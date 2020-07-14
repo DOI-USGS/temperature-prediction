@@ -1,5 +1,5 @@
 {
-  "name": "website-base",
+  "name": "temperature-prediction",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -19,13 +19,12 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "core-js": "^3.6.5",
+    "d3": "^5.16.0",
     "dns": "^0.2.2",
-    "mapbox-gl": "^1.11.1",
     "uswds": "^2.8.0",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",
     "vue-browser-detect-plugin": "^0.1.13",
-    "vue-mapbox": "^0.4.1",
     "vue-router": "^3.3.4",
     "vuex": "^3.5.1"
   },
