@@ -11,7 +11,7 @@
 
 ### Notes on Setup
 - You will need 'node.js' installed on your system
-- If you run into trouble starting the project, it is usually fixed by running `rebuild node-sass`
+- If you run into trouble starting the project, it is usually fixed by running `npm rebuild node-sass`
 - The Windows operating system does not like our environment variables and messes up the local build.
 
 To fix that, do the following: 
@@ -21,4 +21,10 @@ To fix that, do the following:
 - Delete `NODE_ENV=development` from that value
 - That value should now look like `"serve": "vue-cli-service serve --mode test_tier",`
 - Run `npm run serve` again, and the project should start
-- Please return the deleted code before making a Pull Request; a pain, I know, but hate Windows not me
+On Windows -
+You might get this error when running ``npm run serve``
+
+``'vue-cli-service' is not recognized as an internal or external command,
+  operable program or batch file.``
+  
+- To fix, run ``npm install @vue/cli-service -g`` to install the Vue CLI-Service globally.
