@@ -8,6 +8,8 @@
     <router-view
       v-if="!isInternetExplorer"
     />
+    <PreFooterVisualizationsLinks v-if="checkIfIntroSectionIsRendered || !isInternetExplorer" />
+    <PreFooterCodeLinks v-if="checkIfIntroSectionIsRendered || !isInternetExplorer" />
     <FooterUSGS />
   </div>
 </template>
@@ -25,6 +27,8 @@
             HeaderUSGS,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
             WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
+            PreFooterVisualizationsLinks: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
+            PreFooterCodeLinks: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "pre-footer-links-code"*/ "./components/PreFooterCodeLinks"),
             FooterUSGS: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "usgs-footer"*/ "./components/FooterUSGS") // Have Webpack put the footer in a separate chunk so we can load it conditionally (with a v-if) if we desire
         },
         data() {
