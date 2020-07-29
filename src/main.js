@@ -52,41 +52,41 @@ const sessionID = function() {
 
 // Next two sections are for Google Analytics
 // First section --  code to get the ClientId from the Google Analytics Cookie
-const clientID = function() {
-  let returnValue;
-  try {
-    returnValue = window.ga.getAll()[0].get('clientId');
-  }
-  catch(error) {
-    console.error('failed to get the ClientId from Google Analytics Cookie, format of Cookie may have changed ');
-    returnValue = null;
-  }
-  return returnValue;
-};
+// const clientID = function() {
+//   let returnValue;
+//   try {
+//     returnValue = window.ga.getAll()[0].get('clientId');
+//   }
+//   catch(error) {
+//     console.error('failed to get the ClientId from Google Analytics Cookie, format of Cookie may have changed ');
+//     returnValue = null;
+//   }
+//   return returnValue;
+// };
 // Second section -- code to run Vue Analytics plugin
 // Note: to add additional custom dimensions, you must first register the new dimension on the analytics dash board. Then
 // you can set the dimension's value using the plugin.
-Vue.use(VueAnalytics, {
-  id: 'need-to-add-your-own-id-here',
-  debug: {
-    enabled: false, // default value is 'false'; for more complete output set to true. Just remember to turn it back to 'false' before putting into production.
-    trace: false, // default value is 'false'; for more complete output set to true. Just remember to turn it back to 'false' before putting into production.
-    sendHitTask: true // default value is true. Just leave it as 'true' all the time.
-  },
-  set: [
-    { field: 'anonymizeIp', value: true },
-    { field: 'dimension1', value: sessionID() }, // this 'dimension' is must be added to you google account before it will work
-    { field: 'dimension2', value: Date.now() }   // this 'dimension' is must be added to you google account before it will work
-  ],
-  commands: {
-    trackName(eventName, action, label) {
-      this.$ga.set({ dimension2: Date.now() }); // this is assuming the custom dimension you added to your google account is a time stamp
-      this.$ga.set({ dimension3: clientID() }); // is is assuming the custom dimension you added to your google account is an id
-      this.$ga.event(eventName, action, label);
-    }
-  },
-  router
-});
+// Vue.use(VueAnalytics, {
+//   id: 'need-to-add-your-own-id-here',
+//   debug: {
+//     enabled: false, // default value is 'false'; for more complete output set to true. Just remember to turn it back to 'false' before putting into production.
+//     trace: false, // default value is 'false'; for more complete output set to true. Just remember to turn it back to 'false' before putting into production.
+//     sendHitTask: true // default value is true. Just leave it as 'true' all the time.
+//   },
+//   set: [
+//     { field: 'anonymizeIp', value: true },
+//     { field: 'dimension1', value: sessionID() }, // this 'dimension' is must be added to you google account before it will work
+//     { field: 'dimension2', value: Date.now() }   // this 'dimension' is must be added to you google account before it will work
+//   ],
+//   commands: {
+//     trackName(eventName, action, label) {
+//       this.$ga.set({ dimension2: Date.now() }); // this is assuming the custom dimension you added to your google account is a time stamp
+//       this.$ga.set({ dimension3: clientID() }); // is is assuming the custom dimension you added to your google account is an id
+//       this.$ga.event(eventName, action, label);
+//     }
+//   },
+//   router
+// });
 
 
 const app = new Vue({

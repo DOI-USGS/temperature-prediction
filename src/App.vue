@@ -8,8 +8,8 @@
     <router-view
       v-if="!isInternetExplorer"
     />
-    <PreFooterVisualizationsLinks v-if="checkIfIntroSectionIsRendered || !isInternetExplorer" />
-    <PreFooterCodeLinks v-if="checkIfIntroSectionIsRendered || !isInternetExplorer" />
+    <PreFooterVisualizationsLinks v-if="!isInternetExplorer" />
+    <PreFooterCodeLinks v-if="!isInternetExplorer" />
     <FooterUSGS />
   </div>
 </template>
