@@ -1,11 +1,16 @@
+import '@babel/polyfill'
+import 'mutationobserver-shim'
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import Vue from 'vue';
+import './plugins/bootstrap-vue'
 import router from "./router";
 import { store } from './store/store'
 import App from './App.vue';
 import uswds from 'uswds';
 import browserDetect from 'vue-browser-detect-plugin';
+
+
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -33,6 +38,9 @@ library.add(faInstagram);
 Vue.config.productionTip = false;
 Vue.use(uswds);
 Vue.use(browserDetect);
+
+
+
 
 const app = new Vue({
   router,
