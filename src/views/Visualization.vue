@@ -1,6 +1,5 @@
 <template>
   <div id="visualization">
-
     <Set2 />
   </div>
 </template>
