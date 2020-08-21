@@ -11,6 +11,7 @@ import uswds from 'uswds';
 import browserDetect from 'vue-browser-detect-plugin';
 import "./plugins/bootstrap-vue"
 
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
