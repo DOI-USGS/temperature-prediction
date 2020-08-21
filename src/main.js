@@ -38,9 +38,6 @@ Vue.config.productionTip = false;
 Vue.use(uswds);
 Vue.use(browserDetect);
 
-
-
-
 const app = new Vue({
   router,
   store,
