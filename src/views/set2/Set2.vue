@@ -129,197 +129,69 @@
 </template>
 
 <script>
-
-  import $ from 'jquery';
   import * as d3Base from "d3";
-import { geoScaleBar } from "d3-geo-scale-bar";
+  import { geoScaleBar } from "d3-geo-scale-bar";
 
-  import * as topojson from "topojson-client";
 
   export default {
       name: 'Set2',
-      mounted() {
-        const d3 = Object.assign(d3Base, { geoScaleBar })
-        // variables for data join
-        let flowArray = ['avg_ann_flow'];
+      data() {
+        return {
+          d3: null,
+          flowArray:['avg_ann_flow'],
+          timestep_c2p2: 'year',
+          timestep_c2p3: 'date',
+          chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
+          chart_width: null, // this will get a value in the mounted hook
+          chart_height: null // this will get a value in the mounted hook
 
-        // begin script when window loads
-        window.onload = this.setPanels();
+        }
+      },
+      mounted() {
+        const d3 = Object.assign(d3Base, { geoScaleBar }); // this loads d3 plugins with webpack
+        this.d3 = d3; // assign the constant value of d3 to the component scope variable
+
+        const chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
+        const chart_height = window.innerHeight*0.30 - this.chart_margin.top - this.chart_margin.bottom;
+        this.chart_width = chart_width;
+        this.chart_height = chart_height;
+
+        this.setPanels();  // begin script when window loads
       },
       methods: {
         setPanels() {
           // // CHAPTER 1 MAP
-          let map_width_c1p1 = 600,
-              map_height_c1p1 = window.innerHeight*0.8,
-              map_margin_c1p1 = {top: 5, right: 5, bottom: 5, left: 5};
+          const map_width_c1p1 = 600;
+          const map_height_c1p1 = window.innerHeight * 0.8;
+          const map_margin_c1p1 = {top: 5, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on states surrounding DRB for ch1 maps
-          let map_projection_c1p1 = d3.geoAlbers()
+          let map_projection_c1p1 = this.d3.geoAlbers()
               .center([0, 41.27883611]) //41.47883611
               .rotate([76.21902778, 0, 0])
               .parallels([40.31476574, 42.64290648])
-              .scale(map_height_c1p1*6.5) // map_height_c1p1*6
+              .scale(map_height_c1p1 * 6.5) // map_height_c1p1*6
               .translate([map_width_c1p1 / 2, map_height_c1p1 / 2]);
 
-          let map_path_c1p1 = d3.geoPath()
+          let map_path_c1p1 = this.d3.geoPath()
               .projection(map_projection_c1p1);
-// not working because geoscalebar import is not recognized
-          // create scale bar
-          const scaleBarTop_c1p1 = d3.geoScaleBar()
-              .orient(d3.geoScaleBottom)
-              .projection(map_projection_c1p1)
-              .size([map_width_c1p1, map_height_c1p1])
-              .left(.05)
-              .top(.85)
-              .units(d3.geoScaleKilometers)
-              .distance(150)
-              .label("150 kilometers")
-              .labelAnchor("middle")
-              .tickSize(null)
-              .tickValues(null);
 
-          // const scaleBarBottom_c1p1 = d3.geoScaleBar()
-          //     .orient(d3.geoScaleTop)
+          // create scale bar
+          // const scaleBarTop_c1p1 = this.d3.geoScaleBar()
+          //     .orient(this.d3.geoScaleBottom)
           //     .projection(map_projection_c1p1)
           //     .size([map_width_c1p1, map_height_c1p1])
           //     .left(.05)
-          //     .top(.86)
-          //     .units(d3.geoScaleMiles)
-          //     .distance(75)
-          //     .label("75 miles")
-          //     .labelAnchor("middle")
-          //     .tickSize(null)
-          //     .tickValues(null);
-
-          //create new svg container for the ch 1 panel 1 map
-          let map_c1p1 = d3.select("#DRB_map_c1p1")
-              .append("svg")
-              .attr("class", "map_c1p1")
-              .attr("viewBox", [0, 0, (map_width_c1p1 + map_margin_c1p1.right + map_margin_c1p1.left),
-                (map_height_c1p1 + map_margin_c1p1.top + map_margin_c1p1.bottom)].join(' '));
-          // .attr("width", map_width_c1p1)
-          // .attr("height", map_height_c1p1);
-
-          // // CHAPTER 2 BAR CHART
-          // write function to process data for stacked bar chart in chapter 2 panel 1
-          function type(d, i, columns) {
-            let t = 0;
-            for (i=1, t; i < columns.length; ++i)
-                // for each row, which is d, cycle through the columns
-              t += d[columns[i]] = +d[columns[i]];
-            // create a new column in the data titled "total"
-            d.total = t;
-            return d;
-          }
-          // // CHAPTER 2 MAPS
-          // set universal map frame dimensions for Ch 2 panel maps
-          let map_width = 600,
-              map_height = window.innerHeight*0.8,
-              map_margin = {top: 5, right: 5, bottom: 5, left: 5};
-
-          //create Albers equal area conic projection centered on DRB for ch2 panel 1 map
-          let map_projection_c2p1 = d3.geoAlbers()
-              .center([0, 40.658894445])
-              .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
-              .parallels([39.9352537033, 41.1825351867])
-              .scale(map_height*15)
-              .translate([map_width / 2, map_height / 2]);
-
-          let map_path_c2p1 = d3.geoPath()
-              .projection(map_projection_c2p1);
-
-          // doesn't work because geoscalebar import is not recognised
-          // create scale bar for ch 2 panel 1 map
-          // const scaleBarTop_c2p1 = d3.geoScaleBar()
-          //     .orient(d3.geoScaleBottom)
-          //     .projection(map_projection_c2p1)
-          //     .size([map_width, map_height])
-          //     .left(.3) // .15 centered, .45 far right
-          //     .top(.94)
+          //     .top(.85)
           //     .units(d3.geoScaleKilometers)
-          //     .distance(50)
-          //     .label("50 kilometers")
-          //     .labelAnchor("middle")
-          //     .tickSize(null)
-          //     .tickValues(null);
-          //
-          // const scaleBarBottom_c2p1 = d3.geoScaleBar()
-          //     .orient(d3.geoScaleTop)
-          //     .projection(map_projection_c2p1)
-          //     .size([map_width, map_height])
-          //     .left(.3) // .15 centered, .45 far right
-          //     .top(.95)
-          //     .units(d3.geoScaleMiles)
-          //     .distance(25)
-          //     .label("25 miles")
+          //     .distance(150)
+          //     .label("150 kilometers")
           //     .labelAnchor("middle")
           //     .tickSize(null)
           //     .tickValues(null);
 
-          //create Albers equal area conic projection centered on DRB for ch2 panel 2 and 3 maps
-          let map_projection = d3.geoAlbers()
-              .center([0, 40.658894445])
-              .rotate([74.6, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
-              .parallels([39.9352537033, 41.1825351867])
-              .scale(map_height*15)
-              .translate([map_width / 2, map_height / 2]);
 
-          let map_path = d3.geoPath()
-              .projection(map_projection);
-// doesn't work because geoscalebar import is not recognised
-          // create scale bar for ch 2 panel 2 and 3 maps
-          // const scaleBarTop = d3.geoScaleBar()
-          //     .orient(d3.geoScaleBottom)
-          //     .projection(map_projection)
-          //     .size([map_width, map_height])
-          //     .left(.1) // .15 centered, .45 far right
-          //     .top(.94)
-          //     .units(d3.geoScaleKilometers)
-          //     .distance(50)
-          //     .label("50 kilometers")
-          //     .labelAnchor("middle")
-          //     .tickSize(null)
-          //     .tickValues(null);
-          //
-          // const scaleBarBottom = d3.geoScaleBar()
-          //     .orient(d3.geoScaleTop)
-          //     .projection(map_projection)
-          //     .size([map_width, map_height])
-          //     .left(.1) // .15 centered, .45 far right
-          //     .top(.95)
-          //     .units(d3.geoScaleMiles)
-          //     .distance(25)
-          //     .label("25 miles")
-          //     .labelAnchor("middle")
-          //     .tickSize(null)
-          //     .tickValues(null);
 
-          //create new svg container for the ch 2 panel 1 map
-          var map_c2p1 = d3.select("#DRB_map_c2p1")
-              .append("svg")
-              .attr("class", "map_c2p1")
-              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
-                (map_height + map_margin.top + map_margin.bottom)].join(' '));
-          // .attr("width", map_width)
-          // .attr("height", map_height);
-
-          //create new svg container for the ch 2 panel 2 map
-          var map_c2p2 = d3.select("#DRB_map_c2p2")
-              .append("svg")
-              .attr("class", "map_c2p2")
-              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
-                (map_height + map_margin.top + map_margin.bottom)].join(' '));
-          // .attr("width", map_width)
-          // .attr("height", map_height);
-
-          // create new svg container for the ch 2 panel 3 map
-          var map_c2p3 = d3.select("#DRB_map_c2p3")
-              .append("svg")
-              .attr("class", "map_c2p3")
-              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
-                (map_height + map_margin.top + map_margin.bottom)].join(' '));
-          // .attr("width", map_width)
-          // .attr("height", map_height);
 
 
         }

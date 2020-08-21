@@ -21,6 +21,8 @@
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
     "d3": "^5.16.0",
+    "d3-geo-albers-usa": "0.0.0",
+    "d3-geo-projection": "^2.9.0",
     "d3-geo-scale-bar": "^1.0.2",
     "dns": "^0.2.2",
     "jquery": "^3.5.1",
