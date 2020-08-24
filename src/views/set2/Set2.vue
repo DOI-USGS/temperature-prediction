@@ -130,8 +130,12 @@
 
 <script>
   import * as d3Base from "d3";
-  import { geoScaleBar } from "d3-geo-scale-bar";
+  import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
+
+
+
   import * as topojson from "topojson-client";
+  import * as ss from 'simple-statistics';
 
 
   export default {
@@ -145,13 +149,21 @@
           timestep_c2p3: 'date',
           chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
           chart_width: null, // this will get a value in the mounted hook
-          chart_height: null // this will get a value in the mounted hook
+          chart_height: null, // this will get a value in the mounted hook
+          map_c1p1: null,
+          map_path_c1p1: null,
+          scaleBarTop_c1p1: null,
+          scaleBarBottom_c1p1: null,
+          map_c2p1: null,
+          map_path_c2p1: null,
+          scaleBarTop_c2p1: null,
+          scaleBarBottom_c2p1: null
 
         }
       },
       mounted() {
-        const d3 = Object.assign(d3Base, { geoScaleBar }); // this loads d3 plugins with webpack
-        this.d3 = d3; // assign the constant value of d3 to the component scope letiable
+        const d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
+        this.d3 = d3; // assign the constant value of d3 to the component scope
 
         const chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
         const chart_height = window.innerHeight * 0.30 - this.chart_margin.top - this.chart_margin.bottom;
@@ -162,6 +174,7 @@
       },
       methods: {
         setPanels() {
+          const self = this;
           // // CHAPTER 1 MAP
           const map_width_c1p1 = 600;
           const map_height_c1p1 = window.innerHeight * 0.8;
@@ -179,18 +192,153 @@
               .projection(map_projection_c1p1);
 
           // create scale bar
-          // const scaleBarTop_c1p1 = this.d3.geoScaleBar()
-          //     .orient(this.d3.geoScaleBottom)
-          //     .projection(map_projection_c1p1)
-          //     .size([map_width_c1p1, map_height_c1p1])
-          //     .left(.05)
-          //     .top(.85)
-          //     .units(d3.geoScaleKilometers)
-          //     .distance(150)
-          //     .label("150 kilometers")
-          //     .labelAnchor("middle")
-          //     .tickSize(null)
-          //     .tickValues(null);
+          self.scaleBarTop_c1p1 = self.d3.geoScaleBar()
+              .orient(self.d3.geoScaleBottom)
+              .projection(map_projection_c1p1)
+              .size([map_width_c1p1, map_height_c1p1])
+              .left(.05)
+              .top(.85)
+              .units(self.d3.geoScaleKilometers)
+              .distance(150)
+              .label("150 kilometers")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          self.scaleBarBottom_c1p1 = self.d3.geoScaleBar()
+              .orient(self.d3.geoScaleTop)
+              .projection(map_projection_c1p1)
+              .size([map_width_c1p1, map_height_c1p1])
+              .left(.05)
+              .top(.86)
+              .units(self.d3.geoScaleMiles)
+              .distance(75)
+              .label("75 miles")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          //create new svg container for the ch 1 panel 1 map
+          this.map_c1p1 = this.d3.select("#DRB_map_c1p1")
+              .append("svg")
+              .attr("class", "map_c1p1")
+              .attr("viewBox", [0, 0, (map_width_c1p1 + map_margin_c1p1.right + map_margin_c1p1.left),
+                (map_height_c1p1 + map_margin_c1p1.top + map_margin_c1p1.bottom)].join(' '));
+
+          // // CHAPTER 2 BAR CHART
+          // write function to process data for stacked bar chart in chapter 2 panel 1
+          function type(d, i, columns) {
+            for (i=1, t=0; i < columns.length; ++i)
+                // for each row, which is d, cycle through the columns
+              t += d[columns[i]] = +d[columns[i]];
+            // create a new column in the data titled "total"
+            d.total = t;
+            return d;
+
+          }
+
+          // // CHAPTER 2 MAPS
+          // set universal map frame dimensions for Ch 2 panel maps
+          var map_width = 600,
+              map_height = window.innerHeight*0.8,
+              map_margin = {top: 5, right: 5, bottom: 5, left: 5};
+
+          //create Albers equal area conic projection centered on DRB for ch2 panel 1 map
+          var map_projection_c2p1 = this.d3.geoAlbers()
+              .center([0, 40.658894445])
+              .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
+              .parallels([39.9352537033, 41.1825351867])
+              .scale(map_height*15)
+              .translate([map_width / 2, map_height / 2]);
+
+          var map_path_c2p1 = this.d3.geoPath()
+              .projection(map_projection_c2p1);
+
+          // create scale bar for ch 2 panel 1 map
+          const scaleBarTop_c2p1 = this.d3.geoScaleBar()
+              .orient(this.d3.geoScaleBottom)
+              .projection(map_projection_c2p1)
+              .size([map_width, map_height])
+              .left(.3) // .15 centered, .45 far right
+              .top(.94)
+              .units(this.d3.geoScaleKilometers)
+              .distance(50)
+              .label("50 kilometers")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          const scaleBarBottom_c2p1 = this.d3.geoScaleBar()
+              .orient(this.d3.geoScaleTop)
+              .projection(map_projection_c2p1)
+              .size([map_width, map_height])
+              .left(.3) // .15 centered, .45 far right
+              .top(.95)
+              .units(this.d3.geoScaleMiles)
+              .distance(25)
+              .label("25 miles")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          //create Albers equal area conic projection centered on DRB for ch2 panel 2 and 3 maps
+          var map_projection = this.d3.geoAlbers()
+              .center([0, 40.658894445])
+              .rotate([74.6, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
+              .parallels([39.9352537033, 41.1825351867])
+              .scale(map_height*15)
+              .translate([map_width / 2, map_height / 2]);
+
+          var map_path = this.d3.geoPath()
+              .projection(map_projection);
+
+          // create scale bar for ch 2 panel 2 and 3 maps
+          const scaleBarTop = d3.geoScaleBar()
+              .orient(this.d3.geoScaleBottom)
+              .projection(map_projection)
+              .size([map_width, map_height])
+              .left(.1) // .15 centered, .45 far right
+              .top(.94)
+              .units(this.d3.geoScaleKilometers)
+              .distance(50)
+              .label("50 kilometers")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          const scaleBarBottom = this.d3.geoScaleBar()
+              .orient(this.d3.geoScaleTop)
+              .projection(map_projection)
+              .size([map_width, map_height])
+              .left(.1) // .15 centered, .45 far right
+              .top(.95)
+              .units(this.d3.geoScaleMiles)
+              .distance(25)
+              .label("25 miles")
+              .labelAnchor("middle")
+              .tickSize(null)
+              .tickValues(null);
+
+          //create new svg container for the ch 2 panel 1 map
+          this.map_c2p1 = this.d3.select("#DRB_map_c2p1")
+              .append("svg")
+              .attr("class", "map_c2p1")
+              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
+                (map_height + map_margin.top + map_margin.bottom)].join(' '));
+
+          //create new svg container for the ch 2 panel 2 map
+          this.map_c2p2 = this.d3.select("#DRB_map_c2p2")
+              .append("svg")
+              .attr("class", "map_c2p2")
+              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
+                (map_height + map_margin.top + map_margin.bottom)].join(' '));
+
+          // create new svg container for the ch 2 panel 3 map
+          this.map_c2p3 = this.d3.select("#DRB_map_c2p3")
+              .append("svg")
+              .attr("class", "map_c2p3")
+              .attr("viewBox", [0, 0, (map_width + map_margin.right + map_margin.left),
+                (map_height + map_margin.top + map_margin.bottom)].join(' '));
 
           let promises = [this.d3.csv("data/segment_maflow.csv"),
             this.d3.csv(this.publicPath + "data/matrix_annual_obs.csv"),
@@ -262,11 +410,11 @@
           let widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
           // // Set up Ch 1 panel 1 -
-          setMap_c1p1(states, states_merged, segs_small, bay, map_c1p1, map_path_c1p1, scaleBarTop_c1p1, scaleBarBottom_c1p1, widthScale_c1p1);
+          this.setMap_c1p1(states, states_merged, segs_small, bay, this.map_c1p1, this.map_path_c1p1, this.scaleBarTop_c1p1, this.scaleBarBottom_c1p1, widthScale_c1p1);
 
           // // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
-          setMap_c2p1(segments, stations, bay, map_c2p1, map_path_c2p1, scaleBarTop_c2p1, scaleBarBottom_c2p1, widthScale_c2);
+          this.setMap_c2p1(segments, stations, bay, this.map_c2p1, this.map_path_c2p1, this.scaleBarTop_c2p1, this.scaleBarBottom_c2p1, widthScale_c2);
           // add bar chart to panel 1
           setBarChart_c2p1(csv_agency_count);
 
@@ -318,7 +466,8 @@
           };
           return segments;
         },
-        makeWidthScale_c1p1(data){
+        makeWidthScale_c1p1(data) {
+          const self = this;
 
           // // graduated scale
           // set width classes
@@ -338,30 +487,19 @@
           // // BOTH METHODS
           // build array of all values of flow
           let domainArrayFlow = [];
-          for (let i=0; i<data.length; i++){
+          for (let i=0; i<data.length; i++) {
             let val = parseFloat(data[i]['avg_ann_flow']);
             domainArrayFlow.push(val);
           }
 
-          // // // linear scale //
-          // let dataMax = Math.round(Math.max(...domainArrayFlow));
-
-          // // // linear scale //
-          // let widthScale = this.d3.scaleLinear()
-          //     // set range of possible output values
-          //     .range([0.3,3])
-          //     // define range of input values
-          //     .domain([0,dataMax]);
-
-          // // graduated scale
-          // cluster data using ckmeans clustering algoritm to create natural breaks
+          // graduated scale
+          // cluster data using ckmeans clustering algorithm to create natural breaks
           let clusters = ss.ckmeans(domainArrayFlow, 5);
-          // console.log(clusters);
 
-          // // graduated scale
+          /// graduated scale
           // reset domain array to cluster minimumns
-          domainArrayFlow = clusters.map(function(d){
-            return this.d3.min(d);
+          domainArrayFlow = clusters.map(function(d) {
+            return self.d3.min(d);
           });
 
           // // graduated scale
@@ -375,8 +513,8 @@
           // // BOTH METHODS
           return widthScale;
         },
-        makeWidthScale_c2(data){
-
+        makeWidthScale_c2(data) {
+          const self = this;
           // // graduated scale
           // set width classes
           let widthClasses = [
@@ -400,30 +538,19 @@
           // // BOTH METHODS
           // build array of all values of flow
           let domainArrayFlow = [];
-          for (let i=0; i<data.length; i++){
+          for (let i = 0; i < data.length; i++) {
             let val = parseFloat(data[i]['avg_ann_flow']);
             domainArrayFlow.push(val);
-          };
+          }
 
-          // // // linear scale //
-          // let dataMax = Math.round(Math.max(...domainArrayFlow));
-
-          // // // linear scale //
-          // let widthScale = this.d3.scaleLinear()
-          //     // set range of possible output values
-          //     .range([0.3,3])
-          //     // define range of input values
-          //     .domain([0,dataMax]);
-
-          // // graduated scale
+          // graduated scale
           // cluster data using ckmeans clustering algoritm to create natural breaks
           let clusters = ss.ckmeans(domainArrayFlow, 10);
-          // console.log(clusters);
 
-          // // graduated scale
+          // graduated scale
           // reset domain array to cluster minimumns
           domainArrayFlow = clusters.map(function(d){
-            return this.d3.min(d);
+            return self.d3.min(d);
           });
 
           // // graduated scale
@@ -436,9 +563,127 @@
 
           // // BOTH METHODS
           return widthScale;
-        }
+        },
+        setMap_c1p1(states, states_merged, segs_small, bay, map_c1p1, map_path_c1p1, scaleBarTop_c1p1, scaleBarBottom_c1p1, widthScale_c1p1) {
+          // add merged surrounding states to map
+          var states_merged = map_c1p1.append("path")
+              .datum(states_merged)
+              .attr("class", "c1p1 states_merged")
+              .attr("d", map_path_c1p1)
+              .attr("filter", "url(#shadow2)")
 
-      }
+          // add surrounding states to map
+          var states = map_c1p1.append("path")
+              .datum(states)
+              .attr("class", "c1p1 states")
+              .attr("d", map_path_c1p1)
+
+          // add delaware bay to map
+          var drb_bay = map_c1p1.append("path")
+              .datum(bay)
+              .attr("class", "c1p1 delaware_bay")
+              .attr("d", map_path_c1p1)
+
+          // add drb segments to map
+          var drb_segments = map_c1p1.selectAll(".river_segments")
+              // bind segments to each element to be created
+              .data(segs_small)
+              // create an element for each datum
+              .enter()
+              // append each element to the svg as a path element
+              .append("path")
+              // assign class for styling
+              .attr("class", function(d){
+                var seg_class = 'c1p1 river_segments seg'
+                seg_class += d.seg_id_nat
+                return seg_class
+              })
+              // project segments
+              .attr("d", map_path_c1p1)
+              // add stroke width based on widthScale function
+              .style("stroke-width", function(d){
+                var value = d.properties['avg_ann_flow'];
+                if (value){
+                  return widthScale_c1p1(value);
+                } else {
+                  return "#ccc";
+                }
+              })
+              // set fill to none
+              .style("fill", "None")
+      
+        // add scale bar
+        this.map_c1p1 = map_c1p1;
+        this.map_c1p1.append("g").call(this.scaleBarTop_c1p1);
+        this.map_c1p1.append("g").call(this.scaleBarBottom_c1p1);
+        },
+        setMap_c2p1(segments, stations, bay, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
+          // add delaware bay to map
+          var drb_bay = map.append("path")
+              .datum(bay)
+              .attr("class", "c2p1 delaware_bay")
+              .attr("d", map_path)
+
+          // add drb segments to map
+          var drb_segments = map.selectAll(".river_segments")
+              // bind segments to each element to be created
+              .data(segments)
+              // create an element for each datum
+              .enter()
+              // append each element to the svg as a path element
+              .append("path")
+              // assign class for styling
+              .attr("class", function(d){
+                return 'c2p1 river_segments seg' + d.seg_id_nat
+              })
+              // project segments
+              .attr("d", map_path)
+              // add stroke width based on widthScale function
+              .style("stroke-width", function(d){
+                var value = d.properties['avg_ann_flow'];
+                if (value){
+                  return widthScale_c2(value);
+                } else {
+                  return "#ccc";
+                }
+              })
+              // set fill to none
+              .style("fill", "None")
+
+          // add drb stations to map
+          var drb_stations = map.selectAll(".obs_stations")
+              // bind points to each element to be created
+              .data(stations)
+              // create an element for each datum
+              .enter()
+              // append each element to the svg as a circle element
+              .append("path")
+              // project points and SET SIZE
+              .attr("d", map_path.pointRadius(2))
+              // assign class for styling
+              .attr("class", function(d){
+                return "c2p2 obs_stations station" + d.id
+              })
+              // assign fill color based on agency
+              .style("fill", function(d){
+                if (d.properties.site_agency == 'USGS'){
+                  return "#edb932"
+                } else {
+                  return "#eb4444"
+                }
+              })
+              // assign stroke in background color
+              .style("stroke", "#000000")
+              .style("stroke-width", 0.4)
+              // assign opacity
+              .style("opacity", 1)
+
+          // add scale bar
+          this.map_c2p1 = map;
+          this.map_c2p1.append("g").call(this.scaleBarTop);
+          this.map_c2p1.append("g").call(this.scaleBarBottom);
+        }
+      }    
   }
 
 </script>
