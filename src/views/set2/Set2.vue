@@ -373,8 +373,6 @@
             this.d3.json(this.publicPath + "data/cb_states_16per_merged.json")
           ];
           Promise.all(promises).then(this.callback);
-
-
         },
         type(d, i, columns) {
           let t = 0;
@@ -699,7 +697,7 @@
             this.map_c2p1.append("g").call(this.scaleBarTop);
             this.map_c2p1.append("g").call(this.scaleBarBottom);
           },
-          setBarChart_c2p1(csv_agency_count) {
+        setBarChart_c2p1(csv_agency_count) {
       // append svg to div
         var svgChart = this.d3.select("#barChart_c2p1")
             .append("svg")
@@ -831,7 +829,7 @@
             .text(function(d) { return d; });
 
       },
-      setMap_c2p2(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
+        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
 
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -1268,10 +1266,6 @@
           // reset coordinates when mousemoves over map svg
           svg_map_c2p3.addEventListener('mousemove', function(evt){
             loc_map_c2p3 = cursorPoint_c2p3(evt);
-            // console.log('x:')
-            // console.log(loc_map_c2p3.x)
-            // console.log('y:')
-            // console.log(loc_map_c2p3.y)
           }, false);
 
           // // Add tooltip as text appended to map svg
@@ -1892,14 +1886,6 @@
           this.d3.selectAll(".c2p2.basin_buffered")
               .lower()
         },
-
-
-
-
-
-
-
-
         mouseoverDimSegs_c2p3(data) {
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
@@ -1909,227 +1895,227 @@
               .style("fill", "#172c4f")
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#172c4f")
+        },
+        mouseoutDimSegs_c2p3(data) {
+          // un-dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p3.reservoirs")
+              .style("fill", "#6079a3")
+              .style("stroke", "#6079a3")
+          this.d3.selectAll(".c2p3.delaware_bay")
+              .style("fill", "#6079a3")
+          this.d3.selectAll(".c2p3.river_segments")
+              .style("stroke", "#6079a3")
+        },
+        mousemoveSeg_c2p3(data, tooltip, mouse_x, mouse_y) {
+          // find # of obs in 2019 for selected segment
+          var num_obs = data.properties.year_count['2019'];
+
+          // bind mouse coordinates and # obs to tooltip
+          tooltip
+              .attr("y", mouse_y - 15)
+              .attr("x", mouse_x + 15)
+              .attr("text-align", "left")
+              .text(this.d3.format(',')(num_obs) + " obs.")
+              .raise()
+        },
+        mouseoverSeg_c2p3(data, tooltip) {
+          // select all *temporal* rectangles and set fill and stroke to none
+          // so they can't be selected
+          this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("fill", "None")
+              .style("stroke", "None")
+
+          // make tooltip visible
+          tooltip
+              .style("opacity", 1);
+          // select all spatial rectangles and make mostly opaque to dim matrix
+          this.d3.selectAll(".c2p3.matrixSpatialRect")
+              .style("opacity", 0.7)
+              .style("stroke-width", 1);
+          // select matrix cells for highlighted segment and raise
+          this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
+              .raise()
+          // select the spatial rectangle corresponding to the hightlighted segment
+          this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.seg_id_nat)
+              // set stroke width, opacity, and stroke color
+              // based on whether segment has any observations in record
+              .style("stroke-width", function(data) {
+                if (data.properties.year_count['2019'] > 0) {
+                  return 0;
+                } else {
+                  return 0.5;
+                }
+              })
+              .style("opacity", function(data) {
+                if (data.properties.year_count['2019'] > 0) {
+                  return 0;
+                } else {
+                  return 1;
+                }
+              })
+              .style("stroke", function(data) {
+                if (data.properties.year_count['2019'] > 0) {
+                  return "None";
+                } else {
+                  return "#ffffff";
+                }
+              })
+              // raise the spatial rectangle
+              .raise()
+          // dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p3.reservoirs")
+              .style("fill", "#172c4f")
+              .style("stroke", "#172c4f")
+          this.d3.selectAll(".c2p3.delaware_bay")
+              .style("fill", "#172c4f")
+          this.d3.selectAll(".c2p3.river_segments")
+              .style("stroke", "#172c4f")
+          // select mouseovered segment and set to white with a shadow
+          // and raise segment
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
+              .style("stroke", "#ffffff")
+              .attr("opacity", 1)
+              .attr("filter", "url(#shadow1)")
+              .raise()
+        },
+        mouseoutSeg_c2p3(data, tooltip) {
+          // select all *temporal* rectangles and set fill and stroke back
+          // to black so that they are selectable
+          this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .style("stroke-width", 2)
+
+          // hide tooltip
+          tooltip
+              .style("opacity", 0)
+          // select all spatial rectangles and set opacity back to zero
+          // with black fill and stroke
+          this.d3.selectAll(".c2p3.matrixSpatialRect")
+              .style("stroke", "None")
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 2)
+              .style("opacity", 0)
+          // select spatial rectangle corresponding to segmend and lower
+          this.d3.selectAll(".c2p3.matrixSpatialRect" + data.seg_id_nat)
+              .lower()
+          // lower matrix cells associated with segment
+          this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
+              .lower()
+          // un-dim riversegments, reservoirs, and bay
+          // and reset to default styling
+          this.d3.selectAll(".c2p3.river_segments")
+              .style("stroke", "#6079a3")
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
+              .style("stroke", "#6079a3")
+              .attr("opacity", 1)
+              .attr("filter","None")
+              .lower()
+          this.d3.selectAll(".c2p3.reservoirs")
+              .style("fill", "#6079a3")
+              .style("stroke", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p3.delaware_bay")
+              .style("fill", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p3.basin_buffered")
+              .lower()
+          // raise matrix axes
+          this.d3.selectAll("g")
+              .raise()
+        },
+        mousemoveRect_c2p3(data, tooltip, mouse_x, mouse_y) {
+          // identify selected date
+          var selected_year = data[this.timestep_c2p3];
+
+          // set tooltip x coordinate based on mouse coordinates and position w/i matrix
+          if (mouse_x > 70){
+            var x_position = mouse_x - 60
+          } else {
+            var x_position = mouse_x + 20
+          }
+
+          // bind adjusted mouse coordinates and year to tooltip
+          tooltip
+              .attr("y", mouse_y - 20)
+              .attr("x", x_position)
+              .attr("text-align", "left")
+              .text(selected_year)
+              .raise()
+
+        },
+        mouseoverRect_c2p3(data, tooltip) {
+          // select all the *spatial* rectangles and make them unselectable
+          // by setting fill to none and stroke to none
+          this.d3.selectAll(".c2p3.matrixSpatialRect")
+              .style("fill", "None")
+              .style("stroke", "None")
+
+          // show tooltip
+          tooltip
+              .style("opacity", 1)
+          // select all temporal rectangles and make mostly opaque
+          this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("opacity", 0.85)
+              .style("stroke-width", 0.6)
+          // select mouseovered rectangle and set opacity to zero
+          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[this.timestep_c2p3])
+              .style("opacity", 0)
+          // dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p3.reservoirs")
+              .style("fill", "#172c4f")
+              .style("stroke", "#172c4f")
+          this.d3.selectAll(".c2p3.delaware_bay")
+              .style("fill", "#172c4f")
+          this.d3.selectAll(".c2p3.river_segments")
+              .style("stroke", "#172c4f")
+          // select all river segments that have data on highlighted date
+          // and make white
+          this.d3.selectAll(".c2p3.river_segments." + this.timestep_c2p3 + data[this.timestep_c2p3])
+              .style("stroke", "#ffffff")
+              .attr("opacity", 1)
+              .raise()
+        },
+        mouseoutRect_c2p3(data, tooltip) {
+
+          // select all *spatial* rectangles and reset fill and stroke to black
+          this.d3.selectAll(".c2p3.matrixSpatialRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .style("stroke-width", 2)
+
+          // hide tooltip
+          tooltip
+              .style("opacity", 0)
+          // select all temporal rectangles and set fill and stroke back to black
+          // with no opacity (so available for selection but not visible)
+          this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 0.6)
+              .style("stroke-opacity", 0)
+              .style("opacity", 0)
+          // un-dim river segments, reservoirs, and bay
+          // lower elements as needed
+          this.d3.selectAll(".c2p3.river_segments")
+              .style("stroke", "#6079a3")
+              .attr("opacity", 1)
+          this.d3.selectAll(".c2p3.river_segments." + timestep_c2p3 + data[timestep_c2p3])
+              .style("stroke", "#6079a3")
+              .attr("opacity", 1)
+              .lower()
+          this.d3.selectAll(".c2p3.reservoirs")
+              .style("fill", "#6079a3")
+              .style("stroke", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p3.delaware_bay")
+              .style("fill", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p3.basin_buffered")
+              .lower()
         }
-      },
-      mouseoutDimSegs_c2p3(data) {
-        // un-dim reservoirs, bay, and river segments
-        this.d3.selectAll(".c2p3.reservoirs")
-            .style("fill", "#6079a3")
-            .style("stroke", "#6079a3")
-        this.d3.selectAll(".c2p3.delaware_bay")
-            .style("fill", "#6079a3")
-        this.d3.selectAll(".c2p3.river_segments")
-            .style("stroke", "#6079a3")
-      },
-      mousemoveSeg_c2p3(data, tooltip, mouse_x, mouse_y) {
-        // find # of obs in 2019 for selected segment
-        var num_obs = data.properties.year_count['2019'];
-
-        // bind mouse coordinates and # obs to tooltip
-        tooltip
-            .attr("y", mouse_y - 15)
-            .attr("x", mouse_x + 15)
-            .attr("text-align", "left")
-            .text(this.d3.format(',')(num_obs) + " obs.")
-            .raise()
-      },
-    mouseoverSeg_c2p3(data, tooltip) {
-      // select all *temporal* rectangles and set fill and stroke to none
-      // so they can't be selected
-      this.d3.selectAll(".c2p3.matrixTemporalRect")
-          .style("fill", "None")
-          .style("stroke", "None")
-
-      // make tooltip visible
-      tooltip
-          .style("opacity", 1);
-      // select all spatial rectangles and make mostly opaque to dim matrix
-      this.d3.selectAll(".c2p3.matrixSpatialRect")
-          .style("opacity", 0.7)
-          .style("stroke-width", 1);
-      // select matrix cells for highlighted segment and raise
-      this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
-          .raise()
-      // select the spatial rectangle corresponding to the hightlighted segment
-      this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.seg_id_nat)
-          // set stroke width, opacity, and stroke color
-          // based on whether segment has any observations in record
-          .style("stroke-width", function(data) {
-            if (data.properties.year_count['2019'] > 0) {
-              return 0;
-            } else {
-              return 0.5;
-            }
-          })
-          .style("opacity", function(data) {
-            if (data.properties.year_count['2019'] > 0) {
-              return 0;
-            } else {
-              return 1;
-            }
-          })
-          .style("stroke", function(data) {
-            if (data.properties.year_count['2019'] > 0) {
-              return "None";
-            } else {
-              return "#ffffff";
-            }
-          })
-          // raise the spatial rectangle
-          .raise()
-      // dim reservoirs, bay, and river segments
-      this.d3.selectAll(".c2p3.reservoirs")
-          .style("fill", "#172c4f")
-          .style("stroke", "#172c4f")
-      this.d3.selectAll(".c2p3.delaware_bay")
-          .style("fill", "#172c4f")
-      this.d3.selectAll(".c2p3.river_segments")
-          .style("stroke", "#172c4f")
-      // select mouseovered segment and set to white with a shadow
-      // and raise segment
-      this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
-          .style("stroke", "#ffffff")
-          .attr("opacity", 1)
-          .attr("filter", "url(#shadow1)")
-          .raise()
-    },
-    mouseoutSeg_c2p3(data, tooltip) {
-      // select all *temporal* rectangles and set fill and stroke back
-      // to black so that they are selectable
-      this.d3.selectAll(".c2p3.matrixTemporalRect")
-          .style("fill", "#000000")
-          .style("stroke", "#000000")
-          .style("stroke-width", 2)
-
-      // hide tooltip
-      tooltip
-          .style("opacity", 0)
-      // select all spatial rectangles and set opacity back to zero
-      // with black fill and stroke
-      this.d3.selectAll(".c2p3.matrixSpatialRect")
-          .style("stroke", "None")
-          .style("stroke", "#000000")
-          .style("fill", "#000000")
-          .style("stroke-width", 2)
-          .style("opacity", 0)
-      // select spatial rectangle corresponding to segmend and lower
-      this.d3.selectAll(".c2p3.matrixSpatialRect" + data.seg_id_nat)
-          .lower()
-      // lower matrix cells associated with segment
-      this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
-          .lower()
-      // un-dim riversegments, reservoirs, and bay
-      // and reset to default styling
-      this.d3.selectAll(".c2p3.river_segments")
-          .style("stroke", "#6079a3")
-      this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
-          .style("stroke", "#6079a3")
-          .attr("opacity", 1)
-          .attr("filter","None")
-          .lower()
-      this.d3.selectAll(".c2p3.reservoirs")
-          .style("fill", "#6079a3")
-          .style("stroke", "#6079a3")
-          .lower()
-      this.d3.selectAll(".c2p3.delaware_bay")
-          .style("fill", "#6079a3")
-          .lower()
-      this.d3.selectAll(".c2p3.basin_buffered")
-          .lower()
-      // raise matrix axes
-      this.d3.selectAll("g")
-          .raise()
-    },
-    mousemoveRect_c2p3(data, tooltip, mouse_x, mouse_y) {
-      // identify selected date
-      var selected_year = data[this.timestep_c2p3];
-
-      // set tooltip x coordinate based on mouse coordinates and position w/i matrix
-      if (mouse_x > 70){
-        var x_position = mouse_x - 60
-      } else {
-        var x_position = mouse_x + 20
       }
-
-      // bind adjusted mouse coordinates and year to tooltip
-      tooltip
-          .attr("y", mouse_y - 20)
-          .attr("x", x_position)
-          .attr("text-align", "left")
-          .text(selected_year)
-          .raise()
-
-    },
-    mouseoverRect_c2p3(data, tooltip) {
-      // select all the *spatial* rectangles and make them unselectable
-      // by setting fill to none and stroke to none
-      this.d3.selectAll(".c2p3.matrixSpatialRect")
-          .style("fill", "None")
-          .style("stroke", "None")
-
-      // show tooltip
-      tooltip
-          .style("opacity", 1)
-      // select all temporal rectangles and make mostly opaque
-      this.d3.selectAll(".c2p3.matrixTemporalRect")
-          .style("opacity", 0.85)
-          .style("stroke-width", 0.6)
-      // select mouseovered rectangle and set opacity to zero
-      this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[this.timestep_c2p3])
-          .style("opacity", 0)
-      // dim reservoirs, bay, and river segments
-      this.d3.selectAll(".c2p3.reservoirs")
-          .style("fill", "#172c4f")
-          .style("stroke", "#172c4f")
-      this.d3.selectAll(".c2p3.delaware_bay")
-          .style("fill", "#172c4f")
-      this.d3.selectAll(".c2p3.river_segments")
-          .style("stroke", "#172c4f")
-      // select all river segments that have data on highlighted date
-      // and make white
-      this.d3.selectAll(".c2p3.river_segments." + this.timestep_c2p3 + data[this.timestep_c2p3])
-          .style("stroke", "#ffffff")
-          .attr("opacity", 1)
-          .raise()
-    },
-    mouseoutRect_c2p3(data, tooltip) {
-
-      // select all *spatial* rectangles and reset fill and stroke to black
-      this.d3.selectAll(".c2p3.matrixSpatialRect")
-          .style("fill", "#000000")
-          .style("stroke", "#000000")
-          .style("stroke-width", 2)
-
-      // hide tooltip
-      tooltip
-          .style("opacity", 0)
-      // select all temporal rectangles and set fill and stroke back to black
-      // with no opacity (so available for selection but not visible)
-      this.d3.selectAll(".c2p3.matrixTemporalRect")
-          .style("stroke", "#000000")
-          .style("fill", "#000000")
-          .style("stroke-width", 0.6)
-          .style("stroke-opacity", 0)
-          .style("opacity", 0)
-      // un-dim river segments, reservoirs, and bay
-      // lower elements as needed
-      this.d3.selectAll(".c2p3.river_segments")
-          .style("stroke", "#6079a3")
-          .attr("opacity", 1)
-      this.d3.selectAll(".c2p3.river_segments." + timestep_c2p3 + data[timestep_c2p3])
-          .style("stroke", "#6079a3")
-          .attr("opacity", 1)
-          .lower()
-      this.d3.selectAll(".c2p3.reservoirs")
-          .style("fill", "#6079a3")
-          .style("stroke", "#6079a3")
-          .lower()
-      this.d3.selectAll(".c2p3.delaware_bay")
-          .style("fill", "#6079a3")
-          .lower()
-      this.d3.selectAll(".c2p3.basin_buffered")
-          .lower()
-    }
   }
 
 </script>
