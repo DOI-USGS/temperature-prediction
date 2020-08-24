@@ -170,10 +170,7 @@
           map_c2p2: null,
           map_width: 600,
           mapHeight: null,
-          map_projection_c2p1: null,
-
-
-
+          map_projection_c2p1: null
         }
       },
       mounted() {
