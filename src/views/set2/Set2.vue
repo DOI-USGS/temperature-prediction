@@ -905,16 +905,16 @@
               .style("opacity", 0)
               // trigger interactions
               .on("mouseover", function(d) {
-                mouseoverSeg_c2p2(d, tooltip);
+                this.mouseoverSeg_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 // pass mouse coordinates
                 let mouse_x = loc_map_c2p2.x
                 let mouse_y = loc_map_c2p2.y
-                mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); // position
+                this.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); // position
               })
               .on("mouseout", function(d) {
-                mouseoutSeg_c2p2(d, tooltip);
+                this.mouseoutSeg_c2p2(d, tooltip);
               });
 
           // add basin_buffered basin to map - for selection only
@@ -930,10 +930,10 @@
               .style("opacity", 0)
               // trigger dimming
               .on("mouseover", function(d) {
-                mouseoverDimSegs_c2p2(d)
+                this.mouseoverDimSegs_c2p2(d)
               })
               .on("mouseout", function(d) {
-                mouseoutDimSegs_c2p2(d)
+                this.mouseoutDimSegs_c2p2(d)
               });
 
           // add delaware bay to map
@@ -946,10 +946,10 @@
               .attr("d", map_path)
               // trigger dimming
               .on("mouseover", function(d) {
-                mouseoverDimSegs_c2p2(d)
+                this.mouseoverDimSegs_c2p2(d)
               })
               .on("mouseout", function(d) {
-                mouseoutDimSegs_c2p2(d)
+                this.mouseoutDimSegs_c2p2(d)
               });
 
           // add drb reservoirs to map
@@ -1005,16 +1005,16 @@
               .style("fill", "None")
               // trigger interactions
               .on("mouseover", function(d) {
-                mouseoverSeg_c2p2(d, tooltip);
+                this.mouseoverSeg_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 // pass mouse coordinates
                 let mouse_x = loc_map_c2p2.x
                 let mouse_y = loc_map_c2p2.y
-                mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
+                this.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                mouseoutSeg_c2p2(d, tooltip);
+                this.mouseoutSeg_c2p2(d, tooltip);
               });
 
           // add scale bar
@@ -1240,15 +1240,15 @@
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
-                mouseoverRect_c2p2(d, tooltip);
+                this.mouseoverRect_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_matrix_c2p2.x
                 let mouse_y = loc_matrix_c2p2.y
-                mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
+                this.mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                mouseoutRect_c2p2(d, tooltip);
+                this.mouseoutRect_c2p2(d, tooltip);
               })
         },
         setMap_c2p3(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
@@ -1674,6 +1674,232 @@
                 this.mouseoutRect_c2p3(d, tooltip);
               })
         },
+        mouseoverDimSegs_c2p2(data) {
+          // dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p2.reservoirs")
+              .style("fill", "#172c4f")
+              .style("stroke", "#172c4f")
+          this.d3.selectAll(".c2p2.delaware_bay")
+              .style("fill", "#172c4f")
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#172c4f")
+        },
+        mouseoutDimSegs_c2p2(data) {
+    // un-dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p2.reservoirs")
+            .style("fill", "#6079a3")
+            .style("stroke", "#6079a3")
+          this.d3.selectAll(".c2p2.delaware_bay")
+            .style("fill", "#6079a3")
+          this.d3.selectAll(".c2p2.river_segments")
+          .style("stroke", "#6079a3")
+        },
+        mousemoveSeg_c2p2(data, tooltip, mouse_x, mouse_y) {
+          // find # of observations for selected reach
+          var num_obs = data.properties.total_count;
+
+          // bind mouse coordinates and # of obs to tooltip
+          tooltip
+              .attr("y", mouse_y - 15)
+              .attr("x", mouse_x + 15)
+              .attr("text-align", "left")
+              .text(d3.format(',')(num_obs) + " obs.")
+              .raise()
+        },
+        mouseoverSeg_c2p2(data, tooltip) {
+
+          // select all *temporal* rectangles and set fill and stroke to none
+          // so they can't be selected
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              .style("fill", "None")
+              .style("stroke", "None")
+
+          // make tooltip visible
+          tooltip
+              .style("opacity", 1);
+          // select all spatial rectangles and make mostly opaque to dim matrix
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("opacity", 0.7)
+              .style("stroke-width", 1);
+          // select matrix cells for highlighted segment and raise
+          this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
+              .raise()
+          // select the spatial rectangle corresponding to the hightlighted segment
+          this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.seg_id_nat)
+              // set stroke width, opacity, and stroke color
+              // based on whether segment has any observations in record
+              .style("stroke-width", function(data) {
+                if (data.properties.total_count > 0) {
+                  return 0;
+                } else {
+                  return 0.5;
+                }
+              })
+              .style("opacity", function(data) {
+                if (data.properties.total_count > 0) {
+                  return 0;
+                } else {
+                  return 1;
+                }
+              })
+              .style("stroke", function(data) {
+                if (data.properties.total_count > 0) {
+                  return "None";
+                } else {
+                  return "#ffffff";
+                }
+              })
+              // raise the spatial rectangle
+              .raise();
+          // dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p2.reservoirs")
+              .style("fill", "#172c4f")
+              .style("stroke", "#172c4f")
+          this.d3.selectAll(".c2p2.delaware_bay")
+              .style("fill", "#172c4f")
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#172c4f")
+          // select mouseovered segment and set to white with a shadow
+          // and raise segment
+          this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
+              .style("stroke", "#ffffff")
+              .attr("opacity", 1)
+              .attr("filter", "url(#shadow1)")
+              .raise()
+        },
+        mouseoutSeg_c2p2(data, tooltip) {
+          // select all *temporal* rectangles and set fill and stroke back
+          // to black so that they are selectable
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .style("stroke-width", 2)
+
+          // hide tooltip
+          tooltip
+              .style("opacity", 0)
+          // select all spatial rectangles and set opacity back to zero
+          // with black fill and stroke
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("stroke", "None")
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 2)
+              .style("opacity", 0)
+          // select spatial rectangle corresponding to segment and lower
+          this.d3.selectAll(".c2p2.matrixSpatialRect" + data.seg_id_nat)
+              .lower()
+          // lower spatial cells associated with segment
+          this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
+              .lower()
+          // un-dim riversegments, reservoirs, and bay
+          // and reset to default styling
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#6079a3")
+          this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
+              .style("stroke", "#6079a3")
+              .attr("opacity", 1)
+              .attr("filter","None")
+              .lower()
+          this.d3.selectAll(".c2p2.reservoirs")
+              .style("fill", "#6079a3")
+              .style("stroke", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p2.delaware_bay")
+              .style("fill", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p2.basin_buffered")
+              .lower()
+          // raise matrix axes
+          this.d3.selectAll("g")
+              .raise()
+        },
+        mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
+          // identify selected year
+          var selected_year = data[this.timestep_c2p2];
+          // bind mouse coordinates and year to tooltip
+          tooltip
+              .attr("y", mouse_y - 15)
+              .attr("x", mouse_x - 39)
+              .attr("text-align", "left")
+              .text(selected_year)
+              .raise()
+        },
+        mouseoverRect_c2p2(data, tooltip) {
+          // select all the *spatial* rectangles and make them unselectable
+          // by setting fill to none and stroke to none
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("fill", "None")
+              .style("stroke", "None")
+
+          // show tooltip
+          tooltip
+              .style("opacity", 1);
+          // select all temporal rectangles and make mostly opaque
+          // with thick stroke for selection
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              .style("opacity", 0.8)
+              .style("stroke-width", 2);
+          // select mouseovered rectangle and set opacity to zero
+          this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[this.timestep_c2p2])
+              .style("opacity", 0)
+          // dim reservoirs, bay, and river segments
+          this.d3.selectAll(".c2p2.reservoirs")
+              .style("fill", "#172c4f")
+              .style("stroke", "#172c4f")
+          this.d3.selectAll(".c2p2.delaware_bay")
+              .style("fill", "#172c4f")
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#172c4f")
+          // select all river segments that have data in highlighted year
+          // and make white
+          this.d3.selectAll(".c2p2.river_segments." + timestep_c2p2 + data[this.timestep_c2p2])
+              .style("stroke", "#ffffff")
+              .attr("opacity", 1)
+              .raise()
+        },
+        mouseoutRect_c2p2(data, tooltip) {
+          // select all *spatial* rectangles and reset fill and stroke to black
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .style("stroke-width", 2)
+
+          // hide tooltip
+          tooltip
+              .style("opacity", 0)
+          // select all temporal rectangles and set fill and stroke back to black
+          // with no opacity (so available for selection but not visible)
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 2)
+              .style("opacity", 0)
+          // un-dim river segments, reservoirs, and bay
+          // lower elements as needed
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#6079a3")
+              .attr("opacity", 1)
+          this.d3.selectAll(".c2p2.river_segments." + timestep_c2p2 + data[timestep_c2p2])
+              .lower()
+          this.d3.selectAll(".c2p2.reservoirs")
+              .style("fill", "#6079a3")
+              .style("stroke", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p2.delaware_bay")
+              .style("fill", "#6079a3")
+              .lower()
+          this.d3.selectAll(".c2p2.basin_buffered")
+              .lower()
+        },
+
+
+
+
+
+
+
+
         mouseoverDimSegs_c2p3(data) {
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
