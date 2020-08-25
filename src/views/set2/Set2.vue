@@ -1139,6 +1139,7 @@
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
+          let loc_matrix_c2p2;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_matrix_c2p2 = document.querySelector('.matrix_c2p2');
@@ -1149,8 +1150,7 @@
             pt_matrix_c2p2.x = evt.clientX; pt_matrix_c2p2.y = evt.clientY;
             return pt_matrix_c2p2.matrixTransform(svg_matrix_c2p2.getScreenCTM().inverse());
           }
-          // create local variable to store point coordinates
-          var loc_matrix_c2p2
+
           // // reset coordinates when mousemoves over matrix svg
           svg_matrix_c2p2.addEventListener('mousemove', function(evt){
             loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
@@ -1234,15 +1234,15 @@
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
-                this.mouseoverRect_c2p2(d, tooltip);
+                self.mouseoverRect_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_matrix_c2p2.x
                 let mouse_y = loc_matrix_c2p2.y
-                this.mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
+                self.mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                this.mouseoutRect_c2p2(d, tooltip);
+                self.mouseoutRect_c2p2(d, tooltip);
               })
         },
         setMap_c2p3(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
@@ -1653,15 +1653,15 @@
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
-                this.mouseoverRect_c2p3(d, tooltip);
+                self.mouseoverRect_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_matrix_c2p3.x
                 let mouse_y = loc_matrix_c2p3.y
-                this.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
+                self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                this.mouseoutRect_c2p3(d, tooltip);
+                self.mouseoutRect_c2p3(d, tooltip);
               })
         },
         mouseoverDimSegs_c2p2(data) {
@@ -1816,6 +1816,7 @@
               .raise()
         },
         mouseoverRect_c2p2(data, tooltip) {
+          const  self = this;
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
           this.d3.selectAll(".c2p2.matrixSpatialRect")
@@ -1831,7 +1832,7 @@
               .style("opacity", 0.8)
               .style("stroke-width", 2);
           // select mouseovered rectangle and set opacity to zero
-          this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[this.timestep_c2p2])
+          this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[self.timestep_c2p2])
               .style("opacity", 0)
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p2.reservoirs")
@@ -1843,12 +1844,13 @@
               .style("stroke", "#172c4f")
           // select all river segments that have data in highlighted year
           // and make white
-          this.d3.selectAll(".c2p2.river_segments." + timestep_c2p2 + data[this.timestep_c2p2])
+          this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .style("stroke", "#ffffff")
               .attr("opacity", 1)
               .raise()
         },
         mouseoutRect_c2p2(data, tooltip) {
+          const self = this;
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("fill", "#000000")
@@ -1870,7 +1872,7 @@
           this.d3.selectAll(".c2p2.river_segments")
               .style("stroke", "#6079a3")
               .attr("opacity", 1)
-          this.d3.selectAll(".c2p2.river_segments." + timestep_c2p2 + data[timestep_c2p2])
+          this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
               .style("fill", "#6079a3")
@@ -2042,6 +2044,7 @@
 
         },
         mouseoverRect_c2p3(data, tooltip) {
+          const self = this;
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
           this.d3.selectAll(".c2p3.matrixSpatialRect")
@@ -2056,7 +2059,7 @@
               .style("opacity", 0.85)
               .style("stroke-width", 0.6)
           // select mouseovered rectangle and set opacity to zero
-          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[this.timestep_c2p3])
+          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
               .style("opacity", 0)
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
@@ -2068,12 +2071,13 @@
               .style("stroke", "#172c4f")
           // select all river segments that have data on highlighted date
           // and make white
-          this.d3.selectAll(".c2p3.river_segments." + this.timestep_c2p3 + data[this.timestep_c2p3])
+          this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
               .style("stroke", "#ffffff")
               .attr("opacity", 1)
               .raise()
         },
         mouseoutRect_c2p3(data, tooltip) {
+          const self = this;
 
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
@@ -2097,7 +2101,7 @@
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#6079a3")
               .attr("opacity", 1)
-          this.d3.selectAll(".c2p3.river_segments." + timestep_c2p3 + data[timestep_c2p3])
+          this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
               .style("stroke", "#6079a3")
               .attr("opacity", 1)
               .lower()
