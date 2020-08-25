@@ -1408,15 +1408,15 @@
               })
               .style("fill", "None")
               .on("mouseover", function(d) {
-                this.mouseoverSeg_c2p3(d, tooltip);
+                self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_map_c2p3.x
                 let mouse_y = loc_map_c2p3.y
-                this.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
+                self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                this.mouseoutSeg_c2p3(d, tooltip);
+                self.mouseoutSeg_c2p3(d, tooltip);
               });
           // add scale bar
           map.append("g").call(scaleBarTop)
