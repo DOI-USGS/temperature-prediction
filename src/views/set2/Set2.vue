@@ -143,7 +143,8 @@
       data() {
         return {
           publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
-          d3: null,
+          d3: null, // this is used so that we can assign d3 plugins to the d3 instance
+          // global variables instantiated in next section
           flowArray:['avg_ann_flow'],
           timestep_c2p2: 'year',
           timestep_c2p3: 'date',
@@ -151,26 +152,27 @@
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
           matrix_margin: {top: 15, right: 15, bottom: 15, left: 35},
-          matrix_width_c2p2: null,
-          matrix_width_c2p3: null,
-          matrix_height_c2p2: null,
-          matrix_height_c2p3: null,
-          map_c1p1: null,
-          map_path_c1p1: null,
-          scaleBarTop_c1p1: null,
-          scaleBarBottom_c1p1: null,
-          map_c2p1: null,
-          map_path_c2p1: null,
-          scaleBarTop_c2p1: null,
-          scaleBarBottom_c2p1: null,
+          matrix_width_c2p2: null, // this will get a value in the mounted hook
+          matrix_width_c2p3: null, // this will get a value in the mounted hook
+          matrix_height_c2p2: null, // this will get a value in the mounted hook
+          matrix_height_c2p3: null, // this will get a value in the mounted hook
           scaleBarTop: null,
           scaleBarBottom: null,
-          map_path: null,
-          map_projection: null,
+          scaleBarTop_c1p1: null,
+          scaleBarTop_c2p1: null,
+          scaleBarBottom_c1p1: null,
+          scaleBarBottom_c2p1: null,
+          map_c1p1: null,
+          map_c2p1: null,
           map_c2p2: null,
-          map_width: 600,
-          mapHeight: null,
-          map_projection_c2p1: null
+          map_c2p3: null,
+          map_path_c1p1: null,
+          map_path_c2p1: null,
+          map_width: null,
+          map_height: null,
+          map_margin: null,
+          map_path: null,
+          map_projection: null
         }
       },
       mounted() {
@@ -232,7 +234,7 @@
               .tickValues(null);
 
           //create new svg container for the ch 1 panel 1 map
-          self.map_c1p1 = self.d3.select("#DRB_map_c1p1")
+          let map_c1p1 = self.d3.select("#DRB_map_c1p1")
               .append("svg")
               .attr("class", "map_c1p1")
               .attr("viewBox", [0, 0, (map_width_c1p1 + map_margin_c1p1.right + map_margin_c1p1.left),
@@ -247,31 +249,30 @@
             // create a new column in the data titled "total"
             d.total = t;
             return d;
-
           }
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          self.map_width = 600,
-          self.map_height = window.innerHeight * 0.8,
-          self.map_margin = {top: 5, right: 5, bottom: 5, left: 5};
+          this.map_width = 600;
+          this.map_height = window.innerHeight * 0.8;
+          this.map_margin = {top: 5, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 panel 1 map
-          self.map_projection_c2p1 = self.d3.geoAlbers()
+          let map_projection_c2p1 = self.d3.geoAlbers()
               .center([0, 40.658894445])
               .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
-              .scale(self.map_height * 15)
-              .translate([self.map_width / 2, self.map_height / 2]);
+              .scale(this.map_height * 15)
+              .translate([this.map_width / 2, this.map_height / 2]);
 
-          self.map_path_c2p1 = self.d3.geoPath()
-              .projection(self.map_projection_c2p1);
+          this.map_path_c2p1 = self.d3.geoPath()
+              .projection(map_projection_c2p1);
 
           // create scale bar for ch 2 panel 1 map
-          const scaleBarTop_c2p1 = self.d3.geoScaleBar()
+          this.scaleBarTop_c2p1 = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleBottom)
-              .projection(self.map_projection_c2p1)
-              .size([self.map_width, self.map_height])
+              .projection(map_projection_c2p1)
+              .size([this.map_width, this.map_height])
               .left(.3) // .15 centered, .45 far right
               .top(.94)
               .units(self.d3.geoScaleKilometers)
@@ -281,10 +282,10 @@
               .tickSize(null)
               .tickValues(null);
 
-          const scaleBarBottom_c2p1 = self.d3.geoScaleBar()
+          this.scaleBarBottom_c2p1 = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleTop)
-              .projection(self.map_projection_c2p1)
-              .size([self.map_width, self.map_height])
+              .projection(map_projection_c2p1)
+              .size([this.map_width, this.map_height])
               .left(.3) // .15 centered, .45 far right
               .top(.95)
               .units(self.d3.geoScaleMiles)
@@ -295,21 +296,21 @@
               .tickValues(null);
 
           //create Albers equal area conic projection centered on DRB for ch2 panel 2 and 3 maps
-          self.map_projection = self.d3.geoAlbers()
+          this.map_projection = self.d3.geoAlbers()
               .center([0, 40.658894445])
               .rotate([74.6, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
-              .scale(self.map_height * 15)
-              .translate([self.map_width / 2, self.map_height / 2]);
+              .scale(this.map_height * 15)
+              .translate([this.map_width / 2, this.map_height / 2]);
 
-          self.map_path = self.d3.geoPath()
-              .projection(self.map_projection);
+          this.map_path = self.d3.geoPath()
+              .projection(this.map_projection);
 
           // create scale bar for ch 2 panel 2 and 3 maps
-          self.scaleBarTop = self.d3.geoScaleBar()
+          this.scaleBarTop = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleBottom)
-              .projection(self.map_projection)
-              .size([self.map_width, self.map_height])
+              .projection(this.map_projection)
+              .size([this.map_width, this.map_height])
               .left(.1) // .15 centered, .45 far right
               .top(.94)
               .units(self.d3.geoScaleKilometers)
@@ -319,10 +320,10 @@
               .tickSize(null)
               .tickValues(null);
 
-          self.scaleBarBottom = self.d3.geoScaleBar()
+          this.scaleBarBottom = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleTop)
-              .projection(self.map_projection)
-              .size([self.map_width, self.map_height])
+              .projection(this.map_projection)
+              .size([this.map_width, this.map_height])
               .left(.1) // .15 centered, .45 far right
               .top(.95)
               .units(self.d3.geoScaleMiles)
@@ -333,25 +334,28 @@
               .tickValues(null);
 
           //create new svg container for the ch 2 panel 1 map
-          self.map_c2p1 = self.d3.select("#DRB_map_c2p1")
+          this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
               .append("svg")
               .attr("class", "map_c2p1")
-              .attr("viewBox", [0, 0, (self.map_width + self.map_margin.right + self.map_margin.left),
-                (self.map_height + self.map_margin.top + self.map_margin.bottom)].join(' '));
+              .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           //create new svg container for the ch 2 panel 2 map
-          self.map_c2p2 = self.d3.select("#DRB_map_c2p2")
+          this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
               .attr("class", "map_c2p2")
-              .attr("viewBox", [0, 0, (self.map_width + self.map_margin.right + self.map_margin.left),
-                (self.map_height + self.map_margin.top + self.map_margin.bottom)].join(' '));
+              .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           // create new svg container for the ch 2 panel 3 map
-          self.map_c2p3 = self.d3.select("#DRB_map_c2p3")
+          this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
               .attr("class", "map_c2p3")
-              .attr("viewBox", [0, 0, (self.map_width + self.map_margin.right + self.map_margin.left),
-                (self.map_height + self.map_margin.top + self.map_margin.bottom)].join(' '));
+              .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+          // add variables to component data
+          this.map_c1p1 = map_c1p1;
+          this.map_path_c1p1 = map_path_c1p1;
 
           let promises = [self.d3.csv("data/segment_maflow.csv"),
             self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
@@ -408,34 +412,34 @@
           let segs_small = topojson.feature(json_segs_small, json_segs_small.objects.Segments_subset_1per_smooth).features;
           let states_merged = topojson.feature(json_states_merged, json_states_merged.objects.cb_states_16per_merged);
 
-          // // join csv flow data to geojson segments
+          // join csv flow data to geojson segments
           // ch 1 p 1 map segments
           segs_small = this.joinData(segs_small, csv_flow);
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
 
-          // // set stroke width scale
+          // set stroke width scale
           // for ch 1 p 1 map segments
           let widthScale_c1p1 = this.makeWidthScale_c1p1(csv_flow);
           // for ch 2 map segments
           let widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
-          // // Set up Ch 1 panel 1 -
+          // Set up Ch 1 panel 1 -
           this.setMap_c1p1(states, states_merged, segs_small, bay, this.map_c1p1, this.map_path_c1p1, this.scaleBarTop_c1p1, this.scaleBarBottom_c1p1, widthScale_c1p1);
 
-          // // Set up Ch 2 panel 1 -
+          // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
           this.setMap_c2p1(segments, stations, bay, this.map_c2p1, this.map_path_c2p1, this.scaleBarTop_c2p1, this.scaleBarBottom_c2p1, widthScale_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_agency_count);
 
-          // // Set up Ch 2 panel 2 -
+          // Set up Ch 2 panel 2 -
           // add DRB segments to the panel 2 map
           this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p2, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 2 matrix
           this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments, this.timestep_c2p2);
 
-          // // Set up Ch 2 panel 3 -
+          // Set up Ch 2 panel 3 -
           // add DRB segments to the panel 3 map
           this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p3, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 3 matrix
@@ -624,9 +628,9 @@
               .style("fill", "None")
       
         // add scale bar
-        this.map_c1p1 = map_c1p1;
-        this.map_c1p1.append("g").call(this.scaleBarTop_c1p1);
-        this.map_c1p1.append("g").call(this.scaleBarBottom_c1p1);
+        map_c1p1 = map_c1p1;
+        map_c1p1.append("g").call(this.scaleBarTop_c1p1);
+        map_c1p1.append("g").call(this.scaleBarBottom_c1p1);
         },
         setMap_c2p1(segments, stations, bay, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
           // add delaware bay to map
@@ -677,7 +681,7 @@
                 })
                 // assign fill color based on agency
                 .style("fill", function(d){
-                  if (d.properties.site_agency == 'USGS'){
+                  if (d.properties.site_agency === 'USGS'){
                     return "#edb932"
                   } else {
                     return "#eb4444"
@@ -690,9 +694,8 @@
                 .style("opacity", 1)
 
             // add scale bar
-            this.map_c2p1 = map;
-            this.map_c2p1.append("g").call(this.scaleBarTop);
-            this.map_c2p1.append("g").call(this.scaleBarBottom);
+            map.append("g").call(this.scaleBarTop);
+            map.append("g").call(this.scaleBarBottom);
           },
         setBarChart_c2p1(csv_agency_count) {
       // append svg to div
@@ -861,7 +864,7 @@
               .attr("height", map_height)
               .append("xhtml:body")
               .attr("class", "c2p2 narrative")
-              .html('<p>The reality is that we cannot measure water temperature everywhere at all times.\
+              .html('<p id="insert-text">The reality is that we cannot measure water temperature everywhere at all times.\
                 Therefore, records of stream temperature have gaps in space and time. In the matrix chart,\
                 right, the columns represent years, and each row represents a stream reach within the\
                  basin. If every stream reach had at least <span id="c2p2_matrix_bold">one measurement of \
@@ -2120,6 +2123,136 @@
 </script>
 
 <style scoped lang="scss">
+#section_2 {
+  margin-bottom: 0;
+  font-family: 'Open Sans', arial, sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  background-color: black;
+  color: #525252;
+  text-align: center;
 
+  #intro_row_1 {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+  #intro_row_1 h2 {
+    color: #cecece;
+  }
 
+  #intro_row_2 {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+  #intro_row_2 h2 {
+    color: #cecece;
+  }
+
+  .row {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+  }
+
+  #filter_row {
+    height: 1vh;
+  }
+
+  .narrative_text {
+    text-align: left;
+    color: #cecece;
+    margin-right: 7vh;
+    font-size: 1.02vw;
+  }
+
+  .narrative {
+    color: #cecece;
+    font-size: 0.9em;
+    text-align: right;
+    margin-right: 0.2vh;
+  }
+}
+</style>
+<style lang="scss">
+// this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
+.narrative {
+  background-color: black;
+  color: #cecece;
+}
+
+#c2p2_matrix_min {
+  font-weight: 700;
+  color: #302D85;
+}
+#c2p2_matrix_max {
+  font-weight: 700;
+  color: #EBE72C;
+}
+
+#c2p2_matrix_bold {
+  font-weight: 700;
+  font-style: italic;
+}
+
+#c2p3_min_t {
+  color: #354198;
+}
+
+#c2p3_max_t {
+  color: #AD1F28;
+}
+
+#tip_text {
+  font-size: 0.75em;
+  color: #858585;
+  margin-right: 0.5vh;
+}
+
+.states {
+  fill: None;
+  stroke: #636363;
+  stroke-width: 0.5;
+}
+
+.delaware_bay {
+  fill: #6079a3;
+}
+
+.river_segments {
+  stroke: #6079a3;
+  stroke-linecap: round;
+  stroke-width: 0.5px;
+}
+
+.reservoirs {
+  fill:  #6079a3;
+  stroke: #6079a3;
+}
+
+.matrixAxis {
+  color: #7a7a7a;
+}
+
+.chartAxis {
+  color: #999999;
+  font-size: .60em;
+}
+
+.legend {
+  font-family: 'Open Sans', arial, sans-serif;
+  font-size: 0.6em;
+  fill: #999999;
+}
+
+.chartAxisText {
+  fill: #999999;
+  font-size: 1.2em;
+}
+
+.tooltip {
+  fill: #ffffff;
+  font-family: sans-serif;
+  font-size: 0.7em;
+  font-weight: bold;
+  line-height: 1em;
+}
 </style>
