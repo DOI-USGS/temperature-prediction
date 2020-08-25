@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "GRAND_ID": 1550, "DAM_NAME": "Cannonsville Dam", "RIVER": "West Branch of Delaware River", "LONG_DD": -75.37375, "LAT_DD": 42.06625 }, "geometry": { "type": "Point", "coordinates": [ -75.37375, 42.06625 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1560, "DAM_NAME": "Wallenpaupack", "RIVER": "Lackawaxen River", "LONG_DD": -75.187083, "LAT_DD": 41.457917 }, "geometry": { "type": "Point", "coordinates": [ -75.187083, 41.457917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1580, "DAM_NAME": "Penn Forest", "RIVER": "Wild Creek", "LONG_DD": -75.56625, "LAT_DD": 40.932917 }, "geometry": { "type": "Point", "coordinates": [ -75.56625, 40.932917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1583, "DAM_NAME": "Wild Creek", "RIVER": "Wild Creek", "LONG_DD": -75.56625, "LAT_DD": 40.899583 }, "geometry": { "type": "Point", "coordinates": [ -75.56625, 40.899583 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1584, "DAM_NAME": "Still Creek", "RIVER": "Still Creek", "LONG_DD": -75.987917, "LAT_DD": 40.85875 }, "geometry": { "type": "Point", "coordinates": [ -75.987917, 40.85875 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1585, "DAM_NAME": "Beltzville Dam", "RIVER": "Pohopoco Creek", "LONG_DD": -75.637917, "LAT_DD": 40.849583 }, "geometry": { "type": "Point", "coordinates": [ -75.637917, 40.849583 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1610, "DAM_NAME": "Nockamixon", "RIVER": "Tohickon Creek", "LONG_DD": -75.187083, "LAT_DD": 40.470417 }, "geometry": { "type": "Point", "coordinates": [ -75.187083, 40.470417 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1615, "DAM_NAME": "Blue Marsh Dam", "RIVER": "Tulpehocken Creek", "LONG_DD": -76.037083, "LAT_DD": 40.382917 }, "geometry": { "type": "Point", "coordinates": [ -76.037083, 40.382917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1618, "DAM_NAME": "Greenlane Reservoir", "RIVER": "Perkiomen Creek", "LONG_DD": -75.482917, "LAT_DD": 40.342917 }, "geometry": { "type": "Point", "coordinates": [ -75.482917, 40.342917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1633, "DAM_NAME": "Geist Storage", "RIVER": "Crum Creek", "LONG_DD": -75.395417, "LAT_DD": 39.95375 }, "geometry": { "type": "Point", "coordinates": [ -75.395417, 39.95375 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 1662, "DAM_NAME": "Union Lake Dam", "RIVER": "Maurice River", "LONG_DD": -75.05375, "LAT_DD": 39.40375 }, "geometry": { "type": "Point", "coordinates": [ -75.05375, 39.40375 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2192, "DAM_NAME": "Downsville Dam", "RIVER": "East Branch of Delaware River", "LONG_DD": -74.96375, "LAT_DD": 42.07875 }, "geometry": { "type": "Point", "coordinates": [ -74.96375, 42.07875 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2200, "DAM_NAME": "Neversink Reservoir Dam", "RIVER": "Neversink River", "LONG_DD": -74.64125, "LAT_DD": 41.824583 }, "geometry": { "type": "Point", "coordinates": [ -74.64125, 41.824583 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2204, "DAM_NAME": "Toronto", "RIVER": "Mongaup River", "LONG_DD": -74.782917, "LAT_DD": 41.574583 }, "geometry": { "type": "Point", "coordinates": [ -74.782917, 41.574583 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2205, "DAM_NAME": "Rio", "RIVER": "Mongaup River", "LONG_DD": -74.757917, "LAT_DD": 41.482917 }, "geometry": { "type": "Point", "coordinates": [ -74.757917, 41.482917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2235, "DAM_NAME": "Lake Hopatcong Dam", "RIVER": "Muscontcong River", "LONG_DD": -74.662917, "LAT_DD": 40.917917 }, "geometry": { "type": "Point", "coordinates": [ -74.662917, 40.917917 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2240, "DAM_NAME": "Assunpink Dam 6", "RIVER": "Assunpink Creek", "LONG_DD": -74.582917, "LAT_DD": 40.234583 }, "geometry": { "type": "Point", "coordinates": [ -74.582917, 40.234583 ] } },
+{ "type": "Feature", "properties": { "GRAND_ID": 2242, "DAM_NAME": "Van Sciver Lake", "RIVER": "Scotts Creek", "LONG_DD": -74.774583, "LAT_DD": 40.132917 }, "geometry": { "type": "Point", "coordinates": [ -74.774583, 40.132917 ] } }
+]
+}
