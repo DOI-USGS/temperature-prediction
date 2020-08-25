@@ -131,12 +131,8 @@
 <script>
   import * as d3Base from "d3";
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
-
-
-
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
-
 
   export default {
       name: 'Set2',
@@ -172,7 +168,9 @@
           map_height: null,
           map_margin: null,
           map_path: null,
-          map_projection: null
+          map_projection: null,
+          loc_matrix_c2p2: null,
+          loc_map_c2p3: null
         }
       },
       mounted() {
@@ -628,7 +626,6 @@
               .style("fill", "None")
       
         // add scale bar
-        map_c1p1 = map_c1p1;
         map_c1p1.append("g").call(this.scaleBarTop_c1p1);
         map_c1p1.append("g").call(this.scaleBarBottom_c1p1);
         },
@@ -1142,7 +1139,6 @@
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
-          let loc_matrix_c2p2 = null;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_matrix_c2p2 = document.querySelector('.matrix_c2p2');
@@ -1156,7 +1152,7 @@
 
           // // reset coordinates when mousemoves over matrix svg
           svg_matrix_c2p2.addEventListener('mousemove', function(evt){
-            loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
+            self.loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
           }, false);
 
           // Build matrix
@@ -1239,8 +1235,8 @@
                 self.mouseoverRect_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = loc_matrix_c2p2.x
-                let mouse_y = loc_matrix_c2p2.y
+                let mouse_x = self.loc_matrix_c2p2.x
+                let mouse_y = self.loc_matrix_c2p2.y
                 self.mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1259,11 +1255,10 @@
             pt_map_c2p3.x = evt.clientX; pt_map_c2p3.y = evt.clientY;
             return pt_map_c2p3.matrixTransform(svg_map_c2p3.getScreenCTM().inverse());
           }
-          // create local variable to store point coordinates
-          var loc_map_c2p3
+
           // reset coordinates when mousemoves over map svg
           svg_map_c2p3.addEventListener('mousemove', function(evt){
-            loc_map_c2p3 = cursorPoint_c2p3(evt);
+            self.loc_map_c2p3 = cursorPoint_c2p3(evt);
           }, false);
 
           // // Add tooltip as text appended to map svg
@@ -1317,8 +1312,8 @@
                 self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = loc_map_c2p3.x
-                let mouse_y = loc_map_c2p3.y
+                let mouse_x = self.loc_map_c2p3.x
+                let mouse_y = self.loc_map_c2p3.y
                 self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1413,8 +1408,8 @@
                 self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = loc_map_c2p3.x
-                let mouse_y = loc_map_c2p3.y
+                let mouse_x = self.loc_map_c2p3.x
+                let mouse_y = self.loc_map_c2p3.y
                 self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1677,7 +1672,7 @@
               .style("stroke", "#172c4f")
         },
         mouseoutDimSegs_c2p2(data) {
-    // un-dim reservoirs, bay, and river segments
+        // un-dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p2.reservoirs")
             .style("fill", "#6079a3")
             .style("stroke", "#6079a3")
