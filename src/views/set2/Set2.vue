@@ -827,8 +827,7 @@
 
       },
         setMap_c2p2(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
-
-
+          const self = this;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_map_c2p2 = document.querySelector('.map_c2p2');
@@ -900,16 +899,16 @@
               .style("opacity", 0)
               // trigger interactions
               .on("mouseover", function(d) {
-                this.mouseoverSeg_c2p2(d, tooltip);
+                self.mouseoverSeg_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 // pass mouse coordinates
                 let mouse_x = loc_map_c2p2.x
                 let mouse_y = loc_map_c2p2.y
-                this.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); // position
+                self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); // position
               })
               .on("mouseout", function(d) {
-                this.mouseoutSeg_c2p2(d, tooltip);
+                self.mouseoutSeg_c2p2(d, tooltip);
               });
 
           // add basin_buffered basin to map - for selection only
@@ -925,10 +924,10 @@
               .style("opacity", 0)
               // trigger dimming
               .on("mouseover", function(d) {
-                this.mouseoverDimSegs_c2p2(d)
+                self.mouseoverDimSegs_c2p2(d)
               })
               .on("mouseout", function(d) {
-                this.mouseoutDimSegs_c2p2(d)
+                self.mouseoutDimSegs_c2p2(d)
               });
 
           // add delaware bay to map
@@ -941,10 +940,10 @@
               .attr("d", map_path)
               // trigger dimming
               .on("mouseover", function(d) {
-                this.mouseoverDimSegs_c2p2(d)
+                self.mouseoverDimSegs_c2p2(d)
               })
               .on("mouseout", function(d) {
-                this.mouseoutDimSegs_c2p2(d)
+                self.mouseoutDimSegs_c2p2(d)
               });
 
           // add drb reservoirs to map
@@ -1000,16 +999,16 @@
               .style("fill", "None")
               // trigger interactions
               .on("mouseover", function(d) {
-                this.mouseoverSeg_c2p2(d, tooltip);
+                self.mouseoverSeg_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
                 // pass mouse coordinates
                 let mouse_x = loc_map_c2p2.x
                 let mouse_y = loc_map_c2p2.y
-                this.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
+                self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                this.mouseoutSeg_c2p2(d, tooltip);
+                self.mouseoutSeg_c2p2(d, tooltip);
               });
 
           // add scale bar
@@ -1247,7 +1246,7 @@
               })
         },
         setMap_c2p3(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
-
+          const self = this;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_map_c2p3 = document.querySelector('.map_c2p3');
@@ -1313,15 +1312,15 @@
               .style("fill", "None")
               .style("opacity", 0)
               .on("mouseover", function(d) {
-                this.mouseoverSeg_c2p3(d, tooltip);
+                self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_map_c2p3.x
                 let mouse_y = loc_map_c2p3.y
-                this.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
+                self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                this.mouseoutSeg_c2p3(d, tooltip);
+                self.mouseoutSeg_c2p3(d, tooltip);
               });
 
           // add basin_buffered basin to map
@@ -1337,10 +1336,10 @@
               .style("opacity", 0)
               // trigger dimming
               .on("mouseover", function(d) {
-                this.mouseoverDimSegs_c2p3(d)
+                self.mouseoverDimSegs_c2p3(d)
               })
               .on("mouseout", function(d) {
-                this.mouseoutDimSegs_c2p3(d)
+                self.mouseoutDimSegs_c2p3(d)
               });
 
           // add delaware bay to map
@@ -1353,10 +1352,10 @@
               .attr("d", map_path)
               // trigger dimming
               .on("mouseover", function(d) {
-                this.mouseoverDimSegs_c2p3(d)
+                self.mouseoverDimSegs_c2p3(d)
               })
               .on("mouseout", function(d) {
-                this.mouseoutDimSegs_c2p3(d)
+                self.mouseoutDimSegs_c2p3(d)
               });
 
           // add drb reservoirs to map
@@ -1694,7 +1693,7 @@
               .attr("y", mouse_y - 15)
               .attr("x", mouse_x + 15)
               .attr("text-align", "left")
-              .text(d3.format(',')(num_obs) + " obs.")
+              .text(this.d3.format(',')(num_obs) + " obs.")
               .raise()
         },
         mouseoverSeg_c2p2(data, tooltip) {
