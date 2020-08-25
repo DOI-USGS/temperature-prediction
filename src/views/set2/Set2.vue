@@ -1,8 +1,8 @@
 <template>
-  <section>
+  <section id="section_2">
     <div class="container-fluid">
       <div
-        id="intro_row"
+        id="intro_row_1"
         class="row"
       >
         <div class="col-xl-1 col-md-1 col-xs-0" />
@@ -12,7 +12,7 @@
         <div class="col-xl-1 col-md-1 col-xs-0" />
       </div>
       <div
-        id="intro_row"
+        id="intro_row_2"
         class="row"
       >
         <div
@@ -21,7 +21,7 @@
         />
         <div class="col-xl-6 col-md-6 col-xs-12">
           <br><br>
-          <p id="narrative_text">
+          <p class="narrative_text">
             The Delaware River Basin covers 13,500 square miles in parts of four states,
             including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history,
             ecologically diverse, and critical to the regional economy. Water managers in this region have a
@@ -29,7 +29,7 @@
             this treasured resource, which provides drinking water to over 15 million people in the region.
           </p>
           <br>
-          <p id="narrative_text">
+          <p class="narrative_text">
             Temperature is a "master factor" in aquatic systems, regulating many processes --
             including fish growth, gas exchange, and evaporation. Increases in summer stream temperature as a
             result of human impacts and climate change may exceed the thermal tolerances of aquatic biota that
@@ -50,7 +50,7 @@
           class="col-xl-6 col-md-6 col-xs-12"
         >
           <br>
-          <p id="narrative_text">
+          <p class="narrative_text">
             The USGS and
             state and local agencies monitor stream temperature across the Delaware
             River Basin, collecting continuous and discrete measurements of water temperature.
@@ -59,7 +59,7 @@
             is rapidly increasing the volume of available data.
           </p>
           <br>
-          <p id="narrative_text">
+          <p class="narrative_text">
             This certainly seems like a lot of information, and it does
             represent a large investment of resources on the part of the USGS and stakeholders
             throughout the basin. However, in order to evaluate trends, predict water temperatures,
@@ -1139,13 +1139,13 @@
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
-          let loc_matrix_c2p2;
+          let loc_matrix_c2p2 = null;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_matrix_c2p2 = document.querySelector('.matrix_c2p2');
           // create a SVGPoint for future math
           var pt_matrix_c2p2 = svg_matrix_c2p2.createSVGPoint();
-          // fucntion to get point in global SVG space
+          // function to get point in global SVG space
           function cursorPoint_matrix_c2p2(evt){
             pt_matrix_c2p2.x = evt.clientX; pt_matrix_c2p2.y = evt.clientY;
             return pt_matrix_c2p2.matrixTransform(svg_matrix_c2p2.getScreenCTM().inverse());
@@ -1156,8 +1156,7 @@
             loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
           }, false);
 
-
-          // // Build matrix
+          // Build matrix
           // create transformed matrix variable
           var transformedMatrix = this.d3.select(".c2p2.transformedMatrix")
 
@@ -1570,10 +1569,10 @@
           // reset coordinates when mousemoves over matrix svg
           svg_matrix_c2p3.addEventListener('mousemove', function(evt){
             loc_matrix_c2p3 = cursorPoint_matrix_c2p3(evt);
-            console.log('x:')
-            console.log(loc_matrix_c2p3.x)
-            console.log('y:')
-            console.log(loc_matrix_c2p3.y)
+            // console.log('x:')
+            // console.log(loc_matrix_c2p3.x)
+            // console.log('y:')
+            // console.log(loc_matrix_c2p3.y)
           }, false);
 
           // // Build matrix
@@ -2121,8 +2120,8 @@
 </script>
 
 <style scoped lang="scss">
-body {
-  margin-bottom: 0px;
+#section_2 {
+  margin-bottom: 0;
   font-family: 'Open Sans', arial, sans-serif;
   font-weight: 300;
   font-size: 1em;
@@ -2130,6 +2129,7 @@ body {
   color: #525252;
   text-align: center;
 }
+
 
 #c2p2_matrix_min {
   font-weight: 700;
@@ -2154,11 +2154,19 @@ body {
   color: #AD1F28;
 }
 
-#intro_row {
+#intro_row_1 {
   margin-top: 3vh;
   margin-bottom: 3vh;
 }
-#intro_row h2 {
+#intro_row_1 h2 {
+  color: #cecece;
+}
+
+#intro_row_2 {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+#intro_row_2 h2 {
   color: #cecece;
 }
 
@@ -2171,7 +2179,7 @@ body {
   height: 1vh;
 }
 
-#narrative_text {
+.narrative_text {
   text-align: left;
   color: #cecece;
   margin-right: 7vh;
