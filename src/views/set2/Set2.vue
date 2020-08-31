@@ -435,13 +435,13 @@
           // add DRB segments to the panel 2 map
           this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p2, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 2 matrix
-          this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments, this.timestep_c2p2);
+          this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments);
 
           // Set up Ch 2 panel 3 -
           // add DRB segments to the panel 3 map
           this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p3, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 3 matrix
-          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, this.timestep_c2p3);
+          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments);
         },
         joinData(segments, csv_flow) {
           // loop through csv to assign each set of csv attribute values to a geojson polyline
@@ -520,7 +520,7 @@
           domainArrayFlow.shift();
 
           // // graduated scale
-          // assign array of last 9 cluster minimums as domain
+          // assign array of last 4 cluster minimums as domain
           widthScale.domain(domainArrayFlow);
 
           // // BOTH METHODS
@@ -979,7 +979,7 @@
                 let key = null;
                 for (key in d.properties.year_count) {
                   if (d.properties.year_count[key]) {
-                    seg_class += " " + this.timestep_c2p2 + key
+                    seg_class += " " + self.timestep_c2p2 + key
                   }
                 }
                 return seg_class
@@ -1015,13 +1015,13 @@
           map.append("g").call(scaleBarTop)
           map.append("g").call(scaleBarBottom)
         },
-        createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments, timestep_c2p2){
-
+        createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments){
+          const self = this;
           // append the svg object to the body of the page
-          var svgMatrix = this.d3.select("#matrixChart_c2p2")
+          var svgMatrix = self.d3.select("#matrixChart_c2p2")
               .append("svg")
-              .attr("viewBox", [0, 0, (this.matrix_width_c2p2 + this.matrix_margin.left + this.matrix_margin.right),
-                (this.matrix_height_c2p2 + this.matrix_margin.top + this.matrix_margin.bottom)].join(' '))
+              .attr("viewBox", [0, 0, (self.matrix_width_c2p2 + self.matrix_margin.left + self.matrix_margin.right),
+                (self.matrix_height_c2p2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
               .attr("class", "c2p2 matrix_c2p2")
 
           // append tooltip for matrix to the matrix svg
@@ -1032,21 +1032,21 @@
           svgMatrix.append("g")
               .attr("class", "c2p2 transformedMatrix")
               .attr("transform",
-                  "translate(" + this.matrix_margin.left + "," + this.matrix_margin.top + ")")
+                  "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
 
           // read in data for matrix
-          var myGroups = this.d3.map(csv_matrix_annual, function(d){return d[timestep_c2p2];}).keys()
-          var myVars = this.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
+          var myGroups = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
+          var myVars = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
-          var x = this.d3.scaleBand()
-              .range([0, this.matrix_width_c2p2])
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p2])
               .domain(myGroups)
               .padding(0.1);
 
           // build y scale
-          var y = this.d3.scaleBand()
-              .range([this.matrix_height_c2p2, 0])
+          var y = self.d3.scaleBand()
+              .range([self.matrix_height_c2p2, 0])
               .domain(myVars)
               .padding(0.1);
 
@@ -1061,20 +1061,20 @@
           var temporalCountMax = Math.round(Math.max(...domainArrayTemporalCounts));
 
           // build color scale
-          var myColor = this.d3.scaleSequential()
-              .interpolator(this.d3.interpolatePlasma) /* interpolatePlasma */
+          var myColor = self.d3.scaleSequential()
+              .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
               // .domain([temporalCountMax,1]) // if INVERTING color scale
               .domain([1, temporalCountMax]) // if NOT INVERTING color scale
 
           // add the cells to the matrix
           // select transformed matrix
-          var transformedMatrix = this.d3.select(".c2p2.transformedMatrix")
+          var transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
           // append rectangles to the matrix
           var matrixCells = transformedMatrix.selectAll('matrixCells')
               // bind data to rectangles
               .data(csv_matrix_annual, function(d) {
                 if (d.total_obs > 0) {
-                  return d[timestep_c2p2] +':'+ d.seg_id_nat;
+                  return d[self.timestep_c2p2] +':'+ d.seg_id_nat;
                 }
               })
               // create element for each data item
@@ -1088,7 +1088,7 @@
               .append("rect")
               // set x position based on year
               .attr("x", function (d){
-                return x(d[this.timestep_c2p2])
+                return x(d[self.timestep_c2p2])
               })
               // set y position based on segment id
               .attr("y", function(d) {
@@ -1099,7 +1099,7 @@
               .attr("height", y.bandwidth())
               // assign class with segment id AND year for styling
               .attr("class", function(d) {
-                return 'c2p2 cell segment' + d.seg_id_nat + ' timestep' + d[this.timestep_c2p2]
+                return 'c2p2 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p2]
               })
               // style based on # of observations for that segment in that year
               .style("fill", function(d) {
@@ -1112,30 +1112,30 @@
               .style("opacity", 1);
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          this.createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip);
+          self.createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip);
 
           // draw x axes
           transformedMatrix.append("g")
               .style("font-size", 10)
-              .attr("transform", "translate(" + 0 + "," + this.matrix_height_c2p2 + ")")
+              .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2p2 + ")")
               .attr("class", "c2p2 matrixAxis bottom")
-              .call(this.d3.axisBottom(x).tickSize(0).tickValues(['1980', '1990', '2000', '2010', '2019']).tickPadding(4)) /* '1980-01', '1990-01', '2000-01', '2010-01', '2019-01' */
+              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['1980', '1990', '2000', '2010', '2019']).tickPadding(4)) /* '1980-01', '1990-01', '2000-01', '2010-01', '2019-01' */
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + 0 + "," + 0 + ")")
               .attr("class", "c2p2 matrixAxis top")
-              .call(this.d3.axisTop(x).tickSize(0))
+              .call(self.d3.axisTop(x).tickSize(0))
 
           // draw y axes
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("class", "c2p2 matrixAxis left")
-              .call(this.d3.axisLeft(y).tickSize(0))
+              .call(self.d3.axisLeft(y).tickSize(0))
           transformedMatrix.append("g")
               .style("font-size", 0)
-              .attr("transform", "translate(" + this.matrix_width_c2p2 + "," + 0 + ")")
+              .attr("transform", "translate(" + self.matrix_width_c2p2 + "," + 0 + ")")
               .attr("class", "c2p2 matrixAxis right")
-              .call(this.d3.axisRight(y).tickSize(0))
+              .call(self.d3.axisRight(y).tickSize(0))
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
@@ -1157,21 +1157,21 @@
 
           // Build matrix
           // create transformed matrix variable
-          var transformedMatrix = this.d3.select(".c2p2.transformedMatrix")
+          var transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
 
           // read in data for matrix
-          var myGroups = this.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
-          var myVars = this.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
+          var myGroups = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
+          var myVars = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
-          var xscale = this.d3.scaleBand()
-              .range([0,this.matrix_width_c2p2])
+          var xscale = self.d3.scaleBand()
+              .range([0,self.matrix_width_c2p2])
               .domain(myGroups)
               .padding(0.1);
 
           // build y scale
-          var yscale = this.d3.scaleBand()
-              .range([this.matrix_height_c2p2, 0])
+          var yscale = self.d3.scaleBand()
+              .range([self.matrix_height_c2p2, 0])
               .domain(myVars)
               .padding(0.1);
 
@@ -1189,7 +1189,7 @@
               // set y value based on segment id
               .attr("y", function(d) { return yscale(d.seg_id_nat) })
               // set width to width of matrix
-              .attr("width", this.matrix_width_c2p2)
+              .attr("width", self.matrix_width_c2p2)
               // set height based on yscale bandwidth
               .attr("height", yscale.bandwidth())
               // set class based on segment id
@@ -1213,17 +1213,17 @@
               .append("rect")
               // set x value based on year and xscale
               .attr("x", function(d){
-                return xscale(d[this.timestep_c2p2])
+                return xscale(d[self.timestep_c2p2])
               })
               // set y value to 0
               .attr("y", 0)
               // set width based on bandwidth of x scale
               .attr("width", xscale.bandwidth())
               // set height to height of matrix
-              .attr("height", this.matrix_height_c2p2)
+              .attr("height", self.matrix_height_c2p2)
               // set class based on year
               .attr("class", function(d) {
-                return 'c2p2 matrixTemporalRect time' + d[this.timestep_c2p2];
+                return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#000000")
@@ -1387,7 +1387,7 @@
                 seg_class += d.seg_id_nat
                 for (key in d.properties.day_count) {
                   if (d.properties.day_count[key]) {
-                    seg_class += " " + this.timestep_c2p3 + key
+                    seg_class += " " + self.timestep_c2p3 + key
                   }
                 }
                 return seg_class
@@ -1420,14 +1420,14 @@
           map.append("g").call(scaleBarBottom)
 
         },
-        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, timestep_c2p3){
+        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments){
           const self = this;
           // append the svg object to the body of the page
-          var svgMatrix = this.d3.select("#matrixChart_c2p3")
+          var svgMatrix = self.d3.select("#matrixChart_c2p3")
               .append("svg")
               // set viewbox
-              .attr("viewBox", [0, 0, (this.matrix_width_c2p3 + this.matrix_margin.left + this.matrix_margin.right),
-                (this.matrix_height_c2p3 + this.matrix_margin.top + this.matrix_margin.bottom)].join(' '))
+              .attr("viewBox", [0, 0, (self.matrix_width_c2p3 + self.matrix_margin.left + self.matrix_margin.right),
+                (self.matrix_height_c2p3 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
               .attr("class", "c2p3 matrix_c2p3")
 
           // append tooltip for matrix to the matrix svg
@@ -1438,21 +1438,21 @@
           svgMatrix.append("g")
               .attr("class", "c2p3 transformedMatrix")
               .attr("transform",
-                  "translate(" + this.matrix_margin.left + "," + this.matrix_margin.top + ")");
+                  "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")");
 
           // read in data for matrix
-          var myGroups = this.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = this.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
+          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
+          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
-          var x = this.d3.scaleBand()
-              .range([0, this.matrix_width_c2p3])
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
               .domain(myGroups)
               .padding(0.1);
 
           // build y scale
-          var y = this.d3.scaleBand()
-              .range([this.matrix_height_c2p3, 0])
+          var y = self.d3.scaleBand()
+              .range([self.matrix_height_c2p3, 0])
               .domain(myVars)
               .padding(0.1);
 
@@ -1474,20 +1474,20 @@
           var obsTempMin = Math.round(Math.min(...arrayObsTemps));
 
           // build color scale
-          var myColor = this.d3.scaleSequential()
-              .interpolator(this.d3.interpolateRdYlBu) /* interpolatePlasma */
+          var myColor = self.d3.scaleSequential()
+              .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
               .domain([obsTempMax,obsTempMin]) // if INVERTING color scale
           // .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
 
           // // add the cells to the matrix
           // select transformed matrix
-          var transformedMatrix = this.d3.select(".c2p3.transformedMatrix")
+          var transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
           // append rectangles to the matrix
           var matrixCells = transformedMatrix.selectAll('matrixCells')
               // bind data to rectangles
               .data(csv_matrix_daily_2019, function(d) {
                 if (d.total_obs > 0) {
-                  return d[this.timestep_c2p3] +':'+ d.seg_id_nat; /* d.seg_id_nat */
+                  return d[self.timestep_c2p3] +':'+ d.seg_id_nat; /* d.seg_id_nat */
                 }
               })
               // create element for each data item
@@ -1501,7 +1501,7 @@
               .append("rect")
               // set x position based on date
               .attr("x", function (d){
-                return x(d[this.timestep_c2p3])
+                return x(d[self.timestep_c2p3])
               })
               // set y position based on segment id
               .attr("y", function(d) {
@@ -1512,7 +1512,7 @@
               .attr("height", y.bandwidth())
               // assign class with segment id AND date for styling
               .attr("class", function(d) {
-                return 'c2p3 cell segment' + d.seg_id_nat + ' timestep' + d[this.timestep_c2p3]
+                return 'c2p3 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p3]
               })
               // style based on # of observations for that segment in that year
               .style("fill", function(d) {
@@ -1525,29 +1525,29 @@
               .style("opacity", 1);
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          this.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip);
+          self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip);
 
           transformedMatrix.append("g")
               .style("font-size", 10)
-              .attr("transform", "translate(" + 0 + "," + this.matrix_height_c2p3 + ")")
+              .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2p3 + ")")
               .attr("class", "c2p3 matrixAxis bottom")
-              .call(this.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(4)) //.tickFormat(formatTime(parseTime()))
+              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(4)) //.tickFormat(formatTime(parseTime()))
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + 0 + "," + 0 + ")")
               .attr("class", "c2p3 matrixAxis top")
-              .call(this.d3.axisTop(x).tickSize(0))
+              .call(self.d3.axisTop(x).tickSize(0))
 
           // draw y axes
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("class", "c2p3 matrixAxis left")
-              .call(this.d3.axisLeft(y).tickSize(0))
+              .call(self.d3.axisLeft(y).tickSize(0))
           transformedMatrix.append("g")
               .style("font-size", 0)
-              .attr("transform", "translate(" + this.matrix_width_c2p3 + "," + 0 + ")")
+              .attr("transform", "translate(" + self.matrix_width_c2p3 + "," + 0 + ")")
               .attr("class", "c2p3 matrixAxis right")
-              .call(this.d3.axisRight(y).tickSize(0))
+              .call(self.d3.axisRight(y).tickSize(0))
 
         },
         createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip) {
@@ -1575,21 +1575,21 @@
 
           // // Build matrix
           // create transformed matrix variable
-          var transformedMatrix = this.d3.select(".c2p3.transformedMatrix")
+          var transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
 
           // read in data for matrix
-          var myGroups = this.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = this.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
+          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
+          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
-          var xscale = this.d3.scaleBand()
-              .range([0, this.matrix_width_c2p3])
+          var xscale = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
               .domain(myGroups)
               .padding(0.1);
 
           // build y scale
-          var yscale = this.d3.scaleBand()
-              .range([this.matrix_height_c2p3, 0])
+          var yscale = self.d3.scaleBand()
+              .range([self.matrix_height_c2p3, 0])
               .domain(myVars)
               .padding(0.1);
 
@@ -1607,7 +1607,7 @@
               // set y value based on segment id
               .attr("y", function(d) { return yscale(d.seg_id_nat) })
               // set width to width of matrix
-              .attr("width", this.matrix_width_c2p3)
+              .attr("width", self.matrix_width_c2p3)
               // set height based on yscale bandwidth
               .attr("height", yscale.bandwidth() )
               // set class based on segment id
@@ -1631,14 +1631,14 @@
               .append("rect")
               // set x value based on date and xscale
               .attr("x", function(d){
-                return xscale(d[this.timestep_c2p3])
+                return xscale(d[self.timestep_c2p3])
               })
               // set y value to 0
               .attr("y", 0)
               // set width based on bandwidth of x scale
               .attr("width", xscale.bandwidth())
               // set height to height of matrix
-              .attr("height", this.matrix_height_c2p3)
+              .attr("height", self.matrix_height_c2p3)
               // set class based on date
               .attr("class", function(d) {
                 return 'c2p3 matrixTemporalRect time' + d[self.timestep_c2p3];
