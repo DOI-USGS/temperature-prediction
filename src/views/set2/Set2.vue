@@ -141,7 +141,6 @@
           publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
           d3: null, // this is used so that we can assign d3 plugins to the d3 instance
           // global variables instantiated in next section
-          flowArray:['avg_ann_flow'],
           timestep_c2p2: 'year',
           timestep_c2p3: 'date',
           chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
@@ -450,29 +449,24 @@
             let csvSegment = csv_flow[i];
             // define the csv attribute field to use as the key
             let csvKey = csvSegment.seg_id_nat;
-
             // Loop through the geojson segments
             for (let a=0; a<segments.length; a++){
               // Pull the properties for the current geojson segment
               let geojsonProps = segments[a].properties;
               // set the geojson properties field to use as the key
-              // if joining regular segments (for c2 maps)
               let geojsonKey;
+              // if joining regular segments (for c2 maps)
               if (segments[a].seg_id_nat){
-                let geojsonKey = segments[a].seg_id_nat;
-                // if joining segments small (v. simplified segments for c1p1 map)
+                geojsonKey = segments[a].seg_id_nat;
+              // if joining segments small (v. simplified segments for c1p1 map)
               } else {
-                let geojsonKey = geojsonProps.seg_id_nat;
+                geojsonKey = geojsonProps.seg_id_nat;
               }
               // where primary keys match, transfer csv data to geojson properties object
               if (geojsonKey == csvKey){
                 // assign all attributes and values
-                this.flowArray.forEach(function(attr){
-                  // get csv attribute value, converting it to a float
-                  let val = parseFloat(csvSegment[attr]);
-                  // assign attribute and value to geojson properties
-                  geojsonProps[attr] = val;
-                });
+                let val = parseFloat(csvSegment['avg_ann_flow'])
+                geojsonProps['avg_ann_flow'] = val;
               };
             };
 
