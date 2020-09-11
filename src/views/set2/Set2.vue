@@ -415,8 +415,6 @@
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
 
-          console.log(segments)
-
           // set stroke width scale
           // for ch 1 p 1 map segments
           let widthScale_c1p1 = this.makeWidthScale_c1p1(csv_flow);
