@@ -399,7 +399,7 @@
           let json_states_merged = data[14];
 
           // translate topojsons
-          let segments = json_segments.features; /* topojson.feature(json_segments, json_segments.objects.Segments_subset_4per_smooth).features */
+          let segments = json_segments.features;
           let stations = json_obs_stations.features;
           let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
           let reservoirs = json_reservoirs.features;
@@ -414,6 +414,8 @@
           segs_small = this.joinData(segs_small, csv_flow);
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
+
+          console.log(segments)
 
           // set stroke width scale
           // for ch 1 p 1 map segments
