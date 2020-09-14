@@ -272,8 +272,7 @@
             self.d3.json(self.publicPath + "data/observed_site_locations.json"),
             self.d3.json(self.publicPath + "data/NHDWaterbody_DelawareBay_pt6per_smooth.json"),
             self.d3.json(self.publicPath + "data/reservoirs.json"),
-            self.d3.json(self.publicPath + "data/dams.json"),
-            self.d3.json(self.publicPath + "data/Segments_subset_4per_smooth_10miBuffer_diss.json")
+            self.d3.json(self.publicPath + "data/dams.json")
           ];
           Promise.all(promises).then(self.callback);
         },
@@ -298,7 +297,6 @@
           let json_bay = data[8];
           let json_reservoirs = data[9];
           let json_dams = data[10];
-          let json_basin_buffered = data[11];
 
           // translate topojsons
           let segments = json_segments.features;
@@ -306,7 +304,6 @@
           let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
           let reservoirs = json_reservoirs.features;
           let dams = json_dams.features;
-          let basin_buffered = topojson.feature(json_basin_buffered, json_basin_buffered.objects.Segments_subset_4per_smooth_10miBuffer_diss);
           
           // join csv flow data to geojson segments
           // ch 2 map segments
@@ -324,13 +321,13 @@
 
           // Set up Ch 2 panel 2 -
           // add DRB segments to the panel 2 map
-          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p2, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
+          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 2 matrix
           this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments);
 
           // Set up Ch 2 panel 3 -
           // add DRB segments to the panel 3 map
-          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, basin_buffered, this.map_c2p3, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
+          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
           // create panel 3 matrix
           this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments);
         },
@@ -606,7 +603,7 @@
             .text(function(d) { return d; });
 
       },
-        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
+        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
           const self = this;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
@@ -689,25 +686,6 @@
               })
               .on("mouseout", function(d) {
                 self.mouseoutSeg_c2p2(d, tooltip);
-              });
-
-          // add basin_buffered basin to map - for selection only
-          var drb_basin_buffered = map.append("path")
-              // bind data to element
-              .datum(basin_buffered)
-              // set class for styling
-              .attr("class", "c2p2 basin_buffered")
-              // project element
-              .attr("d", map_path)
-              // style for selection only
-              .style("fill", "#000000")
-              .style("opacity", 0)
-              // trigger dimming
-              .on("mouseover", function(d) {
-                self.mouseoverDimSegs_c2p2(d)
-              })
-              .on("mouseout", function(d) {
-                self.mouseoutDimSegs_c2p2(d)
               });
 
           // add delaware bay to map
@@ -1023,7 +1001,7 @@
                 self.mouseoutRect_c2p2(d, tooltip);
               })
         },
-        setMap_c2p3(map_width, map_height, segments, bay, reservoirs, basin_buffered, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
+        setMap_c2p3(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
           const self = this;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
@@ -1098,25 +1076,6 @@
               })
               .on("mouseout", function(d) {
                 self.mouseoutSeg_c2p3(d, tooltip);
-              });
-
-          // add basin_buffered basin to map
-          var drb_basin_buffered = map.append("path")
-              // bind data to element
-              .datum(basin_buffered)
-              // set class for styling
-              .attr("class", "c2p3 basin_buffered")
-              // project element
-              .attr("d", map_path)
-              // style for selection only
-              .style("fill", "#000000")
-              .style("opacity", 0)
-              // trigger dimming
-              .on("mouseover", function(d) {
-                self.mouseoverDimSegs_c2p3(d)
-              })
-              .on("mouseout", function(d) {
-                self.mouseoutDimSegs_c2p3(d)
               });
 
           // add delaware bay to map
@@ -1575,8 +1534,6 @@
           this.d3.selectAll(".c2p2.delaware_bay")
               .style("fill", "#6079a3")
               .lower()
-          this.d3.selectAll(".c2p2.basin_buffered")
-              .lower()
           // raise matrix axes
           this.d3.selectAll("g")
               .raise()
@@ -1657,8 +1614,6 @@
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
               .style("fill", "#6079a3")
-              .lower()
-          this.d3.selectAll(".c2p2.basin_buffered")
               .lower()
         },
         mouseoverDimSegs_c2p3(data) {
@@ -1794,8 +1749,6 @@
           this.d3.selectAll(".c2p3.delaware_bay")
               .style("fill", "#6079a3")
               .lower()
-          this.d3.selectAll(".c2p3.basin_buffered")
-              .lower()
           // raise matrix axes
           this.d3.selectAll("g")
               .raise()
@@ -1888,8 +1841,6 @@
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
               .style("fill", "#6079a3")
-              .lower()
-          this.d3.selectAll(".c2p3.basin_buffered")
               .lower()
         }
       }
