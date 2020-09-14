@@ -490,7 +490,7 @@
         var x = this.d3.scaleBand()
             .rangeRound([0, this.chart_width])
             // set padding between bars
-            .padding(0.3)
+            .padding(0.1)
 
 
         // make y scale
@@ -568,14 +568,16 @@
             .append("text")
             .attr("y", 35)
             // offset to (roughly) center on y axis
-            .attr("x", -this.chart_height / 1.15)
+            .attr("x", -this.chart_height / 1)
             .attr("text-anchor", "starts")
             .attr("class", "c2p1 chartAxisText")
-            .text("# of Measurements")
+            .text("# of unique temperature measurements")
+            //.attr("transform", "translate(25, 0)")
             .attr("transform", "rotate(-90)")
+            
 
         // set the tick mark lines to background color
-        svgChart.selectAll(".tick line").attr("stroke", "#000000")
+        svgChart.selectAll(".tick line").attr("stroke", "#000000").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 1"))
 
         //  make the legend
         var legend = g.selectAll(".legend")
@@ -1998,7 +2000,7 @@
 
 .chartAxisText {
   fill: #999999;
-  font-size: 1.2em;
+  font-size: 1.1vh;
 }
 
 .tooltip {
