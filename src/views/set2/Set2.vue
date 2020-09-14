@@ -695,14 +695,7 @@
               // assign class for styling
               .attr("class", "c2p2 delaware_bay")
               // project element
-              .attr("d", map_path)
-              // trigger dimming
-              .on("mouseover", function(d) {
-                self.mouseoverDimSegs_c2p2(d)
-              })
-              .on("mouseout", function(d) {
-                self.mouseoutDimSegs_c2p2(d)
-              });
+              .attr("d", map_path);
 
           // add drb reservoirs to map
           var drb_reservoirs = map.selectAll(".reservoirs")
@@ -1085,14 +1078,7 @@
               // add class for styling
               .attr("class", "c2p3 delaware_bay")
               // project
-              .attr("d", map_path)
-              // trigger dimming
-              .on("mouseover", function(d) {
-                self.mouseoverDimSegs_c2p3(d)
-              })
-              .on("mouseout", function(d) {
-                self.mouseoutDimSegs_c2p3(d)
-              });
+              .attr("d", map_path);
 
           // add drb reservoirs to map
           var drb_reservoirs = map.selectAll(".reservoirs")
@@ -1400,26 +1386,6 @@
                 self.mouseoutRect_c2p3(d, tooltip);
               })
         },
-        mouseoverDimSegs_c2p2(data) {
-          // dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
-          this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#172c4f")
-          this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#172c4f")
-        },
-        mouseoutDimSegs_c2p2(data) {
-        // un-dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p2.reservoirs")
-            .style("fill", "#6079a3")
-            .style("stroke", "#6079a3")
-          this.d3.selectAll(".c2p2.delaware_bay")
-            .style("fill", "#6079a3")
-          this.d3.selectAll(".c2p2.river_segments")
-          .style("stroke", "#6079a3")
-        },
         mousemoveSeg_c2p2(data, tooltip, mouse_x, mouse_y) {
           // find # of observations for selected reach
           var num_obs = data.properties.total_count;
@@ -1615,26 +1581,6 @@
           this.d3.selectAll(".c2p2.delaware_bay")
               .style("fill", "#6079a3")
               .lower()
-        },
-        mouseoverDimSegs_c2p3(data) {
-          // dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
-          this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#172c4f")
-          this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#172c4f")
-        },
-        mouseoutDimSegs_c2p3(data) {
-          // un-dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#6079a3")
-              .style("stroke", "#6079a3")
-          this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#6079a3")
-          this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#6079a3")
         },
         mousemoveSeg_c2p3(data, tooltip, mouse_x, mouse_y) {
           // find # of obs in 2019 for selected segment
