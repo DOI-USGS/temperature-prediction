@@ -1,44 +1,6 @@
 <template>
   <section id="section_2">
     <div class="container-fluid">
-      <div
-        id="intro_row_1"
-        class="row"
-      >
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-        <div class="col-xl-10 col-md-10 col-xs-12">
-          <h2>Stream Temperature Monitoring in the Delaware River Basin</h2>
-        </div>
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-      </div>
-      <div
-        id="intro_row_2"
-        class="row"
-      >
-        <div
-          id="DRB_map_c1p1"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div class="col-xl-6 col-md-6 col-xs-12">
-          <br><br>
-          <p class="narrative_text">
-            The Delaware River Basin covers 13,500 square miles in parts of four states,
-            including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history,
-            ecologically diverse, and critical to the regional economy. Water managers in this region have a
-            long history of applying innovative, regional solutions to insure the long-term sustainability of
-            this treasured resource, which provides drinking water to over 15 million people in the region.
-          </p>
-          <br>
-          <p class="narrative_text">
-            Temperature is a "master factor" in aquatic systems, regulating many processes --
-            including fish growth, gas exchange, and evaporation. Increases in summer stream temperature as a
-            result of human impacts and climate change may exceed the thermal tolerances of aquatic biota that
-            are adapted to colder environments and climates. Modeling temperature in unobserved places and times,
-            including forecasting into the future, allows stakeholders to anticipate and understand how water
-            temperature has or will affect their resource of interest.
-          </p>
-        </div>
-      </div>
       <div class="row">
         <div
           id="DRB_map_c2p1"
@@ -153,15 +115,11 @@
           matrix_height_c2p3: null, // this will get a value in the mounted hook
           scaleBarTop: null,
           scaleBarBottom: null,
-          scaleBarTop_c1p1: null,
           scaleBarTop_c2p1: null,
-          scaleBarBottom_c1p1: null,
           scaleBarBottom_c2p1: null,
-          map_c1p1: null,
           map_c2p1: null,
           map_c2p2: null,
           map_c2p3: null,
-          map_path_c1p1: null,
           map_path_c2p1: null,
           map_width: null,
           map_height: null,
@@ -187,55 +145,6 @@
       methods: {
         setPanels() {
           const self = this;
-          // // CHAPTER 1 MAP
-          const map_width_c1p1 = 600;
-          const map_height_c1p1 = window.innerHeight * 0.8;
-          const map_margin_c1p1 = {top: 5, right: 5, bottom: 5, left: 5};
-
-          //create Albers equal area conic projection centered on states surrounding DRB for ch1 maps
-          let map_projection_c1p1 = self.d3.geoAlbers()
-              .center([0, 41.27883611]) //41.47883611
-              .rotate([76.21902778, 0, 0])
-              .parallels([40.31476574, 42.64290648])
-              .scale(map_height_c1p1 * 6.5) // map_height_c1p1*6
-              .translate([map_width_c1p1 / 2, map_height_c1p1 / 2]);
-
-          let map_path_c1p1 = self.d3.geoPath()
-              .projection(map_projection_c1p1);
-
-          // create scale bar
-          self.scaleBarTop_c1p1 = self.d3.geoScaleBar()
-              .orient(self.d3.geoScaleBottom)
-              .projection(map_projection_c1p1)
-              .size([map_width_c1p1, map_height_c1p1])
-              .left(.05)
-              .top(.85)
-              .units(self.d3.geoScaleKilometers)
-              .distance(150)
-              .label("150 kilometers")
-              .labelAnchor("middle")
-              .tickSize(null)
-              .tickValues(null);
-
-          self.scaleBarBottom_c1p1 = self.d3.geoScaleBar()
-              .orient(self.d3.geoScaleTop)
-              .projection(map_projection_c1p1)
-              .size([map_width_c1p1, map_height_c1p1])
-              .left(.05)
-              .top(.86)
-              .units(self.d3.geoScaleMiles)
-              .distance(75)
-              .label("75 miles")
-              .labelAnchor("middle")
-              .tickSize(null)
-              .tickValues(null);
-
-          //create new svg container for the ch 1 panel 1 map
-          let map_c1p1 = self.d3.select("#DRB_map_c1p1")
-              .append("svg")
-              .attr("class", "map_c1p1")
-              .attr("viewBox", [0, 0, (map_width_c1p1 + map_margin_c1p1.right + map_margin_c1p1.left),
-                (map_height_c1p1 + map_margin_c1p1.top + map_margin_c1p1.bottom)].join(' '));
 
           // // CHAPTER 2 BAR CHART
           // write function to process data for stacked bar chart in chapter 2 panel 1
@@ -350,9 +259,8 @@
               .attr("class", "map_c2p3")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+          
           // add variables to component data
-          this.map_c1p1 = map_c1p1;
-          this.map_path_c1p1 = map_path_c1p1;
 
           let promises = [self.d3.csv("data/segment_maflow.csv"),
             self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
@@ -365,10 +273,7 @@
             self.d3.json(self.publicPath + "data/NHDWaterbody_DelawareBay_pt6per_smooth.json"),
             self.d3.json(self.publicPath + "data/reservoirs.json"),
             self.d3.json(self.publicPath + "data/dams.json"),
-            self.d3.json(self.publicPath + "data/Segments_subset_4per_smooth_10miBuffer_diss.json"),
-            self.d3.json(self.publicPath + "data/cb_states_16per.json"),
-            self.d3.json(self.publicPath + "data/Segments_subset_1per_smooth.json"),
-            self.d3.json(self.publicPath + "data/cb_states_16per_merged.json")
+            self.d3.json(self.publicPath + "data/Segments_subset_4per_smooth_10miBuffer_diss.json")
           ];
           Promise.all(promises).then(self.callback);
         },
@@ -394,9 +299,6 @@
           let json_reservoirs = data[9];
           let json_dams = data[10];
           let json_basin_buffered = data[11];
-          let json_states = data[12];
-          let json_segs_small = data[13];
-          let json_states_merged = data[14];
 
           // translate topojsons
           let segments = json_segments.features;
@@ -405,24 +307,14 @@
           let reservoirs = json_reservoirs.features;
           let dams = json_dams.features;
           let basin_buffered = topojson.feature(json_basin_buffered, json_basin_buffered.objects.Segments_subset_4per_smooth_10miBuffer_diss);
-          let states = topojson.feature(json_states, json_states.objects.cb_states);
-          let segs_small = topojson.feature(json_segs_small, json_segs_small.objects.Segments_subset_1per_smooth).features;
-          let states_merged = topojson.feature(json_states_merged, json_states_merged.objects.cb_states_16per_merged);
-
+          
           // join csv flow data to geojson segments
-          // ch 1 p 1 map segments
-          segs_small = this.joinData(segs_small, csv_flow);
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
 
           // set stroke width scale
-          // for ch 1 p 1 map segments
-          let widthScale_c1p1 = this.makeWidthScale_c1p1(csv_flow);
           // for ch 2 map segments
           let widthScale_c2 = this.makeWidthScale_c2(csv_flow);
-
-          // Set up Ch 1 panel 1 -
-          this.setMap_c1p1(states, states_merged, segs_small, bay, this.map_c1p1, this.map_path_c1p1, this.scaleBarTop_c1p1, this.scaleBarBottom_c1p1, widthScale_c1p1);
 
           // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
@@ -454,14 +346,7 @@
               // Pull the properties for the current geojson segment
               let geojsonProps = segments[a].properties;
               // set the geojson properties field to use as the key
-              let geojsonKey;
-              // if joining regular segments (for c2 maps)
-              if (segments[a].seg_id_nat){
-                geojsonKey = segments[a].seg_id_nat;
-              // if joining segments small (v. simplified segments for c1p1 map)
-              } else {
-                geojsonKey = geojsonProps.seg_id_nat;
-              }
+              let geojsonKey = segments[a].seg_id_nat;
               // where primary keys match, transfer csv data to geojson properties object
               if (geojsonKey == csvKey){
                 // assign all attributes and values
@@ -472,53 +357,6 @@
 
           };
           return segments;
-        },
-        makeWidthScale_c1p1(data) {
-          const self = this;
-
-          // // graduated scale
-          // set width classes
-          let widthClasses = [
-            0.5,
-            0.7,
-            1.2,
-            1.5,
-            2
-          ];
-
-          // // graduated scale
-          // create width scale generator for natural breaks classification
-          let widthScale = this.d3.scaleThreshold()
-              .range(widthClasses);
-
-          // // BOTH METHODS
-          // build array of all values of flow
-          let domainArrayFlow = [];
-          for (let i=0; i<data.length; i++) {
-            let val = parseFloat(data[i]['avg_ann_flow']);
-            domainArrayFlow.push(val);
-          }
-
-          // graduated scale
-          // cluster data using ckmeans clustering algorithm to create natural breaks
-          let clusters = ss.ckmeans(domainArrayFlow, 5);
-
-          /// graduated scale
-          // reset domain array to cluster minimumns
-          domainArrayFlow = clusters.map(function(d) {
-            return self.d3.min(d);
-          });
-
-          // // graduated scale
-          // remove first value from domain array to create class breakpoints
-          domainArrayFlow.shift();
-
-          // // graduated scale
-          // assign array of last 4 cluster minimums as domain
-          widthScale.domain(domainArrayFlow);
-
-          // // BOTH METHODS
-          return widthScale;
         },
         makeWidthScale_c2(data) {
           const self = this;
@@ -570,58 +408,6 @@
 
           // // BOTH METHODS
           return widthScale;
-        },
-        setMap_c1p1(states, states_merged, segs_small, bay, map_c1p1, map_path_c1p1, scaleBarTop_c1p1, scaleBarBottom_c1p1, widthScale_c1p1) {
-          // add merged surrounding states to map
-          var states_merged = map_c1p1.append("path")
-              .datum(states_merged)
-              .attr("class", "c1p1 states_merged")
-              .attr("d", map_path_c1p1)
-              .attr("filter", "url(#shadow2)")
-
-          // add surrounding states to map
-          var states = map_c1p1.append("path")
-              .datum(states)
-              .attr("class", "c1p1 states")
-              .attr("d", map_path_c1p1)
-
-          // add delaware bay to map
-          var drb_bay = map_c1p1.append("path")
-              .datum(bay)
-              .attr("class", "c1p1 delaware_bay")
-              .attr("d", map_path_c1p1)
-
-          // add drb segments to map
-          var drb_segments = map_c1p1.selectAll(".river_segments")
-              // bind segments to each element to be created
-              .data(segs_small)
-              // create an element for each datum
-              .enter()
-              // append each element to the svg as a path element
-              .append("path")
-              // assign class for styling
-              .attr("class", function(d){
-                var seg_class = 'c1p1 river_segments seg'
-                seg_class += d.seg_id_nat
-                return seg_class
-              })
-              // project segments
-              .attr("d", map_path_c1p1)
-              // add stroke width based on widthScale function
-              .style("stroke-width", function(d){
-                var value = d.properties['avg_ann_flow'];
-                if (value){
-                  return widthScale_c1p1(value);
-                } else {
-                  return "#ccc";
-                }
-              })
-              // set fill to none
-              .style("fill", "None")
-      
-        // add scale bar
-        map_c1p1.append("g").call(this.scaleBarTop_c1p1);
-        map_c1p1.append("g").call(this.scaleBarBottom_c1p1);
         },
         setMap_c2p1(segments, stations, bay, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
           // add delaware bay to map
@@ -689,7 +475,7 @@
             map.append("g").call(this.scaleBarBottom);
           },
         setBarChart_c2p1(csv_agency_count) {
-      // append svg to div
+        // append svg to div
         var svgChart = this.d3.select("#barChart_c2p1")
             .append("svg")
             .attr("viewBox", [0, 0, (this.chart_width +  this.chart_margin.right + this.chart_margin.left),
@@ -2121,22 +1907,6 @@
   color: #525252;
   text-align: center;
 
-  #intro_row_1 {
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-  }
-  #intro_row_1 h2 {
-    color: #cecece;
-  }
-
-  #intro_row_2 {
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-  }
-  #intro_row_2 h2 {
-    color: #cecece;
-  }
-
   .row {
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -2194,12 +1964,6 @@
   font-size: 0.75em;
   color: #858585;
   margin-right: 0.5vh;
-}
-
-.states {
-  fill: None;
-  stroke: #636363;
-  stroke-width: 0.5;
 }
 
 .delaware_bay {
