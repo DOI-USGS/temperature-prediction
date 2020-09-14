@@ -758,7 +758,7 @@
                 seg_class += d.seg_id_nat
                 let key = null;
                 for (key in d.properties.year_count) {
-                  if (d.properties.year_count[key]) {
+                  if (d.properties.year_count[key] > 0) {
                     seg_class += " " + self.timestep_c2p2 + key
                   }
                 }
