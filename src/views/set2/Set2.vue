@@ -104,6 +104,10 @@
           d3: null, // this is used so that we can assign d3 plugins to the d3 instance
           // global variables instantiated in next section
           timestep_c2p2: 'year',
+          y_c2p2: null,
+          myGroups_c2p2: null,
+          myVars_c2p2: null,
+          temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
           chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
           chart_width: null, // this will get a value in the mounted hook
@@ -308,6 +312,8 @@
           // join csv flow data to geojson segments
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
+
+          console.log(segments)
 
           // set stroke width scale
           // for ch 2 map segments
@@ -786,19 +792,23 @@
                   "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
 
           // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
-          var myVars = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
+          self.myGroups_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
+          self.myVars_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
 
-          // build x scale
+          console.log("groups")
+          console.log(self.myGroups_c2p2)
+
+          // build x scale for matrix cells
           var x = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p2])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p2)
               .padding(0.1);
 
-          // build y scale
-          var y = self.d3.scaleBand()
+          // build y scale for matrix cells
+          // var y = self.d3.scaleBand()
+          self.y_c2p2 = self.d3.scaleBand()
               .range([self.matrix_height_c2p2, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p2)
               .padding(0.1);
 
           // build array of all values of observation counts
@@ -809,13 +819,15 @@
           };
 
           // Find maximum count of observations to use in color scale
-          var temporalCountMax = Math.round(Math.max(...domainArrayTemporalCounts));
+          self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
+
+          console.log(self.temporalCountMax_c2p2)
 
           // build color scale
           var myColor = self.d3.scaleSequential()
               .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
-              // .domain([temporalCountMax,1]) // if INVERTING color scale
-              .domain([1, temporalCountMax]) // if NOT INVERTING color scale
+              // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
+              .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
 
           // add the cells to the matrix
           // select transformed matrix
@@ -843,11 +855,13 @@
               })
               // set y position based on segment id
               .attr("y", function(d) {
-                return y(d.seg_id_nat)
+                // return y(d.seg_id_nat)
+                return self.y_c2p2(d.seg_id_nat)
               })
               // set width and height based on bandwidth of axes
               .attr("width", x.bandwidth())
-              .attr("height", y.bandwidth())
+              // .attr("height", y.bandwidth())
+              .attr("height", self.y_c2p2.bandwidth())
               // assign class with segment id AND year for styling
               .attr("class", function(d) {
                 return 'c2p2 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p2]
@@ -881,12 +895,14 @@
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("class", "c2p2 matrixAxis left")
-              .call(self.d3.axisLeft(y).tickSize(0))
+              //.call(self.d3.axisLeft(y).tickSize(0))
+              .call(self.d3.axisLeft(self.y_c2p2).tickSize(0))
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + self.matrix_width_c2p2 + "," + 0 + ")")
               .attr("class", "c2p2 matrixAxis right")
-              .call(self.d3.axisRight(y).tickSize(0))
+              // .call(self.d3.axisRight(y).tickSize(0))
+              .call(self.d3.axisRight(self.y_c2p2).tickSize(0))
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
@@ -1406,6 +1422,20 @@
               .style("fill", "None")
               .style("stroke", "None")
 
+          // build y scale for hover bar chart
+          let barMax = 150
+          let yScale_barChart_c2p2 = this.d3.scaleLinear()
+              // set range of possible output values 
+              .range([barMax, 50])
+              // define range of input values
+              .domain([1, this.temporalCountMax_c2p2]);
+          
+          // re-build y scale for matrix cells
+          let yScale_matrix_c2p2 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p2, 0])
+              .domain(this.myVars_c2p2)
+              .padding(0.1);
+
           // make tooltip visible
           tooltip
               .style("opacity", 1);
@@ -1414,8 +1444,30 @@
               .style("opacity", 0.7)
               .style("stroke-width", 1);
           // select matrix cells for highlighted segment and raise
-          this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
-              .raise()
+          //this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
+          //     .attr("height", 20)
+          //     .raise()
+          for (let i = 0; i < this.myGroups_c2p2.length; i++) {
+              let seg_year = this.myGroups_c2p2[i]
+              let barHeight;
+              this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat + ".timestep" + seg_year)
+                  .attr("height", function(i) {
+                      if (data.properties.year_count[seg_year] > 0) {
+                        //console.log(seg_year)
+                        //console.log(data.properties.year_count[seg_year])
+                        barHeight = barMax - yScale_barChart_c2p2(data.properties.year_count[seg_year]);
+                        return barHeight;
+                      }
+                  })
+                  .attr("y", function(i){
+                      if (data.properties.year_count[seg_year] > 0) {
+                          return yScale_matrix_c2p2(data.seg_id_nat) - barHeight;
+                      }
+                  })
+                  .raise()
+          
+              //console.log(this.myGroups_c2p2[i])
+          }
           // select the spatial rectangle corresponding to the hightlighted segment
           this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.seg_id_nat)
               // set stroke width, opacity, and stroke color
@@ -1467,6 +1519,12 @@
               .style("stroke", "#000000")
               .style("stroke-width", 2)
 
+          // re-build y scale for matrix cells
+          let yScale_matrix_c2p2 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p2, 0])
+              .domain(this.myVars_c2p2)
+              .padding(0.1);
+
           // hide tooltip
           tooltip
               .style("opacity", 0)
@@ -1483,6 +1541,8 @@
               .lower()
           // lower spatial cells associated with segment
           this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
+              .attr("height", this.y_c2p2.bandwidth())
+              .attr("y", yScale_matrix_c2p2(data.seg_id_nat))
               .lower()
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
