@@ -327,8 +327,6 @@
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
 
-          console.log(segments)
-
           // set stroke width scale
           // for ch 2 map segments
           let widthScale_c2 = this.makeWidthScale_c2(csv_flow);
@@ -818,9 +816,6 @@
           // read in data for matrix
           self.myGroups_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
           self.myVars_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
-
-          console.log("groups")
-          console.log(self.myGroups_c2p2)
 
           // build x scale for matrix cells
           var x = self.d3.scaleBand()
@@ -1490,7 +1485,7 @@
               // define range of input values
               .domain([1, this.temporalCountMax_c2p2]);
           
-          // re-build y scale for matrix cells
+          // re-build y scale for matrix
           let yScale_matrix_c2p2 = this.d3.scaleBand()
               .range([this.matrix_height_c2p2, 0])
               .domain(this.myVars_c2p2)
@@ -1513,8 +1508,6 @@
               this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat + ".timestep" + seg_year)
                   .attr("height", function(i) {
                       if (data.properties.year_count[seg_year] > 0) {
-                        //console.log(seg_year)
-                        //console.log(data.properties.year_count[seg_year])
                         barHeight = (barMax - yScale_barChart_c2p2(data.properties.year_count[seg_year]))+1;
                         return barHeight;
                       }
@@ -1559,9 +1552,6 @@
                   // raise the spatial rectangle
                   .raise();
           }
-          // dim the axes
-          this.d3.selectAll(".c2p2.matrixAxis")
-              .attr("color", "#000000")
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p2.reservoirs")
               .style("fill", "#172c4f")
@@ -1639,11 +1629,6 @@
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
               .lower()
-          // raise matrix axes
-          //this.d3.selectAll("g")
-          // this.d3.selectAll(".c2p2.matrixAxis")
-          //     .attr("color", "#7a7a7a")
-          //     .raise()
         },
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           // identify selected year
