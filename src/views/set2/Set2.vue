@@ -1486,7 +1486,7 @@
           let barMax = this.matrix_height_c2p2/8
           let yScale_barChart_c2p2 = this.d3.scaleLinear()
               // set range of possible output values 
-              .range([barMax, 5])
+              .range([barMax, 0])
               // define range of input values
               .domain([1, this.temporalCountMax_c2p2]);
           
@@ -1515,7 +1515,7 @@
                       if (data.properties.year_count[seg_year] > 0) {
                         //console.log(seg_year)
                         //console.log(data.properties.year_count[seg_year])
-                        barHeight = barMax - yScale_barChart_c2p2(data.properties.year_count[seg_year]);
+                        barHeight = (barMax - yScale_barChart_c2p2(data.properties.year_count[seg_year]))+1;
                         return barHeight;
                       }
                   })
@@ -1539,7 +1539,7 @@
               this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.seg_id_nat)
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
-                  .style("fill", "#e0e0e0")
+                  //.style("fill", "#e0e0e0")
                   .style("stroke-width", 0)
                   .style("opacity", 1)
                   .style("stroke", "None")
@@ -1552,10 +1552,10 @@
                   // based on whether segment has any observations in record
                   .style("fill", "#000000")
                   .style("stroke-width", 0.5)
-                  .style("stroke-dasharray", ("2,3"))
+                  //.style("stroke-dasharray", ("2,4"))
                   .style("opacity", 1)
-                  .style("stroke", "#ffffff")
-                  .attr("height", yScale_matrix_c2p2.bandwidth())
+                  .style("stroke", "#e0e0e0")
+                  .attr("height", 3)
                   // raise the spatial rectangle
                   .raise();
           }
