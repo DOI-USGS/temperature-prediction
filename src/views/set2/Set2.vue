@@ -1463,17 +1463,6 @@
           // find # of observations for selected reach
           var num_obs = data.properties.total_count;
 
-          // get height of tooltip
-          let tooltipHeight = this.d3.select(".c2p2.tooltip.map")
-              // get its DOM node 
-              .node()
-              // return an object the size of the label 
-              .getBoundingClientRect()
-              // access its height
-              .height;
-
-          console.log(tooltipHeight)
-
           // bind mouse coordinates and # of obs to tooltip
           tooltip
               .attr("y", mouse_y - 10)
