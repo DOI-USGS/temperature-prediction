@@ -126,7 +126,7 @@
           chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 25, right: 15, bottom: 15, left: 35},
+          matrix_margin: {top: 50, right: 15, bottom: 15, left: 35},
           matrix_width_c2p2: null, // this will get a value in the mounted hook
           matrix_width_c2p3: null, // this will get a value in the mounted hook
           matrix_height_c2p2: null, // this will get a value in the mounted hook
@@ -178,8 +178,8 @@
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
           this.map_width = 600;
-          this.map_height = window.innerHeight * 0.8;
-          this.map_margin = {top: 5, right: 5, bottom: 5, left: 5};
+          this.map_height = window.innerHeight * 0.79;
+          this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 panel 1 map
           let map_projection_c2p1 = self.d3.geoAlbers()
@@ -222,7 +222,7 @@
           //create Albers equal area conic projection centered on DRB for ch2 panel 2 and 3 maps
           this.map_projection = self.d3.geoAlbers()
               .center([0, 40.658894445])
-              .rotate([74.6, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
+              .rotate([74.9, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
               .scale(this.map_height * 15)
               .translate([this.map_width / 2, this.map_height / 2]);
@@ -652,9 +652,9 @@
           var narrative = map.append("foreignObject")
               .attr("class", "c2p2 narrative")
               .attr("text-align", "left")
-              .attr("x", map_width*0.6)
+              .attr("x", map_width*0.7)
               .attr("y", 25)
-              .attr("width", map_width*0.4)
+              .attr("width", map_width*0.3)
               .attr("height", map_height)
               .append("xhtml:body")
               .attr("class", "c2p2 narrative")
@@ -1095,9 +1095,9 @@
           var narrative = map.append("foreignObject")
               .attr("class", "c2p3 narrative")
               .attr("text-align", "left")
-              .attr("x", map_width*0.6)
+              .attr("x", map_width*0.7)
               .attr("y", 25)
-              .attr("width", map_width*0.4)
+              .attr("width", map_width*0.3)
               .attr("height", map_height)
               .append("xhtml:body")
               .attr("class", "c2p3 narrative")
@@ -1465,8 +1465,8 @@
 
           // bind mouse coordinates and # of obs to tooltip
           tooltip
-              .attr("y", mouse_y - 15)
-              .attr("x", mouse_x + 15)
+              .attr("y", mouse_y - 10)
+              .attr("x", mouse_x + 10)
               .attr("text-align", "left")
               .text(this.d3.format(',')(num_obs) + " obs.")
               .raise()
@@ -1480,7 +1480,7 @@
               .style("stroke", "None")
 
           // build y scale for hover bar chart
-          let barMax = this.matrix_height_c2p2/8
+          let barMax = this.matrix_height_c2p2/16
           let yScale_barChart_c2p2 = this.d3.scaleLinear()
               // set range of possible output values 
               .range([barMax, 0])
