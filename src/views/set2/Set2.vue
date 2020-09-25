@@ -13,21 +13,20 @@
         >
           <br>
           <p class="narrative_text">
-            The USGS and
-            state and local agencies monitor stream temperature across the Delaware
-            River Basin, collecting continuous and discrete measurements of water temperature.
-            In the past 40 years, stream temperature has been measured at more than
-            1,300 sites throughout the basin. Expansion to the monitoring network since 2018
-            is rapidly increasing the volume of available data.
+            At the surface, it appears we have a lot of temperature information in the basin. 
+            The USGS has been monitoring temperature in the DRB since XXXX, and since then has 
+            amassed over XXXXX site-days of temperature measurements.
           </p>
-          <br>
           <p class="narrative_text">
-            This certainly seems like a lot of information, and it does
-            represent a large investment of resources on the part of the USGS and stakeholders
-            throughout the basin. However, in order to evaluate trends, predict water temperatures,
-            or forecast future water temperatures, we must consider how much information is
-            available to provide as input to a model at any given point in time, and at any
-            given location within the basin.
+            Since 2017, an uptick in temperature monitoring can be attributed to the USGS’s Next Generation Water 
+            Observing Systems (NGWOS); NGWOS is a targeted effort in the basin to develop and 
+            apply new monitoring techniques for a wide range of water characteristics. Temperature 
+            is one of the most widely measured water characteristics in the U.S. – temperature 
+            can now be monitored by boat, by camera, by drone, by cable, by satellite, by sensor, 
+            or by the tried and true method of a human sticking a thermometer in the water.
+          </p>
+          <p class="narrative_text">
+            But don’t let the data fool you. Most temperature records are concentrated at a few sites across the basin.
           </p>
         </div>
       </div>
@@ -50,6 +49,18 @@
           id="matrixChart_c2p3"
           class="col-xl-6 col-md-6 col-xs-12"
         />
+      </div>
+      <div class="row">
+        <div class="col-xl-1 col-md-1 col-xs-0"/>
+        <div class="col-xl-10 col-md-10 col-xs-12">
+          <p class="narrative_text">
+            Data sparsity and the variability in stream temperature across the network limits our ability 
+            to answer questions like: How far downstream will this cold water release affect temperature? 
+            How has fish habitat changed through time? Will we have enough cold water in the reservoir in 
+            50 years? 
+          </p>
+        </div>
+        <div class="col-xl-1 col-md-1 col-xs-0"/>
       </div>
       <div
         id="filter_row"
@@ -658,19 +669,12 @@
               .attr("height", map_height)
               .append("xhtml:body")
               .attr("class", "c2p2 narrative")
-              .html('<p id="insert-text">The reality is that we cannot measure water temperature everywhere at all times.\
-                Therefore, records of stream temperature have gaps in space and time. In the matrix chart,\
-                right, the columns represent years, and each row represents a stream reach within the\
-                 basin. If every stream reach had at least <span id="c2p2_matrix_bold">one measurement of \
-                 water temperature</span> at a representative monitoring station <span id="c2p2_matrix_bold">each year</span>, the chart \
-                  would be entirely <span id="c2p2_matrix_min"><b>blue</b></span>. If every reach \
-                  had at least <span id="c2p2_matrix_bold">one measurement of water temperature</span>  on \
-                  <span id="c2p2_matrix_bold">each day of each \
-                  year</span>, the chart would be entirely <span id="c2p2_matrix_max"><b>\
-                  yellow</b></span>. Current monitoring efforts cannot reach either of these baselines. Black \
-                  sections in the chart therefore represent where and when we are "in the dark" about stream \
-                  temperature </p><p id="tip_text"><i>Hover over the stream network, left, and the matrix chart, right, to\
-                  explore the availability of data in space in time.</i></p>')
+              .html('<p id="insert-text">Most data in the basin come from a small number of \
+              sites. The top 1% of river reaches (5 sites) makes up nearly 20% of all data. \
+              And there are whole chunks of time and space where we’re in the dark.</p> <p id="insert-text"> Explore \
+              the availability of temperature observations across the Delaware River Basin \
+              by selecting a year (on the right) or a river segment (on the left) to explore \
+              when and where we have the most information.</p>')
 
 
           // // Build Map
@@ -1100,22 +1104,14 @@
               .attr("width", map_width*0.3)
               .attr("height", map_height)
               .append("xhtml:body")
-              .attr("class", "c2p3 narrative")
-              .html('<p>If we look more closely at a single year, we can \
-            see the dynamics of stream temperature itself. \
-            Streams are <span id="c2p3_min_t">\
-            cooler</span> in the winter and <span id="c2p3_max_t">warmer</span> in the summer, and\
-            the warm periods are longer in the southern portion of the basin.</p><p>But the dynamics of \
-            stream temperature are not identical in all stream reaches. Reach-level temperatures are \
-            influenced by many factors, such as surrounding land use, the orientation and size of the stream, \
-            and inflow from upstream reaches. For example, reaches within or immediately below reservoirs remained \
-            cool throughout the 2019 summer period.</p>\
-            <p>Through modeling, we can explore reach-level patterns and improve our understanding of \
-            stream temperature dynamics. Models allow us to \
-            estimate temperatures in unobserved reaches and predict how stream \
-            temperatures may respond as the climate changes.</p>\
-            <p id="tip_text"><i>Hover over the stream network, left, and the matrix chart, right, to\
-            explore the availability of data in space in time.</i></p>')
+              .attr("class", "c2p2 narrative")
+              .html('<p id="insert-text">Further complicating our understanding of temperature dynamics \
+              in the DRB is the fact that all streams are not created equal. Features \
+              of the landscape can have large effects on water temperature that create \
+              differences in temperature dynamics  -- things like groundwater inputs, \
+              reservoirs, and urban areas have distinct temperature signatures.</p>\
+              <p id="insert-text">Explore a year of temperature data across all monitored sites in \
+              the Delaware River Basin.</p>')
 
           // add drb segments to map BACKGROUND
           var drb_segments = map.selectAll(".river_segments")
@@ -1952,13 +1948,12 @@
     text-align: left;
     color: #cecece;
     margin-right: 7vh;
-    font-size: 1.02vw;
+    font-size: 1.2vw;
   }
 
   .narrative {
-    color: #cecece;
-    font-size: 0.9em;
-    text-align: right;
+    background-color: black;
+    font-size: 0.2em;
     margin-right: 0.2vh;
   }
 }
