@@ -13,7 +13,7 @@
         >
           <br>
           <p class="narrative_text">
-            At the surface, it appears we have a lot of temperature information in the basin. 
+            At first glance, it appears we have a lot of temperature information in the basin. 
             The USGS has been monitoring temperature in the DRB since XXXX, and since then has 
             amassed over XXXXX site-days of temperature measurements.
           </p>
@@ -26,7 +26,7 @@
             or by the tried and true method of a human sticking a thermometer in the water.
           </p>
           <p class="narrative_text">
-            But don’t let the data fool you. Most temperature records are concentrated at a few sites across the basin.
+            But don’t let first impressions fool you. Most temperature records are concentrated at a few sites across the basin.
           </p>
         </div>
       </div>
