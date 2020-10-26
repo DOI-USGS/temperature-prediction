@@ -5,6 +5,7 @@
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
     <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
+    <Nav />
     <router-view
       v-if="!isInternetExplorer"
     />
@@ -18,6 +19,7 @@
     import WindowSize from "./components/WindowSize";
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
+    import Nav from './components/Nav'
 
     export default {
         name: 'App',
@@ -25,6 +27,7 @@
             WindowSize,
             HeaderUSWDSBanner,
             HeaderUSGS,
+            Nav,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
             WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
@@ -61,5 +64,76 @@
 </script>
 
 <style lang="scss">
+
+
+  // Type
+
+body {
+      margin: 0;
+      padding: 0;
+      color: black;
+      background-color: white;
+      line-height: 1.5;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      width: 100%;
+  }
+
+h2{
+font-size: 2em;
+margin-top: 80px;
+font-weight: bold;
+
+}
+h3{
+    font-size: 1.4em;
+    padding-top: .5em;
+    font-weight: 700;
+    @media screen and (max-width: 600px) {
+        font-size: .8em;
+    }
+}
+
+  // General Layout  
+
+  .text-content {
+    min-width: 350px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 2em 0 2em;     
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-around;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  .flex-item {
+    flex: 1;
+    align-self: center;
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .flex-item img {
+    padding: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .flex-container {
+      flex-direction: column;
+    }
+    .flex-item {
+      flex: none;
+      padding: 0 0 1em 0;
+      height: 100%;
+    }
+  }
+
 
 </style>

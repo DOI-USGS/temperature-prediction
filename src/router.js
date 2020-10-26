@@ -7,9 +7,27 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'Visualization',
+            name: 'Importance',
             component: () =>
-                    import('@/views/Visualization.vue')
+                    import('@/views/1-Importance/Importance.vue')
+        },
+        {
+            path: '/importance',
+            name: 'Importance',
+            component: () =>
+                    import('@/views/1-Importance/Importance.vue')
+        },
+        {
+            path: '/monitoring',
+            name: 'Monitoring',
+            component: () =>
+                    import('@/views/2-Monitoring/Monitoring.vue')
+        },
+        {
+            path: '/modeling',
+            name: 'Modeling',
+            component: () =>
+                    import('@/views/3-Modeling/Modeling.vue')
         },
         {
             path: '/404',
