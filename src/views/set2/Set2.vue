@@ -344,7 +344,7 @@
 
           // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
-          this.setMap_c2p1(segments, stations, bay, this.map_c2p1, this.map_path_c2p1, this.scaleBarTop_c2p1, this.scaleBarBottom_c2p1, widthScale_c2);
+          this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2p1, this.scaleBarTop_c2p1, this.scaleBarBottom_c2p1, widthScale_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_agency_count);
 
@@ -435,12 +435,29 @@
           // // BOTH METHODS
           return widthScale;
         },
-        setMap_c2p1(segments, stations, bay, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
+        setMap_c2p1(segments, stations, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
           // add delaware bay to map
           var drb_bay = map.append("path")
               .datum(bay)
               .attr("class", "c2p1 delaware_bay")
               .attr("d", map_path)
+
+          // add drb reservoirs to map
+          var drb_reservoirs = map.selectAll(".reservoirs")
+              // bind polygons to each element to be created
+              .data(reservoirs)
+              // create an element for each datum
+              .enter()
+              // append each element to the svg as a path element
+              .append("path")
+              // project polygons
+              .attr("d", map_path)
+              // assign class for styling
+              .attr("class", function(d){
+                return "c2p1 reservoirs res_id" + d.properties.GRAND_ID
+              })
+              // set stroke width so that polygons appear larger
+              .style("stroke-width", 0.75)
 
           // add drb segments to map
           var drb_segments = map.selectAll(".river_segments")
@@ -736,7 +753,7 @@
                 return "c2p2 reservoirs res_id" + d.properties.GRAND_ID
               })
               // set stroke width so that polygons appear larger
-              .style("stroke-width", 1)
+              .style("stroke-width", 0.75)
 
           // add drb segments to map
           var drb_segments = map.selectAll(".river_segments")
@@ -1163,7 +1180,7 @@
               .attr("class", function(d){
                 return "c2p3 reservoirs res_id" + d.properties.GRAND_ID
               })
-              .style("stroke-width", 1)
+              .style("stroke-width", 0.75)
 
           // add drb segments to map
           let key = null;
@@ -1552,12 +1569,12 @@
           }
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
+              .style("fill", "#164152")
+              .style("stroke", "#164152")
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#172c4f")
+              .style("fill", "#164152")
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#172c4f")
+              .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
@@ -1610,18 +1627,18 @@
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
           this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
               .attr("opacity", 1)
               .attr("filter","None")
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#6079a3")
-              .style("stroke", "#6079a3")
+              .style("fill", "#6399ba")
+              .style("stroke", "#6399ba")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#6079a3")
+              .style("fill", "#6399ba")
               .lower()
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -1663,12 +1680,12 @@
               .style("opacity", 0)
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
+              .style("fill", "#164152")
+              .style("stroke", "#164152")
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#172c4f")
+              .style("fill", "#164152")
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#172c4f")
+              .style("stroke", "#164152")
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
@@ -1697,16 +1714,16 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
               .attr("opacity", 1)
           this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#6079a3")
-              .style("stroke", "#6079a3")
+              .style("fill", "#6399ba")
+              .style("stroke", "#6399ba")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#6079a3")
+              .style("fill", "#6399ba")
               .lower()
           // select background rectangle and remove filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -1771,12 +1788,12 @@
               .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
+              .style("fill", "#164152")
+              .style("stroke", "#164152")
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#172c4f")
+              .style("fill", "#164152")
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#172c4f")
+              .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
@@ -1813,18 +1830,18 @@
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
           this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
               .attr("opacity", 1)
               .attr("filter","None")
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#6079a3")
-              .style("stroke", "#6079a3")
+              .style("fill", "#6399ba")
+              .style("stroke", "#6399ba")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#6079a3")
+              .style("fill", "#6399ba")
               .lower()
           // raise matrix axes
           this.d3.selectAll("g")
@@ -1870,12 +1887,12 @@
               .style("opacity", 0)
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#172c4f")
-              .style("stroke", "#172c4f")
+              .style("fill", "#164152")
+              .style("stroke", "#164152")
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#172c4f")
+              .style("fill", "#164152")
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#172c4f")
+              .style("stroke", "#164152")
           // select all river segments that have data on highlighted date
           // and make white
           this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -1906,18 +1923,18 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
               .attr("opacity", 1)
           this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
-              .style("stroke", "#6079a3")
+              .style("stroke", "#6399ba")
               .attr("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#6079a3")
-              .style("stroke", "#6079a3")
+              .style("fill", "#6399ba")
+              .style("stroke", "#6399ba")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#6079a3")
+              .style("fill", "#6399ba")
               .lower()
         }
       }
@@ -1999,18 +2016,18 @@
 }
 
 .delaware_bay {
-  fill: #6079a3;
+  fill: #6399ba;
 }
 
 .river_segments {
-  stroke: #6079a3;
+  stroke: #6399ba;
   stroke-linecap: round;
   stroke-width: 0.5px;
 }
 
 .reservoirs {
-  fill:  #6079a3;
-  stroke: #6079a3;
+  fill:  #6399ba;
+  stroke: #6399ba;
 }
 
 .matrixAxis {
