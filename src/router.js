@@ -12,6 +12,12 @@ export default new Router({
                     import('@/views/Visualization.vue')
         },
         {
+            path: '/',
+            name: 'Importance',
+            component: () =>
+                    import('@/views/1-Importance.vue')
+        },
+        {
             path: '/404',
             name: 'error404',
             component: () =>
