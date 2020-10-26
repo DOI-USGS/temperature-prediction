@@ -51,7 +51,7 @@
         />
       </div>
       <div class="row">
-        <div class="col-xl-1 col-md-1 col-xs-0"/>
+        <div class="col-xl-1 col-md-1 col-xs-0" />
         <div class="col-xl-10 col-md-10 col-xs-12">
           <p class="narrative_text">
             Data sparsity and the variability in stream temperature across the network limits our ability 
@@ -60,7 +60,7 @@
             50 years? 
           </p>
         </div>
-        <div class="col-xl-1 col-md-1 col-xs-0"/>
+        <div class="col-xl-1 col-md-1 col-xs-0" />
       </div>
       <div
         id="filter_row"
@@ -154,9 +154,7 @@
           map_height: null,
           map_margin: null,
           map_path: null,
-          map_projection: null,
-          loc_matrix_c2p2: null,
-          loc_map_c2p3: null
+          map_projection: null
         }
       },
       mounted() {
@@ -297,11 +295,11 @@
             self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
             self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv"),
             self.d3.csv(self.publicPath + "data/agency_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
-            self.d3.json(self.publicPath + "data/segment_geojson.json"),
-            self.d3.json(self.publicPath + "data/observed_site_locations.json"),
-            self.d3.json(self.publicPath + "data/NHDWaterbody_DelawareBay_pt6per_smooth.json"),
-            self.d3.json(self.publicPath + "data/reservoirs.json"),
-            self.d3.json(self.publicPath + "data/dams.json")
+            self.d3.json(self.publicPath + "data/topojson/segment_data.json"),
+            self.d3.json(self.publicPath + "data/topojson/observed_site_locations.json"),
+            self.d3.json(self.publicPath + "data/topojson/DelawareBay.json"),
+            self.d3.json(self.publicPath + "data/topojson/reservoirs.json"),
+            self.d3.json(self.publicPath + "data/topojson/dams.json")
           ];
           Promise.all(promises).then(self.callback);
         },
@@ -328,12 +326,12 @@
           let json_dams = data[10];
 
           // translate topojsons
-          let segments = json_segments.features;
-          let stations = json_obs_stations.features;
+          let segments = topojson.feature(json_segments, json_segments.objects.segment_data).features; 
+          let stations = topojson.feature(json_obs_stations, json_obs_stations.objects.observed_site_locations).features; 
           let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
-          let reservoirs = json_reservoirs.features;
-          let dams = json_dams.features;
-          
+          let reservoirs = topojson.feature(json_reservoirs, json_reservoirs.objects.reservoirs).features; 
+          let dams = topojson.feature(json_dams, json_dams.objects.dams).features; 
+
           // join csv flow data to geojson segments
           // ch 2 map segments
           segments = this.joinData(segments, csv_flow);
@@ -372,7 +370,7 @@
               // Pull the properties for the current geojson segment
               let geojsonProps = segments[a].properties;
               // set the geojson properties field to use as the key
-              let geojsonKey = segments[a].seg_id_nat;
+              let geojsonKey = segments[a].properties.seg_id_nat;
               // where primary keys match, transfer csv data to geojson properties object
               if (geojsonKey == csvKey){
                 // assign all attributes and values
@@ -469,7 +467,7 @@
               .append("path")
               // assign class for styling
               .attr("class", function(d){
-                return 'c2p1 river_segments seg' + d.seg_id_nat
+                return 'c2p1 river_segments seg' + d.properties.seg_id_nat
               })
               // project segments
               .attr("d", map_path)
@@ -664,7 +662,7 @@
             return pt_map_c2p2.matrixTransform(svg_map_c2p2.getScreenCTM().inverse());
           }
           // create local variable to store point coordinates
-          var loc_map_c2p2
+          let loc_map_c2p2;
           // reset coordinates when mousemoves over map svg
           svg_map_c2p2.addEventListener('mousemove', function(evt){
             loc_map_c2p2 = cursorPoint_c2p2(evt);
@@ -723,7 +721,7 @@
                 // pass mouse coordinates
                 let mouse_x = loc_map_c2p2.x
                 let mouse_y = loc_map_c2p2.y
-                self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); // position
+                self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); 
               })
               .on("mouseout", function(d) {
                 self.mouseoutSeg_c2p2(d, tooltip);
@@ -767,7 +765,7 @@
               // and based on years in which each segment has data
               .attr("class", function(d) {
                 let seg_class = 'c2p2 river_segments seg'
-                seg_class += d.seg_id_nat
+                seg_class += d.properties.seg_id_nat
                 let key = null;
                 for (key in d.properties.year_count) {
                   if (d.properties.year_count[key] > 0) {
@@ -875,7 +873,7 @@
           var matrixCells = transformedMatrix.selectAll('matrixCells')
               // bind data to rectangles
               .data(csv_matrix_annual, function(d) {
-                if (d.total_obs > 0) {
+                if (d.total_count > 0) { /* d.total_obs */
                   return d[self.timestep_c2p2] +':'+ d.seg_id_nat;
                 }
               })
@@ -916,7 +914,7 @@
           // add text labels for each cell
           let cellText = transformedMatrix.selectAll(".text")
               .data(csv_matrix_annual, function(d) {
-                if (d.total_obs > 0) {
+                if (d.total_count > 0) { 
                   return d[self.timestep_c2p2] + ':' + d.seg_id_nat;
                 }
               })
@@ -984,6 +982,7 @@
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
           const self = this;
+          
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_matrix_c2p2 = document.querySelector('.matrix_c2p2');
@@ -994,10 +993,11 @@
             pt_matrix_c2p2.x = evt.clientX; pt_matrix_c2p2.y = evt.clientY;
             return pt_matrix_c2p2.matrixTransform(svg_matrix_c2p2.getScreenCTM().inverse());
           }
-
+          // create local variable to store point coordinates
+          let loc_matrix_c2p2 = null;
           // // reset coordinates when mousemoves over matrix svg
           svg_matrix_c2p2.addEventListener('mousemove', function(evt){
-            self.loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
+            loc_matrix_c2p2 = cursorPoint_matrix_c2p2(evt);
           }, false);
 
           // Build matrix
@@ -1032,14 +1032,14 @@
               // set x value based on minimum year (1980)
               .attr("x", xscale("1980"))
               // set y value based on segment id
-              .attr("y", function(d) { return yscale(d.seg_id_nat) })
+              .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
               // set width to width of matrix
               .attr("width", self.matrix_width_c2p2)
               // set height based on yscale bandwidth
               .attr("height", yscale.bandwidth())
               // set class based on segment id
               .attr("class", function(d) {
-                return 'c2p2 matrixSpatialRect seg' + d.seg_id_nat;
+                return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#000000")
@@ -1080,8 +1080,8 @@
                 self.mouseoverRect_c2p2(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = self.loc_matrix_c2p2.x
-                let mouse_y = self.loc_matrix_c2p2.y
+                let mouse_x = loc_matrix_c2p2.x
+                let mouse_y = loc_matrix_c2p2.y
                 self.mousemoveRect_c2p2(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1101,9 +1101,11 @@
             return pt_map_c2p3.matrixTransform(svg_map_c2p3.getScreenCTM().inverse());
           }
 
+          // create local variable to store point coordinates
+          let loc_map_c2p3 = null;
           // reset coordinates when mousemoves over map svg
           svg_map_c2p3.addEventListener('mousemove', function(evt){
-            self.loc_map_c2p3 = cursorPoint_c2p3(evt);
+            loc_map_c2p3 = cursorPoint_c2p3(evt);
           }, false);
 
           // // Add tooltip as text appended to map svg
@@ -1149,8 +1151,8 @@
                 self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = self.loc_map_c2p3.x
-                let mouse_y = self.loc_map_c2p3.y
+                let mouse_x = loc_map_c2p3.x
+                let mouse_y = loc_map_c2p3.y
                 self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1195,7 +1197,7 @@
               // and each date for which segment has data
               .attr("class", function(d){
                 var seg_class = 'c2p3 river_segments seg'
-                seg_class += d.seg_id_nat
+                seg_class += d.properties.seg_id_nat
                 for (key in d.properties.day_count) {
                   if (d.properties.day_count[key]) {
                     seg_class += " " + self.timestep_c2p3 + key
@@ -1219,8 +1221,8 @@
                 self.mouseoverSeg_c2p3(d, tooltip);
               })
               .on("mousemove", function(d) {
-                let mouse_x = self.loc_map_c2p3.x
-                let mouse_y = self.loc_map_c2p3.y
+                let mouse_x = loc_map_c2p3.x
+                let mouse_y = loc_map_c2p3.y
                 self.mousemoveSeg_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
@@ -1297,8 +1299,8 @@
           var matrixCells = transformedMatrix.selectAll('matrixCells')
               // bind data to rectangles
               .data(csv_matrix_daily_2019, function(d) {
-                if (d.total_obs > 0) {
-                  return d[self.timestep_c2p3] +':'+ d.seg_id_nat; /* d.seg_id_nat */
+                if (d.total_count > 0) {  
+                  return d[self.timestep_c2p3] +':'+ d.seg_id_nat; 
                 }
               })
               // create element for each data item
@@ -1374,14 +1376,10 @@
             return pt_matrix_c2p3.matrixTransform(svg_matrix_c2p3.getScreenCTM().inverse());
           }
           // create local variable to store point coordinates
-          var loc_matrix_c2p3
+          let loc_matrix_c2p3;
           // reset coordinates when mousemoves over matrix svg
           svg_matrix_c2p3.addEventListener('mousemove', function(evt){
             loc_matrix_c2p3 = cursorPoint_matrix_c2p3(evt);
-            // console.log('x:')
-            // console.log(loc_matrix_c2p3.x)
-            // console.log('y:')
-            // console.log(loc_matrix_c2p3.y)
           }, false);
 
           // // Build matrix
@@ -1416,14 +1414,14 @@
               // set x value based on minimum date (2019-01-01)
               .attr("x", xscale("2019-01-01"))
               // set y value based on segment id
-              .attr("y", function(d) { return yscale(d.seg_id_nat) })
+              .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
               // set width to width of matrix
               .attr("width", self.matrix_width_c2p3)
               // set height based on yscale bandwidth
               .attr("height", yscale.bandwidth() )
               // set class based on segment id
               .attr("class", function(d) {
-                return 'c2p3 matrixSpatialRect seg' + d.seg_id_nat;
+                return 'c2p3 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#000000")
@@ -1520,7 +1518,7 @@
           for (let i = 0; i < this.myGroups_c2p2.length; i++) {
               let seg_year = this.myGroups_c2p2[i]
               let barHeight;
-              this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat + ".timestep" + seg_year)
+              this.d3.selectAll(".c2p2.cell.segment" + data.properties.seg_id_nat + ".timestep" + seg_year) 
                   .attr("height", function(i) {
                       if (data.properties.year_count[seg_year] > 0) {
                         barHeight = (barMax - yScale_barChart_c2p2(data.properties.year_count[seg_year]))+1;
@@ -1529,14 +1527,14 @@
                   })
                   .attr("y", function(i){
                       if (data.properties.year_count[seg_year] > 0) {
-                          return yScale_matrix_c2p2(data.seg_id_nat) - barHeight;
+                          return yScale_matrix_c2p2(data.properties.seg_id_nat) - barHeight; 
                       }
                   })
                   .raise()
               // turn on text for cells associated with segment
-              this.d3.selectAll(".c2p2.cellText.seg" + data.seg_id_nat + ".year" + seg_year)
+              this.d3.selectAll(".c2p2.cellText.seg" + data.properties.seg_id_nat + ".year" + seg_year) 
                   .attr("y", function(d) {
-                      return yScale_matrix_c2p2(data.seg_id_nat) - barHeight - 5;
+                      return yScale_matrix_c2p2(data.properties.seg_id_nat) - barHeight - 5; 
                   })
                   .attr("fill", "#ffffff")
                   .raise()   
@@ -1544,7 +1542,7 @@
           // select the spatial rectangle corresponding to the hightlighted segment
           if (data.properties.total_count > 0) {
               // select the spatial rectangle corresponding to the hightlighted segment
-              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.seg_id_nat)
+              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   //.style("fill", "#e0e0e0")
@@ -1555,7 +1553,7 @@
                   .raise()
           } else {
               // select the spatial rectangle corresponding to the hightlighted segment
-              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.seg_id_nat)
+              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .style("fill", "#000000")
@@ -1577,13 +1575,14 @@
               .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
-          this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
               .style("stroke", "#ffffff")
               .attr("opacity", 1)
               .attr("filter", "url(#shadow1)")
               .raise()
         },
         mouseoutSeg_c2p2(data, tooltip) {
+
           // select all *temporal* rectangles and set fill and stroke back
           // to black so that they are selectable
           this.d3.selectAll(".c2p2.matrixTemporalRect")
@@ -1610,17 +1609,17 @@
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
           // select spatial rectangle corresponding to segment and lower
-          this.d3.selectAll(".c2p2.matrixSpatialRect" + data.seg_id_nat)
+          this.d3.selectAll(".c2p2.matrixSpatialRect" + data.properties.seg_id_nat) 
               .lower()
           // lower spatial cells associated with segment
-          this.d3.selectAll(".c2p2.cell.segment" + data.seg_id_nat)
+          this.d3.selectAll(".c2p2.cell.segment" + data.properties.seg_id_nat) 
               .attr("height", yScale_matrix_c2p2.bandwidth())
-              .attr("y", yScale_matrix_c2p2(data.seg_id_nat))
+              .attr("y", yScale_matrix_c2p2(data.properties.seg_id_nat)) 
               .lower()
           // turn off text for cells associated with segment
-          this.d3.selectAll(".c2p2.cellText.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p2.cellText.seg" + data.properties.seg_id_nat) 
               .attr("y", function(d) {
-                  return yScale_matrix_c2p2(data.seg_id_nat) - 5;
+                  return yScale_matrix_c2p2(data.properties.seg_id_nat) - 5; 
               })
               .attr("fill", "None")
               .lower()
@@ -1628,7 +1627,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments")
               .style("stroke", "#6399ba")
-          this.d3.selectAll(".c2p2.river_segments.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
               .style("stroke", "#6399ba")
               .attr("opacity", 1)
               .attr("filter","None")
@@ -1743,6 +1742,7 @@
               .raise()
         },
         mouseoverSeg_c2p3(data, tooltip) {
+
           // select all *temporal* rectangles and set fill and stroke to none
           // so they can't be selected
           this.d3.selectAll(".c2p3.matrixTemporalRect")
@@ -1757,10 +1757,10 @@
               .style("opacity", 0.7)
               .style("stroke-width", 1);
           // select matrix cells for highlighted segment and raise
-          this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
               .raise()
           // select the spatial rectangle corresponding to the hightlighted segment
-          this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
               // set stroke width, opacity, and stroke color
               // based on whether segment has any observations in record
               .style("stroke-width", function(data) {
@@ -1796,13 +1796,14 @@
               .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
-          this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat) 
               .style("stroke", "#ffffff")
               .attr("opacity", 1)
               .attr("filter", "url(#shadow1)")
               .raise()
         },
         mouseoutSeg_c2p3(data, tooltip) {
+
           // select all *temporal* rectangles and set fill and stroke back
           // to black so that they are selectable
           this.d3.selectAll(".c2p3.matrixTemporalRect")
@@ -1822,16 +1823,16 @@
               .style("stroke-width", 2)
               .style("opacity", 0)
           // select spatial rectangle corresponding to segmend and lower
-          this.d3.selectAll(".c2p3.matrixSpatialRect" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.matrixSpatialRect" + data.properties.seg_id_nat) 
               .lower()
           // lower matrix cells associated with segment
-          this.d3.selectAll(".c2p3.cell.segment" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
               .lower()
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#6399ba")
-          this.d3.selectAll(".c2p3.river_segments.seg" + data.seg_id_nat)
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat) 
               .style("stroke", "#6399ba")
               .attr("opacity", 1)
               .attr("filter","None")
