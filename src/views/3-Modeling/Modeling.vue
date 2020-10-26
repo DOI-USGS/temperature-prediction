@@ -1,16 +1,19 @@
 <template>
   <div id="modeling">
-    <Set2 />
+      <div class="text-content">
+        <h2>Modeling!!!</h2>
+        <p>💥BOOM💥 that's right! We've made it to Chapter 3 where we're gonna do all sorts of wild stuff.</p>
+        <p>Ta ta for now 👋</p>
+      </div>
+      
   </div>
 </template>
 
 <script>
-  import Set2 from "./set2/Set2";
 
   export default {
     name: 'Modeling',
     components: {
-        Set2
     }
   }
 </script>
