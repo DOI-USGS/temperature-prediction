@@ -74,6 +74,7 @@ body {
       color: white;
       background-color: black;
       line-height: 1.5;
+      font-size: 14pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
       font-weight: 400;
       -webkit-font-smoothing: antialiased;
@@ -82,9 +83,9 @@ body {
   }
 
 h2{
-font-size: 2em;
-margin-top: 80px;
-font-weight: bold;
+  font-size: 2em;
+  margin-top: 80px;
+  font-weight: bold;
 
 }
 h3{
@@ -102,7 +103,7 @@ h3{
     min-width: 350px;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0 2em 0 2em;     
+    padding: 2em 2em 2em 2em;     
   }
 
   .flex-container {
@@ -111,6 +112,7 @@ h3{
     align-content: space-around;
     max-width: 100%;
     margin: auto;
+    overflow-x: hidden;
   }
 
   .flex-item {
@@ -118,6 +120,7 @@ h3{
     align-self: center;
     text-align: center;
     max-width: 90%;
+    min-width: 600px;
   }
 
   .flex-item img {
