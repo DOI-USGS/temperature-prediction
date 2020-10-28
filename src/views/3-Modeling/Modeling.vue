@@ -1,30 +1,34 @@
-<template>
+<template id="modeling-template">
   <div id="modeling">
       <section id="scrolly">
         <h1 class="intro__hed">Modeling</h1>
-        <p class="intro__dek">
-          yesssssssss there are many important things to say here
-        </p>
+
         <div class="sticky">
           <div id="sticky-container">
-          <h2 >I'm sticky ;)</h2>
+          <h2 >I'm sticky</h2>
           </div>
           </div>
         <article>
+          <div class="step-container">
           <div class="step" data-step="1">
             <p>yes</p>
-          </div>
+          </div></div>
+          <div class="step-container">
           <div class="step" data-step="2">
             <p>Yes</p>
-          </div>
+          </div></div>
+          <div class="step-container">
           <div class="step" data-step="3">
             <p>YES</p>
-          </div>
+          </div></div>
+          <div class="step-container">
           <div class="step" data-step="4">
-            <p>YAASSSS!</p>
-          </div>
+            <p>YAASSSS!!!!</p>
+          </div></div>
+          <div class="step-container">
           <div class="step" data-step="5">
-          </div>
+              </div></div>
+          
         </article>
       </section>
       <section id="outro">
@@ -37,6 +41,7 @@
 <script>
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
+
   export default {
     name: 'Modeling',
     components: {
@@ -61,6 +66,7 @@
             var scrolly = document.querySelector("#scrolly");
             var article = scrolly.querySelector("article");
             var step = article.querySelectorAll(".step");
+
             // initialize the scrollama
             var scroller = scrollama();
 
@@ -81,6 +87,15 @@
             }
 
             // track scroll progress 
+            function handleStepProgress(response) {
+              console.log(response.progress);
+              var el = this.d3.select(response.element);
+
+              var val = el.attr("data-step");
+              var rgba = "rgba(" + val + ", " + response.progress + ")";
+              el.style("background-color", rgba);
+              el.select(".progress").text(d3.format(".1%")(response.progress));
+            }
 
             // make scroller
             function init() {
@@ -95,21 +110,31 @@
               scroller
                 .setup({
                   step: "#scrolly article .step",
-                  debug: true,
-                  offset: 0.3
+                  debug: false,
+                  offset: 0.5
                 })
                 .onStepEnter(handleStepEnter)
+                .onStepProgress(handleStepProgress)
                 .onStepExit(handleStepExit);
               // 3. setup resize event
               window.addEventListener("resize", scroller.resize);
             }
             // kick things off
             init();
+
+            function drawCircle() {
+
+            }
           },
           callback(data) {
           // call functions
           },
-           
+          fadeIn(response) {
+            response
+            .transition()
+            .duration(500)
+            .attr("opacity", 1);
+          },
           setScrolls() {
             
           }
@@ -118,63 +143,70 @@
 </script>
 
 <style scoped lang="scss">
+#modeling, #modeling-template {
+  background-color:black;
+}
+
 #scrolly {
         position: relative;
       }
+
       article {
         position: relative;
-        padding: 0 1rem;
         margin: 0 auto;
-        width: 95%;
+        width: 100%;
       }
       .sticky {
         position: -webkit-sticky;
         position: sticky;
-        top:50vh;
-        height: 50vh;
+        top:20vh;
+        height: 60vh;
         left: 0;
         margin: 0;
-        background-color: white;
+        color: white;
         width: 100%;
-        z-index: 1;
+        z-index: 0;
+        background-color: cadetblue;
     
       }
       .sticky h2 {
         text-align: center;
         position: relative;
-        top: 25vh;
+        top: 40vh;
 
       }
-
+      .step-container {
+        width:100%;
+      }
       .step {
-        margin: 2rem auto 4rem auto;
-        background-color: #3b3b3b;
-        color:#3b3b3b;
+        position: relative;
+        width: 90%;
+        margin: 50rem auto 4rem auto;
+        color:black;
+        z-index: 1;
+        background-color: pink;
         opacity: .5;
-        z-index: 0;
+        height: 50vh;
       }
-      // can trigger attribute changes 
+      // can trigger attribute changes with .is-active
+      .step.is-active {
+
+      }
       .step.is-active[data-step="1"] {
-        background-color: purple;
-        color:violet;
+        color:purple;
       }
        .step.is-active[data-step="2"] {
-        background-color: orangered;
         color:yellow;
       }
        .step.is-active[data-step="3"] {
-        background-color: forestgreen;
         color:turquoise;
       }
        .step.is-active[data-step="4"] {
-        background-color: navy;
-        color:rgb(49, 234, 240);
+        color:rgb(81, 173, 50);
         
       }
       .step:last-child {
-        background-color: white;
-        color: white;
-        height: 100vh;
+
         
       }
       .step p {
