@@ -3045,15 +3045,15 @@
               >
                 <text
                   class="city-label"
-                  transform="translate(153.7 121.3)"
+                  transform="translate(151.7 121.3)"
                 >Binghamton</text>
                 <text
                   class="city-label"
-                  transform="translate(200.4 241.9)"
+                  transform="translate(198.4 241.9)"
                 >Scranton</text>
                 <text
                   class="city-label"
-                  transform="translate(83.4 435.9)"
+                  transform="translate(85.4 435.9)"
                 >Harrisburg</text>
                 <text
                   class="city-label"
@@ -3061,7 +3061,7 @@
                 >New York</text>
                 <text
                   class="city-label"
-                  transform="translate(69.2 606.9)"
+                  transform="translate(65.2 606.9)"
                 >Baltimore</text>
                 <text
                   class="city-label"
@@ -3069,22 +3069,41 @@
                 >Washington</text>
               </g>
               <g id="Inside_DRB">
+                <g id="text-masking">
+                    <text
+                      class="city-label masking"
+                      transform="translate(217.7 389.6)"
+                    >Allentown</text>
+                    <text
+                      class="city-label masking"
+                      transform="translate(370.7 458.1)"
+                    >Trenton</text>
+                    <text
+                      class="city-label masking"
+                      transform="translate(251.2 495.5)"
+                    >Philadelphia</text>
+                    <text
+                      class="city-label masking"
+                      transform="translate(210.1 525.3)"
+                    >Wilmington</text>
+                </g>
                 <text
-                  class="city-label"
+                  class="city-label inside"
                   transform="translate(217.7 389.6)"
                 >Allentown</text>
                 <text
-                  class="city-label"
+                  class="city-label inside"
                   transform="translate(370.7 458.1)"
                 >Trenton</text>
                 <text
-                  class="city-label"
+                  class="city-label inside"
                   transform="translate(251.2 495.5)"
                 >Philadelphia</text>
                 <text
-                  class="city-label"
-                  transform="translate(216.1 525.3)"
+                  class="city-label inside"
+                  transform="translate(210.1 525.3)"
                 >Wilmington</text>
+                
               </g>
             </g>
             <g id="States"> 
@@ -3307,6 +3326,76 @@
                 />
               </g>
               <g>
+                <g class="river-label masking">
+                  <text
+                    class="river-label"
+                    transform="translate(205.9 417.1) rotate(69.9)"
+                  >S</text>
+                  <text
+                    class="river-label"
+                    transform="translate(207.3 420.9) rotate(64.8)"
+                  >c</text>
+                  <text
+                    class="river-label"
+                    transform="translate(208.8 424.2) rotate(58)"
+                  >h</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.66, 0.75, -0.75, 0.66, 211.23, 428.08)"
+                  >u</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.78, 0.62, -0.62, 0.78, 214.24, 431.43)"
+                  >y</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.85, 0.52, -0.52, 0.85, 217.28, 433.77)"
+                  >l</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.91, 0.42, -0.42, 0.91, 218.94, 434.84)"
+                  >k</text>
+                  <text
+                    class="river-label"
+                    transform="translate(222.5 436.5) rotate(19.5)"
+                  >i</text>
+                  <text
+                    class="river-label"
+                    transform="translate(224.3 437.1) rotate(16.7)"
+                  >l</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.97, 0.25, -0.25, 0.97, 226.15, 437.64)"
+                  >l</text>
+                  <text
+                    class="river-label"
+                    transform="translate(228 438.1) rotate(12.5)"
+                  />
+                  <text
+                    class="river-label"
+                    transform="translate(229.7 438.5) rotate(11.2)"
+                  />
+                  <text
+                    class="river-label"
+                    transform="translate(231.3 438.8) rotate(9.9)"
+                  >R</text>
+                  <text
+                    class="river-label"
+                    transform="translate(235.6 439.5) rotate(9.6)"
+                  >i</text>
+                  <text
+                    class="river-label"
+                    transform="matrix(0.98, 0.18, -0.18, 0.98, 237.47, 439.85)"
+                  >v</text>
+                  <text
+                    class="river-label"
+                    transform="translate(241.3 440.5) rotate(13.1)"
+                  >e</text>
+                  <text
+                    class="river-label"
+                    transform="translate(245.3 441.5) rotate(17.1)"
+                  >r</text>
+                </g>
                 <text
                   class="river-label"
                   transform="translate(205.9 417.1) rotate(69.9)"
@@ -3377,6 +3466,9 @@
                 >r</text>
               </g>
               <g>
+                <g class="river-label masking">
+                  
+                </g>
                 <text
                   class="river-label"
                   transform="matrix(0.7, -0.72, 0.72, 0.7, 327.42, 292.51)"
@@ -3557,16 +3649,9 @@
             />
             <g>
               <text
-                class="cls-81"
-                transform="translate(497.1 774.3)"
-              >25</text>
-              <text
-                class="cls-82"
-                transform="translate(509 774.3)"
-              ><tspan class="cls-83">M</tspan><tspan
-                x="6.6"
-                y="0"
-              >iles</tspan></text>
+                class="scale-bar-label"
+                transform="translate(488 774.3)"
+              >25 Miles</text>
             </g>
             <polyline
               class="cls-80"
@@ -3574,23 +3659,9 @@
             />
             <g>
               <text
-                class="cls-84"
-                transform="translate(494.2 753.9)"
-              >50</text>
-              <text
-                class="cls-84"
-                transform="translate(506.4 753.9)"
-              ><tspan class="cls-85">K</tspan><tspan
-                x="4.8"
-                y="0"
-              >ilome</tspan><tspan
-                class="cls-86"
-                x="25.1"
-                y="0"
-              >t</tspan><tspan
-                x="27.9"
-                y="0"
-              >ers</tspan></text>
+                class="scale-bar-label"
+                transform="translate(488 753.9)"
+              >50 Kilometers</text>
             </g>
           </g>
           <g id="north_arrow">
@@ -3774,13 +3845,7 @@ export default {
         opacity: 0.8;
     }
 
-    .city-dot {
-        font-size: 1px;
-        /* stroke: #000;
-        stroke-width: 1px;
-        stroke-miterlimit: 10; */
-        fill: #0e5d84;
-    }
+
 
     .cls-70 {
         fill: #969696;
@@ -3809,14 +3874,33 @@ export default {
 
     .city-label{
         font-size: 10px;
-        /* fill: #232323; */
+        font-weight: 200;
         fill: #545454;
-        /* font-weight: bold; */
+        letter-spacing: .5px;
     }
     .inside {
-        background-color: black;
+        fill: #7e7e7e;
+        font-weight: 400;
+        /* background-color: black; */
         /* stroke: black;
         stroke-width: 1px; */
+    }
+    .masking {
+        fill: black;
+        font-weight: 400;
+        /* background-color: black; */
+        stroke: black;
+        stroke-width: 7px;
+        stroke-linejoin: round;
+    }
+
+
+    .city-dot {
+        font-size: 2px;
+        /* stroke: #000;
+        stroke-width: 1px;
+        stroke-miterlimit: 10; */
+        fill: #545454;
     }
 
     .water-label {
@@ -3932,8 +4016,19 @@ export default {
     .river-label {
         font-size: 5pt;
         font-style: italic;
-        fill: #eaeaea;
-        /* fill: #316d84; */
+        fill: #316d84;
+    }
+
+    #scale_bars {
+      /* float: right; */
+    }
+
+    .scale-bar-label {
+      font-size: 7pt;
+      font-weight: 500;
+      /* fill: #1f4c5c; */
+      fill: #316d84;
+      letter-spacing: .5px;
     }
 
     .cls-78 {
@@ -3946,13 +4041,10 @@ export default {
     }
 
     .cls-80 {
-        stroke: #1e4756;
+        stroke: #1f4c5c;
     }
 
-    .cls-81, .cls-82, .cls-84 {
-        font-family: SegoeUI-Light, SegoeUI Light;
-        font-weight: 300;
-    }
+
 
     .cls-82 {
         font-size: 8.1px;
