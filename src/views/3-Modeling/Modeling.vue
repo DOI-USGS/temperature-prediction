@@ -7,18 +7,21 @@
         </p>
       </section>
       <section id="scrolly">
+        <div class="sticky">
+          <h2>I'm sticky ;)</h2>
+          </div>
         <article>
           <div class="step" data-step="1">
-            <p>BLOCK 1</p>
+            <p>yes</p>
           </div>
           <div class="step" data-step="2">
-            <p>BLOCK 2</p>
+            <p>Yes</p>
           </div>
           <div class="step" data-step="3">
-            <p>BLOCK 3</p>
+            <p>YES</p>
           </div>
           <div class="step" data-step="4">
-            <p>BLOCK 4</p>
+            <p>YAASSSS!</p>
           </div>
         </article>
       </section>
@@ -30,7 +33,6 @@
 <script>
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
-
   export default {
     name: 'Modeling',
     components: {
@@ -44,31 +46,29 @@
         },
         mounted() {
           this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
-
           this.setPanels(); //begin script when window loads
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
-
           setPanels() {
             const self = this;
-            //code to run on load
+            // code to run on load
             // using d3 for convenience
             var scrolly = document.querySelector("#scrolly");
             var article = scrolly.querySelector("article");
             var step = article.querySelectorAll(".step");
-
             // initialize the scrollama
             var scroller = scrollama();
 
             // scrollama event handlers
+
+            // add/remove class on enter/exit
             function handleStepEnter(response) {
               // response = { element, direction, index }
               console.log(response);
               // add to color to current step
               response.element.classList.add("is-active");
             }
-
             function handleStepExit(response) {
               // response = { element, direction, index }
               console.log(response);
@@ -76,36 +76,34 @@
               response.element.classList.remove("is-active");
             }
 
+            // track scroll progress 
+
+            // make scroller
             function init() {
-              // set random padding for different step heights (not required)
+              // set  padding for different step heights 
               step.forEach(function(step) {
-                var v = 100 + Math.floor((Math.random() * window.innerHeight) / 4);
+                var v = 100;
                 step.style.padding = v + "px 0px";
               });
-
               // 1. setup the scroller with the bare-bones options
               // 		this will also initialize trigger observations
               // 2. bind scrollama event handlers (this can be chained like below)
               scroller
                 .setup({
                   step: "#scrolly article .step",
-                  debug: true,
-                  offset: 0.5
+                  debug: false,
+                  offset: 0.3
                 })
                 .onStepEnter(handleStepEnter)
                 .onStepExit(handleStepExit);
-
               // 3. setup resize event
               window.addEventListener("resize", scroller.resize);
             }
-
             // kick things off
             init();
-
           },
           callback(data) {
           // call functions
-
           },
            
           setScrolls() {
@@ -119,25 +117,45 @@
 #scrolly {
         position: relative;
       }
-
       article {
         position: relative;
         padding: 0 1rem;
         margin: 0 auto;
-        width: 33%;
+        width: 95%;
       }
-
+      .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top:0;
+        background-color: pink;
+        height: 500px;
+        padding: 100px;
+        width: 100%;
+    
+      }
       .step {
         margin: 2rem auto 4rem auto;
         background-color: #3b3b3b;
-        color: #fff;
+        color:#3b3b3b;
+        opacity: .5;
       }
-
-      .step.is-active {
-        background-color: goldenrod;
-        color: #3b3b3b;
+      .step.is-active[data-step="1"] {
+        background-color: purple;
+        color:violet;
       }
-
+       .step.is-active[data-step="2"] {
+        background-color: orangered;
+        color:yellow;
+      }
+       .step.is-active[data-step="3"] {
+        background-color: forestgreen;
+        color:turquoise;
+      }
+       .step.is-active[data-step="4"] {
+        background-color: navy;
+        color:rgb(49, 234, 240);
+        
+      }
       .step p {
         text-align: center;
         padding: 1rem;
