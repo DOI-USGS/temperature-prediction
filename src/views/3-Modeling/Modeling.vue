@@ -1,14 +1,14 @@
 <template>
   <div id="modeling">
-      <section id="intro">
+      <section id="scrolly">
         <h1 class="intro__hed">Modeling</h1>
         <p class="intro__dek">
-          yesssssssss
+          yesssssssss there are many important things to say here
         </p>
-      </section>
-      <section id="scrolly">
         <div class="sticky">
-          <h2>I'm sticky ;)</h2>
+          <div id="sticky-container">
+          <h2 >I'm sticky ;)</h2>
+          </div>
           </div>
         <article>
           <div class="step" data-step="1">
@@ -23,9 +23,13 @@
           <div class="step" data-step="4">
             <p>YAASSSS!</p>
           </div>
+          <div class="step" data-step="5">
+          </div>
         </article>
       </section>
-      <section id="outro"></section>
+      <section id="outro">
+        <h2>bye</h2>
+      </section>
       
   </div>
 </template>
@@ -91,7 +95,7 @@
               scroller
                 .setup({
                   step: "#scrolly article .step",
-                  debug: false,
+                  debug: true,
                   offset: 0.3
                 })
                 .onStepEnter(handleStepEnter)
@@ -126,19 +130,30 @@
       .sticky {
         position: -webkit-sticky;
         position: sticky;
-        top:0;
-        background-color: pink;
-        height: 500px;
-        padding: 100px;
+        top:50vh;
+        height: 50vh;
+        left: 0;
+        margin: 0;
+        background-color: white;
         width: 100%;
+        z-index: 1;
     
       }
+      .sticky h2 {
+        text-align: center;
+        position: relative;
+        top: 25vh;
+
+      }
+
       .step {
         margin: 2rem auto 4rem auto;
         background-color: #3b3b3b;
         color:#3b3b3b;
         opacity: .5;
+        z-index: 0;
       }
+      // can trigger attribute changes 
       .step.is-active[data-step="1"] {
         background-color: purple;
         color:violet;
@@ -156,9 +171,20 @@
         color:rgb(49, 234, 240);
         
       }
+      .step:last-child {
+        background-color: white;
+        color: white;
+        height: 100vh;
+        
+      }
       .step p {
         text-align: center;
         padding: 1rem;
         font-size: 1.5rem;
       }
+#outro {
+  text-align: center;
+  width: 100%;
+  height: 400px;
+}
 </style>
