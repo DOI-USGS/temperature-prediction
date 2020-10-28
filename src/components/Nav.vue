@@ -1,11 +1,17 @@
 <template>
-    <nav>
-        <div id="nav">
-            <router-link to="/">Importance</router-link> |
-            <router-link to="/monitoring">Monitoring</router-link> |
-            <router-link to="/modeling">Modeling</router-link>
-        </div>
-    </nav>
+  <nav>
+    <div id="nav">
+      <router-link to="/">
+        Importance
+      </router-link> |
+      <router-link to="/monitoring">
+        Monitoring
+      </router-link> |
+      <router-link to="/modeling">
+        Modeling
+      </router-link>
+    </div>
+  </nav>
 </template>
 
 <script>

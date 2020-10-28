@@ -11,7 +11,6 @@
       <p>Modeling water temperature allows us to fill gaps in our knowledge about water temperature, including predicting water temperature in the future. Here, we explore new techniques developed by the USGS to model water temperature in the Delaware River Basin.</p>
     </div>
   </section>
-  
 </template>
 
 <script>
