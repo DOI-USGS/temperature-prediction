@@ -1,15 +1,58 @@
 <template>
-  <div id="icons" class="text-content"> 
-      <h2>Water temperature is a key indicator of water quality in the Delaware River Basin</h2>
-      <div class="grid-container">
-        <div class="grid-item icon" id="icon-1">[Icon here]</div>
-        <div class="grid-item icon" id="icon-2">[Icon here]</div>
-        <div class="grid-item icon" id="icon-3">[Icon here]</div>
-        <div class="grid-item icon" id="icon-4">[Icon here]</div>
-        <div class="grid-item desc" id="desc-1">Solubility of many dissolved gases</div>
-        <div class="grid-item desc" id="desc-2">Growth rates and abundance of fish</div>
-        <div class="grid-item desc" id="desc-3">Biogeochemical fate of in-stream nutrients</div>
-        <div class="grid-item desc" id="desc-4">Emergence of harmful algal blooms</div>
+  <div
+    id="icons"
+    class="text-content"
+  > 
+    <h2>Water temperature is a key indicator of water quality in the Delaware River Basin</h2>
+    <div class="grid-container">
+      <div
+        id="icon-1"
+        class="grid-item icon"
+      >
+        [Icon here]
+      </div>
+      <div
+        id="icon-2"
+        class="grid-item icon"
+      >
+        [Icon here]
+      </div>
+      <div
+        id="icon-3"
+        class="grid-item icon"
+      >
+        [Icon here]
+      </div>
+      <div
+        id="icon-4"
+        class="grid-item icon"
+      >
+        [Icon here]
+      </div>
+      <div
+        id="desc-1"
+        class="grid-item desc"
+      >
+        Solubility of many dissolved gases
+      </div>
+      <div
+        id="desc-2"
+        class="grid-item desc"
+      >
+        Growth rates and abundance of fish
+      </div>
+      <div
+        id="desc-3"
+        class="grid-item desc"
+      >
+        Biogeochemical fate of in-stream nutrients
+      </div>
+      <div
+        id="desc-4"
+        class="grid-item desc"
+      >
+        Emergence of harmful algal blooms
+      </div>
     </div>
   </div>
 </template>

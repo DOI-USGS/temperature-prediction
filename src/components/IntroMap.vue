@@ -2465,7 +2465,10 @@
               />
             </g>
             <g id="buffers_simplified">
-              <g id="buffer_lines" class="buffer-lines">
+              <g
+                id="buffer_lines"
+                class="buffer-lines"
+              >
                 <g
                   id="_20500"
                   data-name="20500"
@@ -3047,22 +3050,22 @@
               </g>
               <g id="Inside_DRB">
                 <g id="text-masking">
-                    <text
-                      class="city-label masking"
-                      transform="translate(217.7 389.6)"
-                    >Allentown</text>
-                    <text
-                      class="city-label masking"
-                      transform="translate(370.7 458.1)"
-                    >Trenton</text>
-                    <text
-                      class="city-label masking"
-                      transform="translate(251.2 495.5)"
-                    >Philadelphia</text>
-                    <text
-                      class="city-label masking"
-                      transform="translate(210.1 525.3)"
-                    >Wilmington</text>
+                  <text
+                    class="city-label masking"
+                    transform="translate(217.7 389.6)"
+                  >Allentown</text>
+                  <text
+                    class="city-label masking"
+                    transform="translate(370.7 458.1)"
+                  >Trenton</text>
+                  <text
+                    class="city-label masking"
+                    transform="translate(251.2 495.5)"
+                  >Philadelphia</text>
+                  <text
+                    class="city-label masking"
+                    transform="translate(210.1 525.3)"
+                  >Wilmington</text>
                 </g>
                 <text
                   class="city-label inside"
@@ -3443,9 +3446,7 @@
                 >r</text>
               </g>
               <g>
-                <g class="river-label masking">
-                  
-                </g>
+                <g class="river-label masking" />
                 <text
                   class="river-label"
                   transform="matrix(0.7, -0.72, 0.72, 0.7, 327.42, 292.51)"
