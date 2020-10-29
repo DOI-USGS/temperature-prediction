@@ -3804,7 +3804,7 @@ export default {
     .city-label{
         font-size: 10px;
         font-weight: 200;
-        fill: #545454;
+        fill: #707070;
         letter-spacing: .5px;
     }
     .inside {
