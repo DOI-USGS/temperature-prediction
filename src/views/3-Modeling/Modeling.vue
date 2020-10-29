@@ -5,9 +5,7 @@
         <p> so much to say here!</p>
 
         <div class="sticky">
-          <div id="sticky-container">
           <div id="bees-container">
-            </div>
           </div>
           </div>
         <article>
@@ -54,7 +52,7 @@
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
-            margin: {top:20, right: 20, bottom: 20, left: 20},
+            margin: {top: 20, right: 20, bottom: 20, left: 20},
             width: null,
             height: null,
             
@@ -64,8 +62,8 @@
           this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
           this.setScroller(); //begin script when window loads
 
-          this.width = 500 - this.margin.left - this.margin.right;
-          this.height = 500 - this.margin.top - this.margin.bottom;
+          this.width = 300 - this.margin.left - this.margin.right;
+          this.height = 300 - this.margin.top - this.margin.bottom;
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -135,29 +133,20 @@
             }
             // kick things off
             init();
-
-            function drawCircle() {
-
-            }
           },
           callback(data) {
             let csv_test = data[0];
             console.log(csv_test);
-
             this.setChart(csv_test);
-
-
           },
           drawDots() {
             const self = this;
-
-
           },
           setChart(data) {
         // append svg
           var bees = this.d3.select("#bees-container")
             .append("svg")
-            .attr("viewBox", [0, 0, 500, 500].join(' '))
+            .attr("viewBox", [0, -30, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom+this.margin.bottom)].join(' '))
             .attr("width", "100%")
             .attr("height", "100%")
             .attr("preserveAspectRatio", "xMidYMid")
@@ -169,27 +158,31 @@
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
           //scales
-          var x = this.d3.scaleLinear().range([this.height, 0]);
-          var y = this.d3.scaleLinear().range([0, this.width]);
+          var x = this.d3.scaleLinear().range([0, this.height]);
+          var y = this.d3.scaleLinear().range([this.width, 0]);
 
           // Scale the range of the data
           x.domain(this.d3.extent(data, function(d) { return d.xvar; }));
-          y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]);
+          y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]); 
 
+          //draw bees
           bees.selectAll("dot")
             .data(data)
           .enter().append("circle")
             .attr("r", 5)
+            .attr("fill", "orchid")
             .attr("cx", function(d) { return x(d.xvar); })
             .attr("cy", function(d) { return y(d.yvar); });
 
           // add x axis
           bees.append("g")
             .attr("transform", "translate(0," + this.height + ")")
+            .attr("stroke-width", "3px")
             .call(this.d3.axisBottom(x));
 
           // add y axis
           bees.append("g")
+            .attr("stroke-width", "3px")
             .call(this.d3.axisLeft(y));
            
           }
@@ -202,7 +195,7 @@
   background-color:black;
 
   p, h1, h2, h3 {
-    color: white;
+
   }
 }
 
@@ -210,78 +203,75 @@
         position: relative;
       }
 
-      article {
-        position: relative;
-        margin: 0 auto;
-        width: 100%;
-      }
-      .sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top:20vh;
-        height: 60vh;
-        left: 0;
-        margin: 0;
-        color: white;
-        width: 100%;
-        z-index: 0;
-        background-color: cadetblue;
-    
-      }
-      .sticky h2 {
-        text-align: center;
-        position: relative;
-        top: 40vh;
+article {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top:20vh;
+  height: 60vh;
+  left: 0;
+  margin: 0;
+  color: white;
+  width: 100vw;
+  z-index: 0;
 
-      }
-      .step-container {
-        width:100%;
-      }
-      .step {
-        position: relative;
-        width: 90%;
-        margin: 50rem auto 4rem auto;
-        color:black;
-        z-index: 1;
-        background-color: pink;
-        opacity: .5;
-        height: 50vh;
-      }
-      // can trigger attribute changes with .is-active
-      .step.is-active {
-        color:purple;
-      }
-      .step.is-active[data-step="1"] {
-        
-      }
-       .step.is-active[data-step="2"] {
-      }
-       .step.is-active[data-step="3"] {
+}
+.sticky h2 {
+  text-align: center;
+  position: relative;
+  top: 40vh;
 
-      }
-       .step.is-active[data-step="4"] {
+}
+.step-container {
+  width:100vw;
+}
+.step {
+  position: relative;
+  width: 90%;
+  margin: 50rem auto 4rem auto;
+  color:white;
+  z-index: 1;
+  height: 50vh;
+}
 
-        
-      }
-      .step:last-child {
+// can trigger attribute changes with .is-active
+.step.is-active {
+  color: orange;
+}
 
-        
-      }
-      .step p {
-        text-align: center;
-        padding: 1rem;
-        font-size: 1.5rem;
-      }
+// 
+.step.is-active[data-step="1"] {
+}
+.step.is-active[data-step="2"] {
+}
+.step.is-active[data-step="3"] {
+}
+.step.is-active[data-step="4"] {
+}
+.step:last-child {
+}
+
+
+.step p {
+  text-align: center;
+  padding: 1rem;
+  font-size: 2.5rem;
+}
 #outro {
   text-align: center;
   width: 100%;
   height: 400px;
 }
 #bees-container {
-  position: relative;
-  width: 100vw;
-  height: auto;
-  left: 5vw;
-  top:10vh;
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+
 }
 </style>
