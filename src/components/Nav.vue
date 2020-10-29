@@ -12,9 +12,9 @@
       </router-link>
     </div>
     <div>
-      <p class="nav-title">
-        Jump to Chapter
-      </p>
+      <!-- <p class="nav-title">
+        Choose a chapter
+      </p> -->
     </div>
   </nav>
 </template>
