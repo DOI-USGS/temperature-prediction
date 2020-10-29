@@ -807,6 +807,7 @@
         },
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments){
           const self = this;
+
           // append the svg object to the body of the page
           var svgMatrix = self.d3.select("#matrixChart_c2p2")
               .append("svg")
@@ -814,7 +815,70 @@
                 (self.matrix_height_c2p2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
               .attr("class", "c2p2 matrix_c2p2")
 
-          // append background rectangle
+          // build array of all values of observation counts
+          var domainArrayTemporalCounts = [];
+          for (var i=0; i<csv_matrix_annual.length; i++){
+            var val = parseFloat(csv_matrix_annual[i]['obs_count']);
+            domainArrayTemporalCounts.push(val);
+          };
+
+          // Find maximum count of observations to use in color scale
+          self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
+
+          // build color scale
+          var myColor = self.d3.scaleSequential()
+              .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
+              // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
+              .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
+
+          // build list of posible counts (0 to 366)
+          var count_list = [];
+          for (var i = 1; i <= self.temporalCountMax_c2p2; i++) {
+            count_list.push(i);
+          } 
+
+          // define gradient for legend
+          var defs = svgMatrix.append("defs")
+              .append("linearGradient")
+              .attr("id", "gradient-plasma")
+              .attr("x1", "0%").attr("y1", "0%")
+              .attr("x2", "100%").attr("y2", "0%")
+              .selectAll("stop")
+              .data(count_list)
+              .enter().append("stop")
+              .attr("offset", function(d,i) {
+                return i/(count_list.length-1);
+              })
+              .attr("stop-color", function(d) {
+                return myColor(d)
+              })
+
+          // append legend container
+          var legendsvg = svgMatrix.append("g")
+              .attr("class", "legendWrapper")
+              .attr("transform", "translate(" + (self.matrix_width_c2p2/8 + self.matrix_margin.left) + "," + 0 + ")")
+
+          // append legend rectangle
+          legendsvg.append("rect")
+              .attr("class", "legend_c2p2")
+              .attr("width", self.matrix_width_c2p2/2)
+              .attr("height", 20)
+              .attr("fill", "url(#gradient-plasma)")
+              .attr("x", self.matrix_width_c2p2/8)
+
+          // set scale for legend x axis
+          var legend_xScale = self.d3.scaleLinear()
+            .range([0, self.matrix_width_c2p2*10/16])
+            .domain([1, 366]);
+
+          // place the x axis
+          legendsvg.append("g")
+              .attr("class", "c2p2 legendAxis bottom")
+              .attr("transform", "translate(" + self.matrix_width_c2p2*1/16 + "," + 0 + ")")
+              .call(this.d3.axisBottom(legend_xScale).tickValues(['1', '365']).tickSize(0))
+              .select(".domain").remove()
+
+          // append background rectangle for matrix
           svgMatrix.append("rect")
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2p2)
@@ -849,22 +913,6 @@
               .range([self.matrix_height_c2p2, 0])
               .domain(self.myVars_c2p2)
               .padding(0.1);
-
-          // build array of all values of observation counts
-          var domainArrayTemporalCounts = [];
-          for (var i=0; i<csv_matrix_annual.length; i++){
-            var val = parseFloat(csv_matrix_annual[i]['obs_count']);
-            domainArrayTemporalCounts.push(val);
-          };
-
-          // Find maximum count of observations to use in color scale
-          self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
-
-          // build color scale
-          var myColor = self.d3.scaleSequential()
-              .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
-              // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
-              .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
 
           // add the cells to the matrix
           // select transformed matrix
@@ -1984,7 +2032,7 @@
 }
 
 .c2p2.cellText {
-  font-size: 0.5em;
+  font-size: 0.45em;
   //text-anchor: middle;
 }
 
@@ -2045,7 +2093,10 @@
   font-size: 0.6em;
   fill: #999999;
 }
-
+.legendAxis {
+  color: #ffffff;
+  font-size: 1em;;
+}
 .chartAxisText {
   fill: #999999;
   font-size: 1.1vh;
