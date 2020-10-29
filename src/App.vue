@@ -87,6 +87,10 @@ h2{
   font-size: 2em;
   margin-top: 80px;
   font-weight: bold;
+  line-height: 1.7;
+  @media screen and (max-width: 600px) {
+    font-size: 1.2em;
+  }
 
 }
 h3{
@@ -94,7 +98,7 @@ h3{
     padding-top: .5em;
     font-weight: 700;
     @media screen and (max-width: 600px) {
-        font-size: .8em;
+        font-size: 1em;
     }
 }
 
@@ -104,7 +108,10 @@ h3{
     min-width: 350px;
     max-width: 700px;
     margin: 0 auto;
-    padding: 2em 2em 2em 2em;     
+    padding: 2em;   
+    @media screen and (max-width: 600px) {
+        padding: 10px;
+    }  
   }
 
   .flex-container {
