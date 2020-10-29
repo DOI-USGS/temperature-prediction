@@ -592,7 +592,7 @@
             .attr("x", -28)
             .attr("dy", ".35em")
             .attr("transform", "rotate(-45)")
-            .style("text-anchor", "start")
+            .attr("text-anchor", "start")
 
 
         // place the y axis and format tick labels
@@ -609,8 +609,8 @@
             .append("text")
             .attr("y", 35)
             // offset to (roughly) center on y axis
-            .attr("x", -this.chart_height / 1)
-            .attr("text-anchor", "starts")
+            .attr("x", -this.chart_height / 2)
+            .attr("text-anchor", "middle")
             .attr("class", "c2p1 chartAxisText")
             .text("# of unique temperature measurements")
             //.attr("transform", "translate(25, 0)")
@@ -855,28 +855,35 @@
 
           // append legend container
           var legendsvg = svgMatrix.append("g")
-              .attr("class", "legendWrapper")
-              .attr("transform", "translate(" + (self.matrix_width_c2p2/8 + self.matrix_margin.left) + "," + 0 + ")")
+              .attr("class", "c2p2 legendWrapper")
+              .attr("width", self.matrix_width_c2p2)
+              .attr("transform", "translate(" + (self.matrix_margin.left) + "," + 0 + ")")
+
+          // append legend text
+          legendsvg.append("text")
+              .attr("class", "c2p2 legendAxis")
+              .attr("text-anchor", "end")
+              .attr("x", self.matrix_width_c2p2*1/4 - 10)
+              .attr("y", 17)
+              .attr("fill", "#ffffff")
+              .text("1 daily value")
 
           // append legend rectangle
           legendsvg.append("rect")
-              .attr("class", "legend_c2p2")
+              .attr("class", "c2p2 matrixLegend")
               .attr("width", self.matrix_width_c2p2/2)
               .attr("height", 20)
               .attr("fill", "url(#gradient-plasma)")
-              .attr("x", self.matrix_width_c2p2/8)
+              .attr("x", self.matrix_width_c2p2/4)
 
-          // set scale for legend x axis
-          var legend_xScale = self.d3.scaleLinear()
-            .range([0, self.matrix_width_c2p2*10/16])
-            .domain([1, 366]);
-
-          // place the x axis
-          legendsvg.append("g")
-              .attr("class", "c2p2 legendAxis bottom")
-              .attr("transform", "translate(" + self.matrix_width_c2p2*1/16 + "," + 0 + ")")
-              .call(this.d3.axisBottom(legend_xScale).tickValues(['1', '365']).tickSize(0))
-              .select(".domain").remove()
+          // append legend text
+          legendsvg.append("text")
+              .attr("class", "c2p2 legendAxis")
+              .attr("text-anchor", "start")
+              .attr("x", self.matrix_width_c2p2*3/4 + 10)
+              .attr("y", 17)
+              .attr("fill", "#ffffff")
+              .text("365 daily values")
 
           // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -1291,6 +1298,93 @@
                 (self.matrix_height_c2p3 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
               .attr("class", "c2p3 matrix_c2p3")
 
+          // build array of all values of observed temperature
+          var arrayObsTemps = [];
+          for (var i=0; i<csv_matrix_daily_2019.length; i++){
+            var val = parseFloat(csv_matrix_daily_2019[i]['temp_c']);
+            if (val){
+              arrayObsTemps.push(val);
+            } else {
+              continue
+            }
+          };
+
+          // Find maximum observed temperature to use in color scale
+          var obsTempMax = Math.round(Math.max(...arrayObsTemps));
+
+          // Find minimum observed temperature to use in color scale
+          var obsTempMin = Math.round(Math.min(...arrayObsTemps));
+
+          // build color scale
+          var myColor = self.d3.scaleSequential()
+              .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
+              .domain([obsTempMax,obsTempMin]) // if INVERTING color scale
+          // .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
+
+          // build list of posible counts (0 to 366)
+          var temp_list = [];
+          for (var i = obsTempMin; i <= obsTempMax; i++) {
+            temp_list.push(i);
+          } 
+
+          // define gradient for legend
+          var defs = svgMatrix.append("defs")
+              .append("linearGradient")
+              .attr("id", "gradient-RYB")
+              .attr("x1", "0%").attr("y1", "0%")
+              .attr("x2", "100%").attr("y2", "0%")
+              .selectAll("stop")
+              .data(temp_list)
+              .enter().append("stop")
+              .attr("offset", function(d,i) {
+                return i/(temp_list.length-1);
+              })
+              .attr("stop-color", function(d) {
+                return myColor(d)
+              })
+
+          // append legend container
+          var legendsvg = svgMatrix.append("g")
+              .attr("class", "c2p3 legendWrapper")
+              .attr("width", self.matrix_width_c2p3)
+              .attr("transform", "translate(" + (self.matrix_margin.left) + "," + 0 + ")")
+
+          // append legend text
+          legendsvg.append("text")
+              .attr("class", "c2p3 legendAxis")
+              .attr("text-anchor", "end")
+              .attr("x", self.matrix_width_c2p3*1/4 - 10)
+              .attr("y", 17)
+              .attr("fill", "#ffffff")
+              .text(obsTempMin + " °C")
+
+          // append legend rectangle
+          legendsvg.append("rect")
+              .attr("class", "c2p3 matrixLegend")
+              .attr("width", self.matrix_width_c2p3/2)
+              .attr("height", 20)
+              .attr("fill", "url(#gradient-RYB)")
+              .attr("x", self.matrix_width_c2p3/4)
+
+          // append legend text
+          legendsvg.append("text")
+              .attr("class", "c2p3 legendAxis")
+              .attr("text-anchor", "start")
+              .attr("x", self.matrix_width_c2p3*3/4 + 10)
+              .attr("y", 17)
+              .attr("fill", "#ffffff")
+              .text(obsTempMax + " °C")
+
+          // append background rectangle for matrix
+          svgMatrix.append("rect")
+                  .attr("class", "c2p3 matrixBkgdRect")
+                  .attr("width", self.matrix_width_c2p3)
+                  .attr("height", self.matrix_height_c2p3)
+                  .attr("fill", "#000000")
+                  .attr("filter", "url(#shadow2)")
+                  .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+
           // append tooltip for matrix to the matrix svg
           var tooltip = svgMatrix.append("text")
               .attr("class", "c2p3 tooltip matrix")
@@ -1316,29 +1410,6 @@
               .range([self.matrix_height_c2p3, 0])
               .domain(myVars)
               .padding(0.1);
-
-          // build array of all values of observed temperature
-          var arrayObsTemps = [];
-          for (var i=0; i<csv_matrix_daily_2019.length; i++){
-            var val = parseFloat(csv_matrix_daily_2019[i]['temp_c']);
-            if (val){
-              arrayObsTemps.push(val);
-            } else {
-              continue
-            }
-          };
-
-          // Find maximum observed temperature to use in color scale
-          var obsTempMax = Math.round(Math.max(...arrayObsTemps));
-
-          // Find minimum observed temperature to use in color scale
-          var obsTempMin = Math.round(Math.min(...arrayObsTemps));
-
-          // build color scale
-          var myColor = self.d3.scaleSequential()
-              .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
-              .domain([obsTempMax,obsTempMin]) // if INVERTING color scale
-          // .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
 
           // // add the cells to the matrix
           // select transformed matrix
@@ -1392,23 +1463,27 @@
               .style("font-size", 10)
               .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2p3 + ")")
               .attr("class", "c2p3 matrixAxis bottom")
-              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(4)) //.tickFormat(formatTime(parseTime()))
+              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(formatTime(parseTime()))
+            .select(".domain").remove()
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + 0 + "," + 0 + ")")
               .attr("class", "c2p3 matrixAxis top")
               .call(self.d3.axisTop(x).tickSize(0))
+              .select(".domain").remove()
 
           // draw y axes
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("class", "c2p3 matrixAxis left")
               .call(self.d3.axisLeft(y).tickSize(0))
+              .select(".domain").remove()
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + self.matrix_width_c2p3 + "," + 0 + ")")
               .attr("class", "c2p3 matrixAxis right")
               .call(self.d3.axisRight(y).tickSize(0))
+              .select(".domain").remove()
 
         },
         createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip) {
@@ -1772,7 +1847,7 @@
           this.d3.selectAll(".c2p2.delaware_bay")
               .style("fill", "#6399ba")
               .lower()
-          // select background rectangle and remove filter
+          // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
               .lower()
@@ -1804,6 +1879,9 @@
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("opacity", 0.7)
               .style("stroke-width", 1);
+          // select background rectangle and remove filter
+          this.d3.selectAll(".c2p3.matrixBkgdRect")
+              .attr("filter", "url(#shadow3)")
           // select matrix cells for highlighted segment and raise
           this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
               .raise()
@@ -1892,9 +1970,10 @@
           this.d3.selectAll(".c2p3.delaware_bay")
               .style("fill", "#6399ba")
               .lower()
-          // raise matrix axes
-          this.d3.selectAll("g")
-              .raise()
+          // reset filter on background rectangle and lower
+          this.d3.selectAll(".c2p3.matrixBkgdRect")
+              .attr("filter", "url(#shadow2)")
+              .lower()
         },
         mousemoveRect_c2p3(data, tooltip, mouse_x, mouse_y) {
           // identify selected date
@@ -1927,6 +2006,9 @@
           // show tooltip
           tooltip
               .style("opacity", 1)
+          // select background rectangle and remove filter
+          this.d3.selectAll(".c2p3.matrixBkgdRect")
+              .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0.85)
@@ -1984,6 +2066,10 @@
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
               .style("fill", "#6399ba")
+              .lower()
+          // select background rectangle and replace filter
+          this.d3.selectAll(".c2p3.matrixBkgdRect")
+              .attr("filter", "url(#shadow2)")
               .lower()
         }
       }
@@ -2079,9 +2165,9 @@
   stroke: #6399ba;
 }
 
-.matrixAxis {
-  color: #7a7a7a; /* #7a7a7a */
-}
+//.matrixAxis {
+//  color: #7a7a7a; /* #7a7a7a */
+//}
 
 .chartAxis {
   color: #999999;
