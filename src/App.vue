@@ -9,6 +9,7 @@
     <router-view
       v-if="!isInternetExplorer"
     />
+    <Nav />
     <PreFooterVisualizationsLinks v-if="!isInternetExplorer" />
     <PreFooterCodeLinks v-if="!isInternetExplorer" />
     <FooterUSGS />
