@@ -27,10 +27,16 @@
 
 <style scoped>
     #nav {
-        text-align: center;
-        padding: 40px;
-        color: #5088A5;
+      text-align: center;
+      padding: 40px 0 40px 0;
+      color: #5088A5;   
     }
+    @media (max-width: 600px) {
+      #nav a {
+        font-size: .7em;
+      }
+    }
+
 
     .nav-title {
       text-align: center;
