@@ -2,10 +2,12 @@
   <div id="modeling">
       <section id="scrolly">
         <h1 class="intro__hed">Modeling</h1>
+        <p> so much to say here!</p>
 
         <div class="sticky">
           <div id="sticky-container">
-          <h2 >I'm sticky</h2>
+          <div id="bees-container">
+            </div>
           </div>
           </div>
         <article>
@@ -40,6 +42,7 @@
 
 <script>
     import * as d3Base from "d3";
+      import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
     import * as scrollama from 'scrollama';
 
   export default {
@@ -51,16 +54,27 @@
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
+            margin: {top:20, right: 20, bottom: 20, left: 20},
+            width: null,
+            height: null,
+            
           }
         },
         mounted() {
-          this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
-          this.setPanels(); //begin script when window loads
+          this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
+          this.setScroller(); //begin script when window loads
+
+          this.width = 500 - this.margin.left - this.margin.right;
+          this.height = 500 - this.margin.top - this.margin.bottom;
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
-          setPanels() {
+          setScroller() {
             const self = this;
+
+            let promises = [self.d3.csv("data/test.csv")];
+            Promise.all(promises).then(self.callback);
+
             // code to run on load
             // using d3 for convenience
             var scrolly = document.querySelector("#scrolly");
@@ -127,16 +141,57 @@
             }
           },
           callback(data) {
-          // call functions
+            let csv_test = data[0];
+            console.log(csv_test);
+
+            this.setChart(csv_test);
+
+
           },
-          fadeIn(response) {
-            response
-            .transition()
-            .duration(500)
-            .attr("opacity", 1);
+          drawDots() {
+            const self = this;
+
+
           },
-          setScrolls() {
-            
+          setChart(data) {
+        // append svg
+          var bees = this.d3.select("#bees-container")
+            .append("svg")
+            .attr("viewBox", [0, 0, 500, 500].join(' '))
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("preserveAspectRatio", "xMidYMid")
+            .attr("class", "bees dotPlot");
+
+          //transform svg
+          let g = bees.append("g")
+            .attr("class", "bees transDotPlot")
+            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+          //scales
+          var x = this.d3.scaleLinear().range([this.height, 0]);
+          var y = this.d3.scaleLinear().range([0, this.width]);
+
+          // Scale the range of the data
+          x.domain(this.d3.extent(data, function(d) { return d.xvar; }));
+          y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]);
+
+          bees.selectAll("dot")
+            .data(data)
+          .enter().append("circle")
+            .attr("r", 5)
+            .attr("cx", function(d) { return x(d.xvar); })
+            .attr("cy", function(d) { return y(d.yvar); });
+
+          // add x axis
+          bees.append("g")
+            .attr("transform", "translate(0," + this.height + ")")
+            .call(this.d3.axisBottom(x));
+
+          // add y axis
+          bees.append("g")
+            .call(this.d3.axisLeft(y));
+           
           }
         }
   }
@@ -145,6 +200,10 @@
 <style scoped lang="scss">
 #modeling, #modeling-template {
   background-color:black;
+
+  p, h1, h2, h3 {
+    color: white;
+  }
 }
 
 #scrolly {
@@ -190,19 +249,18 @@
       }
       // can trigger attribute changes with .is-active
       .step.is-active {
-
-      }
-      .step.is-active[data-step="1"] {
         color:purple;
       }
+      .step.is-active[data-step="1"] {
+        
+      }
        .step.is-active[data-step="2"] {
-        color:yellow;
       }
        .step.is-active[data-step="3"] {
-        color:turquoise;
+
       }
        .step.is-active[data-step="4"] {
-        color:rgb(81, 173, 50);
+
         
       }
       .step:last-child {
@@ -218,5 +276,12 @@
   text-align: center;
   width: 100%;
   height: 400px;
+}
+#bees-container {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  left: 5vw;
+  top:10vh;
 }
 </style>
