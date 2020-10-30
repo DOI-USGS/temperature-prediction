@@ -6,6 +6,7 @@
 
         <div class="sticky">
           <div id="bees-container">
+            <p class="progress"></p>
           </div>
           </div>
         <article>
@@ -40,7 +41,7 @@
 
 <script>
     import * as d3Base from "d3";
-      import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
+    import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
     import * as scrollama from 'scrollama';
 
   export default {
@@ -78,6 +79,8 @@
             var scrolly = document.querySelector("#scrolly");
             var article = scrolly.querySelector("article");
             var step = article.querySelectorAll(".step");
+            var sticky = document.querySelector(".sticky");
+            
 
             // initialize the scrollama
             var scroller = scrollama();
@@ -90,24 +93,32 @@
               console.log(response);
               // add to color to current step
               response.element.classList.add("is-active");
+
+              //update number in sticky to show step number
+              self.d3.select("#bees-container p")
+              .text(response.index + 1);
+
+              var pretty = ["orangered", "pink", "cyan", "goldenrod", "green"];
+              var rgb = pretty[response.index];
+              console.log(rgb);
+
+              //trying to change dot color based on scroll trigger
+              var test = self.d3.selectAll(".dot")
+              .transition()
+              .attr('fill', rgb);
+
+              console.log(test);
             }
             function handleStepExit(response) {
               // response = { element, direction, index }
               console.log(response);
               // remove color from current step
               response.element.classList.remove("is-active");
-              beeColor(response.index) 
             }
 
             // track scroll progress 
             function handleStepProgress(response) {
               console.log(response.progress);
-              var el = this.d3.select(response.element);
-
-              var val = el.attr("data-step");
-              var rgba = "rgba(" + val + ", " + response.progress + ")";
-              el.style("background-color", rgba);
-              el.select(".progress").text(d3.format(".1%")(response.progress));
             }
 
             // make scroller
@@ -139,11 +150,11 @@
             let csv_test = data[0];
             console.log(csv_test);
             this.setChart(csv_test);
-          },
-          drawDots() {
-            const self = this;
+
+           /*  this.beeColor(); */
           },
           setChart(data) {
+            const self = this;
         // append svg
           var bees = this.d3.select("#bees-container")
             .append("svg")
@@ -187,7 +198,7 @@
             .attr("stroke-width", "3px")
             .call(this.d3.axisLeft(y));
            
-          },
+          }/* ,
           beeColor(index, sticky) {
               const self = this;
               var pretty = ["orangered", "pink", "cyan", "goldenrod", "grass"];
@@ -199,7 +210,7 @@
                 .delay(100)
                 .attr("fill", pretty[index]);
 
-            }
+            } */
         }
   }
   
@@ -208,16 +219,20 @@
 <style scoped lang="scss">
 #modeling, #modeling-template {
   background-color:black;
-
-  p, h1, h2, h3 {
-
-  }
 }
+.progress {
+  background-color: black;
+  position: relative;
+  left: 40%;
+  padding: 1em;
 
+}
 #scrolly {
         position: relative;
       }
-
+.progress {
+  font-size: 32px;
+}
 article {
   position: relative;
   margin: 0 auto;
@@ -239,7 +254,6 @@ article {
   text-align: center;
   position: relative;
   top: 40vh;
-
 }
 .step-container {
   width:100vw;
