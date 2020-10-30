@@ -62,7 +62,7 @@
         mounted() {
           this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
           this.setScroller(); //begin script when window loads
-
+          
           this.width = 300 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
         },
@@ -85,42 +85,6 @@
             // initialize the scrollama
             var scroller = scrollama();
 
-            // scrollama event handlers
-
-            // add/remove class on enter/exit
-            function handleStepEnter(response) {
-              // response = { element, direction, index }
-              console.log(response);
-              // add to color to current step
-              response.element.classList.add("is-active");
-
-              //update number in sticky to show step number
-              self.d3.select("#bees-container p")
-              .text(response.index + 1);
-
-              var pretty = ["orangered", "pink", "cyan", "goldenrod", "green"];
-              var rgb = pretty[response.index];
-              console.log(rgb);
-
-              //trying to change dot color based on scroll trigger
-              var test = self.d3.selectAll(".dot")
-              .transition()
-              .attr('fill', rgb);
-
-              console.log(test);
-            }
-            function handleStepExit(response) {
-              // response = { element, direction, index }
-              console.log(response);
-              // remove color from current step
-              response.element.classList.remove("is-active");
-            }
-
-            // track scroll progress 
-            function handleStepProgress(response) {
-              console.log(response.progress);
-            }
-
             // make scroller
             function init() {
               // set  padding for different step heights 
@@ -137,9 +101,9 @@
                   debug: false,
                   offset: 0.5
                 })
-                .onStepEnter(handleStepEnter)
-                .onStepProgress(handleStepProgress)
-                .onStepExit(handleStepExit);
+                .onStepEnter(self.handleStepEnter)
+                .onStepProgress(self.handleStepProgress)
+                .onStepExit(self.handleStepExit);
               // 3. setup resize event
               window.addEventListener("resize", scroller.resize);
             }
@@ -153,6 +117,7 @@
 
            /*  this.beeColor(); */
           },
+          // draw beeswarm
           setChart(data) {
             const self = this;
         // append svg
@@ -198,19 +163,41 @@
             .attr("stroke-width", "3px")
             .call(this.d3.axisLeft(y));
            
-          }/* ,
-          beeColor(index, sticky) {
-              const self = this;
-              var pretty = ["orangered", "pink", "cyan", "goldenrod", "grass"];
-              console.log(pretty[index]);
+          },
+          // scrollama event handlers
 
-              sticky
-              .transition()
-                .duration(1000)
-                .delay(100)
-                .attr("fill", pretty[index]);
+        // add class on enter
+        handleStepEnter(response) {
+          // add/remove class on enter/exit
+          const self = this;
+          // response = { element, direction, index }
+          console.log(response);
+          // add to color to current step
+          response.element.classList.add("is-active");
 
-            } */
+          //update number in sticky to show step number
+          self.d3.select("#bees-container p")
+          .text(response.index + 1);
+
+          var pretty = ["orangered", "pink", "cyan", "goldenrod", "green"];
+          var rgb = pretty[response.index];
+
+          //trying to change dot color based on scroll trigger
+          var test = self.d3.selectAll(".dot")
+          .transition()
+          .attr('fill', rgb);
+        },
+        // remove class on enter
+        handleStepExit(response) {
+              // response = { element, direction, index }
+              console.log(response);
+              // remove color from current step
+              response.element.classList.remove("is-active");
+        },
+        // track scroll progress - not working?
+        handleStepProgress(response) {
+              console.log(response.progress);
+        }
         }
   }
   
@@ -219,19 +206,20 @@
 <style scoped lang="scss">
 #modeling, #modeling-template {
   background-color:black;
+
 }
 .progress {
   background-color: black;
   position: relative;
   left: 40%;
-  padding: 1em;
+  line-height: 1em;
 
 }
 #scrolly {
         position: relative;
       }
 .progress {
-  font-size: 32px;
+  font-size: 1em;
 }
 article {
   position: relative;
@@ -243,6 +231,7 @@ article {
   position: sticky;
   top:20vh;
   height: 60vh;
+  padding: 1em;
   left: 0;
   margin: 0;
   color: white;
