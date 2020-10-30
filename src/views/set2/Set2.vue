@@ -1403,13 +1403,13 @@
           var x = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
               .domain(myGroups)
-              .padding(0.1);
+              .padding(0);
 
           // build y scale
           var y = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
               .domain(myVars)
-              .padding(0.1);
+              .padding(0);
 
           // // add the cells to the matrix
           // select transformed matrix
@@ -1517,13 +1517,13 @@
           var xscale = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
               .domain(myGroups)
-              .padding(0.1);
+              .padding(0);
 
           // build y scale
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
               .domain(myVars)
-              .padding(0.1);
+              .padding(0);
 
           // // build spatial rectangles
           // append to transformed matrix
@@ -1548,7 +1548,7 @@
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#000000")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1)
               .style("stroke", "#000000")
               .style("opacity", 0)
 
@@ -1711,7 +1711,6 @@
           this.d3.selectAll(".c2p2.matrixTemporalRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
-              .style("stroke-width", 2)
 
           // re-build y scale for matrix cells y placement
           let yScale_matrix_c2p2 = this.d3.scaleBand()
@@ -1728,7 +1727,7 @@
               //.style("stroke", "None")
               .style("stroke", "#000000")
               .style("fill", "#000000")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
           // select spatial rectangle corresponding to segment and lower
@@ -1821,7 +1820,6 @@
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
-              .style("stroke-width", 2)
 
           // hide tooltip
           tooltip
@@ -2046,10 +2044,6 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("stroke", "#000000")
-              .style("fill", "#000000")
-              .style("stroke-width", 0.6)
-              .style("stroke-opacity", 0)
               .style("opacity", 0)
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
