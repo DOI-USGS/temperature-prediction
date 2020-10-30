@@ -189,10 +189,15 @@
           var rgb = pretty[response.index];
 
           // change dot color on scroll step
-          var test = self.d3.selectAll(".dot")
+          self.d3.selectAll(".dot")
           .transition()
           .duration(800)
           .attr('fill', rgb);
+
+          let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD, this.flyE];
+          beesFly[response.index]();
+
+          console.log(beesFly[response.index]);
 
 
           
@@ -209,10 +214,35 @@
         handleStepProgress(response) {
           console.log(response);
         },
-        updateChart(index) {
-          self.d3.selectAll(".dot")
-          .data(data)
-          .attr('fill', rgb)
+        flyA() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_2; })
+        },
+        flyB() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_3; })
+        },
+        flyC() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.ID; })
+        },
+        flyD() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar; })
+        },
+        flyE() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_2; })
         }
       }
   }
@@ -271,6 +301,7 @@ article {
   color:white;
   z-index: 1;
   height: 50vh;
+  color: black;
 }
 
 // can trigger attribute changes with .is-active
