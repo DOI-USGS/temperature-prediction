@@ -2739,20 +2739,24 @@
             <g id="gnispop_p_extract_p">
               <g id="in_DRB">
                 <text
+                  id="philly-dot"
                   class="city-dot"
                   transform="translate(306.1 498.1) scale(8.1 8.1)"
                 >•</text>
                 <text
+                  id="allentown-dot"
                   class="city-dot"
                   transform="translate(262.5 384.5) scale(8.1 8.1)"
                 >•</text>
                 <text
+                  id="wilmington-dot"
                   class="city-dot"
                   transform="translate(255 533.9) scale(8.1 8.1)"
                 >•</text>
                 <text
+                  id="trenton-dot"
                   class="city-dot"
-                  transform="translate(362.8 452.7)"
+                  transform="translate(364 456) scale(8.1 8.1)"
                 >•</text>
               </g>
               <g id="outside_DRB">
