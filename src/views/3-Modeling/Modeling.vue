@@ -65,6 +65,8 @@
           
           this.width = 300 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
+
+          
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -112,12 +114,16 @@
           },
           callback(data) {
             let csv_test = data[0];
-            console.log(csv_test);
+
             this.setChart(csv_test);
 
-           /*  this.beeColor(); */
+            var mappedArray = csv_test.columns;
+            console.log(mappedArray[4]);
+            var currentCol = mappedArray[4];
+            console.log(currentCol)
+
           },
-          // draw beeswarm
+          // draw beeswarm/scatterplot
           setChart(data) {
             const self = this;
         // append svg
@@ -139,6 +145,7 @@
           var y = this.d3.scaleLinear().range([this.width, 0]);
 
           // Scale the range of the data
+          
           x.domain(this.d3.extent(data, function(d) { return d.xvar; }));
           y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]); 
 
@@ -164,41 +171,50 @@
             .call(this.d3.axisLeft(y));
            
           },
-          // scrollama event handlers
+        // scrollama event handler functions
 
         // add class on enter
         handleStepEnter(response) {
-          // add/remove class on enter/exit
           const self = this;
           // response = { element, direction, index }
           console.log(response);
-          // add to color to current step
+           // changes css for class
           response.element.classList.add("is-active");
 
           //update number in sticky to show step number
           self.d3.select("#bees-container p")
           .text(response.index + 1);
 
-          var pretty = ["orangered", "pink", "cyan", "goldenrod", "green"];
+          var pretty = ["orangered", "pink", "cyan", "yellow", "green"];
           var rgb = pretty[response.index];
 
-          //trying to change dot color based on scroll trigger
+          // change dot color on scroll step
           var test = self.d3.selectAll(".dot")
           .transition()
+          .duration(800)
           .attr('fill', rgb);
+
+
+          
         },
-        // remove class on enter
+        // add remove class on exit
         handleStepExit(response) {
-              // response = { element, direction, index }
-              console.log(response);
-              // remove color from current step
-              response.element.classList.remove("is-active");
+          const self = this;
+          // response = { element, direction, index }
+          console.log(response);
+          // changes css for class
+          response.element.classList.remove("is-active");
         },
-        // track scroll progress - not working?
+        // track scroll progress - not returning anything?
         handleStepProgress(response) {
-              console.log(response.progress);
+          console.log(response);
+        },
+        updateChart(index) {
+          self.d3.selectAll(".dot")
+          .data(data)
+          .attr('fill', rgb)
         }
-        }
+      }
   }
   
 </script>
@@ -206,12 +222,13 @@
 <style scoped lang="scss">
 #modeling, #modeling-template {
   background-color:black;
+  text-align: center;
 
 }
 .progress {
   background-color: black;
   position: relative;
-  left: 40%;
+  left: 45%;
   line-height: 1em;
 
 }
