@@ -90,7 +90,7 @@
               <g> 
                 <!-- This is the halo raster effect around the perimeter of the DRB -->
                 <image
-                  class="cls-3"
+                  class="drb-halo"
                   width="291"
                   height="679"
                   transform="translate(134 48)"
@@ -3025,11 +3025,11 @@
               >
                 <text
                   class="city-label"
-                  transform="translate(151.7 121.3)"
+                  transform="translate(147.7 121.3)"
                 >Binghamton</text>
                 <text
                   class="city-label"
-                  transform="translate(198.4 241.9)"
+                  transform="translate(195.4 241.9)"
                 >Scranton</text>
                 <text
                   class="city-label"
@@ -3037,7 +3037,7 @@
                 >Harrisburg</text>
                 <text
                   class="city-label"
-                  transform="translate(414.6 360)"
+                  transform="translate(410.6 360)"
                 >New York</text>
                 <text
                   class="city-label"
@@ -3045,7 +3045,7 @@
                 >Baltimore</text>
                 <text
                   class="city-label"
-                  transform="translate(58.3 674.3)"
+                  transform="translate(60.3 674.3)"
                 >Washington</text>
               </g>
               <g id="Inside_DRB">
@@ -3714,8 +3714,8 @@ export default {
         clip-path: url(#clip-path);
     }
 
-    .cls-3 {
-        opacity: 0.9;
+    .drb-halo{
+        opacity: 0.7;
     }
 
     .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
