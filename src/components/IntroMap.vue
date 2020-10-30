@@ -2959,7 +2959,7 @@
                   transform="translate(583.7 305.2) rotate(-17.1)"
                 >d</text>
               </g>
-              <g id="atlantic-label" class="hidden-on-mobile">
+              <g id="atlantic-label" class="hidden-on-mobile" transform="translate(0 -10)">
                 <text
                   class="ocean-label"
                   transform="matrix(0.8, -0.6, 0.6, 0.8, 402.3, 746.96)"
@@ -3056,15 +3056,15 @@
                   >Allentown</text>
                   <text
                     class="city-label masking"
-                    transform="translate(370.7 458.1)"
+                    transform="translate(372 458)"
                   >Trenton</text>
                   <text
                     class="city-label masking"
-                    transform="translate(251.2 495.5)"
+                    transform="translate(244 495.5)"
                   >Philadelphia</text>
                   <text
                     class="city-label masking"
-                    transform="translate(210.1 525.3)"
+                    transform="translate(210.1 522)"
                   >Wilmington</text>
                 </g>
                 <text
@@ -3073,15 +3073,15 @@
                 >Allentown</text>
                 <text
                   class="city-label inside"
-                  transform="translate(370.7 458.1)"
+                  transform="translate(372 458)"
                 >Trenton</text>
                 <text
                   class="city-label inside"
-                  transform="translate(251.2 495.5)"
+                  transform="translate(244 495.5)"
                 >Philadelphia</text>
                 <text
                   class="city-label inside"
-                  transform="translate(210.1 525.3)"
+                  transform="translate(210.1 522)"
                 >Wilmington</text>
                 
               </g>
@@ -3678,15 +3678,15 @@ export default {
     }
 
     .deep, .deeper, .deepest {
-      opacity: .1;
+      opacity: .2;
     }
 
     .middle {
-      opacity: .3;
+      opacity: .4;
     }
 
     .shallow {
-      opacity: .4;
+      opacity: .6;
     }
 
      .ocean {
@@ -3694,7 +3694,7 @@ export default {
         opacity: 1;
         stroke: #416d88;
         stroke-width: .4px;
-        stroke-opacity: .5;
+        stroke-opacity: .8;
     }
 
 
@@ -3833,7 +3833,8 @@ export default {
     }
 
     .delaware-water-label text {
-      fill: #5a98a3;
+      /* fill: #5a98a3; */
+      fill: #6399ba;
     }
     .ocean-label {
         font-weight: 200;
@@ -3872,18 +3873,18 @@ export default {
     .scale-bar-label {
       font-size: 7pt;
       font-weight: 500;
-      fill: #316d84;
+      fill: #14414e;
       letter-spacing: .5px;
     }
   /* scale bar lines */
     .cls-80 {
-        stroke: #1f4c5c;
+        stroke: #14414e;
     }
 
 
   .north-arrow {
-    color: #133b47;
-    fill: #133b47;
+    color: #14414e;
+    fill: #14414e;
     stroke: none;
   }
 
