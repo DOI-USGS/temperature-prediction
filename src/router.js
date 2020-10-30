@@ -19,9 +19,13 @@ export default new Router({
         },
         {
             path: '/monitoring',
-            name: 'Monitoring',
+            name: 'MonitoringDesktop',
+            // components: {
+            //     default: MonitoringDesktop,
+            //     // mobile: monitoringMobile
+            // }
             component: () =>
-                    import('@/views/2-Monitoring/Monitoring.vue')
+                    import('@/views/2-Monitoring/MonitoringDesktop.vue')
         },
         {
             path: '/modeling',

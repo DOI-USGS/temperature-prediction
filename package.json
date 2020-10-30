@@ -33,6 +33,7 @@
     "uswds": "^2.8.0",
     "vue": "^2.6.11",
     "vue-browser-detect-plugin": "^0.1.13",
+    "vue-mobile-detection": "^1.0.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.5.1"
   },
