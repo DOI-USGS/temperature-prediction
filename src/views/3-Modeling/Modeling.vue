@@ -96,7 +96,7 @@
               console.log(response);
               // remove color from current step
               response.element.classList.remove("is-active");
-              this.beeColor(response.index) 
+              beeColor(response.index) 
             }
 
             // track scroll progress 
