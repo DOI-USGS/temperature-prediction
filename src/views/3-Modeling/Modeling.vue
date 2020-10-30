@@ -96,6 +96,7 @@
               console.log(response);
               // remove color from current step
               response.element.classList.remove("is-active");
+              this.beeColor(response.index) 
             }
 
             // track scroll progress 
@@ -169,6 +170,7 @@
           bees.selectAll("dot")
             .data(data)
           .enter().append("circle")
+            .attr("class", "dot")
             .attr("r", 5)
             .attr("fill", "orchid")
             .attr("cx", function(d) { return x(d.xvar); })
@@ -185,9 +187,22 @@
             .attr("stroke-width", "3px")
             .call(this.d3.axisLeft(y));
            
-          }
+          },
+          beeColor(index, sticky) {
+              const self = this;
+              var pretty = ["orangered", "pink", "cyan", "goldenrod", "grass"];
+              console.log(pretty[index]);
+
+              sticky
+              .transition()
+                .duration(1000)
+                .delay(100)
+                .attr("fill", pretty[index]);
+
+            }
         }
   }
+  
 </script>
 
 <style scoped lang="scss">
