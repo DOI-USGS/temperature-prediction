@@ -132,6 +132,8 @@
           timestep_c2p2: 'year',
           myGroups_c2p2: null,
           myVars_c2p2: null,
+          myGroups_c2p3: null,
+          myVars_c2p3: null,
           temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
           chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
@@ -1059,20 +1061,16 @@
           // create transformed matrix variable
           var transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
 
-          // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
-          var myVars = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
-
-          // build x scale
+          // build x scale using data read in for matrix in createMatrix_c2p2()
           var xscale = self.d3.scaleBand()
               .range([0,self.matrix_width_c2p2])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p2)
               .padding(0.1);
 
-          // build y scale
+          // build y scale using data read in for matrix in createMatrix_c2p2()
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p2, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p2)
               .padding(0.1);
 
           // //  build spatial rectangles
@@ -1396,19 +1394,19 @@
                   "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")");
 
           // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
+          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
+          self.myVars_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
           var x = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p3)
               .padding(0);
 
           // build y scale
           var y = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p3)
               .padding(0);
 
           // // add the cells to the matrix
@@ -1509,20 +1507,16 @@
           // create transformed matrix variable
           var transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
 
-          // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
-
-          // build x scale
+          // build x scale using data for matrix read in createMatrix_c2p3()
           var xscale = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p3)
               .padding(0);
 
-          // build y scale
+          // build y scale using data for matrix read in createMatrix_c2p3()
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p3)
               .padding(0);
 
           // // build spatial rectangles
@@ -1675,7 +1669,7 @@
                   .attr("height", 0.5)
                   .raise()
           } else {
-              // select the spatial rectangle corresponding to the hightlighted segment
+              // select the spatial rectangle corresponding to the highlighted segment
               this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
@@ -1794,8 +1788,7 @@
           // select all temporal rectangles and make mostly opaque
           // with thick stroke for selection
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("opacity", 0.8)
-              .style("stroke-width", 2);
+              .style("opacity", 0.8);
           // select mouseovered rectangle and set opacity to zero
           this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[self.timestep_c2p2])
               .style("opacity", 0)
@@ -1829,7 +1822,6 @@
           this.d3.selectAll(".c2p2.matrixTemporalRect")
               .style("stroke", "#000000")
               .style("fill", "#000000")
-              .style("stroke-width", 2)
               .style("opacity", 0)
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
@@ -1870,6 +1862,15 @@
               .style("fill", "None")
               .style("stroke", "None")
 
+          // re-build y scale for matrix
+          let yScale_matrix_c2p3 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p3, 0])
+              .domain(this.myVars_c2p3)
+              .padding(0.1);
+
+          // set height for hovered matrix cells
+          let cellHeight_c2p3 = 12
+
           // make tooltip visible
           tooltip
               .style("opacity", 1);
@@ -1881,9 +1882,13 @@
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select matrix cells for highlighted segment and raise
-          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
+          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat)
+              .attr("height", cellHeight_c2p3)
+              .attr("y", function(d){
+                  return yScale_matrix_c2p3(data.properties.seg_id_nat) - cellHeight_c2p3/2; 
+              })
               .raise()
-          // select the spatial rectangle corresponding to the hightlighted segment
+          // select the spatial rectangle corresponding to the highlighted segment
           this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
               // set stroke width, opacity, and stroke color
               // based on whether segment has any observations in record
@@ -1933,7 +1938,12 @@
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
-              .style("stroke-width", 2)
+
+          // re-build y scale for matrix
+          let yScale_matrix_c2p3 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p3, 0])
+              .domain(this.myVars_c2p3)
+              .padding(0.1);
 
           // hide tooltip
           tooltip
@@ -1946,11 +1956,13 @@
               .style("fill", "#000000")
               .style("stroke-width", 2)
               .style("opacity", 0)
-          // select spatial rectangle corresponding to segmend and lower
+          // select spatial rectangle corresponding to segment and lower
           this.d3.selectAll(".c2p3.matrixSpatialRect" + data.properties.seg_id_nat) 
               .lower()
           // lower matrix cells associated with segment
           this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
+              .attr("height", yScale_matrix_c2p3.bandwidth())
+              .attr("y", yScale_matrix_c2p3(data.properties.seg_id_nat))
               .lower()
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
@@ -2001,6 +2013,15 @@
               .style("fill", "None")
               .style("stroke", "None")
 
+          // build x scale
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
+              .domain(self.myGroups_c2p3)
+              .padding(0);
+
+          // set width for hovered matrix cells
+          let cellWidth_c2p3 = 8
+
           // show tooltip
           tooltip
               .style("opacity", 1)
@@ -2010,10 +2031,18 @@
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0.85)
-              .style("stroke-width", 0.6)
-          // select mouseovered rectangle and set opacity to zero
+              .style("stroke-width", 1)
+          // select matrix cells for highlighted timestep and raise
+          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
+              .attr("x", function (d){
+                return x(data[self.timestep_c2p3]) - cellWidth_c2p3/2
+              })
+              .attr("width", cellWidth_c2p3)
+              .raise()
+          // select mouseovered temporal rectangle and set opacity to zero and raise
           this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
               .style("opacity", 0)
+          //    .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#164152")
@@ -2036,15 +2065,35 @@
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
-              .style("stroke-width", 2)
+              //.raise()
+
+          // build x scale
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
+              .domain(self.myGroups_c2p3)
+              .padding(0);
 
           // hide tooltip
           tooltip
               .style("opacity", 0)
+          
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0)
+              .style("stroke-width", 0.6)
+              //.raise()
+          // select mouseovered temporal rectangle and lower
+          //this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
+          //    .raise()
+          // select matrix cells for highlighted timestep and lower
+          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
+              .attr("x", function (d){
+                return x(data[self.timestep_c2p3])
+              })
+              // set width and height based on bandwidth of axes
+              .attr("width", x.bandwidth())
+              .lower()
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
