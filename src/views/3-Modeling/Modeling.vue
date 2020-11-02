@@ -1,41 +1,60 @@
 <template id="modeling-template">
   <div id="modeling">
-      <section id="scrolly">
-        <h1 class="intro__hed">Modeling</h1>
-        <p> so much to say here!</p>
+    <section id="scrolly">
+      <h1 class="intro__hed">
+        Modeling
+      </h1>
+      <p> so much to say here!</p>
 
-        <div class="sticky">
-          <div id="bees-container">
-            <p class="progress"></p>
-          </div>
-          </div>
-        <article>
-          <div class="step-container">
-          <div class="step" data-step="1">
+      <div class="sticky">
+        <div id="bees-container">
+          <p class="progress" />
+        </div>
+      </div>
+      <article>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="1"
+          >
             <p>yes</p>
-          </div></div>
-          <div class="step-container">
-          <div class="step" data-step="2">
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="2"
+          >
             <p>Yes</p>
-          </div></div>
-          <div class="step-container">
-          <div class="step" data-step="3">
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="3"
+          >
             <p>YES</p>
-          </div></div>
-          <div class="step-container">
-          <div class="step" data-step="4">
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="4"
+          >
             <p>YAASSSS!!!!</p>
-          </div></div>
-          <div class="step-container">
-          <div class="step" data-step="5">
-              </div></div>
-          
-        </article>
-      </section>
-      <section id="outro">
-        <h2>bye</h2>
-      </section>
-      
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="5"
+          />
+        </div>
+      </article>
+    </section>
+    <section id="outro">
+      <h2>bye</h2>
+    </section>
   </div>
 </template>
 

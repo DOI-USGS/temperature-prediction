@@ -206,12 +206,12 @@
               .orient(self.d3.geoScaleBottom)
               .projection(map_projection_c2p1)
               .size([this.map_width, this.map_height])
-              .left(.3) // .15 centered, .45 far right
-              .top(.94)
+              .left(.25) // .15 centered, .45 far right
+              .top(.96)
               .units(self.d3.geoScaleKilometers)
               .distance(50)
               .label("50 kilometers")
-              .labelAnchor("middle")
+              .labelAnchor("start")
               .tickSize(null)
               .tickValues(null);
 
@@ -219,12 +219,12 @@
               .orient(self.d3.geoScaleTop)
               .projection(map_projection_c2p1)
               .size([this.map_width, this.map_height])
-              .left(.3) // .15 centered, .45 far right
-              .top(.95)
+              .left(.25) // .15 centered, .45 far right
+              .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
               .label("25 miles")
-              .labelAnchor("middle")
+              .labelAnchor("start")
               .tickSize(null)
               .tickValues(null);
 
@@ -244,12 +244,12 @@
               .orient(self.d3.geoScaleBottom)
               .projection(this.map_projection)
               .size([this.map_width, this.map_height])
-              .left(.1) // .15 centered, .45 far right
-              .top(.94)
+              .left(.03) // .15 centered, .45 far right
+              .top(.96)
               .units(self.d3.geoScaleKilometers)
               .distance(50)
               .label("50 kilometers")
-              .labelAnchor("middle")
+              .labelAnchor("start")
               .tickSize(null)
               .tickValues(null);
 
@@ -257,12 +257,12 @@
               .orient(self.d3.geoScaleTop)
               .projection(this.map_projection)
               .size([this.map_width, this.map_height])
-              .left(.1) // .15 centered, .45 far right
-              .top(.95)
+              .left(.03) // .15 centered, .45 far right
+              .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
               .label("25 miles")
-              .labelAnchor("middle")
+              .labelAnchor("start")
               .tickSize(null)
               .tickValues(null);
 
@@ -512,8 +512,8 @@
                 .style("opacity", 1)
 
             // add scale bar
-            map.append("g").call(this.scaleBarTop);
-            map.append("g").call(this.scaleBarBottom);
+            map.append("g").call(scaleBarTop);
+            map.append("g").call(scaleBarBottom);
           },
         setBarChart_c2p1(csv_agency_count) {
         // append svg to div
