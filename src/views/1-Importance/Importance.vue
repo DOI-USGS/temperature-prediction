@@ -19,8 +19,8 @@
   export default {
     name: "Importance",
     components: {
-      IntroMap: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "intromap"*/ "./../../components/IntroMap"),
-      ImportanceIcons: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "importanceicons"*/ "./../../components/ImportanceIcons")
+      IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/IntroMap"),
+      ImportanceIcons: () => import( /* webpackPreload: true */ /*webpackChunkName: "importanceicons"*/ "./../../components/ImportanceIcons")
     }
   }
 </script>
