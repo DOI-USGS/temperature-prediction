@@ -320,7 +320,6 @@ article {
   color:white;
   z-index: 1;
   height: 50vh;
-  color: black;
 }
 
 // can trigger attribute changes with .is-active
