@@ -1576,7 +1576,7 @@
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
-                self.mouseoverRect_c2p3(d, tooltip);
+                self.mouseoverRect_c2p3(d, tooltip, xscale(d[self.timestep_c2p3]));
               })
               .on("mousemove", function(d) {
                 let mouse_x = loc_matrix_c2p3.x
@@ -1584,7 +1584,7 @@
                 self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
               })
               .on("mouseout", function(d) {
-                self.mouseoutRect_c2p3(d, tooltip);
+                self.mouseoutRect_c2p3(d, tooltip, xscale(d[self.timestep_c2p3]), xscale.bandwidth());
               })
         },
         mousemoveSeg_c2p2(data, tooltip, mouse_x, mouse_y) {
@@ -2005,7 +2005,7 @@
               .raise()
 
         },
-        mouseoverRect_c2p3(data, tooltip) {
+        mouseoverRect_c2p3(data, tooltip, default_x) {
           const self = this;
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
@@ -2035,7 +2035,7 @@
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
               .attr("x", function (d){
-                return x(data[self.timestep_c2p3]) - cellWidth_c2p3/2
+                return default_x - cellWidth_c2p3/2 /* x(data[self.timestep_c2p3]) */
               })
               .attr("width", cellWidth_c2p3)
               .raise()
@@ -2058,7 +2058,7 @@
               .attr("opacity", 1)
               .raise()
         },
-        mouseoutRect_c2p3(data, tooltip) {
+        mouseoutRect_c2p3(data, tooltip, default_x, default_width) {
           const self = this;
 
           // select all *spatial* rectangles and reset fill and stroke to black
@@ -2068,10 +2068,10 @@
               //.raise()
 
           // build x scale
-          var x = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2p3])
-              .domain(self.myGroups_c2p3)
-              .padding(0);
+          //var x = self.d3.scaleBand()
+          //    .range([0, self.matrix_width_c2p3])
+          //    .domain(self.myGroups_c2p3)
+          //    .padding(0);
 
           // hide tooltip
           tooltip
@@ -2089,10 +2089,10 @@
           // select matrix cells for highlighted timestep and lower
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
               .attr("x", function (d){
-                return x(data[self.timestep_c2p3])
+                return default_x /* x(data[self.timestep_c2p3]) */
               })
               // set width and height based on bandwidth of axes
-              .attr("width", x.bandwidth())
+              .attr("width", default_width) /* x.bandwidth() */
               .lower()
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
