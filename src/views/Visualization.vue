@@ -12,7 +12,7 @@
     name: "Vizualization",
     components: {
       Nav: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "nav"*/ "./components/Nav"),
-      Importance: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "importance"*/ "./1-Importance/Importance")
+      Importance: () => import( /* webpackPreload: true */ /*webpackChunkName: "importance"*/ "./1-Importance/Importance")
     }
   }
 </script>
