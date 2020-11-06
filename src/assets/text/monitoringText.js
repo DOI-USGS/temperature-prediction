@@ -1,0 +1,6 @@
+export default {
+   textContents: {
+        paragraph1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget dolor venenatis, consectetur odio quis, fringilla mauris. Aliquam erat tellus, porttitor vitae justo eleifend, tincidunt faucibus quam. Vestibulum faucibus rhoncus auctor. Donec cursus lacus nunc, ut viverra nisl mollis eu. Aliquam semper id lorem ac bibendum. Praesent et tincidunt enim. Suspendisse potenti. Aenean laoreet venenatis ultricies. Maecenas sit amet mi tempus, venenatis ex eleifend, gravida tortor. Integer vestibulum justo felis, sit amet facilisis ante vulputate quis.",
+        paragraph2: "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse vitae purus id tellus maximus interdum. Phasellus egestas pellentesque ipsum placerat convallis. Nullam lobortis sagittis accumsan. Aliquam ex nunc, lobortis non imperdiet ut, placerat sed sapien. Aenean vitae hendrerit ex, at congue eros. Sed at urna nulla. Vestibulum lacinia viverra felis in pulvinar."
+    }
+}

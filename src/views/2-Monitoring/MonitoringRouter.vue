@@ -1,18 +1,20 @@
 <template>
     <section id="monitoring-router">
-        <h2>Hi!  Where shall we go?</h2>
+        <div class="text-content">
+            <h2>This heading is in the component "Router Testing"</h2>
+            <p>{{ msg }} version will be loaded below conditionally.</p>
+            <p>When we're done testing, delete this div and all that will be left will be the {{ msg }} component. </p>
+        </div>
         <div 
             id="monitoring-mobile"
             v-if="isMobile"
         >
-            {{ msg }}
             <MonitoringMobile />
         </div>
         <div 
             id="monitoring-desktop"
             v-if="!isMobile"
         >
-            {{ msg }}
             <MonitoringDesktop />
         </div>
     </section>
@@ -31,7 +33,7 @@
         },
         data() {
             return {
-                msg: isMobile ? "I'm on mobile!" : "I'm on desktop!",
+                msg: isMobile ? "Mobile" : "Desktop",
                 MobileView: false // Assume the viewer is on desktop
             }
         },
