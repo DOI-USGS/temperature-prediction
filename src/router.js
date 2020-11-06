@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -25,7 +26,7 @@ export default new Router({
             //     // mobile: monitoringMobile
             // }
             component: () =>
-                    import('@/views/2-Monitoring/MonitoringDesktop.vue')
+                    import('@/views/2-Monitoring/MonitoringRouter.vue')
         },
         {
             path: '/modeling',
