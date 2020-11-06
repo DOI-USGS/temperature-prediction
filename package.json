@@ -27,6 +27,7 @@
     "d3-geo-scale-bar": "^1.0.2",
     "dns": "^0.2.2",
     "jquery": "^3.5.1",
+    "mobile-device-detect": "^0.4.3",
     "scrollama": "^2.2.1",
     "simple-statistics": "^7.2.0",
     "topojson-client": "^3.1.0",
