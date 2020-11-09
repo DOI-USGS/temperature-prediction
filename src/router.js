@@ -20,7 +20,7 @@ export default new Router({
         },
         {
             path: '/monitoring',
-            name: 'MonitoringDesktop',
+            name: 'Monitoring',
             // components: {
             //     default: MonitoringDesktop,
             //     // mobile: monitoringMobile
