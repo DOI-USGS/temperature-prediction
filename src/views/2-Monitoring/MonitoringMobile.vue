@@ -10,8 +10,9 @@
     <MonitoringMap1 />
     <div class="text-content">
       <p v-html="text.paragraph3" />
-      <p>BAR CHART HERE</p>
-      <!-- <MonitoringBarChart /> -->
+    </div>
+    <MonitoringBarChart />
+    <div class="text-content">
       <p v-html="text.paragraph4" />
       <p>ICONS HERE</p>
       <!-- <Chapter2Icons1 /> -->
@@ -19,8 +20,7 @@
       <p v-html="text.paragraph5" />
       <p v-html="text.paragraph6" />
     </div>
-    <h3>ANIMATED MAP HERE</h3>
-    <!-- <MonitoringMap2 /> -->
+    <MonitoringMap2 />
     <div class="text-content">
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
@@ -51,12 +51,16 @@
 <script>
   import monitoringText from "./../../assets/text/monitoringText";
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
+  import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
+  import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
     name: 'MonitoringMobile',
     components: {
-      MonitoringMap1
+      MonitoringMap1,
+      MonitoringBarChart,
+      MonitoringMap2
     },
     data() {
         return {
