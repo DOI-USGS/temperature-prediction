@@ -32,8 +32,7 @@
       <div class="row">
         <div
           class="col-xl-1 col-md-1 col-xs-0"
-        >
-        </div>
+        />
         <div
           class="col-xl-10 col-md-10 col-xs-12"
         >
@@ -50,8 +49,7 @@
         </div>
         <div
           class="col-xl-1 col-md-1 col-xs-0"
-        >
-        </div>
+        />
       </div>
       <div class="row">
         <div
@@ -66,8 +64,7 @@
       <div class="row">
         <div
           class="col-xl-1 col-md-1 col-xs-0"
-        >
-        </div>
+        />
         <div
           class="col-xl-10 col-md-10 col-xs-12"
         >
@@ -84,8 +81,7 @@
         </div>
         <div
           class="col-xl-1 col-md-1 col-xs-0"
-        >
-        </div>
+        />
       </div>
       <div class="row">
         <div
