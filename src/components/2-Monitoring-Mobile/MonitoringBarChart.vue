@@ -84,7 +84,7 @@
         <rect class="cls-2" x="632.3" y="54.7" width="13.6" height="3.51"/>
         </g>
         <g id="y_axis_label">
-        <text class="axis-title" transform="translate(45.8 87.1)">Number of unique <tspan class="cls-4" x="140.1" y="0">T</tspan><tspan class="cls-5" x="148.5" y="0">empe</tspan><tspan class="cls-6" x="191.3" y="0">r</tspan><tspan class="cls-7" x="197.1" y="0">a</tspan><tspan x="205.9" y="0">tu</tspan><tspan class="cls-8" x="221.8" y="0">r</tspan><tspan x="227.9" y="0">e m</tspan><tspan class="cls-9" x="255.4" y="0">e</tspan><tspan class="cls-10" x="264" y="0">asu</tspan><tspan class="cls-8" x="290.4" y="0">r</tspan><tspan x="296.5" y="0">emen</tspan><tspan class="cls-11" x="339.1" y="0">t</tspan><tspan x="345" y="0">s</tspan></text>
+        <text class="axis-title" transform="translate(45.8 87.1)">Number of unique temperature measurements</text>
         </g>
         <g id="y_axis_tick_labels">
         <text class="cls-12" transform="translate(651.3 42.2)">20k</text>
@@ -223,4 +223,12 @@ export default {
       .cls-22 {
         letter-spacing: 0.01em;
       }
+
+        .axis-title {
+      font-size: 1.2em;
+      font-family: SourceSansPro-Bold, Source Sans Pro;
+      font-weight: 700;
+      fill: white;
+  }
+
 </style>

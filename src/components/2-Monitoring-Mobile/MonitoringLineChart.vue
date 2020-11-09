@@ -58,12 +58,12 @@
             </g>
             <g id="axis-titles">
                 <g>
-                        <text class="axis-subtitle" transform="translate(46.2 49.7)">in degrees Celsius</text>
+                        <text class="axis-subtitle" transform="translate(46.2 55)">in degrees Celsius</text>
                         <text class="axis-title" transform="translate(46.2 34.4)">Stream Temperature</text>
                 </g>
                 <g>
                         <text class="axis-title" transform="translate(247.9 427.2)">Day of Year</text>
-                        <text class="axis-subtitle" transform="translate(234.2 445.8)">starting January 1, 2019</text>
+                        <text class="axis-subtitle" transform="translate(234.2 450)">starting January 1, 2019</text>
                 </g>
             </g>
             <g id="axis-labels-x">
@@ -170,6 +170,20 @@ export default {
       .cls-25 {
         stroke: white;
       }
+
+  .axis-title {
+      font-size: 1.2em;
+      font-family: SourceSansPro-Bold, Source Sans Pro;
+      font-weight: 700;
+      fill: white;
+  }
+
+  .axis-subtitle {
+        font-family: SourceSansPro-Light, Source Sans Pro;
+        font-weight: 300;
+        fill: white;
+        font-size: 1em;
+  }
 
   .tick-label {
         font-family: SourceSansPro-Light, Source Sans Pro;
