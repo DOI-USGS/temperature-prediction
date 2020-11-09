@@ -6,7 +6,6 @@
           id="DRB_map_c2p1"
           class="col-xl-6 col-md-6 col-xs-12"
         />
-        <!-- <div class="col-md-1"></div> -->
         <div
           id="barChart_c2p1"
           class="col-xl-6 col-md-6 col-xs-12"
@@ -14,8 +13,8 @@
           <br>
           <p class="narrative_text">
             At first glance, it appears we have a lot of temperature information in the basin. 
-            The USGS has been monitoring temperature in the DRB since XXXX, and since then has 
-            amassed over XXXXX site-days of temperature measurements.
+            The USGS has been monitoring temperature in the DRB since 1901, and since then has 
+            amassed over 450,000 site-days of temperature measurements.
           </p>
           <p class="narrative_text">
             Since 2017, an uptick in temperature monitoring can be attributed to the USGS’s Next Generation Water 
@@ -32,12 +31,56 @@
       </div>
       <div class="row">
         <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+        <div
+          class="col-xl-10 col-md-10 col-xs-12"
+        >
+          <p class="narrative_text">
+            Most data in the basin come from a small number of sites. The top 1% of river reaches 
+            (5 sites) makes up nearly 20% of all data. And there are whole chunks of time and 
+            space where we’re in the dark.
+          </p>
+          <p class="narrative_text">
+            Explore the availability of temperature observations across the Delaware River Basin 
+            by selecting a year (on the right) or a river segment (on the left) to explore 
+            when and where we have the most information.
+          </p>
+        </div>
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+      </div>
+      <div class="row">
+        <div
           id="DRB_map_c2p2"
           class="col-xl-6 col-md-6 col-xs-12"
         />
         <div
           id="matrixChart_c2p2"
           class="col-xl-6 col-md-6 col-xs-12"
+        />
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+        <div
+          class="col-xl-10 col-md-10 col-xs-12"
+        >
+          <p class="narrative_text">
+            Further complicating our understanding of temperature dynamics in the DRB is the 
+            fact that all streams are not created equal. Features of the landscape can have 
+            large effects on water temperature that create differences in temperature dynamics -- 
+            things like groundwater inputs, reservoirs, and urban areas have distinct 
+            temperature signatures.
+          </p>
+          <p class="narrative_text">
+            Explore a year of temperature data across all monitored sites in the Delaware River Basin.
+          </p>
+        </div>
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
         />
       </div>
       <div class="row">
@@ -190,21 +233,21 @@
           this.map_height = window.innerHeight * 0.79;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
-          //create Albers equal area conic projection centered on DRB for ch2 panel 1 map
-          let map_projection_c2p1 = self.d3.geoAlbers()
+          //create Albers equal area conic projection centered on DRB for ch2 maps
+          let map_projection_c2 = self.d3.geoAlbers()
               .center([0, 40.658894445])
               .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
               .scale(this.map_height * 15)
               .translate([this.map_width / 2, this.map_height / 2]);
 
-          this.map_path_c2p1 = self.d3.geoPath()
-              .projection(map_projection_c2p1);
+          this.map_path_c2 = self.d3.geoPath()
+              .projection(map_projection_c2);
 
-          // create scale bar for ch 2 panel 1 map
-          this.scaleBarTop_c2p1 = self.d3.geoScaleBar()
+          // create scale bar for ch 2 maps
+          this.scaleBarTop_c2 = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleBottom)
-              .projection(map_projection_c2p1)
+              .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
               .left(.25) // .15 centered, .45 far right
               .top(.96)
@@ -215,49 +258,11 @@
               .tickSize(null)
               .tickValues(null);
 
-          this.scaleBarBottom_c2p1 = self.d3.geoScaleBar()
+          this.scaleBarBottom_c2 = self.d3.geoScaleBar()
               .orient(self.d3.geoScaleTop)
-              .projection(map_projection_c2p1)
+              .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
               .left(.25) // .15 centered, .45 far right
-              .top(.97)
-              .units(self.d3.geoScaleMiles)
-              .distance(25)
-              .label("25 miles")
-              .labelAnchor("start")
-              .tickSize(null)
-              .tickValues(null);
-
-          //create Albers equal area conic projection centered on DRB for ch2 panel 2 and 3 maps
-          this.map_projection = self.d3.geoAlbers()
-              .center([0, 40.658894445])
-              .rotate([74.9, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
-              .parallels([39.9352537033, 41.1825351867])
-              .scale(this.map_height * 15)
-              .translate([this.map_width / 2, this.map_height / 2]);
-
-          this.map_path = self.d3.geoPath()
-              .projection(this.map_projection);
-
-          // create scale bar for ch 2 panel 2 and 3 maps
-          this.scaleBarTop = self.d3.geoScaleBar()
-              .orient(self.d3.geoScaleBottom)
-              .projection(this.map_projection)
-              .size([this.map_width, this.map_height])
-              .left(.03) // .15 centered, .45 far right
-              .top(.96)
-              .units(self.d3.geoScaleKilometers)
-              .distance(50)
-              .label("50 kilometers")
-              .labelAnchor("start")
-              .tickSize(null)
-              .tickValues(null);
-
-          this.scaleBarBottom = self.d3.geoScaleBar()
-              .orient(self.d3.geoScaleTop)
-              .projection(this.map_projection)
-              .size([this.map_width, this.map_height])
-              .left(.03) // .15 centered, .45 far right
               .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
@@ -342,19 +347,19 @@
 
           // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
-          this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2p1, this.scaleBarTop_c2p1, this.scaleBarBottom_c2p1, widthScale_c2);
+          this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_agency_count);
 
           // Set up Ch 2 panel 2 -
           // add DRB segments to the panel 2 map
-          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
+          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
           // create panel 2 matrix
           this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments);
 
           // Set up Ch 2 panel 3 -
           // add DRB segments to the panel 3 map
-          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path, this.scaleBarTop, this.scaleBarBottom, widthScale_c2);
+          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
           // create panel 3 matrix
           this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments);
         },
@@ -672,25 +677,6 @@
           // add tooltip to map svg
           var tooltip = map.append("text")
               .attr("class", "c2p2 tooltip map")
-
-          // // Add in narrative text as text element appended to map svg
-          // add c2p2 narrative text
-          var narrative = map.append("foreignObject")
-              .attr("class", "c2p2 narrative")
-              .attr("text-align", "left")
-              .attr("x", map_width*0.7)
-              .attr("y", 25)
-              .attr("width", map_width*0.3)
-              .attr("height", map_height)
-              .append("xhtml:body")
-              .attr("class", "c2p2 narrative")
-              .html('<p id="insert-text">Most data in the basin come from a small number of \
-              sites. The top 1% of river reaches (5 sites) makes up nearly 20% of all data. \
-              And there are whole chunks of time and space where we’re in the dark.</p> <p id="insert-text"> Explore \
-              the availability of temperature observations across the Delaware River Basin \
-              by selecting a year (on the right) or a river segment (on the left) to explore \
-              when and where we have the most information.</p>')
-
 
           // // Build Map
           // add drb segments to map BACKGROUND - for selection only
@@ -1167,25 +1153,6 @@
           // add tooltip to map svg
           var tooltip = map.append("text")
               .attr("class", "c2p3 tooltip map")
-
-          // // Add narrative text as html apppended to  map svg
-          // add c2p3 narrative text
-          var narrative = map.append("foreignObject")
-              .attr("class", "c2p3 narrative")
-              .attr("text-align", "left")
-              .attr("x", map_width*0.7)
-              .attr("y", 25)
-              .attr("width", map_width*0.3)
-              .attr("height", map_height)
-              .append("xhtml:body")
-              .attr("class", "c2p2 narrative")
-              .html('<p id="insert-text">Further complicating our understanding of temperature dynamics \
-              in the DRB is the fact that all streams are not created equal. Features \
-              of the landscape can have large effects on water temperature that create \
-              differences in temperature dynamics  -- things like groundwater inputs, \
-              reservoirs, and urban areas have distinct temperature signatures.</p>\
-              <p id="insert-text">Explore a year of temperature data across all monitored sites in \
-              the Delaware River Basin.</p>')
 
           // add drb segments to map BACKGROUND
           var drb_segments = map.selectAll(".river_segments")
@@ -2082,8 +2049,8 @@
   text-align: center;
 
   .row {
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
   }
 
   #filter_row {
@@ -2094,7 +2061,7 @@
     text-align: left;
     color: #cecece;
     margin-right: 7vh;
-    font-size: 1.2vw;
+    font-size: 1.3vw;
   }
 
   .narrative {
@@ -2158,10 +2125,6 @@
   fill:  #6399ba;
   stroke: #6399ba;
 }
-
-//.matrixAxis {
-//  color: #7a7a7a; /* #7a7a7a */
-//}
 
 .chartAxis {
   color: #999999;
