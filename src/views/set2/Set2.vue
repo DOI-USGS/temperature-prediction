@@ -2038,7 +2038,7 @@
         },
         mouseoutRect_c2p3(data, tooltip, default_x, default_width) {
           const self = this;
-          console.log(default_width)
+          
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("fill", "#000000")
