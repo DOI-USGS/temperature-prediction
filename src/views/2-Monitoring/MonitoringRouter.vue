@@ -35,7 +35,7 @@
         data() {
             return {
                 msg: isMobile ? "Mobile" : "Desktop",
-                mobileView: isMobile ? "false" : "true"
+                mobileView: isMobile
             }
         },
         methods: {
@@ -45,9 +45,6 @@
                 } else {
                     return false
                 }
-            },
-            testRouter(msg) {
-                console.log(msg);
             }
         }
     }
