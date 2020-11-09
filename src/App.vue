@@ -37,7 +37,7 @@
         },
         data() {
             return {
-                isInternetExplorer: false
+                isInternetExplorer: false,
             }
         },
         computed: {

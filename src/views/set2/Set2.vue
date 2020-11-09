@@ -164,6 +164,7 @@
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
+  import monitoringText from "./../../assets/text/monitoringText";
 
   export default {
       name: 'Set2',
@@ -197,7 +198,9 @@
           map_height: null,
           map_margin: null,
           map_path: null,
-          map_projection: null
+          map_projection: null,
+          //import text
+          text: monitoringText.textContents
         }
       },
       mounted() {
