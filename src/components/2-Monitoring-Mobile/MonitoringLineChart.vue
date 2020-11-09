@@ -58,25 +58,25 @@
             </g>
             <g id="axis-titles">
                 <g>
-                        <text class="cls-4" transform="translate(46.2 49.7)">in degrees Celsius</text>
-                        <text class="cls-8" transform="translate(46.2 34.4)">Stream Temperature</text>
+                        <text class="axis-subtitle" transform="translate(46.2 49.7)">in degrees Celsius</text>
+                        <text class="axis-title" transform="translate(46.2 34.4)">Stream Temperature</text>
                 </g>
                 <g>
-                        <text class="cls-8" transform="translate(247.9 427.2)">Day of Year</text>
-                        <text class="cls-4" transform="translate(234.2 445.8)">starting January 1, 2019</text>
+                        <text class="axis-title" transform="translate(247.9 427.2)">Day of Year</text>
+                        <text class="axis-subtitle" transform="translate(234.2 445.8)">starting January 1, 2019</text>
                 </g>
             </g>
             <g id="axis-labels-x">
-                <text class="cls-4" transform="translate(33.9 489.4)">0</text>
-                <text class="cls-4" transform="translate(148.2 489.4)">100</text>
-                <text class="cls-4" transform="translate(268.2 489.4)">200</text>
-                <text class="cls-4" transform="translate(388.2 489.6)">300</text>
+                <text class="tick-label" transform="translate(33.9 489.4)">0</text>
+                <text class="tick-label" transform="translate(148.2 489.4)">100</text>
+                <text class="tick-label" transform="translate(268.2 489.4)">200</text>
+                <text class="tick-label" transform="translate(388.2 489.6)">300</text>
             </g>
             <g id="axis-labels-y">
-                <text class="cls-22" transform="translate(11.4 463.5)">0</text>
-                <text class="cls-22" transform="translate(8.8 318.7)">10</text>
-                <text class="cls-22" transform="translate(8.8 171.4)">20</text>
-                <text class="cls-22" transform="translate(9 27.4)">30</text>
+                <text class="tick-label" transform="translate(11.4 463.5)">0</text>
+                <text class="tick-label" transform="translate(8.8 318.7)">10</text>
+                <text class="tick-label" transform="translate(8.8 171.4)">20</text>
+                <text class="tick-label" transform="translate(9 27.4)">30</text>
             </g>
             <g id="special-lines">
                 <path id="cold-reservoir-seg" class="cls-23" d="M39.3,389.2h2.4l1.2,1.5h2.4l1.2,1.4h1.2l1.2,1.4,1.2,1.5,1.2,4.4,1.2,1.4,1.3,1.4,1.2,1.4,1.2,1.5h1.2l1.2,1.4,1.2,1.4,1.2,3,1.2,2.9,1.2,5.9,1.2,1.4,1.2-3,1.2,3h2.5l1.2,1.4,1.2,1.4,1.2,5.9,1.2-1.5,1.2,1.5,1.2,4.4h1.2l1.2-3,1.2-1.4,1.2-3,1.2-1.4h2.5l1.2,1.4h1.2l1.2-3,1.2,1.5h1.2l1.2-1.5h6.1l1.2,3,1.2-3,1.2-1.4,1.2-1.4,1.2-1.4,1.2-1.5,1.2,1.5,1.2,2.9,1.2-1.4,1.2,1.4,1.2-1.4,1.2-1.4,1.3,1.4,1.2-3h1.2l1.2,5.8,1.2,1.5,1.2-7.4h1.2l1.2-1.4,1.2-1.4,1.2-1.5,1.2-1.4,1.2-3,1.3-1.4,1.2-1.4h1.2l1.2-1.4h1.2l1.2-3,1.2-1.4,1.2-1.5h1.2l1.2-1.4,1.2-1.4,1.2-3,1.2-1.4,1.3-1.4,1.2-3,1.2,3,1.2-1.5,1.2-7.3,1.2-7.4,1.2,1.5,1.2-3,1.2-11.8,1.2-7.3,1.2,14.6,1.2-3,1.3-10.2,1.2-20.5,1.2-4.4,1.2,4.4,1.2-7.4,1.2,32.2,1.2-5.8,1.2-32.2,1.2-19,1.2,10.2,1.2-10.2,1.2-17.6,1.2,17.6,1.3,13.2,1.2-3,1.2-41,1.2-14.6,1.2,67.4,1.2-48.4,1.2,14.6,1.2,4.4,1.2-13.1,1.2-5.9,1.2-7.3,1.2,4.4,1.2-19,1.3,39.5,1.2,11.8,1.2-14.6,1.2-42.5,1.2,24.9,1.2,11.7,1.2-30.7,1.2,40.9,1.2,20.6h1.2l1.2,4.4,1.2-20.6,1.3-13.1L206,285l1.2,11.8,1.2-8.8,1.2-20.5,1.2-11.8,1.2-3h1.2l1.2-1.4,1.2-2.9,1.2-1.5H218l1.2,7.4,1.3-3,1.2-14.6,1.2-1.4,1.2,20.5,1.2,14.6,1.2-2.9,1.2-1.5h1.2l1.2-2.9,1.2-3,1.2,3,1.2-4.4H235l1.2-1.4,1.2-5.9,1.2-2.9,1.2,1.4,1.2-1.4h2.4l1.2-3,1.2-3,1.2-4.4,1.2-2.9,1.2-1.5,1.3-1.4,1.2-4.4h2.4l1.2-1.4,1.2-1.4h1.2l1.2-3,1.2,1.4,1.2-1.4h1.2l1.2-3,1.3,1.5h1.2l1.2-3,1.2-3,1.2,1.5,1.2-3h1.2l1.2-1.4,1.2-3h2.4l1.2,3,1.2-3,1.3-1.4,1.2-1.4,1.2,1.4,1.2,36.6,1.2,17.5,1.2-4.4,1.2-1.4,1.2-1.4,1.2-1.5h1.2l1.2-2.9,1.2,4.4,1.3-1.5,1.2-1.4,1.2-2.9h2.4l1.2-1.5,1.2,1.5,1.2-1.5,1.2-5.8h2.4l1.2-1.4,1.2,1.4,1.3-1.4,1.2-3h1.2l1.2-1.4,1.2-1.4h1.2l1.2-1.5,1.2-1.4,1.2-1.4,1.2,2.9,1.2-1.4,1.2-1.4,1.3-1.4h1.2l1.2-1.5,1.2-1.4h2.4l1.2-1.4H334l1.2,35.1,1.2,17.6,1.2,1.4h1.2l1.2-2.9h1.3l1.2-1.5,1.2-2.9,1.2-1.5,1.2,1.5h2.4l1.2-4.4,1.2,1.4,1.2-1.4,1.2-1.5h2.4l1.3-1.4,1.2-5.8,1.2-4.4,1.2,1.4h1.2l1.2,3,1.2-4.4h1.2l1.2-3,1.2,3,1.2-4.4,1.2-3,1.3,5.9,1.2-1.5,1.2,3,1.2-3,1.2,29.4,1.2,21.9h1.2l1.2-2.9,1.2,1.4h1.2l1.2-1.4,1.2-3h1.2l1.3-1.4,1.2-1.5,1.2,1.5,1.2,24.9,1.2-1.4,1.2-39.6,1.2,26.4,1.2,32.2h1.2l1.2-1.5,1.2-1.4,1.2-3h1.3l1.2-4.4,1.2-2.9,1.2-5.8,1.2-16.2,1.2-27.8,1.2-11.7,1.2,2.9,1.2,5.9,1.2,4.4h1.2l1.2,1.4h1.2l1.3,1.4,1.2,8.8,1.2,13.2,1.2,5.8,1.2-10.2,1.2-3,1.2,5.8,1.2,5.9,1.2,1.4,1.2,1.4,1.2,3,1.2,1.4,1.3,8.8,1.2,7.4,1.2-1.5,1.2-2.9h1.2l1.2,2.9,1.2,4.4,1.2,3,1.2,1.4,1.2,4.4,1.2,1.4,1.2,3,1.2,1.4,1.3,4.4h1.2l1.2,4.4,1.2,3,1.2-1.5,1.2,3,1.2,3L456,363l1.2,1.4h2.4l1.2,1.5,1.3,4.3,1.2,1.5,1.2,5.8,1.2,3,1.2,4.4h1.2l1.2,1.4,1.2,1.4,1.2,3,1.2-1.5h1.2l1.2,3h1.2l1.3-1.4H479"/>
@@ -131,15 +131,12 @@ export default {
         stroke: #fff;
       }
 
-      .cls-22, .cls-4, .cls-8 {
+      .cls-22 {
         fill: #fff;
       }
+     
 
-      .cls-4 {
-        font-size: 12.08px;
-      }
-
-      .cls-22, .cls-4 {
+      .cls-22 {
         font-family: SourceSansPro-Light, Source Sans Pro;
         font-weight: 300;
       }
@@ -156,11 +153,6 @@ export default {
         letter-spacing: 0em;
       }
 
-      .cls-8 {
-        font-size: 17.57px;
-        font-family: SourceSansPro-Bold, Source Sans Pro;
-        font-weight: 700;
-      }
 
 
       .cls-22 {
@@ -179,4 +171,10 @@ export default {
         stroke: white;
       }
 
+  .tick-label {
+        font-family: SourceSansPro-Light, Source Sans Pro;
+        font-weight: 300;
+        fill: white;
+        font-size: .8em;
+  }
 </style>
