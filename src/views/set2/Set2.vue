@@ -695,11 +695,11 @@
               .append("path")
               // assign class for styling
               .attr("class", function(d) {
-                let transparent_seg_class = 'c2p2 segs_transparent '
+                let transparent_seg_class = 'c2p2 segs_transparent'
                 let key = null;
                 for (key in d.properties.year_count) {
                   if (d.properties.year_count[key] > 0) {
-                    transparent_seg_class += self.timestep_c2p2 + key
+                    transparent_seg_class += " " + self.timestep_c2p2 + key
                   }
                 }
                 return transparent_seg_class
@@ -780,11 +780,7 @@
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 var value = d.properties['avg_ann_flow'];
-                if (value){
-                  return self.widthScale_c2(value);
-                } else {
-                  return "#ccc";
-                }
+                return self.widthScale_c2(value);
               })
               // set fill to none
               .style("fill", "None")
@@ -1777,7 +1773,7 @@
           // and make white
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .style("stroke", "#ffffff")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1.5)
               .style("opacity", 1)
               .raise()
         },
@@ -1993,8 +1989,6 @@
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#000000")
-              .style("stroke", "#000000")
               .style("opacity", 0.6)
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
@@ -2003,9 +1997,6 @@
               })
               .attr("width", cellWidth_c2p3)
               .raise()
-          // select mouseovered temporal rectangle and set opacity to zero
-          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
-              .style("opacity", 0)
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#164152")
@@ -2153,7 +2144,6 @@
 .river_segments {
   stroke: #6399ba;
   stroke-linecap: round;
-  stroke-width: 0.5px;
 }
 
 .reservoirs {
