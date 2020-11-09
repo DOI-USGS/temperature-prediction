@@ -81,9 +81,11 @@
         mounted() {
           this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
           this.setScroller(); //begin script when window loads
-
+          
           this.width = 300 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
+
+          
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -104,42 +106,6 @@
             // initialize the scrollama
             var scroller = scrollama();
 
-            // scrollama event handlers
-
-            // add/remove class on enter/exit
-            function handleStepEnter(response) {
-              // response = { element, direction, index }
-              console.log(response);
-              // add to color to current step
-              response.element.classList.add("is-active");
-
-              //update number in sticky to show step number
-              self.d3.select("#bees-container p")
-              .text(response.index + 1);
-
-              var pretty = ["orangered", "pink", "cyan", "goldenrod", "green"];
-              var rgb = pretty[response.index];
-              console.log(rgb);
-
-              //trying to change dot color based on scroll trigger
-              var test = self.d3.selectAll(".dot")
-              .transition()
-              .attr('fill', rgb);
-
-              console.log(test);
-            }
-            function handleStepExit(response) {
-              // response = { element, direction, index }
-              console.log(response);
-              // remove color from current step
-              response.element.classList.remove("is-active");
-            }
-
-            // track scroll progress 
-            function handleStepProgress(response) {
-              console.log(response.progress);
-            }
-
             // make scroller
             function init() {
               // set  padding for different step heights 
@@ -156,9 +122,9 @@
                   debug: false,
                   offset: 0.5
                 })
-                .onStepEnter(handleStepEnter)
-                .onStepProgress(handleStepProgress)
-                .onStepExit(handleStepExit);
+                .onStepEnter(self.handleStepEnter)
+                .onStepProgress(self.handleStepProgress)
+                .onStepExit(self.handleStepExit);
               // 3. setup resize event
               window.addEventListener("resize", scroller.resize);
             }
@@ -167,11 +133,16 @@
           },
           callback(data) {
             let csv_test = data[0];
-            console.log(csv_test);
+
             this.setChart(csv_test);
 
-           /*  this.beeColor(); */
+            var mappedArray = csv_test.columns;
+            console.log(mappedArray[4]);
+            var currentCol = mappedArray[4];
+            console.log(currentCol)
+
           },
+          // draw beeswarm/scatterplot
           setChart(data) {
             const self = this;
         // append svg
@@ -193,6 +164,7 @@
           var y = this.d3.scaleLinear().range([this.width, 0]);
 
           // Scale the range of the data
+          
           x.domain(this.d3.extent(data, function(d) { return d.xvar; }));
           y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]); 
 
@@ -217,20 +189,81 @@
             .attr("stroke-width", "3px")
             .call(this.d3.axisLeft(y));
            
-          }/* ,
-          beeColor(index, sticky) {
-              const self = this;
-              var pretty = ["orangered", "pink", "cyan", "goldenrod", "grass"];
-              console.log(pretty[index]);
+          },
+        // scrollama event handler functions
 
-              sticky
-              .transition()
-                .duration(1000)
-                .delay(100)
-                .attr("fill", pretty[index]);
+        // add class on enter
+        handleStepEnter(response) {
+          const self = this;
+          // response = { element, direction, index }
+          console.log(response);
+           // changes css for class
+          response.element.classList.add("is-active");
 
-            } */
+          //update number in sticky to show step number
+          self.d3.select("#bees-container p")
+          .text(response.index + 1);
+
+          var pretty = ["orangered", "pink", "cyan", "yellow", "green"];
+          var rgb = pretty[response.index];
+
+          // change dot color on scroll step
+          self.d3.selectAll(".dot")
+          .transition()
+          .duration(800)
+          .attr('fill', rgb);
+
+          let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD, this.flyE];
+          beesFly[response.index]();
+
+          console.log(beesFly[response.index]);
+
+
+          
+        },
+        // add remove class on exit
+        handleStepExit(response) {
+          const self = this;
+          // response = { element, direction, index }
+          console.log(response);
+          // changes css for class
+          response.element.classList.remove("is-active");
+        },
+        // track scroll progress - not returning anything?
+        handleStepProgress(response) {
+          console.log(response);
+        },
+        flyA() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_2; })
+        },
+        flyB() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_3; })
+        },
+        flyC() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.ID; })
+        },
+        flyD() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar; })
+        },
+        flyE() {
+          this.d3.selectAll(".dot")
+            .transition()
+              .duration(3000)
+              .attr("cx", function(d) { return d.xvar_2; })
         }
+      }
   }
   
 </script>
@@ -238,19 +271,21 @@
 <style scoped lang="scss">
 #modeling, #modeling-template {
   background-color:black;
+  text-align: center;
+
 }
 .progress {
   background-color: black;
   position: relative;
-  left: 40%;
-  padding: 1em;
+  left: 45%;
+  line-height: 1em;
 
 }
 #scrolly {
         position: relative;
       }
 .progress {
-  font-size: 32px;
+  font-size: 1em;
 }
 article {
   position: relative;
@@ -262,6 +297,7 @@ article {
   position: sticky;
   top:20vh;
   height: 60vh;
+  padding: 1em;
   left: 0;
   margin: 0;
   color: white;
