@@ -36,7 +36,7 @@
       <p v-html="text.paragraph10" />
       <!-- <Chapter2Icons2 /> -->
     </div>
-    <!-- <MonitoringLineChart /> -->
+    <MonitoringLineChart />
     <div class="text-content">
       <p v-html="text.paragraph11" />
       <p v-html="text.paragraph12" />
@@ -53,6 +53,7 @@
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
   import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
   import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";
+  import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
@@ -60,7 +61,8 @@
     components: {
       MonitoringMap1,
       MonitoringBarChart,
-      MonitoringMap2
+      MonitoringMap2,
+      MonitoringLineChart
     },
     data() {
         return {
