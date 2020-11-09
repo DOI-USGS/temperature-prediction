@@ -2008,6 +2008,8 @@
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
               .style("opacity", 0.6)
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
