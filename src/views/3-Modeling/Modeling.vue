@@ -77,6 +77,7 @@
             margin: {top: 20, right: 20, bottom: 20, left: 20},
             width: null,
             height: null,
+            radius: null,
             
           }
         },
@@ -84,8 +85,9 @@
           this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
           this.setScroller(); //begin script when window loads
           
-          this.width = 300 - this.margin.left - this.margin.right;
+          this.width = 600 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
+          this.radius = 10;
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -137,8 +139,6 @@
             let csv_test = data[0];
             let rmse_monthly = data[1];
 
-            console.table(rmse_monthly);
-
             this.setChart(rmse_monthly);
 
             var mappedArray = rmse_monthly.columns;
@@ -150,12 +150,10 @@
           setChart(data) {
             const self = this;
         // append svg
-          var bees = this.d3.select("#bees-container")
-            .append("svg")
+          var bees = this.d3.select("#bees-container").append("svg")
             .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
-            .attr("width", "100%")
-            .attr("height", "100%")
-            .attr("preserveAspectRatio", "xMidYMid")
+            .attr("width", this.width)
+            .attr("height", this.height)
             .attr("class", "bees dotPlot");
 
           //transform svg
@@ -164,8 +162,8 @@
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
           //scales
-          var x = this.d3.scaleLinear().range([0, this.height]);
-          var y = this.d3.scaleLinear().range([this.width, 0]);
+          var x = this.d3.scaleLinear().range([0, this.width]);
+          var y = this.d3.scaleLinear().range([this.height, 0]);
 
           // Scale the range of the data
           x.domain(this.d3.extent(data, function(d) { return d.ANN; }));
@@ -185,13 +183,13 @@
           // add x axis
           bees.append("g")
             .attr("transform", "translate(0," + this.height + ")")
-            .attr("stroke-width", "3px")
+            .attr("stroke-width", "2px")
             .call(this.d3.axisBottom(x));
 
           // add y axis
           bees.append("g")
             .attr("stroke-width", "0px")
-            .call(this.d3.axisLeft(y));
+            .call(this.d3.axisLeft(y).ticks(0));
            
           },
         // scrollama event handler functions
