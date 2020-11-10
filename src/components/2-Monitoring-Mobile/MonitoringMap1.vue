@@ -1,6 +1,7 @@
 <template>
+<div id="monitoring-map-1">
+  <h3 class="viz-title">Monitoring Sites in the Delaware River Basin</h3>
   <svg
-    id="monitoring-map-1" 
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 90 610 1020"
   >
@@ -7846,6 +7847,7 @@
       </g>
     </g>
   </svg>
+</div>
 </template>
 
 <script>
@@ -7857,7 +7859,7 @@ export default {
 <style scoped>
     #monitoring-map-1 {
         width: 100%;
-        margin: auto;
+        padding: 10px;
     }
     /* Rivers and Delaware Bay */
     .st0 {
@@ -7865,11 +7867,7 @@ export default {
         stroke: #6399BA;
         stroke-width: 1px;
         }
-	.legend-text {
-        fill:#525252;
-        font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-        font-size: 1em;
-        }
+
     #legend_text {
         transform: translate(0, 30)
     }
@@ -7877,8 +7875,7 @@ export default {
 
 
     /* Circles */
-	.st5{fill:#EB4444;stroke:#000000;stroke-width:0.2;}
-	.st6{fill:#EDB932;stroke:#000000;stroke-width:0.2;}
+	.st5{fill:#EB4444;stroke:#000000;stroke-width:0.5;}
+	.st6{fill:#EDB932;stroke:#000000;stroke-width:0.5;}
 
-     
 </style>

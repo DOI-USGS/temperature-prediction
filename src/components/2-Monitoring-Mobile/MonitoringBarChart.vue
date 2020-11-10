@@ -1,8 +1,10 @@
 <template>
+<div>
+  <h3 class="viz-title">Individual Temperature Measurements in the DRB</h3>
   <svg
     id="bar-chart"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 691 466.8"
+    viewBox="0 60 691 430"
   >
     <g id="Bars_USGS">
       <rect class="cls-1" x="33.4" y="402.4" width="8.5" height="1.98"/>
@@ -147,6 +149,7 @@
       <text class="cls-6" transform="translate(83.3 140.5)">USGS</text>
     </g>
   </svg>
+</div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div id="line-chart">
-    <h2>gonna change these highlight line colors...</h2>    
+    <h3 class="viz-title">Daily Temperature of Most-Observed DRB Reaches</h3>    
     <svg
       id="line-chart-svg"
       xmlns="http://www.w3.org/2000/svg"
