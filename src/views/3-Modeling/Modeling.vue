@@ -87,7 +87,7 @@
           
           this.width = 600 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
-          this.radius = 10;
+          this.radius = 5;
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -156,29 +156,52 @@
             .attr("height", this.height)
             .attr("class", "bees dotPlot");
 
+          bees.append("line", 'svg')
+            .classed("main_line", true)
+            .attr("x1", 0)
+            .attr("y1", this.height/2)
+            .attr("x2", this.width)
+            .attr("y2", this.height/2)
+            .attr("stroke-width", 1.5)
+            .attr("stroke", "#A3A0A6");
+            
+
           //transform svg
-          let g = bees.append("g")
-            .attr("class", "bees transDotPlot")
-            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+          //let g = bees.append("g")
+           // .attr("class", "bees transDotPlot")
+           // .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
           //scales
-          var x = this.d3.scaleLinear().range([0, this.width]);
-          var y = this.d3.scaleLinear().range([this.height, 0]);
+          var x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.ANN; }));
+          //var y = this.d3.scaleLinear().range([this.height, 0]).domain([0, this.d3.max(data, function(d) { return 1; })]);
 
-          // Scale the range of the data
-          x.domain(this.d3.extent(data, function(d) { return d.ANN; }));
-          y.domain([0, this.d3.max(data, function(d) { return 1; })]); 
+          var data_set = 'ANN';
 
           //draw bees
           bees.selectAll("dot")
             .data(data)
-          .enter().append("circle")
-            .attr("class", "dot")
-            .attr("r", 4)
+          .enter().append("circle").classed('dot', true)
+            .attr("r", this.radius)
             .attr("fill", "orchid")
-            .attr("opacity", .4)
-            .attr("cx", function(d) { return x(d.ANN); })
-            .attr("cy", function(d) { return y(.5); });
+            .attr("opacity", .8)
+            .attr('cx', function(d){return x(d[data_set]);})
+            .attr('cy', function(d){return this.height/2;})
+            .on('click', function(d){
+              self.highlight(d)
+            });
+
+          var simulation = this.d3.forceSimulation(data)
+            .force('x', this.d3.forceX(function(d){
+                return x(d[data_set])
+              }).strength(0.99)
+            )
+            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
+            .force('collide', this.d3.forceCollide(this.radius))
+            .alphaDecay(0)
+            .alpha(0.12)
+            .on('tick', self.tick)
+
+
 
           // add x axis
           bees.append("g")
@@ -187,10 +210,16 @@
             .call(this.d3.axisBottom(x));
 
           // add y axis
-          bees.append("g")
-            .attr("stroke-width", "0px")
-            .call(this.d3.axisLeft(y).ticks(0));
+          //bees.append("g")
+          //  .attr("stroke-width", "0px")
+          //  .call(this.d3.axisLeft(y).ticks(0));
            
+          },
+          // idea is to highlight point on click to track them through movement, don't know how to self select
+          highlight(data) {
+            this.d3.selectAll(".dot" + data.i)
+              .attr('stroke','yellow')
+              .style('stroke-width',2)
           },
         // scrollama event handler functions
 
@@ -222,6 +251,11 @@
 
 
           
+        },
+        tick() {
+          this.d3.selectAll(".dot")
+            .attr('cx', function(d){return d.x})
+            .attr('cy', function(d){return d.y})
         },
         // add remove class on exit
         handleStepExit(response) {
