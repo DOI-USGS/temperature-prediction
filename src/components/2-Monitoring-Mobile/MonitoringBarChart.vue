@@ -5,703 +5,146 @@
     viewBox="0 0 691 466.8"
   >
     <g id="Bars_USGS">
-      <rect
-        class="cls-1"
-        x="43.7"
-        y="304.1"
-        width="13.6"
-        height="109.56"
-      />
-      <rect
-        class="cls-1"
-        x="58.8"
-        y="313.6"
-        width="13.6"
-        height="100.08"
-      />
-      <rect
-        class="cls-1"
-        x="73.9"
-        y="313.6"
-        width="13.6"
-        height="100.08"
-      />
-      <rect
-        class="cls-1"
-        x="89"
-        y="317.1"
-        width="13.6"
-        height="96.59"
-      />
-      <rect
-        class="cls-1"
-        x="104.1"
-        y="314.7"
-        width="13.6"
-        height="98.95"
-      />
-      <rect
-        class="cls-1"
-        x="119.1"
-        y="312.8"
-        width="13.6"
-        height="100.91"
-      />
-      <rect
-        class="cls-1"
-        x="134.2"
-        y="312.8"
-        width="13.6"
-        height="100.84"
-      />
-      <rect
-        class="cls-1"
-        x="149.3"
-        y="322.1"
-        width="13.6"
-        height="91.62"
-      />
-      <rect
-        class="cls-1"
-        x="164.4"
-        y="311.7"
-        width="13.6"
-        height="101.93"
-      />
-      <rect
-        class="cls-1"
-        x="179.5"
-        y="299.4"
-        width="13.6"
-        height="114.32"
-      />
-      <rect
-        class="cls-1"
-        x="194.6"
-        y="292"
-        width="13.6"
-        height="121.72"
-      />
-      <rect
-        class="cls-1"
-        x="209.7"
-        y="286.8"
-        width="13.6"
-        height="126.85"
-      />
-      <rect
-        class="cls-1"
-        x="224.8"
-        y="284.6"
-        width="13.6"
-        height="129.12"
-      />
-      <rect
-        class="cls-1"
-        x="239.9"
-        y="282.1"
-        width="13.6"
-        height="131.54"
-      />
-      <rect
-        class="cls-1"
-        x="255"
-        y="298.1"
-        width="13.6"
-        height="115.53"
-      />
-      <rect
-        class="cls-1"
-        x="270.1"
-        y="284.3"
-        width="13.6"
-        height="129.36"
-      />
-      <rect
-        class="cls-1"
-        x="285.2"
-        y="288.7"
-        width="13.6"
-        height="125.02"
-      />
-      <rect
-        class="cls-1"
-        x="300.2"
-        y="279"
-        width="13.6"
-        height="134.63"
-      />
-      <rect
-        class="cls-1"
-        x="315.3"
-        y="267.9"
-        width="13.6"
-        height="145.79"
-      />
-      <rect
-        class="cls-1"
-        x="330.4"
-        y="261.2"
-        width="13.6"
-        height="152.45"
-      />
-      <rect
-        class="cls-1"
-        x="345.5"
-        y="232.4"
-        width="13.6"
-        height="181.32"
-      />
-      <rect
-        class="cls-1"
-        x="360.6"
-        y="230.4"
-        width="13.6"
-        height="183.32"
-      />
-      <rect
-        class="cls-1"
-        x="375.7"
-        y="259.3"
-        width="13.6"
-        height="154.34"
-      />
-      <rect
-        class="cls-1"
-        x="390.8"
-        y="263.4"
-        width="13.6"
-        height="150.23"
-      />
-      <rect
-        class="cls-1"
-        x="405.9"
-        y="275.7"
-        width="13.6"
-        height="137.99"
-      />
-      <rect
-        class="cls-1"
-        x="421"
-        y="301"
-        width="13.6"
-        height="112.69"
-      />
-      <rect
-        class="cls-1"
-        x="436.1"
-        y="295.8"
-        width="13.6"
-        height="117.92"
-      />
-      <rect
-        class="cls-1"
-        x="451.2"
-        y="280.9"
-        width="13.6"
-        height="132.8"
-      />
-      <rect
-        class="cls-1"
-        x="466.3"
-        y="256.9"
-        width="13.6"
-        height="156.78"
-      />
-      <rect
-        class="cls-1"
-        x="481.3"
-        y="261.1"
-        width="13.6"
-        height="152.59"
-      />
-      <rect
-        class="cls-1"
-        x="496.4"
-        y="283.6"
-        width="13.6"
-        height="130.12"
-      />
-      <rect
-        class="cls-1"
-        x="511.5"
-        y="286.5"
-        width="13.6"
-        height="127.16"
-      />
-      <rect
-        class="cls-1"
-        x="526.6"
-        y="263.2"
-        width="13.6"
-        height="150.49"
-      />
-      <rect
-        class="cls-1"
-        x="541.7"
-        y="262"
-        width="13.6"
-        height="151.64"
-      />
-      <rect
-        class="cls-1"
-        x="556.8"
-        y="248.7"
-        width="13.6"
-        height="164.99"
-      />
-      <rect
-        class="cls-1"
-        x="571.9"
-        y="257.1"
-        width="13.6"
-        height="156.57"
-      />
-      <rect
-        class="cls-1"
-        x="587"
-        y="250.1"
-        width="13.6"
-        height="163.61"
-      />
-      <rect
-        class="cls-1"
-        x="602.1"
-        y="218.4"
-        width="13.6"
-        height="195.27"
-      />
-      <rect
-        class="cls-1"
-        x="617.2"
-        y="139.6"
-        width="13.6"
-        height="274.08"
-      />
-      <rect
-        class="cls-1"
-        x="632.3"
-        y="58.2"
-        width="13.6"
-        height="355.49"
-      />
+      <rect class="cls-1" x="33.4" y="402.4" width="8.5" height="1.98"/>
+      <rect class="cls-1" x="43.6" y="402.5" width="8.5" height="1.86"/>
+      <rect class="cls-1" x="53.7" y="402" width="8.5" height="2.38"/>
+      <rect class="cls-1" x="63.9" y="401.2" width="8.5" height="3.15"/>
+      <rect class="cls-1" x="74" y="397.8" width="8.5" height="6.6"/>
+      <rect class="cls-1" x="84.2" y="378.6" width="8.5" height="25.75"/>
+      <rect class="cls-1" x="94.3" y="373.7" width="8.5" height="30.68"/>
+      <rect class="cls-1" x="104.5" y="367.6" width="8.5" height="36.74"/>
+      <rect class="cls-1" x="114.6" y="354.1" width="8.5" height="50.26"/>
+      <rect class="cls-1" x="124.8" y="349.1" width="8.5" height="55.21"/>
+      <rect class="cls-1" x="134.9" y="340.8" width="8.5" height="63.54"/>
+      <rect class="cls-1" x="145.1" y="336.7" width="8.5" height="67.65"/>
+      <rect class="cls-1" x="155.2" y="323.5" width="8.5" height="80.83"/>
+      <rect class="cls-1" x="165.4" y="326.8" width="8.5" height="77.52"/>
+      <rect class="cls-1" x="175.6" y="323.3" width="8.5" height="81.03"/>
+      <rect class="cls-1" x="185.7" y="307.3" width="8.5" height="97.03"/>
+      <rect class="cls-1" x="195.9" y="292.5" width="8.5" height="111.83"/>
+      <rect class="cls-1" x="206" y="299" width="8.5" height="105.4"/>
+      <rect class="cls-1" x="216.2" y="297.9" width="8.5" height="106.44"/>
+      <rect class="cls-1" x="226.3" y="311.4" width="8.5" height="93.01"/>
+      <rect class="cls-1" x="236.5" y="288.5" width="8.5" height="115.84"/>
+      <rect class="cls-1" x="246.6" y="297.3" width="8.5" height="107.01"/>
+      <rect class="cls-1" x="256.8" y="301.3" width="8.5" height="103.09"/>
+      <rect class="cls-1" x="266.9" y="306.1" width="8.5" height="98.29"/>
+      <rect class="cls-1" x="277.1" y="301.3" width="8.5" height="103.04"/>
+      <rect class="cls-1" x="287.2" y="298.5" width="8.5" height="105.82"/>
+      <rect class="cls-1" x="297.4" y="298.6" width="8.5" height="105.81"/>
+      <rect class="cls-1" x="307.5" y="307" width="8.5" height="97.4"/>
+      <rect class="cls-1" x="317.7" y="298.8" width="8.5" height="105.59"/>
+      <rect class="cls-1" x="327.8" y="287.9" width="8.5" height="116.43"/>
+      <rect class="cls-1" x="338" y="278.6" width="8.5" height="125.8"/>
+      <rect class="cls-1" x="348.1" y="265.6" width="8.5" height="138.8"/>
+      <rect class="cls-1" x="358.3" y="249.8" width="8.5" height="154.52"/>
+      <rect class="cls-1" x="368.4" y="256.8" width="8.5" height="147.53"/>
+      <rect class="cls-1" x="378.6" y="270" width="8.5" height="134.33"/>
+      <rect class="cls-1" x="388.7" y="260.7" width="8.5" height="143.65"/>
+      <rect class="cls-1" x="398.9" y="269" width="8.5" height="135.37"/>
+      <rect class="cls-1" x="409" y="257.3" width="8.5" height="147.03"/>
+      <rect class="cls-1" x="419.2" y="225.3" width="8.5" height="179.02"/>
+      <rect class="cls-1" x="429.3" y="239.2" width="8.5" height="165.13"/>
+      <rect class="cls-1" x="439.5" y="212.8" width="8.5" height="191.57"/>
+      <rect class="cls-1" x="449.6" y="219.4" width="8.5" height="184.94"/>
+      <rect class="cls-1" x="459.8" y="237.5" width="8.5" height="166.89"/>
+      <rect class="cls-1" x="470" y="245.2" width="8.5" height="159.12"/>
+      <rect class="cls-1" x="480.1" y="255.6" width="8.5" height="148.77"/>
+      <rect class="cls-1" x="490.3" y="282.1" width="8.5" height="122.24"/>
+      <rect class="cls-1" x="500.4" y="276.3" width="8.5" height="128.06"/>
+      <rect class="cls-1" x="510.6" y="261.3" width="8.5" height="143.09"/>
+      <rect class="cls-1" x="520.7" y="227.5" width="8.5" height="176.89"/>
+      <rect class="cls-1" x="530.9" y="228.6" width="8.5" height="175.74"/>
+      <rect class="cls-1" x="541" y="253.2" width="8.5" height="151.17"/>
+      <rect class="cls-1" x="551.2" y="273.3" width="8.5" height="131.06"/>
+      <rect class="cls-1" x="561.3" y="253.5" width="8.5" height="150.84"/>
+      <rect class="cls-1" x="571.5" y="253.2" width="8.5" height="151.17"/>
+      <rect class="cls-1" x="581.6" y="238.2" width="8.5" height="166.2"/>
+      <rect class="cls-1" x="591.8" y="242.5" width="8.5" height="161.86"/>
+      <rect class="cls-1" x="601.9" y="240.3" width="8.5" height="164.11"/>
+      <rect class="cls-1" x="612.1" y="209.7" width="8.5" height="194.63"/>
+      <rect class="cls-1" x="622.2" y="147.2" width="8.5" height="257.16"/>
+      <rect class="cls-1" x="632.4" y="62.4" width="8.5" height="341.92"/>
     </g>
     <g id="Bars_other">
-      <rect
-        class="cls-2"
-        x="58.8"
-        y="313.5"
-        width="13.6"
-        height="0.08"
-      />
-      <rect
-        class="cls-2"
-        x="73.9"
-        y="313.5"
-        width="13.6"
-        height="0.08"
-      />
-      <rect
-        class="cls-2"
-        x="89"
-        y="317"
-        width="13.6"
-        height="0.11"
-      />
-      <rect
-        class="cls-2"
-        x="104.1"
-        y="314.6"
-        width="13.6"
-        height="0.17"
-      />
-      <rect
-        class="cls-2"
-        x="119.1"
-        y="311.3"
-        width="13.6"
-        height="1.49"
-      />
-      <rect
-        class="cls-2"
-        x="134.2"
-        y="312.7"
-        width="13.6"
-        height="0.17"
-      />
-      <rect
-        class="cls-2"
-        x="149.3"
-        y="321.9"
-        width="13.6"
-        height="0.19"
-      />
-      <rect
-        class="cls-2"
-        x="164.4"
-        y="309.7"
-        width="13.6"
-        height="2.08"
-      />
-      <rect
-        class="cls-2"
-        x="179.5"
-        y="297.2"
-        width="13.6"
-        height="2.15"
-      />
-      <rect
-        class="cls-2"
-        x="194.6"
-        y="290.6"
-        width="13.6"
-        height="1.36"
-      />
-      <rect
-        class="cls-2"
-        x="209.7"
-        y="286.6"
-        width="13.6"
-        height="0.26"
-      />
-      <rect
-        class="cls-2"
-        x="224.8"
-        y="284.4"
-        width="13.6"
-        height="0.13"
-      />
-      <rect
-        class="cls-2"
-        x="239.9"
-        y="281.6"
-        width="13.6"
-        height="0.57"
-      />
-      <rect
-        class="cls-2"
-        x="255"
-        y="297.8"
-        width="13.6"
-        height="0.38"
-      />
-      <rect
-        class="cls-2"
-        x="270.1"
-        y="283.8"
-        width="13.6"
-        height="0.49"
-      />
-      <rect
-        class="cls-2"
-        x="285.2"
-        y="288.4"
-        width="13.6"
-        height="0.26"
-      />
-      <rect
-        class="cls-2"
-        x="300.2"
-        y="275.1"
-        width="13.6"
-        height="3.95"
-      />
-      <rect
-        class="cls-2"
-        x="315.3"
-        y="263.2"
-        width="13.6"
-        height="4.7"
-      />
-      <rect
-        class="cls-2"
-        x="330.4"
-        y="253.3"
-        width="13.6"
-        height="7.87"
-      />
-      <rect
-        class="cls-2"
-        x="345.5"
-        y="219.9"
-        width="13.6"
-        height="12.4"
-      />
-      <rect
-        class="cls-2"
-        x="360.6"
-        y="216.6"
-        width="13.6"
-        height="13.71"
-      />
-      <rect
-        class="cls-2"
-        x="375.7"
-        y="246.4"
-        width="13.6"
-        height="12.95"
-      />
-      <rect
-        class="cls-2"
-        x="390.8"
-        y="251.5"
-        width="13.6"
-        height="11.97"
-      />
-      <rect
-        class="cls-2"
-        x="405.9"
-        y="263.4"
-        width="13.6"
-        height="12.25"
-      />
-      <rect
-        class="cls-2"
-        x="421"
-        y="287.7"
-        width="13.6"
-        height="13.23"
-      />
-      <rect
-        class="cls-2"
-        x="436.1"
-        y="280.6"
-        width="13.6"
-        height="15.1"
-      />
-      <rect
-        class="cls-2"
-        x="451.2"
-        y="265.2"
-        width="13.6"
-        height="15.71"
-      />
-      <rect
-        class="cls-2"
-        x="466.3"
-        y="242.5"
-        width="13.6"
-        height="14.44"
-      />
-      <rect
-        class="cls-2"
-        x="481.3"
-        y="243"
-        width="13.6"
-        height="18.07"
-      />
-      <rect
-        class="cls-2"
-        x="496.4"
-        y="265.4"
-        width="13.6"
-        height="18.16"
-      />
-      <rect
-        class="cls-2"
-        x="511.5"
-        y="269.3"
-        width="13.6"
-        height="17.24"
-      />
-      <rect
-        class="cls-2"
-        x="526.6"
-        y="249"
-        width="13.6"
-        height="14.2"
-      />
-      <rect
-        class="cls-2"
-        x="541.7"
-        y="250.9"
-        width="13.6"
-        height="11.08"
-      />
-      <rect
-        class="cls-2"
-        x="556.8"
-        y="240.4"
-        width="13.6"
-        height="8.29"
-      />
-      <rect
-        class="cls-2"
-        x="571.9"
-        y="246.7"
-        width="13.6"
-        height="10.38"
-      />
-      <rect
-        class="cls-2"
-        x="587"
-        y="236.4"
-        width="13.6"
-        height="13.71"
-      />
-      <rect
-        class="cls-2"
-        x="602.1"
-        y="204.6"
-        width="13.6"
-        height="13.84"
-      />
-      <rect
-        class="cls-2"
-        x="617.2"
-        y="132.3"
-        width="13.6"
-        height="7.25"
-      />
-      <rect
-        class="cls-2"
-        x="632.3"
-        y="54.7"
-        width="13.6"
-        height="3.51"
-      />
-    </g>
-    <g id="y_axis_label">
-      <text
-        class="axis-title"
-        transform="translate(45.8 87.1)"
-      >Number of unique temperature measurements</text>
+      <rect class="cls-2" x="124.8" y="348.6" width="8.5" height="0.56"/>
+      <rect class="cls-2" x="134.9" y="340.7" width="8.5" height="0.15"/>
+      <rect class="cls-2" x="145.1" y="336.6" width="8.5" height="0.1"/>
+      <rect class="cls-2" x="155.2" y="323.3" width="8.5" height="0.18"/>
+      <rect class="cls-2" x="165.4" y="326.8" width="8.5" height="0.02"/>
+      <rect class="cls-2" x="175.6" y="323.2" width="8.5" height="0.13"/>
+      <rect class="cls-2" x="185.7" y="307.2" width="8.5" height="0.08"/>
+      <rect class="cls-2" x="195.9" y="292.4" width="8.5" height="0.15"/>
+      <rect class="cls-2" x="216.2" y="297.8" width="8.5" height="0.15"/>
+      <rect class="cls-2" x="226.3" y="311.2" width="8.5" height="0.15"/>
+      <rect class="cls-2" x="246.6" y="297" width="8.5" height="0.33"/>
+      <rect class="cls-2" x="256.8" y="300.9" width="8.5" height="0.4"/>
+      <rect class="cls-2" x="266.9" y="305.6" width="8.5" height="0.48"/>
+      <rect class="cls-2" x="277.1" y="300.8" width="8.5" height="0.49"/>
+      <rect class="cls-2" x="287.2" y="294.4" width="8.5" height="4.11"/>
+      <rect class="cls-2" x="297.4" y="297.9" width="8.5" height="0.64"/>
+      <rect class="cls-2" x="307.5" y="306.3" width="8.5" height="0.68"/>
+      <rect class="cls-2" x="317.7" y="296.6" width="8.5" height="2.13"/>
+      <rect class="cls-2" x="327.8" y="285.8" width="8.5" height="2.13"/>
+      <rect class="cls-2" x="338" y="274.8" width="8.5" height="3.76"/>
+      <rect class="cls-2" x="348.1" y="264.3" width="8.5" height="1.22"/>
+      <rect class="cls-2" x="358.3" y="249.4" width="8.5" height="0.45"/>
+      <rect class="cls-2" x="368.4" y="255.5" width="8.5" height="1.35"/>
+      <rect class="cls-2" x="378.6" y="268.6" width="8.5" height="1.44"/>
+      <rect class="cls-2" x="388.7" y="259.2" width="8.5" height="1.47"/>
+      <rect class="cls-2" x="398.9" y="268" width="8.5" height="1.02"/>
+      <rect class="cls-2" x="409" y="251.3" width="8.5" height="6.02"/>
+      <rect class="cls-2" x="419.2" y="214.4" width="8.5" height="10.95"/>
+      <rect class="cls-2" x="429.3" y="224.4" width="8.5" height="14.83"/>
+      <rect class="cls-2" x="439.5" y="191.7" width="8.5" height="21.07"/>
+      <rect class="cls-2" x="449.6" y="194.8" width="8.5" height="24.63"/>
+      <rect class="cls-2" x="459.8" y="215.1" width="8.5" height="22.37"/>
+      <rect class="cls-2" x="470" y="223.7" width="8.5" height="21.54"/>
+      <rect class="cls-2" x="480.1" y="231.5" width="8.5" height="24.08"/>
+      <rect class="cls-2" x="490.3" y="257.8" width="8.5" height="24.37"/>
+      <rect class="cls-2" x="500.4" y="249.9" width="8.5" height="26.38"/>
+      <rect class="cls-2" x="510.6" y="234.6" width="8.5" height="26.64"/>
+      <rect class="cls-2" x="520.7" y="199.6" width="8.5" height="27.83"/>
+      <rect class="cls-2" x="530.9" y="192.4" width="8.5" height="36.24"/>
+      <rect class="cls-2" x="541" y="222.5" width="8.5" height="30.65"/>
+      <rect class="cls-2" x="551.2" y="243" width="8.5" height="30.29"/>
+      <rect class="cls-2" x="561.3" y="226.6" width="8.5" height="26.92"/>
+      <rect class="cls-2" x="571.5" y="233.9" width="8.5" height="19.28"/>
+      <rect class="cls-2" x="581.6" y="224" width="8.5" height="14.15"/>
+      <rect class="cls-2" x="591.8" y="224.6" width="8.5" height="17.93"/>
+      <rect class="cls-2" x="612.1" y="178.6" width="8.5" height="31.16"/>
+      <rect class="cls-2" x="622.2" y="129.2" width="8.5" height="17.96"/>
+      <rect class="cls-2" x="632.4" y="55.7" width="8.5" height="6.75"/>
     </g>
     <g id="y_axis_tick_labels">
-      <text
-        class="cls-12"
-        transform="translate(651.3 42.2)"
-      >20k</text>
-      <text
-        class="cls-12"
-        transform="translate(651.3 136.6)"
-      >15k</text>
-      <text
-        class="cls-12"
-        transform="translate(651.3 325.2)"
-      >5k</text>
-      <text
-        class="cls-12"
-        transform="translate(651.3 231)"
-      >10k</text>
-      <text
-        class="cls-12"
-        transform="translate(651.3 419.8)"
-      >0</text>
+      <text class="cls-3" transform="translate(648.6 81.3)">20k</text>
+      <text class="cls-3" transform="translate(648.6 163.5)">15k</text>
+      <text class="cls-3" transform="translate(648.6 246.3)">10k</text>
+      <text class="cls-3" transform="translate(648.6 328.3)">5k</text>
+      <text class="cls-3" transform="translate(648.6 411.3)">0k</text>
     </g>
     <g id="gridlines">
-      <line
-        class="cls-13"
-        x1="646.8"
-        y1="36.8"
-        x2="42.2"
-        y2="36.8"
-      />
-      <line
-        class="cls-13"
-        x1="646.8"
-        y1="131.2"
-        x2="42.2"
-        y2="131.2"
-      />
-      <line
-        class="cls-13"
-        x1="646.8"
-        y1="319.8"
-        x2="42.2"
-        y2="319.8"
-      />
-      <line
-        class="cls-13"
-        x1="646.8"
-        y1="225.6"
-        x2="42.2"
-        y2="225.6"
-      />
+      <line class="cls-4" x1="643.5" y1="75.3" x2="618" y2="75.3"/>
+      <line class="cls-4" x1="643.5" y1="157.5" x2="608.6" y2="157.5"/>
+      <line class="cls-4" x1="643.5" y1="240.2" x2="396" y2="240.2"/>
+      <line class="cls-4" x1="643.5" y1="322.2" x2="121.1" y2="322.2"/>
     </g>
     <g id="x_axis_tick_labels">
-      <text
-        class="cls-14"
-        transform="translate(621.2 448.3) rotate(-45)"
-      >2019</text>
-      <text
-        class="cls-14"
-        transform="translate(485.4 448.3) rotate(-45)"
-      >2010</text>
-      <text
-        class="cls-14"
-        transform="translate(334.4 448.3) rotate(-45)"
-      >2000</text>
-      <text
-        class="cls-14"
-        transform="translate(183.5 448.3) rotate(-45)"
-      >1990</text>
-      <text
-        class="cls-14"
-        transform="translate(32.6 448.3) rotate(-45)"
-      >1980</text>
+      <text class="cls-5" transform="translate(17.3 448.6) rotate(-45)">1960</text>
+      <text class="cls-5" transform="translate(118.8 448.6) rotate(-45)">1970</text>
+      <text class="cls-5" transform="translate(220.3 448.6) rotate(-45)">1980</text>
+      <text class="cls-5" transform="translate(321.8 448.6) rotate(-45)">1990</text>
+      <text class="cls-5" transform="translate(423.3 448.6) rotate(-45)">2000</text>
+      <text class="cls-5" transform="translate(524.9 448.6) rotate(-45)">2010</text>
+      <text class="cls-5" transform="translate(616.2 448.6) rotate(-45)">2019</text>
     </g>
     <g id="legend_squares">
-      <rect
-        class="cls-1"
-        x="74.9"
-        y="189"
-        width="12.1"
-        height="12.07"
-      />
-      <rect
-        class="cls-2"
-        x="74.9"
-        y="163.3"
-        width="12.1"
-        height="12.07"
-      />
+      <rect class="cls-2" x="60" y="104.2" width="11.6" height="11.65"/>
+      <rect class="cls-1" x="60" y="129" width="11.6" height="11.65"/>
     </g>
     <g id="legend_text">
-      <text
-        class="cls-15"
-        transform="translate(99 200.9)"
-      >U<tspan
-        class="cls-16"
-        x="10.8"
-        y="0"
-      >SGS</tspan></text>
-      <text
-        class="cls-12"
-        transform="translate(99 175.3)"
-      ><tspan class="cls-17">S</tspan><tspan
-        class="cls-18"
-        x="8.6"
-        y="0"
-      >t</tspan><tspan
-        class="cls-19"
-        x="14"
-        y="0"
-      >at</tspan><tspan
-        x="27.8"
-        y="0"
-      >e or </tspan><tspan
-        class="cls-20"
-        x="58"
-        y="0"
-      >o</tspan><tspan
-        x="66.8"
-        y="0"
-      >ther a</tspan><tspan
-        class="cls-21"
-        x="107.9"
-        y="0"
-      >g</tspan><tspan
-        x="116.2"
-        y="0"
-      >en</tspan><tspan
-        class="cls-22"
-        x="133.9"
-        y="0"
-      >c</tspan><tspan
-        x="141.7"
-        y="0"
-      >y</tspan></text>
+      <text class="cls-6" transform="translate(83.3 115.7)">State or other agency</text>
+      <text class="cls-6" transform="translate(83.3 140.5)">USGS</text>
     </g>
   </svg>
 </template>
@@ -715,8 +158,44 @@ export default {
 <style scoped>
 #bar-chart {
         width: 100%;
+        padding: 10px;
     }
 
+
+    .cls-1 {
+        fill: #edb932;
+      }
+
+      .cls-2 {
+        fill: #eb4444;
+      }
+
+      .cls-3, .cls-5, .cls-6 {
+        isolation: isolate;
+        fill: #999;
+        font-family: ArialMT, Arial;
+      }
+
+      .cls-3 {
+        font-size: 18.95px;
+      }
+
+      .cls-4 {
+        fill: none;
+        stroke: #000;
+        stroke-dasharray: 2 2;
+      }
+
+      .cls-5 {
+        font-size: 18.95px;
+      }
+
+      .cls-6 {
+        font-size: 16.31px;
+      }
+
+
+/* 
     .cls-1 {
         fill: #edb932;
       }
@@ -818,6 +297,6 @@ export default {
       font-family: SourceSansPro-Bold, Source Sans Pro;
       font-weight: 700;
       fill: white;
-  }
+  } */
 
 </style>
