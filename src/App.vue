@@ -102,6 +102,8 @@ h3{
     }
 }
 
+
+
   // General Layout  
 
   .text-content {
@@ -146,5 +148,20 @@ h3{
     }
   }
 
+// Specific Design Elements for Charts and Maps
 
+.viz-title {
+  font-size: 1.2em;
+  padding: 0 30px 10px;
+  margin: 0 20px 20px 15px;
+  border: 1px solid #545454;
+  padding: 10px;
+  box-shadow: 3px 3px #545454;
+}
+
+.legend-text {
+      fill: darkgray;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+      font-size: 1em;
+      }
 </style>
