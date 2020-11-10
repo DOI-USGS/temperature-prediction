@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -21,7 +22,7 @@ export default new Router({
             path: '/monitoring',
             name: 'Monitoring',
             component: () =>
-                    import('@/views/2-Monitoring/Monitoring.vue')
+                    import('@/views/2-Monitoring/MonitoringRouter.vue')
         },
         {
             path: '/modeling',

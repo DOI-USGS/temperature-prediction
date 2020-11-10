@@ -9,7 +9,8 @@ import { store } from './store/store'
 import App from './App.vue';
 import uswds from 'uswds';
 import browserDetect from 'vue-browser-detect-plugin';
-import "./plugins/bootstrap-vue"
+import "./plugins/bootstrap-vue";
+import VueMobileDetection from 'vue-mobile-detection'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -38,6 +39,7 @@ library.add(faInstagram);
 Vue.config.productionTip = false;
 Vue.use(uswds);
 Vue.use(browserDetect);
+Vue.use(VueMobileDetection);
 
 const app = new Vue({
   router,
