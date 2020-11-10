@@ -78,6 +78,8 @@
             width: null,
             height: null,
             radius: null,
+            force_sim: null,
+            x: null,
             
           }
         },
@@ -139,7 +141,9 @@
             let csv_test = data[0];
             let rmse_monthly = data[1];
 
-            this.setChart(rmse_monthly);
+            var data_set = 'ANN';
+
+            this.setChart(rmse_monthly, data_set);
 
             var mappedArray = rmse_monthly.columns;
             var currentCol = mappedArray[4];
@@ -147,8 +151,10 @@
 
           },
           // draw beeswarm/scatterplot
-          setChart(data) {
+          setChart(data, model) {
             const self = this;
+            console.log(model);
+
         // append svg
           var bees = this.d3.select("#bees-container").append("svg")
             .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
@@ -165,62 +171,88 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
             
-
           //transform svg
           //let g = bees.append("g")
            // .attr("class", "bees transDotPlot")
            // .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
 
           //scales
-          var x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.ANN; }));
-          //var y = this.d3.scaleLinear().range([this.height, 0]).domain([0, this.d3.max(data, function(d) { return 1; })]);
+          this.x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.ANN; }));
 
-          var data_set = 'ANN';
 
           //draw bees
+          //use force to push each dot to x position
           bees.selectAll("dot")
             .data(data)
           .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", "orchid")
             .attr("opacity", .8)
-            .attr('cx', function(d){return x(d[data_set]);})
+            .attr('cx', function(d){return self.x(d[model]);})
             .attr('cy', function(d){return this.height/2;})
             .on('click', function(d){
               self.highlight(d)
             });
 
-          var simulation = this.d3.forceSimulation(data)
+          //apply force to push dots towards central position on yaxis
+          this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
-                return x(d[data_set])
-              }).strength(0.99)
+                return self.x(d[model])
+              }).strength(0.39)
             )
             .force('y', this.d3.forceY(this.height/2).strength(0.05))	
             .force('collide', this.d3.forceCollide(this.radius))
             .alphaDecay(0)
-            .alpha(0.12)
+            .alpha(0.22)
             .on('tick', self.tick)
 
+            //add decay after set time to smoothly end transition
+            var init_decay; 
+            init_decay = setTimeout(function(){
+              console.log('init alpha decay')
+              this.force_sim.alphaDecay(0.1);
+            }, 3000);
 
+            // add x axis
+            bees.append("g")
+              .attr("transform", "translate(0," + this.height + ")")
+              .attr("stroke-width", "2px")
+              .call(this.d3.axisBottom(x));
 
-          // add x axis
-          bees.append("g")
-            .attr("transform", "translate(0," + this.height + ")")
-            .attr("stroke-width", "2px")
-            .call(this.d3.axisBottom(x));
-
-          // add y axis
-          //bees.append("g")
-          //  .attr("stroke-width", "0px")
-          //  .call(this.d3.axisLeft(y).ticks(0));
-           
           },
-          // idea is to highlight point on click to track them through movement, don't know how to self select
+          // highlight point on click to track them through movement, don't know how to self select
           highlight(data) {
-            this.d3.selectAll(".dot" + data.i)
-              .attr('stroke','yellow')
+            const self = this;
+            self.d3.selectAll(".dot")
+              .style('stroke','cadetblue')
               .style('stroke-width',2)
           },
+          //update x position on scroll
+          updateChart(data) {
+            const self = this;
+            // list models in order of transitions, use step index to select
+            var model_list = ['ANN', 'RNN', 'RGCN', 'RGCN_ptrn'];
+            var model_sel = model_list[data];
+            //console.log(model_sel);
+
+            //this.setChart(this.rmse_monthly, model_sel);
+
+            this.force_sim.force('x', this.d3.forceX(function(d){
+              return self.x(d[model_sel])
+            }))
+    
+            this.d3.selectAll("dot")
+              .transition()
+              .duration(3000)
+                .attr()
+
+          },
+          tick() {
+          const self = this;
+          this.d3.selectAll(".dot")
+            .attr('cx', function(d){return d.x})
+            .attr('cy', function(d){return d.y})
+        },
         // scrollama event handler functions
 
         // add class on enter
@@ -235,28 +267,13 @@
           self.d3.select("#bees-container p")
           .text(response.index + 1);
 
-          var pretty = ["orangered", "pink", "cyan", "yellow", "green"];
-          var rgb = pretty[response.index];
+          this.updateChart(response.index);
 
-          // change dot color on scroll step
-          self.d3.selectAll(".dot")
-          .transition()
-          .duration(800)
-          .attr('fill', rgb);
-
-          let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD, this.flyE];
-          beesFly[response.index]();
-
-          console.log(beesFly[response.index]);
-
-
+          //let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD];
+          //beesFly[response.index]();
           
         },
-        tick() {
-          this.d3.selectAll(".dot")
-            .attr('cx', function(d){return d.x})
-            .attr('cy', function(d){return d.y})
-        },
+        
         // add remove class on exit
         handleStepExit(response) {
           const self = this;
@@ -288,12 +305,6 @@
               .attr("cx", function(d) { return d.RGCN; })
         },
         flyD() {
-          this.d3.selectAll(".dot")
-            .transition()
-              .duration(3000)
-              .attr("cx", function(d) { return d.RGCN_ptrn; })
-        },
-        flyE() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
