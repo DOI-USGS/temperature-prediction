@@ -18,7 +18,8 @@
       <p v-html="text.paragraph4" />
       <p>ICONS HERE</p>
       <!-- <Chapter2Icons1 /> -->
-      <p v-html="text.title2" />
+      <h2 v-html="text.title2" />
+      <p v-html="text.subtitle2" />
       <p v-html="text.paragraph5" />
       <p v-html="text.paragraph6" />
     </div>
@@ -27,14 +28,15 @@
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
     </div>
-    <!-- <MatrixExplainerSpace /> -->
-    <!-- <MatrixExplainerTime /> -->
-    <!-- <MatrixExplainerCells /> -->
+    <MatrixExplainerSpace />
+    <MatrixExplainerTime />
+    <MatrixExplainerColor />
     <div class="text-content">
       <p v-html="text.paragraph9" />
     </div>
-    <!-- <MatrixAvailability /> -->
+    <MatrixAvailability />
     <div class="text-content">
+      <h2 v-html="text.title3" />
       <p v-html="text.paragraph10" />
       <!-- <Chapter2Icons2 /> -->
     </div>
@@ -43,7 +45,7 @@
       <p v-html="text.paragraph11" />
       <p v-html="text.paragraph12" />
     </div>
-    <!-- <MonitoringMatrixTemperature /> -->
+    <MatrixTemperature />
     <div class="text-content">
       <p v-html="text.paragraph13" />
     </div>
@@ -55,7 +57,12 @@
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
   import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
   import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";
+  import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
+  import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
+  import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
+  import MatrixAvailability from "./../../components/2-Monitoring-Mobile/MatrixAvailability";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
+  import MatrixTemperature from "./../../components/2-Monitoring-Mobile/MatrixTemperature";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
@@ -64,7 +71,12 @@
       MonitoringMap1,
       MonitoringBarChart,
       MonitoringMap2,
-      MonitoringLineChart
+      MatrixExplainerSpace,
+      MatrixExplainerTime,
+      MatrixExplainerColor,
+      MatrixAvailability,
+      MonitoringLineChart,
+      MatrixTemperature
     },
     data() {
         return {

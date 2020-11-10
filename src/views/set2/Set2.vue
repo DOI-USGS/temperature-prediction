@@ -180,7 +180,7 @@
           myVars_c2p3: null,
           temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
-          chart_margin: {top: 30, right: 60, bottom: 45, left: 5},
+          chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
           matrix_margin: {top: 50, right: 15, bottom: 15, left: 35},
@@ -305,12 +305,11 @@
             self.d3.csv(self.publicPath + "data/obs_annual_count.csv"),
             self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
             self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv"),
-            self.d3.csv(self.publicPath + "data/agency_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
+            self.d3.csv(self.publicPath + "data/source_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
             self.d3.json(self.publicPath + "data/topojson/segment_data.json"),
-            self.d3.json(self.publicPath + "data/topojson/observed_site_locations.json"),
+            self.d3.json(self.publicPath + "data/topojson/unique_drb_sites.json"),
             self.d3.json(self.publicPath + "data/topojson/DelawareBay.json"),
-            self.d3.json(self.publicPath + "data/topojson/reservoirs.json"),
-            self.d3.json(self.publicPath + "data/topojson/dams.json")
+            self.d3.json(self.publicPath + "data/topojson/reservoirs.json")
           ];
           Promise.all(promises).then(self.callback);
         },
@@ -329,19 +328,17 @@
           let csv_annual_count = data[2];
           let csv_matrix_daily_2019 = data[3];
           let csv_daily_count_2019 = data[4];
-          let csv_agency_count = data[5];
+          let csv_source_count = data[5];
           let json_segments = data[6];
-          let json_obs_stations = data[7];
+          let json_unique_sites = data[7];
           let json_bay = data[8];
           let json_reservoirs = data[9];
-          let json_dams = data[10];
 
           // translate topojsons
           let segments = topojson.feature(json_segments, json_segments.objects.segment_data).features; 
-          let stations = topojson.feature(json_obs_stations, json_obs_stations.objects.observed_site_locations).features; 
+          let sites = topojson.feature(json_unique_sites, json_unique_sites.objects.unique_drb_sites).features; 
           let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
           let reservoirs = topojson.feature(json_reservoirs, json_reservoirs.objects.reservoirs).features; 
-          let dams = topojson.feature(json_dams, json_dams.objects.dams).features; 
 
           // join csv flow data to geojson segments
           // ch 2 map segments
@@ -355,7 +352,7 @@
           // add DRB segments to the panel 1 map
           this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // add bar chart to panel 1
-          this.setBarChart_c2p1(csv_agency_count);
+          this.setBarChart_c2p1(csv_source_count);
 
           // Set up Ch 2 panel 2 -
           // add DRB segments to the panel 2 map
@@ -446,7 +443,6 @@
         },
         setMap_c2p1(segments, stations, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
           const self = this;
-
           // add delaware bay to map
           var drb_bay = map.append("path")
               .datum(bay)
@@ -496,10 +492,10 @@
               // set fill to none
               .style("fill", "None")
 
-            // add drb stations to map
-            var drb_stations = map.selectAll(".obs_stations")
+            // add drb sites to map
+            var drb_sites = map.selectAll(".obs_sites")
                 // bind points to each element to be created
-                .data(stations)
+                .data(sites)
                 // create an element for each datum
                 .enter()
                 // append each element to the svg as a circle element
@@ -507,12 +503,10 @@
                 // project points and SET SIZE
                 .attr("d", map_path.pointRadius(2))
                 // assign class for styling
-                .attr("class", function(d){
-                  return "c2p2 obs_stations station" + d.id
-                })
+                .attr("class", "c2p1 obs_sites")
                 // assign fill color based on agency
                 .style("fill", function(d){
-                  if (d.properties.site_agency === 'USGS'){
+                  if (d.properties.source === 'USGS'){
                     return "#edb932"
                   } else {
                     return "#eb4444"
@@ -528,11 +522,11 @@
             map.append("g").call(scaleBarTop);
             map.append("g").call(scaleBarBottom);
           },
-        setBarChart_c2p1(csv_agency_count) {
+        setBarChart_c2p1(csv_source_count) {
         // append svg to div
         var svgChart = this.d3.select("#barChart_c2p1")
             .append("svg")
-            .attr("viewBox", [0, 0, (this.chart_width +  this.chart_margin.right + this.chart_margin.left),
+            .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
               (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
 
             .attr("class", "c2p1 barChart")
@@ -558,7 +552,7 @@
         var stack = this.d3.stack();
 
         // load processed data
-        let data = csv_agency_count
+        let data = csv_source_count
 
         // set x domain - create an array of the two site agency categories
         x.domain(data.map(function(d) { return d.year; }));
@@ -595,13 +589,13 @@
         g.append("g")
             .attr("class", "c2p1 chartAxis bottom")
             .attr("transform", "translate(0," + this.chart_height + ")")
-            .call(this.d3.axisBottom(x).tickValues(['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ]).tickSize(0))
+            .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
             .select(".domain").remove()
 
         // place and rotate x axis labels
         g.selectAll('text')
-            .attr("y", 5)
-            .attr("x", -28)
+            .attr("y", 6)
+            .attr("x", -27)
             .attr("dy", ".35em")
             .attr("transform", "rotate(-45)")
             .attr("text-anchor", "start")
@@ -611,7 +605,7 @@
         g.append("g")
             .attr("class", "c2p1 chartAxis right")
             // offset axis slightly to align closer to last bar
-            .attr("transform", "translate(" + this.chart_width * 0.96 + "," + 0 + ")")
+            .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
             // give ticks k number format and set their size to cover the width of the chart
             .call(this.d3.axisRight(y).ticks(10, "s").tickSize(- this.chart_width))
             .select(".domain").remove()
@@ -619,7 +613,7 @@
         // place and rotate the y axis label
         svgChart.selectAll(".chartAxis.right")
             .append("text")
-            .attr("y", 35)
+            .attr("y", 40)
             // offset to (roughly) center on y axis
             .attr("x", -this.chart_height / 2)
             .attr("text-anchor", "middle")
@@ -630,7 +624,7 @@
             
 
         // set the tick mark lines to background color
-        svgChart.selectAll(".tick line").attr("stroke", "#000000").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 1"))
+        svgChart.selectAll(".tick line").attr("stroke", "#000000").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 2"))
 
         //  make the legend
         var legend = g.selectAll(".legend")
