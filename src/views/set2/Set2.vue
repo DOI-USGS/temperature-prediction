@@ -176,6 +176,8 @@
           timestep_c2p2: 'year',
           myGroups_c2p2: null,
           myVars_c2p2: null,
+          myGroups_c2p3: null,
+          myVars_c2p3: null,
           temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
@@ -199,6 +201,7 @@
           map_margin: null,
           map_path: null,
           map_projection: null,
+          widthScale_c2: null,
           //import text
           text: monitoringText.textContents
         }
@@ -343,23 +346,23 @@
 
           // set stroke width scale
           // for ch 2 map segments
-          let widthScale_c2 = this.makeWidthScale_c2(csv_flow);
+          this.widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
           // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
-          this.setMap_c2p1(segments, sites, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
+          this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_source_count);
 
           // Set up Ch 2 panel 2 -
           // add DRB segments to the panel 2 map
-          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
+          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // create panel 2 matrix
           this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments);
 
           // Set up Ch 2 panel 3 -
           // add DRB segments to the panel 3 map
-          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2, widthScale_c2);
+          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // create panel 3 matrix
           this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments);
         },
@@ -438,7 +441,8 @@
           // // BOTH METHODS
           return widthScale;
         },
-        setMap_c2p1(segments, sites, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2) {
+        setMap_c2p1(segments, stations, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
+          const self = this;
           // add delaware bay to map
           var drb_bay = map.append("path")
               .datum(bay)
@@ -480,7 +484,7 @@
               .style("stroke-width", function(d){
                 var value = d.properties['avg_ann_flow'];
                 if (value){
-                  return widthScale_c2(value);
+                  return self.widthScale_c2(value);
                 } else {
                   return "#ccc";
                 }
@@ -535,7 +539,6 @@
             .rangeRound([0, this.chart_width])
             // set padding between bars
             .padding(0.1)
-
 
         // make y scale
         var y = this.d3.scaleLinear()
@@ -652,8 +655,9 @@
             .text(function(d) { return d; });
 
       },
-        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
+        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
           const self = this;
+
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_map_c2p2 = document.querySelector('.map_c2p2');
@@ -678,7 +682,7 @@
 
           // // Build Map
           // add drb segments to map BACKGROUND - for selection only
-          var drb_segments_transparent = map.selectAll(".river_segments")
+          var drb_segments_transparent = map.selectAll(".segs_transparent")
               // bind segments to each element to be created
               .data(segments)
               // create an element for each datum
@@ -686,7 +690,16 @@
               // append each element to the svg as a path element
               .append("path")
               // assign class for styling
-              .attr("class", "c2p2 segs_transparent")
+              .attr("class", function(d) {
+                let transparent_seg_class = 'c2p2 segs_transparent'
+                let key = null;
+                for (key in d.properties.year_count) {
+                  if (d.properties.year_count[key] > 0) {
+                    transparent_seg_class += " " + self.timestep_c2p2 + key
+                  }
+                }
+                return transparent_seg_class
+              })
               // project each element
               .attr("d", map_path)
               // set stroke width to be large for selection
@@ -763,11 +776,7 @@
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 var value = d.properties['avg_ann_flow'];
-                if (value){
-                  return widthScale_c2(value);
-                } else {
-                  return "#ccc";
-                }
+                return self.widthScale_c2(value);
               })
               // set fill to none
               .style("fill", "None")
@@ -1043,20 +1052,16 @@
           // create transformed matrix variable
           var transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
 
-          // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
-          var myVars = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
-
-          // build x scale
+          // build x scale using data read in for matrix in createMatrix_c2p2()
           var xscale = self.d3.scaleBand()
               .range([0,self.matrix_width_c2p2])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p2)
               .padding(0.1);
 
-          // build y scale
+          // build y scale using data read in for matrix in createMatrix_c2p2()
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p2, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p2)
               .padding(0.1);
 
           // //  build spatial rectangles
@@ -1127,8 +1132,9 @@
                 self.mouseoutRect_c2p2(d, tooltip);
               })
         },
-        setMap_c2p3(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom, widthScale_c2){
+        setMap_c2p3(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
           const self = this;
+
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           var svg_map_c2p3 = document.querySelector('.map_c2p3');
@@ -1153,7 +1159,7 @@
               .attr("class", "c2p3 tooltip map")
 
           // add drb segments to map BACKGROUND
-          var drb_segments = map.selectAll(".river_segments")
+          var drb_segments = map.selectAll(".segs_transparent")
               // bind segments to each element to be created
               .data(segments)
               // create an element for each datum
@@ -1161,7 +1167,16 @@
               // append each element to the svg as a path element
               .append("path")
               // assign class for styling
-              .attr("class", "c2p3 segs_transparent")
+              .attr("class", function(d) {
+                let transparent_seg_class = 'c2p3 segs_transparent'
+                let key = null;
+                for (key in d.properties.day_count) {
+                  if (d.properties.day_count[key] > 0) {
+                    transparent_seg_class += " " + self.timestep_c2p3 + key
+                  }
+                }
+                return transparent_seg_class
+              })
               .attr("d", map_path)
               .style("stroke-width", 6)
               .style("stroke", "#000000")
@@ -1206,7 +1221,7 @@
 
           // add drb segments to map
           let key = null;
-          var drb_segments = map.selectAll("river_segments")
+          var drb_segments = map.selectAll(".river_segments")
               // bind segments to each element to be created
               .data(segments)
               // create an element for each datum
@@ -1231,7 +1246,7 @@
               .style("stroke-width", function(d){
                 var value = d.properties['avg_ann_flow'];
                 if (value){
-                  return widthScale_c2(value);
+                  return self.widthScale_c2(value);
                 } else {
                   return "#ccc";
                 }
@@ -1283,7 +1298,7 @@
           // build color scale
           var myColor = self.d3.scaleSequential()
               .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
-              .domain([obsTempMax,obsTempMin]) // if INVERTING color scale
+              .domain([obsTempMax, obsTempMin]) // if INVERTING color scale
           // .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
 
           // build list of posible counts (0 to 366)
@@ -1361,20 +1376,20 @@
                   "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")");
 
           // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
+          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
+          self.myVars_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
           // build x scale
           var x = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
-              .domain(myGroups)
-              .padding(0);
+              .domain(self.myGroups_c2p3)
+              .padding(0.0);
 
           // build y scale
           var y = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
-              .domain(myVars)
-              .padding(0);
+              .domain(self.myVars_c2p3)
+              .padding(0.0);
 
           // // add the cells to the matrix
           // select transformed matrix
@@ -1474,20 +1489,16 @@
           // create transformed matrix variable
           var transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
 
-          // read in data for matrix
-          var myGroups = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          var myVars = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
-
-          // build x scale
+          // build x scale using data for matrix read in createMatrix_c2p3()
           var xscale = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
-              .domain(myGroups)
+              .domain(self.myGroups_c2p3)
               .padding(0);
 
-          // build y scale
+          // build y scale using data for matrix read in createMatrix_c2p3()
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
-              .domain(myVars)
+              .domain(self.myVars_c2p3)
               .padding(0);
 
           // // build spatial rectangles
@@ -1542,7 +1553,7 @@
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#000000")
-              .style("stroke-width", 0.6)
+              .style("stroke-width", 2)
               .style("stroke", "#000000")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
@@ -1627,29 +1638,27 @@
                   .attr("fill", "#ffffff")
                   .raise()   
           }
-          // select the spatial rectangle corresponding to the hightlighted segment
+          // select the spatial rectangle corresponding to the highlighted segment
           if (data.properties.total_count > 0) {
-              // select the spatial rectangle corresponding to the hightlighted segment
+              // select the spatial rectangle corresponding to the highlighted segment
               this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
-                  //.style("fill", "#e0e0e0")
+                  .attr("height", 0.5)
                   .style("stroke-width", 0)
                   .style("opacity", 1)
                   .style("stroke", "None")
-                  .attr("height", 0.5)
                   .raise()
           } else {
-              // select the spatial rectangle corresponding to the hightlighted segment
+              // select the spatial rectangle corresponding to the highlighted segment
               this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
+                  .attr("height", 3)
                   .style("fill", "#000000")
                   .style("stroke-width", 0.5)
-                  //.style("stroke-dasharray", ("2,4"))
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
-                  .attr("height", 3)
                   // raise the spatial rectangle
                   .raise();
           }
@@ -1663,19 +1672,13 @@
               .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
-          this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
+          this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat)
+              .attr("filter", "url(#shadow1)") 
               .style("stroke", "#ffffff")
-              .attr("opacity", 1)
-              .attr("filter", "url(#shadow1)")
+              .style("opacity", 1)
               .raise()
         },
         mouseoutSeg_c2p2(data, tooltip) {
-
-          // select all *temporal* rectangles and set fill and stroke back
-          // to black so that they are selectable
-          this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("fill", "#000000")
-              .style("stroke", "#000000")
 
           // re-build y scale for matrix cells y placement
           let yScale_matrix_c2p2 = this.d3.scaleBand()
@@ -1687,37 +1690,38 @@
           tooltip
               .style("opacity", 0)
           // select all spatial rectangles and set opacity back to zero
-          // with black fill and stroke
+          // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              //.style("stroke", "None")
               .style("stroke", "#000000")
               .style("fill", "#000000")
               .style("stroke-width", 1)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
-          // select spatial rectangle corresponding to segment and lower
-          this.d3.selectAll(".c2p2.matrixSpatialRect" + data.properties.seg_id_nat) 
-              .lower()
-          // lower spatial cells associated with segment
+              .raise()
+          // select all *temporal* rectangles and set fill and stroke back
+          // to black and raise so that they are selectable
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .raise()
+          // resize spatial cells associated with segment
           this.d3.selectAll(".c2p2.cell.segment" + data.properties.seg_id_nat) 
               .attr("height", yScale_matrix_c2p2.bandwidth())
-              .attr("y", yScale_matrix_c2p2(data.properties.seg_id_nat)) 
-              .lower()
+              .attr("y", yScale_matrix_c2p2(data.properties.seg_id_nat))
           // turn off text for cells associated with segment
           this.d3.selectAll(".c2p2.cellText.seg" + data.properties.seg_id_nat) 
               .attr("y", function(d) {
                   return yScale_matrix_c2p2(data.properties.seg_id_nat) - 5; 
               })
               .attr("fill", "None")
-              .lower()
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments")
               .style("stroke", "#6399ba")
           this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
-              .style("stroke", "#6399ba")
-              .attr("opacity", 1)
               .attr("filter","None")
+              .style("stroke", "#6399ba")
+              .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
               .style("fill", "#6399ba")
@@ -1729,7 +1733,6 @@
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
-              .lower()
         },
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           // identify selected year
@@ -1759,8 +1762,7 @@
           // select all temporal rectangles and make mostly opaque
           // with thick stroke for selection
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("opacity", 0.8)
-              .style("stroke-width", 2);
+              .style("opacity", 0.8);
           // select mouseovered rectangle and set opacity to zero
           this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[self.timestep_c2p2])
               .style("opacity", 0)
@@ -1774,34 +1776,39 @@
               .style("stroke", "#164152")
           // select all river segments that have data in highlighted year
           // and make white
-          this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
+          this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .style("stroke", "#ffffff")
-              .attr("opacity", 1)
+              .style("stroke-width", 1.25)
+              .style("opacity", 1)
               .raise()
         },
         mouseoutRect_c2p2(data, tooltip) {
           const self = this;
-          // select all *spatial* rectangles and reset fill and stroke to black
+          // select all *spatial* rectangles and reset fill and stroke to black and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
+              .raise()
 
           // hide tooltip
           tooltip
               .style("opacity", 0)
           // select all temporal rectangles and set fill and stroke back to black
-          // with no opacity (so available for selection but not visible)
+          // with no opacity and raise (so available for selection but not visible)
           this.d3.selectAll(".c2p2.matrixTemporalRect")
               .style("stroke", "#000000")
               .style("fill", "#000000")
-              .style("stroke-width", 2)
               .style("opacity", 0)
+              .raise()
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p2.river_segments")
               .style("stroke", "#6399ba")
-              .attr("opacity", 1)
-          this.d3.selectAll(".c2p2.river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
+              .style("opacity", 1)
+          this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
+              .style("stroke", "#000000")
+              .style("stroke-width", 6)
+              .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
               .style("fill", "#6399ba")
@@ -1813,7 +1820,6 @@
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
-              .lower()
         },
         mousemoveSeg_c2p3(data, tooltip, mouse_x, mouse_y) {
           // find # of obs in 2019 for selected segment
@@ -1835,6 +1841,15 @@
               .style("fill", "None")
               .style("stroke", "None")
 
+          // re-build y scale for matrix
+          let yScale_matrix_c2p3 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p3, 0])
+              .domain(this.myVars_c2p3)
+              .padding(0.0);
+
+          // set height for hovered matrix cells
+          let cellHeight_c2p3 = 12
+
           // make tooltip visible
           tooltip
               .style("opacity", 1);
@@ -1846,35 +1861,33 @@
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select matrix cells for highlighted segment and raise
-          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
+          this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat)
+              .attr("height", cellHeight_c2p3)
+              .attr("y", function(d){
+                  return yScale_matrix_c2p3(data.properties.seg_id_nat) - cellHeight_c2p3/2; 
+              })
               .raise()
-          // select the spatial rectangle corresponding to the hightlighted segment
-          this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.properties.seg_id_nat) 
-              // set stroke width, opacity, and stroke color
-              // based on whether segment has any observations in record
-              .style("stroke-width", function(data) {
-                if (data.properties.year_count['2019'] > 0) {
-                  return 0;
-                } else {
-                  return 0.5;
-                }
-              })
-              .style("opacity", function(data) {
-                if (data.properties.year_count['2019'] > 0) {
-                  return 0;
-                } else {
-                  return 1;
-                }
-              })
-              .style("stroke", function(data) {
-                if (data.properties.year_count['2019'] > 0) {
-                  return "None";
-                } else {
-                  return "#ffffff";
-                }
-              })
-              // raise the spatial rectangle
-              .raise()
+          // select the spatial rectangle corresponding to the highlighted segment
+          // set stroke width, opacity, and stroke color
+          // based on whether segment has any observations in record
+          if (data.properties.year_count['2019'] > 0) {
+              // select the spatial rectangle corresponding to the highlighted segment
+              this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.properties.seg_id_nat)
+                .style("stroke-width", 0)
+                .style("opacity", 0)
+                .style("stroke", "None")
+                // raise the spatial rectangle
+                .raise()
+          } else {
+              // select the spatial rectangle corresponding to the highlighted segment
+              this.d3.selectAll(".c2p3.matrixSpatialRect.seg" + data.properties.seg_id_nat)
+                .style("stroke-width", 0.5)
+                .style("opacity", 1)
+                .style("stroke", "#e0e0e0")
+                .attr("height", 3)
+                // raise the spatial rectangle
+                .raise()
+          }
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#164152")
@@ -1885,46 +1898,51 @@
               .style("stroke", "#164152")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
-          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat) 
-              .style("stroke", "#ffffff")
-              .attr("opacity", 1)
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter", "url(#shadow1)")
+              .style("stroke", "#ffffff")
+              .style("opacity", 1)
               .raise()
         },
         mouseoutSeg_c2p3(data, tooltip) {
 
-          // select all *temporal* rectangles and set fill and stroke back
-          // to black so that they are selectable
-          this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#000000")
-              .style("stroke", "#000000")
-              .style("stroke-width", 2)
+          // re-build y scale for matrix
+          let yScale_matrix_c2p3 = this.d3.scaleBand()
+              .range([this.matrix_height_c2p3, 0])
+              .domain(this.myVars_c2p3)
+              .padding(0.0);
 
           // hide tooltip
           tooltip
               .style("opacity", 0)
           // select all spatial rectangles and set opacity back to zero
-          // with black fill and stroke
+          // with black fill and stroke and raise
           this.d3.selectAll(".c2p3.matrixSpatialRect")
+              .attr("height", yScale_matrix_c2p3.bandwidth())
               .style("stroke", "None")
               .style("stroke", "#000000")
               .style("fill", "#000000")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1)
               .style("opacity", 0)
-          // select spatial rectangle corresponding to segmend and lower
-          this.d3.selectAll(".c2p3.matrixSpatialRect" + data.properties.seg_id_nat) 
-              .lower()
-          // lower matrix cells associated with segment
+              .raise()
+          // select all *temporal* rectangles and set fill and stroke back
+          // to black and raise so that they are selectable
+          this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .raise()
+          // resize matrix cells associated with segment
           this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
-              .lower()
+              .attr("height", yScale_matrix_c2p3.bandwidth())
+              .attr("y", yScale_matrix_c2p3(data.properties.seg_id_nat))
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#6399ba")
-          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat) 
-              .style("stroke", "#6399ba")
-              .attr("opacity", 1)
+          this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
+              .style("stroke", "#6399ba")
+              .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#6399ba")
@@ -1936,7 +1954,6 @@
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
-              .lower()
         },
         mousemoveRect_c2p3(data, tooltip, mouse_x, mouse_y) {
           // identify selected date
@@ -1960,11 +1977,21 @@
         },
         mouseoverRect_c2p3(data, tooltip) {
           const self = this;
+
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("fill", "None")
               .style("stroke", "None")
+
+          // rebuild x scale for matrix cells
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
+              .domain(self.myGroups_c2p3)
+              .padding(0.0);
+
+          // set width for hovered matrix cells
+          let cellWidth_c2p3 = 8
 
           // show tooltip
           tooltip
@@ -1974,11 +2001,17 @@
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("opacity", 0.85)
-              .style("stroke-width", 0.6)
-          // select mouseovered rectangle and set opacity to zero
-          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
-              .style("opacity", 0)
+              .style("opacity", 0.6)
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 2)
+          // select matrix cells for highlighted timestep and raise
+          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
+              .attr("x", function (d){
+                return x(data[self.timestep_c2p3]) - cellWidth_c2p3/2 
+              })
+              .attr("width", cellWidth_c2p3)
+              .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#164152")
@@ -1987,37 +2020,57 @@
               .style("fill", "#164152")
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#164152")
-          // select all river segments that have data on highlighted date
+          // select all river segments that have data in highlighted year
           // and make white
-          this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
+          this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
               .style("stroke", "#ffffff")
-              .attr("opacity", 1)
+              .style("stroke-width", 1.25)
+              .style("opacity", 1)
               .raise()
         },
         mouseoutRect_c2p3(data, tooltip) {
           const self = this;
-
+          
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
-              .style("stroke-width", 2)
+              .raise()
 
           // hide tooltip
           tooltip
               .style("opacity", 0)
+
+          // rebuild x scale for matrix cells
+          var x = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2p3])
+              .domain(self.myGroups_c2p3)
+              .padding(0.0);
+          
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixTemporalRect")
+              .style("fill", "#000000")
+              .style("stroke", "#000000")
+              .style("stroke-width", 2)
               .style("opacity", 0)
+              .raise()
+          // select matrix cells for highlighted timestep
+          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
+              .attr("x", function(d){
+                  return x(data[self.timestep_c2p3])
+              })
+              // set width and height based on bandwidth of axes
+              .attr("width", x.bandwidth())
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
               .style("stroke", "#6399ba")
-              .attr("opacity", 1)
-          this.d3.selectAll(".c2p3.river_segments." + self.timestep_c2p3 + data[self.timestep_c2p3])
-              .style("stroke", "#6399ba")
-              .attr("opacity", 1)
+              .style("opacity", 1)
+           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
+              .style("stroke", "#000000")
+              .style("stroke-width", 6)
+              .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
               .style("fill", "#6399ba")
@@ -2029,7 +2082,6 @@
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
-              .lower()
         }
       }
   }
@@ -2116,7 +2168,6 @@
 .river_segments {
   stroke: #6399ba;
   stroke-linecap: round;
-  stroke-width: 0.5px;
 }
 
 .reservoirs {
