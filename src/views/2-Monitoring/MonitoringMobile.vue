@@ -45,7 +45,7 @@
       <p v-html="text.paragraph11" />
       <p v-html="text.paragraph12" />
     </div>
-    <!-- <MatrixTemperature /> -->
+    <MatrixTemperature />
     <div class="text-content">
       <p v-html="text.paragraph13" />
     </div>
@@ -75,7 +75,8 @@
       MatrixExplainerTime,
       MatrixExplainerColor,
       MatrixAvailability,
-      MonitoringLineChart
+      MonitoringLineChart,
+      MatrixTemperature
     },
     data() {
         return {
