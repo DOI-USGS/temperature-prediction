@@ -164,6 +164,7 @@
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
+  import monitoringText from "./../../assets/text/monitoringText";
 
   export default {
       name: 'Set2',
@@ -201,6 +202,8 @@
           map_path: null,
           map_projection: null,
           widthScale_c2: null,
+          //import text
+          text: monitoringText.textContents
         }
       },
       mounted() {
@@ -1301,7 +1304,7 @@
           // build color scale
           var myColor = self.d3.scaleSequential()
               .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
-              .domain([obsTempMax,obsTempMin]) // if INVERTING color scale
+              .domain([obsTempMax, obsTempMin]) // if INVERTING color scale
           // .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
 
           // build list of posible counts (0 to 366)
@@ -1496,13 +1499,13 @@
           var xscale = self.d3.scaleBand()
               .range([0, self.matrix_width_c2p3])
               .domain(self.myGroups_c2p3)
-              .padding(0.0);
+              .padding(0);
 
           // build y scale using data for matrix read in createMatrix_c2p3()
           var yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2p3, 0])
               .domain(self.myVars_c2p3)
-              .padding(0.0);
+              .padding(0);
 
           // // build spatial rectangles
           // append to transformed matrix
@@ -2005,6 +2008,9 @@
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0.6)
+              .style("stroke", "#000000")
+              .style("fill", "#000000")
+              .style("stroke-width", 2)
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
               .attr("x", function (d){
@@ -2052,6 +2058,7 @@
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("fill", "#000000")
               .style("stroke", "#000000")
+              .style("stroke-width", 2)
               .style("opacity", 0)
               .raise()
           // select matrix cells for highlighted timestep
