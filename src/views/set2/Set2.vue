@@ -583,13 +583,13 @@
         g.append("g")
             .attr("class", "c2p1 chartAxis bottom")
             .attr("transform", "translate(0," + this.chart_height + ")")
-            .call(this.d3.axisBottom(x).tickValues(['1960', '1980', '2000', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
+            .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
             .select(".domain").remove()
 
         // place and rotate x axis labels
         g.selectAll('text')
-            .attr("y", 5)
-            .attr("x", -28)
+            .attr("y", 6)
+            .attr("x", -27)
             .attr("dy", ".35em")
             .attr("transform", "rotate(-45)")
             .attr("text-anchor", "start")
