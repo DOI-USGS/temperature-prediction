@@ -350,7 +350,7 @@
 
           // Set up Ch 2 panel 1 -
           // add DRB segments to the panel 1 map
-          this.setMap_c2p1(segments, stations, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
+          this.setMap_c2p1(segments, sites, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_source_count);
 
@@ -441,7 +441,7 @@
           // // BOTH METHODS
           return widthScale;
         },
-        setMap_c2p1(segments, stations, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
+        setMap_c2p1(segments, sites, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
           const self = this;
           // add delaware bay to map
           var drb_bay = map.append("path")
