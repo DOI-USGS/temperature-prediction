@@ -10,14 +10,14 @@ module.exports = {
                 .end()
                 .use('vue-svg-loader')
                 .loader('vue-svg-loader');
-    },
-    configureWebpack: {
-        output: {
-            /*
-                As described on StackOverflow:
-                https://stackoverflow.com/questions/64205612/how-to-correct-preload-key-requests-performance-problem-on-lighthouse-with-vue
-            */
-            crossOriginLoading: 'anonymous'
-        }
+
+        /*
+            As described on StackOverflow:
+            https://stackoverflow.com/questions/64205612/how-to-correct-preload-key-requests-performance-problem-on-lighthouse-with-vue
+            But is in a webpack chain:
+            https://github.com/neutrinojs/webpack-chain#config-output-shorthand-methods
+        */
+        config.output
+            .crossOriginLoading('anonymous');
     }
 };

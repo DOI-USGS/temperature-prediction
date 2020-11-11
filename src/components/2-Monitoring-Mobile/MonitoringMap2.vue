@@ -1,8 +1,7 @@
 <template>
-    <div id="animated-map">
-        <h2>Animated gif of the map goes in here!</h2>
-    </div>
-
+  <div id="animated-map">
+    <h2>Animated gif of the map goes in here!</h2>
+  </div>
 </template>
 
 <script>
