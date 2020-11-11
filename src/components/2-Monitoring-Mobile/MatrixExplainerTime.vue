@@ -899,95 +899,36 @@
       </g>
       <g id="Time_axis_text">
         <text
-          class="cls-38"
+          class="legend-text"
           transform="translate(611.5 1063.8)"
         >2019</text>
         <text
-          class="cls-38"
+          class="legend-text"
           transform="translate(43.2 1063.8)"
         >1980</text>
       </g>
       <g id="label_2013">
         <text
-          class="cls-39"
-          transform="translate(540.9 98.5)"
+          class="legend-text"
+          transform="translate(550 98.5)"
         >2013</text>
       </g>
       <g id="Descriptor_text">
         <text
-          class="cls-38"
+          class="viz-comment"
           transform="translate(162.1 219.4)"
         >and <tspan
-          class="cls-40"
-          x="47"
+          class="viz-emph"
+          x="52"
           y="0"
         >Time</tspan><tspan
-          x="104.7"
+          x="112"
           y="0"
-        >, whe</tspan><tspan
-          class="cls-41"
-          x="162.1"
-          y="0"
-        >r</tspan><tspan
-          class="cls-42"
-          x="170.9"
-          y="0"
-        >e </tspan><tspan
-          class="cls-43"
-          x="189"
-          y="0"
-        >e</tspan><tspan
-          class="cls-42"
-          x="201.5"
-          y="0"
-        >ach </tspan><tspan
-          class="cls-44"
-          x="245.8"
-          y="0"
-        >y</tspan><tspan
-          class="cls-45"
-          x="257.9"
-          y="0"
-        >e</tspan><tspan
-          class="cls-42"
-          x="270.4"
-          y="0"
-        >ar is</tspan><tspan
-          class="cls-46"
+        >, where each year is</tspan><tspan
+          class="viz-comment"
           x="0"
           y="42"
-        >r</tspan><tspan
-          x="8.8"
-          y="42"
-        >ep</tspan><tspan
-          class="cls-46"
-          x="36.1"
-          y="42"
-        >r</tspan><tspan
-          x="44.9"
-          y="42"
-        >esen</tspan><tspan
-          class="cls-47"
-          x="95.8"
-          y="42"
-        >t</tspan><tspan
-          x="104.3"
-          y="42"
-        >ed as a </tspan><tspan
-          class="cls-48"
-          x="184.3"
-          y="42"
-        >c</tspan><tspan
-          x="195.6"
-          y="42"
-        >olumn of </tspan><tspan
-          class="cls-48"
-          x="298.3"
-          y="42"
-        >c</tspan><tspan
-          x="309.6"
-          y="42"
-        >ells</tspan></text>
+        >represented as a column of cells</tspan></text>
       </g>
       <g id="Descriptor_arrow">
         <g>

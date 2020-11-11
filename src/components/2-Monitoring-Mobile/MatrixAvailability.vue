@@ -32908,57 +32908,57 @@
       </g>
       <g id="year_labels">
         <text
-          class="cls-224"
-          transform="translate(601.3 1126.4)"
+          class="legend-text"
+          transform="translate(621.3 1126.4)"
         >2019</text>
         <text
-          class="cls-224"
-          transform="translate(467.1 1126.4)"
+          class="legend-text"
+          transform="translate(477.1 1126.4)"
         >2010</text>
         <text
-          class="cls-224"
-          transform="translate(318 1126.4)"
+          class="legend-text"
+          transform="translate(328 1126.4)"
         >2000</text>
         <text
-          class="cls-224"
-          transform="translate(169 1126.4)"
+          class="legend-text"
+          transform="translate(179 1126.4)"
         >1990</text>
         <text
-          class="cls-224"
-          transform="translate(19.9 1126.4)"
+          class="legend-text"
+          transform="translate(29.9 1126.4)"
         >1980</text>
       </g>
       <g id="year_tick_marks">
         <line
-          class="cls-225"
+          class="tick-marks"
           x1="51.3"
           y1="1093.5"
           x2="51.3"
           y2="1102.8"
         />
         <line
-          class="cls-225"
+          class="tick-marks"
           x1="631.5"
           y1="1093.5"
           x2="631.5"
           y2="1102.8"
         />
         <line
-          class="cls-225"
+          class="tick-marks"
           x1="349"
           y1="1093.5"
           x2="349"
           y2="1102.8"
         />
         <line
-          class="cls-225"
+          class="tick-marks"
           x1="498.7"
           y1="1093.5"
           x2="498.7"
           y2="1102.8"
         />
         <line
-          class="cls-225"
+          class="tick-marks"
           x1="199"
           y1="1093.8"
           x2="199"
@@ -32972,23 +32972,9 @@
         >
           <g>
             <line
-              class="cls-226"
+              class="dashed-axis"
               x1="672.9"
               y1="175.8"
-              x2="672.9"
-              y2="176.8"
-            />
-            <line
-              class="cls-227"
-              x1="672.9"
-              y1="182.6"
-              x2="672.9"
-              y2="1036.3"
-            />
-            <line
-              class="cls-226"
-              x1="672.9"
-              y1="1039.2"
               x2="672.9"
               y2="1040.2"
             />
@@ -33003,11 +32989,11 @@
           </g>
         </g>
         <text
-          class="cls-229"
+          class="legend-text"
           transform="translate(664.6 141.7)"
         >N</text>
         <text
-          class="cls-229"
+          class="legend-text"
           transform="translate(666.1 1083.6)"
         >S</text>
       </g>
@@ -33022,18 +33008,11 @@
       </g>
       <g id="legend_text">
         <text
-          class="cls-224"
-          transform="translate(112.1 75.1)"
-        ><tspan class="cls-231">y</tspan><tspan
-          class="cls-232"
-          x="12.1"
-          y="0"
-        >e</tspan><tspan
-          x="24.6"
-          y="0"
-        >arly</tspan></text>
+          class="legend-text"
+          transform="translate(120.1 75.1)"
+        >yearly</text>
         <text
-          class="cls-224"
+          class="legend-text"
           transform="translate(528.1 75.1)"
         >daily</text>
       </g>

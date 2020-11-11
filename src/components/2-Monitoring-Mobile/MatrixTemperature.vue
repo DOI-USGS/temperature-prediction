@@ -161,94 +161,79 @@
       </g>
       <g id="date_labels">
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(420.6 1119.4)"
-        >Se<tspan
-          class="cls-4"
-          x="19.2"
-          y="0"
-        >p</tspan><tspan
-          class="cls-5"
-          x="29.2"
-          y="0"
-        >t</tspan></text>
+        >Sept</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(523.9 1119.4)"
-        >N<tspan
-          class="cls-6"
-          x="12"
-          y="0"
-        >o</tspan><tspan
-          x="22.1"
-          y="0"
-        >v</tspan></text>
+        >Nov</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(610.2 1119.4)"
         >Dec</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(322.4 1119.4)"
-        >July</text>
+        >Jul</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(219.9 1119.4)"
         >May</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(118.3 1119.4)"
         >Mar</text>
         <text
-          class="cls-3"
+          class="legend-text"
           transform="translate(30 1119.4)"
         >Jan</text>
       </g>
       <g id="date_tick_marks">
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="47.3"
           y1="1091.7"
           x2="47.3"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="137.7"
           y1="1091.7"
           x2="137.7"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="339.9"
           y1="1091.7"
           x2="339.9"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="238.9"
           y1="1091.7"
           x2="238.9"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="544"
           y1="1091.7"
           x2="544"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="630.3"
           y1="1091.7"
           x2="630.3"
           y2="1101.1"
         />
         <line
-          class="cls-7"
+          class="tick-marks"
           x1="442.8"
           y1="1091.7"
           x2="442.8"
@@ -133378,12 +133363,12 @@
       </g>
       <g id="legend_text">
         <text
-          class="cls-780"
-          transform="translate(115 79.7)"
+          class="legend-text"
+          transform="translate(130 75)"
         >0 °C</text>
         <text
-          class="cls-780"
-          transform="translate(528.6 79.7)"
+          class="legend-text"
+          transform="translate(528.6 75)"
         >30 °C</text>
       </g>
       <g id="orientation-axis">
@@ -133393,23 +133378,9 @@
         >
           <g>
             <line
-              class="cls-781"
+              class="dashed-axis"
               x1="673.2"
               y1="177"
-              x2="673.2"
-              y2="177.9"
-            />
-            <line
-              class="cls-782"
-              x1="673.2"
-              y1="183.8"
-              x2="673.2"
-              y2="1037.5"
-            />
-            <line
-              class="cls-781"
-              x1="673.2"
-              y1="1040.4"
               x2="673.2"
               y2="1041.4"
             />
@@ -133424,11 +133395,11 @@
           </g>
         </g>
         <text
-          class="cls-784"
+          class="legend-text"
           transform="translate(664.9 142.9)"
         >N</text>
         <text
-          class="cls-784"
+          class="legend-text"
           transform="translate(666.3 1084.8)"
         >S</text>
       </g>

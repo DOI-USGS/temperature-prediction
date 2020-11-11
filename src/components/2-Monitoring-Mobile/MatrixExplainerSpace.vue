@@ -57,12 +57,12 @@
       </g>
       <g id="Space_axis_text">
         <text
-          class="cls-6"
-          transform="translate(571.1 121.1)"
+          class="legend-text"
+          transform="translate(580 121.1)"
         >North</text>
         <text
-          class="cls-6"
-          transform="translate(571.7 1083.2)"
+          class="legend-text"
+          transform="translate(580 1083.2)"
         >South</text>
       </g>
       <g id="matrix_cells_seg1656">
@@ -341,7 +341,7 @@
         />
       </g>
       <g id="Descriptor_arrow">
-        <g>
+        <g transform="translate(30, 0)"> 
           <path
             class="cls-38"
             d="M453,286.4a58.1,58.1,0,0,0-57.1-47.3"
@@ -354,95 +354,17 @@
       </g>
       <g id="Descriptor_text">
         <text
-          class="cls-40"
+          class="viz-emph"
           transform="translate(79.5 233)"
-        >S<tspan
-          class="cls-41"
-          x="14.5"
+        >Space, <tspan
+          class="viz-comment"
+          x="90"
           y="0"
-        >p</tspan><tspan
-          x="29.2"
-          y="0"
-        >a</tspan><tspan
-          class="cls-42"
-          x="43"
-          y="0"
-        >c</tspan><tspan
-          x="54.4"
-          y="0"
-        >e</tspan><tspan
-          class="cls-43"
-          x="67.9"
-          y="0"
-        >, whe</tspan><tspan
-          class="cls-44"
-          x="125.3"
-          y="0"
-        >r</tspan><tspan
-          class="cls-45"
-          x="134.1"
-          y="0"
-        >e </tspan><tspan
-          class="cls-46"
-          x="152.2"
-          y="0"
-        >e</tspan><tspan
-          class="cls-45"
-          x="164.8"
-          y="0"
-        >ach </tspan><tspan
-          class="cls-47"
-          x="209.1"
-          y="0"
-        >r</tspan><tspan
-          class="cls-48"
-          x="217.9"
-          y="0"
-        >e</tspan><tspan
-          class="cls-43"
-          x="230.4"
-          y="0"
-        >ach is</tspan><tspan class="cls-43"><tspan
-          class="cls-49"
+        >where each reach is</tspan><tspan
+          class="viz-comment"
           x="0"
           y="42"
-        >r</tspan><tspan
-          x="8.8"
-          y="42"
-        >ep</tspan><tspan
-          class="cls-49"
-          x="36.1"
-          y="42"
-        >r</tspan><tspan
-          x="44.9"
-          y="42"
-        >esen</tspan><tspan
-          class="cls-50"
-          x="95.8"
-          y="42"
-        >t</tspan><tspan
-          x="104.3"
-          y="42"
-        >ed as a </tspan><tspan
-          class="cls-51"
-          x="184.3"
-          y="42"
-        >r</tspan><tspan
-          class="cls-52"
-          x="193.1"
-          y="42"
-        >o</tspan><tspan
-          class="cls-53"
-          x="207.1"
-          y="42"
-        >w of </tspan><tspan
-          class="cls-54"
-          x="257.8"
-          y="42"
-        >c</tspan><tspan
-          x="269.1"
-          y="42"
-        >ells</tspan></tspan></text>
+        >represented as a row of cells.</tspan></text>
       </g>
     </svg>
   </div>
