@@ -2566,15 +2566,15 @@
           x="0"
           y="42"
         >when we are</tspan>
-        <tspan
-          class="text-halo"
-          x="141.8"
-          y="42"
-        >in the dark</tspan>
-       <tspan
-          x="263.3"
-          y="42"
-        >about stream temperature</tspan></text>
+          <tspan
+            class="text-halo"
+            x="141.8"
+            y="42"
+          >in the dark</tspan>
+          <tspan
+            x="263.3"
+            y="42"
+          >about stream temperature</tspan></text>
         <text
           class="viz-comment"
           transform="translate(250 850.2)"
