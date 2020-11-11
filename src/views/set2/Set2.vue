@@ -3,6 +3,20 @@
     <div class="container-fluid">
       <div class="row">
         <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+        <div
+          class="col-xl-10 col-md-10 col-xs-12"
+        >
+          <h2 v-html="text.title1" />
+          <p v-html="text.paragraph1" />
+        </div>
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+      </div>
+      <div class="row">
+        <div
           id="DRB_map_c2p1"
           class="col-xl-6 col-md-6 col-xs-12"
         />
@@ -10,23 +24,8 @@
           id="barChart_c2p1"
           class="col-xl-6 col-md-6 col-xs-12"
         >
-          <br>
-          <p class="narrative_text">
-            At first glance, it appears we have a lot of temperature information in the basin. 
-            The USGS has been monitoring temperature in the DRB since 1901, and since then has 
-            amassed over 450,000 site-days of temperature measurements.
-          </p>
-          <p class="narrative_text">
-            Since 2017, an uptick in temperature monitoring can be attributed to the USGS’s Next Generation Water 
-            Observing Systems (NGWOS); NGWOS is a targeted effort in the basin to develop and 
-            apply new monitoring techniques for a wide range of water characteristics. Temperature 
-            is one of the most widely measured water characteristics in the U.S. – temperature 
-            can now be monitored by boat, by camera, by drone, by cable, by satellite, by sensor, 
-            or by the tried and true method of a human sticking a thermometer in the water.
-          </p>
-          <p class="narrative_text">
-            But don’t let first impressions fool you. Most temperature records are concentrated at a few sites across the basin.
-          </p>
+          <p v-html="text.paragraph2" />
+          <p v-html="text.paragraph3" />
         </div>
       </div>
       <div class="row">
@@ -36,16 +35,13 @@
         <div
           class="col-xl-10 col-md-10 col-xs-12"
         >
-          <p class="narrative_text">
-            Most data in the basin come from a small number of sites. The top 1% of river reaches 
-            (5 sites) makes up nearly 20% of all data. And there are whole chunks of time and 
-            space where we’re in the dark.
-          </p>
-          <p class="narrative_text">
-            Explore the availability of temperature observations across the Delaware River Basin 
-            by selecting a year (on the right) or a river segment (on the left) to explore 
-            when and where we have the most information.
-          </p>
+          <p v-html="text.paragraph5" />
+          <p>ICONS HERE</p>
+          <!-- <Chapter2Icons1 /> -->
+          <h2 v-html="text.title2" />
+          <p v-html="text.subtitle2" />
+          <p v-html="text.paragraph6" />
+          <p v-html="text.tiptext1" />
         </div>
         <div
           class="col-xl-1 col-md-1 col-xs-0"
@@ -68,16 +64,38 @@
         <div
           class="col-xl-10 col-md-10 col-xs-12"
         >
-          <p class="narrative_text">
-            Further complicating our understanding of temperature dynamics in the DRB is the 
-            fact that all streams are not created equal. Features of the landscape can have 
-            large effects on water temperature that create differences in temperature dynamics -- 
-            things like groundwater inputs, reservoirs, and urban areas have distinct 
-            temperature signatures.
-          </p>
-          <p class="narrative_text">
-            Explore a year of temperature data across all monitored sites in the Delaware River Basin.
-          </p>
+          <h2 v-html="text.title3" />
+          <p v-html="text.paragraph10" />
+          <p>ICONS HERE</p>
+          <!-- <Chapter2Icons2 /> -->
+          <p v-html="text.paragraph11" />
+        </div>
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+        <div
+          class="col-xl-10 col-md-10 col-xs-12"
+        >
+          <MonitoringLineChart />
+        </div>
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-1 col-md-1 col-xs-0"
+        />
+        <div
+          class="col-xl-10 col-md-10 col-xs-12"
+        >
+          <p v-html="text.paragraph12" />
+          <p v-html="text.paragraph13" />
         </div>
         <div
           class="col-xl-1 col-md-1 col-xs-0"
@@ -96,12 +114,7 @@
       <div class="row">
         <div class="col-xl-1 col-md-1 col-xs-0" />
         <div class="col-xl-10 col-md-10 col-xs-12">
-          <p class="narrative_text">
-            Data sparsity and the variability in stream temperature across the network limits our ability 
-            to answer questions like: How far downstream will this cold water release affect temperature? 
-            How has fish habitat changed through time? Will we have enough cold water in the reservoir in 
-            50 years? 
-          </p>
+          <p v-html="text.paragraph14" />
         </div>
         <div class="col-xl-1 col-md-1 col-xs-0" />
       </div>
@@ -165,9 +178,13 @@
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
   import monitoringText from "./../../assets/text/monitoringText";
+  import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
 
   export default {
       name: 'Set2',
+      components: {
+        MonitoringLineChart
+      },
       data() {
         return {
           publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
@@ -653,6 +670,14 @@
             .attr("text-anchor", "start")
             // set text as column name
             .text(function(d) { return d; });
+
+        var narrative = this.d3.select("#barChart_c2p1").append("foreignObject")
+            .attr("text-align", "left")
+            //.attr("width", this.chart_width)
+            //.attr("height", 500)
+            .attr("x", 0)
+            .attr("y", 0)
+            .html(monitoringText.textContents.paragraph4)
 
       },
         setMap_c2p2(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
@@ -2095,8 +2120,8 @@
   font-weight: 300;
   font-size: 1em;
   background-color: black;
-  color: #525252;
-  text-align: center;
+  color: #757474;
+  text-align: left;
 
   .row {
     margin-top: 3vh;
@@ -2106,59 +2131,14 @@
   #filter_row {
     height: 1vh;
   }
-
-  .narrative_text {
-    text-align: left;
-    color: #cecece;
-    margin-right: 7vh;
-    font-size: 1.3vw;
-  }
-
-  .narrative {
-    background-color: black;
-    font-size: 0.2em;
-    margin-right: 0.2vh;
-  }
 }
 </style>
 <style lang="scss">
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
-.narrative {
-  background-color: black;
-  color: #cecece;
-}
 
 .c2p2.cellText {
   font-size: 0.45em;
   //text-anchor: middle;
-}
-
-#c2p2_matrix_min {
-  font-weight: 700;
-  color: #302D85;
-}
-#c2p2_matrix_max {
-  font-weight: 700;
-  color: #EBE72C;
-}
-
-#c2p2_matrix_bold {
-  font-weight: 700;
-  font-style: italic;
-}
-
-#c2p3_min_t {
-  color: #354198;
-}
-
-#c2p3_max_t {
-  color: #AD1F28;
-}
-
-#tip_text {
-  font-size: 0.75em;
-  color: #858585;
-  margin-right: 0.5vh;
 }
 
 .delaware_bay {
