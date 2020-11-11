@@ -16,38 +16,38 @@
     <MonitoringBarChart />
     <div class="text-content">
       <p v-html="text.paragraph4" />
+      <p v-html="text.paragraph5" />
       <p>ICONS HERE</p>
       <!-- <Chapter2Icons1 /> -->
       <h2 v-html="text.title2" />
       <p v-html="text.subtitle2" />
-      <p v-html="text.paragraph5" />
       <p v-html="text.paragraph6" />
+      <p v-html="text.paragraph7" />
     </div>
     <MonitoringMap2 />
     <div class="text-content">
-      <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
+      <p v-html="text.paragraph9" />
     </div>
     <MatrixExplainerSpace />
     <MatrixExplainerTime />
     <MatrixExplainerColor />
-    <div class="text-content">
-      <p v-html="text.paragraph9" />
-    </div>
     <MatrixAvailability />
     <div class="text-content">
       <h2 v-html="text.title3" />
       <p v-html="text.paragraph10" />
+      <p>ICONS HERE</p>
       <!-- <Chapter2Icons2 /> -->
+      <p v-html="text.paragraph11" />
     </div>
     <MonitoringLineChart />
     <div class="text-content">
-      <p v-html="text.paragraph11" />
       <p v-html="text.paragraph12" />
+      <p v-html="text.paragraph13" />
     </div>
     <MatrixTemperature />
     <div class="text-content">
-      <p v-html="text.paragraph13" />
+      <p v-html="text.paragraph14" />
     </div>
   </div>
 </template>
