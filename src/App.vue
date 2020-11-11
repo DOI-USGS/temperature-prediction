@@ -158,7 +158,11 @@ h3{
   border: 1px solid #545454;
   padding: 10px;
   box-shadow: 3px 3px #545454;
-  z-index: 100
+  z-index: 100;
+  @media screen and (max-width: 600px) {
+    margin: 5px 20px;
+  }
+  
 }
 
 .legend-text {

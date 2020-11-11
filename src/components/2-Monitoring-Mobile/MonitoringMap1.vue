@@ -3,7 +3,7 @@
   <h3 class="viz-title">Monitoring Sites in the Delaware River Basin</h3>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 90 610 1020"
+    viewBox="0 50 610 1020"
   >
     <g id="delaware_bay">
       <path
