@@ -3,6 +3,7 @@
     id="intro-map"
     class="flex-container"
   >
+    <h3 class="viz-title">The Delaware River Basin</h3>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
