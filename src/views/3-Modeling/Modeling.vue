@@ -171,13 +171,8 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
             
-          //transform svg
-          //let g = bees.append("g")
-           // .attr("class", "bees transDotPlot")
-           // .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
           //scales
-          this.x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.ANN; }));
+          this.x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.range; }));
 
 
           //draw bees
@@ -231,7 +226,9 @@
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN', 'RNN', 'RGCN', 'RGCN_ptrn'];
+            var model_list = ['ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
+            var color_list = ['orchid','goldenrod','orangered','cadetblue','orchid'];
+            var color_sel = color_list[data];
             var model_sel = model_list[data];
             //console.log(model_sel);
 
@@ -241,10 +238,10 @@
               return self.x(d[model_sel])
             }))
     
-            this.d3.selectAll("dot")
+            this.d3.selectAll(".dot")
               .transition()
-              .duration(3000)
-                .attr()
+                .duration(1000)
+                .style('fill', color_sel)
 
           },
           tick() {
