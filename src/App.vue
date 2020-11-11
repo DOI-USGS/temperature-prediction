@@ -153,10 +153,12 @@ h3{
 .viz-title {
   font-size: 1.1em;
   padding: 0 30px 10px;
-  margin: 0 20px 20px 15px;
+  margin: auto;
+  max-width: 600px;
   border: 1px solid #545454;
   padding: 10px;
   box-shadow: 3px 3px #545454;
+  z-index: 100
 }
 
 .legend-text {

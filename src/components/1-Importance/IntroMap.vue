@@ -1,9 +1,10 @@
 <template>
+<div>
+  <h3 class="text-content viz-title">The Delaware River Basin</h3>
   <div
     id="intro-map"
     class="flex-container"
   >
-    <h3 class="viz-title">The Delaware River Basin</h3>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -3689,6 +3690,7 @@
       </g>
     </svg>
   </div>
+</div>
 </template>
 
 <script>
@@ -3698,7 +3700,9 @@ export default {
 </script>
 
 <style scoped>
-
+#intro-map {
+  margin-top: 20px;
+}
 
   /* Water and Buffer Lines */
 
