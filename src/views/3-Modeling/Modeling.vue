@@ -8,7 +8,9 @@
 
       <div class="sticky">
         <div id="bees-container">
-          <p class="progress" />
+          <div id="progress-container">
+          <p class="progress"> </p>
+          </div>
         </div>
       </div>
       <article>
@@ -84,7 +86,6 @@
           
           this.width = 300 - this.margin.left - this.margin.right;
           this.height = 300 - this.margin.top - this.margin.bottom;
-
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -92,7 +93,9 @@
           setScroller() {
             const self = this;
 
-            let promises = [self.d3.csv("data/test.csv")];
+            let promises = [self.d3.csv("data/test.csv"),
+            self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
+
             Promise.all(promises).then(self.callback);
 
             // code to run on load
@@ -108,13 +111,12 @@
 
             // make scroller
             function init() {
-              // set  padding for different step heights 
+              // set  padding for step heights 
               step.forEach(function(step) {
                 var v = 100;
                 step.style.padding = v + "px 0px";
               });
-              // 1. setup the scroller with the bare-bones options
-              // 		this will also initialize trigger observations
+              // 1. setup the scroller and initialize trigger observations
               // 2. bind scrollama event handlers (this can be chained like below)
               scroller
                 .setup({
@@ -133,13 +135,15 @@
           },
           callback(data) {
             let csv_test = data[0];
+            let rmse_monthly = data[1];
 
-            this.setChart(csv_test);
+            console.table(rmse_monthly);
 
-            var mappedArray = csv_test.columns;
-            console.log(mappedArray[4]);
+            this.setChart(rmse_monthly);
+
+            var mappedArray = rmse_monthly.columns;
             var currentCol = mappedArray[4];
-            console.log(currentCol)
+            console.log(currentCol);
 
           },
           // draw beeswarm/scatterplot
@@ -148,7 +152,7 @@
         // append svg
           var bees = this.d3.select("#bees-container")
             .append("svg")
-            .attr("viewBox", [0, -30, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom+this.margin.bottom)].join(' '))
+            .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
             .attr("width", "100%")
             .attr("height", "100%")
             .attr("preserveAspectRatio", "xMidYMid")
@@ -164,19 +168,19 @@
           var y = this.d3.scaleLinear().range([this.width, 0]);
 
           // Scale the range of the data
-          
-          x.domain(this.d3.extent(data, function(d) { return d.xvar; }));
-          y.domain([0, this.d3.max(data, function(d) { return d.yvar; })]); 
+          x.domain(this.d3.extent(data, function(d) { return d.ANN; }));
+          y.domain([0, this.d3.max(data, function(d) { return 1; })]); 
 
           //draw bees
           bees.selectAll("dot")
             .data(data)
           .enter().append("circle")
             .attr("class", "dot")
-            .attr("r", 5)
+            .attr("r", 4)
             .attr("fill", "orchid")
-            .attr("cx", function(d) { return x(d.xvar); })
-            .attr("cy", function(d) { return y(d.yvar); });
+            .attr("opacity", .4)
+            .attr("cx", function(d) { return x(d.ANN); })
+            .attr("cy", function(d) { return y(.5); });
 
           // add x axis
           bees.append("g")
@@ -186,7 +190,7 @@
 
           // add y axis
           bees.append("g")
-            .attr("stroke-width", "3px")
+            .attr("stroke-width", "0px")
             .call(this.d3.axisLeft(y));
            
           },
@@ -231,37 +235,37 @@
         },
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
-          console.log(response);
+          console.log(response.progress);
         },
         flyA() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
-              .attr("cx", function(d) { return d.xvar_2; })
+              .attr("cx", function(d) { return d.ANN; })
         },
         flyB() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
-              .attr("cx", function(d) { return d.xvar_3; })
+              .attr("cx", function(d) { return d.RNN; })
         },
         flyC() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
-              .attr("cx", function(d) { return d.ID; })
+              .attr("cx", function(d) { return d.RGCN; })
         },
         flyD() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
-              .attr("cx", function(d) { return d.xvar; })
+              .attr("cx", function(d) { return d.RGCN_ptrn; })
         },
         flyE() {
           this.d3.selectAll(".dot")
             .transition()
               .duration(3000)
-              .attr("cx", function(d) { return d.xvar_2; })
+              .attr("cx", function(d) { return d.RGCN_ptrn; })
         }
       }
   }
@@ -270,23 +274,28 @@
 
 <style scoped lang="scss">
 #modeling, #modeling-template {
-  background-color:black;
   text-align: center;
-
+}
+#progress-container {
+  position: relative;
+  width:80%;
+  height: 30px;
+  margin-left:10%;
+  line-height: 2em;
 }
 .progress {
-  background-color: black;
   position: relative;
-  left: 45%;
+  background-color:transparent;
+  top:1%;
+  left:50%;
+  font-size: .51em;
   line-height: 1em;
-
+  color: red;
 }
 #scrolly {
-        position: relative;
-      }
-.progress {
-  font-size: 1em;
+   position: relative;
 }
+
 article {
   position: relative;
   margin: 0 auto;
@@ -327,7 +336,7 @@ article {
   color: orange;
 }
 
-// 
+// could add changes by step here
 .step.is-active[data-step="1"] {
 }
 .step.is-active[data-step="2"] {
@@ -354,7 +363,7 @@ article {
   position: absolute;
   width: 90%;
   height: 80%;
-  left: 10%;
+  left: 5%;
   top: 10%;
 
 }
