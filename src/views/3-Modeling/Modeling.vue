@@ -19,7 +19,7 @@
             class="step"
             data-step="1"
           >
-            <p>yes</p>
+            <p>Each dot is the model RMSE for a given month. </p>
           </div>
         </div>
         <div class="step-container">
@@ -27,7 +27,7 @@
             class="step"
             data-step="2"
           >
-            <p>Yes</p>
+            <p>Using an artificial neural network (ANN) we can predict stream temperature across river reaches. Closer to 0 = means the model predictions are more similar to observed temperatures.</p>
           </div>
         </div>
         <div class="step-container">
@@ -35,7 +35,7 @@
             class="step"
             data-step="3"
           >
-            <p>YES</p>
+            <p>The RNN uses either time or space in an effort to improve model predictions, can't remember which.</p>
           </div>
         </div>
         <div class="step-container">
@@ -43,7 +43,7 @@
             class="step"
             data-step="4"
           >
-            <p>YAASSSS!!!!</p>
+            <p>The RGCN is informed by time?space? to yield better predictions.</p>
           </div>
         </div>
         <div class="step-container">
@@ -51,6 +51,21 @@
             class="step"
             data-step="5"
           />
+          <p>RGCN + pretraining uses the most information for model predictions.</p>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="6"
+          />
+          <p>and that's how we do it!</p>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="7"
+          />
+          <p></p>
         </div>
       </article>
     </section>
@@ -172,7 +187,9 @@
             .attr("stroke", "#A3A0A6");
             
           //scales
-          this.x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.range; }));
+          this.x = this.d3.scaleLinear()
+            .range([this.margin.left, this.width + this.margin.right])
+            .domain([0,7]);
 
 
           //draw bees
@@ -190,7 +207,7 @@
             });
 
           //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data)
+/*           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.x(d[model])
               }).strength(0.39)
@@ -199,7 +216,15 @@
             .force('collide', this.d3.forceCollide(this.radius))
             .alphaDecay(0)
             .alpha(0.22)
-            .on('tick', self.tick)
+            .on('tick', self.tick); */
+
+          this.force_sim = this.d3.forceSimulation(data)
+            .force('x', this.d3.forceX(d => d.x))
+            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
+            .force('collide', this.d3.forceCollide(d => this.radius))
+            .alphaDecay(0)
+            .alpha(0.22)
+            .on('tick', self.tick);
 
             //add decay after set time to smoothly end transition
             var init_decay; 
@@ -226,8 +251,8 @@
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
-            var color_list = ['orchid','goldenrod','orangered','cadetblue','orchid'];
+            var model_list = ['range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
+            var color_list = ['teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
             //console.log(model_sel);
@@ -361,7 +386,11 @@ article {
 }
 .step.is-active[data-step="4"] {
 }
+.step.is-active[data-step="7"] {
+  margin-bottom: 600px;
+}
 .step:last-child {
+  margin-bottom: 600px;
 }
 
 
