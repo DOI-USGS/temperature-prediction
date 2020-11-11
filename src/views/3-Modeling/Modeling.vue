@@ -285,30 +285,6 @@
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
           console.log(response.progress);
-        },
-        flyA() {
-          this.d3.selectAll(".dot")
-            .transition()
-              .duration(3000)
-              .attr("cx", function(d) { return d.ANN; })
-        },
-        flyB() {
-          this.d3.selectAll(".dot")
-            .transition()
-              .duration(3000)
-              .attr("cx", function(d) { return d.RNN; })
-        },
-        flyC() {
-          this.d3.selectAll(".dot")
-            .transition()
-              .duration(3000)
-              .attr("cx", function(d) { return d.RGCN; })
-        },
-        flyD() {
-          this.d3.selectAll(".dot")
-            .transition()
-              .duration(3000)
-              .attr("cx", function(d) { return d.RGCN_ptrn; })
         }
       }
   }
