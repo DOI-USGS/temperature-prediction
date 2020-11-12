@@ -102,6 +102,8 @@ h3{
     }
 }
 
+
+
   // General Layout  
 
   .text-content {
@@ -146,5 +148,75 @@ h3{
     }
   }
 
+// Specific Design Elements for Charts and Maps
+
+.viz-title {
+  font-size: 1.1em;
+  padding: 0 30px 10px;
+  margin: auto;
+  max-width: 600px;
+  border: 1px solid #545454;
+  padding: 10px;
+  box-shadow: 3px 3px #545454;
+  z-index: 100;
+  @media screen and (max-width: 600px) {
+    margin: 5px 20px;
+  }
+  
+}
+
+.legend-text {
+    fill: darkgray;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 1em;
+  }
+.viz-comment {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  fill: #7d7d7d;
+}
+.viz-emph {
+  font-weight:700;
+  fill: white;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+}
+
+.dashed-axis {
+  stroke: #4d4c4d;
+  stroke-width: 1px;
+  fill: none;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 2 6;
+}
+
+.solid-axis {
+  stroke: #4d4c4d;
+  stroke-width: 1px;
+  fill: none;
+  stroke-miterlimit: 10;
+}
+
+.tick-marks {
+  fill: none;
+  stroke-miterlimit: 10;
+  stroke: #4d4c4d;
+  stroke-width: 0.5px;
+}
+
+  // .axis-title {
+  //     font-size: 1.2em;
+  //     font-family: SourceSansPro-Bold, Source Sans Pro;
+  //     font-weight: 700;
+  //     fill: white;
+  // }
+
+  // .axis-subtitle {
+  //       font-family: SourceSansPro-Light, Source Sans Pro;
+  //       font-weight: 300;
+  //       fill: white;
+  //       font-size: 1em;
+  // }
 
 </style>
