@@ -9,7 +9,7 @@
       <div class="sticky">
         <div id="bees-container">
           <div id="progress-container">
-            <p class="progress" />
+          <p class="progress"/>
           </div>
         </div>
       </div>
@@ -207,7 +207,6 @@
             .range([this.margin.left, this.width + this.margin.right])
             .domain([0,7]);
 
-
           //draw bees
           //use force to push each dot to x position
           bees.selectAll("dot")
@@ -226,12 +225,12 @@
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.x(d[model])
-              }).strength(2)
+              }).strength(5)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
-            .force('collide', this.d3.forceCollide(this.radius))
+            .force('y', this.d3.forceY(this.height/2).strength(0.01))	
+            .force('collide', this.d3.forceCollide(this.radius).strength(0.5))
             .alphaDecay(0)
-            .alpha(0.22)
+            .alpha(0.12)
             .on('tick', self.tick);
 
    /*        this.force_sim = this.d3.forceSimulation(data)
@@ -282,13 +281,11 @@
               .force('x', this.d3.forceX(function(d){
                 return self.x(d[model_sel])
             }).strength(2))
-              
-            
-    
-            this.d3.selectAll(".dot")
+
+            /* this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
-                .style('fill', color_sel)
+                .style('fill', color_sel) */
 
           },
           tick() {
