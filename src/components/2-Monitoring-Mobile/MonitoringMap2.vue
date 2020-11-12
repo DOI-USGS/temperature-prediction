@@ -1,6 +1,12 @@
 <template>
-  <div id="animated-map" text-align:center>
-    <img class="animated-map-gif" src="./../../assets/components/Ch2_TemporalSparsity_Equal_v1.gif" />
+  <div
+    id="animated-map"
+    text-align:center
+  >
+    <img
+      class="animated-map-gif"
+      src="./../../assets/components/Ch2_TemporalSparsity_Equal_v1.gif"
+    >
   </div>
 </template>
 
