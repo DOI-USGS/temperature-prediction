@@ -1,10 +1,12 @@
 <template>
   <div id="line-chart">
-    <h2>gonna change these highlight line colors...</h2>    
+    <h3 class="viz-title">
+      Daily Temperature of Most-Observed DRB Reaches in 2019
+    </h3>
     <svg
       id="line-chart-svg"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 500 500"
+      viewBox="0 0 500 550"
     >
       <g id="background-lines">
         <path
@@ -221,44 +223,37 @@
       <g id="axis">
         <path
           id="x-axis"
-          class="cls-3"
+          class="solid-axis"
           d="M33.2,467H475.4"
         />
         <path
           id="y-axis"
-          class="cls-3"
+          class="solid-axis"
           d="M33.2,467V22.2"
         />
         <line
-          class="cls-3"
-          x1="38.8"
-          y1="467"
-          x2="38.8"
-          y2="474.7"
-        />
-        <line
-          class="cls-3"
+          class="tick-marks"
           x1="158"
           y1="467"
           x2="158"
           y2="474.7"
         />
         <line
-          class="cls-3"
+          class="tick-marks"
           x1="278.3"
           y1="467"
           x2="278.3"
           y2="474.7"
         />
         <line
-          class="cls-3"
+          class="tick-marks"
           x1="398.7"
           y1="467"
           x2="398.7"
           y2="474.7"
         />
         <line
-          class="cls-3"
+          class="tick-marks"
           x1="475.3"
           y1="467"
           x2="475.3"
@@ -266,67 +261,53 @@
         />
         <path
           id="y-axis-ticks"
-          class="cls-3"
+          class="tick-marks"
           d="M33.2,461.5H25.5m7.7-146.4H25.5m7.7-146.5H25.5M33.2,22.2H25.5"
         />
       </g>
-      <g id="axis-titles">
+      <!-- <g id="axis-titles">
         <g>
           <text
-            class="axis-subtitle"
-            transform="translate(46.2 55)"
-          >in degrees Celsius</text>
-          <text
-            class="axis-title"
-            transform="translate(46.2 34.4)"
-          >Stream Temperature</text>
+            class="legend-text"
+            transform="translate(40 535)"
+          >Stream Temperature in most-measured sites in 2019</text>
         </g>
-        <g>
-          <text
-            class="axis-title"
-            transform="translate(247.9 427.2)"
-          >Day of Year</text>
-          <text
-            class="axis-subtitle"
-            transform="translate(234.2 450)"
-          >starting January 1, 2019</text>
-        </g>
-      </g>
+      </g> -->
       <g id="axis-labels-x">
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(33.9 489.4)"
-        >0</text>
+        >Jan</text>
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(148.2 489.4)"
-        >100</text>
+        >Apr</text>
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(268.2 489.4)"
-        >200</text>
+        >Aug</text>
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(388.2 489.6)"
-        >300</text>
+        >Oct</text>
       </g>
       <g id="axis-labels-y">
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(11.4 463.5)"
         >0</text>
-        <text
-          class="tick-label"
+        <!-- <text
+          class="legend-text"
           transform="translate(8.8 318.7)"
         >10</text>
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(8.8 171.4)"
-        >20</text>
+        >20</text> -->
         <text
-          class="tick-label"
+          class="legend-text"
           transform="translate(9 27.4)"
-        >30</text>
+        >30°C</text>
       </g>
       <g id="special-lines">
         <path
@@ -432,24 +413,6 @@ export default {
         stroke: white;
       }
 
-  .axis-title {
-      font-size: 1.2em;
-      font-family: SourceSansPro-Bold, Source Sans Pro;
-      font-weight: 700;
-      fill: white;
-  }
 
-  .axis-subtitle {
-        font-family: SourceSansPro-Light, Source Sans Pro;
-        font-weight: 300;
-        fill: white;
-        font-size: 1em;
-  }
 
-  .tick-label {
-        font-family: SourceSansPro-Light, Source Sans Pro;
-        font-weight: 300;
-        fill: white;
-        font-size: .8em;
-  }
 </style>

@@ -1956,87 +1956,29 @@
       </g>
       <g id="legend_text">
         <text
-          class="cls-36"
+          class="viz-comment"
           transform="translate(207.6 533.2)"
         >or<tspan
-          class="cls-37"
-          x="23.1"
+          class="viz-emph"
+          x="25"
           y="0"
-        /><tspan
-          class="cls-38"
-          x="28.3"
-          y="0"
-        >y</tspan><tspan
-          class="cls-39"
-          x="41.8"
-          y="0"
-        >e</tspan><tspan
-          class="cls-40"
-          x="55.1"
-          y="0"
-        >arl</tspan><tspan
-          class="cls-41"
-          x="86.9"
-          y="0"
-        >y</tspan><tspan
-          class="cls-42"
-          x="99"
-          y="0"
-        >.</tspan></text>
+        > yearly.</tspan></text>
         <text
-          class="cls-36"
+          class="viz-comment"
           transform="translate(156.6 459.9)"
-        ><tspan xml:space="preserve"> wh</tspan><tspan
-          class="cls-43"
-          x="38"
-          y="0"
-        >e</tspan><tspan
-          x="50.6"
-          y="0"
-        >ther </tspan><tspan
-          class="cls-37"
-          x="100.7"
+        >whether<tspan
+          class="viz-emph"
+          x="98"
           y="0"
         >daily</tspan></text>
         <text
-          class="cls-44"
+          class="legend-text"
           transform="translate(362.9 534.8)"
-        >1 obse<tspan
-          class="cls-45"
-          x="40.6"
-          y="0"
-        >r</tspan><tspan
-          class="cls-46"
-          x="46.2"
-          y="0"
-        >v</tspan><tspan
-          class="cls-47"
-          x="52.9"
-          y="0"
-        >a</tspan><tspan
-          x="60.3"
-          y="0"
-        >tion</tspan></text>
+        >1 observation</text>
         <text
-          class="cls-44"
+          class="legend-text"
           transform="translate(362.9 457.3)"
-        >365 obse<tspan
-          class="cls-45"
-          x="55.5"
-          y="0"
-        >r</tspan><tspan
-          class="cls-46"
-          x="61.1"
-          y="0"
-        >v</tspan><tspan
-          class="cls-47"
-          x="67.8"
-          y="0"
-        >a</tspan><tspan
-          class="cls-48"
-          x="75.2"
-          y="0"
-        >tions</tspan></text>
+        >365 observations</text>
       </g>
       <g id="matrix_cells_seg1656">
         <rect
@@ -2610,328 +2552,36 @@
       </g>
       <g id="Descriptor_text">
         <text
-          class="cls-36"
+          class="viz-comment"
           transform="translate(134.3 141.4)"
-        >Each <tspan
-          class="cls-82"
-          x="58"
-          y="0"
-        >c</tspan><tspan
-          x="69.3"
-          y="0"
-        >ell </tspan><tspan
-          class="cls-83"
-          x="100.7"
-          y="0"
-        >f</tspan><tspan
-          x="108"
-          y="0"
-        >or </tspan><tspan
-          class="cls-84"
-          x="136.3"
-          y="0"
-        >e</tspan><tspan
-          class="cls-85"
-          x="148.9"
-          y="0"
-        >ach </tspan><tspan
-          class="cls-86"
-          x="193.2"
-          y="0"
-        >r</tspan><tspan
-          class="cls-87"
-          x="202"
-          y="0"
-        >e</tspan><tspan
-          x="214.5"
-          y="0"
-        >ach is </tspan><tspan
-          class="cls-82"
-          x="281.3"
-          y="0"
-        >c</tspan><tspan
-          x="292.6"
-          y="0"
-        >olo</tspan><tspan
-          class="cls-88"
-          x="327.4"
-          y="0"
-        >r</tspan><tspan
-          class="cls-85"
-          x="335.9"
-          y="0"
-        >-</tspan><tspan
-          class="cls-82"
-          x="343.9"
-          y="0"
-        >c</tspan><tspan
-          x="355.3"
-          y="0"
-        >oded </tspan><tspan
-          class="cls-89"
-          x="416.3"
-          y="0"
-        >b</tspan><tspan
-          class="cls-90"
-          x="430.6"
-          y="0"
-        >y </tspan><tspan class="cls-37"><tspan
-          x="0"
-          y="42"
-        >h</tspan><tspan
-          class="cls-91"
-          x="14.9"
-          y="42"
-        >o</tspan><tspan
-          x="29.2"
-          y="42"
-        >w </tspan><tspan
-          class="cls-92"
-          x="54.7"
-          y="42"
-        >o</tspan><tspan
-          class="cls-93"
-          x="69.1"
-          y="42"
-        >ft</tspan><tspan
-          x="86.8"
-          y="42"
-        >en th</tspan><tspan
-          class="cls-94"
-          x="145.5"
-          y="42"
-        >a</tspan><tspan
-          x="158.8"
-          y="42"
-        >t </tspan><tspan
-          class="cls-95"
-          x="174"
-          y="42"
-        >r</tspan><tspan
-          class="cls-96"
-          x="184.3"
-          y="42"
-        >e</tspan><tspan
-          class="cls-90"
-          x="197.5"
-          y="42"
-        >ach </tspan><tspan
-          class="cls-43"
-          x="243.7"
-          y="42"
-        >w</tspan><tspan
-          class="cls-85"
-          x="263.7"
-          y="42"
-        >as o</tspan><tspan
-          class="cls-97"
-          x="308.8"
-          y="42"
-        >b</tspan><tspan
-          x="323.6"
-          y="42"
-        >se</tspan><tspan
-          class="cls-98"
-          x="348.7"
-          y="42"
-        >r</tspan><tspan
-          class="cls-99"
-          x="359.4"
-          y="42"
-        >v</tspan><tspan
-          class="cls-85"
-          x="372.9"
-          y="42"
-        >ed,</tspan></tspan></text>
+        >Each cell for each reach is color-coded by</text>
         <text
-          class="cls-100"
+          class="viz-emph"
+          transform="translate(134.3 180.4)"
+        >how often that reach was observed,</text>
+        <text
+          class="viz-comment"
           transform="translate(63 1010.7)"
-        >This all<tspan
-          class="cls-89"
-          x="77"
-          y="0"
-        >o</tspan><tspan
-          x="90.9"
-          y="0"
-        >ws us </tspan><tspan
-          class="cls-84"
-          x="155.9"
-          y="0"
-        >t</tspan><tspan
-          x="164.4"
-          y="0"
-        >o see the chunks of time and s</tspan><tspan
-          class="cls-84"
-          x="489.6"
-          y="0"
-        >p</tspan><tspan
-          x="503.6"
-          y="0"
-        >a</tspan><tspan
-          class="cls-82"
-          x="516.7"
-          y="0"
-        >c</tspan><tspan
-          class="cls-85"
-          x="528.1"
-          y="0"
-        >e</tspan><tspan
+        >This allows us to see chunks of time and space<tspan
           x="0"
           y="42"
-        >when </tspan><tspan
-          class="cls-89"
-          x="65.1"
-          y="42"
-        >w</tspan><tspan
-          x="83.7"
-          y="42"
-        >e a</tspan><tspan
-          class="cls-83"
-          x="114.9"
-          y="42"
-        >r</tspan><tspan
-          class="cls-101"
-          x="123.7"
-          y="42"
-        >e </tspan><tspan
-          class="cls-102"
-          x="141.8"
-          y="42"
-        >in the dark</tspan><tspan
-          class="cls-80"
-          x="258.1"
-          y="42"
-        /><tspan
-          x="263.3"
-          y="42"
-        >about </tspan><tspan
-          class="cls-103"
-          x="333.1"
-          y="42"
-        >s</tspan><tspan
-          x="343.5"
-          y="42"
-        >t</tspan><tspan
-          class="cls-86"
-          x="352.3"
-          y="42"
-        >r</tspan><tspan
-          class="cls-87"
-          x="361.1"
-          y="42"
-        >e</tspan><tspan
-          x="373.6"
-          y="42"
-        >am </tspan><tspan
-          class="cls-84"
-          x="413.4"
-          y="42"
-        >t</tspan><tspan
-          x="421.9"
-          y="42"
-        >empe</tspan><tspan
-          class="cls-88"
-          x="483.7"
-          y="42"
-        >r</tspan><tspan
-          class="cls-87"
-          x="492.1"
-          y="42"
-        >a</tspan><tspan
-          class="cls-90"
-          x="504.8"
-          y="42"
-        >tu</tspan><tspan
-          class="cls-86"
-          x="527.8"
-          y="42"
-        >r</tspan><tspan
-          x="536.6"
-          y="42"
-          xml:space="preserve"
-        >e.  </tspan></text>
+        >when we are</tspan>
+          <tspan
+            class="text-halo"
+            x="141.8"
+            y="42"
+          >in the dark</tspan>
+          <tspan
+            x="263.3"
+            y="42"
+          >about stream temperature</tspan></text>
         <text
-          class="cls-36"
-          transform="translate(271.6 850.2)"
-        >If a <tspan
-          class="cls-83"
-          x="37.9"
-          y="0"
-        >r</tspan><tspan
-          class="cls-104"
-          x="46.7"
-          y="0"
-        >e</tspan><tspan
-          x="59.3"
-          y="0"
-        >ach is n</tspan><tspan
-          class="cls-105"
-          x="140.3"
-          y="0"
-        >o</tspan><tspan
-          x="153.9"
-          y="0"
-        >t obse</tspan><tspan
-          class="cls-106"
-          x="220.2"
-          y="0"
-        >r</tspan><tspan
-          class="cls-89"
-          x="229.9"
-          y="0"
-        >v</tspan><tspan
-          x="242"
-          y="0"
-        >ed </tspan><tspan
-          class="cls-104"
-          x="274.5"
-          y="0"
-        >a</tspan><tspan
-          x="287.3"
-          y="0"
-        >t all</tspan><tspan
-          x="58.4"
+          class="viz-comment"
+          transform="translate(250 850.2)"
+        >If a reach is not observed at all<tspan
+          x="65"
           y="42"
-        >th</tspan><tspan
-          class="cls-104"
-          x="81.4"
-          y="42"
-        >a</tspan><tspan
-          x="94.1"
-          y="42"
-        >t </tspan><tspan
-          class="cls-89"
-          x="108.2"
-          y="42"
-        >y</tspan><tspan
-          class="cls-104"
-          x="120.2"
-          y="42"
-        >e</tspan><tspan
-          x="132.8"
-          y="42"
-        >a</tspan><tspan
-          class="cls-107"
-          x="145.9"
-          y="42"
-        >r</tspan><tspan
-          x="153.4"
-          y="42"
-        >, the </tspan><tspan
-          class="cls-82"
-          x="206.2"
-          y="42"
-        >c</tspan><tspan
-          x="217.5"
-          y="42"
-        >ell is dar</tspan><tspan
-          class="cls-108"
-          x="307.9"
-          y="42"
-        >k</tspan><tspan
-          x="321.1"
-          y="42"
-        >.</tspan></text>
+        >that year, the cell is dark.</tspan></text>
       </g>
 
     </svg>
@@ -2944,10 +2594,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #matrix-color-view {
         width: 100%;
     }
+    .text-halo {
+      @supports not (-webkit-touch-callout: none) { // targets everything except Safari mobile
+        text-shadow: 0px 0px 2px white, 0px 0px 5px white, 0px 0px 10px white;
+        fill: black;
+      }
+    }
+
     .cls-1 {
         isolation: isolate;
       }
@@ -3086,7 +2743,7 @@ export default {
         fill: #fcfcfc;
       }
 
-      .cls-100, .cls-34, .cls-36, .cls-44 {
+      .cls-100, .cls-34, .cls-44 {
         font-family: SourceSansPro-Regular, Source Sans Pro;
       }
 
@@ -3094,11 +2751,11 @@ export default {
         fill: url(#linear-gradient);
       }
 
-      .cls-100, .cls-36 {
+      .cls-100 {
         font-size: 26px;
       }
 
-      .cls-36, .cls-44, .cls-81 {
+      .cls-44, .cls-81 {
         fill: #7d7d7d;
       }
 
@@ -3315,113 +2972,11 @@ export default {
         fill: none;
         stroke: #7d7d7d;
         stroke-miterlimit: 10;
+        
       }
 
-      .cls-82 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-83 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-84 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-85 {
-        letter-spacing: 0em;
-      }
-
-      .cls-86 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-87 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-88 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-89 {
-        letter-spacing: 0em;
-      }
-
-      .cls-90 {
-        letter-spacing: 0em;
-      }
-
-      .cls-91 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-92 {
-        letter-spacing: 0em;
-      }
-
-      .cls-93 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-94 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-95 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-96 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-97 {
-        letter-spacing: 0em;
-      }
-
-      .cls-98 {
-        letter-spacing: 0em;
-      }
-
-      .cls-99 {
-        letter-spacing: -0.01em;
-      }
 
       .cls-100 {
         fill: #eaeae9;
-      }
-
-      .cls-101 {
-        letter-spacing: 0em;
-      }
-
-      .cls-102 {
-        stroke-linecap: round;
-      }
-
-      .cls-103 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-104 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-105 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-106 {
-        letter-spacing: 0.02em;
-      }
-
-      .cls-107 {
-        letter-spacing: -0.06em;
-      }
-
-      .cls-108 {
-        letter-spacing: 0.01em;
       }
 </style>
