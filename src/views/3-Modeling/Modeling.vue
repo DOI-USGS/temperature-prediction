@@ -4,7 +4,7 @@
       <h1 class="intro__hed">
         Modeling
       </h1>
-      <p> so much to say here!</p>
+      <p> so much to say here!!</p>
 
       <div class="sticky">
         <div id="bees-container">
