@@ -110,6 +110,7 @@
             width: null,
             height: null,
             radius: null,
+            paddedRadius: null,
             force_sim: null,
             x: null,
             
@@ -122,6 +123,7 @@
           this.width = 600 - this.margin.left - this.margin.right;
           this.height = 500 - this.margin.top - this.margin.bottom;
           this.radius = 5;
+          this.paddedRadius = 7;
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -186,6 +188,17 @@
           setChart(data, model) {
             const self = this;
 
+
+            // Set some forces
+            var forceStrength = .3;
+            var gravityStrength = 1;
+            var friction = 0.6;
+            var alpha = .12; // similar to "starting temperature", higher is hotter
+            var alphaDecay = 0; // similar to "cool down rate", higher is faster
+            var xForceStrength = 5;
+            var yForceStrength = .05;
+            var timeBeforeKill = 3000;
+
         // append svg
           var bees = this.d3.select("#bees-container").append("svg")
             .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
@@ -224,14 +237,13 @@
 
           //apply force to push dots towards central position on yaxis
           this.force_sim = this.d3.forceSimulation(data)
-            .force('x', this.d3.forceX(function(d){
-                return self.x(d[model])
-              }).strength(2)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
-            .force('collide', this.d3.forceCollide(this.radius))
-            .alphaDecay(0)
-            .alpha(0.22)
+            .force('x', this.d3.forceX(function(d){ return self.x(d[model]) }).strength(xForceStrength))
+            .force('y', this.d3.forceY(this.height/2).strength(yForceStrength))	
+            .force('collide', this.d3.forceCollide(this.paddedRadius))
+            // .force("charge", d3.forceManyBody().strength(gravityStrength))
+            .alphaDecay(alphaDecay)
+            .alpha(alpha) // originally 0.22
+            .velocityDecay(friction)
             .on('tick', self.tick);
 
    /*        this.force_sim = this.d3.forceSimulation(data)
@@ -249,8 +261,8 @@
             init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim
-                .alphaDecay(0.05);
-            }, 3000);
+                .alphaDecay(alphaDecay);
+            }, timeBeforeKill);
 
             // add x axis
             bees.append("g")
