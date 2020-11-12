@@ -19,7 +19,23 @@
             class="step"
             data-step="1"
           >
-            <p>yes</p>
+            <p>Each dot is a monthly RMSE.</p>
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="1"
+          >
+            <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p>
+          </div>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="1"
+          >
+            <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p>
           </div>
         </div>
         <div class="step-container">
@@ -27,7 +43,7 @@
             class="step"
             data-step="2"
           >
-            <p>Yes</p>
+            <p>Using an artificial neural network (ANN) we learn a lot, but there is always room for improvement.</p>
           </div>
         </div>
         <div class="step-container">
@@ -35,7 +51,7 @@
             class="step"
             data-step="3"
           >
-            <p>YES</p>
+            <p>RNN uses time.</p>
           </div>
         </div>
         <div class="step-container">
@@ -43,7 +59,7 @@
             class="step"
             data-step="4"
           >
-            <p>YAASSSS!!!!</p>
+            <p>RGCN adds space.</p>
           </div>
         </div>
         <div class="step-container">
@@ -51,6 +67,21 @@
             class="step"
             data-step="5"
           />
+          <p>RGCN + pretraining</p>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="6"
+          />
+          <p>and that's how we do it!</p>
+        </div>
+        <div class="step-container">
+          <div
+            class="step"
+            data-step="7"
+          />
+          <p></p>
         </div>
       </article>
     </section>
@@ -62,6 +93,7 @@
 
 <script>
     import * as d3Base from "d3";
+    import * as d3Force from "d3-force";
     import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
     import * as scrollama from 'scrollama';
 
@@ -88,7 +120,7 @@
           this.setScroller(); //begin script when window loads
           
           this.width = 600 - this.margin.left - this.margin.right;
-          this.height = 300 - this.margin.top - this.margin.bottom;
+          this.height = 500 - this.margin.top - this.margin.bottom;
           this.radius = 5;
           
         },
@@ -141,19 +173,18 @@
             let csv_test = data[0];
             let rmse_monthly = data[1];
 
-            var data_set = 'ANN';
+            var data_set = 'range';
 
             this.setChart(rmse_monthly, data_set);
 
             var mappedArray = rmse_monthly.columns;
             var currentCol = mappedArray[4];
-            console.log(currentCol);
+            //console.log(currentCol);
 
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
-            console.log(model);
 
         // append svg
           var bees = this.d3.select("#bees-container").append("svg")
@@ -171,13 +202,10 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
             
-          //transform svg
-          //let g = bees.append("g")
-           // .attr("class", "bees transDotPlot")
-           // .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
           //scales
-          this.x = this.d3.scaleLinear().range([0, this.width]).domain(this.d3.extent(data, function(d) { return d.ANN; }));
+          this.x = this.d3.scaleLinear()
+            .range([this.margin.left, this.width + this.margin.right])
+            .domain([0,7]);
 
 
           //draw bees
@@ -198,26 +226,37 @@
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.x(d[model])
-              }).strength(0.39)
+              }).strength(2)
             )
             .force('y', this.d3.forceY(this.height/2).strength(0.05))	
             .force('collide', this.d3.forceCollide(this.radius))
             .alphaDecay(0)
             .alpha(0.22)
-            .on('tick', self.tick)
+            .on('tick', self.tick);
+
+   /*        this.force_sim = this.d3.forceSimulation(data)
+            .force('charge', this.d3.forceManyBody())
+            .force('center', this.d3.forceCenter(this.width / 2, this.height / 2))
+            .force('x', this.d3.forceX(d => d.x))
+            .force('y', this.d3.forceY(d => d.y))
+            .force('collide', this.d3.forceCollide(10))
+            .alphaDecay(0)
+            .alpha(0.22)
+            .on('tick', self.tick); */
 
             //add decay after set time to smoothly end transition
             var init_decay; 
             init_decay = setTimeout(function(){
               console.log('init alpha decay')
-              this.force_sim.alphaDecay(0.1);
+              this.force_sim
+                .alphaDecay(0.05);
             }, 3000);
 
             // add x axis
             bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(x));
+              .call(this.d3.axisBottom(self.x));
 
           },
           // highlight point on click to track them through movement, don't know how to self select
@@ -231,20 +270,25 @@
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN', 'RNN', 'RGCN', 'RGCN_ptrn'];
+            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
+            var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var color_sel = color_list[data];
             var model_sel = model_list[data];
             //console.log(model_sel);
 
             //this.setChart(this.rmse_monthly, model_sel);
 
-            this.force_sim.force('x', this.d3.forceX(function(d){
-              return self.x(d[model_sel])
-            }))
+            this.force_sim
+              .force('x', this.d3.forceX(function(d){
+                return self.x(d[model_sel])
+            }).strength(2))
+              
+            
     
-            this.d3.selectAll("dot")
+            this.d3.selectAll(".dot")
               .transition()
-              .duration(3000)
-                .attr()
+                .duration(1000)
+                .style('fill', color_sel)
 
           },
           tick() {
@@ -364,7 +408,11 @@ article {
 }
 .step.is-active[data-step="4"] {
 }
+.step.is-active[data-step="7"] {
+  margin-bottom: 600px;
+}
 .step:last-child {
+  margin-bottom: 600px;
 }
 
 
