@@ -112,6 +112,7 @@
             radius: null,
             force_sim: null,
             x: null,
+            padding: null,
             
           }
         },
@@ -122,6 +123,7 @@
           this.width = 600 - this.margin.left - this.margin.right;
           this.height = 500 - this.margin.top - this.margin.bottom;
           this.radius = 5;
+          this.padding = 2;
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -173,13 +175,9 @@
             let csv_test = data[0];
             let rmse_monthly = data[1];
 
-            var data_set = 'range';
+            var data_set = 'ANN';
 
             this.setChart(rmse_monthly, data_set);
-
-            var mappedArray = rmse_monthly.columns;
-            var currentCol = mappedArray[4];
-            //console.log(currentCol);
 
           },
           // draw beeswarm/scatterplot
@@ -192,73 +190,127 @@
             .attr("width", this.width)
             .attr("height", this.height)
             .attr("class", "bees dotPlot");
-
-          bees.append("line", 'svg')
-            .classed("main_line", true)
-            .attr("x1", 0)
-            .attr("y1", this.height/2)
-            .attr("x2", this.width)
-            .attr("y2", this.height/2)
-            .attr("stroke-width", 1.5)
-            .attr("stroke", "#A3A0A6");
             
           //scales
           this.x = this.d3.scaleLinear()
             .range([this.margin.left, this.width + this.margin.right])
             .domain([0,7]);
 
-
-          //draw bees
-          //use force to push each dot to x position
-          bees.selectAll("dot")
-            .data(data)
-          .enter().append("circle").classed('dot', true)
-            .attr("r", this.radius)
-            .attr("fill", "orchid")
-            .attr("opacity", .8)
-            .attr('cx', function(d){return self.x(d[model]);})
-            .attr('cy', function(d){return this.height/2;})
-            .on('click', function(d){
-              self.highlight(d)
-            });
-
-          //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data)
-            .force('x', this.d3.forceX(function(d){
-                return self.x(d[model])
-              }).strength(2)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
-            .force('collide', this.d3.forceCollide(this.radius))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick);
-
-   /*        this.force_sim = this.d3.forceSimulation(data)
-            .force('charge', this.d3.forceManyBody())
-            .force('center', this.d3.forceCenter(this.width / 2, this.height / 2))
-            .force('x', this.d3.forceX(d => d.x))
-            .force('y', this.d3.forceY(d => d.y))
-            .force('collide', this.d3.forceCollide(10))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick); */
-
-            //add decay after set time to smoothly end transition
-            var init_decay; 
-            init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim
-                .alphaDecay(0.05);
-            }, 3000);
-
-            // add x axis
+           // add x axis
             bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
               .call(this.d3.axisBottom(self.x));
 
+          //draw bees and use dodge function to position vertically in stack
+          bees.selectAll("dot")
+            .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+          .join("circle").classed('dot', true)
+            .attr("r", this.radius)
+            .attr("fill", "teal")
+            .attr("opacity", .8)
+            .attr('cx', d => d.x)
+            .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y)
+
           },
+          // to rearrange overlapping dots
+          dodge(data, radius, model) {
+            const radius2 = this.radius ** 3;
+
+            
+
+            //need to make this line universal so the dataset can be changed on scroll
+            const circles = data.map(d => ({x: this.x(d.range), data: d})).sort((a,b) => a.x - b.x);
+            console.log(circles);
+
+            const epsilon = 1e-3;
+            let head = null, tail = null;
+
+            function intersects(x,y) {
+              let a = head;
+              while (a) {
+                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
+                  return true;
+                }
+                a = a.next;
+              }
+              return false;
+            }
+
+            for (const b of circles) {
+
+              // Remove circles from the queue that can’t intersect the new circle b.
+              while (head && head.x < b.x - radius2) head = head.next;
+
+              // Choose the minimum non-intersecting tangent.
+              if (intersects(b.x, b.y = 0)) {
+                let a = head;
+                b.y = Infinity;
+                do {
+                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
+                  if (y < b.y && !intersects(b.x, y)) b.y = y;
+                  a = a.next;
+                } while (a);
+              }
+
+              // Add b to the queue.
+              b.next = null;
+              if (head === null) head = tail = b;
+              else tail = tail.next = b;
+            }
+
+            return circles;
+
+          },
+          dodge_ANN(data, radius, model) {
+            const radius2 = this.radius ** 3;
+
+            
+
+            //need to make this line universal so the dataset can be changed on scroll
+            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
+            console.log(circles);
+
+            const epsilon = 1e-3;
+            let head = null, tail = null;
+
+            function intersects(x,y) {
+              let a = head;
+              while (a) {
+                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
+                  return true;
+                }
+                a = a.next;
+              }
+              return false;
+            }
+
+            for (const b of circles) {
+
+              // Remove circles from the queue that can’t intersect the new circle b.
+              while (head && head.x < b.x - radius2) head = head.next;
+
+              // Choose the minimum non-intersecting tangent.
+              if (intersects(b.x, b.y = 0)) {
+                let a = head;
+                b.y = Infinity;
+                do {
+                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
+                  if (y < b.y && !intersects(b.x, y)) b.y = y;
+                  a = a.next;
+                } while (a);
+              }
+
+              // Add b to the queue.
+              b.next = null;
+              if (head === null) head = tail = b;
+              else tail = tail.next = b;
+            }
+
+            return circles;
+
+          },
+      
           // highlight point on click to track them through movement, don't know how to self select
           highlight(data) {
             const self = this;
@@ -271,24 +323,42 @@
             const self = this;
             // list models in order of transitions, use step index to select
             var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-            var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var color_list = ['teal','green','yellow','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
-            //console.log(model_sel);
 
-            //this.setChart(this.rmse_monthly, model_sel);
+            if (model_sel === 'ANN') {
+              this.d3.selectAll(".dot")
+                .transition()
+                  .duration(3000)
+                  .data(this.dodge_ANN(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                  .join("circle").classed('dot', true)
+                    .attr("r", this.radius)
+                    .attr("fill", "teal")
+                    .attr("opacity", .8)
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
+            } 
+            else {
+              this.d3.selectAll(".dot")
+                .transition()
+                  .duration(3000)
+                  .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                  .join("circle").classed('dot', true)
+                    .attr("r", this.radius)
+                    .attr("fill", "teal")
+                    .attr("opacity", .8)
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
+            }
 
-            this.force_sim
-              .force('x', this.d3.forceX(function(d){
-                return self.x(d[model_sel])
-            }).strength(2))
-              
-            
-    
             this.d3.selectAll(".dot")
               .transition()
-                .duration(1000)
+                .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                .duration(4000)
                 .style('fill', color_sel)
+                .attr('cx', function(d){
+                return self.x(d[model_sel])})
 
           },
           tick() {
