@@ -179,10 +179,6 @@
 
             this.setChart(rmse_monthly, data_set);
 
-            var mappedArray = rmse_monthly.columns;
-            var currentCol = mappedArray[4];
-            //console.log(currentCol);
-
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
@@ -194,20 +190,17 @@
             .attr("width", this.width)
             .attr("height", this.height)
             .attr("class", "bees dotPlot");
-
-          /* bees.append("line", 'svg')
-            .classed("main_line", true)
-            .attr("x1", 0)
-            .attr("y1", this.height/2)
-            .attr("x2", this.width)
-            .attr("y2", this.height/2)
-            .attr("stroke-width", 1.5)
-            .attr("stroke", "#A3A0A6"); */
             
           //scales
           this.x = this.d3.scaleLinear()
             .range([this.margin.left, this.width + this.margin.right])
             .domain([0,7]);
+
+           // add x axis
+            bees.append("g")
+              .attr("transform", "translate(0," + this.height + ")")
+              .attr("stroke-width", "2px")
+              .call(this.d3.axisBottom(self.x));
 
           //draw bees
           //use force to push each dot to x position
@@ -219,50 +212,16 @@
             .attr("opacity", .8)
             .attr('cx', d => d.x)
             .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y)
-            /* .on('click', function(d){
-              self.highlight(d)
-            }); */
-
-          //apply force to push dots towards central position on yaxis
-         /*  this.force_sim = this.d3.forceSimulation(data)
-            .force('x', this.d3.forceX(function(d){
-                return self.x(d[model])
-              }).strength(5)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.1))	
-            .force('collide', this.d3.forceCollide(this.radius).strength(0.5))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick);
- */
-   /*        this.force_sim = this.d3.forceSimulation(data)
-            .force('charge', this.d3.forceManyBody())
-            .force('center', this.d3.forceCenter(this.width / 2, this.height / 2))
-            .force('x', this.d3.forceX(d => d.x))
-            .force('y', this.d3.forceY(d => d.y))
-            .force('collide', this.d3.forceCollide(10))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick); */
-
-            //add decay after set time to smoothly end transition
-            /* var init_decay; 
-            init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim
-                .alphaDecay(0.05);
-            }, 3000); */
-
-            // add x axis
-            bees.append("g")
-              .attr("transform", "translate(0," + this.height + ")")
-              .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(self.x));
 
           },
+          // to rearrange overlapping dots
           dodge(data, radius, model) {
             const radius2 = this.radius ** 3;
+
+            //need to make this line universal so the dataset can be changed 
             const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
+
+            console.log(circles);
             const epsilon = 1e-3;
             let head = null, tail = null;
 
@@ -318,19 +277,14 @@
             var color_list = ['teal','green','yellow','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
-            //console.log(model_sel);
-
-            //this.setChart(this.rmse_monthly, model_sel);
-
-            /* this.force_sim
-              .force('x', this.d3.forceX(function(d){
-                return self.x(d[model_sel])
-            }).strength(2)) */
 
             this.d3.selectAll(".dot")
               .transition()
-                .duration(1000)
+                .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                .duration(4000)
                 .style('fill', color_sel)
+                .attr('cx', function(d){
+                return self.x(d[model_sel])})
 
           },
           tick() {
