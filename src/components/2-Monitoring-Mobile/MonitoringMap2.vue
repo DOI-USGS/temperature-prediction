@@ -1,6 +1,12 @@
 <template>
-  <div id="animated-map">
-    <h2>Animated gif of the map goes in here!</h2>
+  <div
+    id="animated-map"
+    text-align:center
+  >
+    <img
+      class="animated-map-gif"
+      src="./../../assets/components/Ch2_TemporalSparsity_Equal_v1.gif"
+    >
   </div>
 </template>
 
@@ -11,5 +17,11 @@ export default {
 </script>
 
 <style scoped>
-
+  #animated-map {
+    text-align: center
+  }
+  img.animated-map-gif{
+    width: 270px;
+    height: auto;
+  }
 </style>
