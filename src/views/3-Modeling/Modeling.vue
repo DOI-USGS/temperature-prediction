@@ -337,7 +337,7 @@
         var interpolateColors = this.d3.scaleSequential(this.d3.interpolateWarm);
         
         //interpolate the color scale to have that many stops
-        var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));
+        var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));  // This is the one currently hooked up, and it's not really working properly right now. 
 
         // RECOLORING THE CHART
         if(activeButton == "none") {

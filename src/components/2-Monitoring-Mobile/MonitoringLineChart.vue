@@ -355,6 +355,9 @@ export default {
         var myColor = self.d3.scaleSequential()
             .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
             .domain([0, 30]) // if INVERTING color scale
+
+
+            // Use this tutorial https://www.d3-graph-gallery.com/graph/line_color_gradient_svg.html
       }
     }
 }
