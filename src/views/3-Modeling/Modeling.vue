@@ -120,7 +120,10 @@
         paddedRadius: null,
         force_sim: null,
         x: null,
-        activeButton: null
+        activeButton: null,
+        seg_id_nat: null,
+        year: null,
+        month: null
       }
     },
     watch: {
@@ -195,9 +198,9 @@
         var currentCol = mappedArray[4];
 
         // calculate value arrays for color coding ONCE here and then we're good forever
-        const data_segments = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
-        const data_years = [...new Set(rmse_monthly.map(item => item.year))];
-        const data_months = [...new Set(rmse_monthly.map(item => item.month))];
+        this.seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
+        this.year = [...new Set(rmse_monthly.map(item => item.year))];
+        this.month = [...new Set(rmse_monthly.map(item => item.month))];
     
       },
       // draw beeswarm/scatterplot
@@ -242,7 +245,7 @@
           .data(data)
         .enter().append("circle").classed('dot', true)
           .attr("r", this.radius)
-          .attr("fill", "orchid")
+          .attr("fill", "white")
           .attr("opacity", .8)
           .attr('cx', function(d){return self.x(d[model]);})
           .attr('cy', function(d){return this.height/2;})
@@ -306,31 +309,27 @@
         this.d3.select("#"+activeButton).classed('active', true);
 
         // MAKE COLOR RAMPS
-        // list models in order of transitions, use step index to select
-          // var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-          // var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
-          // var colorScheme = color_list[data];
-          // var model_sel = model_list[data];
-        //console.log(model_sel);
+
+        var interpolateColors = this.d3.scaleSequential(this.d3.interpolateWarm);
+        
+        //interpolate the color scale to have that many stops
+        var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));
 
         // RECOLORING THE CHART
         if(activeButton == "none") {
-          console.log("color me by", this.data_years);
-          colorScheme = activeButton; // THIS IS WRONG --- Figure out a way to dynamically select a color scheme based on an active button id
-        } else if (activeButton == "seg_id_nat") {
-          console.log("color me by", activeButton);
-        } else if (activeButton == "year") {
-          console.log("color me by", activeButton);
-        } else if (activeButton == "month") {
-          console.log("color me by", activeButton);
-         }
-
-         this.d3.selectAll(".dot")
+          this.d3.selectAll(".dot")
             .transition()
-            .duration(transitionTime)
-            .style('stroke', 'yellow')
-            .style('stroke-width',5);
-
+            .duration(transitionTime/5)
+            .style('fill', "white");
+        } else if (activeButton == "seg_id_nat" || "year" || "month") {
+          console.log("color me by", activeButton, "and here's the data", this[activeButton]);
+          interpolateColors.domain(this[activeButton])
+          this.d3.selectAll(".dot")
+            .transition()
+            .duration(transitionTime/5)
+            .style('fill', function(d) { return interpolateColors(d[activeButton])});
+        } 
+       
       },
       //update x position on scroll
       updateChart(data) {
@@ -352,7 +351,9 @@
         this.d3.selectAll(".dot")
           .transition()
             .duration(1000)
-            .style('fill', color_sel)
+            .style('stroke', color_sel)
+            .style('stroke-width', 2);
+
       },
       tick() {
         const self = this;
