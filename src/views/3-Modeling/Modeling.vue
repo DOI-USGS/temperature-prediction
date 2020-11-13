@@ -175,7 +175,7 @@
             let csv_test = data[0];
             let rmse_monthly = data[1];
 
-            var data_set = 'range';
+            var data_set = 'ANN';
 
             this.setChart(rmse_monthly, data_set);
 
@@ -195,14 +195,14 @@
             .attr("height", this.height)
             .attr("class", "bees dotPlot");
 
-          bees.append("line", 'svg')
+          /* bees.append("line", 'svg')
             .classed("main_line", true)
             .attr("x1", 0)
             .attr("y1", this.height/2)
             .attr("x2", this.width)
             .attr("y2", this.height/2)
             .attr("stroke-width", 1.5)
-            .attr("stroke", "#A3A0A6");
+            .attr("stroke", "#A3A0A6"); */
             
           //scales
           this.x = this.d3.scaleLinear()
@@ -212,7 +212,7 @@
           //draw bees
           //use force to push each dot to x position
           bees.selectAll("dot")
-            .data(this.dodge(data, this.radius * 2 + this.padding))
+            .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
           .join("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", "orchid")
@@ -260,7 +260,7 @@
               .call(this.d3.axisBottom(self.x));
 
           },
-          dodge(data, radius) {
+          dodge(data, radius, model) {
             const radius2 = this.radius ** 3;
             const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
             const epsilon = 1e-3;
@@ -315,22 +315,22 @@
             const self = this;
             // list models in order of transitions, use step index to select
             var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-            var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var color_list = ['teal','green','yellow','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
             //console.log(model_sel);
 
             //this.setChart(this.rmse_monthly, model_sel);
 
-            this.force_sim
+            /* this.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.x(d[model_sel])
-            }).strength(2))
+            }).strength(2)) */
 
-            /* this.d3.selectAll(".dot")
+            this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
-                .style('fill', color_sel) */
+                .style('fill', color_sel)
 
           },
           tick() {
