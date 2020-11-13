@@ -202,13 +202,12 @@
               .attr("stroke-width", "2px")
               .call(this.d3.axisBottom(self.x));
 
-          //draw bees
-          //use force to push each dot to x position
+          //draw bees and use dodge function to position vertically in stack
           bees.selectAll("dot")
             .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
           .join("circle").classed('dot', true)
             .attr("r", this.radius)
-            .attr("fill", "orchid")
+            .attr("fill", "teal")
             .attr("opacity", .8)
             .attr('cx', d => d.x)
             .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y)
@@ -218,10 +217,60 @@
           dodge(data, radius, model) {
             const radius2 = this.radius ** 3;
 
-            //need to make this line universal so the dataset can be changed 
-            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
+            
 
+            //need to make this line universal so the dataset can be changed on scroll
+            const circles = data.map(d => ({x: this.x(d.range), data: d})).sort((a,b) => a.x - b.x);
             console.log(circles);
+
+            const epsilon = 1e-3;
+            let head = null, tail = null;
+
+            function intersects(x,y) {
+              let a = head;
+              while (a) {
+                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
+                  return true;
+                }
+                a = a.next;
+              }
+              return false;
+            }
+
+            for (const b of circles) {
+
+              // Remove circles from the queue that can’t intersect the new circle b.
+              while (head && head.x < b.x - radius2) head = head.next;
+
+              // Choose the minimum non-intersecting tangent.
+              if (intersects(b.x, b.y = 0)) {
+                let a = head;
+                b.y = Infinity;
+                do {
+                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
+                  if (y < b.y && !intersects(b.x, y)) b.y = y;
+                  a = a.next;
+                } while (a);
+              }
+
+              // Add b to the queue.
+              b.next = null;
+              if (head === null) head = tail = b;
+              else tail = tail.next = b;
+            }
+
+            return circles;
+
+          },
+          dodge_ANN(data, radius, model) {
+            const radius2 = this.radius ** 3;
+
+            
+
+            //need to make this line universal so the dataset can be changed on scroll
+            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
+            console.log(circles);
+
             const epsilon = 1e-3;
             let head = null, tail = null;
 
@@ -277,6 +326,31 @@
             var color_list = ['teal','green','yellow','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
+
+            if (model_sel === 'ANN') {
+              this.d3.selectAll(".dot")
+                .transition()
+                  .duration(3000)
+                  .data(this.dodge_ANN(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                  .join("circle").classed('dot', true)
+                    .attr("r", this.radius)
+                    .attr("fill", "teal")
+                    .attr("opacity", .8)
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
+            } 
+            else {
+              this.d3.selectAll(".dot")
+                .transition()
+                  .duration(3000)
+                  .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+                  .join("circle").classed('dot', true)
+                    .attr("r", this.radius)
+                    .attr("fill", "teal")
+                    .attr("opacity", .8)
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
+            }
 
             this.d3.selectAll(".dot")
               .transition()
