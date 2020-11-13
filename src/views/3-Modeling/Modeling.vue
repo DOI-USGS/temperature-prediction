@@ -15,10 +15,34 @@
       </div>
       <div id="button-container">
         <h4>Color By</h4>
-        <button @click="recolor('none')" id="clear" class="cbutton active">Clear</button>
-        <button @click="recolor('seg_id_nat')" id="seg_id_nat" class="cbutton">Segment</button>
-        <button @click="recolor('year')" id="year" class="cbutton">Data Year</button>
-        <button @click="recolor('month')" id="month" class="cbutton">Data Month</button>         
+        <button
+          id="clear"
+          class="cbutton active"
+          @click="recolor('none')"
+        >
+          Clear
+        </button>
+        <button
+          id="seg_id_nat"
+          class="cbutton"
+          @click="recolor('seg_id_nat')"
+        >
+          Segment
+        </button>
+        <button
+          id="year"
+          class="cbutton"
+          @click="recolor('year')"
+        >
+          Data Year
+        </button>
+        <button
+          id="month"
+          class="cbutton"
+          @click="recolor('month')"
+        >
+          Data Month
+        </button>         
       </div>
       <article>
         <div class="step-container">
@@ -88,7 +112,7 @@
             class="step"
             data-step="7"
           />
-          <p></p>
+          <p />
         </div>
       </article>
     </section>
