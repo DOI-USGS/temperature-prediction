@@ -112,6 +112,7 @@
             radius: null,
             force_sim: null,
             x: null,
+            padding: null,
             
           }
         },
@@ -122,6 +123,7 @@
           this.width = 600 - this.margin.left - this.margin.right;
           this.height = 500 - this.margin.top - this.margin.bottom;
           this.radius = 5;
+          this.padding = 2;
           
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -210,29 +212,29 @@
           //draw bees
           //use force to push each dot to x position
           bees.selectAll("dot")
-            .data(data)
-          .enter().append("circle").classed('dot', true)
+            .data(this.dodge(data, this.radius * 2 + this.padding))
+          .join("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", "orchid")
             .attr("opacity", .8)
-            .attr('cx', function(d){return self.x(d[model]);})
-            .attr('cy', function(d){return this.height/2;})
-            .on('click', function(d){
+            .attr('cx', d => d.x)
+            .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y)
+            /* .on('click', function(d){
               self.highlight(d)
-            });
+            }); */
 
           //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data)
+         /*  this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.x(d[model])
               }).strength(5)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.01))	
+            .force('y', this.d3.forceY(this.height/2).strength(0.1))	
             .force('collide', this.d3.forceCollide(this.radius).strength(0.5))
             .alphaDecay(0)
-            .alpha(0.12)
+            .alpha(0.22)
             .on('tick', self.tick);
-
+ */
    /*        this.force_sim = this.d3.forceSimulation(data)
             .force('charge', this.d3.forceManyBody())
             .force('center', this.d3.forceCenter(this.width / 2, this.height / 2))
@@ -244,12 +246,12 @@
             .on('tick', self.tick); */
 
             //add decay after set time to smoothly end transition
-            var init_decay; 
+            /* var init_decay; 
             init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim
                 .alphaDecay(0.05);
-            }, 3000);
+            }, 3000); */
 
             // add x axis
             bees.append("g")
@@ -258,6 +260,49 @@
               .call(this.d3.axisBottom(self.x));
 
           },
+          dodge(data, radius) {
+            const radius2 = this.radius ** 3;
+            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
+            const epsilon = 1e-3;
+            let head = null, tail = null;
+
+            function intersects(x,y) {
+              let a = head;
+              while (a) {
+                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
+                  return true;
+                }
+                a = a.next;
+              }
+              return false;
+            }
+
+            for (const b of circles) {
+
+              // Remove circles from the queue that can’t intersect the new circle b.
+              while (head && head.x < b.x - radius2) head = head.next;
+
+              // Choose the minimum non-intersecting tangent.
+              if (intersects(b.x, b.y = 0)) {
+                let a = head;
+                b.y = Infinity;
+                do {
+                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
+                  if (y < b.y && !intersects(b.x, y)) b.y = y;
+                  a = a.next;
+                } while (a);
+              }
+
+              // Add b to the queue.
+              b.next = null;
+              if (head === null) head = tail = b;
+              else tail = tail.next = b;
+            }
+
+            return circles;
+
+          },
+      
           // highlight point on click to track them through movement, don't know how to self select
           highlight(data) {
             const self = this;
