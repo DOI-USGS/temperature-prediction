@@ -157,7 +157,6 @@
                 .onStepProgress(self.handleStepProgress)
                 .onStepExit(self.handleStepExit);
               // 3. setup resize event
-              this.resize();
               window.addEventListener("resize", scroller.resize);
             }
             // kick things off
