@@ -43,7 +43,7 @@
             class="step"
             data-step="2"
           >
-            <p>Using an artificial neural network (ANN) we learn a lot, but there is always room for improvement.</p>
+            <p>ANN</p>
           </div>
         </div>
         <div class="step-container">
@@ -93,8 +93,6 @@
 
 <script>
     import * as d3Base from "d3";
-    import * as d3Force from "d3-force";
-    import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
     import * as scrollama from 'scrollama';
 
   export default {
@@ -113,6 +111,7 @@
             marginY: 20,
             radius: 5,
             force_sim: null,
+            bees: null,
             x: null,
             scroller: scrollama(), 
             step: 0,
@@ -132,7 +131,7 @@
                 .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
 
-          // 3. setup resize event
+          // 3. setup resize event...
           this.resize();
           window.addEventListener("resize", this.resize);
 
@@ -152,13 +151,14 @@
           },
           callback(data) {
             let rmse_monthly = data[0];
-            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
+            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
             var data_set = model_list[this.step];
             this.setChart(rmse_monthly, data_set);
 
           },
           // resize to keep scroller accurate
           resize () {
+            const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
             this.height = bounds.height
@@ -171,13 +171,13 @@
             const self = this;
 
         // append svg
-          var bees = this.d3.select("#bees-container").append("svg")
+          this.bees = this.d3.select("#bees-container").append("svg")
             .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
             .attr("width", this.width)
             .attr("height", this.height)
             .attr("class", "bees_dotPlot");
 
-          bees.append("line", 'svg')
+          this.bees.append("line", 'svg')
             .classed("main_line", true)
             .attr("x1", this.marginX)
             .attr("y1", this.height/2)
@@ -186,14 +186,14 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
             
-          //scales
+          //scale x axis
           this.x = this.d3.scaleLinear()
             .range([this.marginX, this.width - this.marginX])
             .domain([0,7]);
 
           //draw bees
           //use force to push each dot to x position
-          bees.selectAll("dot")
+          this.bees.selectAll("dot")
             .data(data)
           .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
@@ -223,7 +223,7 @@
             }, 3000);
 
             // add x axis
-            bees.append("g")
+            this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
               .call(this.d3.axisBottom(self.x));
@@ -234,20 +234,22 @@
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-            var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RNN','ANN'];
+            var color_list = ['pink','teal','lightgreen','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
 
-            this.force_sim
+            this.force_sim 
               .force('x', this.d3.forceX(function(d){
                 return self.x(d[model_sel])
-            }).strength(2))
+            }).strength(1))
+            
 
             this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
                 .style('fill', color_sel)
+                
 
           },
           tick() {
@@ -284,7 +286,7 @@
         },
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
-          console.log(response.progress);
+          //console.log(response.progress);
         }
       }
   }
