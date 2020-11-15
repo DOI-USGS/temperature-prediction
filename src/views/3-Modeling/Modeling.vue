@@ -106,23 +106,29 @@
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
-            margin: {top: 20, right: 20, bottom: 20, left: 20},
-            width: null,
-            height: null,
-            radius: null,
+            margin: 20,
+            width: 500,
+            height: 300,
+            radius: 5,
             force_sim: null,
             x: null,
+            scroller: scrollama(), 
+            step: 0,
+            progress: 0,
+            transitionProgress: 0,
+            transitionDirection: 'down',
+            transitionStarted: false,
+            transitionLastTime: null,
+            transitionDuration: 1000,
+            model_sel: null,
             
           }
         },
         mounted() {
           this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
+          
           this.setScroller(); //begin script when window loads
-          
-          this.width = 600 - this.margin.left - this.margin.right;
-          this.height = 500 - this.margin.top - this.margin.bottom;
-          this.radius = 5;
-          
+
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -132,32 +138,23 @@
             let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
             Promise.all(promises).then(self.callback);
 
-            // code to run on load
-            // using d3 for convenience
-            var scrolly = document.querySelector("#scrolly");
-            var article = scrolly.querySelector("article");
-            var step = article.querySelectorAll(".step");
-            var sticky = document.querySelector(".sticky");
-
-            // initialize the scrollama
-            var scroller = scrollama();
-
             // make scroller
             function init() {
 
               // 1. setup the scroller and initialize trigger observations
               // 2. bind scrollama event handlers (this can be chained like below)
-              scroller
-                .setup({
+              self.scroller.setup({
                   step: "#scrolly article .step",
                   debug: false,
-                  offset: 0.5
+                  offset: 0.5,
+                  progress: true,
                 })
                 .onStepEnter(self.handleStepEnter)
                 .onStepProgress(self.handleStepProgress)
                 .onStepExit(self.handleStepExit);
               // 3. setup resize event
-              window.addEventListener("resize", scroller.resize);
+              this.resize()
+              window.addEventListener("resize", this.resize);
             }
             // kick things off
             init();
@@ -168,13 +165,19 @@
             this.setChart(rmse_monthly, data_set);
 
           },
+          resize () {
+            const bounds = this.$refs.figure.getBoundingClientRect()
+            this.width = bounds.width
+            this.height = bounds.height
+            this.scroller.resize()
+          },
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
 
         // append svg
           var bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
+            .attr("viewBox", [0, 0, (this.width+this.margin+this.margin), (this.height+this.margin+this.margin)].join(' '))
             .attr("width", this.width)
             .attr("height", this.height)
             .attr("class", "bees dotPlot");
@@ -190,7 +193,7 @@
             
           //scales
           this.x = this.d3.scaleLinear()
-            .range([this.margin.left, this.width + this.margin.right])
+            .range([this.margin, this.width + this.margin])
             .domain([0,7]);
 
           //draw bees
@@ -208,23 +211,13 @@
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.x(d[model])
-              }).strength(5)
+              }).strength(2)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.01))	
-            .force('collide', this.d3.forceCollide(this.radius).strength(0.5))
+            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
+            .force('collide', this.d3.forceCollide(this.radius).strength(1))
             .alphaDecay(0)
             .alpha(0.12)
             .on('tick', self.tick);
-
-   /*        this.force_sim = this.d3.forceSimulation(data)
-            .force('charge', this.d3.forceManyBody())
-            .force('center', this.d3.forceCenter(this.width / 2, this.height / 2))
-            .force('x', this.d3.forceX(d => d.x))
-            .force('y', this.d3.forceY(d => d.y))
-            .force('collide', this.d3.forceCollide(10))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick); */
 
             //add decay after set time to smoothly end transition
             var init_decay; 
