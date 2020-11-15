@@ -6,13 +6,13 @@
       </h1>
       <p> so much to say here!</p>
 
-      <div class="sticky">
+      <figure ref="figure" class="sticky">
         <div id="bees-container">
           <div id="progress-container">
           <p class="progress"/>
           </div>
         </div>
-      </div>
+      </figure>
       <article>
         <div class="step-container">
           <div
@@ -107,8 +107,10 @@
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
             margin: 20,
-            width: 500,
+            width: 400,
             height: 300,
+            marginX: 20,
+            marginY: 20,
             radius: 5,
             force_sim: null,
             x: null,
@@ -120,39 +122,33 @@
           }
         },
         mounted() {
-          this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
-          
-          this.setScroller(); //begin script when window loads
-
-        },
-        //methods are executed once, not cached as computed properties, rerun everytime deal with new step
-        methods: {
-          setScroller() {
-            const self = this;
-
-            let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
-            Promise.all(promises).then(self.callback);
-
-            // make scroller
-            function init() {
-
-              // 1. setup the scroller and initialize trigger observations
-              // 2. bind scrollama event handlers (this can be chained like below)
-              self.scroller.setup({
+          this.scroller.setup({
                   step: "#scrolly article .step",
                   debug: false,
                   offset: 0.5,
                   progress: true,
                 })
-                .onStepEnter(self.handleStepEnter)
-                .onStepProgress(self.handleStepProgress)
-                .onStepExit(self.handleStepExit);
-              // 3. setup resize event
-              this.resize()
-              window.addEventListener("resize", this.resize);
-            }
-            // kick things off
-            init();
+                .onStepEnter(this.handleStepEnter)
+                .onStepProgress(this.handleStepProgress)
+                .onStepExit(this.handleStepExit);
+
+          // 3. setup resize event
+          this.resize();
+          window.addEventListener("resize", this.resize);
+
+          this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
+          
+          this.getData(); //read in data and then draw chart
+
+        },
+        //methods are executed once, not cached as computed properties, rerun everytime deal with new step
+        methods: {
+          getData() {
+            const self = this;
+
+            let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
+            Promise.all(promises).then(self.callback);
+
           },
           callback(data) {
             let rmse_monthly = data[0];
@@ -166,6 +162,8 @@
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
             this.height = bounds.height
+            this.marginX = bounds.width * 0.1
+            this.marginY = bounds.height * 0.1
             this.scroller.resize()
           },
           // draw beeswarm/scatterplot
@@ -174,23 +172,23 @@
 
         // append svg
           var bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, (this.width+this.margin+this.margin), (this.height+this.margin+this.margin)].join(' '))
+            .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
             .attr("width", this.width)
             .attr("height", this.height)
-            .attr("class", "bees dotPlot");
+            .attr("class", "bees_dotPlot");
 
           bees.append("line", 'svg')
             .classed("main_line", true)
-            .attr("x1", 0)
+            .attr("x1", this.marginX)
             .attr("y1", this.height/2)
-            .attr("x2", this.width)
+            .attr("x2", this.width-this.marginX)
             .attr("y2", this.height/2)
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
             
           //scales
           this.x = this.d3.scaleLinear()
-            .range([this.margin, this.width + this.margin])
+            .range([this.marginX, this.width - this.marginX])
             .domain([0,7]);
 
           //draw bees
