@@ -115,11 +115,6 @@
             scroller: scrollama(), 
             step: 0,
             progress: 0,
-            transitionProgress: 0,
-            transitionDirection: 'down',
-            transitionStarted: false,
-            transitionLastTime: null,
-            transitionDuration: 1000,
             model_sel: null,
             
           }
@@ -161,10 +156,12 @@
           },
           callback(data) {
             let rmse_monthly = data[0];
-            var data_set = 'range';
+            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
+            var data_set = model_list[this.step];
             this.setChart(rmse_monthly, data_set);
 
           },
+          // resize to keep scroller accurate
           resize () {
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
