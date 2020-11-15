@@ -129,9 +129,7 @@
           setScroller() {
             const self = this;
 
-            let promises = [self.d3.csv("data/test.csv"),
-            self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
-
+            let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
             Promise.all(promises).then(self.callback);
 
             // code to run on load
@@ -140,18 +138,13 @@
             var article = scrolly.querySelector("article");
             var step = article.querySelectorAll(".step");
             var sticky = document.querySelector(".sticky");
-            
 
             // initialize the scrollama
             var scroller = scrollama();
 
             // make scroller
             function init() {
-              // set  padding for step heights 
-              step.forEach(function(step) {
-                var v = 100;
-                step.style.padding = v + "px 0px";
-              });
+
               // 1. setup the scroller and initialize trigger observations
               // 2. bind scrollama event handlers (this can be chained like below)
               scroller
@@ -164,22 +157,16 @@
                 .onStepProgress(self.handleStepProgress)
                 .onStepExit(self.handleStepExit);
               // 3. setup resize event
+              this.resize();
               window.addEventListener("resize", scroller.resize);
             }
             // kick things off
             init();
           },
           callback(data) {
-            let csv_test = data[0];
-            let rmse_monthly = data[1];
-
+            let rmse_monthly = data[0];
             var data_set = 'range';
-
             this.setChart(rmse_monthly, data_set);
-
-            var mappedArray = rmse_monthly.columns;
-            var currentCol = mappedArray[4];
-            //console.log(currentCol);
 
           },
           // draw beeswarm/scatterplot
@@ -217,9 +204,6 @@
             .attr("opacity", .8)
             .attr('cx', function(d){return self.x(d[model]);})
             .attr('cy', function(d){return this.height/2;})
-            .on('click', function(d){
-              self.highlight(d)
-            });
 
           //apply force to push dots towards central position on yaxis
           this.force_sim = this.d3.forceSimulation(data)
@@ -258,13 +242,7 @@
               .call(this.d3.axisBottom(self.x));
 
           },
-          // highlight point on click to track them through movement, don't know how to self select
-          highlight(data) {
-            const self = this;
-            self.d3.selectAll(".dot")
-              .style('stroke','cadetblue')
-              .style('stroke-width',2)
-          },
+
           //update x position on scroll
           updateChart(data) {
             const self = this;
@@ -273,19 +251,16 @@
             var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             var model_sel = model_list[data];
-            //console.log(model_sel);
-
-            //this.setChart(this.rmse_monthly, model_sel);
 
             this.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.x(d[model_sel])
             }).strength(2))
 
-            /* this.d3.selectAll(".dot")
+            this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
-                .style('fill', color_sel) */
+                .style('fill', color_sel)
 
           },
           tick() {
@@ -310,9 +285,6 @@
 
           this.updateChart(response.index);
 
-          //let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD];
-          //beesFly[response.index]();
-          
         },
         
         // add remove class on exit
