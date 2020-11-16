@@ -211,15 +211,58 @@
         init();
       },
       callback(data) {
+        // call original data
         let csv_test = data[0];
-        let rmse_monthly = data[1];
+            let rmse_monthly = data[1];
 
+        // get parameters of realistic data
+        var setOf_seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
+        var setOf_year = [...new Set(rmse_monthly.map(item => item.year))];
+        var setOf_month = [...new Set(rmse_monthly.map(item => item.month))];
+        var setOf_n = [...new Set(rmse_monthly.map(item => item.n))];
+        var setOf_ANN = [...new Set(rmse_monthly.map(item => item.ANN))];
+        var setOf_RGCN = [...new Set(rmse_monthly.map(item => item.RGCN))];
+        var setOf_RGCN_ptrn = [...new Set(rmse_monthly.map(item => item.RGCN_ptrn))];
+        var setOf_RNN = [...new Set(rmse_monthly.map(item => item.RNN))];
+        var setOf_range = [...new Set(rmse_monthly.map(item => item.range))];
+
+        // random integer function
+        function getRandInt(max){
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        // Generate empty array for fake data to live in
+        let rmse_monthly_fake = [];
+
+        // set size of data HERE for testing
+        var size = 500;
+        for (var i=0; i<size; i++) {
+          rmse_monthly_fake[i] = {
+            seg_id_natL: setOf_seg_id_nat[getRandInt(setOf_seg_id_nat.length)],
+            year: setOf_year[getRandInt(setOf_year.length)],
+            month: setOf_month[getRandInt(setOf_month.length)],
+            n: setOf_n[getRandInt(setOf_n.length)],
+            ANN: setOf_ANN[getRandInt(setOf_ANN.length)], 
+            RGCN: setOf_RGCN[getRandInt(setOf_RGCN.length)],
+            RGCN_ptrn: setOf_RGCN_ptrn[getRandInt(setOf_RGCN_ptrn.length)],
+            RNN: setOf_RNN[getRandInt(setOf_RNN.length)],
+            range: setOf_range[getRandInt(setOf_range.length)]
+          }
+        }
+        console.log(rmse_monthly_fake, "fake!!")
+
+        // set the initial column read in to the beeswarm
         var data_set = 'range';
 
-        this.setChart(rmse_monthly, data_set);
+        // THIS IS THE REAL LINE OF CODE! Recomment this back in to use real data
+        // this.setChart(rmse_monthly, data_set);
+        // INSTEAD, THIS IS THE FAKE CODE
+        this.setChart(rmse_monthly_fake, data_set);
 
         var mappedArray = rmse_monthly.columns;
         var currentCol = mappedArray[4];
+        // console.log(rmse_monthly, "rmse")
+        // console.log(mappedArray, "mapped array")
 
         // calculate value arrays for color coding ONCE here and then we're good forever
         this.seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
@@ -301,7 +344,6 @@
           //add decay after set time to smoothly end transition
           var init_decay = []; 
           init_decay = setTimeout(function(){
-            console.log('init alpha decay')
             this.force_sim
               .alphaDecay(alphaDecay);
           }, timeBeforeKill);
@@ -346,7 +388,6 @@
             .duration(transitionTime/5)
             .style('fill', "white");
         } else if (activeButton == "seg_id_nat" || "year" || "month") {
-          console.log("color me by", activeButton, "and here's the data", this[activeButton]);
           interpolateColors.domain(this[activeButton])
           this.d3.selectAll(".dot")
             .transition()
@@ -364,7 +405,6 @@
         var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
         var color_sel = color_list[data];
         var model_sel = model_list[data];
-        //console.log(model_sel);
 
         //this.setChart(this.rmse_monthly, model_sel);
         this.force_sim
