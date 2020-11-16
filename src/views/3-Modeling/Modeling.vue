@@ -112,11 +112,12 @@
             radius: 5,
             force_sim: null,
             bees: null,
-            x: null,
+            xScale: null,
             scroller: scrollama(), 
             step: 0,
             progress: 0,
             model_sel: null,
+            init_decay: null
             
           }
         },
@@ -187,7 +188,7 @@
             .attr("stroke", "#A3A0A6");
             
           //scale x axis
-          this.x = this.d3.scaleLinear()
+          this.xScale = this.d3.scaleLinear()
             .range([this.marginX, this.width - this.marginX])
             .domain([0,7]);
 
@@ -199,34 +200,34 @@
             .attr("r", this.radius)
             .attr("fill", "orchid")
             .attr("opacity", .8)
-            .attr('cx', function(d){return self.x(d[model]);})
+            .attr('cx', function(d){return self.xScale(d[model]);})
             .attr('cy', function(d){return this.height/2;})
 
           //apply force to push dots towards central position on yaxis
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
-                return self.x(d[model])
+                return self.xScale(d[model])
               }).strength(2)
             )
             .force('y', this.d3.forceY(this.height/2).strength(0.05))	
             .force('collide', this.d3.forceCollide(this.radius).strength(1))
+            .alpha(.1)
             .alphaDecay(0)
-            .alpha(0.12)
             .on('tick', self.tick);
 
             //add decay after set time to smoothly end transition
-            var init_decay; 
-            init_decay = setTimeout(function(){
+
+            this.init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim
-                .alphaDecay(0.05);
+                .alphaDecay(0.1);
             }, 3000);
 
             // add x axis
             this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(self.x));
+              .call(this.d3.axisBottom(self.xScale));
 
           },
 
@@ -239,17 +240,27 @@
             var color_sel = color_list[data];
             var model_sel = model_list[data];
 
-            this.force_sim 
-              .force('x', this.d3.forceX(function(d){
-                return self.x(d[model_sel])
+            this.force_sim.force('x', this.d3.forceX(function(d){
+                return self.xScale(d[model_sel])
             }).strength(1))
-            
+
+            this.force_sim
+              .alphaDecay(0.01)
+              .alpha(0.12)
+              .restart()
+              .on('tick', self.tick);
+
+            clearTimeout(this.init_decay);
+
+            this.init_decay = setTimeout(function(){
+              console.log('re-init alpha decay');
+              this.force_sim.alphaDecay(0.1);
+            }, 3000)
 
             this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
                 .style('fill', color_sel)
-                
 
           },
           tick() {
