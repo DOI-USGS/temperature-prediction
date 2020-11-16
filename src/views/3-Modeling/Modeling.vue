@@ -4,7 +4,7 @@
       <h1 class="intro__hed">
         Modeling
       </h1>
-      <p> so much to say here!</p>
+      <p> so much to say here!!</p>
 
       <figure ref="figure" class="sticky">
         <div id="bees-container">
@@ -13,6 +13,37 @@
           </div>
         </div>
       </figure>
+      <div id="button-container">
+        <h4>Color By</h4>
+        <button
+          id="clear"
+          class="cbutton active"
+          @click="recolor('none')"
+        >
+          Clear
+        </button>
+        <button
+          id="seg_id_nat"
+          class="cbutton"
+          @click="recolor('seg_id_nat')"
+        >
+          Segment
+        </button>
+        <button
+          id="year"
+          class="cbutton"
+          @click="recolor('year')"
+        >
+          Data Year
+        </button>
+        <button
+          id="month"
+          class="cbutton"
+          @click="recolor('month')"
+        >
+          Data Month
+        </button>         
+      </div>
       <article>
         <div class="step-container">
           <div
@@ -81,7 +112,7 @@
             class="step"
             data-step="7"
           />
-          <p></p>
+          <p />
         </div>
       </article>
     </section>
@@ -117,8 +148,18 @@
             step: 0,
             progress: 0,
             model_sel: null,
-            init_decay: null
+            init_decay: null,
+            activeButton: null,
+            seg_id_nat: null,
+            year: null,
+            month: null
             
+          }
+        },
+         watch: {
+          activeButton: {
+            deep: true,
+            handler() {this.recolor(); }
           }
         },
         mounted() {
@@ -137,6 +178,7 @@
           window.addEventListener("resize", this.resize);
 
           this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
+          this.paddedRadius = 7;
           
           this.getData(); //read in data and then draw chart
 
@@ -152,6 +194,12 @@
           },
           callback(data) {
             let rmse_monthly = data[0];
+            
+            // calculate value arrays for color coding ONCE here and then we're good forever
+            this.seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
+            this.year = [...new Set(rmse_monthly.map(item => item.year))];
+            this.month = [...new Set(rmse_monthly.map(item => item.month))];
+            
             var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
             var data_set = model_list[this.step];
             this.setChart(rmse_monthly, data_set);
@@ -170,6 +218,16 @@
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
+            
+            // Set some forces
+            var forceStrength = .3;
+            var gravityStrength = 1;
+            var friction = 0.6;
+            var alpha = .12; // similar to "starting temperature", higher is hotter
+            var alphaDecay = 0; // similar to "cool down rate", higher is faster
+            var xForceStrength = 2;
+            var yForceStrength = .05;
+            var timeBeforeKill = 3000;
 
         // append svg
           this.bees = this.d3.select("#bees-container").append("svg")
@@ -207,12 +265,14 @@
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
-              }).strength(2)
+              }).strength(xForceStrength)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
-            .force('collide', this.d3.forceCollide(this.radius).strength(1))
-            .alpha(.1)
-            .alphaDecay(0)
+            .force('y', this.d3.forceY(this.height/2).strength(yForceStrength))	
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1))
+            // .force("charge", d3.forceManyBody().strength(gravityStrength))
+            .alpha(alpha)
+            .alphaDecay(alphaDecay)
+            .velocityDecay(friction)
             .on('tick', self.tick);
 
             //add decay after set time to smoothly end transition
@@ -220,14 +280,49 @@
             this.init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim
-                .alphaDecay(0.1);
-            }, 3000);
+                .alphaDecay(alphaDecay);
+            }, timeBeforeKill);
 
             // add x axis
             this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
               .call(this.d3.axisBottom(self.xScale));
+
+          },
+          recolor(activeButton){
+            const self = this;
+            var transitionTime = 1000; // how long it takes for the color to change
+
+            // BUTTON FUNCTIONALITY
+            // select the button with class "active"
+            var prevButton = this.d3.select(".active");
+            // remove active class from all buttons
+            this.d3.selectAll('.cbutton').classed('active', false);
+            // Find the button just clicked and give it a class "active"
+            this.d3.select("#"+activeButton).classed('active', true);
+
+            // MAKE COLOR RAMPS
+
+            var interpolateColors = this.d3.scaleSequential(this.d3.interpolateWarm);
+
+            //interpolate the color scale to have that many stops
+            var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));  // This is the one currently hooked up, and it's not really working properly right now. 
+
+            // RECOLORING THE CHART
+            if(activeButton == "none") {
+              this.d3.selectAll(".dot")
+                .transition()
+                .duration(transitionTime/5)
+                .style('fill', "white");
+            } else if (activeButton == "seg_id_nat" || "year" || "month") {
+              console.log("color me by", activeButton, "and here's the data", this[activeButton]);
+              interpolateColors.domain(this[activeButton])
+              this.d3.selectAll(".dot")
+                .transition()
+                .duration(transitionTime/5)
+                .style('fill', function(d) { return interpolateColors(d[activeButton])});
+            } 
 
           },
 
@@ -299,9 +394,8 @@
         handleStepProgress(response) {
           //console.log(response.progress);
         }
-      }
+    }
   }
-  
 </script>
 
 <style scoped lang="scss">
@@ -344,13 +438,51 @@ article {
   color: white;
   width: 100vw;
   z-index: 0;
-
+  
 }
 .sticky h2 {
   text-align: center;
   position: relative;
   top: 40vh;
 }
+
+#button-container {
+    z-index: 100;
+    bottom: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 85vh;
+    .cbutton{
+        display: inline-block;
+        background-color: black;
+        color: #DBDAD9;
+        padding: 10px;
+        margin:0 10px 10px 0;
+        border:0.1em solid #DBDAD9;
+        border-radius:0.12em;
+        box-sizing: border-box;
+        text-decoration:none;
+        text-align:center;
+        transition: all 0.2s;
+        min-width: 110px;
+        cursor: pointer;
+        font-size: .8em;
+    }
+    .cbutton.active {
+      background: #DBDAD9;
+      color: #000000;
+    }
+    .cbutton:focus {
+      outline: 0;
+    }
+    .cbutton:hover {
+      color:#000000;
+      background-color:#DBDAD9;
+    }
+
+
+  }
+
 .step-container {
   width:100vw;
 }
