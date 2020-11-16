@@ -152,6 +152,7 @@
             init_decay: null,
             circles: null,
             rmse_monthly: null,
+            rmse_monthly_fake: null
             
           }
         },
@@ -180,7 +181,6 @@
           this.paddedRadius = 7;
           
           this.getData(); //read in data and then draw chart
-
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -193,9 +193,57 @@
           },
           callback(data) {
             this.rmse_monthly = data[0];
+            this.rmse_monthly_fake = [];
             var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
             this.model_sel = model_list[this.step];
-            this.setChart(this.rmse_monthly, this.model_sel);
+
+            // BEGIN BREAK TESTING
+            // get parameters of realistic data
+            var setOf_seg_id_nat = [...new Set(this.rmse_monthly.map(item => item.seg_id_nat))];
+            var setOf_year = [...new Set(this.rmse_monthly.map(item => item.year))];
+            var setOf_month = [...new Set(this.rmse_monthly.map(item => item.month))];
+            var setOf_n = [...new Set(this.rmse_monthly.map(item => item.n))];
+            var setOf_ANN = [...new Set(this.rmse_monthly.map(item => item.ANN))];
+            var setOf_RGCN = [...new Set(this.rmse_monthly.map(item => item.RGCN))];
+            var setOf_RGCN_ptrn = [...new Set(this.rmse_monthly.map(item => item.RGCN_ptrn))];
+            var setOf_RNN = [...new Set(this.rmse_monthly.map(item => item.RNN))];
+            var setOf_range = [...new Set(this.rmse_monthly.map(item => item.range))];
+
+            // random integer function
+            function getRandInt(max){
+              return Math.floor(Math.random() * Math.floor(max));
+            }
+            // Generate empty array for fake data to live in
+  
+            // set size of data HERE for testing
+            var size = 1000;
+
+            // create loop that makes objects for the array of length "size" and selects a random occurence from the original data set.  Basically it's a shuffler more than a generator. 
+            for (var i=0; i<size; i++) {
+              this.rmse_monthly_fake[i] = {
+                seg_id_natL: setOf_seg_id_nat[getRandInt(setOf_seg_id_nat.length)],
+                year: setOf_year[getRandInt(setOf_year.length)],
+                month: setOf_month[getRandInt(setOf_month.length)],
+                n: setOf_n[getRandInt(setOf_n.length)],
+                ANN: setOf_ANN[getRandInt(setOf_ANN.length)], 
+                RGCN: setOf_RGCN[getRandInt(setOf_RGCN.length)],
+                RGCN_ptrn: setOf_RGCN_ptrn[getRandInt(setOf_RGCN_ptrn.length)],
+                RNN: setOf_RNN[getRandInt(setOf_RNN.length)],
+                range: setOf_range[getRandInt(setOf_range.length)]
+              }
+            }
+            console.log(this.rmse_monthly, "real")
+            console.log(this.rmse_monthly_fake, "fake!!")
+
+
+
+             // END BREAK TESTING
+           
+            // Original data call, Uncomment this once we're done testing
+            // this.setChart(this.rmse_monthly, this.model_sel);
+
+            // FAKE DATA CALL! Delete this line once we're done testing
+            this.setChart(this.rmse_monthly_fake, this.model_sel);
 
           },
           // resize to keep scroller accurate
@@ -319,7 +367,7 @@
 
           //move bees to new position
             this.d3.selectAll(".dot")
-              .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
+              .data(this.dodge(this.rmse_monthly_fake, this.radius * 2 + this.padding, this.model_sel))
               .transition()
                 .duration(1000)
                 .attr('cx', d => d.x)
