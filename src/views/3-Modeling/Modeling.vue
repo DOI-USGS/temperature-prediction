@@ -9,7 +9,7 @@
       <figure ref="figure" class="sticky">
         <div id="bees-container">
           <div id="progress-container">
-          <p class="progress"/>
+            <p class="progress" />
           </div>
         </div>
       </figure>
