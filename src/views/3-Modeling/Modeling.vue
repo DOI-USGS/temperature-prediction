@@ -4,7 +4,7 @@
       <h1 class="intro__hed">
         Modeling
       </h1>
-      <p> so much to say here!</p>
+      <p> so much to say here!!</p>
 
       <div class="sticky">
         <div id="bees-container">
@@ -12,6 +12,37 @@
             <p class="progress" />
           </div>
         </div>
+      </div>
+      <div id="button-container">
+        <h4>Color By</h4>
+        <button
+          id="clear"
+          class="cbutton active"
+          @click="recolor('none')"
+        >
+          Clear
+        </button>
+        <button
+          id="seg_id_nat"
+          class="cbutton"
+          @click="recolor('seg_id_nat')"
+        >
+          Segment
+        </button>
+        <button
+          id="year"
+          class="cbutton"
+          @click="recolor('year')"
+        >
+          Data Year
+        </button>
+        <button
+          id="month"
+          class="cbutton"
+          @click="recolor('month')"
+        >
+          Data Month
+        </button>         
       </div>
       <article>
         <div class="step-container">
@@ -81,7 +112,7 @@
             class="step"
             data-step="7"
           />
-          <p></p>
+          <p />
         </div>
       </article>
     </section>
@@ -102,137 +133,160 @@
     components: {
     },
     data() {
-          return {
-            publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
-            d3: null, // this is used so that we can assign d3 plugins to the d3 instance
-            // global variables instantiated in next section
-            margin: {top: 20, right: 20, bottom: 20, left: 20},
-            width: null,
-            height: null,
-            radius: null,
-            force_sim: null,
-            x: null,
-            
-          }
-        },
-        mounted() {
-          this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
-          this.setScroller(); //begin script when window loads
+      return {
+        publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
+        d3: null, // this is used so that we can assign d3 plugins to the d3 instance
+        // global variables instantiated in next section
+        margin: {top: 20, right: 20, bottom: 20, left: 20},
+        width: null,
+        height: null,
+        radius: null,
+        paddedRadius: null,
+        force_sim: null,
+        x: null,
+        activeButton: null,
+        seg_id_nat: null,
+        year: null,
+        month: null
+      }
+    },
+    watch: {
+      activeButton: {
+        deep: true,
+        handler() {this.recolor(); }
+      }
+    },
+    mounted() {
+      this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
+      this.setScroller(); //begin script when window loads
+      
+      this.width = 600 - this.margin.left - this.margin.right;
+      this.height = 500 - this.margin.top - this.margin.bottom;
+      this.radius = 5;
+      this.paddedRadius = 7;
           
-          this.width = 600 - this.margin.left - this.margin.right;
-          this.height = 500 - this.margin.top - this.margin.bottom;
-          this.radius = 5;
-          
-        },
-        //methods are executed once, not cached as computed properties, rerun everytime deal with new step
-        methods: {
-          setScroller() {
-            const self = this;
+    },
+    methods: { //methods are executed once, not cached as computed properties, rerun everytime deal with new step
+      setScroller() {
+        const self = this;
 
-            let promises = [self.d3.csv("data/test.csv"),
-            self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
+        let promises = [self.d3.csv("data/test.csv"),
+        self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
 
-            Promise.all(promises).then(self.callback);
+        Promise.all(promises).then(self.callback);
 
-            // code to run on load
-            // using d3 for convenience
-            var scrolly = document.querySelector("#scrolly");
-            var article = scrolly.querySelector("article");
-            var step = article.querySelectorAll(".step");
-            var sticky = document.querySelector(".sticky");
-            
+        // code to run on load
+        // using d3 for convenience
+        var scrolly = document.querySelector("#scrolly");
+        var article = scrolly.querySelector("article");
+        var step = article.querySelectorAll(".step");
+        var sticky = document.querySelector(".sticky");
+        
 
-            // initialize the scrollama
-            var scroller = scrollama();
+        // initialize the scrollama
+        var scroller = scrollama();
 
-            // make scroller
-            function init() {
-              // set  padding for step heights 
-              step.forEach(function(step) {
-                var v = 100;
-                step.style.padding = v + "px 0px";
-              });
-              // 1. setup the scroller and initialize trigger observations
-              // 2. bind scrollama event handlers (this can be chained like below)
-              scroller
-                .setup({
-                  step: "#scrolly article .step",
-                  debug: false,
-                  offset: 0.5
-                })
-                .onStepEnter(self.handleStepEnter)
-                .onStepProgress(self.handleStepProgress)
-                .onStepExit(self.handleStepExit);
-              // 3. setup resize event
-              window.addEventListener("resize", scroller.resize);
-            }
-            // kick things off
-            init();
-          },
-          callback(data) {
-            let csv_test = data[0];
-            let rmse_monthly = data[1];
+        // make scroller
+        function init() {
+          // set  padding for step heights 
+          step.forEach(function(step) {
+            var v = 100;
+            step.style.padding = v + "px 0px";
+          });
+          // 1. setup the scroller and initialize trigger observations
+          // 2. bind scrollama event handlers (this can be chained like below)
+          scroller
+            .setup({
+              step: "#scrolly article .step",
+              debug: false,
+              offset: 0.5
+            })
+            .onStepEnter(self.handleStepEnter)
+            .onStepProgress(self.handleStepProgress)
+            .onStepExit(self.handleStepExit);
+          // 3. setup resize event
+          window.addEventListener("resize", scroller.resize);
+        }
+        // kick things off
+        init();
+      },
+      callback(data) {
+        let csv_test = data[0];
+        let rmse_monthly = data[1];
 
-            var data_set = 'range';
+        var data_set = 'range';
 
-            this.setChart(rmse_monthly, data_set);
+        this.setChart(rmse_monthly, data_set);
 
-            var mappedArray = rmse_monthly.columns;
-            var currentCol = mappedArray[4];
-            //console.log(currentCol);
+        var mappedArray = rmse_monthly.columns;
+        var currentCol = mappedArray[4];
 
-          },
-          // draw beeswarm/scatterplot
-          setChart(data, model) {
-            const self = this;
+        // calculate value arrays for color coding ONCE here and then we're good forever
+        this.seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
+        this.year = [...new Set(rmse_monthly.map(item => item.year))];
+        this.month = [...new Set(rmse_monthly.map(item => item.month))];
+    
+      },
+      // draw beeswarm/scatterplot
+      setChart(data, model) {
+        const self = this;
+        
+        // Set some forces
+        var forceStrength = .3;
+        var gravityStrength = 1;
+        var friction = 0.6;
+        var alpha = .12; // similar to "starting temperature", higher is hotter
+        var alphaDecay = 0; // similar to "cool down rate", higher is faster
+        var xForceStrength = 5;
+        var yForceStrength = .05;
+        var timeBeforeKill = 3000;
 
         // append svg
-          var bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
-            .attr("width", this.width)
-            .attr("height", this.height)
-            .attr("class", "bees dotPlot");
+        var bees = this.d3.select("#bees-container").append("svg")
+          .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
+          .attr("width", this.width)
+          .attr("height", this.height)
+          .attr("class", "bees dotPlot");
 
-          bees.append("line", 'svg')
-            .classed("main_line", true)
-            .attr("x1", 0)
-            .attr("y1", this.height/2)
-            .attr("x2", this.width)
-            .attr("y2", this.height/2)
-            .attr("stroke-width", 1.5)
-            .attr("stroke", "#A3A0A6");
-            
-          //scales
-          this.x = this.d3.scaleLinear()
-            .range([this.margin.left, this.width + this.margin.right])
-            .domain([0,7]);
+        bees.append("line", 'svg')
+          .classed("main_line", true)
+          .attr("x1", 0)
+          .attr("y1", this.height/2)
+          .attr("x2", this.width)
+          .attr("y2", this.height/2)
+          .attr("stroke-width", 1.5)
+          .attr("stroke", "#A3A0A6");
+          
+        //scales
+        this.x = this.d3.scaleLinear()
+          .range([this.margin.left, this.width + this.margin.right])
+          .domain([0,7]);
 
 
-          //draw bees
-          //use force to push each dot to x position
-          bees.selectAll("dot")
-            .data(data)
-          .enter().append("circle").classed('dot', true)
-            .attr("r", this.radius)
-            .attr("fill", "orchid")
-            .attr("opacity", .8)
-            .attr('cx', function(d){return self.x(d[model]);})
-            .attr('cy', function(d){return this.height/2;})
-            .on('click', function(d){
-              self.highlight(d)
-            });
+        //draw bees
+        //use force to push each dot to x position
+        bees.selectAll("dot")
+          .data(data)
+        .enter().append("circle").classed('dot', true)
+          .attr("r", this.radius)
+          .attr("fill", "white")
+          .attr("opacity", .8)
+          .attr('cx', function(d){return self.x(d[model]);})
+          .attr('cy', function(d){return this.height/2;})
+          .on('click', function(d){
+            self.highlight(d)
+          });
 
-          //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data)
-            .force('x', this.d3.forceX(function(d){
-                return self.x(d[model])
-              }).strength(2)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))	
-            .force('collide', this.d3.forceCollide(this.radius))
-            .alphaDecay(0)
-            .alpha(0.22)
-            .on('tick', self.tick);
+        //apply force to push dots towards central position on yaxis
+        this.force_sim = this.d3.forceSimulation(data)
+          .force('x', this.d3.forceX(function(d){ return self.x(d[model]) }).strength(xForceStrength))
+          .force('y', this.d3.forceY(this.height/2).strength(yForceStrength))	
+          .force('collide', this.d3.forceCollide(this.paddedRadius))
+          // .force("charge", d3.forceManyBody().strength(gravityStrength))
+          .alphaDecay(alphaDecay)
+          .alpha(alpha) // originally 0.22
+          .velocityDecay(friction)
+          .on('tick', self.tick);
 
    /*        this.force_sim = this.d3.forceSimulation(data)
             .force('charge', this.d3.forceManyBody())
@@ -244,95 +298,125 @@
             .alpha(0.22)
             .on('tick', self.tick); */
 
-            //add decay after set time to smoothly end transition
-            var init_decay; 
-            init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim
-                .alphaDecay(0.05);
-            }, 3000);
-
-            // add x axis
-            bees.append("g")
-              .attr("transform", "translate(0," + this.height + ")")
-              .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(self.x));
-
-          },
-          // highlight point on click to track them through movement, don't know how to self select
-          highlight(data) {
-            const self = this;
-            self.d3.selectAll(".dot")
-              .style('stroke','cadetblue')
-              .style('stroke-width',2)
-          },
-          //update x position on scroll
-          updateChart(data) {
-            const self = this;
-            // list models in order of transitions, use step index to select
-            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-            var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
-            var color_sel = color_list[data];
-            var model_sel = model_list[data];
-            //console.log(model_sel);
-
-            //this.setChart(this.rmse_monthly, model_sel);
-
+          //add decay after set time to smoothly end transition
+          var init_decay = []; 
+          init_decay = setTimeout(function(){
+            console.log('init alpha decay')
             this.force_sim
-              .force('x', this.d3.forceX(function(d){
-                return self.x(d[model_sel])
-            }).strength(2))
-              
-            
-    
-            this.d3.selectAll(".dot")
-              .transition()
-                .duration(1000)
-                .style('fill', color_sel)
+              .alphaDecay(alphaDecay);
+          }, timeBeforeKill);
 
-          },
-          tick() {
-          const self = this;
-          this.d3.selectAll(".dot")
-            .attr('cx', function(d){return d.x})
-            .attr('cy', function(d){return d.y})
-        },
-        // scrollama event handler functions
+          // add x axis
+          bees.append("g")
+            .attr("transform", "translate(0," + this.height + ")")
+            .attr("stroke-width", "2px")
+            .call(this.d3.axisBottom(self.x));
 
-        // add class on enter
-        handleStepEnter(response) {
-          const self = this;
-          // response = { element, direction, index }
-          console.log(response);
-           // changes css for class
-          response.element.classList.add("is-active");
+      },
+      // highlight point on click to track them through movement, don't know how to self select
+      highlight(data) {
+        const self = this;
+        self.d3.selectAll(".dot")
+          .style('stroke','cadetblue')
+          .style('stroke-width',2)
+      },
+      recolor(activeButton){
+        const self = this;
+        var transitionTime = 1000; // how long it takes for the color to change
 
-          //update number in sticky to show step number
-          self.d3.select("#bees-container p")
-          .text(response.index + 1);
+        // BUTTON FUNCTIONALITY
+        // select the button with class "active"
+        var prevButton = this.d3.select(".active");
+        // remove active class from all buttons
+        this.d3.selectAll('.cbutton').classed('active', false);
+        // Find the button just clicked and give it a class "active"
+        this.d3.select("#"+activeButton).classed('active', true);
 
-          this.updateChart(response.index);
+        // MAKE COLOR RAMPS
 
-          //let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD];
-          //beesFly[response.index]();
-          
-        },
+        var interpolateColors = this.d3.scaleSequential(this.d3.interpolateWarm);
         
-        // add remove class on exit
-        handleStepExit(response) {
-          const self = this;
-          // response = { element, direction, index }
-          console.log(response);
+        //interpolate the color scale to have that many stops
+        var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));  // This is the one currently hooked up, and it's not really working properly right now. 
+
+        // RECOLORING THE CHART
+        if(activeButton == "none") {
+          this.d3.selectAll(".dot")
+            .transition()
+            .duration(transitionTime/5)
+            .style('fill', "white");
+        } else if (activeButton == "seg_id_nat" || "year" || "month") {
+          console.log("color me by", activeButton, "and here's the data", this[activeButton]);
+          interpolateColors.domain(this[activeButton])
+          this.d3.selectAll(".dot")
+            .transition()
+            .duration(transitionTime/5)
+            .style('fill', function(d) { return interpolateColors(d[activeButton])});
+        } 
+       
+      },
+      //update x position on scroll
+      updateChart(data) {
+        const self = this;
+    
+        // list models in order of transitions, use step index to select
+        var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
+        var color_list = ['teal','teal','teal','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+        var color_sel = color_list[data];
+        var model_sel = model_list[data];
+        //console.log(model_sel);
+
+        //this.setChart(this.rmse_monthly, model_sel);
+        this.force_sim
+          .force('x', this.d3.forceX(function(d){
+            return self.x(d[model_sel])
+        }).strength(2))
+          
+        this.d3.selectAll(".dot")
+          .transition()
+            .duration(1000)
+            .style('stroke', color_sel)
+            .style('stroke-width', 2);
+
+      },
+      tick() {
+        const self = this;
+        this.d3.selectAll(".dot")
+          .attr('cx', function(d){return d.x})
+          .attr('cy', function(d){return d.y})
+      },
+      // scrollama event handler functions
+      // add class on enter
+      handleStepEnter(response) {
+        const self = this;
+        // response = { element, direction, index }
+        console.log(response);
           // changes css for class
-          response.element.classList.remove("is-active");
-        },
-        // track scroll progress - not returning anything?
-        handleStepProgress(response) {
-          console.log(response.progress);
-        }
+        response.element.classList.add("is-active");
+
+        //update number in sticky to show step number
+        self.d3.select("#bees-container p")
+        .text(response.index + 1);
+
+        this.updateChart(response.index);
+
+        //let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD];
+        //beesFly[response.index]();
+      },
+      // add remove class on exit
+      handleStepExit(response) {
+        const self = this;
+        // response = { element, direction, index }
+        console.log(response);
+        // changes css for class
+        response.element.classList.remove("is-active");
+      },
+      // track scroll progress - not returning anything?
+      handleStepProgress(response) {
+        console.log(response.progress);
       }
+    }
   }
-  
 </script>
 
 <style scoped lang="scss">
@@ -375,13 +459,51 @@ article {
   color: white;
   width: 100vw;
   z-index: 0;
-
+  
 }
 .sticky h2 {
   text-align: center;
   position: relative;
   top: 40vh;
 }
+
+#button-container {
+    z-index: 100;
+    bottom: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 85vh;
+    .cbutton{
+        display: inline-block;
+        background-color: black;
+        color: #DBDAD9;
+        padding: 10px;
+        margin:0 10px 10px 0;
+        border:0.1em solid #DBDAD9;
+        border-radius:0.12em;
+        box-sizing: border-box;
+        text-decoration:none;
+        text-align:center;
+        transition: all 0.2s;
+        min-width: 110px;
+        cursor: pointer;
+        font-size: .8em;
+    }
+    .cbutton.active {
+      background: #DBDAD9;
+      color: #000000;
+    }
+    .cbutton:focus {
+      outline: 0;
+    }
+    .cbutton:hover {
+      color:#000000;
+      background-color:#DBDAD9;
+    }
+
+
+  }
+
 .step-container {
   width:100vw;
 }
