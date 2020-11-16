@@ -118,7 +118,9 @@
             step: 0,
             progress: 0,
             model_sel: null,
-            init_decay: null
+            init_decay: null,
+            circles: null,
+            rmse_monthly: null,
             
           }
         },
@@ -152,10 +154,10 @@
 
           },
           callback(data) {
-            let rmse_monthly = data[0];
+            this.rmse_monthly = data[0];
             var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
-            var data_set = model_list[this.step];
-            this.setChart(rmse_monthly, data_set);
+            this.model_sel = model_list[this.step];
+            this.setChart(this.rmse_monthly, this.model_sel);
 
           },
           // resize to keep scroller accurate
@@ -192,7 +194,7 @@
 
           //draw bees and use dodge function to position vertically in stack
           this.bees.selectAll("dot")
-            .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.xScale(d[model])}))
+            .data(this.dodge(data, this.radius * 2 + this.padding, this.model_sel))
           .join("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", "teal")
@@ -202,12 +204,26 @@
 
           },
           // to rearrange overlapping dots
-          dodge(data, radius) {
+          dodge(data, radius, model) {
+             const self = this;
             const radius2 = this.radius ** 3;
 
+            //swap x var to set dodge
+            if (model === 'ANN') {
+              this.circles = data.map(d => ({x: this.xScale(d['ANN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RNN') {
+              this.circles = data.map(d => ({x: this.xScale(d['RNN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RGCN') {
+              this.circles = data.map(d => ({x: this.xScale(d['RGCN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RGCN_ptrn') {
+              this.circles = data.map(d => ({x: this.xScale(d['RGCN_ptrn']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+
             //need to make this line universal so the dataset can be changed on scroll
-            const circles = data.map(d => ({x: this.xScale(d.ANN), data: d})).sort((a,b) => a.x - b.x);
-            console.log(circles);
+            this.circles = data.map(d => ({x: this.xScale(d[model]), data: d})).sort((a,b) => a.x - b.x);
 
             const epsilon = 1e-3;
             let head = null, tail = null;
@@ -223,7 +239,7 @@
               return false;
             }
 
-            for (const b of circles) {
+            for (const b of this.circles) {
 
               // Remove circles from the queue that can’t intersect the new circle b.
               while (head && head.x < b.x - radius2) head = head.next;
@@ -245,55 +261,10 @@
               else tail = tail.next = b;
             }
 
-            return circles;
+            return this.circles;
 
           },
-          dodge_ANN(data, radius, model) {
-            const radius2 = this.radius ** 3;
-
-            //need to make this line universal so the dataset can be changed on scroll
-            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
-            console.log(circles);
-
-            const epsilon = 1e-3;
-            let head = null, tail = null;
-
-            function intersects(x,y) {
-              let a = head;
-              while (a) {
-                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
-                  return true;
-                }
-                a = a.next;
-              }
-              return false;
-            }
-
-            for (const b of circles) {
-
-              // Remove circles from the queue that can’t intersect the new circle b.
-              while (head && head.x < b.x - radius2) head = head.next;
-
-              // Choose the minimum non-intersecting tangent.
-              if (intersects(b.x, b.y = 0)) {
-                let a = head;
-                b.y = Infinity;
-                do {
-                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
-                  if (y < b.y && !intersects(b.x, y)) b.y = y;
-                  a = a.next;
-                } while (a);
-              }
-
-              // Add b to the queue.
-              b.next = null;
-              if (head === null) head = tail = b;
-              else tail = tail.next = b;
-            }
-
-            return circles;
-
-          },
+          
           //update x position on scroll
           updateChart(data) {
             const self = this;
@@ -301,37 +272,22 @@
             var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RNN','ANN'];
             var color_list = ['pink','teal','lightgreen','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
-            var model_sel = model_list[data];
-
-/*             this.force_sim.force('x', this.d3.forceX(function(d){
-                return self.xScale(d[model_sel])
-            }).strength(1))
-
-            this.force_sim
-              .alphaDecay(0.01)
-              .alpha(0.12)
-              .restart()
-              .on('tick', self.tick);
-
-            clearTimeout(this.init_decay);
-
-            this.init_decay = setTimeout(function(){
-              console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.1);
-            }, 3000) */
+            this.model_sel = model_list[data];
+            console.log(this.model_sel);
 
             this.d3.selectAll(".dot")
               .transition()
                 .duration(1000)
                 .style('fill', color_sel)
 
+            this.d3.selectAll(".dot")
+              .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
+              .transition()
+                .duration(3000)
+                .attr('cx', d => d.x)
+                .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
+
           },
-          tick() {
-          const self = this;
-          this.d3.selectAll(".dot")
-            .attr('cx', function(d){return d.x})
-            .attr('cy', function(d){return d.y})
-        },
         // scrollama event handler functions
 
         // add class on enter
