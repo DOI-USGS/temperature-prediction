@@ -9,7 +9,7 @@
       <figure ref="figure" class="sticky">
         <div id="bees-container">
           <div id="progress-container">
-            <p class="progress" />
+          <p class="progress"/>
           </div>
         </div>
       </figure>
@@ -240,10 +240,8 @@
             }
 
             for (const b of this.circles) {
-
               // Remove circles from the queue that can’t intersect the new circle b.
               while (head && head.x < b.x - radius2) head = head.next;
-
               // Choose the minimum non-intersecting tangent.
               if (intersects(b.x, b.y = 0)) {
                 let a = head;
@@ -254,15 +252,12 @@
                   a = a.next;
                 } while (a);
               }
-
               // Add b to the queue.
               b.next = null;
               if (head === null) head = tail = b;
               else tail = tail.next = b;
             }
-
             return this.circles;
-
           },
           
           //update x position on scroll
@@ -282,10 +277,8 @@
                 .attr('cx', d => d.x)
                 .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
                 .style('fill', color_sel)
-
           },
         // scrollama event handler functions
-
         // add class on enter
         handleStepEnter(response) {
           const self = this;
