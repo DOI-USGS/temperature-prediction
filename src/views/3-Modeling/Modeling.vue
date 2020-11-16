@@ -6,20 +6,20 @@
       </h1>
       <p> so much to say here!</p>
 
-      <div class="sticky">
+      <figure ref="figure" class="sticky">
         <div id="bees-container">
           <div id="progress-container">
-            <p class="progress" />
+          <p class="progress"/>
           </div>
         </div>
-      </div>
+      </figure>
       <article>
         <div class="step-container">
           <div
             class="step"
             data-step="1"
           >
-            <p>Each dot is a monthly RMSE.</p>
+           <!--  <p>Each dot is a monthly RMSE.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -27,7 +27,7 @@
             class="step"
             data-step="1"
           >
-            <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p>
+            <!-- <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -35,7 +35,7 @@
             class="step"
             data-step="1"
           >
-            <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p>
+            <!-- <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -43,7 +43,7 @@
             class="step"
             data-step="2"
           >
-            <p>Using an artificial neural network (ANN) we learn a lot, but there is always room for improvement.</p>
+            <!-- <p>ANN</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -51,7 +51,7 @@
             class="step"
             data-step="3"
           >
-            <p>RNN uses time.</p>
+            <!-- <p>RNN uses time.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -59,7 +59,7 @@
             class="step"
             data-step="4"
           >
-            <p>RGCN adds space.</p>
+            <!-- <p>RGCN adds space.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -67,14 +67,14 @@
             class="step"
             data-step="5"
           />
-          <p>RGCN + pretraining</p>
+          <!-- <p>RGCN + pretraining</p> -->
         </div>
         <div class="step-container">
           <div
             class="step"
             data-step="6"
           />
-          <p>and that's how we do it!</p>
+         <!--  <p>and that's how we do it!</p> -->
         </div>
         <div class="step-container">
           <div
@@ -93,8 +93,6 @@
 
 <script>
     import * as d3Base from "d3";
-    import * as d3Force from "d3-force";
-    import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
     import * as scrollama from 'scrollama';
 
   export default {
@@ -106,122 +104,126 @@
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
-            margin: {top: 20, right: 20, bottom: 20, left: 20},
-            width: null,
-            height: null,
-            radius: null,
+            margin: 20,
+            width: 400,
+            height: 300,
+            marginX: 20,
+            marginY: 20,
+            radius: 5,
             force_sim: null,
-            x: null,
+            bees: null,
             padding: null,
+            xScale: null,
+            scroller: scrollama(), 
+            step: 0,
+            progress: 0,
+            model_sel: null,
+            init_decay: null,
+            circles: null,
+            rmse_monthly: null,
             
           }
         },
         mounted() {
-          this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
-          this.setScroller(); //begin script when window loads
+          this.scroller.setup({
+                  step: "#scrolly article .step",
+                  debug: false,
+                  offset: 0.5,
+                  progress: true,
+                })
+                .onStepEnter(this.handleStepEnter)
+                .onStepProgress(this.handleStepProgress)
+                .onStepExit(this.handleStepExit);
+
+          // 3. setup resize event...
+          this.resize();
+          window.addEventListener("resize", this.resize);
+
+          this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
           
-          this.width = 600 - this.margin.left - this.margin.right;
-          this.height = 500 - this.margin.top - this.margin.bottom;
-          this.radius = 5;
-          this.padding = 2;
-          
+          this.getData(); //read in data and then draw chart
+
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
-          setScroller() {
+          getData() {
             const self = this;
 
-            let promises = [self.d3.csv("data/test.csv"),
-            self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
-
+            let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
             Promise.all(promises).then(self.callback);
 
-            // code to run on load
-            // using d3 for convenience
-            var scrolly = document.querySelector("#scrolly");
-            var article = scrolly.querySelector("article");
-            var step = article.querySelectorAll(".step");
-            var sticky = document.querySelector(".sticky");
-            
-
-            // initialize the scrollama
-            var scroller = scrollama();
-
-            // make scroller
-            function init() {
-              // set  padding for step heights 
-              step.forEach(function(step) {
-                var v = 100;
-                step.style.padding = v + "px 0px";
-              });
-              // 1. setup the scroller and initialize trigger observations
-              // 2. bind scrollama event handlers (this can be chained like below)
-              scroller
-                .setup({
-                  step: "#scrolly article .step",
-                  debug: false,
-                  offset: 0.5
-                })
-                .onStepEnter(self.handleStepEnter)
-                .onStepProgress(self.handleStepProgress)
-                .onStepExit(self.handleStepExit);
-              // 3. setup resize event
-              window.addEventListener("resize", scroller.resize);
-            }
-            // kick things off
-            init();
           },
           callback(data) {
-            let csv_test = data[0];
-            let rmse_monthly = data[1];
+            this.rmse_monthly = data[0];
+            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
+            this.model_sel = model_list[this.step];
+            this.setChart(this.rmse_monthly, this.model_sel);
 
-            var data_set = 'ANN';
-
-            this.setChart(rmse_monthly, data_set);
-
+          },
+          // resize to keep scroller accurate
+          resize () {
+            const self = this;
+            const bounds = this.$refs.figure.getBoundingClientRect()
+            this.width = bounds.width
+            this.height = bounds.height
+            this.marginX = bounds.width * 0.1
+            this.marginY = bounds.height * 0.1
+            this.scroller.resize()
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
 
         // append svg
-          var bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, (this.width+this.margin.left+this.margin.right), (this.height+this.margin.top+this.margin.bottom)].join(' '))
+          this.bees = this.d3.select("#bees-container").append("svg")
+            .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
             .attr("width", this.width)
             .attr("height", this.height)
-            .attr("class", "bees dotPlot");
+            .attr("class", "bees-dotPlot");
             
-          //scales
-          this.x = this.d3.scaleLinear()
-            .range([this.margin.left, this.width + this.margin.right])
+          //scale x axis
+          this.xScale = this.d3.scaleLinear()
+            .range([this.marginX, this.width - this.marginX])
             .domain([0,7]);
 
            // add x axis
-            bees.append("g")
+          this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(self.x));
+              .call(this.d3.axisBottom(self.xScale));
 
           //draw bees and use dodge function to position vertically in stack
-          bees.selectAll("dot")
-            .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
+          this.bees.selectAll("dot")
+            .data(this.dodge(data, this.radius * 2 + this.padding, this.model_sel))
           .join("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", "teal")
             .attr("opacity", .8)
             .attr('cx', d => d.x)
-            .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y)
+            .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
 
           },
           // to rearrange overlapping dots
           dodge(data, radius, model) {
+             const self = this;
             const radius2 = this.radius ** 3;
 
-            
+            /* //swap x var to set dodge
+            if (model === 'ANN') {
+              this.circles = data.map(d => ({x: this.xScale(d['ANN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RNN') {
+              this.circles = data.map(d => ({x: this.xScale(d['RNN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RGCN') {
+              this.circles = data.map(d => ({x: this.xScale(d['RGCN']), data: d})).sort((a,b) => a.x - b.x);
+            } 
+            if (model === 'RGCN_ptrn') {
+              this.circles = data.map(d => ({x: this.xScale(d['RGCN_ptrn']), data: d})).sort((a,b) => a.x - b.x);
+            }  */
 
             //need to make this line universal so the dataset can be changed on scroll
-            const circles = data.map(d => ({x: this.x(d.range), data: d})).sort((a,b) => a.x - b.x);
-            console.log(circles);
+            this.circles = data.map(d => ({x: this.xScale(d[model]), data: d})).sort((a,b) => a.x - b.x);
 
             const epsilon = 1e-3;
             let head = null, tail = null;
@@ -237,11 +239,9 @@
               return false;
             }
 
-            for (const b of circles) {
-
+            for (const b of this.circles) {
               // Remove circles from the queue that can’t intersect the new circle b.
               while (head && head.x < b.x - radius2) head = head.next;
-
               // Choose the minimum non-intersecting tangent.
               if (intersects(b.x, b.y = 0)) {
                 let a = head;
@@ -252,123 +252,33 @@
                   a = a.next;
                 } while (a);
               }
-
               // Add b to the queue.
               b.next = null;
               if (head === null) head = tail = b;
               else tail = tail.next = b;
             }
-
-            return circles;
-
+            return this.circles;
           },
-          dodge_ANN(data, radius, model) {
-            const radius2 = this.radius ** 3;
-
-            
-
-            //need to make this line universal so the dataset can be changed on scroll
-            const circles = data.map(d => ({x: this.x(d.ANN), data: d})).sort((a,b) => a.x - b.x);
-            console.log(circles);
-
-            const epsilon = 1e-3;
-            let head = null, tail = null;
-
-            function intersects(x,y) {
-              let a = head;
-              while (a) {
-                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
-                  return true;
-                }
-                a = a.next;
-              }
-              return false;
-            }
-
-            for (const b of circles) {
-
-              // Remove circles from the queue that can’t intersect the new circle b.
-              while (head && head.x < b.x - radius2) head = head.next;
-
-              // Choose the minimum non-intersecting tangent.
-              if (intersects(b.x, b.y = 0)) {
-                let a = head;
-                b.y = Infinity;
-                do {
-                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
-                  if (y < b.y && !intersects(b.x, y)) b.y = y;
-                  a = a.next;
-                } while (a);
-              }
-
-              // Add b to the queue.
-              b.next = null;
-              if (head === null) head = tail = b;
-              else tail = tail.next = b;
-            }
-
-            return circles;
-
-          },
-      
-          // highlight point on click to track them through movement, don't know how to self select
-          highlight(data) {
-            const self = this;
-            self.d3.selectAll(".dot")
-              .style('stroke','cadetblue')
-              .style('stroke-width',2)
-          },
+          
           //update x position on scroll
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['range','range','range','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','RGCN_ptrn'];
-            var color_list = ['teal','green','yellow','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RNN','ANN'];
+            var color_list = ['pink','teal','lightgreen','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
-            var model_sel = model_list[data];
+            this.model_sel = model_list[data];
 
-            if (model_sel === 'ANN') {
-              this.d3.selectAll(".dot")
-                .transition()
-                  .duration(3000)
-                  .data(this.dodge_ANN(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
-                  .join("circle").classed('dot', true)
-                    .attr("r", this.radius)
-                    .attr("fill", "teal")
-                    .attr("opacity", .8)
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
-            } 
-            else {
-              this.d3.selectAll(".dot")
-                .transition()
-                  .duration(3000)
-                  .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
-                  .join("circle").classed('dot', true)
-                    .attr("r", this.radius)
-                    .attr("fill", "teal")
-                    .attr("opacity", .8)
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => this.height - this.margin.bottom -this.padding - this.padding - d.y);
-            }
-
+          //move bees to new position
             this.d3.selectAll(".dot")
+              .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
               .transition()
-                .data(this.dodge(data, this.radius * 2 + this.padding, function(d){ return self.x(d[model])}))
-                .duration(4000)
+                .duration(1000)
+                .attr('cx', d => d.x)
+                .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
                 .style('fill', color_sel)
-                .attr('cx', function(d){
-                return self.x(d[model_sel])})
-
           },
-          tick() {
-          const self = this;
-          this.d3.selectAll(".dot")
-            .attr('cx', function(d){return d.x})
-            .attr('cy', function(d){return d.y})
-        },
         // scrollama event handler functions
-
         // add class on enter
         handleStepEnter(response) {
           const self = this;
@@ -381,11 +291,9 @@
           self.d3.select("#bees-container p")
           .text(response.index + 1);
 
+          //change chart data w/ transition
           this.updateChart(response.index);
 
-          //let beesFly = [this.flyA, this.flyB, this.flyC, this.flyD];
-          //beesFly[response.index]();
-          
         },
         
         // add remove class on exit
@@ -398,7 +306,7 @@
         },
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
-          console.log(response.progress);
+          //console.log(response.progress);
         }
       }
   }
