@@ -19,7 +19,7 @@
             class="step"
             data-step="1"
           >
-            <p>Each dot is a monthly RMSE.</p>
+           <!--  <p>Each dot is a monthly RMSE.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -27,7 +27,7 @@
             class="step"
             data-step="1"
           >
-            <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p>
+            <!-- <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -35,7 +35,7 @@
             class="step"
             data-step="1"
           >
-            <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p>
+            <!-- <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -43,7 +43,7 @@
             class="step"
             data-step="2"
           >
-            <p>ANN</p>
+            <!-- <p>ANN</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -51,7 +51,7 @@
             class="step"
             data-step="3"
           >
-            <p>RNN uses time.</p>
+            <!-- <p>RNN uses time.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -59,7 +59,7 @@
             class="step"
             data-step="4"
           >
-            <p>RGCN adds space.</p>
+            <!-- <p>RGCN adds space.</p> -->
           </div>
         </div>
         <div class="step-container">
@@ -67,14 +67,14 @@
             class="step"
             data-step="5"
           />
-          <p>RGCN + pretraining</p>
+          <!-- <p>RGCN + pretraining</p> -->
         </div>
         <div class="step-container">
           <div
             class="step"
             data-step="6"
           />
-          <p>and that's how we do it!</p>
+         <!--  <p>and that's how we do it!</p> -->
         </div>
         <div class="step-container">
           <div
@@ -208,7 +208,7 @@
              const self = this;
             const radius2 = this.radius ** 3;
 
-            //swap x var to set dodge
+            /* //swap x var to set dodge
             if (model === 'ANN') {
               this.circles = data.map(d => ({x: this.xScale(d['ANN']), data: d})).sort((a,b) => a.x - b.x);
             } 
@@ -220,7 +220,7 @@
             } 
             if (model === 'RGCN_ptrn') {
               this.circles = data.map(d => ({x: this.xScale(d['RGCN_ptrn']), data: d})).sort((a,b) => a.x - b.x);
-            } 
+            }  */
 
             //need to make this line universal so the dataset can be changed on scroll
             this.circles = data.map(d => ({x: this.xScale(d[model]), data: d})).sort((a,b) => a.x - b.x);
@@ -273,7 +273,7 @@
             this.d3.selectAll(".dot")
               .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
               .transition()
-                .duration(3000)
+                .duration(1000)
                 .attr('cx', d => d.x)
                 .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
                 .style('fill', color_sel)
@@ -291,6 +291,7 @@
           self.d3.select("#bees-container p")
           .text(response.index + 1);
 
+          //change chart data w/ transition
           this.updateChart(response.index);
 
         },
