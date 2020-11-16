@@ -236,6 +236,8 @@
 
         // set size of data HERE for testing
         var size = 500;
+
+        // create loop that makes objects for the array of length "size" and selects a random occurence from the original data set.  Basically it's a shuffler more than a generator. 
         for (var i=0; i<size; i++) {
           rmse_monthly_fake[i] = {
             seg_id_natL: setOf_seg_id_nat[getRandInt(setOf_seg_id_nat.length)],
