@@ -273,19 +273,15 @@
             var color_list = ['pink','teal','lightgreen','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             this.model_sel = model_list[data];
-            console.log(this.model_sel);
 
-            this.d3.selectAll(".dot")
-              .transition()
-                .duration(1000)
-                .style('fill', color_sel)
-
+          //move bees to new position
             this.d3.selectAll(".dot")
               .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
               .transition()
                 .duration(3000)
                 .attr('cx', d => d.x)
                 .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
+                .style('fill', color_sel)
 
           },
         // scrollama event handler functions
