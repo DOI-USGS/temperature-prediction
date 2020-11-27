@@ -219,6 +219,8 @@
           map_path: null,
           map_projection: null,
           widthScale_c2: null,
+          segments: null,
+          
           //import text
           text: monitoringText.textContents
         }
@@ -317,18 +319,26 @@
           
           // add variables to component data
 
-          let promises = [self.d3.csv("data/segment_maflow.csv"),
-            self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
-            self.d3.csv(self.publicPath + "data/obs_annual_count.csv"),
-            self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
-            self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv"),
+          let promises_1 = [self.d3.csv("data/segment_maflow.csv"),
             self.d3.csv(self.publicPath + "data/source_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
             self.d3.json(self.publicPath + "data/topojson/segment_data.json"),
             self.d3.json(self.publicPath + "data/topojson/unique_drb_sites.json"),
             self.d3.json(self.publicPath + "data/topojson/DelawareBay.json"),
             self.d3.json(self.publicPath + "data/topojson/reservoirs.json")
           ];
-          Promise.all(promises).then(self.callback);
+          Promise.all(promises_1).then(self.callback_1);
+
+          let promises_2 = [
+            self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
+            self.d3.csv(self.publicPath + "data/obs_annual_count.csv")
+          ];
+          Promise.all(promises_2).then(self.callback_2);
+
+          let promises_3 = [
+            self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
+            self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv")
+          ];
+          Promise.all(promises_3).then(self.callback_3); 
         },
         type(d, i, columns) {
           let t = 0;
@@ -339,49 +349,55 @@
           d.total = t;
           return d;
         },
-        callback(data) {
+        callback_1(data) {
           let csv_flow = data[0];
-          let csv_matrix_annual = data[1];
-          let csv_annual_count = data[2];
-          let csv_matrix_daily_2019 = data[3];
-          let csv_daily_count_2019 = data[4];
-          let csv_source_count = data[5];
-          let json_segments = data[6];
-          let json_unique_sites = data[7];
-          let json_bay = data[8];
-          let json_reservoirs = data[9];
+          let csv_source_count = data[1];
+          let json_segments = data[2];
+          let json_unique_sites = data[3];
+          let json_bay = data[4];
+          let json_reservoirs = data[5];
 
           // translate topojsons
-          let segments = topojson.feature(json_segments, json_segments.objects.segment_data).features; 
+          this.segments = topojson.feature(json_segments, json_segments.objects.segment_data).features; 
           let sites = topojson.feature(json_unique_sites, json_unique_sites.objects.unique_drb_sites).features; 
           let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
           let reservoirs = topojson.feature(json_reservoirs, json_reservoirs.objects.reservoirs).features; 
 
           // join csv flow data to geojson segments
           // ch 2 map segments
-          segments = this.joinData(segments, csv_flow);
+          this.segments = this.joinData(this.segments, csv_flow);
 
           // set stroke width scale
           // for ch 2 map segments
           this.widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
+          // set up all Ch2 maps
+          // set up panel 1 map
+          this.setMap_c2p1(sites, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
+          // set up panel 2 map
+          this.setMap_c2p2(this.map_width, this.map_height, bay, reservoirs, this.map_c2p2, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
+          // set up panel 3 map
+          this.setMap_c2p3(this.map_width, this.map_height, bay, reservoirs, this.map_c2p3, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
+          
           // Set up Ch 2 panel 1 -
-          // add DRB segments to the panel 1 map
-          this.setMap_c2p1(segments, sites, bay, reservoirs, this.map_c2p1, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_source_count);
+        },
+        callback_2(data) {
+          let csv_matrix_annual = data[0];
+          let csv_annual_count = data[1];
 
           // Set up Ch 2 panel 2 -
-          // add DRB segments to the panel 2 map
-          this.setMap_c2p2(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p2, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // create panel 2 matrix
-          this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments);
+          this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count);
+        },
+        callback_3(data) {
+          let csv_matrix_daily_2019 = data[0];
+          let csv_daily_count_2019 = data[1];
 
           // Set up Ch 2 panel 3 -
-          // add DRB segments to the panel 3 map
-          this.setMap_c2p3(this.map_width, this.map_height, segments, bay, reservoirs, this.map_c2p3, this.map_path_c2, this.scaleBarTop_c2, this.scaleBarBottom_c2);
           // create panel 3 matrix
-          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments);
+          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, this.segments);
         },
         joinData(segments, csv_flow) {
           // loop through csv to assign each set of csv attribute values to a geojson polyline
@@ -458,7 +474,7 @@
           // // BOTH METHODS
           return widthScale;
         },
-        setMap_c2p1(segments, sites, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
+        setMap_c2p1(sites, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom) {
           const self = this;
           // add delaware bay to map
           var drb_bay = map.append("path")
@@ -486,7 +502,7 @@
           // add drb segments to map
           var drb_segments = map.selectAll(".river_segments")
               // bind segments to each element to be created
-              .data(segments)
+              .data(self.segments)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -680,7 +696,7 @@
             .html(monitoringText.textContents.paragraph4)
 
       },
-        setMap_c2p2(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
+        setMap_c2p2(map_width, map_height, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
           const self = this;
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -709,7 +725,7 @@
           // add drb segments to map BACKGROUND - for selection only
           var drb_segments_transparent = map.selectAll(".segs_transparent")
               // bind segments to each element to be created
-              .data(segments)
+              .data(self.segments)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -778,7 +794,7 @@
           // add drb segments to map
           var drb_segments = map.selectAll(".river_segments")
               // bind segments to each element to be created
-              .data(segments)
+              .data(self.segments)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -823,7 +839,7 @@
           map.append("g").call(scaleBarTop)
           map.append("g").call(scaleBarBottom)
         },
-        createMatrix_c2p2(csv_matrix_annual, csv_annual_count, segments){
+        createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
 
           // append the svg object to the body of the page
@@ -1022,7 +1038,7 @@
               })
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          self.createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip);
+          self.createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, tooltip);
 
           // draw x axes
           transformedMatrix.append("g")
@@ -1053,7 +1069,7 @@
               .call(self.d3.axisRight(y).tickSize(0))
               .select(".domain").remove()
         },
-        createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, segments, tooltip) {
+        createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, tooltip) {
           const self = this;
           
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -1093,7 +1109,7 @@
           // append to transformed matrix
           var SpatialRectangles = transformedMatrix.selectAll('.c2p2.matrixSpatialRect')
               // bind data to each element
-              .data(segments)
+              .data(self.segments)
               // create element for each datum
               .enter()
               // append rectangle for each element
@@ -1157,7 +1173,7 @@
                 self.mouseoutRect_c2p2(d, tooltip);
               })
         },
-        setMap_c2p3(map_width, map_height, segments, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
+        setMap_c2p3(map_width, map_height, bay, reservoirs, map, map_path, scaleBarTop, scaleBarBottom){
           const self = this;
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -1186,7 +1202,7 @@
           // add drb segments to map BACKGROUND
           var drb_segments = map.selectAll(".segs_transparent")
               // bind segments to each element to be created
-              .data(segments)
+              .data(self.segments)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -1248,7 +1264,7 @@
           let key = null;
           var drb_segments = map.selectAll(".river_segments")
               // bind segments to each element to be created
-              .data(segments)
+              .data(self.segments)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -1293,7 +1309,7 @@
           map.append("g").call(scaleBarBottom)
 
         },
-        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments){
+        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019){
           const self = this;
           // append the svg object to the body of the page
           var svgMatrix = self.d3.select("#matrixChart_c2p3")
@@ -1462,7 +1478,7 @@
               .style("opacity", 1);
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip);
+          self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip);
 
           transformedMatrix.append("g")
               .style("font-size", 10)
@@ -1491,7 +1507,7 @@
               .select(".domain").remove()
 
         },
-        createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, segments, tooltip) {
+        createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip) {
           const self = this;
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
@@ -1530,7 +1546,7 @@
           // append to transformed matrix
           var SpatialRectangles = transformedMatrix.selectAll('.c2p3.matrixSpatialRect')
               // bind data to each element
-              .data(segments)
+              .data(self.segments)
               // create element for each datum
               .enter()
               // append rectangle for each element
