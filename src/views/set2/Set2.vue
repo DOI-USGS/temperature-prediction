@@ -318,8 +318,6 @@
         loadData_1() {
           const self = this;
 
-          console.time("load_data_1")
-
           // First set of data and scripts to generate all Ch2 maps and Ch2 panel 1 bar chart
           let promises_1 = [self.d3.csv("data/segment_maflow.csv"),
             self.d3.csv(self.publicPath + "data/source_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
@@ -415,7 +413,7 @@
           // set up panel 3 map
           this.setMap_c2p3();
           // create panel 3 matrix
-          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, this.segments);
+          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019);
         },
         // Join modeled flow data to simplified segment geometries
         joinData(segments, csv_flow) {
@@ -714,8 +712,6 @@
               .attr("x", 0)
               .attr("y", 0)
               .html(monitoringText.textContents.paragraph4)
-
-          console.timeEnd("load_data_1")
         },
         setMap_c2p2(){
           const self = this;
