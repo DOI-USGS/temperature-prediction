@@ -214,6 +214,8 @@
           map_path_c2: null,
           widthScale_c2: null,
           segments: null,
+          bay: null,
+          reservoirs: null,
           
           //import text
           text: monitoringText.textContents
@@ -311,6 +313,12 @@
           
 
           // // LOAD IN DATA AND CALL SCRIPTS IN STAGES
+          self.loadData_1();
+        },
+        loadData_1() {
+          const self = this;
+
+          console.time("load_data_1")
 
           // First set of data and scripts to generate all Ch2 maps and Ch2 panel 1 bar chart
           let promises_1 = [self.d3.csv("data/segment_maflow.csv"),
@@ -321,6 +329,9 @@
             self.d3.json(self.publicPath + "data/topojson/reservoirs.json")
           ];
           Promise.all(promises_1).then(self.callback_1);
+        },
+        loadData_2() {
+          const self = this;
 
           // Second set of data and scripts to generate Ch2 panel 2 matrix
           let promises_2 = [
@@ -328,8 +339,11 @@
             self.d3.csv(self.publicPath + "data/obs_annual_count.csv")
           ];
           Promise.all(promises_2).then(self.callback_2);
+        },
+        loadData_3() {
+          const self = this;
 
-          // Second set of data and scripts to generate Ch2 panel 3 matrix
+          // Third set of data and scripts to generate Ch2 panel 3 matrix
           let promises_3 = [
             self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
             self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv")
@@ -346,7 +360,7 @@
           d.total = t;
           return d;
         },
-        // set up all Ch2 maps and Ch2 panel 1 bar chart
+        // set up Ch2 panel 1 map and Ch2 panel 1 bar chart
         callback_1(data) {
           let csv_flow = data[0];
           let csv_source_count = data[1];
@@ -358,8 +372,8 @@
           // translate topojsons
           this.segments = topojson.feature(json_segments, json_segments.objects.segment_data).features; 
           let sites = topojson.feature(json_unique_sites, json_unique_sites.objects.unique_drb_sites).features; 
-          let bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
-          let reservoirs = topojson.feature(json_reservoirs, json_reservoirs.objects.reservoirs).features; 
+          this.bay = topojson.feature(json_bay, json_bay.objects.NHDWaterbody_DelawareBay_pt6per_smooth);
+          this.reservoirs = topojson.feature(json_reservoirs, json_reservoirs.objects.reservoirs).features; 
 
           // join csv flow data to geojson segments
           // ch 2 map segments
@@ -369,33 +383,37 @@
           // for ch 2 map segments
           this.widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
-          // set up all Ch2 maps
-          // set up panel 1 map
-          this.setMap_c2p1(sites, bay, reservoirs);
-          // set up panel 2 map
-          this.setMap_c2p2(bay, reservoirs);
-          // set up panel 3 map
-          this.setMap_c2p3(bay, reservoirs);
-          
           // Set up Ch 2 panel 1 -
+          // set up panel 1 map
+          this.setMap_c2p1(sites);
           // add bar chart to panel 1
           this.setBarChart_c2p1(csv_source_count);
+
+          // LOAD SECOND SET OF DATA
+          this.loadData_2();
         },
-        // Set up Ch 2 panel 2 matrix
+        // Set up  Ch2 panel 2 map and Ch 2 panel 2 matrix
         callback_2(data) {
           let csv_matrix_annual = data[0];
           let csv_annual_count = data[1];
 
           // Set up Ch 2 panel 2 -
+          // set up panel 2 map
+          this.setMap_c2p2();
           // create panel 2 matrix
           this.createMatrix_c2p2(csv_matrix_annual, csv_annual_count);
+
+          // LOAD THIRD AND FINAL SET OF DATA
+          this.loadData_3();
         },
-        // Set up Ch 2 panel 3 matrix
+        // Set up  Ch2 panel 3 map and Ch 2 panel 3 matrix
         callback_3(data) {
           let csv_matrix_daily_2019 = data[0];
           let csv_daily_count_2019 = data[1];
 
           // Set up Ch 2 panel 3 -
+          // set up panel 3 map
+          this.setMap_c2p3();
           // create panel 3 matrix
           this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, this.segments);
         },
@@ -475,19 +493,19 @@
           // // return calculated scale
           return widthScale;
         },
-        setMap_c2p1(sites, bay, reservoirs) {
+        setMap_c2p1(sites) {
           const self = this;
 
           // add delaware bay to map
           let drb_bay = self.map_c2p1.append("path")
-              .datum(bay)
+              .datum(self.bay)
               .attr("class", "c2p1 delaware_bay")
               .attr("d", self.map_path_c2)
 
           // add drb reservoirs to map
           let drb_reservoirs = self.map_c2p1.selectAll(".reservoirs")
               // bind polygons to each element to be created
-              .data(reservoirs)
+              .data(self.reservoirs)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -697,8 +715,9 @@
               .attr("y", 0)
               .html(monitoringText.textContents.paragraph4)
 
+          console.timeEnd("load_data_1")
         },
-        setMap_c2p2(bay, reservoirs){
+        setMap_c2p2(){
           const self = this;
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -712,7 +731,7 @@
             return pt_map_c2p2.matrixTransform(svg_map_c2p2.getScreenCTM().inverse());
           }
           // create local variable to store point coordinates
-          let loc_map_c2p2;
+          let loc_map_c2p2 = {x: 0, y: 0};
           // reset coordinates when mousemoves over map svg
           svg_map_c2p2.addEventListener('mousemove', function(evt){
             loc_map_c2p2 = cursorPoint_c2p2(evt);
@@ -770,7 +789,7 @@
           // add delaware bay to map
           let drb_bay = self.map_c2p2.append("path")
               // bind data to element
-              .datum(bay)
+              .datum(self.bay)
               // assign class for styling
               .attr("class", "c2p2 delaware_bay")
               // project element
@@ -779,7 +798,7 @@
           // add drb reservoirs to map
           let drb_reservoirs = self.map_c2p2.selectAll(".reservoirs")
               // bind polygons to each element to be created
-              .data(reservoirs)
+              .data(self.reservoirs)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
@@ -1175,7 +1194,7 @@
                 self.mouseoutRect_c2p2(d, tooltip);
               })
         },
-        setMap_c2p3(bay, reservoirs){
+        setMap_c2p3(){
           const self = this;
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -1240,7 +1259,7 @@
           // add delaware bay to map
           let drb_bay = self.map_c2p3.append("path")
               // bind data to element
-              .datum(bay)
+              .datum(self.bay)
               // add class for styling
               .attr("class", "c2p3 delaware_bay")
               // project
@@ -1249,7 +1268,7 @@
           // add drb reservoirs to map
           let drb_reservoirs = self.map_c2p3.selectAll(".reservoirs")
               // bind polygons to each element to be created
-              .data(reservoirs)
+              .data(self.reservoirs)
               // create an element for each datum
               .enter()
               // append each element to the svg as a path element
