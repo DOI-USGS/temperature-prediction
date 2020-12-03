@@ -300,8 +300,8 @@
           }
 
           //update number in sticky to show step number
-          self.d3.select("#bees-container p")
-          .text(response.index + 1);
+          //self.d3.select("#bees-container p")
+          //.text(response.index + 1);
 
           //change chart data w/ transition
           this.updateChart(response.index);
@@ -331,6 +331,7 @@
 }
 #map-container {
   height: 100vh;
+  padding: 5vw;
 }
 #progress-container {
   position: relative;
