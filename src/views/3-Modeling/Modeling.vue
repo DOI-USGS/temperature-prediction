@@ -4,7 +4,7 @@
       <h1 class="intro__hed">
         Modeling
       </h1>
-      <p> </p>
+      <p class="text-intro">Artifical neural networks, which are a form of deep learning, have had huge success in identifying complex relationships and making accurate predictions.</p>
 
       <figure
         ref="figure"
@@ -16,6 +16,7 @@
           </div>
         </div>
       </figure>
+
       <article>
         <div class="step-container">
           <div
@@ -95,19 +96,19 @@
   </div>
 </template>
 
+
+
 <script>
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
-
   export default {
     name: 'Modeling',
     components: {
     },
     data() {
           return {
-            publicPath: process.env.BASE_URL, // find the files when on different deployment roots
-            d3: null, // assign d3 plugins to the d3 instance
-
+            publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
+            d3: null, // this is used so that we can assign d3 plugins to the d3 instance
             // global variables instantiated in next section
             margin: 20,
             width: 400,
@@ -117,53 +118,74 @@
             radius: 4,
             force_sim: null,
             bees: null,
-            padding: null,
             xScale: null,
             scroller: scrollama(), 
             step: 0,
             progress: 0,
             model_sel: null,
             init_decay: null,
-            circles: null,
-            rmse_monthly: null,
+            activeButton: null,
+            seg_id_nat: null,
+            year: null,
+            month: null,
+            color: null,
+
+                        // Set some forces
+            forceStrength: .3,
+            gravityStrength: 5,
+            friction: 0.6,
+            alpha: .2, // similar to "starting temperature", higher is hotter
+            alphaDecay: .1, // similar to "cool down rate", higher is faster
+            xForceStrength: 2,
+            yForceStrength: .07,
+            timeBeforeKill: 3000,
+            exp_color: ["orangered", "cadetblue"],
             
+          }
+        },
+         watch: {
+          activeButton: {
+            deep: true,
+            handler() {this.recolor(); }
           }
         },
         mounted() {
           this.scroller.setup({
                   step: "#scrolly article .step",
                   debug: false,
-                  offset: 0.95,
+                  offset: 0.9,
                   progress: true,
                 })
                 .onStepEnter(this.handleStepEnter)
                 .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
-
           // 3. setup resize event...
           this.resize();
           window.addEventListener("resize", this.resize);
-
           this.d3 = Object.assign(d3Base); // this loads d3 plugins with webpack
+          this.paddedRadius = 5;
           
           this.getData(); //read in data and then draw chart
-
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
           getData() {
             const self = this;
-
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv")];
             Promise.all(promises).then(self.callback);
-
           },
           callback(data) {
-            this.rmse_monthly = data[0];
-            var model_list = ['d001_ANN','d001_ANN','d001_RNN','d001_RGCN','d001_ANN', 'd001_RNN', 'd001_RGCN', 'd001_RGCN_ptrn','d001_ANN','d001_RNN'];
-            this.model_sel = model_list[this.step];
-            this.setChart(this.rmse_monthly, this.model_sel);
+            let rmse_monthly = data[0];
+            
+            // calculate value arrays for color coding ONCE here and then we're good forever
+            this.seg_id_nat = [...new Set(rmse_monthly.map(item => item.seg_id_nat))];
+            this.year = [...new Set(rmse_monthly.map(item => item.year))];
+            this.month = [...new Set(rmse_monthly.map(item => item.month))];
+            
+            var model_list = ['ANN','RNN','RGCN','RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
 
+            var data_set = model_list[this.step];
+            this.setChart(rmse_monthly, data_set);
           },
           // resize to keep scroller accurate
           resize () {
@@ -184,117 +206,129 @@
             .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
             .attr("width", this.width)
             .attr("height", this.height)
-            .attr("class", "bees-dotPlot");
-            
+            .attr("class", "bees_dotPlot");
+
+          this.bees.append("line", 'svg')
+            .classed("main_line", true)
+            .attr("x1", this.marginX)
+            .attr("y1", this.height/2)
+            .attr("x2", this.width-this.marginX)
+            .attr("y2", this.height/2)
+            .attr("opacity", 0)
+            .attr("stroke-width", 1.5)
+            .attr("stroke", "#A3A0A6");
+
+            let experiments = Array.from(new Set(data.map((d) => d.experiment)));
+
+            let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
+
           //scale x axis
           this.xScale = this.d3.scaleLinear()
             .range([this.marginX, this.width - this.marginX])
             .domain([0,10]);
+          //draw bees
+          //use force to push each dot to x position
+          this.bees.selectAll("dot")
+            .data(data)
+          .enter().append("circle").classed('dot', true)
+            .attr("r", this.radius)
+            .attr("fill", (d) => color(d.experiment))
+            .attr("opacity", .8)
+            .attr('cx', function(d){return self.xScale(d[model]);})
+/*             .attr('cy', function(d){return this.height/2;}) */
 
-           // add x axis
-          this.bees.append("g")
-            .classed("xaxis", true)
+          //apply force to push dots towards central position on yaxis
+          this.force_sim = this.d3.forceSimulation(data)
+            .force('x', this.d3.forceX(function(d){
+                return self.xScale(d[model])
+              }).strength(this.xForceStrength)
+            )
+            .force('y', this.d3.forceY(this.height/2).strength(this.yForceStrength))	
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1))
+            .alpha(this.alpha)
+            .alphaDecay(this.alphaDecay)
+            .velocityDecay(this.friction)
+            .on('tick', self.tick);
+
+            //add decay after set time to smoothly end transition
+            this.init_decay = setTimeout(function(){
+              console.log('init alpha decay')
+              this.force_sim
+                .alphaDecay(this.alphaDecay);
+            }, this.timeBeforeKill);
+            // add x axis
+            this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
-              .attr('opacity', 0)
+              .attr("opacity", 0)
               .call(this.d3.axisBottom(self.xScale));
-
-          //draw bees and use dodge function to position vertically in stack
-          this.bees.selectAll("dot")
-            .data(this.dodge(data, this.radius * 2 + this.padding, this.model_sel))
-          .join("circle").classed('dot', true)
-            .attr("r", this.radius)
-            .attr("fill", "black")
-            .attr("opacity", .8)
-            .attr('cx', d => d.x)
-            .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
-
           },
-          // to rearrange overlapping dots
-          dodge(data, radius, model) {
+          recolor(activeButton){
             const self = this;
-            const radius2 = this.radius ** 3;
-
-            /* //swap x var to set dodge
-            if (model === 'ANN') {
-              this.circles = data.map(d => ({x: this.xScale(d['ANN']), data: d})).sort((a,b) => a.x - b.x);
+            var transitionTime = 1000; // how long it takes for the color to change
+            // BUTTON FUNCTIONALITY
+            // select the button with class "active"
+            var prevButton = this.d3.select(".active");
+            // remove active class from all buttons
+            this.d3.selectAll('.cbutton').classed('active', false);
+            // Find the button just clicked and give it a class "active"
+            this.d3.select("#"+activeButton).classed('active', true);
+            // MAKE COLOR RAMPS
+            var interpolateColors = this.d3.scaleSequential(this.d3.interpolateWarm);
+            //interpolate the color scale to have that many stops
+            var colorScale = this.d3.scaleOrdinal((this.d3.schemePastel2));  // This is the one currently hooked up, and it's not really working properly right now. 
+            // RECOLORING THE CHART
+            if(activeButton == "none") {
+              this.d3.selectAll(".dot")
+                .transition()
+                .duration(transitionTime/5)
+                .style('fill', "white");
+            } else if (activeButton == "seg_id_nat" || "year" || "month") {
+              console.log("color me by", activeButton, "and here's the data", this[activeButton]);
+              interpolateColors.domain(this[activeButton])
+              this.d3.selectAll(".dot")
+                .transition()
+                .duration(transitionTime/5)
+                .style('fill', function(d) { return interpolateColors(d[activeButton])});
             } 
-            if (model === 'RNN') {
-              this.circles = data.map(d => ({x: this.xScale(d['RNN']), data: d})).sort((a,b) => a.x - b.x);
-            } 
-            if (model === 'RGCN') {
-              this.circles = data.map(d => ({x: this.xScale(d['RGCN']), data: d})).sort((a,b) => a.x - b.x);
-            } 
-            if (model === 'RGCN_ptrn') {
-              this.circles = data.map(d => ({x: this.xScale(d['RGCN_ptrn']), data: d})).sort((a,b) => a.x - b.x);
-            }  */
-
-            //need to make this line universal so the dataset can be changed on scroll
-            this.circles = data.map(d => ({x: this.xScale(d[model]), data: d})).sort((a,b) => a.x - b.x);
-
-            const epsilon = 1e-3;
-            let head = null, tail = null;
-
-            function intersects(x,y) {
-              let a = head;
-              while (a) {
-                if (radius2 - epsilon > (a.x - x) ** 2 + (a.y - y) ** 2) {
-                  return true;
-                }
-                a = a.next;
-              }
-              return false;
-            }
-
-            for (const b of this.circles) {
-              // Remove circles from the queue that can’t intersect the new circle b.
-              while (head && head.x < b.x - radius2) head = head.next;
-              // Choose the minimum non-intersecting tangent.
-              if (intersects(b.x, b.y = 0)) {
-                let a = head;
-                b.y = Infinity;
-                do {
-                  let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
-                  if (y < b.y && !intersects(b.x, y)) b.y = y;
-                  a = a.next;
-                } while (a);
-              }
-              // Add b to the queue.
-              b.next = null;
-              if (head === null) head = tail = b;
-              else tail = tail.next = b;
-            }
-            return this.circles;
           },
-          
           //update x position on scroll
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['d001_ANN','d001_RNN','d001_RGCN','d001_RGCN_ptrn','d001_ANN', 'd001_RNN', 'd001_RGCN', 'd001_RGCN_ptrn','d001_ANN'];
-            var color_list = ['pink','teal','orangered','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
-            var color_sel = color_list[data];
-            this.model_sel = model_list[data];
+            var model_list = ['ANN','RNN','RGCN','RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
+           /*  var color_list = ['pink','teal','orangered','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var color_sel = color_list[data]; */
+            var model_sel = model_list[data];
 
-            this.d3.selectAll(".step.is-active p")
-              .transition()
-              .style('stroke', color_sel)
-              .style('color', color_sel)
+            self.force_sim
+              .force('x', this.d3.forceX(function(d){
+                return self.xScale(d[model_sel])
+              }).strength(1))
 
-          //move bees to new position
-            this.d3.selectAll(".dot")
-              .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
-              .transition()
-                .duration(1000)
-                .attr('cx', d => d.x)
-                .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
-                .style('fill', color_sel)
+            this.force_sim
+              .alphaDecay(0.01)
+              .alpha(0.12)
+              .restart()
+              .on('tick', self.tick);
+            
+            this.init_decay = setTimeout(function(){
+              console.log('re-init alpha decay');
+              this.force_sim.alphaDecay(0.1);
+            }, 1000)
 
-              this.scroller.resize();
+            clearTimeout(this.init_decay);
+
           },
+          tick() {
+          const self = this;
+          this.d3.selectAll(".dot")
+            .attr('cx', function(d){return d.x})
+            .attr('cy', function(d){return d.y})
+        },
         // scrollama event handler functions
         // add class on enter
-        handleStepEnter(response) {
+handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
           console.log(response);
@@ -303,7 +337,7 @@
 
           if(response.index === 0){
 
-            this.d3.select(".xaxis")
+            this.d3.select(".main_line")
               .attr("opacity", 1)
           } /* else {
             this.d3.select(".xaxis")
@@ -316,7 +350,7 @@
 
           //change chart data w/ transition
           this.updateChart(response.index);
-          this.resize();
+          this.scroller.resize();
 
         },
         
@@ -332,11 +366,9 @@
         handleStepProgress(response) {
           //console.log(response.progress);
         }
-      }
+    }
   }
-  
 </script>
-
 <style scoped lang="scss">
 #modeling, #modeling-template {
   text-align: center;
@@ -392,9 +424,25 @@ article {
 .step {
   position: relative;
   width: 90%;
-  margin: 50rem auto 4rem auto;
+  margin: 2rem auto 4rem auto;
   z-index: 1;
   height: 50vh;
+
+  p {
+    padding: 2vw;
+  }
+}
+
+.text-intro {
+  position: relative;
+  width: 90%;
+  margin: 2rem auto 1rem auto;
+  z-index: 1;
+  height: 50vh;
+
+  p {
+    padding: 2vw;
+  }
 }
 
 // can trigger attribute changes with .is-active
