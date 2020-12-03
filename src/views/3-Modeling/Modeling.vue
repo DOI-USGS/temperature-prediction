@@ -4,7 +4,7 @@
       <h1 class="intro__hed">
         Modeling
       </h1>
-      <p> so much to say here!</p>
+      <p> </p>
 
       <figure
         ref="figure"
@@ -22,7 +22,7 @@
             class="step"
             data-step="1"
           >
-           <!--  <p>Each dot is a monthly RMSE.</p> -->
+            <p>ANN</p>
           </div>
         </div>
         <div class="step-container">
@@ -30,7 +30,7 @@
             class="step"
             data-step="1"
           >
-            <!-- <p>RMSE is one way to measure model error/accuracy. RMSE quantifies the distance between predicted and observed values.</p> -->
+            <p>RNN</p>
           </div>
         </div>
         <div class="step-container">
@@ -38,7 +38,7 @@
             class="step"
             data-step="1"
           >
-            <!-- <p>Models with RMSE values closer to zero do better at predicting temeprature than models with higher RMSE.</p> -->
+            <p>RGCN</p>
           </div>
         </div>
         <div class="step-container">
@@ -46,7 +46,7 @@
             class="step"
             data-step="2"
           >
-            <!-- <p>ANN</p> -->
+            <p>RGCN_ptrn</p>
           </div>
         </div>
         <div class="step-container">
@@ -114,7 +114,7 @@
             height: 300,
             marginX: 20,
             marginY: 20,
-            radius: 5,
+            radius: 4,
             force_sim: null,
             bees: null,
             padding: null,
@@ -133,7 +133,7 @@
           this.scroller.setup({
                   step: "#scrolly article .step",
                   debug: false,
-                  offset: 0.5,
+                  offset: 0.95,
                   progress: true,
                 })
                 .onStepEnter(this.handleStepEnter)
@@ -154,13 +154,13 @@
           getData() {
             const self = this;
 
-            let promises = [self.d3.csv(self.publicPath + "data/beeswarm_monthly_rmse_cast.csv")];
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv")];
             Promise.all(promises).then(self.callback);
 
           },
           callback(data) {
             this.rmse_monthly = data[0];
-            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn','ANN'];
+            var model_list = ['d001_ANN','d001_ANN','d001_RNN','d001_RGCN','d001_ANN', 'd001_RNN', 'd001_RGCN', 'd001_RGCN_ptrn','d001_ANN','d001_RNN'];
             this.model_sel = model_list[this.step];
             this.setChart(this.rmse_monthly, this.model_sel);
 
@@ -189,13 +189,14 @@
           //scale x axis
           this.xScale = this.d3.scaleLinear()
             .range([this.marginX, this.width - this.marginX])
-            .domain([0,7]);
+            .domain([0,10]);
 
            // add x axis
           this.bees.append("g")
             .classed("xaxis", true)
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
+              .attr('opacity', 0)
               .call(this.d3.axisBottom(self.xScale));
 
           //draw bees and use dodge function to position vertically in stack
@@ -203,7 +204,7 @@
             .data(this.dodge(data, this.radius * 2 + this.padding, this.model_sel))
           .join("circle").classed('dot', true)
             .attr("r", this.radius)
-            .attr("fill", "teal")
+            .attr("fill", "black")
             .attr("opacity", .8)
             .attr('cx', d => d.x)
             .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
@@ -270,19 +271,26 @@
           updateChart(data) {
             const self = this;
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN','RNN','RGCN','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','RNN','ANN'];
-            var color_list = ['pink','teal','lightgreen','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
+            var model_list = ['d001_ANN','d001_RNN','d001_RGCN','d001_RGCN_ptrn','d001_ANN', 'd001_RNN', 'd001_RGCN', 'd001_RGCN_ptrn','d001_ANN'];
+            var color_list = ['pink','teal','orangered','goldenrod','orangered','cadetblue','orchid','blue','transparent'];
             var color_sel = color_list[data];
             this.model_sel = model_list[data];
+
+            this.d3.selectAll(".step.is-active p")
+              .transition()
+              .style('stroke', color_sel)
+              .style('color', color_sel)
 
           //move bees to new position
             this.d3.selectAll(".dot")
               .data(this.dodge(this.rmse_monthly, this.radius * 2 + this.padding, this.model_sel))
               .transition()
-                .duration(800)
+                .duration(1000)
                 .attr('cx', d => d.x)
                 .attr('cy', d => this.height - this.marginY -this.padding - this.padding - d.y)
                 .style('fill', color_sel)
+
+              this.scroller.resize();
           },
         // scrollama event handler functions
         // add class on enter
@@ -293,14 +301,14 @@
            // changes css for class
           response.element.classList.add("is-active");
 
-          if(response.index === 8){
+          if(response.index === 0){
 
             this.d3.select(".xaxis")
-              .attr("opacity", 0)
-          } else {
+              .attr("opacity", 1)
+          } /* else {
             this.d3.select(".xaxis")
               .attr("opacity", 1)
-          }
+          } */
 
           //update number in sticky to show step number
           //self.d3.select("#bees-container p")
@@ -308,6 +316,7 @@
 
           //change chart data w/ transition
           this.updateChart(response.index);
+          this.resize();
 
         },
         
@@ -350,7 +359,6 @@
   left:50%;
   font-size: .51em;
   line-height: 1em;
-  color: red;
 }
 #scrolly {
    position: relative;
@@ -369,7 +377,6 @@ article {
   padding: 1em;
   left: 0;
   margin: 0;
-  color: white;
   width: 100vw;
   z-index: 0;
 
@@ -386,14 +393,13 @@ article {
   position: relative;
   width: 90%;
   margin: 50rem auto 4rem auto;
-  color:white;
   z-index: 1;
   height: 50vh;
 }
 
 // can trigger attribute changes with .is-active
 .step.is-active {
-  color: orange;
+
 }
 
 // could add changes by step here
