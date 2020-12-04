@@ -11,8 +11,7 @@
         class="sticky"
       >
         <div id="bees-container">
-          <div id="progress-container">
-            <p class="progress" />
+          <div id="legend-container">
           </div>
         </div>
       </figure>
@@ -112,7 +111,7 @@
             // global variables instantiated in next section
             margin: 20,
             width: 400,
-            height: 300,
+            height: 500,
             marginX: 20,
             marginY: 20,
             radius: 4,
@@ -135,11 +134,11 @@
             gravityStrength: 5,
             friction: 0.6,
             alpha: .2, // similar to "starting temperature", higher is hotter
-            alphaDecay: .1, // similar to "cool down rate", higher is faster
+            alphaDecay: .5, // similar to "cool down rate", higher is faster
             xForceStrength: 2,
             yForceStrength: .07,
-            timeBeforeKill: 3000,
-            exp_color: ["orangered", "cadetblue"],
+            timeBeforeKill: 1000,
+            exp_color: ["gold", "darkmagenta"],
             
           }
         },
@@ -218,14 +217,45 @@
             .attr("stroke-width", 1.5)
             .attr("stroke", "#A3A0A6");
 
+          //use color scale for experiment
             let experiments = Array.from(new Set(data.map((d) => d.experiment)));
-
             let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
+            var keys = ["1%", "100%"];
+
+            this.legend = this.d3.select("#legend-container").append("svg")
+              .attr("viewBox", [0, 0, 200, 200])
+              .attr("width", 100)
+              .attr("height", 100)
+              .attr("class", "bees_legend");
+
+            //create color legend
+            this.legend.selectAll("mydots")
+              .data(keys)
+              .enter()
+              .append("circle")
+                .attr("cx", 100)
+                .attr("cy", function(d, i){ return 100 + i*50})
+                .attr("r", 8)
+                .style("fill", function(d){return color(d)});
+          
+          this.legend.selectAll("mylabels")
+            .data(keys)
+            .enter()
+            .append("text")
+              .attr("x", 120)
+              .attr("y", function(d,i){ return 100 + i*50})
+              .style("fill",  function(d){ return color(d)})
+              .text(function(d){ return d})
+              .attr("text-anchor", "left")
+              .attr("font-size", "50px")
+              .style("alignment-baseline", "middle");
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
             .range([this.marginX, this.width - this.marginX])
             .domain([0,10]);
+
+
           //draw bees
           //use force to push each dot to x position
           this.bees.selectAll("dot")
@@ -263,7 +293,7 @@
               .attr("opacity", 0)
               .call(this.d3.axisBottom(self.xScale));
           },
-          recolor(activeButton){
+/*           recolor(activeButton){
             const self = this;
             var transitionTime = 1000; // how long it takes for the color to change
             // BUTTON FUNCTIONALITY
@@ -291,7 +321,7 @@
                 .duration(transitionTime/5)
                 .style('fill', function(d) { return interpolateColors(d[activeButton])});
             } 
-          },
+          }, */
           //update x position on scroll
           updateChart(data) {
             const self = this;
@@ -314,7 +344,7 @@
             
             this.init_decay = setTimeout(function(){
               console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.1);
+              this.force_sim.alphaDecay(0.7);
             }, 1000)
 
             clearTimeout(this.init_decay);
@@ -377,21 +407,13 @@ handleStepEnter(response) {
   height: 100vh;
   padding: 5vw;
 }
-#progress-container {
+#legend-container {
   position: relative;
-  width:80%;
-  height: 30px;
-  margin-left:10%;
-  line-height: 2em;
+  width:100%;
+  height: 50px;
+  left: 190px;
 }
-.progress {
-  position: relative;
-  background-color:transparent;
-  top:1%;
-  left:50%;
-  font-size: .51em;
-  line-height: 1em;
-}
+
 #scrolly {
    position: relative;
 }
