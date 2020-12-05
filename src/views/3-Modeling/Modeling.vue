@@ -65,7 +65,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="1"
           >
             <p v-html="text.paragraph3" />
           </div>
@@ -73,7 +73,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="2"
           >
             <p v-html="text.paragraph4" />
           </div>
@@ -81,7 +81,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="3"
           >
             <p v-html="text.paragraph5" />
           </div>
@@ -89,7 +89,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="4"
           >
             <p v-html="text.paragraph6" />
           </div>
@@ -97,7 +97,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="5"
           >
             <p v-html="text.paragraph7" />
           </div>
@@ -105,7 +105,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="6"
           >
             <p v-html="text.paragraph8" />
           </div>
@@ -113,7 +113,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="7"
           >
             <p v-html="text.paragraph9" />
           </div>
@@ -121,7 +121,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="8"
           >
             <p v-html="text.paragraph10" />
           </div>
@@ -129,7 +129,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="9"
           >
             <p v-html="text.paragraph11" />
           </div>
@@ -137,7 +137,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="10"
           >
             <p v-html="text.paragraph12" />
           </div>
@@ -145,7 +145,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="11"
           >
             <p v-html="text.paragraph13" />
           </div>
@@ -153,7 +153,7 @@
         <div class="step-container text-content">
           <div
             class="step"
-            data-step="0"
+            data-step="12"
           >
             <p v-html="text.paragraph14" />
           </div>
@@ -569,9 +569,7 @@ article {
 #modeling {
   width: 100vw;
 }
-
 // intro title, text at top of page (scrolls)
-
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
   display: grid;
@@ -590,15 +588,15 @@ figure.sticky {
     grid-row: 2 / 2;
     background-color: blue;
   }
+  #error-container {
+    grid-column: 2 / 2;
+    grid-row: 3 / 3;
+    background-color: rgb(187, 25, 52);
+  }
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    background-color: pink;
-
   }
 }
-#flubber-container {
-  flex: 1;
-  
-}
+
 </style>
