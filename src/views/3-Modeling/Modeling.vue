@@ -1,12 +1,9 @@
 <template>
   <div id="modeling">
       <div id="intro-container" class="text-content">
-      <h2 >
-        Modeling!
-      </h2>
-      
-      <p >Artifical neural networks, which are a form of deep learning, have had huge success in identifying complex relationships and making accurate predictions.</p>
-      </div>
+        <h2 v-html="text.title1" />
+        <p v-html="text.paragraph1" />
+     </div>
      <!--  figure contains all the sticky elements -->
       <figure
         ref="figure"
@@ -48,6 +45,8 @@
             </svg>
             </div>
         </div>
+        <div id="error-container">
+        </div>
         <div id="bees-container">
           <div id="legend-container">
           </div>
@@ -55,75 +54,111 @@
       </figure>
 <!--     all the scrolling elements -->
       <article>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="1"
+            data-step="0"
           >
-            <p>ANN</p>
+            <p v-html="text.paragraph2" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="1"
+            data-step="0"
           >
-            <p>RNN</p>
+            <p v-html="text.paragraph3" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="1"
+            data-step="0"
           >
-            <p>RGCN</p>
+            <p v-html="text.paragraph4" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="2"
+            data-step="0"
           >
-            <p>RGCN_ptrn</p>
+            <p v-html="text.paragraph5" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="3"
+            data-step="0"
           >
-            <!-- <p>RNN uses time.</p> -->
+            <p v-html="text.paragraph6" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="4"
+            data-step="0"
           >
-            <!-- <p>RGCN adds space.</p> -->
+            <p v-html="text.paragraph7" />
           </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="5"
-          />
-          <!-- <p>RGCN + pretraining</p> -->
+            data-step="0"
+          >
+            <p v-html="text.paragraph8" />
+          </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="6"
-          />
-         <!--  <p>and that's how we do it!</p> -->
+            data-step="0"
+          >
+            <p v-html="text.paragraph9" />
+          </div>
         </div>
-        <div class="step-container">
+        <div class="step-container text-content">
           <div
             class="step"
-            data-step="7"
-          />
-          <p></p>
+            data-step="0"
+          >
+            <p v-html="text.paragraph10" />
+          </div>
         </div>
+        <div class="step-container text-content">
+          <div
+            class="step"
+            data-step="0"
+          >
+            <p v-html="text.paragraph11" />
+          </div>
+        </div>
+        <div class="step-container text-content">
+          <div
+            class="step"
+            data-step="0"
+          >
+            <p v-html="text.paragraph12" />
+          </div>
+        </div>
+        <div class="step-container text-content">
+          <div
+            class="step"
+            data-step="0"
+          >
+            <p v-html="text.paragraph13" />
+          </div>
+        </div>
+        <div class="step-container text-content">
+          <div
+            class="step"
+            data-step="0"
+          >
+            <p v-html="text.paragraph14" />
+          </div>
+        </div>
+      
       </article>
       <div id="map-container">
      <img src="@/assets/usa_hex_map_80-01.png" />
@@ -139,6 +174,8 @@
     import { interpolatePath } from 'd3-interpolate-path';
     import * as flubber from "flubber";
 
+    import modelingText from "./../../assets/text/modelingText";
+
 
   export default {
     name: 'Modeling',
@@ -146,6 +183,7 @@
     },
     data() {
           return {
+            text: modelingText.textContents,
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
 
@@ -472,18 +510,7 @@ article {
   margin: 0 auto;
   width: 100%;
 }
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top:20vh;
-  height: 60vh;
-  padding: 1em;
-  left: 0;
-  margin: 0;
-  width: 100vw;
-  z-index: 0;
 
-}
 .sticky h2 {
   text-align: center;
   position: relative;
@@ -537,28 +564,38 @@ article {
   height: 400px;
 }
 
-#bees-container {
-  position: absolute;
-  width: 95%;
-  height: 50vh;
-  left: 5%;
-  top: 10%;
-}
-
 //start at beginning
 //grid layout
-#modeling, #modeling-template {
+#modeling {
   width: 100vw;
 }
-#scrolly {
-  display:flex;
-  flex-direction: column;
-}
+
 // intro title, text at top of page (scrolls)
 
-
+// beeswarm and flubber contained in sticky figure
 figure.sticky {
+  display: grid;
+  grid-template-rows: 5% 1fr 1fr 5%;
+  grid-template-columns: 2% auto 2%;
+  row-gap:15px;
 
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+
+  #flubber-container {
+    grid-column: 2 / 2;
+    grid-row: 2 / 2;
+    background-color: blue;
+  }
+  #bees-container {
+    grid-column: 2 / 2;
+    grid-row: 3 / 3;
+    background-color: pink;
+
+  }
 }
 #flubber-container {
   flex: 1;
