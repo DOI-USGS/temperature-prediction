@@ -72,8 +72,8 @@
 body {
       margin: 0;
       padding: 0;
-      color:black;
-      background-color: white;
+      color:white;
+      background-color: black;
       line-height: 1.5;
       font-size: 14pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
