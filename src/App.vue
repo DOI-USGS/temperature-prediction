@@ -72,7 +72,7 @@
 body {
       margin: 0;
       padding: 0;
-      color: white;
+      color:white;
       background-color: black;
       line-height: 1.5;
       font-size: 14pt;
