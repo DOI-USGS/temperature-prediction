@@ -3,7 +3,7 @@ export default {
         title1: "Predicting water temperature (ANN)",
         paragraph1: "Artifical neural networks (ANN), which are a form of deep learning, have had huge success in identifying complex relationships and making accurate predictions.",
         paragraph2: "We can measure the success of a model, in the case a ANN, by how closely the predicted temperature matches our measured temperature. A model that closely matches our observations in the streams has low error or good accuracy.",
-        paragraph3: "Using an ANN to predict water temperatures in the DRB, we can compare prediction accuracy across different time periods, locations, and at different amounts of data coverage. Here we show model RMSEs (the root mean square error) for a series of model runs using all of the data available. ",
+        paragraph3: "Using an ANN to predict water temperatures in the DRB, we can compare prediction accuracy across different time periods, locations, and at different amounts of data coverage.",
         paragraph4: "If a model perfectly predicts the observed data the RMSE will be 0. But as model accuracy decreases, prediction error increases and so does RMSE. When trained on 100% of the data, the ANN predicts temperatures fairly consistently in time and space.",
         paragraph5: "But when data are sparse (e.g. 1%), ANN predictions become less accurate. How can we help the model learn more with less data? This is where we can use our understanding of the world to give a machine learning model the upper hand. ",
         title2: "Recurrent neural network (RNN)",

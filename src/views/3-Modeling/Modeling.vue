@@ -21,7 +21,7 @@
           >
             <g
               id="Path1"
-              style="stroke: pink"
+              style="stroke: orangered"
             >
               <path
                 id="river"
@@ -41,7 +41,7 @@
             </g>
             <g
               id="Path2"
-              style="stroke: blue"
+              style="stroke: teal"
             >
               <path
                 id="river"
@@ -61,7 +61,7 @@
             </g>
             <g
               id="Path3"
-              style="stroke: teal"
+              style="stroke: orangered"
             >
               <path
                 id="other"
@@ -81,7 +81,7 @@
             </g>
             <g
               id="Path4"
-              style="stroke: green"
+              style="stroke: orangered"
             >
               <path
                 id="other"
@@ -101,7 +101,7 @@
             </g>
             <g
               id="Path5"
-              style="stroke: yellow"
+              style="stroke: teal"
             >
               <path
                 id="other"
@@ -122,9 +122,8 @@
           </svg>
       </div>
       <div id="error-container" />
-      <div id="bees-container">
-        <div id="legend-container" />
-      </div>
+      <div id="bees-container" />
+      <div id="legend-container" />
     </figure>
     <!--     all the scrolling elements -->
     <article>
@@ -387,7 +386,7 @@
               .attr("viewBox", [0, 0, this.width, this.height])
               .attr("class", "bees_legend");
 
-            //draw an arrow
+            //draw an arrow to RMSES
             var arrows = this.legend.append("g").classed("arrow", true)
 
             arrows
@@ -398,6 +397,10 @@
             arrows.append('path')
               .attr('d', "M.4 66.6a100.7 100.7 0 0113.5 19.2 1.5 1.5 0 002.3.4A169 169 0 0133.6 68c1.4-1.3-.7-3.4-2.2-2.1a169 169 0 00-17.3 18l2.4.3a103.5 103.5 0 00-14-19.8c-1.3-1.4-3.4.7-2.1 2.1z")
               .attr("fill","white")
+
+            arrows
+              .attr("transform", "rotate(90)")
+            /*   .attr("transform", "translate(50, 350)") */
 
             //create color legend dots
             this.legend.selectAll("mydots")
@@ -461,11 +464,11 @@
 
 
             // add x axis?? 
-            this.bees.append("g").classed("legend", true)
+/*             this.bees.append("g").classed("legend", true)
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
               .attr("opacity", 0)
-              .call(this.d3.axisBottom(self.xScale));
+              .call(this.d3.axisBottom(self.xScale)); */
           },
           //update bee x position on scroll
           updateChart(data) {
@@ -536,16 +539,16 @@
         handleStepProgress(response) {
           //console.log(response.progress);
         },
-        fadeOut(element) {
+        fadeOut(element, time) {
           element
           .transition()
-          .duration(500)
+          .duration(time)
           .attr("opacity",0)
         },
-         fadeIn(element) {
+         fadeIn(element, time) {
           element
           .transition()
-          .duration(500)
+          .duration(time)
           .attr("opacity",1)
         },
         //style changes by step
@@ -553,19 +556,20 @@
           //make beeswarm and legend fade in 
           // all are initially drawn with opacity 0
           if (action === 'appear') {
-
+            var time = 1000;
             // make beeswarm appear with legend
-            this.fadeIn(this.d3.selectAll(".dot"));
-            this.fadeIn(this.d3.selectAll(".legend"));
-            this.fadeIn(this.d3.select(".main_line"));
+
+            this.fadeIn(this.d3.selectAll(".dot"), time);
+            this.fadeIn(this.d3.selectAll(".legend"), time);
+            this.fadeIn(this.d3.select(".main_line"), time);
 
           }
           // fade out if scrolls back
           if (action === 'blank') {
             //beeswarm fadeout
-            this.fadeOut(this.d3.selectAll(".dot"));
-            this.fadeOut(this.d3.selectAll(".legend"));
-            this.fadeOut(this.d3.select(".main_line"));
+            this.fadeOut(this.d3.selectAll(".dot"), time);
+            this.fadeOut(this.d3.selectAll(".legend"), time);
+            this.fadeOut(this.d3.select(".main_line"), time);
 
           }
         // highlight high and low values
@@ -652,13 +656,11 @@ figure.sticky {
   #bees_dotPlot {
     width: 100%;
     height: 100%;
+
   }
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    position: relative;
-    height: 50px;
-    left: 70%;
   }
 }
 
