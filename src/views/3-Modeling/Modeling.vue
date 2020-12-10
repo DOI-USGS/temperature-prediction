@@ -13,9 +13,8 @@
       class="sticky"
     >
       <div id="flubber-container">
-        <div id="flubber">
           <svg
-            id="transform-svg-test"
+            id="flubber"
             xmlns="http://www.w3.org/2000/svg"
             width="100%"
             height="100%"
@@ -121,7 +120,6 @@
               />
             </g>
           </svg>
-        </div>
       </div>
       <div id="error-container" />
       <div id="bees-container">
@@ -265,7 +263,7 @@
             // dimensions
             margin: 20,
             width: 400,
-            height: 500,
+            height: 100,
             marginX: 20,
             marginY: 20,
 
@@ -286,7 +284,7 @@
             forceStrength: .3,
             gravityStrength: 5,
             friction: 0.6,
-            alpha: .2, // similar to "starting temperature", higher is hotter
+            alpha: .2, // similar to "starting tempyerature", higher is hotter
             alphaDecay: .5, // similar to "cool down rate", higher is faster
             xForceStrength: 2,
             yForceStrength: .07,
@@ -298,7 +296,7 @@
             path2_strings: null,
             path3_strings: null,
             path4_strings: null,
-            path5_strings: null,
+            path5_strings: null
             
           }
         },
@@ -306,7 +304,7 @@
           this.scroller.setup({
                   step: "article .step",
                   debug: false,
-                  offset: 0.5,
+                  offset: 0.9, //bottom of the page to trigger onStepEnter events
                   progress: false,
                 })
                 .onStepEnter(this.handleStepEnter)
@@ -331,7 +329,16 @@
           callback(data) {
             let rmse_monthly = data[0];
             
-            var model_list = ['ANN','RNN','RGCN','RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
+            var keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            var model_list = ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
+
+            var steps = {};
+            for (var i = 0; i < keys.length; i++){
+              steps[keys[i]] = model_list[i];
+            };
+
+            var model_emphasis = ['blank','blank','appear','highlight','none','none', 'none',''];
+            var flubber_steps = ['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream'];
 
             var data_set = model_list[this.step];
             this.setChart(rmse_monthly, data_set);
@@ -349,19 +356,20 @@
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
+          this.height = 1000;
+          this.width = 1000;
+          this.margin = 50;
 
         // append svg
           this.bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
-            .attr("width", this.width)
-            .attr("height", this.height)
+            .attr("viewBox", [0, 0, this.width, this.height].join(' '))
             .attr("class", "bees_dotPlot");
 
           this.bees.append("line", 'svg')
             .classed("main_line", true)
-            .attr("x1", this.marginX)
+            .attr("x1", this.margin)
             .attr("y1", this.height/2)
-            .attr("x2", this.width-this.marginX)
+            .attr("x2", this.width-this.margin)
             .attr("y2", this.height/2)
             .attr("opacity", 0)
             .attr("stroke-width", 1.5)
@@ -402,7 +410,7 @@
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
-            .range([this.marginX, this.width - this.marginX])
+            .range([this.margin, this.width-this.margin])
             .domain([0,10]);
 
 
@@ -448,7 +456,7 @@
             const self = this;
 
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN','RNN','RGCN','RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
+            var model_list = ['ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
             var model_sel = model_list[data];
             console.log(model_sel);
 
@@ -482,7 +490,7 @@
     handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
-          console.log(response);
+          //console.log(response);
            // changes css for class
           response.element.classList.add("is-active");
 
@@ -506,13 +514,13 @@
         handleStepExit(response) {
           const self = this;
           // response = { element, direction, index }
-          console.log(response);
+          //console.log(response);
           // changes css for class
           response.element.classList.remove("is-active");
         },
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
-          console.log(response.progress);
+          //console.log(response.progress);
         }
     }
   }
@@ -543,8 +551,6 @@ article {
   z-index: 1;
   height: 50vh;
   border: 1px;
-/*   background-color: grey;
-  opacity: .5; */
 
   p {
     padding: 2vw;
@@ -574,6 +580,11 @@ figure.sticky {
     grid-column: 2 / 2;
     grid-row: 2 / 2;
   }
+  #flubber {
+    display: block;
+    margin: auto;
+    width: auto;
+  }
   #error-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
@@ -582,21 +593,23 @@ figure.sticky {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
   }
-  #legend-container {
-    position: relative;
-    width:100%;
-    height: 50px;
-    left: 190px;
+  #bees_dotPlot {
+    width: 100%;
+    height: 100%;
   }
-}
-#flubber {
-  opacity: 0;
+  #legend-container {
+    grid-column: 2 / 2;
+    grid-row: 3 / 3;
+    position: relative;
+    height: 50px;
+    left: 70%;
+  }
 }
 
 // step-triggered transitions
 // can trigger attribute changes with .is-active
 .step.is-active {
- /*  background-color: orchid; */
+
 }
 
 // could add changes by step here
