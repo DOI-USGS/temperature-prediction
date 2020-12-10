@@ -277,6 +277,7 @@
             scroller: scrollama(), 
             step: 0,
             progress: 0,
+            action: "blank",
 
             // force
             force: null,
@@ -302,6 +303,8 @@
 
             keys: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             model_list: ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
+            model_emphasis: ['blank','appear','highlight','none','none', 'none',''],
+            flubber_steps:['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream']
             
           }
         },
@@ -320,7 +323,7 @@
           this.resize();
           window.addEventListener("resize", this.resize);
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
-          this.paddedRadius = this.radius*1.1;
+          this.paddedRadius = this.radius*1.5;
           
           this.getData(); //read in data and then draw chart
         },
@@ -334,20 +337,12 @@
           callback(data) {
             let rmse_monthly = data[0];
 
-                       
-            var keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-            var model_list = ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
-
-            var steps = {};
-            for (var i = 0; i < keys.length; i++){
-              steps[keys[i]] = model_list[i];
-            };
-
-            var model_emphasis = ['blank','blank','appear','highlight','none','none', 'none',''];
-            var flubber_steps = ['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream'];
-
-            var data_set = model_list[this.step];
+            var data_set = this.model_list[this.step];
             this.setChart(rmse_monthly, data_set);
+
+            //triggered events
+            this.action = this.model_emphasis[this.step];
+            this.makePop(this.action);
           },
           // resize to keep scroller accurate
           resize () {
@@ -371,6 +366,7 @@
               .attr("viewBox", [0, 0, this.width, this.height].join(' '))
               .attr("class", "bees_dotPlot");
 
+            //add mid line for horizontal clustering
             this.bees.append("line", 'svg')
               .classed("main_line", true)
               .attr("x1", this.margin)
@@ -378,41 +374,55 @@
               .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
               .attr("opacity", 0)
-              .attr("stroke-width", 1.5)
+              .attr("stroke-width", 2)
               .attr("stroke", "#A3A0A6");
 
           //use color scale for experiment
             let experiments = Array.from(new Set(data.map((d) => d.experiment)));
             let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
-            var keys = ["1%", "100%"];
+            var scale_keys = ["1%", "100%"];
 
+          // add color legend - different svg that is stacked on top of the beeswarm
             this.legend = this.d3.select("#legend-container").append("svg")
-              .attr("viewBox", [0, 0, 200, 200])
-              .attr("width", 100)
-              .attr("height", 100)
+              .attr("viewBox", [0, 0, this.width, this.height])
               .attr("class", "bees_legend");
 
-            //create color legend
+            //draw an arrow
+            var arrows = this.legend.append("g").classed("arrow", true)
+
+            arrows
+              .append('path')
+              .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
+              .attr("fill","white")
+              
+            arrows.append('path')
+              .attr('d', "M.4 66.6a100.7 100.7 0 0113.5 19.2 1.5 1.5 0 002.3.4A169 169 0 0133.6 68c1.4-1.3-.7-3.4-2.2-2.1a169 169 0 00-17.3 18l2.4.3a103.5 103.5 0 00-14-19.8c-1.3-1.4-3.4.7-2.1 2.1z")
+              .attr("fill","white")
+
+            //create color legend dots
             this.legend.selectAll("mydots")
-              .data(keys)
+              .data(scale_keys)
               .enter()
-              .append("circle")
+              .append("circle").classed("legend", true)
                 .attr("cx", 100)
-                .attr("cy", function(d, i){ return 100 + i*50})
+                .attr("cy", function(d, i){ return 800 + i*50})
                 .attr("r", 8)
-                .style("fill", function(d){return color(d)});
-          
+                .style("fill", function(d){return color(d)})
+                .attr("opacity", 0);
+
+          //legend labels
           this.legend.selectAll("mylabels")
-            .data(keys)
+            .data(scale_keys)
             .enter()
-            .append("text")
+            .append("text").classed("legend", true)
               .attr("x", 120)
-              .attr("y", function(d,i){ return 100 + i*50})
+              .attr("y", function(d,i){ return 800 + i*50})
               .style("fill",  function(d){ return color(d)})
               .text(function(d){ return d})
               .attr("text-anchor", "left")
               .attr("font-size", "50px")
-              .style("alignment-baseline", "middle");
+              .style("alignment-baseline", "middle")
+              .attr("opacity", 0);
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
@@ -427,87 +437,42 @@
             .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", (d) => color(d.experiment))
-            .attr("opacity", .8)
+            .attr("opacity", 0)
             .attr('cx', function(d){return self.xScale(d[model]);})
-/* 
-            this.force = this.d3.forceSimulation(data)
-            .force("charge", this.d3.forceManyBody())
-            .force("forceX", this.d3.forceX(this.width/2))
-            .force("forceY", this.d3.forceY(this.height/2));
-
-            // define force strength
-            force.force("forceX").strength(0.5);
-            force.force("forceY").strength(0.5);
-            force.force("link").distance(50);
-            force.force("link").strength(0.05);
-            force.force("charge").strength(-40); */
-
-            //decay is used to smoothly kill the simulation
 
           //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data)
+          this.force_sim = this.d3.forceSimulation(data) // start force simulation from array of nodes
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
-              }).strength(.99)
+              }).strength(.95)
             )
             .force('y', this.d3.forceY(this.height/2).strength(0.05))
-            .force('collide', this.d3.forceCollide(this.paddedRadius))
+            .force('collide', this.d3.forceCollide(this.paddedRadius*1.2).strength(.3))
             .alphaDecay(0)
             .alpha(0.12)
-            .on('tick', self.tick)
+            .on('tick', self.tick) // listen for tick events
 
+            //decay is used to smoothly kill the simulation after a defined time
             var init_decay;
             init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim.alphaDecay(0.1);
             }, 8000);
- /*            .alpha(this.alpha)
-            .alphaDecay(this.alphaDecay)
-            .velocityDecay(this.friction)
-            .on('tick', self.tick); */
-
-            /* this.force_sim = this.d3.layout.force()
-              .size([this.width, this.height])
-              .nodes(this.d3.values(nodes))
-              .on('tick', tick)
-              .linkDistance(300)
-              .start();
-
-              node = this.d3.selectAll('.node')
-              .data(force.nodes())
-              .enter().append('circle')
-              .attr('class','node')
-              .attr('r', this.radius);
-
-              function tick(e) {
-                node.attr('cx', function(d) { return d.x; })
-                    .attr('cy', function(d) { return d.y; })
-                    .call(force.drag);
-
-              } */
-
-            //add decay after set time to smoothly end transition
-            /* this.init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim
-                .alphaDecay(this.alphaDecay);
-            }, this.timeBeforeKill); */
 
 
-            // add x axis
-            this.bees.append("g")
+            // add x axis?? 
+            this.bees.append("g").classed("legend", true)
               .attr("transform", "translate(0," + this.height + ")")
               .attr("stroke-width", "2px")
               .attr("opacity", 0)
               .call(this.d3.axisBottom(self.xScale));
           },
-          //update x position on scroll
+          //update bee x position on scroll
           updateChart(data) {
             const self = this;
 
             // list models in order of transitions, use step index to select
-            var model_list = ['ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
-            var model_sel = model_list[data];
+            var model_sel = this.model_list[data];
             console.log(model_sel);
 /* 
             this.force_sim
@@ -537,22 +502,21 @@
         },
         // scrollama event handler functions
         // add class on enter
-    handleStepEnter(response) {
+      handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
           //console.log(response);
            // changes css for class
           response.element.classList.add("is-active");
 
-          if(response.index === 0){
+        // update step variable to match step in view
+          this.step = response.index;
+          
 
-            this.d3.select(".main_line")
-              .attr("opacity", 1)
-          } 
-
-          //update number in sticky to show step number
-          self.d3.select("#bees-container p")
-          .text(response.index + 1);
+        // trigger style changes
+          this.action = this.model_emphasis[this.step];
+          console.log(this.action);
+          this.makePop(this.action);
 
           //change chart data w/ transition
          /*  this.updateChart(response.index); */
@@ -571,6 +535,48 @@
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
           //console.log(response.progress);
+        },
+        fadeOut(element) {
+          element
+          .transition()
+          .duration(500)
+          .attr("opacity",0)
+        },
+         fadeIn(element) {
+          element
+          .transition()
+          .duration(500)
+          .attr("opacity",1)
+        },
+        //style changes by step
+        makePop(action) {
+          //make beeswarm and legend fade in 
+          // all are initially drawn with opacity 0
+          if (action === 'appear') {
+
+            // make beeswarm appear with legend
+            this.fadeIn(this.d3.selectAll(".dot"));
+            this.fadeIn(this.d3.selectAll(".legend"));
+            this.fadeIn(this.d3.select(".main_line"));
+
+          }
+          // fade out if scrolls back
+          if (action === 'blank') {
+            //beeswarm fadeout
+            this.fadeOut(this.d3.selectAll(".dot"));
+            this.fadeOut(this.d3.selectAll(".legend"));
+            this.fadeOut(this.d3.select(".main_line"));
+
+          }
+        // highlight high and low values
+            if (action === 'highlight') {
+
+            //label accurate vs inaccurate
+            //highlight 
+            }
+        },
+        errorChart(data) {
+
         }
     }
   }
