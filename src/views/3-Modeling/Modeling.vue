@@ -262,8 +262,8 @@
 
             // dimensions
             margin: 20,
-            width: 400,
-            height: 100,
+            width: 1000,
+            height: 1000,
             marginX: 20,
             marginY: 20,
 
@@ -279,8 +279,10 @@
             progress: 0,
 
             // force
+            force: null,
             force_sim: null,
             init_decay: null,
+
             forceStrength: .3,
             gravityStrength: 5,
             friction: 0.6,
@@ -288,7 +290,7 @@
             alphaDecay: .5, // similar to "cool down rate", higher is faster
             xForceStrength: 2,
             yForceStrength: .07,
-            timeBeforeKill: 1000,
+            timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
 
            // flubber
@@ -296,7 +298,10 @@
             path2_strings: null,
             path3_strings: null,
             path4_strings: null,
-            path5_strings: null
+            path5_strings: null,
+
+            keys: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            model_list: ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
             
           }
         },
@@ -328,7 +333,8 @@
           },
           callback(data) {
             let rmse_monthly = data[0];
-            
+
+                       
             var keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
             var model_list = ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
 
@@ -356,24 +362,24 @@
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
-          this.height = 1000;
-          this.width = 1000;
-          this.margin = 50;
+            this.height = 1000;
+            this.width = 1000;
+            this.margin = 50;
 
-        // append svg
-          this.bees = this.d3.select("#bees-container").append("svg")
-            .attr("viewBox", [0, 0, this.width, this.height].join(' '))
-            .attr("class", "bees_dotPlot");
+          // append svg
+            this.bees = this.d3.select("#bees-container").append("svg")
+              .attr("viewBox", [0, 0, this.width, this.height].join(' '))
+              .attr("class", "bees_dotPlot");
 
-          this.bees.append("line", 'svg')
-            .classed("main_line", true)
-            .attr("x1", this.margin)
-            .attr("y1", this.height/2)
-            .attr("x2", this.width-this.margin)
-            .attr("y2", this.height/2)
-            .attr("opacity", 0)
-            .attr("stroke-width", 1.5)
-            .attr("stroke", "#A3A0A6");
+            this.bees.append("line", 'svg')
+              .classed("main_line", true)
+              .attr("x1", this.margin)
+              .attr("y1", this.height/2)
+              .attr("x2", this.width-this.margin)
+              .attr("y2", this.height/2)
+              .attr("opacity", 0)
+              .attr("stroke-width", 1.5)
+              .attr("stroke", "#A3A0A6");
 
           //use color scale for experiment
             let experiments = Array.from(new Set(data.map((d) => d.experiment)));
@@ -418,32 +424,76 @@
           //use force to push each dot to x position
           this.bees.selectAll("dot")
             .data(data)
-          .enter().append("circle").classed('dot', true)
+            .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", (d) => color(d.experiment))
             .attr("opacity", .8)
             .attr('cx', function(d){return self.xScale(d[model]);})
-/*             .attr('cy', function(d){return this.height/2;}) */
+/* 
+            this.force = this.d3.forceSimulation(data)
+            .force("charge", this.d3.forceManyBody())
+            .force("forceX", this.d3.forceX(this.width/2))
+            .force("forceY", this.d3.forceY(this.height/2));
+
+            // define force strength
+            force.force("forceX").strength(0.5);
+            force.force("forceY").strength(0.5);
+            force.force("link").distance(50);
+            force.force("link").strength(0.05);
+            force.force("charge").strength(-40); */
+
+            //decay is used to smoothly kill the simulation
 
           //apply force to push dots towards central position on yaxis
           this.force_sim = this.d3.forceSimulation(data)
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
-              }).strength(this.xForceStrength)
+              }).strength(.99)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(this.yForceStrength))	
-            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1))
-            .alpha(this.alpha)
+            .force('y', this.d3.forceY(this.height/2).strength(0.05))
+            .force('collide', this.d3.forceCollide(this.paddedRadius))
+            .alphaDecay(0)
+            .alpha(0.12)
+            .on('tick', self.tick)
+
+            var init_decay;
+            init_decay = setTimeout(function(){
+              console.log('init alpha decay')
+              this.force_sim.alphaDecay(0.1);
+            }, 8000);
+ /*            .alpha(this.alpha)
             .alphaDecay(this.alphaDecay)
             .velocityDecay(this.friction)
-            .on('tick', self.tick);
+            .on('tick', self.tick); */
+
+            /* this.force_sim = this.d3.layout.force()
+              .size([this.width, this.height])
+              .nodes(this.d3.values(nodes))
+              .on('tick', tick)
+              .linkDistance(300)
+              .start();
+
+              node = this.d3.selectAll('.node')
+              .data(force.nodes())
+              .enter().append('circle')
+              .attr('class','node')
+              .attr('r', this.radius);
+
+              function tick(e) {
+                node.attr('cx', function(d) { return d.x; })
+                    .attr('cy', function(d) { return d.y; })
+                    .call(force.drag);
+
+              } */
 
             //add decay after set time to smoothly end transition
-            this.init_decay = setTimeout(function(){
+            /* this.init_decay = setTimeout(function(){
               console.log('init alpha decay')
               this.force_sim
                 .alphaDecay(this.alphaDecay);
-            }, this.timeBeforeKill);
+            }, this.timeBeforeKill); */
+
+
             // add x axis
             this.bees.append("g")
               .attr("transform", "translate(0," + this.height + ")")
@@ -459,21 +509,21 @@
             var model_list = ['ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'];
             var model_sel = model_list[data];
             console.log(model_sel);
-
-            self.force_sim
+/* 
+            this.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
 
             this.force_sim
-              .alphaDecay(0.01)
+              .alphaDecay(this.alphaDecay)
               .alpha(0.12)
               .restart()
-              .on('tick', self.tick);
+              .on('tick', self.tick); */
             
             this.init_decay = setTimeout(function(){
               console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.7);
+              this.force_sim.alphaDecay(this.alphaDecay);
             }, 1000)
 
             clearTimeout(this.init_decay);
@@ -505,7 +555,7 @@
           .text(response.index + 1);
 
           //change chart data w/ transition
-          this.updateChart(response.index);
+         /*  this.updateChart(response.index); */
           this.scroller.resize();
 
         },
