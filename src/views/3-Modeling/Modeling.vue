@@ -273,10 +273,9 @@
             model_sel: null,
 
             // scroll options
-            scroller: scrollama(), 
-            step: 0,
+            scroller: null,
+            step: null,
             progress: 0,
-            action: "blank",
 
             // force
             force: null,
@@ -302,12 +301,12 @@
 
             keys: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             model_list: ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
-            model_emphasis: ['blank','appear','highlight','none','none', 'none',''],
             flubber_steps:['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream']
             
           }
         },
         mounted() {
+          this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
                   debug: false,
@@ -317,6 +316,7 @@
                 .onStepEnter(this.handleStepEnter)
                 .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
+          
 
           // 3. setup resize event...is this working as expected?
           this.resize();
@@ -325,6 +325,7 @@
           this.paddedRadius = this.radius*1.5;
           
           this.getData(); //read in data and then draw chart
+
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -340,11 +341,11 @@
             this.setChart(rmse_monthly, data_set);
 
             //triggered events
-            this.action = this.model_emphasis[this.step];
-            this.makePop(this.action);
+            this.makePop(this.step);
           },
           // resize to keep scroller accurate
           resize () {
+            // need to move ALL sizing aspects to this section...charts, legends.
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
@@ -393,14 +394,18 @@
               .append('path')
               .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
               .attr("fill","white")
+              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
               
             arrows.append('path')
               .attr('d', "M.4 66.6a100.7 100.7 0 0113.5 19.2 1.5 1.5 0 002.3.4A169 169 0 0133.6 68c1.4-1.3-.7-3.4-2.2-2.1a169 169 0 00-17.3 18l2.4.3a103.5 103.5 0 00-14-19.8c-1.3-1.4-3.4.7-2.1 2.1z")
               .attr("fill","white")
+              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
 
-            arrows
-              .attr("transform", "rotate(90)")
-            /*   .attr("transform", "translate(50, 350)") */
+            arrows.append('text').classed('text-annotate', true)
+              .text("RMSEs")
+              .attr("transform", "translate(400, 700)")
+              .style("fill", "white")
+              .attr("font-size", "32px")
 
             //create color legend dots
             this.legend.selectAll("mydots")
@@ -410,8 +415,7 @@
                 .attr("cx", 100)
                 .attr("cy", function(d, i){ return 800 + i*50})
                 .attr("r", 8)
-                .style("fill", function(d){return color(d)})
-                .attr("opacity", 0);
+                .style("fill", function(d){return color(d)});
 
           //legend labels
           this.legend.selectAll("mylabels")
@@ -424,14 +428,12 @@
               .text(function(d){ return d})
               .attr("text-anchor", "left")
               .attr("font-size", "50px")
-              .style("alignment-baseline", "middle")
-              .attr("opacity", 0);
+              .style("alignment-baseline", "middle");
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
-
 
           //draw bees
           //use force to push each dot to x position
@@ -440,7 +442,6 @@
             .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", (d) => color(d.experiment))
-            .attr("opacity", 0)
             .attr('cx', function(d){return self.xScale(d[model]);})
 
           //apply force to push dots towards central position on yaxis
@@ -458,8 +459,9 @@
             //decay is used to smoothly kill the simulation after a defined time
             var init_decay;
             init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim.alphaDecay(0.1);
+              console.log('init alpha decay');
+              self.force_sim
+                .alphaDecay(0.1);
             }, 8000);
 
 
@@ -489,12 +491,12 @@
               .restart()
               .on('tick', self.tick); */
             
-            this.init_decay = setTimeout(function(){
+            /* this.init_decay = setTimeout(function(){
               console.log('re-init alpha decay');
               this.force_sim.alphaDecay(this.alphaDecay);
             }, 1000)
 
-            clearTimeout(this.init_decay);
+            clearTimeout(this.init_decay); */
 
           },
           tick() {
@@ -517,9 +519,7 @@
           
 
         // trigger style changes
-          this.action = this.model_emphasis[this.step];
-          console.log(this.action);
-          this.makePop(this.action);
+          this.makePop(this.step);
 
           //change chart data w/ transition
          /*  this.updateChart(response.index); */
@@ -555,29 +555,33 @@
         makePop(action) {
           //make beeswarm and legend fade in 
           // all are initially drawn with opacity 0
-          if (action === 'appear') {
-            var time = 1000;
+          // thi sis not a good approach - the the page is refreshed in scroll, it resets to step 0
+          // rather than the current step - need to address that throughout
+          //how to pull current step on page load???
+           var time = 1000;
+          if (action >= 1 ) {
             // make beeswarm appear with legend
 
             this.fadeIn(this.d3.selectAll(".dot"), time);
-            this.fadeIn(this.d3.selectAll(".legend"), time);
             this.fadeIn(this.d3.select(".main_line"), time);
-
+            this.fadeIn(this.d3.select(".arrow"), time);
           }
           // fade out if scrolls back
-          if (action === 'blank') {
+          if (action === 0) {
             //beeswarm fadeout
             this.fadeOut(this.d3.selectAll(".dot"), time);
             this.fadeOut(this.d3.selectAll(".legend"), time);
             this.fadeOut(this.d3.select(".main_line"), time);
+            this.fadeOut(this.d3.select(".arrow"), time);
 
           }
-        // highlight high and low values
-            if (action === 'highlight') {
+          if (action >= 2 ) {
 
-            //label accurate vs inaccurate
-            //highlight 
-            }
+            this.fadeIn(this.d3.selectAll(".legend"), time);
+           this.fadeOut(this.d3.select(".arrow"), time);
+
+          }
+
         },
         errorChart(data) {
 
@@ -661,7 +665,12 @@ figure.sticky {
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
+
   }
+}
+
+.text-annotate {
+  fill:white;
 }
 
 // step-triggered transitions
