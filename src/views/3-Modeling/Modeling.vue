@@ -157,9 +157,9 @@
     <article>
       <div class="step-container text-content">
         <div
+          id="ANN"
           class="step"
           data-step="0"
-          id='ANN'
         >
           <p v-html="text.paragraph2" />
         </div>
@@ -190,18 +190,18 @@
       </div>
       <div class="step-container text-content">
         <div
+          id="ANN"
           class="step"
           data-step="4"
-          id='ANN'
         >
           <p v-html="text.paragraph6" />
         </div>
       </div>
       <div class="step-container text-content">
         <div
+          id="RNN"
           class="step"
           data-step="5"
-          id="RNN"
         >
           <p v-html="text.paragraph7" />
         </div>
@@ -216,36 +216,36 @@
       </div>
       <div class="step-container text-content">
         <div
+          id="RNN"
           class="step"
           data-step="7"
-          id='RNN'
         >
           <p v-html="text.paragraph9" />
         </div>
       </div>
       <div class="step-container text-content">
         <div
+          id="RGCN"
           class="step"
           data-step="8"
-          id="RGCN"
         >
           <p v-html="text.paragraph10" />
         </div>
       </div>
       <div class="step-container text-content">
         <div
+          id="RGCN"
           class="step"
           data-step="9"
-          id='RGCN'
         >
           <p v-html="text.paragraph11" />
         </div>
       </div>
       <div class="step-container text-content">
         <div
+          id="RGCN_ptrn"
           class="step"
           data-step="10"
-          id="RGCN_ptrn"
         >
           <p v-html="text.paragraph12" />
         </div>
