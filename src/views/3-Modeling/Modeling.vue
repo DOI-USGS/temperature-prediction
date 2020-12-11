@@ -395,6 +395,7 @@
             //draw an arrow to RMSES
             var arrows = this.legend.append("g").classed("arrow", true)
 
+          //rmse arrow
             arrows
               .append('path')
               .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
@@ -417,8 +418,8 @@
               .data(scale_keys)
               .enter()
               .append("circle").classed("legend", true)
-                .attr("cx", 100)
-                .attr("cy", function(d, i){ return 800 + i*50})
+                .attr("cx", function(d,i){return 250 + i*250})
+                .attr("cy", function(d, i){ return 800 })
                 .attr("r", 8)
                 .style("fill", function(d){return color(d)});
 
@@ -427,8 +428,8 @@
             .data(scale_keys)
             .enter()
             .append("text").classed("legend", true)
-              .attr("x", 120)
-              .attr("y", function(d,i){ return 800 + i*50})
+              .attr("x", function(d,i){return 280 + i*250})
+              .attr("y", function(d,i){ return 800})
               .style("fill",  function(d){ return color(d)})
               .text(function(d){ return d})
               .attr("text-anchor", "left")
@@ -455,8 +456,8 @@
                 return self.xScale(d[model])
               }).strength(.95)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.05))
-            .force('collide', this.d3.forceCollide(this.paddedRadius*1.2).strength(.3))
+            .force('y', this.d3.forceY(this.height/2).strength(0.1))
+            .force('collide', this.d3.forceCollide(this.paddedRadius*1.3).strength(.3).iterations(1))
             .alphaDecay(0)
             .alpha(0.12)
             .on('tick', self.tick) // listen for tick events
@@ -520,6 +521,7 @@
 
         // update step variable to match step in view
           this.step = response.index;
+          console.log(response.index);
           
 
         // trigger style changes
@@ -528,6 +530,12 @@
           //change chart data w/ transition
          /*  this.updateChart(response.index); */
           this.scroller.resize();
+
+        /*   if (response.index <= 4) {
+            this.d3.selectAll(".dot")
+            .transition()
+              .attr("fill", "teal")
+          } */
 
         },
         
