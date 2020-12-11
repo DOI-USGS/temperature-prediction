@@ -30,6 +30,7 @@
     "dns": "^0.2.2",
     "flubber": "^0.4.2",
     "jquery": "^3.5.1",
+    "lint": "^0.7.0",
     "mobile-device-detect": "^0.4.3",
     "scrollama": "^2.2.1",
     "simple-statistics": "^7.2.0",

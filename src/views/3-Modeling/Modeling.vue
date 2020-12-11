@@ -531,11 +531,21 @@
          /*  this.updateChart(response.index); */
           this.scroller.resize();
 
-        /*   if (response.index <= 4) {
-            this.d3.selectAll(".dot")
-            .transition()
-              .attr("fill", "teal")
-          } */
+          if (response.index === 4) {
+            var circles = this.d3.selectAll(".dot")
+            .data(rmse_mo)
+
+            circles.exit().remove(); // drop unneeded 
+            circles.enter().append("circle")
+              .attr("r", 0) // create new circles
+            
+            circles.transition()
+              .duration(500)
+              .attr("cx", function(d,i){
+
+              })
+
+          }
 
         },
         
