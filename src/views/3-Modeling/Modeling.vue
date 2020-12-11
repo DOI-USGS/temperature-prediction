@@ -425,7 +425,7 @@
               console.log('current flubber id')
               console.log(self.current_flubber_id)
 
-              // identify which fluber id to transition to
+              // identify which flubber id to transition to
               // get id of current step w/i flubber_id_order array
               let next_id_index = self.flubber_id_order.indexOf(step_id)
               let previous_id;
@@ -435,6 +435,8 @@
                 // OR the step_id matches the previous step id (as stored at the end of this function)
                 // set the previous_id to be the same as the step_id
                 // otherwise, set the previous_id to be the preceding item in the flubber_id_order array
+                // // // NOTE: Wil leave as is for now, but now that I am storing the 'current id' at the end of this function, 
+                // // // we could potentially just use that to define the previous step, unless it is null (beginning)?
                 previous_id = (next_id_index == 0 || step_id == self.current_flubber_id) ? step_id : self.flubber_id_order[next_id_index - 1]
               } else {
                 // if the step direction is up, and
@@ -442,6 +444,8 @@
                 // OR the step_id matches the previous step id (as stored at the end of this function)
                 // set the previous_id to the step_id
                 // otherwise, set the previous_id to be the subsequent item in the flubber_id_order array
+                // // // NOTE: Will leave as is for now, but now that I am storing the 'current id' at the end of this function, 
+                // // // we could potentially just use that to define the previous step?
                 previous_id = (next_id_index == self.flubber_id_order.length-1 || step_id == self.current_flubber_id) ? step_id : self.flubber_id_order[next_id_index + 1]  
               }
 
