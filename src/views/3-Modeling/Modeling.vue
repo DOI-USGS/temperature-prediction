@@ -123,7 +123,17 @@
       </div>
       <div id="error-container" />
       <div id="bees-container" />
-      <div id="legend-container" />
+      <div id="legend-container" >
+        <svg id="bees_legend" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+        <g id="legend-scale" transform="translate(0, 700)">
+        <path d="M228,643.5H807" transform="translate(-28.24 -627.46)" style="fill: none;stroke: white;stroke-miterlimit: 10;stroke-width: 3px"/>
+        <text class="text-annotate" transform="translate(50 27.42)" >accurate</text>
+        <text class="text-annotate" transform="translate(795 27.42)" >inaccurate</text>
+        <path d="M247.5,656.5l-23-12,22-15" transform="translate(-28.24 -627.46)" style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"/>
+        <path d="M722.5,657.5l24-14-25-13" transform="translate(30 -627.46)" style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"/>
+      </g>
+      </svg>
+      </div>
     </figure>
     <!--     all the scrolling elements -->
     <article>
@@ -299,7 +309,6 @@
             path4_strings: null,
             path5_strings: null,
 
-            keys: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             model_list: ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
             flubber_steps:['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream']
             
@@ -373,8 +382,7 @@
               .attr("y1", this.height/2)
               .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
-              .attr("opacity", 0)
-              .attr("stroke-width", 2)
+              .attr("stroke-width", 4)
               .attr("stroke", "#A3A0A6");
 
           //use color scale for experiment
@@ -383,10 +391,7 @@
             var scale_keys = ["1%", "100%"];
 
           // add color legend - different svg that is stacked on top of the beeswarm
-            this.legend = this.d3.select("#legend-container").append("svg")
-              .attr("viewBox", [0, 0, this.width, this.height])
-              .attr("class", "bees_legend");
-
+            this.legend = this.d3.select("#bees_legend")
             //draw an arrow to RMSES
             var arrows = this.legend.append("g").classed("arrow", true)
 
@@ -466,10 +471,9 @@
 
 
             // add x axis?? 
-/*             this.bees.append("g").classed("legend", true)
-              .attr("transform", "translate(0," + this.height + ")")
+           /*  this.bees.append("g").classed("legend", true)
+              .attr("transform", "translate(0," + this.height*.6 + ")")
               .attr("stroke-width", "2px")
-              .attr("opacity", 0)
               .call(this.d3.axisBottom(self.xScale)); */
           },
           //update bee x position on scroll
@@ -565,6 +569,7 @@
             this.fadeIn(this.d3.selectAll(".dot"), time);
             this.fadeIn(this.d3.select(".main_line"), time);
             this.fadeIn(this.d3.select(".arrow"), time);
+
           }
           // fade out if scrolls back
           if (action === 0) {
@@ -577,9 +582,16 @@
           }
           if (action >= 2 ) {
 
-            this.fadeIn(this.d3.selectAll(".legend"), time);
+          this.fadeIn(this.d3.selectAll(".legend"), time);
            this.fadeOut(this.d3.select(".arrow"), time);
 
+           this.fadeIn(this.d3.select("#legend-scale"), time);
+
+          }
+          if (action <= 1) {
+            //disappearing elements
+            this.fadeOut(this.d3.selectAll(".legend"), time/2);
+            this.fadeOut(this.d3.selectAll("#legend-scale"), time/2);
           }
 
         },
@@ -630,9 +642,9 @@ article {
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
   display: grid;
-  grid-template-rows: 5% 1fr 1fr 5%;
+  grid-template-rows: 5% 1fr 10% 1fr 5%;
   grid-template-columns: 2% auto 2%;
-  row-gap:15px;
+  row-gap:20px;
 
   position: -webkit-sticky;
   position: sticky;
@@ -651,11 +663,11 @@ figure.sticky {
   }
   #error-container {
     grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
   }
   #bees-container {
     grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
   }
   #bees_dotPlot {
     width: 100%;
@@ -664,13 +676,16 @@ figure.sticky {
   }
   #legend-container {
     grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
 
   }
 }
 
 .text-annotate {
   fill:white;
+  font-size: 32px;
+  font-family: NotoSans-Medium, Noto Sans;
+  font-weight: 300;
 }
 
 // step-triggered transitions
