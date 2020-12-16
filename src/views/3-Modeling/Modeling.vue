@@ -279,8 +279,11 @@
             // beeswarm
             radius: 4,
             bees: null,
+            svg: null,
             xScale: null,
             model_sel: null,
+            rmse_monthly: null,
+            rmse_monthly_cast: null,
 
             // scroll options
             scroller: null,
@@ -309,8 +312,7 @@
             path4_strings: null,
             path5_strings: null,
 
-            model_list: ['ANN','ANN','ANN','ANN','ANN_exp', 'ANN_exp', 'ANN_exp', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
-            flubber_steps:['ANN','ANN','ANN','ANN','ANN','ANN','timeseries','timeseries','network','network','stream','stream']
+            model_list: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
             
           }
         },
@@ -331,7 +333,7 @@
           this.resize();
           window.addEventListener("resize", this.resize);
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
-          this.paddedRadius = this.radius*1.5;
+          this.paddedRadius = this.radius*1.2;
           
           this.getData(); //read in data and then draw chart
 
@@ -340,14 +342,16 @@
         methods: {
           getData() {
             const self = this;
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv")];
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv"),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv")];
             Promise.all(promises).then(self.callback);
           },
           callback(data) {
             let rmse_monthly = data[0];
+            let rmse_monthly_cast = data[1];
 
             var data_set = this.model_list[this.step];
-            this.setChart(rmse_monthly, data_set);
+            this.setChart(rmse_monthly_cast, data_set);
 
             //triggered events
             this.makePop(this.step);
@@ -390,12 +394,12 @@
             let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
             var scale_keys = ["1%", "100%"];
 
-          // add color legend - different svg that is stacked on top of the beeswarm
+          /* // add color legend - different svg that is stacked on top of the beeswarm
             this.legend = this.d3.select("#bees_legend")
             //draw an arrow to RMSES
             var arrows = this.legend.append("g").classed("arrow", true)
 
-          //rmse arrow
+          //rmse arrow - should jsut add these as svg?
             arrows
               .append('path')
               .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
@@ -434,7 +438,7 @@
               .text(function(d){ return d})
               .attr("text-anchor", "left")
               .attr("font-size", "50px")
-              .style("alignment-baseline", "middle");
+              .style("alignment-baseline", "middle"); */
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
@@ -443,7 +447,7 @@
 
           //draw bees
           //use force to push each dot to x position
-          this.bees.selectAll("dot")
+          this.bees.selectAll("circle")
             .data(data)
             .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
@@ -456,8 +460,9 @@
                 return self.xScale(d[model])
               }).strength(.95)
             )
-            .force('y', this.d3.forceY(this.height/2).strength(0.1))
-            .force('collide', this.d3.forceCollide(this.paddedRadius*1.3).strength(.3).iterations(1))
+            .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
+            //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
             .alphaDecay(0)
             .alpha(0.12)
             .on('tick', self.tick) // listen for tick events
@@ -468,14 +473,41 @@
               console.log('init alpha decay');
               self.force_sim
                 .alphaDecay(0.1);
-            }, 8000);
+            }, 5000);
 
 
-            // add x axis?? 
-           /*  this.bees.append("g").classed("legend", true)
-              .attr("transform", "translate(0," + this.height*.6 + ")")
-              .attr("stroke-width", "2px")
-              .call(this.d3.axisBottom(self.xScale)); */
+          },
+          addPts(selection) {
+            const self = this;
+/* 
+            const circles = selection.selectAll("circle.dot")
+              .data(this.rmse_monthly, function (d) { return d.ANN })
+              .join(
+                enter => enter.append("circle")
+                  .attr("fill", "green")
+                  .attr(d => d.ANN),
+                update => update
+                  .attr("fill", "gray")
+                  .classed("new", true)
+                ); */ // select all the svg circles in beeswarm
+
+            var circles = self.d3.selectAll("circle")
+              .data(this.rmse_monthly);
+
+            const t = selection.transition()
+              .duration(1000);
+
+            circles.join(
+              enter => enter
+                .append("circle").classed("new", true)
+                .attr("cx", function(d) { return self.xScale(d.ANN)})
+                .call(enter => enter.transition(t)),
+              update => update  
+                .attr("cx", function(d) { return self.xScale(d.ANN)})
+                .call(update => update.transition(t))
+
+            )
+
           },
           //update bee x position on scroll
           updateChart(data) {
@@ -484,24 +516,17 @@
             // list models in order of transitions, use step index to select
             var model_sel = this.model_list[data];
             console.log(model_sel);
-/* 
-            this.force_sim
+
+            self.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-
-            this.force_sim
-              .alphaDecay(this.alphaDecay)
+              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
+              .alphaDecay(0)
               .alpha(0.12)
-              .restart()
-              .on('tick', self.tick); */
-            
-            /* this.init_decay = setTimeout(function(){
-              console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(this.alphaDecay);
-            }, 1000)
+              .on('tick', self.tick)
 
-            clearTimeout(this.init_decay); */
+
 
           },
           tick() {
@@ -525,26 +550,15 @@
           
 
         // trigger style changes
-          this.makePop(this.step);
+          //this.makePop(this.step);
 
           //change chart data w/ transition
-         /*  this.updateChart(response.index); */
+          this.updateChart(response.index);
           this.scroller.resize();
 
-          if (response.index === 4) {
-            var circles = this.d3.selectAll(".dot")
-            .data(rmse_mo)
-
-            circles.exit().remove(); // drop unneeded 
-            circles.enter().append("circle")
-              .attr("r", 0) // create new circles
+          if (response.index >= 3) {
             
-            circles.transition()
-              .duration(500)
-              .attr("cx", function(d,i){
-
-              })
-
+            this.addPts(this.d3.select("svg.bees_dotPlot"));
           }
 
         },
@@ -611,9 +625,6 @@
             this.fadeOut(this.d3.selectAll(".legend"), time/2);
             this.fadeOut(this.d3.selectAll("#legend-scale"), time/2);
           }
-
-        },
-        errorChart(data) {
 
         }
     }
