@@ -540,17 +540,17 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
+
+//this locks in the scroll to center page like a magnet if working
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
 }
-.step:last-child {
-  margin-bottom: 600px;
-}
-.step p {
-  text-align: center;
-  padding: 1rem;
-  font-size: 2.5rem;
-}
+
 .step-container {
   width:100vw;
+  scroll-snap-align: top; //not working?
+  
 }
 .step {
   position: relative;
@@ -561,14 +561,21 @@ article {
   border: 1px;
 
   p {
-    padding: 2vw;
-  }
+  text-align: left;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+}
+.step:last-child {
+  margin-bottom: 600px;
 }
 
 //start at beginning
 //grid layout
 #modeling {
   width: 100vw;
+
 }
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
