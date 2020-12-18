@@ -4,8 +4,6 @@
       id="intro-container"
       class="text-content"
     >
-      <h2 v-html="text.title1" />
-      <p v-html="text.paragraph1" />
     </div>
     <!--  figure contains all the sticky elements -->
     <figure
@@ -135,112 +133,17 @@
       </svg>
       </div>
     </figure>
-    <!--     all the scrolling elements -->
+    <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="0"
-        >
-          <p v-html="text.paragraph2" />
+      <div
+        v-for="text in text.methods"
+        :key="text.title"
+        class="step-container text-content">
+        <div class="step" >
+          <h3> {{ text.title }} </h3>
+          <p> {{ text.method }} </p>
         </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="1"
-        >
-          <p v-html="text.paragraph3" />
         </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="2"
-        >
-          <p v-html="text.paragraph4" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="3"
-        >
-          <p v-html="text.paragraph5" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="4"
-        >
-          <p v-html="text.paragraph6" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="5"
-        >
-          <p v-html="text.paragraph7" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="6"
-        >
-          <p v-html="text.paragraph8" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="7"
-        >
-          <p v-html="text.paragraph9" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="8"
-        >
-          <p v-html="text.paragraph10" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="9"
-        >
-          <p v-html="text.paragraph11" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="10"
-        >
-          <p v-html="text.paragraph12" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="11"
-        >
-          <p v-html="text.paragraph13" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="12"
-        >
-          <p v-html="text.paragraph14" />
-        </div>
-      </div>
     </article>
     <div id="map-container">
     <!--  <img src="@/assets/usa_hex_map_80-01.png" /> -->
@@ -287,19 +190,17 @@
 
             // scroll options
             scroller: null,
-            step: null,
+            step: 0,
             progress: 0,
 
             // force
-            force: null,
             force_sim: null,
             init_decay: null,
+            simulation: null,
 
             forceStrength: .3,
             gravityStrength: 5,
             friction: 0.6,
-            alpha: .2, // similar to "starting tempyerature", higher is hotter
-            alphaDecay: .5, // similar to "cool down rate", higher is faster
             xForceStrength: 2,
             yForceStrength: .07,
             timeBeforeKill: 5000,
@@ -312,7 +213,8 @@
             path4_strings: null,
             path5_strings: null,
 
-            model_list: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
+            model_list: ['ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
+            model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
             
           }
         },
@@ -351,7 +253,8 @@
             let rmse_monthly_cast = data[1];
 
             var data_set = this.model_list[this.step];
-            this.setChart(rmse_monthly_cast, data_set);
+            this.setChart(rmse_monthly, data_set);
+            this.simulation = this.d3.forceSimulation();
 
             //triggered events
             this.makePop(this.step);
@@ -455,7 +358,7 @@
             .attr('cx', function(d){return self.xScale(d[model]);})
 
           //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data) // start force simulation from array of nodes
+          this.simulation = this.d3.forceSimulation(data) // start force simulation from array of nodes
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
               }).strength(.95)
@@ -471,7 +374,7 @@
             var init_decay;
             init_decay = setTimeout(function(){
               console.log('init alpha decay');
-              self.force_sim
+              self.simulation
                 .alphaDecay(0.1);
             }, 5000);
 
@@ -517,14 +420,14 @@
             var model_sel = this.model_list[data];
             console.log(model_sel);
 
-            self.force_sim
+            self.simulation
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
+              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(40))
               .alphaDecay(0)
               .alpha(0.12)
-              .on('tick', self.tick)
+              .tick()
 
 
 
