@@ -213,7 +213,7 @@
             path4_strings: null,
             path5_strings: null,
 
-            model_list: ['ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
+            model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
             model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
             
           }
@@ -358,7 +358,7 @@
             .attr('cx', function(d){return self.xScale(d[model]);})
 
           //apply force to push dots towards central position on yaxis
-          this.simulation = this.d3.forceSimulation(data) // start force simulation from array of nodes
+          this.force_sim = this.d3.forceSimulation(data) // start force simulation from array of nodes
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
               }).strength(.95)
@@ -374,7 +374,7 @@
             var init_decay;
             init_decay = setTimeout(function(){
               console.log('init alpha decay');
-              self.simulation
+              self.force_sim
                 .alphaDecay(0.1);
             }, 5000);
 
@@ -420,14 +420,27 @@
             var model_sel = this.model_list[data];
             console.log(model_sel);
 
-            self.simulation
+            this.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(40))
-              .alphaDecay(0)
+            this.force_sim
+              .alphaDecay(0.01)
               .alpha(0.12)
-              .tick()
+              .restart()
+              .on('tick', self.tick);
+            
+            this.init_decay = setTimeout(function(){
+              console.log('re-init alpha decay');
+              this.force_sim.alphaDecay(0.7);
+            }, 1000)
+            clearTimeout(this.init_decay);
+
+          //modify the force depending on step
+              if (data === 2){
+
+              }
+
 
 
 
