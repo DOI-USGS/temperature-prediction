@@ -492,7 +492,7 @@
                   .transition()
                   .duration(animationLength)
                   .attrTween("d", function(d){
-                    return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 1 })
+                    return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2 })
                   })
               }
 
