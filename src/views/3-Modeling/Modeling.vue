@@ -32,7 +32,7 @@
               <path
                 id="RNN"
                 class="path1 river"
-                d="M4.4,166.9.5,166c.8-3,18.3-72.2,59.7-83.5,20.4-5.6,43,4.1,67,28.7l-2.9,2.8c-22.9-23.5-44.1-32.8-63-27.7C22.1,97,4.6,166.2,4.4,166.9Z"
+                d="M37.1,166.9l-4-.9c.5-3,13.5-72.2,44.3-83.5,15.2-5.6,32.1,3.8,49.9,28.4l-2.3,3.2C108,90.7,92.3,81.2,78.2,86.3,49.1,97,37.2,166.2,37.1,166.9Z"
               />
               <path
                 id="RGCN"
@@ -57,7 +57,7 @@
               <path
                 id="RNN"
                 class="path2 river"
-                d="M190.1,153.1c-19.1,0-41.2-13.2-65.8-39.2l2.9-2.7c26.6,28.1,49.8,40.7,69.1,37.3,24.5-4.3,37-33.1,43.8-48.6a74.9,74.9,0,0,1,3.6-7.7l3.4,2c-.8,1.5-2,4.1-3.4,7.3-7,16.2-20.1,46.3-46.7,51A40.2,40.2,0,0,1,190.1,153.1Z"
+                d="M188.6,153.1c-18.7,0-41.5-12.7-64.3-39.2l2.8-2.7c25.4,28.7,48.8,40.7,67.6,37.3,23.9-4.3,36.2-33.1,42.8-48.6,1.4-3.3,2.6-6,3.5-7.7l3.4,2c-.8,1.5-1.9,4.1-3.3,7.3-6.9,16.2-19.7,46.3-45.7,51A38.2,38.2,0,0,1,188.6,153.1Z"
               />
               <path
                 id="RGCN"
@@ -144,6 +144,39 @@
                 class="path5 other"
                 d="M227,214.3l-11.2,6.4-2.1,1.1-9.1,5.2-2,1.2-11.2,6.4V219l11.2,6.8V212.6l11.3,6.8V206.2Z"
               />
+            </g>
+            <g
+            id="ANN_annotations">
+            </g>
+            <g 
+            id="RNN_annotations"
+            transform="translate(0 25)">
+              <text id="text-1" class="f_main light" transform="translate(93.9 75.1)"><tspan class="f_main light">yesterday</tspan></text>
+              <text id="text-2" class="f_main bold" transform="translate(132.6 108.5)"><tspan class="f_main bold">today</tspan></text>
+              <text id="text-3" class="f_main light" transform="translate(102.7 157.2)"><tspan class="f_main light">tomorrow</tspan></text>
+              <g id="arrow">
+                <g>
+                  <line class="f_arrow" x1="21" y1="177" x2="21" y2="43.7"/>
+                  <polygon class="cls-9" points="23 43.5 21 40.1 19 43.5 23 43.5"/>
+                </g>
+              </g>
+              <g id="arrow-2" data-name="arrow">
+                <g>
+                  <line class="f_arrow" x1="25.9" y1="183.2" x2="250" y2="183.2"/>
+                  <polygon class="cls-9" points="23 43.5 21 40.1 19 43.5 23 43.5" transform="translate(294,162.2) rotate(90)"/>
+                </g>
+              </g>
+              <text id="axis_labels" class="f_sub" transform="translate(24.6 196.3)">time</text>
+              <text id="axis_labels-2" data-name="axis_labels" class="f_sub" transform="translate(15.1 178.2) rotate(-90)"><tspan class="f_sub">temperature</tspan></text>
+            </g>
+            <g
+            id="RGCN_annotations">
+            </g>
+            <g
+            id="RGCN_2_annotations">
+            </g>
+            <g
+            id="RGCN_ptrn_annotations">
             </g>
           </svg>
         </div>
@@ -396,16 +429,20 @@
           setFlubber() {
             const self = this;
             // display only the ANN path elements
+            let test_sel = self.d3.select("#transform-svg-test")
+            console.log(test_sel)
+
             self.d3.select("#transform-svg-test")
                 .selectAll("#RNN")
-                //.filter(function(d, i) {
-                //    return i; })
                   .remove();
             self.d3.select("#transform-svg-test")
                 .selectAll("#RGCN")
                   .remove();
             self.d3.select("#transform-svg-test")
                 .selectAll("#RGCN_ptrn")
+                  .remove();
+            self.d3.select("#transform-svg-test")
+                .selectAll("#RNN_annotations")
                   .remove();
           },
           // animate flubber svg
@@ -468,6 +505,12 @@
                     return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 0.5 })
                   })
               }
+
+              // select associated annotations
+              let annotation_id = step_id + "_annotations"
+              console.log(annotation_id)
+              // self.d3.selectAll('#' + annotation_id)
+              //   .append('div');
 
               // store current id
               self.current_flubber_id = step_id
@@ -741,6 +784,37 @@ figure.sticky {
   stroke: #EDA550;
   stroke-width: 2px;
 }
+.f_main {
+  font-size: 14px;
+  fill: #f0efef;
+}
+.f_sub {
+  font-size: 14px;
+  fill: #686868;
+}
+.f_main.light, .f_sub {
+  font-family: SegoeUI-Semilight, Segoe UI;
+  font-weight: 300;
+  letter-spacing: 0em;
+}
+.f_main.bold {
+  font-family: SegoeUI-Semibold, Segoe UI;
+  font-weight: 600;
+}
+.cls-10, .f_arrow {
+  fill: none;
+  stroke: #878787;
+  stroke-miterlimit: 10;
+  stroke-width: 0.5px;
+}
+.f_arrow {
+  stroke-dasharray: 1 2;
+}
+.cls-9 {
+  fill: #878787;
+}
+
+
 
 // step-triggered transitions
 // can trigger attribute changes with .is-active
