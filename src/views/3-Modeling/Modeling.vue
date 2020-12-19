@@ -4,6 +4,7 @@
       id="intro-container"
       class="text-content"
     >
+      <h2>Modeling!</h2>
     </div>
     <!--  figure contains all the sticky elements -->
     <figure
@@ -196,13 +197,7 @@
             // force
             force_sim: null,
             init_decay: null,
-            simulation: null,
 
-            forceStrength: .3,
-            gravityStrength: 5,
-            friction: 0.6,
-            xForceStrength: 2,
-            yForceStrength: .07,
             timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
 
@@ -213,6 +208,7 @@
             path4_strings: null,
             path5_strings: null,
 
+          //listing model steps in order
             model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
             model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
             
@@ -253,8 +249,11 @@
             let rmse_monthly_cast = data[1];
 
             var data_set = this.model_list[this.step];
+
+            this.force_sim = this.d3.forceSimulation(rmse_monthly);
+
+            this.force_sim.on('tick', self.tick)
             this.setChart(rmse_monthly, data_set);
-            this.simulation = this.d3.forceSimulation();
 
             //triggered events
             this.makePop(this.step);
@@ -358,7 +357,8 @@
             .attr('cx', function(d){return self.xScale(d[model]);})
 
           //apply force to push dots towards central position on yaxis
-          this.force_sim = this.d3.forceSimulation(data) // start force simulation from array of nodes
+
+          self.force_sim  // start force simulation from array of nodes
             .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model])
               }).strength(.95)
@@ -366,8 +366,9 @@
             .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
             //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
             .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
+            .force('center', null)
             .alphaDecay(0)
-            .alpha(0.12)
+            .alpha(0.2)
             .on('tick', self.tick) // listen for tick events
 
             //decay is used to smoothly kill the simulation after a defined time
@@ -376,7 +377,9 @@
               console.log('init alpha decay');
               self.force_sim
                 .alphaDecay(0.1);
-            }, 5000);
+            }, 3000);
+
+
 
 
           },
@@ -413,43 +416,58 @@
 
           },
           //update bee x position on scroll
-          updateChart(data) {
+          updateChart(data, data_step) {
             const self = this;
 
             // list models in order of transitions, use step index to select
-            var model_sel = this.model_list[data];
+            var model_sel = this.model_list[data_step];
+
+           this.force_sim.stop()
+
+          //modify the force depending on step
+          
+              if (data_step === 2){
+
+              console.log(model_sel);
+
+                  self.force_sim
+                    .force('center', this.d3.forceCenter(500,500))
+                    .force('x', this.d3.forceX(500).strength(.5))
+                    .force('y', this.d3.forceY(500).strength(.5))
+                    .alpha(0.2)
+                    .alphaDecay(0.05)
+                  
+              } else {
+
             console.log(model_sel);
 
+            // this should only happen if the model is different than the previous
+
             this.force_sim
+              .force('center', null)
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-            this.force_sim
-              .alphaDecay(0.01)
-              .alpha(0.12)
-              .restart()
-              .on('tick', self.tick);
-            
+              .alpha(0.05)
+
             this.init_decay = setTimeout(function(){
               console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.7);
-            }, 1000)
+              this.force_sim.alphaDecay(0.1);
+            }, 500)
             clearTimeout(this.init_decay);
 
-          //modify the force depending on step
-              if (data === 2){
-
               }
-
-
-
+              this.force_sim.restart()
 
           },
           tick() {
           const self = this;
+          
           this.d3.selectAll(".dot")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
+
+
         },
         // scrollama event handler functions
         // add class on enter
@@ -469,7 +487,7 @@
           //this.makePop(this.step);
 
           //change chart data w/ transition
-          this.updateChart(response.index);
+          this.updateChart(response, response.index);
           this.scroller.resize();
 
           if (response.index >= 3) {
