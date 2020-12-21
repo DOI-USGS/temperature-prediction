@@ -29,7 +29,7 @@ export default {
             {
                 'title': "Recurrent neural network (RNN)",
                 'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id':'RNN'
+                'flubber_id':'ANN'
             },
             {
                 'title': "",
@@ -59,7 +59,7 @@ export default {
             {
                 'title': "Deep learning (RGCN_ptrn)",
                 'method': "Beyond space and time, We know quite a bit about how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a data-driven approach. These process are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
-                'flubber_id':'RGDN_ptrn'
+                'flubber_id':'RGCN_ptrn'
             },
             {
                 'title': "",
