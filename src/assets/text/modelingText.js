@@ -11,7 +11,7 @@ export default {
             },
             {
                 'title': "",
-                'method': "Using an ANN to predict water temperatures in the DRB, we can compare prediction accuracy across different time periods, locations, and at different amounts of data coverage."
+                'method': "Using an ANN to predict water temperatures in the DRB, we can use RMSE to compare prediction accuracy across different time periods, locations, and data coverage."
             },
             {
                 'title': "",

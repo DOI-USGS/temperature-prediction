@@ -366,7 +366,6 @@
             .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
             //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
             .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
-            .force('center', null)
             .alphaDecay(0)
             .alpha(0.2)
             .on('tick', self.tick) // listen for tick events
@@ -378,8 +377,6 @@
               self.force_sim
                 .alphaDecay(0.1);
             }, 3000);
-
-
 
 
           },
@@ -422,18 +419,19 @@
             // list models in order of transitions, use step index to select
             var model_sel = this.model_list[data_step];
 
-           this.force_sim.stop()
+            // stop previous simulation
+           //this.force_sim.stop()
 
           //modify the force depending on step
           
+          //move all points to center when model is introduced?
               if (data_step === 2){
 
               console.log(model_sel);
 
                   self.force_sim
-                    .force('center', this.d3.forceCenter(500,500))
-                    .force('x', this.d3.forceX(500).strength(.5))
-                    .force('y', this.d3.forceY(500).strength(.5))
+                    .force('x', this.d3.forceX(500).strength(.4))
+                    .force('y', this.d3.forceY(500).strength(.4))
                     .alpha(0.2)
                     .alphaDecay(0.05)
                   
@@ -441,14 +439,14 @@
 
             console.log(model_sel);
 
+            // move points along x axis according to model, when "ticked"
             // this should only happen if the model is different than the previous
 
             this.force_sim
-              .force('center', null)
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-              .alpha(0.05)
+              .alpha(0.5)
 
             this.init_decay = setTimeout(function(){
               console.log('re-init alpha decay');
@@ -457,6 +455,7 @@
             clearTimeout(this.init_decay);
 
               }
+              // reheat the simulation to make thigns move
               this.force_sim.restart()
 
           },
