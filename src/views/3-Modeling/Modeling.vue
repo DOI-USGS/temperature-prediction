@@ -12,8 +12,9 @@
       class="sticky"
     >
       <div id="flubber-container">
+        <div id="flubber">
         <svg
-          id="flubber"
+          id="transform-svg-test"
           xmlns="http://www.w3.org/2000/svg"
           width="300px"
           height="300px"
@@ -169,6 +170,7 @@
             />
           </g>
         </svg>
+        </div>
       </div>
       <div id="error-container" />
       <div id="bees-container" />
