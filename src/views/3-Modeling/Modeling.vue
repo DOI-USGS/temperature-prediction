@@ -618,6 +618,8 @@
             // list models in order of transitions, use step index to select
             var model_sel = this.model_list[data_step];
 
+            var force_new = self.force_sim;
+
             // stop previous simulation
            //this.force_sim.stop()
           
@@ -626,7 +628,7 @@
 
               console.log(model_sel);
 
-                  self.force_sim
+                  force_new
                     .force('x', this.d3.forceX(500).strength(.4))
                     .force('y', this.d3.forceY(500).strength(.4))
                     .alpha(0.2)
@@ -639,7 +641,7 @@
             // move points along x axis according to model, when "ticked"
             // this should only happen if the model is different than the previous
 
-            this.force_sim
+            force_new
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
@@ -648,14 +650,14 @@
               }
               // reheat the simulation to make thigns move
               // charge or "heat" is defined by alpha, 
-              this.force_sim.restart()
+              force_new.restart()
                 .on("tick", self.tick)
 
-              this.init_decay = setTimeout(function(){
+              self.init_decay = setTimeout(function(){
                 console.log('re-init alpha decay');
-                this.force_sim.alphaDecay(0.01);
+                force_new.alphaDecay(0.01);
               }, 500)
-              clearTimeout(this.init_decay);
+              clearTimeout(self.init_decay);
 
           },
           tick() {
