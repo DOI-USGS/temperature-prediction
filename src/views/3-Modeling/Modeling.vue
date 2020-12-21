@@ -4,8 +4,7 @@
       id="intro-container"
       class="text-content"
     >
-      <h2 v-html="text.title1" />
-      <p v-html="text.paragraph1" />
+      <h2>Modeling!</h2>
     </div>
     <!--  figure contains all the sticky elements -->
     <figure
@@ -237,122 +236,57 @@
         </div>
       </div>
       <div id="error-container" />
-      <div id="bees-container">
-        <div id="legend-container" />
+      <div id="bees-container" />
+      <div id="legend-container">
+        <svg
+          id="bees_legend"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1000 1000"
+        >
+          <g
+            id="legend-scale"
+            transform="translate(0, 700)"
+          >
+            <path
+              d="M228,643.5H807"
+              transform="translate(-28.24 -627.46)"
+              style="fill: none;stroke: white;stroke-miterlimit: 10;stroke-width: 3px"
+            />
+            <text
+              class="text-annotate"
+              transform="translate(50 27.42)"
+            >accurate</text>
+            <text
+              class="text-annotate"
+              transform="translate(795 27.42)"
+            >inaccurate</text>
+            <path
+              d="M247.5,656.5l-23-12,22-15"
+              transform="translate(-28.24 -627.46)"
+              style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
+            />
+            <path
+              d="M722.5,657.5l24-14-25-13"
+              transform="translate(30 -627.46)"
+              style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
+            />
+          </g>
+        </svg>
       </div>
     </figure>
-    <!--     all the scrolling elements -->
+    <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
-      <div class="step-container text-content">
+      <div
+        v-for="text in text.methods"
+        :key="text.title"
+        class="step-container text-content"
+      >
         <div
-          id="ANN"
+          :id="text.flubber_id"
           class="step"
-          data-step="0"
         >
-          <p v-html="text.paragraph2" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="1"
-        >
-          <p v-html="text.paragraph3" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="2"
-        >
-          <p v-html="text.paragraph4" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="3"
-        >
-          <p v-html="text.paragraph5" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="ANN"
-          class="step"
-          data-step="4"
-        >
-          <p v-html="text.paragraph6" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RNN"
-          class="step"
-          data-step="5"
-        >
-          <p v-html="text.paragraph7" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RNN"
-          class="step"
-          data-step="6"
-        >
-          <p v-html="text.paragraph8" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RGCN"
-          class="step"
-          data-step="7"
-        >
-          <p v-html="text.paragraph9" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RGCN_2"
-          class="step"
-          data-step="8"
-        >
-          <p v-html="text.paragraph10" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RGCN_2"
-          class="step"
-          data-step="9"
-        >
-          <p v-html="text.paragraph11" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          id="RGCN_ptrn"
-          class="step"
-          data-step="10"
-        >
-          <p v-html="text.paragraph12" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="11"
-        >
-          <p v-html="text.paragraph13" />
-        </div>
-      </div>
-      <div class="step-container text-content">
-        <div
-          class="step"
-          data-step="12"
-        >
-          <p v-html="text.paragraph14" />
+          <h3> {{ text.title }} </h3>
+          <p> {{ text.method }} </p>
         </div>
       </div>
     </article>
@@ -385,37 +319,37 @@
 
             // dimensions
             margin: 20,
-            width: 400,
-            height: 500,
+            width: 1000,
+            height: 1000,
             marginX: 20,
             marginY: 20,
 
             // beeswarm
             radius: 4,
             bees: null,
+            svg: null,
             xScale: null,
             model_sel: null,
-            model_list: [],
+            rmse_monthly: null,
+            rmse_monthly_cast: null,
 
             // scroll options
-            scroller: scrollama(), 
-            step: 0,
+            scroller: null,
+            step: 0, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
             progress: 0,
 
             // force
             force_sim: null,
             init_decay: null,
-            forceStrength: .3,
-            gravityStrength: 5,
-            friction: 0.6,
-            alpha: .2, // similar to "starting temperature", higher is hotter
-            alphaDecay: .5, // similar to "cool down rate", higher is faster
-            xForceStrength: 2,
-            yForceStrength: .07,
-            timeBeforeKill: 1000,
+
+            timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
 
-           // flubber
+           //listing model steps in order for the two separate datasets
+            model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
+            model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
+
+            // flubber
             flubber_dict: {},
             flubber_id_order: [],
             current_flubber_id: null,
@@ -423,23 +357,23 @@
           }
         },
         mounted() {
+          this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
                   debug: false,
-                  offset: 0.5,
+                  offset: 0.9, //bottom of the page to trigger onStepEnter events
                   progress: false,
                 })
                 .onStepEnter(this.handleStepEnter)
                 .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
+          
 
           // 3. setup resize event...is this working as expected?
           this.resize();
           window.addEventListener("resize", this.resize);
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
-          this.paddedRadius = this.radius*1.1;
-
-          this.model_list = ['ANN','RNN','RGCN','RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN', 'RNN', 'RGCN', 'RGCN_ptrn','ANN'];
+          this.paddedRadius = this.radius*1.2;
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
@@ -452,6 +386,7 @@
           this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn']
 
           this.getData(); //read in data and then draw chart
+
         },
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
@@ -460,16 +395,29 @@
 
             this.setFlubber();
 
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv")];
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv"),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv")];
+
             Promise.all(promises).then(self.callback);
           },
           callback(data) {
 
             let rmse_monthly = data[0];
-            
-            // use step index to select model from model list and define data set
+            let rmse_monthly_cast = data[1];
+
             var data_set = this.model_list[this.step];
+
+            // does this belong here?
+            this.force_sim = this.d3.forceSimulation(rmse_monthly); 
+            this.force_sim.on('tick', self.tick)
+
+            // draw initial beeswarm chart (data, xvar)
+            // do this based on current step - what if page is reloaded at step 10?
             this.setChart(rmse_monthly, data_set);
+
+            //triggered events
+            // controls fadein/fadeout of extra annotations etc as scrolled
+            this.makePop(this.step);
           },
           // resize to keep scroller accurate
           resize () {
@@ -600,132 +548,218 @@
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
+            this.height = 1000;
+            this.width = 1000;
+            this.margin = 50;
 
-            // append svg
+          // append svg
+          // canvas is 1000 by 1000 and set to scale with container
             this.bees = this.d3.select("#bees-container").append("svg")
-              .attr("viewBox", [0, 0, (this.width+this.marginX+this.marginX), (this.height+this.marginY+this.marginY)].join(' '))
-              .attr("width", this.width)
-              .attr("height", this.height)
+              .attr("viewBox", [0, 0, this.width, this.height].join(' '))
               .attr("class", "bees_dotPlot");
 
+            //add mid line for horizontal clustering
             this.bees.append("line", 'svg')
               .classed("main_line", true)
-              .attr("x1", this.marginX)
+              .attr("x1", this.margin)
               .attr("y1", this.height/2)
-              .attr("x2", this.width-this.marginX)
+              .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
-              .attr("opacity", 0)
-              .attr("stroke-width", 1.5)
+              .attr("stroke-width", 4)
               .attr("stroke", "#A3A0A6");
 
-            //use color scale for experiment
+          //use color scale for experiment
             let experiments = Array.from(new Set(data.map((d) => d.experiment)));
             let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
-            var keys = ["1%", "100%"];
+            var scale_keys = ["1%", "100%"];
 
-            this.legend = this.d3.select("#legend-container").append("svg")
-              .attr("viewBox", [0, 0, 200, 200])
-              .attr("width", 100)
-              .attr("height", 100)
-              .attr("class", "bees_legend");
+          // come back to this
+          // this draw legend, annotations to view, thigns to emphasize as scroll progresses
 
-            //create color legend
+          // add color legend - different svg that is stacked on top of the beeswarm
+            this.legend = this.d3.select("#bees_legend")
+            //draw an arrow to RMSES
+            var arrows = this.legend.append("g").classed("arrow", true)
+
+          //rmse arrow - should jsut add these as svg?
+            arrows
+              .append('path')
+              .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
+              .attr("fill","white")
+              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
+              
+            arrows.append('path')
+              .attr('d', "M.4 66.6a100.7 100.7 0 0113.5 19.2 1.5 1.5 0 002.3.4A169 169 0 0133.6 68c1.4-1.3-.7-3.4-2.2-2.1a169 169 0 00-17.3 18l2.4.3a103.5 103.5 0 00-14-19.8c-1.3-1.4-3.4.7-2.1 2.1z")
+              .attr("fill","white")
+              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
+
+            arrows.append('text').classed('text-annotate', true)
+              .text("RMSEs")
+              .attr("transform", "translate(400, 700)")
+              .style("fill", "white")
+              .attr("font-size", "32px")
+
+            //create color legend dots
             this.legend.selectAll("mydots")
-              .data(keys)
+              .data(scale_keys)
               .enter()
-              .append("circle")
-                .attr("cx", 100)
-                .attr("cy", function(d, i){ return 100 + i*50})
+              .append("circle").classed("legend", true)
+                .attr("cx", function(d,i){return 250 + i*250})
+                .attr("cy", function(d, i){ return 800 })
                 .attr("r", 8)
                 .style("fill", function(d){return color(d)});
-          
-            this.legend.selectAll("mylabels")
-              .data(keys)
-              .enter()
-              .append("text")
-                .attr("x", 120)
-                .attr("y", function(d,i){ return 100 + i*50})
-                .style("fill",  function(d){ return color(d)})
-                .text(function(d){ return d})
-                .attr("text-anchor", "left")
-                .attr("font-size", "50px")
-                .style("alignment-baseline", "middle");
 
-            //scale x axis
-            this.xScale = this.d3.scaleLinear()
-              .range([this.marginX, this.width - this.marginX])
-              .domain([0,10]);
+          //legend labels
+          this.legend.selectAll("mylabels")
+            .data(scale_keys)
+            .enter()
+            .append("text").classed("legend", true)
+              .attr("x", function(d,i){return 280 + i*250})
+              .attr("y", function(d,i){ return 800})
+              .style("fill",  function(d){ return color(d)})
+              .text(function(d){ return d})
+              .attr("text-anchor", "left")
+              .attr("font-size", "50px")
+              .style("alignment-baseline", "middle");
 
+          //scale x axis
+          this.xScale = this.d3.scaleLinear()
+            .range([this.margin, this.width-this.margin])
+            .domain([0,10]);
 
-            //draw bees
-            //use force to push each dot to x position
-            this.bees.selectAll("dot")
-              .data(data)
+          //draw bees
+          //use force to push each dot to x position
+          this.bees.selectAll("circle")
+            .data(data)
             .enter().append("circle").classed('dot', true)
-              .attr("r", this.radius)
-              .attr("fill", (d) => color(d.experiment))
-              .attr("opacity", .8)
-              .attr('cx', function(d){return self.xScale(d[model]);})
-  /*             .attr('cy', function(d){return this.height/2;}) */
+            .attr("r", this.radius)
+            .attr("fill", (d) => color(d.experiment))
+            .attr('cx', function(d){return self.xScale(d[model]);})
 
-            //apply force to push dots towards central position on yaxis
-            this.force_sim = this.d3.forceSimulation(data)
-              .force('x', this.d3.forceX(function(d){
-                  return self.xScale(d[model])
-                }).strength(this.xForceStrength)
-              )
-              .force('y', this.d3.forceY(this.height/2).strength(this.yForceStrength))	
-              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1))
-              .alpha(this.alpha)
-              .alphaDecay(this.alphaDecay)
-              .velocityDecay(this.friction)
-              .on('tick', self.tick);
+          //apply force to push dots towards central position on yaxis
 
-            //add decay after set time to smoothly end transition
-            this.init_decay = setTimeout(function(){
-              console.log('init alpha decay')
-              this.force_sim
-                .alphaDecay(this.alphaDecay);
-            }, this.timeBeforeKill);
-            // add x axis
-            this.bees.append("g")
-              .attr("transform", "translate(0," + this.height + ")")
-              .attr("stroke-width", "2px")
-              .attr("opacity", 0)
-              .call(this.d3.axisBottom(self.xScale));
+          self.force_sim  // start force simulation from array of nodes
+            .force('x', this.d3.forceX(function(d){
+                return self.xScale(d[model])
+              }).strength(.95)
+            )
+            .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
+            //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
+            .alphaDecay(0.001)
+            .alpha(0.2)
+            .on('tick', self.tick) // listen for tick events
+
+            //decay is used to smoothly kill the simulation after a defined time
+            var init_decay;
+            init_decay = setTimeout(function(){
+              console.log('init alpha decay');
+              self.force_sim
+                .alphaDecay(0.1);
+            }, 3000);
+
+
           },
-          //update x position on scroll
-          updateChart(data) {
+          addPts(selection) {
+            const self = this;
+            // this is where I am trying to write a function that adds points to the beeswarm chart
+            // the idea is to have an intial chart showing RMSEs for 100% of training data
+            // then on scoll, the number of points are doubled to show scores with 1% of training data
+            // to do this, I have 2 possible datasets being read in to use - rmse_monthly which is in long form with a column for experiment and separate data columns with model scores
+            // rmse_monthly_cast is wide format of the same data but each experiment x model has a column
+
+            // the approach:
+            // use rmse_monthly_cast to draw the initial chart using the 'ANN_d100' column
+            // then on scroll, use d3 join(enter, exit, update) to transition the data to the 'ANN' column on rmse_monthly that has the same data as 'ANN_d100' PLUS the 'ANN_d001'
+            // the join pattern should recognize which data points "enter" and which "update" (do they need to be ordered the same for that too work????)
+            // no points with "exit" because we are going from fewer points to more points and not vice versa
+/* 
+            const circles = selection.selectAll("circle.dot")
+              .data(this.rmse_monthly, function (d) { return d.ANN })
+              .join(
+                enter => enter.append("circle")
+                  .attr("fill", "green")
+                  .attr(d => d.ANN),
+                update => update
+                  .attr("fill", "gray")
+                  .classed("new", true)
+                ); */ // select all the svg circles in beeswarm
+
+            var circles = self.d3.selectAll("circle")
+              .data(this.rmse_monthly);
+
+            const t = selection.transition()
+              .duration(1000);
+
+            circles.join(
+              enter => enter
+                .append("circle").classed("new", true)
+                .attr("cx", function(d) { return self.xScale(d.ANN)})
+                .call(enter => enter.transition(t)),
+              update => update  
+                .attr("cx", function(d) { return self.xScale(d.ANN)})
+                .call(update => update.transition(t))
+
+            )
+
+          },
+          //update bee x position on scroll
+          // this is done by changing the forceX to a different x variable
+          updateChart(data, data_step) {
             const self = this;
 
-            // use step index to select from model_list
-            var model_sel = self.model_list[data];
+            //modify the force depending on step
+            // list models in order of transitions, use step index to select
+            var model_sel = this.model_list[data_step];
+
+            // stop previous simulation
+           //this.force_sim.stop()
+          
+          //move all points to center when model is introduced?
+              if (data_step === 2){
+
+              console.log(model_sel);
+
+                  self.force_sim
+                    .force('x', this.d3.forceX(500).strength(.4))
+                    .force('y', this.d3.forceY(500).strength(.4))
+                    .alpha(0.2)
+                    .alphaDecay(0.05)
+                  
+              } else {
+
             console.log(model_sel);
 
-            self.force_sim
+            // move points along x axis according to model, when "ticked"
+            // this should only happen if the model is different than the previous
+
+            this.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
+              .alpha(0.5)
 
-            this.force_sim
-              .alphaDecay(0.01)
-              .alpha(0.12)
-              .restart()
-              .on('tick', self.tick);
-            
-            this.init_decay = setTimeout(function(){
-              console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.7);
-            }, 1000)
+              }
+              // reheat the simulation to make thigns move
+              // charge or "heat" is defined by alpha, 
+              this.force_sim.restart()
+                .on("tick", self.tick)
 
-            clearTimeout(this.init_decay);
+              this.init_decay = setTimeout(function(){
+                console.log('re-init alpha decay');
+                this.force_sim.alphaDecay(0.01);
+              }, 500)
+              clearTimeout(this.init_decay);
 
           },
           tick() {
           const self = this;
+          
           this.d3.selectAll(".dot")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
+
+
         },
         // scrollama event handler functions
         // add class on enter
@@ -734,25 +768,27 @@
           // response = { element, direction, index }
           console.log(response);
 
+          // update step variable to match step in view
+          this.step = response.index;
+
            // changes css for class
           response.element.classList.add("is-active");
+          
 
-          if(response.index === 0){
-
-            this.d3.select(".main_line")
-              .attr("opacity", 1)
-          } 
-
-          //update number in sticky to show step number
-          self.d3.select("#bees-container p")
-          .text(response.index + 1);
+          // trigger style changes
+          //this.makePop(this.step);
 
           // trigger flubber
           this.animateFlubber(response.element.id, response.direction);
 
-          //change chart data w/ transition
-          this.updateChart(response.index);
+          //change chart data w/ transition 
+          this.updateChart(response, response.index);
           this.scroller.resize();
+
+          // add points to chart for both experiments
+          if (response.index >= 3) {
+            this.addPts(this.d3.select("svg.bees_dotPlot"));
+          }
 
         },
         
@@ -760,13 +796,65 @@
         handleStepExit(response) {
           const self = this;
           // response = { element, direction, index }
-          console.log(response);
+
           // changes css for class
           response.element.classList.remove("is-active");
         },
         // track scroll progress - not returning anything?
         handleStepProgress(response) {
-          console.log(response.progress);
+          //console.log(response.progress);
+        },
+        fadeOut(element, time) {
+          element
+          .transition()
+          .duration(time)
+          .attr("opacity",0)
+        },
+         fadeIn(element, time) {
+          element
+          .transition()
+          .duration(time)
+          .attr("opacity",1)
+        },
+        //style changes by step
+        makePop(action) {
+          //make beeswarm and legend fade in 
+          // all are initially drawn with opacity 0
+          // thi sis not a good approach - the the page is refreshed in scroll, it resets to step 0
+          // rather than the current step - need to address that throughout
+          //how to pull current step on page load???
+           var time = 1000;
+          if (action >= 1 ) {
+            // make beeswarm appear with legend
+
+            this.fadeIn(this.d3.selectAll(".dot"), time);
+            this.fadeIn(this.d3.select(".main_line"), time);
+            this.fadeIn(this.d3.select(".arrow"), time);
+
+          }
+          // fade out if scrolls back
+          if (action === 0) {
+            //beeswarm fadeout
+            this.fadeOut(this.d3.selectAll(".dot"), time);
+            this.fadeOut(this.d3.selectAll(".legend"), time);
+            this.fadeOut(this.d3.select(".main_line"), time);
+            this.fadeOut(this.d3.select(".arrow"), time);
+
+          }
+          if (action >= 2 ) {
+
+          this.fadeIn(this.d3.selectAll(".legend"), time);
+           this.fadeOut(this.d3.select(".arrow"), time);
+
+           this.fadeIn(this.d3.select("#legend-scale"), time);
+
+          }
+          if (action <= 1) {
+            //disappearing elements
+            this.fadeOut(this.d3.selectAll(".legend"), time/2);
+            this.fadeOut(this.d3.selectAll("#legend-scale"), time/2);
+          }
+
         }
     }
   }
@@ -778,17 +866,15 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
-}
-.step:last-child {
-  margin-bottom: 600px;
-}
-.step p {
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.5rem;
+//this locks in the scroll to center page like a magnet if working
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
 }
 .step-container {
   width:100vw;
+  scroll-snap-align: top; //not working?
+  
 }
 .step {
   position: relative;
@@ -797,12 +883,15 @@ article {
   z-index: 1;
   height: 50vh;
   border: 1px;
-/*   background-color: grey;
-  opacity: .5; */
 
   p {
-    padding: 2vw;
+  text-align: left;
+  padding: 1rem;
+  font-size: 1.5rem;
   }
+}
+.step:last-child {
+  margin-bottom: 600px;
 }
 
 //start at beginning
@@ -814,9 +903,9 @@ article {
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
   display: grid;
-  grid-template-rows: 5% 1fr 1fr 5%;
+  grid-template-rows: 5% 1fr 10% 1fr 5%;
   grid-template-columns: 2% auto 2%;
-  row-gap:15px;
+  row-gap:20px;
 
   position: -webkit-sticky;
   position: sticky;
@@ -828,20 +917,36 @@ figure.sticky {
     grid-column: 2 / 2;
     grid-row: 2 / 2;
   }
+  #flubber {
+    display: block;
+    margin: auto;
+    width: auto;
+  }
   #error-container {
     grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
   }
   #bees-container {
     grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
+  }
+  #bees_dotPlot {
+    width: 100%;
+    height: 100%;
+
   }
   #legend-container {
-    position: relative;
-    width:100%;
-    height: 50px;
-    left: 190px;
+    grid-column: 2 / 2;
+    grid-row: 4 / 4;
+
   }
+}
+
+.text-annotate {
+  fill:white;
+  font-size: 32px;
+  font-family: NotoSans-Medium, Noto Sans;
+  font-weight: 300;
 }
 #flubber {
   opacity: 1;
@@ -895,7 +1000,7 @@ figure.sticky {
 // step-triggered transitions
 // can trigger attribute changes with .is-active
 .step.is-active {
- /*  background-color: orchid; */
+
 }
 
 // could add changes by step here
