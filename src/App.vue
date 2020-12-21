@@ -128,7 +128,7 @@ h3{
   .flex-item {
     flex: 1;
     align-self: center;
-    text-align: center;
+    text-align: left;
     max-width: 90%;
     min-width: 600px;
   }
