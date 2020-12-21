@@ -43,7 +43,7 @@ export default {
             },
             {
                 'title': "Graph convolutional network (RGCN)",
-                'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in upstream segments is likely to look like downstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
+                'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in downstream segments is likely to be similar to that in upstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
                 'flubber_id':'RGCN'
             },
             {
