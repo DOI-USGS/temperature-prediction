@@ -448,15 +448,17 @@
               }).strength(1))
               .alpha(0.5)
 
-            this.init_decay = setTimeout(function(){
-              console.log('re-init alpha decay');
-              this.force_sim.alphaDecay(0.1);
-            }, 500)
-            clearTimeout(this.init_decay);
-
               }
               // reheat the simulation to make thigns move
+              // charge or "heat" is defined by alpha, 
               this.force_sim.restart()
+                .on("tick", self.tick)
+
+              this.init_decay = setTimeout(function(){
+                console.log('re-init alpha decay');
+                this.force_sim.alphaDecay(0.01);
+              }, 500)
+              clearTimeout(this.init_decay);
 
           },
           tick() {
