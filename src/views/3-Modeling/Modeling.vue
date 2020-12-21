@@ -591,7 +591,7 @@
                   .classed("new", true)
                 ); */ // select all the svg circles in beeswarm
 
-            var circles = self.d3.selectAll("circle")
+            var circles = this.d3.selectAll("circle")
               .data(this.rmse_monthly);
 
             const t = selection.transition()
