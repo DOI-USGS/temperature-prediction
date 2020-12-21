@@ -190,7 +190,8 @@
         v-for="text in text.methods"
         :key="text.title"
         class="step-container text-content">
-        <div class="step" >
+        <div class="step"
+          :id="text.flubber_id" >
           <h3> {{ text.title }} </h3>
           <p> {{ text.method }} </p>
         </div>
@@ -238,9 +239,10 @@
             model_sel: null,
             rmse_monthly: null,
             rmse_monthly_cast: null,
+
             // scroll options
             scroller: null,
-            step: 0,
+            step: 0, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
             progress: 0,
 
             // force
@@ -250,7 +252,7 @@
             timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
 
-          //listing model steps in order
+           //listing model steps in order for the two separate datasets
             model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
             model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
 
@@ -326,7 +328,6 @@
           },
           // resize to keep scroller accurate
           resize () {
-            // need to move ALL sizing aspects to this section...charts, legends.
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
@@ -451,7 +452,7 @@
           // come back to this
           // this draw legend, annotations to view, thigns to emphasize as scroll progresses
 
-          /* // add color legend - different svg that is stacked on top of the beeswarm
+          // add color legend - different svg that is stacked on top of the beeswarm
             this.legend = this.d3.select("#bees_legend")
             //draw an arrow to RMSES
             var arrows = this.legend.append("g").classed("arrow", true)
@@ -495,7 +496,7 @@
               .text(function(d){ return d})
               .attr("text-anchor", "left")
               .attr("font-size", "50px")
-              .style("alignment-baseline", "middle"); */
+              .style("alignment-baseline", "middle");
 
           //scale x axis
           this.xScale = this.d3.scaleLinear()
@@ -520,8 +521,8 @@
             )
             .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
             //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
-            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(8))
-            .alphaDecay(0)
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
+            .alphaDecay(0.001)
             .alpha(0.2)
             .on('tick', self.tick) // listen for tick events
 
@@ -583,13 +584,12 @@
           updateChart(data, data_step) {
             const self = this;
 
+            //modify the force depending on step
             // list models in order of transitions, use step index to select
             var model_sel = this.model_list[data_step];
 
             // stop previous simulation
            //this.force_sim.stop()
-
-          //modify the force depending on step
           
           //move all points to center when model is introduced?
               if (data_step === 2){
@@ -742,16 +742,11 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
-
 //this locks in the scroll to center page like a magnet if working
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   scroll-snap-type: y proximity;
 }
-.step:last-child {
-  margin-bottom: 600px;
-}
-
 .step-container {
   width:100vw;
   scroll-snap-align: top; //not working?
@@ -769,8 +764,7 @@ article {
   text-align: left;
   padding: 1rem;
   font-size: 1.5rem;
-}
-
+  }
 }
 .step:last-child {
   margin-bottom: 600px;
@@ -780,7 +774,6 @@ article {
 //grid layout
 #modeling {
   width: 100vw;
-
 }
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
