@@ -289,7 +289,7 @@
 
            //listing model steps in order for the two separate datasets
             model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
-            model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
+            model_list_cast: ['ANN_d100','ANN_d100','ANN_d100','ANN_d100','ANN_d100','ANN_d100', 'ANN_d100', 'ANN_d100', 'RNN_d100','RNN_d100', 'RGCN_d100', 'RGCN_d100', 'RGCN_ptrn_d100','RGCN_ptrn_d100'],
 
             // flubber
             flubber_dict: {},
@@ -578,7 +578,7 @@
 
 
           },
-          addPts(selection) {
+          addPts() {
             const self = this;
             // this is where I am trying to write a function that adds points to the beeswarm chart
             // the idea is to have an intial chart showing RMSEs for 100% of training data
@@ -603,16 +603,25 @@
                   .classed("new", true)
                 ); */ // select all the svg circles in beeswarm
 
+// currently this is effectively switching theh xaxis to the new dataframe BUT no new points are added
             const svg = this.d3.select(".bees_dotPlot")
 
             const circles = svg
               .selectAll("circle")
-              .data(this.rmse_monthly, (d) => d)
-              .join(
-                (enter) => enter
-                  .append("circle")
-                  .attr("r", this.radius)
-                  .attr("cx", (d) => this.xScale(d[model])));
+              .data(this.rmse_monthly)
+              .join("circle");
+
+              self.force_sim  // start force simulation from array of nodes
+            .force('x', this.d3.forceX(function(d){
+                return self.xScale(d['ANN_d001'])
+              }).strength(.95)
+            )
+            .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
+            //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
+            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
+            .alphaDecay(0.001)
+            .alpha(0.2)
+            .on('tick', self.tick).restart() // listen for tick events
 
 
           },
@@ -699,7 +708,7 @@
           this.scroller.resize();
 
           // add points to chart for both experiments
-          if (response.index >= 3) {
+          if (response.index === 3) {
             this.addPts(this.d3.select("svg.bees_dotPlot"));
           }
 
