@@ -270,6 +270,11 @@
             rmse_monthly: null,
             rmse_monthly_cast: null,
 
+            //update pattern variables
+            ANN_both: null,
+            ANN_d001: null,
+            ANN_d100: null, 
+
             // scroll options
             scroller: null,
             step: 0, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
@@ -284,7 +289,7 @@
 
            //listing model steps in order for the two separate datasets
             model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
-            model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
+            model_list_cast: ['ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001','ANN_d001', 'ANN_d001', 'ANN_d001', 'RNN_d001','RNN_d001', 'RGCN_d001', 'RGCN_d001', 'RGCN_ptrn_d001','RGCN_ptrn_d001'],
 
             // flubber
             flubber_dict: {},
@@ -342,15 +347,21 @@
             let rmse_monthly = data[0];
             let rmse_monthly_cast = data[1];
 
-            var data_set = this.model_list[this.step];
+          // name variables used in .join(enter, update) pattern
+            let ANN_both = rmse_monthly.map((d) => d.ANN);
+            let ANN_d001 = rmse_monthly_cast.map((d) => d.ANN_d001);
+            let ANN_d100 = rmse_monthly_cast.map((d) => d.ANN_d100);
+            //console.log(ANN_both);
+
+            var data_set = this.model_list_cast[this.step];
 
             // does this belong here?
-            this.force_sim = this.d3.forceSimulation(rmse_monthly); 
-            this.force_sim.on('tick', self.tick)
+            this.force_sim = this.d3.forceSimulation(rmse_monthly_cast); 
+            //this.force_sim.on('tick', self.tick)
 
             // draw initial beeswarm chart (data, xvar)
             // do this based on current step - what if page is reloaded at step 10?
-            this.setChart(rmse_monthly, data_set);
+            this.setChart(rmse_monthly_cast, data_set);
 
             //triggered events
             // controls fadein/fadeout of extra annotations etc as scrolled
@@ -397,8 +408,8 @@
             if (step_id) {
               let animationLength = 2400;
 
-              console.log('current flubber id')
-              console.log(self.current_flubber_id)
+              //console.log('current flubber id')
+             // console.log(self.current_flubber_id)
 
               // identify which flubber id to transition to
               // get id of current step w/i flubber_id_order array
@@ -503,7 +514,7 @@
               .text("RMSEs")
               .attr("transform", "translate(400, 700)")
               .style("fill", "white")
-              .attr("font-size", "32px")
+              .attr("font-size", "28px")
 
             //create color legend dots
             this.legend.selectAll("mydots")
@@ -525,7 +536,7 @@
               .style("fill",  function(d){ return color(d)})
               .text(function(d){ return d})
               .attr("text-anchor", "left")
-              .attr("font-size", "50px")
+              .attr("font-size", "36px")
               .style("alignment-baseline", "middle");
 
           //scale x axis
@@ -540,7 +551,8 @@
             .enter().append("circle").classed('dot', true)
             .attr("r", this.radius)
             .attr("fill", (d) => color(d.experiment))
-            .attr('cx', function(d){return self.xScale(d[model]);})
+            .attr('cx', (d) => this.xScale(d[model]))
+
 
           //apply force to push dots towards central position on yaxis
 
@@ -562,7 +574,7 @@
               console.log('init alpha decay');
               self.force_sim
                 .alphaDecay(0.1);
-            }, 3000);
+            }, 1000);
 
 
           },
@@ -591,22 +603,17 @@
                   .classed("new", true)
                 ); */ // select all the svg circles in beeswarm
 
-            var circles = this.d3.selectAll("circle")
-              .data(this.rmse_monthly);
+            const svg = this.d3.select(".bees_dotPlot")
 
-            const t = selection.transition()
-              .duration(1000);
+            const circles = svg
+              .selectAll("circle")
+              .data(this.rmse_monthly, (d) => d)
+              .join(
+                (enter) => enter
+                  .append("circle")
+                  .attr("r", this.radius)
+                  .attr("cx", (d) => this.xScale(d[model])));
 
-            circles.join(
-              enter => enter
-                .append("circle").classed("new", true)
-                .attr("cx", function(d) { return self.xScale(d.ANN)})
-                .call(enter => enter.transition(t)),
-              update => update  
-                .attr("cx", function(d) { return self.xScale(d.ANN)})
-                .call(update => update.transition(t))
-
-            )
 
           },
           //update bee x position on scroll
@@ -616,7 +623,7 @@
 
             //modify the force depending on step
             // list models in order of transitions, use step index to select
-            var model_sel = this.model_list[data_step];
+            var model_sel = this.model_list_cast[data_step];
 
             var force_new = self.force_sim;
 
@@ -626,9 +633,7 @@
           //move all points to center when model is introduced?
               if (data_step === 2){
 
-              console.log(model_sel);
-
-                  force_new
+                  self.force_sim
                     .force('x', this.d3.forceX(500).strength(.4))
                     .force('y', this.d3.forceY(500).strength(.4))
                     .alpha(0.2)
@@ -636,26 +641,25 @@
                   
               } else {
 
-            console.log(model_sel);
-
             // move points along x axis according to model, when "ticked"
             // this should only happen if the model is different than the previous
 
-            force_new
+            self.force_sim
               .force('x', this.d3.forceX(function(d){
                 return self.xScale(d[model_sel])
               }).strength(1))
-              .alpha(0.5)
+              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
+              .alpha(0.2);
 
               }
               // reheat the simulation to make thigns move
               // charge or "heat" is defined by alpha, 
-              force_new.restart()
+              self.force_sim.restart()
                 .on("tick", self.tick)
 
               self.init_decay = setTimeout(function(){
                 console.log('re-init alpha decay');
-                force_new.alphaDecay(0.01);
+                self.force_sim.alphaDecay(0.01);
               }, 500)
               clearTimeout(self.init_decay);
 
@@ -674,10 +678,11 @@
         handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
-          console.log(response);
+          //console.log(response);
 
           // update step variable to match step in view
           this.step = response.index;
+          console.log(this.step);
 
            // changes css for class
           response.element.classList.add("is-active");
@@ -751,9 +756,8 @@
           }
           if (action >= 2 ) {
 
-          this.fadeIn(this.d3.selectAll(".legend"), time);
+           this.fadeIn(this.d3.selectAll(".legend"), time);
            this.fadeOut(this.d3.select(".arrow"), time);
-
            this.fadeIn(this.d3.select("#legend-scale"), time);
 
           }
