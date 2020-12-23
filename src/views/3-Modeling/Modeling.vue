@@ -171,116 +171,440 @@
               />
             </g>
             <g
-            id="ANN_annotations"
-            class="flubber annotations"
-            transform="translate(0 0) scale(1.333 1.333)">
-            </g>
+              id="ANN_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            />
             <g 
-            id="RNN_annotations"
-            class="flubber annotations"
-            transform="translate(0 0) scale(1.333 1.333)">
-              <text id="text-1" class="f_main light" transform="translate(93.9 75.1)"><tspan class="f_main light">yesterday</tspan></text>
-              <text id="text-2" class="f_main bold" transform="translate(132.6 108.5)"><tspan class="f_main bold">today</tspan></text>
-              <text id="text-3" class="f_main light" transform="translate(102.7 157.2)"><tspan class="f_main light">tomorrow</tspan></text>
+              id="RNN_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
+              <text
+                id="text-1"
+                class="f_main light"
+                transform="translate(93.9 75.1)"
+              ><tspan class="f_main light">yesterday</tspan></text>
+              <text
+                id="text-2"
+                class="f_main bold"
+                transform="translate(132.6 108.5)"
+              ><tspan class="f_main bold">today</tspan></text>
+              <text
+                id="text-3"
+                class="f_main light"
+                transform="translate(102.7 157.2)"
+              ><tspan class="f_main light">tomorrow</tspan></text>
               <g id="arrow">
                 <g>
-                  <line class="f_arrow" x1="21" y1="177" x2="21" y2="43.7"/>
-                  <polygon class="f_arrowhead" points="23 43.5 21 40.1 19 43.5 23 43.5"/>
+                  <line
+                    class="f_arrow"
+                    x1="21"
+                    y1="177"
+                    x2="21"
+                    y2="43.7"
+                  />
+                  <polygon
+                    class="f_arrowhead"
+                    points="23 43.5 21 40.1 19 43.5 23 43.5"
+                  />
                 </g>
               </g>
-              <g id="arrow-2" data-name="arrow">
+              <g
+                id="arrow-2"
+                data-name="arrow"
+              >
                 <g>
-                  <line class="f_arrow" x1="25.9" y1="183.2" x2="250" y2="183.2"/>
-                  <polygon class="f_arrowhead" points="23 43.5 21 40.1 19 43.5 23 43.5" transform="translate(294,162.2) rotate(90)"/>
+                  <line
+                    class="f_arrow"
+                    x1="25.9"
+                    y1="183.2"
+                    x2="250"
+                    y2="183.2"
+                  />
+                  <polygon
+                    class="f_arrowhead"
+                    points="23 43.5 21 40.1 19 43.5 23 43.5"
+                    transform="translate(294,162.2) rotate(90)"
+                  />
                 </g>
               </g>
-              <text id="axis_labels" class="f_minor" transform="translate(24.6 196.3)">time</text>
-              <text id="axis_labels-2" data-name="axis_labels" class="f_minor" transform="translate(15.1 178.2) rotate(-90)"><tspan class="f_minor">temperature</tspan></text>
+              <text
+                id="axis_labels"
+                class="f_minor"
+                transform="translate(24.6 196.3)"
+              >time</text>
+              <text
+                id="axis_labels-2"
+                data-name="axis_labels"
+                class="f_minor"
+                transform="translate(15.1 178.2) rotate(-90)"
+              ><tspan class="f_minor">temperature</tspan></text>
             </g>
             <g
-            id="RGCN_annotations"
-            class="flubber annotations"
-            transform="translate(0 0) scale(1.333 1.333)">
-              <text id="text-1" class="f_main light" transform="translate(156.6 60)">well-observed</text>
-              <text id="text-2" class="f_main bold" transform="translate(146 43)">Upstream</text>
-              <text id="text-1-2" data-name="text-1" class="f_main light" transform="translate(64.6 225.4)">unobserved</text>
-              <text id="text-2-2" data-name="text-2" class="f_main bold" transform="translate(52.5 209)">Downstream</text>
+              id="RGCN_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
+              <text
+                id="text-1"
+                class="f_main light"
+                transform="translate(156.6 60)"
+              >well-observed</text>
+              <text
+                id="text-2"
+                class="f_main bold"
+                transform="translate(146 43)"
+              >Upstream</text>
+              <text
+                id="text-1-2"
+                data-name="text-1"
+                class="f_main light"
+                transform="translate(64.6 225.4)"
+              >unobserved</text>
+              <text
+                id="text-2-2"
+                data-name="text-2"
+                class="f_main bold"
+                transform="translate(52.5 209)"
+              >Downstream</text>
               <g>
-                <path class="f_arrow" d="M168.2,70.4c1.6,3.6,1.8,7.9,1.7,12.1-.3,7.4-8.8,17.3-12.2,23.5s-4.7,15.5-5.1,23.6-.2,14.3,3.8,21.5,12.1,15.6,15.6,25,4,20,4.5,30.2"/>
-                <polygon class="f_arrowhead" points="174.4 205.8 176.6 209.2 178.4 205.6 174.4 205.8"/>
+                <path
+                  class="f_arrow"
+                  d="M168.2,70.4c1.6,3.6,1.8,7.9,1.7,12.1-.3,7.4-8.8,17.3-12.2,23.5s-4.7,15.5-5.1,23.6-.2,14.3,3.8,21.5,12.1,15.6,15.6,25,4,20,4.5,30.2"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="174.4 205.8 176.6 209.2 178.4 205.6 174.4 205.8"
+                />
               </g>
               <g>
-                <path class="f_arrow" d="M43.7,58.3c2.8,10.9,2.7,22.6,4.2,28.1,5.8,21.9,24.5,25.5,30.6,26.2s14.6,2.3,20.7,5.9"/>
-                <polygon class="f_arrowhead" points="97.6 119.9 101.5 120.1 99.8 116.5 97.6 119.9"/>
+                <path
+                  class="f_arrow"
+                  d="M43.7,58.3c2.8,10.9,2.7,22.6,4.2,28.1,5.8,21.9,24.5,25.5,30.6,26.2s14.6,2.3,20.7,5.9"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="97.6 119.9 101.5 120.1 99.8 116.5 97.6 119.9"
+                />
               </g>
               <g>
-                <text class="f_minor" transform="matrix(0.58, 0.82, -0.82, 0.58, 163.88, 151.43)">F</text>
-                <text class="f_minor" transform="matrix(0.56, 0.83, -0.83, 0.56, 167.7, 156.89)">l</text>
-                <text class="f_minor" transform="translate(169.6 159.6) rotate(57.5)">o</text>
-                <text class="f_minor" transform="translate(173.6 165.8) rotate(61.9)">w</text>
+                <text
+                  class="f_minor"
+                  transform="matrix(0.58, 0.82, -0.82, 0.58, 163.88, 151.43)"
+                >F</text>
+                <text
+                  class="f_minor"
+                  transform="matrix(0.56, 0.83, -0.83, 0.56, 167.7, 156.89)"
+                >l</text>
+                <text
+                  class="f_minor"
+                  transform="translate(169.6 159.6) rotate(57.5)"
+                >o</text>
+                <text
+                  class="f_minor"
+                  transform="translate(173.6 165.8) rotate(61.9)"
+                >w</text>
               </g>
               <g>
-                <text class="f_minor" transform="translate(49.8 118.3) rotate(23.8)">F</text>
-                <text class="f_minor" transform="matrix(0.94, 0.34, -0.34, 0.94, 56.13, 120.97)">l</text>
-                <text class="f_minor" transform="translate(59.4 122.2) rotate(15.9)">o</text>
-                <text class="f_minor" transform="translate(66.7 124.3) rotate(11.2)">w</text>
+                <text
+                  class="f_minor"
+                  transform="translate(49.8 118.3) rotate(23.8)"
+                >F</text>
+                <text
+                  class="f_minor"
+                  transform="matrix(0.94, 0.34, -0.34, 0.94, 56.13, 120.97)"
+                >l</text>
+                <text
+                  class="f_minor"
+                  transform="translate(59.4 122.2) rotate(15.9)"
+                >o</text>
+                <text
+                  class="f_minor"
+                  transform="translate(66.7 124.3) rotate(11.2)"
+                >w</text>
               </g>
             </g>
             <g
-            id="RGCN_2_annotations"
-            class="flubber annotations"
-            transform="translate(0 0) scale(1.333 1.333)">
-              <rect class="f_sec" x="96.9" y="111.3" width="7.1" height="1.61" transform="translate(16.4 -12.8) rotate(7.9)"/>
-              <rect class="f_sec" x="121" y="175.3" width="7.1" height="1.61" transform="translate(-88.6 208.8) rotate(-63.4)"/>
-              <rect class="f_sec" x="70.6" y="181.3" width="7.1" height="1.61" transform="translate(-85.4 297.1) rotate(-103.7)"/>
-              <rect class="f_sec" x="90.2" y="197.7" width="7.1" height="1.61" transform="translate(115 416.9) rotate(-160.3)"/>
-              <rect class="f_sec" x="189.7" y="230.6" width="8.2" height="1.61" transform="translate(4.8 466.7) rotate(-101.3)"/>
-              <text class="f_sec reg" transform="translate(90.5 108.7)">A</text>
-              <text class="f_sec reg" transform="translate(119.4 171.1) scale(0.87 1)">B</text>
-              <text class="f_sec reg" transform="translate(64.2 177.7)">C</text>
-              <text class="f_sec reg" transform="translate(81.5 203.1)">D</text>
-              <text class="f_sec reg" transform="translate(196.9 243.3)">E</text>
-              <text class="other label" transform="translate(152 211.6) rotate(1.8)">C</text>
-              <text class="other label" transform="translate(158 211.8) rotate(6.9)">-</text>
-              <text class="other label" transform="matrix(0.98, 0.2, -0.2, 0.98, 161.82, 212.29)">E</text>
-              <text class="other label" transform="translate(89.1 148.1) rotate(45.1)">A</text>
-              <text class="other label" transform="translate(94.6 153.2) rotate(31.5)">-</text>
-              <text class="other label" transform="matrix(0.93, 0.36, -0.36, 0.93, 98.76, 155.74)">B</text>
-              <text class="other label" transform="translate(134.2 244) rotate(11)">D</text>
-              <text class="other label" transform="matrix(0.99, 0.11, -0.11, 0.99, 141.35, 245.26)">-</text>
-              <text class="other label" transform="matrix(1, 0.05, -0.05, 1, 145.6, 245.74)">E</text>
+              id="RGCN_2_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
+              <rect
+                class="f_sec"
+                x="96.9"
+                y="111.3"
+                width="7.1"
+                height="1.61"
+                transform="translate(16.4 -12.8) rotate(7.9)"
+              />
+              <rect
+                class="f_sec"
+                x="121"
+                y="175.3"
+                width="7.1"
+                height="1.61"
+                transform="translate(-88.6 208.8) rotate(-63.4)"
+              />
+              <rect
+                class="f_sec"
+                x="70.6"
+                y="181.3"
+                width="7.1"
+                height="1.61"
+                transform="translate(-85.4 297.1) rotate(-103.7)"
+              />
+              <rect
+                class="f_sec"
+                x="90.2"
+                y="197.7"
+                width="7.1"
+                height="1.61"
+                transform="translate(115 416.9) rotate(-160.3)"
+              />
+              <rect
+                class="f_sec"
+                x="189.7"
+                y="230.6"
+                width="8.2"
+                height="1.61"
+                transform="translate(4.8 466.7) rotate(-101.3)"
+              />
+              <text
+                class="f_sec reg"
+                transform="translate(90.5 108.7)"
+              >A</text>
+              <text
+                class="f_sec reg"
+                transform="translate(119.4 171.1) scale(0.87 1)"
+              >B</text>
+              <text
+                class="f_sec reg"
+                transform="translate(64.2 177.7)"
+              >C</text>
+              <text
+                class="f_sec reg"
+                transform="translate(81.5 203.1)"
+              >D</text>
+              <text
+                class="f_sec reg"
+                transform="translate(196.9 243.3)"
+              >E</text>
+              <text
+                class="other label"
+                transform="translate(152 211.6) rotate(1.8)"
+              >C</text>
+              <text
+                class="other label"
+                transform="translate(158 211.8) rotate(6.9)"
+              >-</text>
+              <text
+                class="other label"
+                transform="matrix(0.98, 0.2, -0.2, 0.98, 161.82, 212.29)"
+              >E</text>
+              <text
+                class="other label"
+                transform="translate(89.1 148.1) rotate(45.1)"
+              >A</text>
+              <text
+                class="other label"
+                transform="translate(94.6 153.2) rotate(31.5)"
+              >-</text>
+              <text
+                class="other label"
+                transform="matrix(0.93, 0.36, -0.36, 0.93, 98.76, 155.74)"
+              >B</text>
+              <text
+                class="other label"
+                transform="translate(134.2 244) rotate(11)"
+              >D</text>
+              <text
+                class="other label"
+                transform="matrix(0.99, 0.11, -0.11, 0.99, 141.35, 245.26)"
+              >-</text>
+              <text
+                class="other label"
+                transform="matrix(1, 0.05, -0.05, 1, 145.6, 245.74)"
+              >E</text>
             </g>
             <g
-            id="RGCN_ptrn_annotations"
-            class="flubber annotations"
-            transform="translate(0 0) scale(1.333 1.333)">
+              id="RGCN_ptrn_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
               <g>
-                <line class="line_dot" x1="67.6" y1="71.8" x2="167.9" y2="174.7"/>
-                <polygon class="line_arrowhead" points="166.8 175.3 169.2 176 168.6 173.6 166.8 175.3"/>
+                <line
+                  class="line_dot"
+                  x1="67.6"
+                  y1="71.8"
+                  x2="167.9"
+                  y2="174.7"
+                />
+                <polygon
+                  class="line_arrowhead"
+                  points="166.8 175.3 169.2 176 168.6 173.6 166.8 175.3"
+                />
               </g>
-              <line class="line_solid" x1="47.1" y1="50.8" x2="67.6" y2="71.8"/>
-              <line class="line_rain" x1="152.9" y1="50.7" x2="167" y2="97.5"/>
-              <line class="line_rain" x1="157.9" y1="51.6" x2="172.9" y2="101.6"/>
-              <line class="line_rain" x1="161.8" y1="49.7" x2="177.6" y2="102.3"/>
-              <line class="line_rain" x1="166.1" y1="47.4" x2="183.1" y2="104"/>
-              <line class="line_rain" x1="172.3" y1="54.3" x2="186.3" y2="100.7"/>
-              <line class="line_rain" x1="177.2" y1="54.8" x2="191.3" y2="101.7"/>
-              <line class="line_rain" x1="181.8" y1="54.9" x2="195" y2="98.7"/>
-              <line class="line_rain" x1="185.7" y1="52.6" x2="198.9" y2="96.5"/>
-              <line class="line_rain" x1="189.6" y1="50.3" x2="203.7" y2="97.3"/>
-              <line class="line_rain" x1="194.3" y1="50.7" x2="208.3" y2="97.2"/>
-              <line class="line_rain" x1="199.3" y1="51.6" x2="212.5" y2="95.7"/>
-              <line class="line_rain" x1="203.6" y1="50.9" x2="216.8" y2="95"/>
-              <line class="line_rain" x1="208.6" y1="52.1" x2="221.2" y2="94.2"/>
-              <line class="line_rain" x1="214" y1="54.9" x2="225.1" y2="92.1"/>
-              <line class="line_rain" x1="218.6" y1="55" x2="229.7" y2="92.2"/>
-              <line class="line_rain" x1="222.4" y1="52.3" x2="234.2" y2="91.6"/>
-              <line class="line_rain" x1="224.9" y1="45.3" x2="238.1" y2="89.1"/>
-              <line class="line_rain" x1="228.6" y1="42.6" x2="242.2" y2="87.6"/>
-              <line class="line_rain" x1="231.8" y1="37.7" x2="243.7" y2="77.1"/>
-              <text id="text-2" class="f_main light" transform="translate(4 65.1)">Solar<tspan x="0" y="13">radiation</tspan></text>
-              <text id="text-2-2" data-name="text-2" class="f_main light" transform="translate(203 188.5)">Shade</text>
-              <text id="text-2-3" data-name="text-2" class="f_main light" transform="translate(75.3 15)">Precipitation</text>
+              <line
+                class="line_solid"
+                x1="47.1"
+                y1="50.8"
+                x2="67.6"
+                y2="71.8"
+              />
+              <line
+                class="line_rain"
+                x1="152.9"
+                y1="50.7"
+                x2="167"
+                y2="97.5"
+              />
+              <line
+                class="line_rain"
+                x1="157.9"
+                y1="51.6"
+                x2="172.9"
+                y2="101.6"
+              />
+              <line
+                class="line_rain"
+                x1="161.8"
+                y1="49.7"
+                x2="177.6"
+                y2="102.3"
+              />
+              <line
+                class="line_rain"
+                x1="166.1"
+                y1="47.4"
+                x2="183.1"
+                y2="104"
+              />
+              <line
+                class="line_rain"
+                x1="172.3"
+                y1="54.3"
+                x2="186.3"
+                y2="100.7"
+              />
+              <line
+                class="line_rain"
+                x1="177.2"
+                y1="54.8"
+                x2="191.3"
+                y2="101.7"
+              />
+              <line
+                class="line_rain"
+                x1="181.8"
+                y1="54.9"
+                x2="195"
+                y2="98.7"
+              />
+              <line
+                class="line_rain"
+                x1="185.7"
+                y1="52.6"
+                x2="198.9"
+                y2="96.5"
+              />
+              <line
+                class="line_rain"
+                x1="189.6"
+                y1="50.3"
+                x2="203.7"
+                y2="97.3"
+              />
+              <line
+                class="line_rain"
+                x1="194.3"
+                y1="50.7"
+                x2="208.3"
+                y2="97.2"
+              />
+              <line
+                class="line_rain"
+                x1="199.3"
+                y1="51.6"
+                x2="212.5"
+                y2="95.7"
+              />
+              <line
+                class="line_rain"
+                x1="203.6"
+                y1="50.9"
+                x2="216.8"
+                y2="95"
+              />
+              <line
+                class="line_rain"
+                x1="208.6"
+                y1="52.1"
+                x2="221.2"
+                y2="94.2"
+              />
+              <line
+                class="line_rain"
+                x1="214"
+                y1="54.9"
+                x2="225.1"
+                y2="92.1"
+              />
+              <line
+                class="line_rain"
+                x1="218.6"
+                y1="55"
+                x2="229.7"
+                y2="92.2"
+              />
+              <line
+                class="line_rain"
+                x1="222.4"
+                y1="52.3"
+                x2="234.2"
+                y2="91.6"
+              />
+              <line
+                class="line_rain"
+                x1="224.9"
+                y1="45.3"
+                x2="238.1"
+                y2="89.1"
+              />
+              <line
+                class="line_rain"
+                x1="228.6"
+                y1="42.6"
+                x2="242.2"
+                y2="87.6"
+              />
+              <line
+                class="line_rain"
+                x1="231.8"
+                y1="37.7"
+                x2="243.7"
+                y2="77.1"
+              />
+              <text
+                id="text-2"
+                class="f_main light"
+                transform="translate(4 65.1)"
+              >Solar<tspan
+                x="0"
+                y="13"
+              >radiation</tspan></text>
+              <text
+                id="text-2-2"
+                data-name="text-2"
+                class="f_main light"
+                transform="translate(203 188.5)"
+              >Shade</text>
+              <text
+                id="text-2-3"
+                data-name="text-2"
+                class="f_main light"
+                transform="translate(75.3 15)"
+              >Precipitation</text>
             </g>
           </svg>
         </div>
