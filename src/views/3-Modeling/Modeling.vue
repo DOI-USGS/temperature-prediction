@@ -281,8 +281,8 @@
             progress: 0,
 
             // force
-            force_sim: null,
-            init_decay: null,
+            //force_sim: null,
+            //init_decay: null,
 
             timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
@@ -322,7 +322,7 @@
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
           // add flubber model id as key in nested dictionary, with path as value
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
-          console.log(this.flubber_dict)
+          //console.log(this.flubber_dict)
           
           // set order of flubber components
           this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn']
@@ -346,17 +346,19 @@
 
             let rmse_monthly = data[0];
             let rmse_monthly_cast = data[1];
+            console.log(rmse_monthly);
 
           // name variables used in .join(enter, update) pattern
             let ANN_both = rmse_monthly.map((d) => d.ANN);
             let ANN_d001 = rmse_monthly_cast.map((d) => d.ANN_d001);
             let ANN_d100 = rmse_monthly_cast.map((d) => d.ANN_d100);
-            //console.log(ANN_both);
+            console.log(ANN_both);
 
             var data_set = this.model_list_cast[this.step];
 
             // does this belong here?
-            this.force_sim = this.d3.forceSimulation(rmse_monthly_cast); 
+            this.force_sim = this.d3.forceSimulation(rmse_monthly_cast);
+            this.force_sim_new = this.d3.forceSimulation(rmse_monthly); 
             //this.force_sim.on('tick', self.tick)
 
             // draw initial beeswarm chart (data, xvar)
@@ -604,24 +606,35 @@
                 ); */ // select all the svg circles in beeswarm
 
 // currently this is effectively switching theh xaxis to the new dataframe BUT no new points are added
-            const svg = this.d3.select(".bees_dotPlot")
+            const svg = this.d3.select("#bees-container")
+            //var new_var = this.rmse_monthly.map((d) => d.ANN);
+            console.log(this.rmse_monthly);
 
-            const circles = svg
+            svg
               .selectAll("circle")
               .data(this.rmse_monthly)
-              .join("circle");
+              .join(
+                function(enter) {
+                  return enter
+                    .append("circle")
+                    .style('opacity', 0);
+                }
+              )
+              .attr('r', function(d) { return d; });
 
-              self.force_sim  // start force simulation from array of nodes
-            .force('x', this.d3.forceX(function(d){
-                return self.xScale(d['ANN_d001'])
-              }).strength(.95)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
-            //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
-            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
-            .alphaDecay(0.001)
-            .alpha(0.2)
-            .on('tick', self.tick).restart() // listen for tick events
+              var new_force = this.d3.forceSimulation(this.rmse_monthly);
+
+             self.force_sim_new  // start force simulation from array of nodes
+                .force('x', this.d3.forceX(function(d){
+                    return self.xScale(d['ANN'])
+                  }).strength(.95)
+                )
+                .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
+                //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
+                .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
+                .alphaDecay(0.001)
+                .alpha(0.2)
+                .on('tick', self.tick).restart() // listen for tick events
 
 
           },
@@ -642,7 +655,7 @@
           //move all points to center when model is introduced?
               if (data_step === 2){
 
-                  self.force_sim
+                  force_new
                     .force('x', this.d3.forceX(500).strength(.4))
                     .force('y', this.d3.forceY(500).strength(.4))
                     .alpha(0.2)
@@ -658,7 +671,7 @@
                 return self.xScale(d[model_sel])
               }).strength(1))
               .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
-              .alpha(0.2);
+              .alpha(0.1);
 
               }
               // reheat the simulation to make thigns move
