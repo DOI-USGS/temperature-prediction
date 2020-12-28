@@ -213,23 +213,30 @@
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
+      <div id="scrollama-container">
       <!-- create scrolling/sticky headers for each model section -->
       <div 
         v-for="(models, model_group) in text" 
         :key="model_group" 
         :class="model_group" 
         class="step-container text-content">
-        <div slot="graphic" class="viz-title">
-          <div>{{ model_group }}</div>
+        <div
+          class="scroll-sticky">
+          <h3 class="viz-title">
+          {{ model_group }}
+          </h3>
         </div>
         <!-- prior header stays until we change models -->
         <!-- populate nested steps using text about each model -->
+        <div class="scrollama-steps">
         <div class="step" 
           v-for="model in models" 
           :key="model" 
           :id="model.flubber_id">
           {{ model.method }}
         </div></div>
+        </div>
+        </div>
 
     </article>
     <div id="map-container">
@@ -876,14 +883,10 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
-//this locks in the scroll to center page like a magnet....if working
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
+
 }
 .step-container {
   width:100vw;
-  scroll-snap-align: top; //not working?
   
 }
 .step {
@@ -905,17 +908,13 @@ article {
 }
 
 // add sticky header to steps to maintain while given model is shown
-.model-header {
-  background-color: white;
-  color: black;
-  padding: 20px;
+.scroll-sticky {
+  z-index: 1;
   position: -webkit-sticky;
   position: sticky;
-}
-.graphic {
-  z-index: 1;
-    position: -webkit-sticky;
-  position: sticky;
+  top: 0;
+  left: 0;
+  padding-top: 3vh;
 }
 
 //start at beginning

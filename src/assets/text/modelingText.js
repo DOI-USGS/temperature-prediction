@@ -1,6 +1,6 @@
 export default {
     textContents: {
-        "Predicting water temperature (ANN)":[
+        "Predicting water temperature":[
             {
                 'method': "Artifical neural networks (ANN), which are a form of deep learning, have had huge success in identifying complex relationships and making accurate predictions.",
                 'flubber_id':'ANN',
@@ -10,7 +10,8 @@ export default {
                 'method': "We can measure the success of a model, in the case a ANN, by how closely the predicted temperature matches our measured temperature. A model that closely matches our observations in the streams has low error or good accuracy.",
                 'flubber_id': '',
                 'bees_id': 'ANN'
-            },
+            }],
+        "Artificial neural network (ANN)": [
             {
                 'method': "Using an ANN to predict water temperatures in the DRB, we can use RMSE to compare prediction accuracy across different time periods, locations, and data coverage.",
                 'flubber_id': '',
@@ -42,7 +43,7 @@ export default {
                 'flubber_id': 'RNN',
                 'bees_id': 'RNN'
             }],
-        "Graph convolutional network(RGCN)":[
+        "Graph convolutional network (RGCN)":[
             {
                 'title': "Graph convolutional network (RGCN)",
                 'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in upstream segments is likely to look like downstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
