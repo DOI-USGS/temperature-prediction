@@ -213,20 +213,24 @@
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
-      <div
-        v-for="text in text.methods"
-        :key="text.title"
-        class="step-container text-content"
-      >
-        <div
-          :id="text.flubber_id"
-          :ref="text.bees_id"
-          class= "step"
-        >
-          <h3> {{ text.title }} </h3>
-          <p> {{ text.method }} </p>
+      <!-- create scrolling/sticky headers for each model section -->
+      <div 
+        v-for="(models, model_group) in text" 
+        :key="model_group" 
+        :class="model_group" 
+        class="step-container text-content">
+        <div slot="graphic" class="viz-title">
+          <div>{{ model_group }}</div>
         </div>
-      </div>
+        <!-- prior header stays until we change models -->
+        <!-- populate nested steps using text about each model -->
+        <div class="step" 
+          v-for="model in models" 
+          :key="model" 
+          :id="model.flubber_id">
+          {{ model.method }}
+        </div></div>
+
     </article>
     <div id="map-container">
     <!--  <img src="@/assets/usa_hex_map_80-01.png" /> -->
@@ -251,7 +255,9 @@
     },
     data() {
           return {
+            // pull title, text, and methods 
             text: modelingText.textContents,
+
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
 
@@ -375,7 +381,7 @@
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv"),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv")];
 
-          // manipulate data and deploy beeswarm once data are in
+           // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
           },
           callback(data) {
@@ -383,23 +389,23 @@
             // this function organizes data and then draws first beeswarm view based on step
 
             // make data how we like it
-            this.rmse_monthly = data[0];
-            this.rmse_monthly_cast = data[1];
+            // comes in as an array of objects
+            this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
+            this.rmse_monthly_cast = data[1]; // by model type x experiment, e.g. ANN_d001, ANN_d100
             //console.log(this.rmse_monthly);
 
             // name variables to be used in .join(enter, update) pattern
             this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
             this.ANN_d001 = this.rmse_monthly_cast.map((d) => d.ANN_d001);
-            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d10+0);
+            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d100);
             //console.log(this.ANN_both);
 
             // select dataset to draw beeswarm with
             var data_set = this.model_list_cast[this.step];
 
-            // draw beeswarm if there is a step value (as soon as scrolling starts, or immediately with refresh)
+            // draw beeswarm if there is a step value 
             if (this.step) {
               this.makeBeeswarm()
-
             }
 
             // draw initial beeswarm chart (data, xvar)
@@ -502,6 +508,7 @@
             }
           },
           makeBeeswarm() {
+          // define core chart elements that are constant
             const self = this;
 
           //define chart parameters
@@ -869,7 +876,7 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
-//this locks in the scroll to center page like a magnet if working
+//this locks in the scroll to center page like a magnet....if working
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   scroll-snap-type: y proximity;
@@ -895,6 +902,20 @@ article {
 }
 .step:last-child {
   margin-bottom: 600px;
+}
+
+// add sticky header to steps to maintain while given model is shown
+.model-header {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+}
+.graphic {
+  z-index: 1;
+    position: -webkit-sticky;
+  position: sticky;
 }
 
 //start at beginning
