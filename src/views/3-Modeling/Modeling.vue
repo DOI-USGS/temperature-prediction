@@ -220,7 +220,8 @@
       >
         <div
           :id="text.flubber_id"
-          class="step"
+          :ref="text.bees_id"
+          class= "step"
         >
           <h3> {{ text.title }} </h3>
           <p> {{ text.method }} </p>
@@ -255,11 +256,13 @@
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
 
             // dimensions
-            margin: 20,
-            width: 1000,
             height: 1000,
-            marginX: 20,
-            marginY: 20,
+            width: 1000,
+            margin: 50,
+
+            chartState: {},
+            yvars: {},
+            datasets: {},
 
             // beeswarm
             radius: 4,
@@ -267,8 +270,8 @@
             svg: null,
             xScale: null,
             model_sel: null,
-            rmse_monthly: null,
-            rmse_monthly_cast: null,
+            rmse_monthly: [],
+            rmse_monthly_cast: [],
 
             //update pattern variables
             ANN_both: null,
@@ -277,13 +280,12 @@
 
             // scroll options
             scroller: null,
-            step: 0, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
+            step: null, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
             progress: 0,
 
             // force
             //force_sim: null,
             //init_decay: null,
-
             timeBeforeKill: 5000,
             exp_color: ["orangered", "teal"],
 
@@ -295,16 +297,25 @@
             flubber_dict: {},
             flubber_id_order: [],
             current_flubber_id: null,
-            
+
           }
         },
+        created () {
+          // created runs the first time a page or component is opened
+          /// use to set up data before inserting in DOM w/ mounted()
+
+        },
         mounted() {
+        // this all happens before the page is rendered
+           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
+
+          //set up scrollama scoller
           this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
-                  debug: false,
+                  debug: false, // draw trigger line on page
                   offset: 0.9, //bottom of the page to trigger onStepEnter events
-                  progress: false,
+                  progress: false, //whether or not to fire incremental step progress updates within root step
                 })
                 .onStepEnter(this.handleStepEnter)
                 .onStepProgress(this.handleStepProgress)
@@ -312,10 +323,19 @@
           
 
           // 3. setup resize event...is this working as expected?
-          this.resize();
           window.addEventListener("resize", this.resize);
-          this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
+
           this.paddedRadius = this.radius*1.2;
+          
+          // initiate beeswarm chart based on current step
+          // needs to be modified so pulls active step on refresh, not first
+          var step_current = this.step;
+          this.makeBeeswarm(step_current);
+
+          // start force simulations?
+          this.force_sim = this.d3.forceSimulation();
+          this.force_sim_new = this.d3.forceSimulation(this.rmse_monthly); 
+
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
@@ -325,49 +345,66 @@
           //console.log(this.flubber_dict)
           
           // set order of flubber components
-          this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn']
+          this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
-          this.getData(); //read in data and then draw chart
+          //beeswarm options to define intial chart state
+          this.yvars = {
+            ANN: 'ANN',
+            RNN: 'RNN',
+            RGCN: 'RGCN',
+            RGCN_ptrn: 'RGCN_ptrn'
+          };
+          this.datasets = {
+            cast: 'rmse_monthly_cast',
+            long: 'rmse_monthly'
+          };
+         this.chartState.yvar = this.yvars.ANN;
+         this.chartState.df = this.datasets.cast;
+
+        // once everything is set up and the component is added to the DOM, read in data and make it dance
+        this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+        this.setFlubber(); // get flubber going right away
 
         },
+        
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
-          getData() {
+          loadData() {
             const self = this;
-
-            this.setFlubber();
-
+            // read in data 
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv"),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv")];
 
-            Promise.all(promises).then(self.callback);
+          // manipulate data and deploy beeswarm once data are in
+            Promise.all(promises).then(self.callback); 
           },
           callback(data) {
+            const self = this;
+            // this function organizes data and then draws first beeswarm view based on step
 
-            let rmse_monthly = data[0];
-            let rmse_monthly_cast = data[1];
-            console.log(rmse_monthly);
+            // make data how we like it
+            this.rmse_monthly = data[0];
+            this.rmse_monthly_cast = data[1];
+            //console.log(this.rmse_monthly);
 
-          // name variables used in .join(enter, update) pattern
-            let ANN_both = rmse_monthly.map((d) => d.ANN);
-            let ANN_d001 = rmse_monthly_cast.map((d) => d.ANN_d001);
-            let ANN_d100 = rmse_monthly_cast.map((d) => d.ANN_d100);
-            console.log(ANN_both);
+            // name variables to be used in .join(enter, update) pattern
+            this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
+            this.ANN_d001 = this.rmse_monthly_cast.map((d) => d.ANN_d001);
+            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d10+0);
+            //console.log(this.ANN_both);
 
+            // select dataset to draw beeswarm with
             var data_set = this.model_list_cast[this.step];
 
-            // does this belong here?
-            this.force_sim = this.d3.forceSimulation(rmse_monthly_cast);
-            this.force_sim_new = this.d3.forceSimulation(rmse_monthly); 
-            //this.force_sim.on('tick', self.tick)
+            // draw beeswarm if there is a step value (as soon as scrolling starts, or immediately with refresh)
+            if (this.step) {
+              this.makeBeeswarm()
+
+            }
 
             // draw initial beeswarm chart (data, xvar)
-            // do this based on current step - what if page is reloaded at step 10?
-            this.setChart(rmse_monthly_cast, data_set);
+           // this.setChart(rmse_monthly_cast, data_set);
 
-            //triggered events
-            // controls fadein/fadeout of extra annotations etc as scrolled
-            this.makePop(this.step);
           },
           // resize to keep scroller accurate
           resize () {
@@ -461,9 +498,36 @@
               self.current_flubber_id = step_id
 
             } else {
-              console.log("step has no id")
+              //console.log("step has no id")
             }
           },
+          makeBeeswarm() {
+            const self = this;
+
+          //define chart parameters
+            const margin = 50;
+            const height = 1000;
+            const width = 1000;
+
+          // add svg for beeswarm 
+            this.svg = this.d3.select('#bees-container').append('svg')
+              .attr("viewBox", [0, 0, this.width, this.height].join(' '))
+              .attr("class", "bees-chart")
+
+          // define where chart starts within svg
+          this.bees = this.svg
+            .append("g")
+            .attr('transform', `translate(${margin}, ${margin})`);
+
+          // x axis scale
+          const xScale = this.d3.scaleLinear()
+            .range([margin, width-margin])
+            .domain([0,10]);
+
+            //let colors = this.d3.scaleOrdinal()
+
+          },
+
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
@@ -717,14 +781,19 @@
           this.animateFlubber(response.element.id, response.direction);
 
           //change chart data w/ transition 
-          this.updateChart(response, response.index);
           this.scroller.resize();
 
           // add points to chart for both experiments
           if (response.index === 3) {
-            this.addPts(this.d3.select("svg.bees_dotPlot"));
+            //this.addPts(this.d3.select("svg.bees_dotPlot"));
+          }
+          if (response.index > 3 ) {
+            //this.updateChart(response, response.index);
           }
 
+          if (response.index <= 2 ) {
+            //this.updateChart(response, response.index);
+          }
         },
         
         // add remove class on exit
