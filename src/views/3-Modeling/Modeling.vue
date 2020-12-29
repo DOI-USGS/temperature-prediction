@@ -279,9 +279,8 @@
 
             // beeswarm
             radius: 4,
-            paddedRadius: radius*1.2,
+            paddedRadius: this.radius*1.2,
             bees: null,
-            svg: null,
             xScale: null,
             model_sel: null,
             rmse_monthly: [],
@@ -360,17 +359,18 @@
           this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
-        this.loadData(); // this reads in data which then calls function to draw beeswarm chart
+        this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
 
         },
+        
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
           loadData() {
             const self = this;
             // read in data 
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv"),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv")];
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv", this.d3.autoType)];
 
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
@@ -391,13 +391,9 @@
             this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d100);
             //console.log(this.ANN_both);
 
-            // select dataset to draw beeswarm with
-            var data_set = this.model_list_cast[this.step];
-
             // draw beeswarm if there is a step value 
-            if (this.step) {
-              this.makeBeeswarm()
-            }
+              this.makeBeeswarm(this.step);
+              //this.addBees(this.step);
 
             // draw initial beeswarm chart (data, xvar)
            // this.setChart(rmse_monthly_cast, data_set);
@@ -498,34 +494,62 @@
               //console.log("step has no id")
             }
           },
-          makeBeeswarm() {
+          makeBeeswarm(step_in) {
           // define core chart elements that are constant
             const self = this;
-
-          //define chart parameters
-            const margin = 50;
-            const height = 1000;
-            const width = 1000;
+            let margin = 50;
 
           // add svg for beeswarm 
-            this.svg = this.d3.select('#bees-container').append('svg')
+          let svg = this.d3.select('#bees-container').append('svg')
               .attr("viewBox", [0, 0, this.width, this.height].join(' '))
               .attr("class", "bees-chart")
 
           // define where chart starts within svg
-          this.bees = this.svg
+          svg
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
 
-          // x axis scale
+          // x axis scaled across full range of values
           const xScale = this.d3.scaleLinear()
-            .range([margin, width-margin])
+            .range([this.margin, this.width-this.margin])
             .domain([0,10]);
 
-            //let colors = this.d3.scaleOrdinal()
+          // select data variable based on step
+          },
+          addBees(step_in) {
+            const self = this;
+
+            var data_current = self.ANN_d001
+ 
+          const chart = this.d3.select("#bees-container svg g")
+            .selectAll(".bees")
+            .data(data_current)
+            .join("circle")
+            .attr("r", this.radius)
+            .classed("bees", true);
+
+            chart.enter()
+              .append("circle")
+              .classed("buzz", true)
+              .attr("cx", 0)
+              .attr("cy", (this.height/2) - this.margin / 2)
+              .attr("r", this.radius)
+              .attr("fill", "orchid")
+              .merge(chart)
+              .transition()
+              .duration(2000)
+              .attr("cx", function(d) { return d })
+              .attr("cy", function(d) { return d });
+
+            chart
+              .exit()
+              .transition()
+              .duration(1000)
+              .attr("cx", 0)
+              .attr("cy", (this.height/2) - this.margin / 2)
+              .remove();
 
           },
-
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
@@ -770,7 +794,6 @@
 
            // changes css for class
           response.element.classList.add("is-active");
-          
 
           // trigger style changes
           //this.makePop(this.step);
@@ -778,20 +801,8 @@
           // trigger flubber
           this.animateFlubber(response.element.id, response.direction);
 
-          //change chart data w/ transition 
           this.scroller.resize();
 
-          // add points to chart for both experiments
-          if (response.index === 3) {
-            //this.addPts(this.d3.select("svg.bees_dotPlot"));
-          }
-          if (response.index > 3 ) {
-            //this.updateChart(response, response.index);
-          }
-
-          if (response.index <= 2 ) {
-            //this.updateChart(response, response.index);
-          }
         },
         
         // add remove class on exit
