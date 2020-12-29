@@ -339,11 +339,11 @@
           // setup resize event
           window.addEventListener("resize", this.resize);
 
-          // initiate beeswarm chart based on current step
+        /*   // initiate beeswarm chart based on current step
           // needs to be modified so pulls active step on refresh, not first
           var step_current = this.step;
           this.makeBeeswarm(step_current);
-
+ */
           // start force simulations
           this.force_sim = this.d3.forceSimulation();
           this.force_sim_new = this.d3.forceSimulation(); 
@@ -514,12 +514,15 @@
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
 
-          // select data variable based on step
+            this.addBees(this.step, this.ANN_d001);
+
+
           },
-          addBees(step_in) {
+          addBees(step_in, data_current) {
             const self = this;
 
-            var data_current = self.ANN_d001
+            var data_current = data_current;
+            console.log(data_current)
  
           const chart = this.d3.select("#bees-container svg g")
             .selectAll(".bees")
@@ -538,8 +541,7 @@
               .merge(chart)
               .transition()
               .duration(2000)
-              .attr("cx", function(d) { return d })
-              .attr("cy", function(d) { return d });
+              .attr("cx", function(d) { return d });
 
             chart
               .exit()
@@ -575,6 +577,8 @@
 
           //use color scale for experiment
             let experiments = Array.from(new Set(data.map((d) => d.experiment)));
+            var test = Array.from(data.map((d) => d.experiment));
+            console.log(test);
             let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
             var scale_keys = ["1%", "100%"];
 
