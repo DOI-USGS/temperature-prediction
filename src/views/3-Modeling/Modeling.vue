@@ -226,7 +226,6 @@
           {{ model_group }}
           </h3>
         </div>
-        <!-- prior header stays until we change models -->
         <!-- populate nested steps using text about each model -->
         <div class="scrollama-steps">
         <div class="step" 
@@ -282,7 +281,6 @@
             paddedRadius: this.radius*1.2,
             bees: null,
             xScale: null,
-            model_sel: null,
             rmse_monthly: [],
             rmse_monthly_cast: [],
 
@@ -290,17 +288,14 @@
             ANN_both: null,
             ANN_d001: null,
             ANN_d100: null, 
+            RNN: null,
+            RGCN: null,
+            RGCN_ptrn: null,
 
             // scroll options
             scroller: null,
             step: null, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
             current_step: null,
-            progress: 0,
-
-
-           //listing model steps in order for the two separate datasets
-            model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
-            model_list_cast: ['ANN_d100','ANN_d100','ANN_d100','ANN_d100','ANN_d100','ANN_d100', 'ANN_d100', 'ANN_d100', 'RNN_d100','RNN_d100', 'RGCN_d100', 'RGCN_d100', 'RGCN_ptrn_d100','RGCN_ptrn_d100'],
 
             // flubber
             flubber_dict: {},
@@ -380,16 +375,13 @@
             this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
             this.ANN_d001 = this.rmse_monthly_cast.map((d) => d.ANN_d001);
             this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d100);
+            this.RNN = this.rmse_monthly.map((d) => d.RNN);
+            this.RGCN = this.rmse_monthly.map((d) => d.RGCN);
+            this.RGCN_ptrn = this.rmse_monthly.map((d) => d.RGCN_ptrn);
             //console.log(this.ANN_both);
 
             // draw beeswarm if there is a step value 
-              this.makeBeeswarm(this.step);
-
-            // draw initial beeswarm chart (data, xvar)
-           // this.setChart(rmse_monthly_cast, data_set);
-
-           // filter function
-
+            this.makeBeeswarm(this.step);
 
           },
           // resize to keep scroller accurate
@@ -521,32 +513,48 @@
 
             var data_current = data_current;
 
-            const chart = this.d3.select("#bees-container svg g")
-              .selectAll(".bees")
-              .data(data_current)
-              .join("circle")
+          const chart = this.d3.select("#bees-container svg g")
+            .selectAll(".bees")
+            .data(data_current)
+            .join("circle")
               .attr("r", this.radius)
               .attr("fill", "orange")
               .classed("bees", true);
 
-              chart.enter()
-                .append("circle")
-                .classed("buzz", true)
+            chart.exit()
+              .transition()
+                .duration(1000)
                 .attr("cx", 0)
-                .attr("cy", (this.height/2) - this.margin / 2)
-                .attr("r", this.radius)
-                .attr("fill", "orchid")
-                .merge(chart)
-                .transition()
-                  .duration(2000)
-                  .attr("cx", (d) => this.xScale(d));
+                .attr("cy", (this.height /2 ) - this.margin/2)
+                .remove();
 
-          },
-          redraw(dataVar) {
-            let simulation = this.d3.forceSimulation(dataVar)
-            .force("x", this.d3.forceX(function(d) {
-              return self.xScale();
-            }))
+            chart.enter()
+              .append("circle")
+              .classed("buzz", true)
+              .attr("cx", 0)
+              .attr("cy", (this.height/2))
+              .attr("r", this.radius)
+              .attr("fill", "orchid")
+              .merge(chart)
+              .transition()
+                .duration(2000)
+                .attr("cx", (d) => this.xScale(d))
+                .attr("cy", (this.height /2 ) - this.margin/2);
+
+            let simulation = this.d3.forceSimulation();
+
+            simulation
+            .force("x", this.d3.forceX((d) => this.xScale(d)).strength(2))
+            .force('y', this.d3.forceY(this.height/2).strength(0.15))
+            .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(5))
+            .alpha(.2)
+            .restart()
+            .on('tick', self.tick);
+
+          // manually run simulation
+          for (let i = 0; i < data_current.length; ++i) {
+            simulation.tick(10);
+          }
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
@@ -653,64 +661,7 @@
 
 
           },
-          addPts() {
-            const self = this;
-            // this is where I am trying to write a function that adds points to the beeswarm chart
-            // the idea is to have an intial chart showing RMSEs for 100% of training data
-            // then on scoll, the number of points are doubled to show scores with 1% of training data
-            // to do this, I have 2 possible datasets being read in to use - rmse_monthly which is in long form with a column for experiment and separate data columns with model scores
-            // rmse_monthly_cast is wide format of the same data but each experiment x model has a column
 
-            // the approach:
-            // use rmse_monthly_cast to draw the initial chart using the 'ANN_d100' column
-            // then on scroll, use d3 join(enter, exit, update) to transition the data to the 'ANN' column on rmse_monthly that has the same data as 'ANN_d100' PLUS the 'ANN_d001'
-            // the join pattern should recognize which data points "enter" and which "update" (do they need to be ordered the same for that too work????)
-            // no points with "exit" because we are going from fewer points to more points and not vice versa
-/* 
-            const circles = selection.selectAll("circle.dot")
-              .data(this.rmse_monthly, function (d) { return d.ANN })
-              .join(
-                enter => enter.append("circle")
-                  .attr("fill", "green")
-                  .attr(d => d.ANN),
-                update => update
-                  .attr("fill", "gray")
-                  .classed("new", true)
-                ); */ // select all the svg circles in beeswarm
-
-// currently this is effectively switching theh xaxis to the new dataframe BUT no new points are added
-            const svg = this.d3.select("#bees-container")
-            //var new_var = this.rmse_monthly.map((d) => d.ANN);
-            console.log(this.rmse_monthly);
-
-            svg
-              .selectAll("circle")
-              .data(this.rmse_monthly)
-              .join(
-                function(enter) {
-                  return enter
-                    .append("circle")
-                    .style('opacity', 0);
-                }
-              )
-              .attr('r', function(d) { return d; });
-
-              var new_force = this.d3.forceSimulation(this.rmse_monthly);
-
-             self.force_sim_new  // start force simulation from array of nodes
-                .force('x', this.d3.forceX(function(d){
-                    return self.xScale(d['ANN'])
-                  }).strength(.95)
-                )
-                .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
-                //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
-                .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
-                .alphaDecay(0.001)
-                .alpha(0.2)
-                .on('tick', self.tick).restart() // listen for tick events
-
-
-          },
           //update bee x position on scroll
           // this is done by changing the forceX to a different x variable
           updateChart(data, data_step) {
@@ -762,7 +713,7 @@
           tick() {
           const self = this;
           
-          this.d3.selectAll(".dot")
+          this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
 
@@ -777,21 +728,54 @@
           // update step variable to match step in view
           this.step = response.index;
           console.log(this.step);
+
+          // move beeswarm around based on step, call join function
           if (this.step == 2) {
+            this.chartState.measure = 'ANN_d100';
             this.addBees(this.step, this.ANN_d100);
           }
           if (this.step == 3) {
-            this.addBees(this.step, this.ANN_both);
+            this.chartState.measure = 'ANN_d100';
+            this.addBees(this.step, this.ANN_d100);
           }
           if (this.step == 4) {
+            this.chartState.measure = 'ANN_d001';
             this.addBees(this.step, this.ANN_d100);
           }
           if (this.step == 5) {
+            this.chartState.measure = 'ANN_both';
             this.addBees(this.step, this.ANN_both);
           }
+          if (this.step == 6) {
+            this.chartState.measure = 'ANN_both';
+            this.addBees(this.step, this.ANN_both);
+          }
+          if (this.step == 7) {
+            this.chartState.measure = 'ANN_both';
+            this.addBees(this.step, this.ANN_both);
+          }
+          if (this.step == 8) {
+            this.chartState.measure = 'RNN';
+            this.addBees(this.step, this.RNN);
+          }
+          if (this.step == 9) {
+            this.chartState.measure = 'RNN';
+            this.addBees(this.step, this.RNN);
+          }
+          if (this.step == 10) {
+            this.chartState.measure = 'RGCN';
+            this.addBees(this.step, this.RGCN);
+          }
+                    if (this.step == 12) {
+            this.chartState.measure = 'RGCN_ptrn';
+            this.addBees(this.step, this.RGCN_ptrn);
+          }
+                    if (this.step == 14) {
+            this.chartState.measure = 'RGCN_ptrn';
+            this.addBees(this.step, this.RGCN_ptrn);
+          }
 
-
-           // changes css for class
+           // add class to active step
           response.element.classList.add("is-active");
 
           // trigger style changes
@@ -804,15 +788,8 @@
         
         // add remove class on exit
         handleStepExit(response) {
-          const self = this;
-          // response = { element, direction, index }
-
           // changes css for class
           response.element.classList.remove("is-active");
-        },
-        // track scroll progress - not returning anything?
-        handleStepProgress(response) {
-          //console.log(response.progress);
         },
         fadeOut(element, time) {
           element
@@ -884,7 +861,7 @@ article {
   width: 90%;
   margin: 2rem auto 4rem auto;
   z-index: 1;
-  height: 50vh;
+  height: 100vh;
   border: 1px;
 
   p {
@@ -918,7 +895,7 @@ figure.sticky {
   display: grid;
   grid-template-rows: 5% 1fr 10% 1fr 2%;
   grid-template-columns: 2% auto 2%;
-  row-gap:20px;
+  row-gap:1%;
 
   position: -webkit-sticky;
   position: sticky;
