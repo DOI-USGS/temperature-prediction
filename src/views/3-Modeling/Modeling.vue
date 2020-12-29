@@ -274,8 +274,8 @@
             margin: 50,
 
             chartState: {},
-            yvars: {},
-            datasets: {},
+            model_exp: {ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            model_data: {both: 'both', reg: 'rmse_monthly', cast:'rmse_monthly_cast'},
 
             // beeswarm
             radius: 4,
@@ -297,11 +297,6 @@
             current_step: null,
             progress: 0,
 
-            // force
-            //force_sim: null,
-            //init_decay: null,
-            timeBeforeKill: 5000,
-            exp_color: ["orangered", "teal"],
 
            //listing model steps in order for the two separate datasets
             model_list: ['ANN','ANN','ANN','ANN','ANN','ANN', 'ANN', 'ANN', 'RNN','RNN', 'RGCN', 'RGCN', 'RGCN_ptrn','RGCN_ptrn'],
@@ -313,12 +308,6 @@
             current_flubber_id: null,
 
           }
-        },
-        props: {
-          id: {
-            type: String,
-          }
-
         },
         mounted() {
         // this all happens before the page is rendered
@@ -338,6 +327,8 @@
 
           // setup resize event
           window.addEventListener("resize", this.resize);
+
+          this.chartState.measure = this.model_exp.ANN;
 
         /*   // initiate beeswarm chart based on current step
           // needs to be modified so pulls active step on refresh, not first
@@ -393,10 +384,12 @@
 
             // draw beeswarm if there is a step value 
               this.makeBeeswarm(this.step);
-              //this.addBees(this.step);
 
             // draw initial beeswarm chart (data, xvar)
            // this.setChart(rmse_monthly_cast, data_set);
+
+           // filter function
+
 
           },
           // resize to keep scroller accurate
@@ -510,54 +503,54 @@
             .attr('transform', `translate(${margin}, ${margin})`);
 
           // x axis scaled across full range of values
-          const xScale = this.d3.scaleLinear()
+          this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
 
-            this.addBees(this.step, this.ANN_d001);
+           // code experiment with color
+           let colors = this.d3.scaleOrdinal()
+            .domain(["d100","d001"])
+            .range(["teal", "orangered"]);
 
+          // draw initial chart with ANN
+            /* this.addBees(this.step, this.ANN_d100); */
 
           },
           addBees(step_in, data_current) {
             const self = this;
 
             var data_current = data_current;
-            console.log(data_current)
- 
-          const chart = this.d3.select("#bees-container svg g")
-            .selectAll(".bees")
-            .data(data_current)
-            .join("circle")
-            .attr("r", this.radius)
-            .classed("bees", true);
 
-            chart.enter()
-              .append("circle")
-              .classed("buzz", true)
-              .attr("cx", 0)
-              .attr("cy", (this.height/2) - this.margin / 2)
+            const chart = this.d3.select("#bees-container svg g")
+              .selectAll(".bees")
+              .data(data_current)
+              .join("circle")
               .attr("r", this.radius)
-              .attr("fill", "orchid")
-              .merge(chart)
-              .transition()
-              .duration(2000)
-              .attr("cx", function(d) { return d });
+              .attr("fill", "orange")
+              .classed("bees", true);
 
-            chart
-              .exit()
-              .transition()
-              .duration(1000)
-              .attr("cx", 0)
-              .attr("cy", (this.height/2) - this.margin / 2)
-              .remove();
+              chart.enter()
+                .append("circle")
+                .classed("buzz", true)
+                .attr("cx", 0)
+                .attr("cy", (this.height/2) - this.margin / 2)
+                .attr("r", this.radius)
+                .attr("fill", "orchid")
+                .merge(chart)
+                .transition()
+                  .duration(2000)
+                  .attr("cx", (d) => this.xScale(d));
 
+          },
+          redraw(dataVar) {
+            let simulation = this.d3.forceSimulation(dataVar)
+            .force("x", this.d3.forceX(function(d) {
+              return self.xScale();
+            }))
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
-            this.height = 1000;
-            this.width = 1000;
-            this.margin = 50;
 
           // append svg
           // canvas is 1000 by 1000 and set to scale with container
@@ -574,16 +567,6 @@
               .attr("y2", this.height/2)
               .attr("stroke-width", 4)
               .attr("stroke", "#A3A0A6");
-
-          //use color scale for experiment
-            let experiments = Array.from(new Set(data.map((d) => d.experiment)));
-            var test = Array.from(data.map((d) => d.experiment));
-            console.log(test);
-            let color = this.d3.scaleOrdinal().domain(experiments).range(this.exp_color);
-            var scale_keys = ["1%", "100%"];
-
-          // come back to this
-          // this draw legend, annotations to view, thigns to emphasize as scroll progresses
 
           // add color legend - different svg that is stacked on top of the beeswarm
             this.legend = this.d3.select("#bees_legend")
@@ -790,11 +773,23 @@
         handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
-          //console.log(response);
 
           // update step variable to match step in view
-          this.current_step = response.index;
-          console.log(this.current_step);
+          this.step = response.index;
+          console.log(this.step);
+          if (this.step == 2) {
+            this.addBees(this.step, this.ANN_d100);
+          }
+          if (this.step == 3) {
+            this.addBees(this.step, this.ANN_both);
+          }
+          if (this.step == 4) {
+            this.addBees(this.step, this.ANN_d100);
+          }
+          if (this.step == 5) {
+            this.addBees(this.step, this.ANN_both);
+          }
+
 
            // changes css for class
           response.element.classList.add("is-active");
@@ -804,8 +799,6 @@
 
           // trigger flubber
           this.animateFlubber(response.element.id, response.direction);
-
-          this.scroller.resize();
 
         },
         
