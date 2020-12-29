@@ -279,6 +279,7 @@
 
             // beeswarm
             radius: 4,
+            paddedRadius: radius*1.2,
             bees: null,
             svg: null,
             xScale: null,
@@ -294,6 +295,7 @@
             // scroll options
             scroller: null,
             step: null, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
+            current_step: null,
             progress: 0,
 
             // force
@@ -313,16 +315,17 @@
 
           }
         },
-        created () {
-          // created runs the first time a page or component is opened
-          /// use to set up data before inserting in DOM w/ mounted()
+        props: {
+          id: {
+            type: String,
+          }
 
         },
         mounted() {
         // this all happens before the page is rendered
            this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
 
-          //set up scrollama scoller
+          // set up scrollama scoller
           this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
@@ -333,22 +336,18 @@
                 .onStepEnter(this.handleStepEnter)
                 .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
-          
 
-          // 3. setup resize event...is this working as expected?
+          // setup resize event
           window.addEventListener("resize", this.resize);
 
-          this.paddedRadius = this.radius*1.2;
-          
           // initiate beeswarm chart based on current step
           // needs to be modified so pulls active step on refresh, not first
           var step_current = this.step;
           this.makeBeeswarm(step_current);
 
-          // start force simulations?
+          // start force simulations
           this.force_sim = this.d3.forceSimulation();
-          this.force_sim_new = this.d3.forceSimulation(this.rmse_monthly); 
-
+          this.force_sim_new = this.d3.forceSimulation(); 
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
@@ -360,26 +359,11 @@
           // set order of flubber components
           this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
-          //beeswarm options to define intial chart state
-          this.yvars = {
-            ANN: 'ANN',
-            RNN: 'RNN',
-            RGCN: 'RGCN',
-            RGCN_ptrn: 'RGCN_ptrn'
-          };
-          this.datasets = {
-            cast: 'rmse_monthly_cast',
-            long: 'rmse_monthly'
-          };
-         this.chartState.yvar = this.yvars.ANN;
-         this.chartState.df = this.datasets.cast;
-
         // once everything is set up and the component is added to the DOM, read in data and make it dance
-        this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+        this.loadData(); // this reads in data which then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
 
         },
-        
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
           loadData() {
@@ -781,8 +765,8 @@
           //console.log(response);
 
           // update step variable to match step in view
-          this.step = response.index;
-          console.log(this.step);
+          this.current_step = response.index;
+          console.log(this.current_step);
 
            // changes css for class
           response.element.classList.add("is-active");
@@ -883,11 +867,9 @@ article {
   position: relative;
   margin: 0 auto;
   width: 100%;
-
 }
 .step-container {
   width:100vw;
-  
 }
 .step {
   position: relative;
@@ -926,7 +908,7 @@ article {
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
   display: grid;
-  grid-template-rows: 5% 1fr 10% 1fr 5%;
+  grid-template-rows: 5% 1fr 10% 1fr 2%;
   grid-template-columns: 2% auto 2%;
   row-gap:20px;
 
@@ -989,24 +971,6 @@ figure.sticky {
   fill: #EDA550;
   stroke: #EDA550;
   stroke-width: 2px;
-}
-
-// step-triggered transitions
-// can trigger attribute changes with .is-active
-.step.is-active {
-
-}
-
-// could add changes by step here
-.step.is-active[data-step="1"] {
-}
-.step.is-active[data-step="2"] {
-}
-.step.is-active[data-step="3"] {
-}
-.step.is-active[data-step="4"] {
-}
-.step.is-active[data-step="7"] {
 }
 
 </style>
