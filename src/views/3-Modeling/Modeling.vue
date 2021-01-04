@@ -271,6 +271,7 @@
             height: 1000,
             width: 1000,
             margin: 50,
+            svg: null,
 
             chartState: {},
             model_exp: {ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
@@ -288,9 +289,9 @@
             ANN_both: null,
             ANN_d001: null,
             ANN_d100: null, 
-            RNN: null,
-            RGCN: null,
-            RGCN_ptrn: null,
+            RNN_both: null,
+            RGCN_both: null,
+            RGCN_ptrn_both: null,
 
             // scroll options
             scroller: null,
@@ -317,22 +318,19 @@
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
                 .onStepEnter(this.handleStepEnter)
-                .onStepProgress(this.handleStepProgress)
                 .onStepExit(this.handleStepExit);
 
           // setup resize event
           window.addEventListener("resize", this.resize);
 
-          this.chartState.measure = this.model_exp.ANN;
+          // define initial state of chart
+          this.chartState.measure = this.ANN_both;
 
         /*   // initiate beeswarm chart based on current step
           // needs to be modified so pulls active step on refresh, not first
           var step_current = this.step;
           this.makeBeeswarm(step_current);
  */
-          // start force simulations
-          this.force_sim = this.d3.forceSimulation();
-          this.force_sim_new = this.d3.forceSimulation(); 
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
@@ -375,13 +373,15 @@
             this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
             this.ANN_d001 = this.rmse_monthly_cast.map((d) => d.ANN_d001);
             this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d100);
-            this.RNN = this.rmse_monthly.map((d) => d.RNN);
-            this.RGCN = this.rmse_monthly.map((d) => d.RGCN);
-            this.RGCN_ptrn = this.rmse_monthly.map((d) => d.RGCN_ptrn);
+            this.RNN_both = this.rmse_monthly.map((d) => d.RNN);
+            this.RGCN_both = this.rmse_monthly.map((d) => d.RGCN);
+            this.RGCN_ptrn_both = this.rmse_monthly.map((d) => d.RGCN_ptrn);
             //console.log(this.ANN_both);
 
             // draw beeswarm if there is a step value 
-            this.makeBeeswarm(this.step);
+            if (this.step) {
+              this.makeBeeswarm(this.step);
+            }
 
           },
           // resize to keep scroller accurate
@@ -485,12 +485,12 @@
             let margin = 50;
 
           // add svg for beeswarm 
-          let svg = this.d3.select('#bees-container').append('svg')
+          this.svg = this.d3.select('#bees-container').append('svg')
               .attr("viewBox", [0, 0, this.width, this.height].join(' '))
               .attr("class", "bees-chart")
 
           // define where chart starts within svg
-          svg
+          this.svg
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
 
@@ -508,31 +508,49 @@
             /* this.addBees(this.step, this.ANN_d100); */
 
           },
-          addBees(step_in, data_current) {
+          addBees(step_in, data_var) {
             const self = this;
 
-            var data_current = data_current;
+            //var data_current = data_current;
 
-          const chart = this.d3.select("#bees-container svg g")
+          // bind current elements to new data
+          /* const chart = this.d3.select("#bees-container svg g")
             .selectAll(".bees")
             .data(data_current)
             .join("circle")
               .attr("r", this.radius)
-              .attr("fill", "orange")
-              .classed("bees", true);
+              .attr("fill", "pink")
+              .classed("bees", true); */
+
+              
+   /*         let simulation = this.d3.forceSimulation(this.rmse_monthly) /// this is throwing and error of null force
+              .force("x", this.d3.forceX(function(d) {
+                return self.xScale(data_var)
+              }).strength(2))
+              .force('y', this.d3.forceY(this.height/2).strength(0.15))
+              .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(1))
+              .stop();       */    
+              
+        /*   // manually run simulation
+            for (let i = 0; i < data_var.length; ++i) {
+              simulation.tick(10);
+            } */
+         
+         let chart = self.svg.selectAll(".bees")
+          .data(data_var);
 
             chart.exit()
               .transition()
                 .duration(1000)
-                .attr("cx", 0)
+                .attr("cx", 0) //point origin
                 .attr("cy", (this.height /2 ) - this.margin/2)
                 .remove();
 
             chart.enter()
               .append("circle")
-              .classed("buzz", true)
+              .classed("bees", true)
               .attr("cx", 0)
-              .attr("cy", (this.height/2))
+              .attr("cy", (this.height/2) - this.margin / 2)
               .attr("r", this.radius)
               .attr("fill", "orchid")
               .merge(chart)
@@ -541,20 +559,8 @@
                 .attr("cx", (d) => this.xScale(d))
                 .attr("cy", (this.height /2 ) - this.margin/2);
 
-            let simulation = this.d3.forceSimulation();
 
-            simulation
-            .force("x", this.d3.forceX((d) => this.xScale(d)).strength(2))
-            .force('y', this.d3.forceY(this.height/2).strength(0.15))
-            .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(5))
-            .alpha(.2)
-            .restart()
-            .on('tick', self.tick);
 
-          // manually run simulation
-          for (let i = 0; i < data_current.length; ++i) {
-            simulation.tick(10);
-          }
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
@@ -710,7 +716,7 @@
               clearTimeout(self.init_decay);
 
           },
-          tick() {
+          /* tick() {
           const self = this;
           
           this.d3.selectAll(".bees")
@@ -718,7 +724,7 @@
             .attr('cy', function(d){return d.y})
 
 
-        },
+        }, */
         // scrollama event handler functions
         // add class on enter
         handleStepEnter(response) {
@@ -731,49 +737,41 @@
 
           // move beeswarm around based on step, call join function
           if (this.step == 2) {
-            this.chartState.measure = 'ANN_d100';
-            this.addBees(this.step, this.ANN_d100);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 3) {
-            this.chartState.measure = 'ANN_d100';
-            this.addBees(this.step, this.ANN_d100);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 4) {
-            this.chartState.measure = 'ANN_d001';
-            this.addBees(this.step, this.ANN_d100);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 5) {
-            this.chartState.measure = 'ANN_both';
-            this.addBees(this.step, this.ANN_both);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 6) {
-            this.chartState.measure = 'ANN_both';
-            this.addBees(this.step, this.ANN_both);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 7) {
-            this.chartState.measure = 'ANN_both';
-            this.addBees(this.step, this.ANN_both);
+            this.chartState.measure = this.ANN_both;
           }
           if (this.step == 8) {
-            this.chartState.measure = 'RNN';
-            this.addBees(this.step, this.RNN);
+            this.chartState.measure = this.model_exp.RNN;
           }
           if (this.step == 9) {
-            this.chartState.measure = 'RNN';
-            this.addBees(this.step, this.RNN);
+            this.chartState.measure = this.model_exp.RNN;
           }
           if (this.step == 10) {
-            this.chartState.measure = 'RGCN';
-            this.addBees(this.step, this.RGCN);
+            this.chartState.measure = this.model_exp.RGCN;
           }
                     if (this.step == 12) {
-            this.chartState.measure = 'RGCN_ptrn';
-            this.addBees(this.step, this.RGCN_ptrn);
+            this.chartState.measure = this.model_exp.RGCN_ptrn;
           }
                     if (this.step == 14) {
-            this.chartState.measure = 'RGCN_ptrn';
-            this.addBees(this.step, this.RGCN_ptrn);
+            this.chartState.measure = this.model_exp.RGCN_ptrn;
+            
           }
+
+           this.addBees(this.step, this.chartState.measure);
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -791,6 +789,7 @@
           // changes css for class
           response.element.classList.remove("is-active");
         },
+        
         fadeOut(element, time) {
           element
           .transition()
