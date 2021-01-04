@@ -356,6 +356,11 @@
           .force("collide", this.d3.forceCollide(this.paddedRadius))
           .stop(); */
 
+          this.simulation = this.d3.forceSimulation(this.chartState.dataset)
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
+          .force('y', this.d3.forceY(this.height/2).strength(0.05))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
+
         },
         
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -378,17 +383,6 @@
             this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_monthly_cast = data[1]; // by model type x experiment, e.g. ANN_d001, ANN_d100
             //console.log(this.rmse_monthly);
-
-            // name variables to be used in .join(enter, update) pattern
-            // the order of rows in the input dataframe MATTERS
-  /*           this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN); // ANN for just the d100 group
-            this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
-            this.RNN_both = this.rmse_monthly.map((d) => d.RNN);
-            this.RGCN_both = this.rmse_monthly.map((d) => d.RGCN);
-            this.RGCN_ptrn_both = this.rmse_monthly.map((d) => d.RGCN_ptrn);
-            this.experiment = this.rmse_monthly.map((d) => d.experiment);
-            this.experiment_d100 = this.rmse_monthly_cast.map((d) => d.experiment); */
-            //console.log(this.experiment);
 
         // define initial state of chart
           this.chartState.measure = this.model_exp.ANN;
@@ -518,7 +512,7 @@
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001"])
-            .range(["teal", "orangered"]);
+            .range(["#f4de3b", "#593392"]);
 
           // draw initial chart with ANN
             /* this.addBees(this.step, this.ANN_d100); */
@@ -560,18 +554,24 @@
           .force("collide", this.d3.forceCollide(this.paddedRadius))
           .on('tick', self.tick); */
 
-                  // define and stop sim
-        let new_simulation = this.d3.forceSimulation(this.chartState.dataset)
+        // define and stop sim
+        self.simulation = this.d3.forceSimulation(this.chartState.dataset)
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
-          .force('y', this.d3.forceY(this.height/2).strength(0.01))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9))
-          .alpha(.2);
+          .force('y', this.d3.forceY(this.height/2).strength(0.05))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
+          .stop();
+
+/*           // Manually run simulation
+        for (let i = 0; i < self.chartState.dataset.length; ++i) {
+            self.simulation.tick(10);
+        }
+ */
 
 
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
             .attr("fill", (d) => self.set_colors(d.experiment));
-            // mkey value used to identify dots that are the same between datasets (((seg)))
+            // key value used to identify dots that are the same between datasets (((seg)))
 
             chart.exit()
               .transition()
@@ -589,15 +589,14 @@
               .attr("r", this.radius) 
               .merge(chart)
               .transition()
-                .duration(2000)
+                .duration(1000)
                 .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
             //console.log(chart) // update values should be shown as __groups?
 
-             new_simulation.restart()
-                .on("tick", self.tick)
-
+           self.simulation.alpha(.1).restart()
+                .on("tick", self.tick) 
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
@@ -989,8 +988,8 @@ figure.sticky {
   // top: 0%;
 }
 .river{
-  stroke: #6399ba;
-  fill: #6399ba;
+  stroke: #035096;
+  fill: #035096;
   stroke-width: 2px;
 }
 .other{
