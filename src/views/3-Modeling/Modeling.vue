@@ -349,12 +349,12 @@
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
 
-        // define and stop sim
+/*         // define and stop sim
         this.simulation = this.d3.forceSimulation()
           .force("x", this.d3.forceX())
           .force('y', this.d3.forceY(this.height/2))
           .force("collide", this.d3.forceCollide(this.paddedRadius))
-          .stop();
+          .stop(); */
 
         },
         
@@ -363,8 +363,8 @@
           loadData() {
             const self = this;
             // read in data 
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_ann.csv", this.d3.autoType)];
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_ann_test.csv", this.d3.autoType)];
 
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
@@ -381,20 +381,20 @@
 
             // name variables to be used in .join(enter, update) pattern
             // the order of rows in the input dataframe MATTERS
-            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN); // ANN for just the d100 group
+  /*           this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN); // ANN for just the d100 group
             this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
             this.RNN_both = this.rmse_monthly.map((d) => d.RNN);
             this.RGCN_both = this.rmse_monthly.map((d) => d.RGCN);
             this.RGCN_ptrn_both = this.rmse_monthly.map((d) => d.RGCN_ptrn);
             this.experiment = this.rmse_monthly.map((d) => d.experiment);
-            this.experiment_d100 = this.rmse_monthly_cast.map((d) => d.experiment);
+            this.experiment_d100 = this.rmse_monthly_cast.map((d) => d.experiment); */
             //console.log(this.experiment);
 
         // define initial state of chart
           this.chartState.measure = this.model_exp.ANN;
           this.chartState.dataset = this.rmse_monthly_cast;
 
-            // draw beeswarm if there is a step value 
+            // draw beeswarm if step value is not null
             if (this.step) {
               this.makeBeeswarm();
             }
@@ -546,27 +546,32 @@
           // assign color scale depending on the step - after step 3 there are 2 groups (d100, d001), but just 1 before (d100)
           // not working correctly - doesnt recognize grouping variable - should be adding orange dots
           if (step_in >= 4 ){
-            this.color_exp = this.experiment;
             this.chartState.dataset = this.rmse_monthly;
           }
           if (step_in <= 3){
-            this.color_exp = this.experiment_d100
             this.chartState.dataset = this.rmse_monthly_cast;
 
           }
           console.log(this.chartState.measure);
 
-          /* this.simulation
-          .data(data_var)
+   /*        this.simulation
+          .data(this.chartState.dataset)
           .force('y', this.d3.forceY(this.height/5))
           .force("collide", this.d3.forceCollide(this.paddedRadius))
           .on('tick', self.tick); */
 
+                  // define and stop sim
+        let new_simulation = this.d3.forceSimulation(this.chartState.dataset)
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
+          .force('y', this.d3.forceY(this.height/2).strength(0.01))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9))
+          .alpha(.2);
+
 
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
-            .attr("fill", (d) => self.set_colors(d.experiment)); // color scale not assigning correctly
-            // missing key value to identify dots that are consistent between datasets (((seg)))
+            .attr("fill", (d) => self.set_colors(d.experiment));
+            // mkey value used to identify dots that are the same between datasets (((seg)))
 
             chart.exit()
               .transition()
@@ -580,15 +585,18 @@
               .classed("bees", true)
               .attr("cx", this.width/2) // where they enter from
               .attr("cy", (this.height/2) - this.margin / 2)// where they enter from
-              .attr("fill", (d) => self.set_colors(d.experiment)) //lol boooo
+              .attr("fill", (d) => self.set_colors(d.experiment)) 
               .attr("r", this.radius) 
               .merge(chart)
               .transition()
                 .duration(2000)
                 .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
-                .attr("cy", (this.height /2 ) - this.margin/2);// where they move to
+                //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
-              console.log(chart) // update values should be shown as __groups?
+            //console.log(chart) // update values should be shown as __groups?
+
+             new_simulation.restart()
+                .on("tick", self.tick)
 
           },
           // draw beeswarm/scatterplot
@@ -697,26 +705,8 @@
 
           },
 
-          updateChart(data, data_step) {
+        /*   updateChart(data, data_step) {
             const self = this;
-
-            //modify the force depending on step
-            // list models in order of transitions, use step index to select
-            var model_sel = this.model_list_cast[data_step];
-
-            // stop previous simulation
-           //this.force_sim.stop()
-          
-          //move all points to center when model is introduced?
-              if (data_step === 2){
-
-                  force_new
-                    .force('x', this.d3.forceX(500).strength(.4))
-                    .force('y', this.d3.forceY(500).strength(.4))
-                    .alpha(0.2)
-                    .alphaDecay(0.05)
-                  
-              } else {
 
             // move points along x axis according to model, when "ticked"
             // this should only happen if the model is different than the previous
@@ -740,16 +730,15 @@
               }, 500)
               clearTimeout(self.init_decay);
 
-          },
-          /* tick() {
+          }, */
+          tick() {
           const self = this;
           
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
 
-
-        }, */
+        },
         // scrollama event handler functions
         // add class on enter
         handleStepEnter(response) {
@@ -798,7 +787,7 @@
             this.chartState.measure = this.model_exp.RGCN_ptrn;
           }
           if (this.step >= 14) {
-            this.chartState.measure = this.model_exp.RGCN_ptrn_both;
+            this.chartState.measure = this.model_exp.RGCN_ptrn;
             
           }
 
@@ -921,6 +910,7 @@ article {
   margin-bottom: 0;
   height: 50vh;
 }
+// adjust spacing on last step with hex map
 .step[data-scrollama-index='14'] {
   height: 10vh;
 }
