@@ -240,6 +240,7 @@
     </article>
     <div id="map-container">
    <img id="hex-map" src="@/assets/usa_hex_map_80-01.png" />
+   <!-- need to add legend and recolor beeswarm to mirror?? -->
     </div>
   </div>
 </template>
@@ -279,19 +280,23 @@
 
             // beeswarm
             radius: 4,
+            set_colors: null,
+            color_exp: null, 
             paddedRadius: this.radius*1.2,
             bees: null,
             xScale: null,
             rmse_monthly: [],
             rmse_monthly_cast: [],
+            data_set: null,
+            simulation: null,
 
             //update pattern variables
             ANN_both: null,
-            ANN_d001: null,
             ANN_d100: null, 
             RNN_both: null,
             RGCN_both: null,
             RGCN_ptrn_both: null,
+
 
             // scroll options
             scroller: null,
@@ -344,6 +349,13 @@
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
 
+        // define and stop sim
+        this.simulation = this.d3.forceSimulation()
+          .force("x", this.d3.forceX())
+          .force('y', this.d3.forceY(this.height/2))
+          .force("collide", this.d3.forceCollide(this.paddedRadius))
+          .stop();
+
         },
         
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -352,7 +364,7 @@
             const self = this;
             // read in data 
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_cast.csv", this.d3.autoType)];
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_ann.csv", this.d3.autoType)];
 
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
@@ -368,13 +380,15 @@
             //console.log(this.rmse_monthly);
 
             // name variables to be used in .join(enter, update) pattern
+            // the order of rows in the input dataframe MATTERS
+            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN); // ANN for just the d100 group
             this.ANN_both = this.rmse_monthly.map((d) => d.ANN);
-            this.ANN_d001 = this.rmse_monthly_cast.map((d) => d.ANN_d001);
-            this.ANN_d100 = this.rmse_monthly_cast.map((d) => d.ANN_d100);
             this.RNN_both = this.rmse_monthly.map((d) => d.RNN);
             this.RGCN_both = this.rmse_monthly.map((d) => d.RGCN);
             this.RGCN_ptrn_both = this.rmse_monthly.map((d) => d.RGCN_ptrn);
-            //console.log(this.ANN_both);
+            this.experiment = this.rmse_monthly.map((d) => d.experiment);
+            this.experiment_d100 = this.rmse_monthly_cast.map((d) => d.experiment);
+            //console.log(this.experiment);
 
         // define initial state of chart
           this.chartState.measure = this.ANN_d100;
@@ -385,7 +399,7 @@
             }
 
           },
-          // resize to keep scroller accurate
+          // resize to keep scroller accurate with window size changes
           resize () {
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
@@ -501,7 +515,7 @@
             .domain([0,10]);
 
            // code experiment with color
-           let colors = this.d3.scaleOrdinal()
+           this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001"])
             .range(["teal", "orangered"]);
 
@@ -511,17 +525,8 @@
           },
           addBees(step_in, data_var) {
             const self = this;
-
-          // bind current elements to new data
-          /* const chart = this.d3.select("#bees-container svg g")
-            .selectAll(".bees")
-            .data(data_current)
-            .join("circle")
-              .attr("r", this.radius)
-              .attr("fill", "pink")
-              .classed("bees", true); */
-
               
+              // set but pause force simulation, run manually on tick once chart is defined
    /*         let simulation = this.d3.forceSimulation(this.rmse_monthly) /// this is throwing and error of null force
               .force("x", this.d3.forceX(function(d) {
                 return self.xScale(data_var)
@@ -535,28 +540,53 @@
               simulation.tick(10);
             } */
          
-         let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
-          .data(data_var);
+
+
+          // assign color scale depending on the step - after step 3 there are 2 groups (d100, d001), but just 1 before (d100)
+          // not working correctly - doesnt recognize grouping variable - should be adding orange dots
+          if (step_in >= 4 ){
+            this.color_exp = this.experiment;
+            this.data_set = this.rmse_monthly_cast;
+          }
+          if (step_in <= 3){
+            this.color_exp = this.experiment_d100
+            this.data_set = this.rmse_monthly;
+
+          }
+
+          /* this.simulation
+          .data(data_var)
+          .force('y', this.d3.forceY(this.height/5))
+          .force("collide", this.d3.forceCollide(this.paddedRadius))
+          .on('tick', self.tick); */
+
+
+          let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
+          .data(data_var)
+            .attr("fill", (d) => self.set_colors(this.color_exp)); // color scale not assigning correctly
+            // missing key value to identify dots that are consistent between datasets
 
             chart.exit()
               .transition()
                 .duration(1000)
-                .attr("cx", 0) //point origin
-                .attr("cy", (this.height /2 ) - this.margin/2)
+                .attr("cx", this.width/2) //where they exit from
+                .attr("cy", (this.height /2 ) - this.margin/2) //where they exit from
                 .remove();
 
             chart.enter()
               .append("circle")
               .classed("bees", true)
-              .attr("cx", 0)
-              .attr("cy", (this.height/2) - this.margin / 2)
-              .attr("r", this.radius)
-              .attr("fill", "orchid")
+              .attr("cx", this.width/2) // where they enter from
+              .attr("cy", (this.height/2) - this.margin / 2)// where they enter from
+              .attr("fill", (d) => self.set_colors(this.color_exp)) //lol boooo
+              .attr("r", this.radius) 
               .merge(chart)
               .transition()
                 .duration(2000)
-                .attr("cx", (d) => this.xScale(d))
-                .attr("cy", (this.height /2 ) - this.margin/2);
+                .attr("cx", (d) => self.xScale(d))// where they move to
+                .attr("cy", (this.height /2 ) - this.margin/2);// where they move to
+
+              console.log(chart) // update values should be shown as __groups?
 
 
 
@@ -731,6 +761,12 @@
           console.log(response);
 
           // reassign variable used to set x-axis positions in beeswarm
+          if (this.step == 0) {
+            this.chartState.measure = this.ANN_d100;
+          }
+          if (this.step == 1) {
+            this.chartState.measure = this.ANN_d100;
+          }
           if (this.step == 2) {
             this.chartState.measure = this.ANN_d100;
           }
