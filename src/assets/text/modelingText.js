@@ -79,12 +79,6 @@ export default {
             }],
         "Predicting temperature at a national scale": [
             {
-                'title': "Predicting temperature at a national scale",
-                'method': "",
-                'flubber_id': 'RGCN_ptrn',
-                'bees_id': 'RGCN_ptrn'
-            },
-            {
                 'title': "",
                 'method': "This is all really cool considering the distribution of temperature observations at the national scale",
                 'flubber_id': 'RGCN_ptrn',

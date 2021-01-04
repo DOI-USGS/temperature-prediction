@@ -239,7 +239,7 @@
 
     </article>
     <div id="map-container">
-    <!--  <img src="@/assets/usa_hex_map_80-01.png" /> -->
+   <img id="hex-map" src="@/assets/usa_hex_map_80-01.png" />
     </div>
   </div>
 </template>
@@ -323,8 +323,6 @@
           // setup resize event
           window.addEventListener("resize", this.resize);
 
-          // define initial state of chart
-          this.chartState.measure = this.ANN_both;
 
         /*   // initiate beeswarm chart based on current step
           // needs to be modified so pulls active step on refresh, not first
@@ -378,9 +376,12 @@
             this.RGCN_ptrn_both = this.rmse_monthly.map((d) => d.RGCN_ptrn);
             //console.log(this.ANN_both);
 
+        // define initial state of chart
+          this.chartState.measure = this.ANN_d100;
+
             // draw beeswarm if there is a step value 
             if (this.step) {
-              this.makeBeeswarm(this.step);
+              this.makeBeeswarm();
             }
 
           },
@@ -479,7 +480,7 @@
               //console.log("step has no id")
             }
           },
-          makeBeeswarm(step_in) {
+          makeBeeswarm() {
           // define core chart elements that are constant
             const self = this;
             let margin = 50;
@@ -511,8 +512,6 @@
           addBees(step_in, data_var) {
             const self = this;
 
-            //var data_current = data_current;
-
           // bind current elements to new data
           /* const chart = this.d3.select("#bees-container svg g")
             .selectAll(".bees")
@@ -536,7 +535,7 @@
               simulation.tick(10);
             } */
          
-         let chart = self.svg.selectAll(".bees")
+         let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(data_var);
 
             chart.exit()
@@ -668,16 +667,12 @@
 
           },
 
-          //update bee x position on scroll
-          // this is done by changing the forceX to a different x variable
           updateChart(data, data_step) {
             const self = this;
 
             //modify the force depending on step
             // list models in order of transitions, use step index to select
             var model_sel = this.model_list_cast[data_step];
-
-            var force_new = self.force_sim;
 
             // stop previous simulation
            //this.force_sim.stop()
@@ -733,14 +728,14 @@
 
           // update step variable to match step in view
           this.step = response.index;
-          console.log(this.step);
+          console.log(response);
 
-          // move beeswarm around based on step, call join function
+          // reassign variable used to set x-axis positions in beeswarm
           if (this.step == 2) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.ANN_d100;
           }
           if (this.step == 3) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.ANN_d100;
           }
           if (this.step == 4) {
             this.chartState.measure = this.ANN_both;
@@ -755,23 +750,38 @@
             this.chartState.measure = this.ANN_both;
           }
           if (this.step == 8) {
-            this.chartState.measure = this.model_exp.RNN;
+            this.chartState.measure = this.RNN_both;
           }
           if (this.step == 9) {
-            this.chartState.measure = this.model_exp.RNN;
+            this.chartState.measure = this.RNN_both;
           }
           if (this.step == 10) {
-            this.chartState.measure = this.model_exp.RGCN;
+            this.chartState.measure = this.RGCN_both;
           }
-                    if (this.step == 12) {
-            this.chartState.measure = this.model_exp.RGCN_ptrn;
+           if (this.step == 12) {
+            this.chartState.measure = this.RGCN_ptrn_both;
           }
-                    if (this.step == 14) {
-            this.chartState.measure = this.model_exp.RGCN_ptrn;
+          if (this.step >= 14) {
+            this.chartState.measure = this.RGCN_ptrn_both;
             
           }
 
-           this.addBees(this.step, this.chartState.measure);
+          //redraw beeswarm chart based on step
+          this.addBees(this.step, this.chartState.measure);
+
+          // remove/add beeswarm and legend on last step
+          if (this.step == 14 && response.direction == 'down') {
+            this.chartState.measure = this.RGCN_ptrn_both;
+            self.fadeOut(this.d3.select("#legend-scale"), 500);
+            self.fadeOut(this.d3.selectAll(".bees"), 500);
+            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
+          }
+          if (this.step == 13 && response.direction == 'up') {
+            self.fadeIn(this.d3.select("#legend-scale"), 200);
+            self.fadeIn(this.d3.selectAll(".bees"), 200);
+            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
+            
+          }
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -839,6 +849,7 @@
             this.fadeOut(this.d3.selectAll(".legend"), time/2);
             this.fadeOut(this.d3.selectAll("#legend-scale"), time/2);
           }
+          
 
         }
     }
@@ -854,6 +865,7 @@ article {
 }
 .step-container {
   width:100vw;
+
 }
 .step {
   position: relative;
@@ -870,7 +882,11 @@ article {
   }
 }
 .step:last-child {
-  margin-bottom: 600px;
+  margin-bottom: 0;
+  height: 50vh;
+}
+.step[data-scrollama-index='14'] {
+  height: 10vh;
 }
 
 // add sticky header to steps to maintain while given model is shown
@@ -955,6 +971,9 @@ figure.sticky {
   fill: #EDA550;
   stroke: #EDA550;
   stroke-width: 2px;
+}
+#hex-map {
+  padding: 4rem;
 }
 
 </style>
