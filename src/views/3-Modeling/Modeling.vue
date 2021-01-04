@@ -276,7 +276,7 @@
 
             chartState: {},
             model_exp: {ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
-            model_data: {both: 'both', reg: 'rmse_monthly', cast:'rmse_monthly_cast'},
+            model_data: {long: 'rmse_monthly', cast:'rmse_monthly_cast'},
 
             // beeswarm
             radius: 4,
@@ -291,11 +291,11 @@
             simulation: null,
 
             //update pattern variables
-            ANN_both: null,
-            ANN_d100: null, 
-            RNN_both: null,
-            RGCN_both: null,
-            RGCN_ptrn_both: null,
+           // ANN_both: null,
+            //ANN_d100: null, 
+            //RNN_both: null,
+            //RGCN_both: null,
+            //RGCN_ptrn_both: null,
 
 
             // scroll options
@@ -391,7 +391,8 @@
             //console.log(this.experiment);
 
         // define initial state of chart
-          this.chartState.measure = this.ANN_d100;
+          this.chartState.measure = this.model_exp.ANN;
+          this.chartState.dataset = this.rmse_monthly_cast;
 
             // draw beeswarm if there is a step value 
             if (this.step) {
@@ -546,13 +547,14 @@
           // not working correctly - doesnt recognize grouping variable - should be adding orange dots
           if (step_in >= 4 ){
             this.color_exp = this.experiment;
-            this.data_set = this.rmse_monthly_cast;
+            this.chartState.dataset = this.rmse_monthly;
           }
           if (step_in <= 3){
             this.color_exp = this.experiment_d100
-            this.data_set = this.rmse_monthly;
+            this.chartState.dataset = this.rmse_monthly_cast;
 
           }
+          console.log(this.chartState.measure);
 
           /* this.simulation
           .data(data_var)
@@ -562,9 +564,9 @@
 
 
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
-          .data(data_var)
-            .attr("fill", (d) => self.set_colors(this.color_exp)); // color scale not assigning correctly
-            // missing key value to identify dots that are consistent between datasets
+          .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
+            .attr("fill", (d) => self.set_colors(d.experiment)); // color scale not assigning correctly
+            // missing key value to identify dots that are consistent between datasets (((seg)))
 
             chart.exit()
               .transition()
@@ -578,17 +580,15 @@
               .classed("bees", true)
               .attr("cx", this.width/2) // where they enter from
               .attr("cy", (this.height/2) - this.margin / 2)// where they enter from
-              .attr("fill", (d) => self.set_colors(this.color_exp)) //lol boooo
+              .attr("fill", (d) => self.set_colors(d.experiment)) //lol boooo
               .attr("r", this.radius) 
               .merge(chart)
               .transition()
                 .duration(2000)
-                .attr("cx", (d) => self.xScale(d))// where they move to
+                .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 .attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
               console.log(chart) // update values should be shown as __groups?
-
-
 
           },
           // draw beeswarm/scatterplot
@@ -762,43 +762,43 @@
 
           // reassign variable used to set x-axis positions in beeswarm
           if (this.step == 0) {
-            this.chartState.measure = this.ANN_d100;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 1) {
-            this.chartState.measure = this.ANN_d100;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 2) {
-            this.chartState.measure = this.ANN_d100;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 3) {
-            this.chartState.measure = this.ANN_d100;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 4) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 5) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 6) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 7) {
-            this.chartState.measure = this.ANN_both;
+            this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 8) {
-            this.chartState.measure = this.RNN_both;
+            this.chartState.measure = this.model_exp.RNN;
           }
           if (this.step == 9) {
-            this.chartState.measure = this.RNN_both;
+            this.chartState.measure = this.model_exp.RNN;
           }
           if (this.step == 10) {
-            this.chartState.measure = this.RGCN_both;
+            this.chartState.measure = this.model_exp.RGCN;
           }
            if (this.step == 12) {
-            this.chartState.measure = this.RGCN_ptrn_both;
+            this.chartState.measure = this.model_exp.RGCN_ptrn;
           }
           if (this.step >= 14) {
-            this.chartState.measure = this.RGCN_ptrn_both;
+            this.chartState.measure = this.model_exp.RGCN_ptrn_both;
             
           }
 
