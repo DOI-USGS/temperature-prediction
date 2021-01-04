@@ -279,24 +279,15 @@
             model_data: {long: 'rmse_monthly', cast:'rmse_monthly_cast'},
 
             // beeswarm
-            radius: 4,
+            radius: 8,
             set_colors: null,
             color_exp: null, 
-            paddedRadius: this.radius*1.2,
+            paddedRadius: null,
             bees: null,
             xScale: null,
             rmse_monthly: [],
             rmse_monthly_cast: [],
-            data_set: null,
             simulation: null,
-
-            //update pattern variables
-           // ANN_both: null,
-            //ANN_d100: null, 
-            //RNN_both: null,
-            //RGCN_both: null,
-            //RGCN_ptrn_both: null,
-
 
             // scroll options
             scroller: null,
@@ -328,13 +319,6 @@
           // setup resize event
           window.addEventListener("resize", this.resize);
 
-
-        /*   // initiate beeswarm chart based on current step
-          // needs to be modified so pulls active step on refresh, not first
-          var step_current = this.step;
-          this.makeBeeswarm(step_current);
- */
-
           // Populate flubber dictionary
           // add path number as key to nested dictionary
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
@@ -357,9 +341,9 @@
           .stop(); */
 
           this.simulation = this.d3.forceSimulation(this.chartState.dataset)
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
+         /*  .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
           .force('y', this.d3.forceY(this.height/2).strength(0.05))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10)) */
 
         },
         
@@ -383,6 +367,7 @@
             this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_monthly_cast = data[1]; // by model type x experiment, e.g. ANN_d001, ANN_d100
             //console.log(this.rmse_monthly);
+            this.paddedRadius = this.radius* 1.5;
 
         // define initial state of chart
           this.chartState.measure = this.model_exp.ANN;
@@ -529,12 +514,6 @@
               .force('y', this.d3.forceY(this.height/2).strength(0.15))
               .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(1))
               .stop();       */    
-              
-        /*   // manually run simulation
-            for (let i = 0; i < data_var.length; ++i) {
-              simulation.tick(10);
-            } */
-         
 
 
           // assign color scale depending on the step - after step 3 there are 2 groups (d100, d001), but just 1 before (d100)
@@ -548,25 +527,13 @@
           }
           console.log(this.chartState.measure);
 
-   /*        this.simulation
-          .data(this.chartState.dataset)
-          .force('y', this.d3.forceY(this.height/5))
-          .force("collide", this.d3.forceCollide(this.paddedRadius))
-          .on('tick', self.tick); */
-
         // define and stop sim
+        // need to make a different function for the initial force draw, because will want to defien
+        // where things are coming from differently?
         self.simulation = this.d3.forceSimulation(this.chartState.dataset)
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
-          .force('y', this.d3.forceY(this.height/2).strength(0.05))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
-          .stop();
-
-/*           // Manually run simulation
-        for (let i = 0; i < self.chartState.dataset.length; ++i) {
-            self.simulation.tick(10);
-        }
- */
-
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(2))
+          .force('y', this.d3.forceY(this.height/2).strength(0.1))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10));
 
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
@@ -588,15 +555,17 @@
               .attr("fill", (d) => self.set_colors(d.experiment)) 
               .attr("r", this.radius) 
               .merge(chart)
-              .transition()
-                .duration(1000)
-                .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
+              //.transition()
+               // .duration(1000)
+               // .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
             //console.log(chart) // update values should be shown as __groups?
 
-           self.simulation.alpha(.1).restart()
-                .on("tick", self.tick) 
+           self.simulation
+           .alpha(.1)
+           .restart()
+            .on("tick", self.tick) 
           },
           // draw beeswarm/scatterplot
           setChart(data, model) {
