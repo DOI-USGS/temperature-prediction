@@ -332,14 +332,6 @@
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
-
-/*         // define and stop sim
-
-          this.simulation = this.d3.forceSimulation(this.chartState.dataset)
-         /*  .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
-          .force('y', this.d3.forceY(this.height/2).strength(0.05))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10)) */
-
         },
         
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -484,21 +476,17 @@
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
 
-          // x axis scaled across full range of values
+         /*  // x axis scaled across full range of values
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
-
+ */
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001"])
             .range(["#f4de3b", "#593392"]);
 
-          // draw initial chart with ANN
-            /* this.addBees(this.step, this.ANN_d100); */
-
-            
-            //add mid line for horizontal clustering
+            //add mid line for horizontal clustering vibes
             this.bees.append("line", 'svg')
               .classed("main_line", true)
               .attr("x1", this.margin)
@@ -508,12 +496,11 @@
               .attr("stroke-width", 4)
               .attr("stroke", "#A3A0A6");
 
-
           },
           addBees(step_in, data_var) {
             const self = this;
 
-          // assign color scale depending on the step
+          // assign dataset by step
           if (step_in >= 4 ){
             this.chartState.dataset = this.rmse_monthly;
           }
@@ -523,14 +510,22 @@
           }
           console.log(this.chartState.measure);
 
+           // x axis scaled across full range of values
+          this.xScale = this.d3.scaleLinear()
+            .range([this.margin, this.width-this.margin])
+            .domain([0,10]);
+
+
         // define and stop sim
         // need to make a different function for the initial force draw, because will want to defien
         // where things are coming from differently?
+        // need to addres ticking with no variable change and gravity
         self.simulation = this.d3.forceSimulation(this.chartState.dataset)
           .force("x", this.d3.forceX((d) => this.xScale(d[this.chartState.measure])).strength(2))
           .force('y', this.d3.forceY(this.height/2).strength(0.1))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10));
 
+          // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
             .attr("fill", (d) => self.set_colors(d.experiment));
@@ -560,53 +555,9 @@
            .alpha(.1)
            .restart()
             .on("tick", self.tick) 
-          },
-          // draw beeswarm/scatterplot
-          setChart(data, model) {
-            const self = this;
-
-          //rmse arrow - should jsut add these as svg?
-            arrows
-              .append('path')
-              .attr('d', "M36.9.4a77 77 0 00-19.1 30 113.5 113.5 0 00-5 34 132.7 132.7 0 00.9 19c.2 1.9 3.2 2 3 0a151.3 151.3 0 01-.1-32.7A78.5 78.5 0 0126.8 18 76 76 0 0139 2.5C40.4 1 38.3-1 37 .4z")
-              .attr("fill","white")
-              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
-              
-            arrows.append('path')
-              .attr('d', "M.4 66.6a100.7 100.7 0 0113.5 19.2 1.5 1.5 0 002.3.4A169 169 0 0133.6 68c1.4-1.3-.7-3.4-2.2-2.1a169 169 0 00-17.3 18l2.4.3a103.5 103.5 0 00-14-19.8c-1.3-1.4-3.4.7-2.1 2.1z")
-              .attr("fill","white")
-              .attr("transform", "rotate(140, 500, 500) translate(600, 400)")
-
-            arrows.append('text').classed('text-annotate', true)
-              .text("RMSEs")
-              .attr("transform", "translate(400, 700)")
-              .style("fill", "white")
-              .attr("font-size", "28px")
-
-            //create color legend dots
-            this.legend.selectAll("mydots")
-              .data(scale_keys)
-              .enter()
-              .append("circle").classed("legend", true)
-                .attr("cx", function(d,i){return 250 + i*250})
-                .attr("cy", function(d, i){ return 800 })
-                .attr("r", 8)
-                .style("fill", function(d){return color(d)});
-
-          //legend labels
-          this.legend.selectAll("mylabels")
-            .data(scale_keys)
-            .enter()
-            .append("text").classed("legend", true)
-              .attr("x", function(d,i){return 280 + i*250})
-              .attr("y", function(d,i){ return 800})
-              .style("fill",  function(d){ return color(d)})
-              .text(function(d){ return d})
-              .attr("text-anchor", "left")
-              .attr("font-size", "36px")
-              .style("alignment-baseline", "middle");
 
           },
+
           tick() {
           const self = this;
           
@@ -800,9 +751,9 @@ article {
 
 //start at beginning
 //grid layout
-#modeling {
+/* #modeling {
   width: 100vw;
-}
+} */
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
