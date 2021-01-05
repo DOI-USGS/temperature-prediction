@@ -334,11 +334,6 @@
         this.setFlubber(); // get flubber going right away
 
 /*         // define and stop sim
-        this.simulation = this.d3.forceSimulation()
-          .force("x", this.d3.forceX())
-          .force('y', this.d3.forceY(this.height/2))
-          .force("collide", this.d3.forceCollide(this.paddedRadius))
-          .stop(); */
 
           this.simulation = this.d3.forceSimulation(this.chartState.dataset)
          /*  .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(1))
@@ -502,22 +497,23 @@
           // draw initial chart with ANN
             /* this.addBees(this.step, this.ANN_d100); */
 
+            
+            //add mid line for horizontal clustering
+            this.bees.append("line", 'svg')
+              .classed("main_line", true)
+              .attr("x1", this.margin)
+              .attr("y1", this.height/2)
+              .attr("x2", this.width-this.margin)
+              .attr("y2", this.height/2)
+              .attr("stroke-width", 4)
+              .attr("stroke", "#A3A0A6");
+
+
           },
           addBees(step_in, data_var) {
             const self = this;
-              
-              // set but pause force simulation, run manually on tick once chart is defined
-   /*         let simulation = this.d3.forceSimulation(this.rmse_monthly) /// this is throwing and error of null force
-              .force("x", this.d3.forceX(function(d) {
-                return self.xScale(data_var)
-              }).strength(2))
-              .force('y', this.d3.forceY(this.height/2).strength(0.15))
-              .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(1))
-              .stop();       */    
 
-
-          // assign color scale depending on the step - after step 3 there are 2 groups (d100, d001), but just 1 before (d100)
-          // not working correctly - doesnt recognize grouping variable - should be adding orange dots
+          // assign color scale depending on the step
           if (step_in >= 4 ){
             this.chartState.dataset = this.rmse_monthly;
           }
@@ -531,7 +527,7 @@
         // need to make a different function for the initial force draw, because will want to defien
         // where things are coming from differently?
         self.simulation = this.d3.forceSimulation(this.chartState.dataset)
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.measure])).strength(2))
+          .force("x", this.d3.forceX((d) => this.xScale(d[this.chartState.measure])).strength(2))
           .force('y', this.d3.forceY(this.height/2).strength(0.1))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10));
 
@@ -560,8 +556,6 @@
                // .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
-            //console.log(chart) // update values should be shown as __groups?
-
            self.simulation
            .alpha(.1)
            .restart()
@@ -570,27 +564,6 @@
           // draw beeswarm/scatterplot
           setChart(data, model) {
             const self = this;
-
-          // append svg
-          // canvas is 1000 by 1000 and set to scale with container
-            this.bees = this.d3.select("#bees-container").append("svg")
-              .attr("viewBox", [0, 0, this.width, this.height].join(' '))
-              .attr("class", "bees_dotPlot");
-
-            //add mid line for horizontal clustering
-            this.bees.append("line", 'svg')
-              .classed("main_line", true)
-              .attr("x1", this.margin)
-              .attr("y1", this.height/2)
-              .attr("x2", this.width-this.margin)
-              .attr("y2", this.height/2)
-              .attr("stroke-width", 4)
-              .attr("stroke", "#A3A0A6");
-
-          // add color legend - different svg that is stacked on top of the beeswarm
-            this.legend = this.d3.select("#bees_legend")
-            //draw an arrow to RMSES
-            var arrows = this.legend.append("g").classed("arrow", true)
 
           //rmse arrow - should jsut add these as svg?
             arrows
@@ -633,72 +606,7 @@
               .attr("font-size", "36px")
               .style("alignment-baseline", "middle");
 
-          //scale x axis
-          this.xScale = this.d3.scaleLinear()
-            .range([this.margin, this.width-this.margin])
-            .domain([0,10]);
-
-          //draw bees
-          //use force to push each dot to x position
-          this.bees.selectAll("circle")
-            .data(data)
-            .enter().append("circle").classed('dot', true)
-            .attr("r", this.radius)
-            .attr("fill", (d) => color(d.experiment))
-            .attr('cx', (d) => this.xScale(d[model]))
-
-
-          //apply force to push dots towards central position on yaxis
-
-          self.force_sim  // start force simulation from array of nodes
-            .force('x', this.d3.forceX(function(d){
-                return self.xScale(d[model])
-              }).strength(.95)
-            )
-            .force('y', this.d3.forceY(this.height/2).strength(0.15)) //strength.1 keeping on horiz line
-            //collide helps with jitteriness, keep iterations between 5-10, stength close to 1
-            .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
-            .alphaDecay(0.001)
-            .alpha(0.2)
-            .on('tick', self.tick) // listen for tick events
-
-            //decay is used to smoothly kill the simulation after a defined time
-            var init_decay;
-            init_decay = setTimeout(function(){
-              console.log('init alpha decay');
-              self.force_sim
-                .alphaDecay(0.1);
-            }, 1000);
-
-
           },
-
-        /*   updateChart(data, data_step) {
-            const self = this;
-
-            // move points along x axis according to model, when "ticked"
-            // this should only happen if the model is different than the previous
-
-            self.force_sim
-              .force('x', this.d3.forceX(function(d){
-                return self.xScale(d[model_sel])
-              }).strength(1))
-              .force('collide', this.d3.forceCollide(this.paddedRadius).strength(1).iterations(4))
-              .alpha(0.1);
-
-              }
-              // reheat the simulation to make thigns move
-              // charge or "heat" is defined by alpha, 
-              self.force_sim.restart()
-                .on("tick", self.tick)
-
-              self.init_decay = setTimeout(function(){
-                console.log('re-init alpha decay');
-                self.force_sim.alphaDecay(0.01);
-              }, 500)
-              clearTimeout(self.init_decay);
-
-          }, */
           tick() {
           const self = this;
           
@@ -807,11 +715,8 @@
         },
         //style changes by step
         makePop(action) {
-          //make beeswarm and legend fade in 
-          // all are initially drawn with opacity 0
-          // thi sis not a good approach - the the page is refreshed in scroll, it resets to step 0
-          // rather than the current step - need to address that throughout
-          //how to pull current step on page load???
+          //make beeswarm and legend fade in etc
+
            var time = 1000;
           if (action >= 1 ) {
             // make beeswarm appear with legend
@@ -962,8 +867,8 @@ figure.sticky {
   stroke-width: 2px;
 }
 .other{
-  fill: #EDA550;
-  stroke: #EDA550;
+  fill: grey;
+  stroke: grey;
   stroke-width: 2px;
 }
 #hex-map {
