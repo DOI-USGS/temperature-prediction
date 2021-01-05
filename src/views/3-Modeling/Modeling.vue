@@ -4,7 +4,7 @@
       id="intro-container"
       class="text-content"
     >
-      <h2>Modeling!</h2>
+      <h2>Modeling intro</h2>
     </div>
     <!--  figure contains all the sticky elements -->
     <figure
@@ -755,8 +755,8 @@ figure.sticky {
   stroke-width: 2px;
 }
 .other{
-  fill:#e9b24b;
-  stroke:#e9b24b;
+  fill:#e9854b;
+  stroke:#e9854b;
   stroke-width: 2px;
 }
 #hex-map {

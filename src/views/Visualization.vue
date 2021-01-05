@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import Importance from "/1-Importance/Importance"
+
 
   export default {
     name: "Vizualization",
