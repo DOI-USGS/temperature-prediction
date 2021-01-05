@@ -1,15 +1,21 @@
 <template>
   <div id="modeling">
+    <figure
+      class="sticky intro"
+    >
     <div
       id="intro-container"
-      class="text-content"
+      class="text-content text-intro"
     >
-      <h2>Modeling intro</h2>
+      <h2 >{{sectionTitle}}</h2>
+      <p>  </p>
+
     </div>
+    </figure>
     <!--  figure contains all the sticky elements -->
     <figure
       ref="figure"
-      class="sticky"
+      class="sticky charts"
     >
       <div id="flubber-container">
         <div id="flubber">
@@ -609,7 +615,6 @@
           </svg>
         </div>
       </div>
-      <div id="error-container" />
       <div id="bees-container" />
       <div id="legend-container">
         <svg
@@ -621,29 +626,16 @@
             id="legend-scale"
             transform="translate(0, 700)"
           >
-            <!-- <path
-              d="M228,643.5H807"
-              transform="translate(-28.24 -627.46)"
-              style="fill: none;stroke: white;stroke-miterlimit: 10;stroke-width: 3px"
-            /> -->
+
             <text
-              class="text-annotate"
-              transform="translate(50 27.42)"
+              class="text-annotate left"
+              transform="translate(50 27)"
             >accurate</text>
             <text
-              class="text-annotate"
-              transform="translate(795 27.42)"
+              class="text-annotate right"
+              transform="translate(850 27)"
             >inaccurate</text>
-           <!--  <path
-              d="M247.5,656.5l-23-12,22-15"
-              transform="translate(-28.24 -627.46)"
-              style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
-            /> -->
-            <!-- <path
-              d="M722.5,657.5l24-14-25-13"
-              transform="translate(30 -627.46)"
-              style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
-            /> -->
+ 
           </g>
         </svg>
       </div>
@@ -659,9 +651,9 @@
         class="step-container text-content">
         <div
           class="scroll-sticky">
-          <h3 >
+          <h2 >
           {{ model_group }}
-          </h3>
+          </h2>
         </div>
         <!-- populate nested steps using text about each model -->
         <div class="scrollama-steps">
@@ -701,6 +693,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
+            sectionTitle: "Predicting water temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -728,7 +721,7 @@
 
             // scroll options
             scroller: null,
-            step: null, //starts at 0 but this is also causing elements to refresh at step 0, which is a no-no
+            step: 0, //starts at 0 but this is also causing elements to refresh at step 0
             current_step: null,
 
             // flubber
@@ -1045,8 +1038,7 @@
           this.step = response.index;
           console.log(response);
 
-          // reassign variable used to set x-axis positions in beeswarm
-
+          // reassign variable used to set x-axis positions in beeswarm based on scroll step
           if (this.step <= 7) {
             this.chartState.measure = this.model_exp.ANN;
           }
@@ -1063,9 +1055,14 @@
             this.chartState.measure = this.model_exp.RGCN_ptrn;
           }
 
-
           //redraw beeswarm chart based on step
           this.addBees(this.step, this.chartState.measure);
+
+          //toggle intro header to stepped headers
+          // this is necessary because the first view is not in the same sticky scolling structure as the rest
+          if (this.step == 3 && response.direction == "down"){
+             this.d3.select("figure.intro").classed("sticky", false); 
+          }
 
           // remove/add beeswarm and legend on last step
           if (this.step == 14 && response.direction == 'down') {
@@ -1096,6 +1093,15 @@
         handleStepExit(response) {
           // changes css for class
           response.element.classList.remove("is-active");
+
+        // make intro header sticky again if scrolling back
+          if (this.step == 3 && response.direction == "up"){
+             this.d3.select("figure.intro").classed("sticky", true); 
+          }
+
+
+
+
         },
         
         fadeOut(element, time) {
@@ -1149,9 +1155,14 @@ article {
   z-index: 1;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 40px;
   left: 0;
-  padding-top: 3vh;
+  padding-top: 0px;
+
+  .step[data-scrollama-index='14'] {
+  height: 10vh;
+  padding-top: 5vh;
+}
 }
 
 //start at beginning
@@ -1161,21 +1172,33 @@ article {
 }
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
-figure.sticky {
+figure.sticky.intro {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 10vh;
+  width: 100vw;
+}
+#intro-container.text-content.text-intro h2 {
+  margin: 0;
+
+}
+figure.sticky.charts {
   display: grid;
-  grid-template-rows: 5% 1fr 10% 1fr 2%;
+  grid-template-rows: 1fr 10% 1fr;
   grid-template-columns: 2% auto 2%;
   row-gap:1%;
 
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 10vh;
   height: 100vh;
   width: 100vw;
 
   #flubber-container {
     grid-column: 2 / 2;
-    grid-row: 2 / 2;
+    grid-row: 1 / 1;
+    z-index: 1;
   }
   #flubber {
     display: block;
@@ -1184,11 +1207,11 @@ figure.sticky {
   }
   #error-container {
     grid-column: 2 / 2;
-    grid-row: 4 / 4;
+    grid-row: 3 / 3;
   }
   #bees-container {
     grid-column: 2 / 2;
-    grid-row: 4 / 4;
+    grid-row: 3 / 3;
   }
   #bees_dotPlot {
     width: 100%;
@@ -1197,16 +1220,25 @@ figure.sticky {
   }
   #legend-container {
     grid-column: 2 / 2;
-    grid-row: 4 / 4;
+    grid-row: 3 / 3;
 
   }
 }
 
 .text-annotate {
   fill:white;
-  font-size: 32px;
-  font-family: NotoSans-Medium, Noto Sans;
+    font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
+  font-size: 20px;
+
+  .left {
+    text-anchor: left;
+
+  }
+  .right {
+    text-anchor: right;
+  }
+
 }
 #flubber {
   opacity: 1;

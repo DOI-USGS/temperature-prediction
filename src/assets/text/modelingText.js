@@ -1,8 +1,13 @@
 export default {
     textContents: {
-        "Predicting water temperature":[
+        "":[
             {
-                'method': "Artifical neural networks (ANN), which are a form of deep learning, have had huge success in identifying complex relationships and making accurate predictions.",
+                'method': "This is a simplified stream network with 3 temperature gages. Using the data collected from these gages we can model water temperature across the stream network of the Delaware River Basin.",
+                'flubber_id': 'ANN',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "One way to do this is to use an artifical neural network (ANN), a form of deep learning. ANNs have had huge success in identifying complex relationships and making accurate predictions.",
                 'flubber_id':'ANN',
                 'bees_id' : 'ANN'
             },
