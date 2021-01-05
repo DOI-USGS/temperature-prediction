@@ -184,11 +184,11 @@
             id="legend-scale"
             transform="translate(0, 700)"
           >
-            <path
+            <!-- <path
               d="M228,643.5H807"
               transform="translate(-28.24 -627.46)"
               style="fill: none;stroke: white;stroke-miterlimit: 10;stroke-width: 3px"
-            />
+            /> -->
             <text
               class="text-annotate"
               transform="translate(50 27.42)"
@@ -197,16 +197,16 @@
               class="text-annotate"
               transform="translate(795 27.42)"
             >inaccurate</text>
-            <path
+           <!--  <path
               d="M247.5,656.5l-23-12,22-15"
               transform="translate(-28.24 -627.46)"
               style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
-            />
-            <path
+            /> -->
+            <!-- <path
               d="M722.5,657.5l24-14-25-13"
               transform="translate(30 -627.46)"
               style="fill: none;stroke: white;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3px"
-            />
+            /> -->
           </g>
         </svg>
       </div>
@@ -222,7 +222,7 @@
         class="step-container text-content">
         <div
           class="scroll-sticky">
-          <h3 class="viz-title">
+          <h3 >
           {{ model_group }}
           </h3>
         </div>
@@ -356,13 +356,14 @@
             //console.log(this.rmse_monthly);
             this.paddedRadius = this.radius* 1.5;
 
-        // define initial state of chart
-          this.chartState.measure = this.model_exp.ANN;
-          this.chartState.dataset = this.rmse_monthly_cast;
+          // define initial state of chart
+            this.chartState.measure = this.model_exp.ANN;
+            this.chartState.dataset = this.rmse_monthly_cast;
+            this.makeBeeswarm();
 
             // draw beeswarm if step value is not null
             if (this.step) {
-              this.makeBeeswarm();
+              
             }
 
           },
@@ -484,10 +485,10 @@
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001"])
-            .range(["#f4de3b", "#593392"]);
+            .range(["#53354A", "#f8af26"]);
 
             //add mid line for horizontal clustering vibes
-            this.bees.append("line", 'svg')
+            this.svg.append("line", 'svg')
               .classed("main_line", true)
               .attr("x1", this.margin)
               .attr("y1", this.height/2)
@@ -577,28 +578,8 @@
           console.log(response);
 
           // reassign variable used to set x-axis positions in beeswarm
-          if (this.step == 0) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 1) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 2) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 3) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 4) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 5) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 6) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 7) {
+
+          if (this.step <= 7) {
             this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 8) {
@@ -610,13 +591,10 @@
           if (this.step == 10) {
             this.chartState.measure = this.model_exp.RGCN;
           }
-           if (this.step == 12) {
+           if (this.step >= 12) {
             this.chartState.measure = this.model_exp.RGCN_ptrn;
           }
-          if (this.step >= 14) {
-            this.chartState.measure = this.model_exp.RGCN_ptrn;
-            
-          }
+
 
           //redraw beeswarm chart based on step
           this.addBees(this.step, this.chartState.measure);
@@ -663,43 +641,6 @@
           .transition()
           .duration(time)
           .attr("opacity",1)
-        },
-        //style changes by step
-        makePop(action) {
-          //make beeswarm and legend fade in etc
-
-           var time = 1000;
-          if (action >= 1 ) {
-            // make beeswarm appear with legend
-
-            this.fadeIn(this.d3.selectAll(".dot"), time);
-            this.fadeIn(this.d3.select(".main_line"), time);
-            this.fadeIn(this.d3.select(".arrow"), time);
-
-          }
-          // fade out if scrolls back
-          if (action === 0) {
-            //beeswarm fadeout
-            this.fadeOut(this.d3.selectAll(".dot"), time);
-            this.fadeOut(this.d3.selectAll(".legend"), time);
-            this.fadeOut(this.d3.select(".main_line"), time);
-            this.fadeOut(this.d3.select(".arrow"), time);
-
-          }
-          if (action >= 2 ) {
-
-           this.fadeIn(this.d3.selectAll(".legend"), time);
-           this.fadeOut(this.d3.select(".arrow"), time);
-           this.fadeIn(this.d3.select("#legend-scale"), time);
-
-          }
-          if (action <= 1) {
-            //disappearing elements
-            this.fadeOut(this.d3.selectAll(".legend"), time/2);
-            this.fadeOut(this.d3.selectAll("#legend-scale"), time/2);
-          }
-          
-
         }
     }
   }
@@ -730,10 +671,6 @@ article {
   font-size: 1.5rem;
   }
 }
-.step:last-child {
-  margin-bottom: 0;
-  height: 50vh;
-}
 // adjust spacing on last step with hex map
 .step[data-scrollama-index='14'] {
   height: 10vh;
@@ -751,9 +688,9 @@ article {
 
 //start at beginning
 //grid layout
-/* #modeling {
+#modeling {
   width: 100vw;
-} */
+}
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
 figure.sticky {
@@ -813,13 +750,13 @@ figure.sticky {
   // top: 0%;
 }
 .river{
-  stroke: #035096;
-  fill: #035096;
+  stroke: #ACDBDF;
+  fill: #ACDBDF;
   stroke-width: 2px;
 }
 .other{
-  fill: grey;
-  stroke: grey;
+  fill:#e9b24b;
+  stroke:#e9b24b;
   stroke-width: 2px;
 }
 #hex-map {

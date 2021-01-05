@@ -72,7 +72,7 @@
 body {
       margin: 0;
       padding: 0;
-      color:white;
+      color: #b4b1b1;
       background-color: black;
       line-height: 1.5;
       font-size: 14pt;
@@ -128,7 +128,7 @@ h3{
   .flex-item {
     flex: 1;
     align-self: center;
-    text-align: left;
+    text-align: center;
     max-width: 90%;
     min-width: 600px;
   }
