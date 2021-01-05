@@ -29,7 +29,7 @@ export default {
             },
             {
                 'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id': 'RNN',
+                'flubber_id': 'ANN',
                 'bees_id': 'ANN'
             }],
         "Recurrent neural network (RNN)": [
@@ -45,8 +45,7 @@ export default {
             }],
         "Graph convolutional network (RGCN)":[
             {
-                'title': "Graph convolutional network (RGCN)",
-                'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in upstream segments is likely to look like downstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
+                'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in downstream segments is likely to be similar to that in upstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
                 'flubber_id': 'RGCN',
                 'bees_id': 'RGCN'
             },
@@ -62,7 +61,6 @@ export default {
             }],
         "Deep learning (RGCN_ptrn)":[
             {
-                'title': "Deep learning (RGCN_ptrn)",
                 'method': "Beyond space and time, We know quite a bit about how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a data-driven approach. These process are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
                 'flubber_id': 'RGCN_ptrn',
                 'bees_id': 'RGCN_ptrn'
@@ -77,7 +75,7 @@ export default {
                 'flubber_id': '',
                 'bees_id': 'RGCN_ptrn'
             }],
-        "Predicting temperature at a national scale": [
+        "Predicting water temperature at a national scale": [
             {
                 'title': "",
                 'method': "This is all really cool considering the distribution of temperature observations at the national scale",
