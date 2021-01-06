@@ -705,7 +705,7 @@
             svg: null,
 
             chartState: {},
-            model_exp: {ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            model_exp: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             model_data: {long: 'rmse_monthly', cast:'rmse_monthly_cast'},
 
             // beeswarm
@@ -715,6 +715,7 @@
             paddedRadius: null,
             bees: null,
             xScale: null,
+            yScale: null,
             rmse_monthly: [],
             rmse_monthly_cast: [],
             simulation: null,
@@ -759,6 +760,11 @@
           // set order of flubber components
           this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
+          // set header based on refresh scroll
+           if (this.step <= 2){
+             this.d3.select("figure.intro").classed("sticky", true); 
+          }
+
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
@@ -787,14 +793,9 @@
             this.paddedRadius = this.radius* 1.5;
 
           // define initial state of chart
-            this.chartState.measure = this.model_exp.ANN;
+            this.chartState.measure = this.model_exp.error;
             this.chartState.dataset = this.rmse_monthly_cast;
             this.makeBeeswarm();
-
-            // draw beeswarm if step value is not null
-            if (this.step) {
-              
-            }
 
           },
           // resize to keep scroller accurate with window size changes
@@ -924,7 +925,7 @@
             }
           },
           makeBeeswarm() {
-          // define core chart elements that are constant
+          // define core chart elements that are constant and only need to be run this one time
             const self = this;
             let margin = 50;
 
@@ -938,11 +939,11 @@
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
 
-         /*  // x axis scaled across full range of values
+          // x axis scaled across full range of values
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
- */
+
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001"])
@@ -956,35 +957,21 @@
               .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
               .attr("stroke-width", 4)
+              .attr("opacity", 0)
               .attr("stroke", "#A3A0A6");
 
           },
           addBees(step_in, data_var) {
             const self = this;
 
-          // assign dataset by step
-          if (step_in >= 4 ){
-            this.chartState.dataset = this.rmse_monthly;
-          }
-          if (step_in <= 3){
-            this.chartState.dataset = this.rmse_monthly_cast;
-
-          }
           console.log(this.chartState.measure);
-
-           // x axis scaled across full range of values
-          this.xScale = this.d3.scaleLinear()
-            .range([this.margin, this.width-this.margin])
-            .domain([0,10]);
-
 
         // define and stop sim
         // need to make a different function for the initial force draw, because will want to defien
         // where things are coming from differently?
-        // need to addres ticking with no variable change and gravity
-        self.simulation = this.d3.forceSimulation(this.chartState.dataset)
-          .force("x", this.d3.forceX((d) => this.xScale(d[this.chartState.measure])).strength(2))
-          .force('y', this.d3.forceY(this.height/2).strength(0.1))
+        self.simulation = this.d3.forceSimulation(this.chartState.dataset, function(d) { return d.seg })
+          .force("x", this.d3.forceX((d) => this.xScale(d[this.chartState.measure])).strength(1))
+          .force('y', this.d3.forceY(this.height/2).strength(0.3))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10));
 
           // bind data
@@ -1008,9 +995,10 @@
               .attr("fill", (d) => self.set_colors(d.experiment)) 
               .attr("r", this.radius) 
               .merge(chart)
-              //.transition()
-               // .duration(1000)
-               // .attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
+              .transition()
+               //.duration(1000)
+               //.delay(function(d,i) { return 20* i})
+                //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
            self.simulation
@@ -1021,6 +1009,8 @@
           },
 
           tick() {
+            // ticking the simulation moves the dots. currently this is run each step
+            // needs to be modified to only run if the beeswarm data changes
           const self = this;
           
           this.d3.selectAll(".bees")
@@ -1029,7 +1019,7 @@
 
         },
         // scrollama event handler functions
-        // add class on enter
+        // add class on enter, update charts based on step
         handleStepEnter(response) {
           const self = this;
           // response = { element, direction, index }
@@ -1038,8 +1028,18 @@
           this.step = response.index;
           console.log(response);
 
+           // assign dataset by step
+          if (this.step >= 6 ){
+            //contains only data for d100
+            this.chartState.dataset = this.rmse_monthly;
+          }
+          if (this.step <= 5){
+            //contains data for d100 and d001 experiments
+            this.chartState.dataset = this.rmse_monthly_cast;
+          }
+
           // reassign variable used to set x-axis positions in beeswarm based on scroll step
-          if (this.step <= 7) {
+          if (this.step <= 7 && this.step >= 4) {
             this.chartState.measure = this.model_exp.ANN;
           }
           if (this.step == 8) {
@@ -1056,26 +1056,31 @@
           }
 
           //redraw beeswarm chart based on step
-          this.addBees(this.step, this.chartState.measure);
-
+          if (this.step >= 2 ) {
+            self.addBees(this.step, this.chartState.measure);
+          }
+          
           //toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-          if (this.step == 3 && response.direction == "down"){
+          if (this.step >= 2 && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
+             self.fadeIn(this.d3.select(".main_line"), 500)
+          }
+          if (this.step >= 4 && response.direction == "down"){
+             self.fadeIn(this.d3.select(".main_line"), 500)
           }
 
           // remove/add beeswarm and legend on last step
-          if (this.step == 14 && response.direction == 'down') {
+          if (this.step == 15 && response.direction == 'down') {
             this.chartState.measure = this.RGCN_ptrn_both;
-            self.fadeOut(this.d3.select("#legend-scale"), 500);
             self.fadeOut(this.d3.selectAll(".bees"), 500);
             self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
+            self.fadeOut(this.d3.select(".main_line"), 500);
           }
-          if (this.step == 13 && response.direction == 'up') {
-            self.fadeIn(this.d3.select("#legend-scale"), 200);
+          if (this.step == 15 && response.direction == 'up') {
             self.fadeIn(this.d3.selectAll(".bees"), 200);
             self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
-            
+             self.fadeIn(this.d3.select(".main_line"), 500);
           }
 
            // add class to active step
@@ -1095,12 +1100,9 @@
           response.element.classList.remove("is-active");
 
         // make intro header sticky again if scrolling back
-          if (this.step == 3 && response.direction == "up"){
+          if (this.step <= 2 && response.direction == "up"){
              this.d3.select("figure.intro").classed("sticky", true); 
           }
-
-
-
 
         },
         
@@ -1187,12 +1189,11 @@ figure.sticky.charts {
   display: grid;
   grid-template-rows: 1fr 10% 1fr;
   grid-template-columns: 2% auto 2%;
-  row-gap:1%;
 
   position: -webkit-sticky;
   position: sticky;
   top: 10vh;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
 
   #flubber-container {
@@ -1212,6 +1213,7 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
+    padding-bottom: 100px;
   }
   #bees_dotPlot {
     width: 100%;

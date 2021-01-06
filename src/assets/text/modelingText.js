@@ -10,13 +10,13 @@ export default {
                 'method': "One way to do this is to use an artifical neural network (ANN), a form of deep learning. ANNs have had huge success in identifying complex relationships and making accurate predictions.",
                 'flubber_id':'ANN',
                 'bees_id' : 'ANN'
-            },
+            }],
+        "Artificial neural network (ANN)": [
             {
                 'method': "We can measure the success of a model, in the case a ANN, by how closely the predicted temperature matches our measured temperature. A model that closely matches our observations in the streams has low error or good accuracy.",
                 'flubber_id': '',
                 'bees_id': 'ANN'
-            }],
-        "Artificial neural network (ANN)": [
+            },
             {
                 'method': "Using an ANN to predict water temperatures in the DRB, we can use RMSE to compare prediction accuracy across different time periods, locations, and data coverage.",
                 'flubber_id': '',
