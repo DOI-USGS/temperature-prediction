@@ -10,6 +10,7 @@
     <div class="text-content">
       <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
       <p>At the core of understanding water temperature in the Delaware River Basin is monitoring, but modeling water temperature can fill gaps in our knowledge. Here, we explore USGS temperature monitoring and state-of-the-art modeling techniques to predict water temperature in the Delaware River Basin.</p>
+      <p>Use the navigation buttons below to read the next chapter: Monitoring.</p>
     </div>
   </section>
 </template>
