@@ -788,7 +788,7 @@
             // make data how we like it
             // comes in as an array of objects
             this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
-            this.rmse_monthly_cast = data[1]; // by model type x experiment, e.g. ANN_d001, ANN_d100
+            this.rmse_monthly_cast = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             //console.log(this.rmse_monthly);
             this.paddedRadius = this.radius* 1.5;
 
