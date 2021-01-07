@@ -149,6 +149,37 @@ h3{
     }
   }
 
+  .figure-content {
+    border: 1px white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: space-around;
+    max-width: 100%;
+    margin: auto;
+
+  }
+  .figure {
+    display: block;
+    padding: 20px;
+  }
+
+  .map {
+    min-width: 300px;
+    flex: 1 1 30%;
+  }
+
+  .chart {
+    min-width: 600px;
+    flex: 2 1 50%;
+  }
+
+  .matrix {
+    min-width: 600px;
+    flex: 2 1 50%;
+  }
+
 // Specific Design Elements for Charts and Maps
 
 .viz-title {

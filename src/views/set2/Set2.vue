@@ -8,9 +8,11 @@
     </div>
     <div id="map-and-bar-chart" class="figure-content">
       <div
+        class="figure map"
         id="DRB_map_c2p1"
       />
       <div
+        class="figure chart"
         id="barChart_c2p1"
       />
     </div>
@@ -34,9 +36,11 @@
     <div id="data-availability-container" class="figure-content">
       <div
         id="DRB_map_c2p2"
+        class="figure map"
       />
       <div
         id="matrixChart_c2p2"
+        class="figure matrix"
       />
     </div>
     <div class="text-content">
@@ -47,7 +51,8 @@
       <p v-html="text.paragraph11" />
     </div>
     <div class="figure-content">
-      <MonitoringLineChart />
+      <div class="figure chart"><MonitoringLineChart /></div>
+      
     </div>
     <div class="text-content">
       <p v-html="text.paragraph12" />
@@ -56,11 +61,11 @@
     <div class="figure-content">
       <div
         id="DRB_map_c2p3"
-        class="col-xl-6 col-md-6 col-xs-12"
+        class="figure map"
       />
       <div
         id="matrixChart_c2p3"
-        class="col-xl-6 col-md-6 col-xs-12"
+        class="figure matrix"
       />
     </div>
     <div class="text-content">
@@ -119,6 +124,7 @@
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -205,7 +211,7 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 600;
+          this.map_width = 500;
           this.map_height = window.innerHeight * 0.79;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
@@ -662,13 +668,6 @@
               // set text as column name
               .text(function(d) { return d; });
 
-          let narrative = this.d3.select("#barChart_c2p1").append("foreignObject")
-              .attr("text-align", "left")
-              //.attr("width", this.chart_width)
-              //.attr("height", 500)
-              .attr("x", 0)
-              .attr("y", 0)
-              .html(monitoringText.textContents.paragraph4)
         },
         setMap_c2p2(){
           const self = this;
