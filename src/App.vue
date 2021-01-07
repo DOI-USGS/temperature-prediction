@@ -72,8 +72,8 @@
 body {
       margin: 0;
       padding: 0;
-      color:white;
-      background-color: black;
+      color: rgb(241, 241, 241);
+      background-color: rgb(32, 29, 26);
       line-height: 1.5;
       font-size: 14pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -107,7 +107,7 @@ h3{
   // General Layout  
 
   .text-content {
-    min-width: 350px;
+    min-width: 375px;
     max-width: 700px;
     margin: 0 auto;
     padding: 2em;   
@@ -118,19 +118,20 @@ h3{
 
   .flex-container {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
     margin: auto;
-    overflow-x: hidden;
   }
 
   .flex-item {
-    flex: 1;
+    padding: 20px;
+    min-width: 300px;
+    flex: 1 1 30%;
     align-self: center;
-    text-align: left;
-    max-width: 90%;
-    min-width: 600px;
+   
   }
 
   .flex-item img {
