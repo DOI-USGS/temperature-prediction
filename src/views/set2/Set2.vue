@@ -1,123 +1,73 @@
 <template>
   <section id="section_2">
+    <div class="text-content">
+      <h2 v-html="text.title1" />
+      <p v-html="text.paragraph1" />
+      <p v-html="text.paragraph2" />
+      <p v-html="text.paragraph3" />
+    </div>
+    <div id="map-and-bar-chart" class="figure-content">
+      <div
+        id="DRB_map_c2p1"
+      />
+      <div
+        id="barChart_c2p1"
+      />
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph4" />
+      <p v-html="text.paragraph5" />
+      <p>ICONS HERE</p>
+      <!-- <Chapter2Icons1 /> -->
+      <h2 v-html="text.title2" />
+      <p v-html="text.subtitle2" />
+      <p v-html="text.paragraph6" />
+      <p v-html="text.paragraph8" />
+      <p v-html="text.paragraph9" />
+      <div id="matrix-explainer-container" class="flex-container">
+        <div class="flex-item"><MatrixExplainerSpace /></div>
+        <div class="flex-item"><MatrixExplainerTime /></div>
+        <div class="flex-item"><MatrixExplainerColor /></div>            
+      </div>
+      <p v-html="text.tiptextDesktop" />
+    </div>
+    <div id="data-availability-container" class="figure-content">
+      <div
+        id="DRB_map_c2p2"
+      />
+      <div
+        id="matrixChart_c2p2"
+      />
+    </div>
+    <div class="text-content">
+      <h2 v-html="text.title3" />
+      <p v-html="text.paragraph10" />
+      <p>ICONS HERE</p>
+      <!-- <Chapter2Icons2 /> -->
+      <p v-html="text.paragraph11" />
+    </div>
+    <div class="figure-content">
+      <MonitoringLineChart />
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph12" />
+      <p v-html="text.paragraph13" />
+    </div>
+    <div class="figure-content">
+      <div
+        id="DRB_map_c2p3"
+        class="col-xl-6 col-md-6 col-xs-12"
+      />
+      <div
+        id="matrixChart_c2p3"
+        class="col-xl-6 col-md-6 col-xs-12"
+      />
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph14" />
+    </div>
+    
     <div class="container-fluid">
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <h2 v-html="text.title1" />
-          <p v-html="text.paragraph1" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p1"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="barChart_c2p1"
-          class="col-xl-6 col-md-6 col-xs-12"
-        >
-          <p v-html="text.paragraph2" />
-          <p v-html="text.paragraph3" />
-        </div>
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <p v-html="text.paragraph5" />
-          <p>ICONS HERE</p>
-          <!-- <Chapter2Icons1 /> -->
-          <h2 v-html="text.title2" />
-          <p v-html="text.subtitle2" />
-          <p v-html="text.paragraph6" />
-          <p v-html="text.tiptext1" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p2"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="matrixChart_c2p2"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <h2 v-html="text.title3" />
-          <p v-html="text.paragraph10" />
-          <p>ICONS HERE</p>
-          <!-- <Chapter2Icons2 /> -->
-          <p v-html="text.paragraph11" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <MonitoringLineChart />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <p v-html="text.paragraph12" />
-          <p v-html="text.paragraph13" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p3"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="matrixChart_c2p3"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-      </div>
-      <div class="row">
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-        <div class="col-xl-10 col-md-10 col-xs-12">
-          <p v-html="text.paragraph14" />
-        </div>
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-      </div>
       <div
         id="filter_row"
         class="row"
@@ -179,11 +129,18 @@
   import * as ss from 'simple-statistics';
   import monitoringText from "./../../assets/text/monitoringText";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
+  import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
+  import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
+  import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
+
 
   export default {
       name: 'Set2',
       components: {
-        MonitoringLineChart
+        MonitoringLineChart,
+        MatrixExplainerSpace,
+        MatrixExplainerTime,
+        MatrixExplainerColor
       },
       data() {
         return {
@@ -2153,11 +2110,6 @@
 <style scoped lang="scss">
 #section_2 {
   margin-bottom: 0;
-  font-family: 'Open Sans', arial, sans-serif;
-  font-weight: 300;
-  font-size: 1em;
-  background-color: black;
-  color: #757474;
   text-align: left;
 
   .row {

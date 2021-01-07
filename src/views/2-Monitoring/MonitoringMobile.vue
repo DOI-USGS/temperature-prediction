@@ -18,7 +18,7 @@
       <h2 v-html="text.title2" />
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
-      <p v-html="text.paragraph7" />
+      <p v-html="text.tiptextMobile" />
     </div>
     <MonitoringMap2 />
     <div class="text-content">
