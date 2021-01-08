@@ -3701,11 +3701,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+// IMPORT COLORS
+$backgroundCharcoal: #171717;
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #10313e;
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
 #intro-map {
   margin-top: 20px;
 }
 
+#background {
+  fill: $backgroundCharcoal;
+}
   /* Water and Buffer Lines */
 
     .buffer-lines polyline, path {
@@ -3767,6 +3781,9 @@ export default {
         opacity: 0.7;
     }
 
+    .drb-shape {
+      fill: $backgroundCharcoal;
+    }
   
 
     .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
@@ -3842,10 +3859,10 @@ export default {
         stroke-width: 1px; */
     }
     .masking {
-        fill: black;
+        fill: $backgroundCharcoal;
         font-weight: 400;
         /* background-color: black; */
-        stroke: black;
+        stroke: $backgroundCharcoal;
         stroke-width: 7px;
         stroke-linejoin: round;
     }
