@@ -249,7 +249,6 @@
           this.map_width = 500;
           this.map_height = window.innerHeight * 0.79;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
-          console.log(window.innerHeight, "inner height")
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
@@ -552,22 +551,22 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(2))
+                .attr("d", self.map_path_c2.pointRadius(1))
                 // assign class for styling
                 .attr("class", "c2p1 obs_sites")
                 // assign fill color based on agency
                 .style("fill", function(d){
                   if (d.properties.source === 'USGS'){
-                    return "#edb932"
+                    return "#e9eced"
                   } else {
-                    return "#eb4444"
+                    return "#e9eced"
                   }
                 })
                 // assign stroke in background color
-                .style("stroke", "#000000")
-                .style("stroke-width", 0.4)
+                // .style("stroke", "#000000")
+                // .style("stroke-width", 0.4)
                 // assign opacity
-                .style("opacity", 1)
+                .style("opacity", .4)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
@@ -597,7 +596,7 @@
 
           // set colors
           let z = this.d3.scaleOrdinal()
-              .range(["#edb932", "#eb4444"]);
+              .range(["#e9eced", "#e9eced"]);
 
           // stack to create an array for each of the series in the data
           let stack = this.d3.stack();
@@ -658,7 +657,7 @@
               // offset axis slightly to align closer to last bar
               .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
-              .call(this.d3.axisRight(y).ticks(10, "s").tickSize(- this.chart_width))
+              .call(this.d3.axisRight(y).ticks(5, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
 
           // place and rotate the y axis label
@@ -669,41 +668,13 @@
               .attr("x", -this.chart_height / 2)
               .attr("text-anchor", "middle")
               .attr("class", "c2p1 chartAxisText")
-              .text("# of unique temperature measurements")
+              .text("Unique temperature measurements")
               //.attr("transform", "translate(25, 0)")
               .attr("transform", "rotate(-90)")
               
 
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#000000").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 2"))
-
-          //  make the legend
-          let legend = g.selectAll(".legend")
-              // include all but the first column in the legend
-              .data(data.columns.slice(1).reverse())
-              // append an item for each series
-              .enter().append("g")
-              .attr("class", "c2p1 barChart legend")
-              .attr("transform", function(d, i) {
-                return "translate(" + 0 + "," + i * 17 + ")";
-              })
-
-          // append a rectangle for each series
-          legend.append("rect")
-              .attr("x", 14)
-              .attr("width", 8)
-              .attr("height", 8)
-              // set color based on z attribute
-              .attr("fill", z);
-
-          // append a label for each rectangle
-          legend.append("text")
-              .attr("x", 30)
-              .attr("y", 4)
-              .attr("dy", ".35em")
-              .attr("text-anchor", "start")
-              // set text as column name
-              .text(function(d) { return d; });
+          svgChart.selectAll(".tick line").attr("stroke", "#171717").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 2"))
 
         },
         setMap_c2p2(){
