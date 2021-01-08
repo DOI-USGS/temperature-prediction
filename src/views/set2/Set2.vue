@@ -6,15 +6,24 @@
       <p v-html="text.paragraph2" />
       <p v-html="text.paragraph3" />
     </div>
-    <div id="map-and-bar-chart" class="figure-content">
-      <div
-        class="figure map"
-        id="DRB_map_c2p1"
-      />
-      <div
-        class="figure chart"
-        id="barChart_c2p1"
-      />
+    <div id="map-and-bar-chart">
+      <div class="text-content viz-title-wrapper">
+        <h3 class="viz-title">
+          Unique Temperature Measurements in the Basin
+        </h3>
+        <p class="viz-subtitle">By USGS or other agencies</p>
+      </div>  
+      <div class="figure-content">
+        <div
+          class="figure map"
+          id="DRB_map_c2p1"
+        />
+        <div
+          class="figure chart"
+          id="barChart_c2p1"
+        />
+      </div>
+      
     </div>
     <div class="text-content">
       <p v-html="text.paragraph4" />
@@ -26,13 +35,28 @@
       <p v-html="text.paragraph6" />
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
-      <div id="matrix-explainer-container" class="flex-container">
-        <div class="flex-item"><MatrixExplainerSpace /></div>
-        <div class="flex-item"><MatrixExplainerTime /></div>
-        <div class="flex-item"><MatrixExplainerColor /></div>            
-      </div>
+    </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        How to Read the Matrices
+      </h3>
+      <p class="viz-subtitle">Visualizing data availability at temperature measuring sites across the basin</p>
+    </div> 
+    <div id="matrix-explainer-container" class="flex-container">
+      <div class="flex-item"><MatrixExplainerSpace /></div>
+      <div class="flex-item"><MatrixExplainerTime /></div>
+      <div class="flex-item"><MatrixExplainerColor /></div>            
+    </div>
+    <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Temperature Data Availability
+      </h3>
+      <p class="viz-subtitle">Visualizing the count of temperature measurements at all monitoring sites across the basin. </p>
+      <p class="viz-subtitle">Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.</p>
+    </div> 
     <div id="data-availability-container" class="figure-content">
       <div
         id="DRB_map_c2p2"
@@ -50,14 +74,25 @@
       <!-- <Chapter2Icons2 /> -->
       <p v-html="text.paragraph11" />
     </div>
-    <div class="figure-content">
-      <div class="figure chart"><MonitoringLineChart /></div>
-      
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Daily Temperature at each reach in the Basin
+      </h3>
+      <p class="viz-subtitle">Data for 2019 only, including the most-observed reaches.</p>
+    </div> 
+    <div class="text-content">
+      <div class="chart"><MonitoringLineChart /></div>
     </div>
     <div class="text-content">
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
     </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Daily Temperature at each reach in the Basin
+      </h3>
+      <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+    </div> 
     <div class="figure-content">
       <div
         id="DRB_map_c2p3"
@@ -299,6 +334,7 @@
             self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
             self.d3.csv(self.publicPath + "data/obs_annual_count.csv")
           ];
+
           Promise.all(promises_2).then(self.callback_2);
         },
         loadData_3() {
@@ -897,7 +933,7 @@
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#000000")
+                  .attr("fill", "#201D1A")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1100,9 +1136,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#000000")
+              .style("fill", "#201D1A")
               .style("stroke-width", 2)
-              .style("stroke", "#000000")
+              .style("stroke", "#201D1A")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1129,9 +1165,9 @@
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#000000")
+              .style("fill", "#201D1A")
               .style("stroke-width", 2)
-              .style("stroke", "#000000")
+              .style("stroke", "#201D1A")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1374,7 +1410,7 @@
                   .attr("class", "c2p3 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#000000")
+                  .attr("fill", "#201D1A")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1669,7 +1705,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#000000")
+                  .style("fill", "#201D1A")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")

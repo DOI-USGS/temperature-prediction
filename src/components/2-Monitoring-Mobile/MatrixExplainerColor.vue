@@ -1495,6 +1495,7 @@
             y="71.6"
             width="650"
             height="1043.8"
+            class="background"
           />
         </g>
       </g>
@@ -2605,6 +2606,10 @@ export default {
       }
     }
 
+    .background {
+      fill: rgb(32, 29, 26);
+    }
+
     .cls-1 {
         isolation: isolate;
       }
@@ -2765,49 +2770,8 @@ export default {
         font-weight: 700;
       }
 
-      .cls-38 {
-        letter-spacing: -0.01em;
-      }
 
-      .cls-39 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-40 {
-        letter-spacing: 0em;
-      }
-
-      .cls-41 {
-        letter-spacing: -0.06em;
-      }
-
-      .cls-42 {
-        letter-spacing: 0em;
-      }
-
-      .cls-43 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-44 {
-        font-size: 15px;
-      }
-
-      .cls-45 {
-        letter-spacing: 0.03em;
-      }
-
-      .cls-46 {
-        letter-spacing: -0.02em;
-      }
-
-      .cls-47 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-48 {
-        letter-spacing: 0em;
-      }
+    
 
       .cls-49 {
         fill: #e87059;

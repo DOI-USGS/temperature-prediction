@@ -129,13 +129,9 @@ h3{
   .flex-item {
     padding: 20px;
     min-width: 300px;
-    flex: 1 1 30%;
+    flex: 1 1 25%;
     align-self: center;
    
-  }
-
-  .flex-item img {
-    padding: 20px;
   }
 
   @media (max-width: 600px) {
@@ -167,8 +163,15 @@ h3{
 
   .map {
     min-width: 300px;
+    max-width: 500px;
     flex: 1 1 30%;
+
+    @media screen and (max-width: 600px) {
+        max-width: 300px;
+    }
+
   }
+ 
 
   .chart {
     min-width: 600px;
@@ -182,17 +185,21 @@ h3{
 
 // Specific Design Elements for Charts and Maps
 
-.viz-title {
-  font-size: 1.1em;
+.viz-title-wrapper {
   margin: auto;
-  width: 60%;
-  max-width: 450px;
+  width: 80%;
+  max-width: 600px;
   border: 1px solid #545454;
-  padding: 10px;
+  padding: 10px 30px;
   box-shadow: 3px 3px #545454;
   z-index: 100;
-  text-align: center;
- 
+}
+
+.viz-title {
+  font-size: 1.4em;
+}
+.viz-subtitle {
+ font-size: 1em;
 }
 
 .legend-text {
@@ -204,13 +211,19 @@ h3{
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
   font-weight: 400;
-  fill: #7d7d7d;
+  fill:rgb(224, 222, 222);
 }
 .viz-emph {
   font-weight:700;
   fill: white;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
+}
+
+.emph {
+  font-weight:700;
+  fill: white;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 }
 
 .dashed-axis {

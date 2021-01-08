@@ -1,8 +1,5 @@
 <template>
   <div id="line-chart">
-    <h3 class="viz-title">
-      Daily Temperature of Most-Observed DRB Reaches in 2019
-    </h3>
     <svg
       id="line-chart-svg"
       xmlns="http://www.w3.org/2000/svg"
