@@ -1,7 +1,8 @@
 <template>
   <section id="importance">
     <div class="text-content">
-      <h2>Importance</h2>
+      <h1>Temperature Prediction Modeling in the Delaware River Basin</h1>
+      <h2>Why is predicting stream temperature important?</h2>
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>

@@ -83,18 +83,22 @@ body {
       color: $offWhite;
       background-color: $backgroundCharcoal;
       line-height: 1.5;
-      font-size: 14pt;
+      font-size: 13pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
       font-weight: 400;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       width: 100%;
   }
+h1{
+  font-size: 4em;
+  font-weight: 100;
+}
 
 h2{
   font-size: 2em;
   margin-top: 80px;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1.7;
   @media screen and (max-width: 600px) {
     font-size: 1.2em;
@@ -102,9 +106,9 @@ h2{
 
 }
 h3{
-    font-size: 1.4em;
+    font-size: 1.2em;
     padding-top: .5em;
-    font-weight: 700;
+    font-weight: 600;
     @media screen and (max-width: 600px) {
         font-size: 1em;
     }
@@ -176,7 +180,7 @@ h3{
 
   .map {
     min-width: 400px;
-    flex: 1 1 45%;
+    flex: 1 1 40%;
 
     @media screen and (max-width: 600px) {
         max-width: 300px;
@@ -185,12 +189,12 @@ h3{
   }
   .chart {
     min-width: 600px;
-    flex: 1 1 45%;
+    flex: 1 1 40%;
   }
 
   .matrix {
     min-width: 400px;
-    flex: 1 1 45%;
+    flex: 1 1 40%;
   }
 
 // Specific Design Elements for Charts and Maps
