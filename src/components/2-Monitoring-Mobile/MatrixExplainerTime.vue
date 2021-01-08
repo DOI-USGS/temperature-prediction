@@ -953,12 +953,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+$backgroundCharcoal: #171717;
+
+.background{
+  fill: $backgroundCharcoal;
+}
+
 #matrix-time-view {
         width: 100%;
-    }
-    .background {
-      fill: rgb(32, 29, 26);
     }
 
     .cls-1 {

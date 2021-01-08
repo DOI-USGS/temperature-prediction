@@ -2595,7 +2595,14 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+
+$backgroundCharcoal: #171717;
+
+.background{
+  fill: $backgroundCharcoal;
+}
+
 #matrix-color-view {
         width: 100%;
     }
@@ -2604,10 +2611,6 @@ export default {
         text-shadow: 0px 0px 2px white, 0px 0px 5px white, 0px 0px 10px white;
         fill: black;
       }
-    }
-
-    .background {
-      fill: rgb(32, 29, 26);
     }
 
     .cls-1 {
