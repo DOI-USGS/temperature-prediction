@@ -446,8 +446,7 @@
           // // graduated scale
           // set width classes
           let widthClasses = [
-            0.6,
-            0.9,
+            0.8,
             1.2,
             1.4,
             1.7,
@@ -456,7 +455,8 @@
             2.6,
             3,
             3.5,
-          ];
+            3.8
+          ]; //[            0.6,            0.9,            1.2,            1.4,            1.7,            2,            2.3,            2.6,            3,            3.5,          ]
 
           // // graduated scale
           // create width scale generator for natural breaks classification
