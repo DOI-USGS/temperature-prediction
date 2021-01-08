@@ -1,7 +1,9 @@
 <template>
   <section id="section_2">
     <div class="text-content">
-      <h2 v-html="text.title1" />
+      <div class="section-title-wrapper">
+        <h3 v-html="text.title1" />
+      </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
       <p v-html="text.paragraph3" />
@@ -9,21 +11,19 @@
     <div id="map-and-bar-chart">
       <div class="text-content viz-title-wrapper">
         <h3 class="viz-title">
-          Unique Temperature Measurements in the Basin
+          Measuring Temperature in the Basin
         </h3>
-        <p class="viz-subtitle">By USGS or other agencies</p>
       </div>  
       <div class="figure-content">
-        <div
-          class="figure map"
-          id="DRB_map_c2p1"
-        />
-        <div
-          class="figure chart"
-          id="barChart_c2p1"
-        />
-      </div>
-      
+        <div class="figure map">
+          <p class="viz-subtitle">All Monitoring Sites in the Basin</p>
+          <div id="DRB_map_c2p1" />
+        </div>
+        <div class="figure chart">
+          <p class="viz-subtitle">Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies</p>
+          <div id="barChart_c2p1" />
+        </div>
+      </div>      
     </div>
     <div class="text-content">
       <p v-html="text.paragraph4" />
@@ -70,7 +70,6 @@
     <div class="text-content">
       <h2 v-html="text.title3" />
       <p v-html="text.paragraph10" />
-      <p>ICONS HERE</p>
       <!-- <Chapter2Icons2 /> -->
       <p v-html="text.paragraph11" />
     </div>
@@ -246,8 +245,8 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 500;
-          this.map_height = window.innerHeight * 0.79;
+          this.map_width = 400;
+          this.map_height = window.innerHeight * 0.5;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
@@ -657,7 +656,7 @@
               // offset axis slightly to align closer to last bar
               .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
-              .call(this.d3.axisRight(y).ticks(5, "s").tickSize(- this.chart_width))
+              .call(this.d3.axisRight(y).ticks(2, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
 
           // place and rotate the y axis label

@@ -93,6 +93,9 @@ body {
 h1{
   font-size: 4em;
   font-weight: 100;
+  @media screen and (max-width: 600px) {
+    font-size: 3em;
+  }
 }
 
 h2{
@@ -106,13 +109,19 @@ h2{
 
 }
 h3{
-    font-size: 1.2em;
+    font-size: 1.4em;
     padding-top: .5em;
     font-weight: 600;
     @media screen and (max-width: 600px) {
         font-size: 1em;
     }
 }
+
+// .section-title-wrapper{
+//   padding: .5em 10px 0 10px;
+//   background-color: $monotoneBlue5;
+//   margin-top: 1em;
+// }
 
 
 
@@ -140,8 +149,8 @@ h3{
 
   .flex-item {
     padding: 20px;
-    min-width: 300px;
-    flex: 1 1 25%;
+    min-width: 400px;
+    flex: 0 0 auto;
     align-self: center;
    
   }
@@ -161,7 +170,7 @@ h3{
     border: 1px white;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
@@ -180,6 +189,7 @@ h3{
 
   .map {
     min-width: 400px;
+    max-width: 700px;
     flex: 1 1 40%;
 
     @media screen and (max-width: 600px) {
@@ -203,20 +213,25 @@ h3{
   margin: auto;
   width: 80%;
   max-width: 600px;
-  // border: 1px solid #545454;
   padding: 10px 30px;
-  // box-shadow: 3px 3px #545454;
   z-index: 100;
+  
 
 }
 
 .viz-title {
-  font-size: 2em;
+  font-size: 1.4em;
+  font-weight: 600;
   text-align: center;
+  color: $offWhite;
+  box-shadow: -5px -5px $monotoneBlue5;
+  line-height: 1.3em;
 }
 .viz-subtitle {
- font-size: 1em;
- text-align: left;
+  color: $offWhite;
+ font-size: .8em;
+ text-align: center;
+ font-weight: 100;
 }
 
 .legend-text {
@@ -241,6 +256,9 @@ h3{
   font-weight:700;
   fill: white;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $monotoneBlueTransparent 40%);
+  line-height: 1.3em;
+  padding: 0 5px;
 }
 
 .dashed-axis {

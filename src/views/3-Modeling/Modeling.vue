@@ -193,7 +193,7 @@
               ><tspan class="f_main light">yesterday</tspan></text>
               <text
                 id="text-2"
-                class="f_main bold"
+                class="f_main bold emph"
                 transform="translate(132.6 108.5)"
               ><tspan class="f_main bold">today</tspan></text>
               <text
@@ -615,7 +615,7 @@
           </svg>
         </div>
       </div>
-      <div id="bees-container" />
+      <div id="bees-container" class="figure-content"/>
       <div id="legend-container">
         <svg
           id="bees_legend"
@@ -693,7 +693,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
-            sectionTitle: "Predicting water temperature", // the initial
+            sectionTitle: "Modeling Stream Temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -1123,6 +1123,17 @@
 </script>
 <style scoped lang="scss">
 
+// IMPORT COLORS
+$backgroundCharcoal: #171717;
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #10313e;
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
+
 //style steps
 article {
   position: relative;
@@ -1228,8 +1239,7 @@ figure.sticky.charts {
 }
 
 .text-annotate {
-  fill:white;
-    font-family: SegoeUI-Semibold, Segoe UI;
+  fill:$offWhite;
   font-weight: 300;
   font-size: 20px;
 
@@ -1248,22 +1258,24 @@ figure.sticky.charts {
   text-align: center;
 }
 .river{
-  stroke: #6399ba;
-  fill: #6399ba;
+  fill: $monotoneBlue5;
+  stroke: $monotoneBlue5;
+  // stroke: #6399ba;
+  // fill: #6399ba;
   stroke-width: 0.25px;
 }
 .other{
-  fill: #e9854b;
-  stroke: #e9854b;
+  fill: $offWhite;
+  stroke: $offWhite;
+  // fill: #e9854b;
+  // stroke: #e9854b;
   stroke-width: 0px;
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 10px;
 }
 .other.label {
   fill: #e9854b;
   stroke-width: 0px;
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 400;
   font-size: 10px;
 }
@@ -1280,16 +1292,13 @@ figure.sticky.charts {
   fill: #969696;
 }
 .f_main.light, .f_minor {
-  font-family: SegoeUI-Semilight, Segoe UI;
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: 0em;
 }
 .f_main.bold {
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 600;
 }
 .f_sec.reg {
-  font-family: SegoeUI-Semilight, Segoe UI;
   font-weight: 400;
   letter-spacing: 0em;
 }

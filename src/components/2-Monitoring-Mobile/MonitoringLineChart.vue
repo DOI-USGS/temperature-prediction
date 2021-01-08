@@ -360,7 +360,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+// IMPORT COLORS
+$backgroundCharcoal: #171717;
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #10313e;
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
 #line-chart-svg {
     width: 100%;
 }
@@ -403,21 +414,20 @@ export default {
      
 
       .cls-22 {
-        font-family: SourceSansPro-Light, Source Sans Pro;
         font-weight: 300;
       }
 
 
       .cls-23 {
-        stroke: #0069bf;
+        stroke: $monotoneBlue5;
       }
 
       .cls-24 {
-        stroke: #c43300;
+        stroke: goldenrod;
       }
 
       .cls-25 {
-        stroke: white;
+        stroke: $offWhite;
       }
 
 
