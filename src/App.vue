@@ -66,14 +66,22 @@
 
 <style lang="scss">
 
+// IMPORT COLORS
+$backgroundCharcoal: #171717;
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #10313e;
+$monotoneBlueTransparent: rgba(76,101,110, .6);
 
-  // Type
-
+// Type
 body {
       margin: 0;
       padding: 0;
-      color: rgb(241, 241, 241);
-      background-color: rgb(32, 29, 26);
+      color: $offWhite;
+      background-color: $backgroundCharcoal;
       line-height: 1.5;
       font-size: 14pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -153,7 +161,12 @@ h3{
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
+    padding: 0 100px;
     margin: auto;
+
+    @media screen and (max-width: 600px) {
+        padding: 0px; 
+    }
 
   }
   .figure {
@@ -162,25 +175,22 @@ h3{
   }
 
   .map {
-    min-width: 300px;
-    max-width: 500px;
-    flex: 1 1 30%;
+    min-width: 400px;
+    flex: 1 1 45%;
 
     @media screen and (max-width: 600px) {
         max-width: 300px;
     }
 
   }
- 
-
   .chart {
     min-width: 600px;
-    flex: 2 1 50%;
+    flex: 1 1 45%;
   }
 
   .matrix {
-    min-width: 600px;
-    flex: 2 1 50%;
+    min-width: 400px;
+    flex: 1 1 45%;
   }
 
 // Specific Design Elements for Charts and Maps
@@ -189,17 +199,20 @@ h3{
   margin: auto;
   width: 80%;
   max-width: 600px;
-  border: 1px solid #545454;
+  // border: 1px solid #545454;
   padding: 10px 30px;
-  box-shadow: 3px 3px #545454;
+  // box-shadow: 3px 3px #545454;
   z-index: 100;
+
 }
 
 .viz-title {
-  font-size: 1.4em;
+  font-size: 2em;
+  text-align: center;
 }
 .viz-subtitle {
  font-size: 1em;
+ text-align: left;
 }
 
 .legend-text {

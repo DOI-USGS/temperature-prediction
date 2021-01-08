@@ -76,7 +76,7 @@
     </div>
     <div class="text-content viz-title-wrapper">
       <h3 class="viz-title">
-        Daily Temperature at each reach in the Basin
+        Daily Temperature readings in the Basin
       </h3>
       <p class="viz-subtitle">Data for 2019 only, including the most-observed reaches.</p>
     </div> 
@@ -226,7 +226,7 @@
         this.chart_height = window.innerHeight * 0.30 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
         this.matrix_height_c2 = window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
-
+      
         this.setPanels();  // begin script when window loads
       },
       methods: {
@@ -249,6 +249,7 @@
           this.map_width = 500;
           this.map_height = window.innerHeight * 0.79;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
+          console.log(window.innerHeight, "inner height")
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
@@ -829,7 +830,7 @@
                 return self.widthScale_c2(value);
               })
               // set fill to none
-              .style("fill", "None")
+              .style("fill", "none")
               // trigger interactions
               .on("mouseover", function(d) {
                 self.mouseoverSeg_c2p2(d, tooltip);
@@ -868,9 +869,25 @@
           // Find maximum count of observations to use in color scale
           self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
 
+          // Create Custom interpolator for a color scale using HEX codes
+            // Convert Hex to RGB
+          const hex2rgb = hex => {
+            var validHEXInput = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            if (!validHEXInput) {
+                return false;
+            }
+            var output = {
+                r: parseInt(validHEXInput[1], 16),
+                g: parseInt(validHEXInput[2], 16),
+                b: parseInt(validHEXInput[3], 16),
+            };
+            return `rgb(${output.r},${output.g},${output.b})`
+          }
+          let interpolatec2p2 = self.d3.interpolateRgb(hex2rgb("#10313e"), hex2rgb("#bec7ca")); // can only get two stops in this function
+    
           // build color scale
           let myColor = self.d3.scaleSequential()
-              .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
+              .interpolator(interpolatec2p2) /* interpolatePlasma */
               // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
               .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
 
@@ -2166,17 +2183,17 @@
 }
 
 .delaware_bay {
-  fill: #6399ba;
+  fill: #10313e; // original was #6399ba;
 }
 
 .river_segments {
-  stroke: #6399ba;
+  stroke: #10313e;// original was #6399ba;
   stroke-linecap: round;
 }
 
 .reservoirs {
-  fill:  #6399ba;
-  stroke: #6399ba;
+  fill: #10313e; // original was #6399ba;
+  stroke: #10313e;// original was #6399ba;
 }
 
 .chartAxis {
