@@ -368,8 +368,8 @@ export default {
 .background-line {
     fill: none;
     stroke: #828282;
-    stroke-width: 2px;
-    opacity: .1;
+    stroke-width: 1px;
+    opacity: .05;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
@@ -407,23 +407,6 @@ export default {
         font-weight: 300;
       }
 
-      .cls-5 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-6 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-7 {
-        letter-spacing: 0em;
-      }
-
-
-
-      .cls-22 {
-        font-size: 10.87px;
-      }
 
       .cls-23 {
         stroke: #0069bf;
