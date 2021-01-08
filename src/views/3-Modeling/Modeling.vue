@@ -1248,20 +1248,20 @@ figure.sticky.charts {
   text-align: center;
 }
 .river{
-  stroke: #6399ba;
-  fill: #6399ba;
+  stroke: #285C70;
+  fill: #285C70;
   stroke-width: 0.25px;
 }
 .other{
-  fill: #e9854b;
-  stroke: #e9854b;
+  fill: #A9CDD8;
+  stroke: #A9CDD8;
   stroke-width: 0px;
   font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 10px;
 }
 .other.label {
-  fill: #e9854b;
+  fill: #A9CDD8;
   stroke-width: 0px;
   font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 400;
@@ -1320,7 +1320,7 @@ figure.sticky.charts {
   fill: #4f4f4f;
 }
 .line_rain {
-  stroke:#e9854b;
+  stroke: #b0b0b0;
   stroke-miterlimit: 10;
   stroke-dasharray: 2 5;
   stroke-width: 0.8px;
