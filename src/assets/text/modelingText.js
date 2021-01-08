@@ -2,6 +2,46 @@ export default {
     textContents: {
         "":[
             {
+                'method': "Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions. At its most basic, an ANN consists of four components: an input layer, synapses that pass information between layers, one or more hidden layers, and an output layer.",
+                'flubber_id': 'ANN1',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "To predict stream temperature, we provide the model with a set of observed stream temperatures and associated records of air temperature and precipitation. The model attempts to find a relationship between the meteorological inputs and stream temperature. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'flubber_id': 'ANN2',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "The machine learning model ‘learns’ through its attempts to capture these relationships. It begins by passing the information from the input layer to what is called a ‘hidden’ layer. The information is passed through connections. These connections can be weighted to adjust how much importance is assigned to a particular input value. Here, precipitation is weighted slightly less than air temperature.",
+                'flubber_id': 'ANN3',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "The hidden layer receives the weighted information through its connections to the input layer. Each neuron in the hidden layer acts as a processing node, and passes the weighted information through a mathematical function. Each processing node produces a single output value, which is then passed to the next hidden layer, or, if it is the last, to the output layer.",
+                'flubber_id': 'ANN4',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "The ouput layer compiles all of the information into a single prediction of stream temperature.",
+                'flubber_id': 'ANN5',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "The model compares the value it produced to the actual stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the prediction temperature and the actual temperature and uses that difference to adjust the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'flubber_id': 'ANN6',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "Here, precipitation is heavily weighted, while air temperature is largely ignored by the model.",
+                'flubber_id': 'ANN7',
+                'bees_id': 'ANN'
+            },
+            {
+                'method': "While here, the opposite is true – air temperature is weighted much more heavily than precipitation.",
+                'flubber_id': 'ANN8',
+                'bees_id': 'ANN'
+            },
+            {
                 'method': "This is a simplified stream network with 3 temperature gages. Using the data collected from these gages we can model water temperature across the stream network of the Delaware River Basin.",
                 'flubber_id': 'ANN',
                 'bees_id': 'ANN'

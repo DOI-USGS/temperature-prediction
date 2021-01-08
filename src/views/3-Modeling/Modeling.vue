@@ -31,6 +31,38 @@
               transform="translate(0 0) scale(1.333 1.333)"
             >
               <path
+                id="ANN1"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN2"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN3"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN4"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN5"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN6"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN7"
+                class="path1 river flubber visuals"
+              />
+              <path
+                id="ANN8"
+                class="path1 river flubber visuals"
+              />                                                                                                  
+              <path
                 id="ANN"
                 class="path1 river flubber visuals"
                 d="M124.3,126H33.5v-2h90.8Z"
@@ -61,6 +93,38 @@
               transform="translate(0 0) scale(1.333 1.333)"
             >
               <path
+                id="ANN1"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN2"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN3"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN4"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN5"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN6"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN7"
+                class="path2 river flubber visuals"
+              />
+              <path
+                id="ANN8"
+                class="path2 river flubber visuals"
+              />   
+              <path
                 id="ANN"
                 class="path2 river flubber visuals"
                 d="M215.3,126H124.5v-2h90.8Z"
@@ -90,6 +154,38 @@
               id="path3"
               transform="translate(0 0) scale(1.333 1.333)"
             >
+              <path
+                id="ANN1"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN2"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN3"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN4"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN5"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN6"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN7"
+                class="path3 other flubber visuals"
+              />
+              <path
+                id="ANN8"
+                class="path3 other flubber visuals"
+              />   
               <path
                 id="ANN"
                 class="path3 other flubber visuals"
@@ -758,7 +854,7 @@
           //console.log(this.flubber_dict)
           
           // set order of flubber components
-          this.flubber_id_order = ['ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
+          this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
           // set header based on refresh scroll
            if (this.step <= 2){
