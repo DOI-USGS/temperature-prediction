@@ -388,12 +388,62 @@
               <path
                 id="ANN2"
                 class="path6 blocker flubber visuals"
-                d="M79.4,73.4,124,103,70.8,138Z"
+                d="M107.5,102.4A15.5,15.5,0,1,1,92,86.9,15.5,15.5,0,0,1,107.5,102.4Z"                
               />
               <path
                 id="ANN3"
                 class="path6 blocker flubber visuals"
                 d="M79.4,73.4,124,103,70.8,138Z"
+              />
+              <path
+                id="ANN4"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN5"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN6"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN7"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN8"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />             
+              <path
+                id="ANN"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RNN"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_2"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_ptrn"
+                class="path6 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
               />
             </g>
             <g
@@ -403,17 +453,67 @@
               <path
                 id="ANN1"
                 class="path7 blocker flubber visuals"
-                d="M124.7,103.4l53.8,35.8H70.4l.3-.2Z"
+                d="M73.4,95.3A15.5,15.5,0,1,1,57.9,79.8,15.4,15.4,0,0,1,73.4,95.3Z"
               />
               <path
                 id="ANN2"
                 class="path7 blocker flubber visuals"
-                d="M124.7,103.4l53.8,35.8H70.4l.3-.2Z"
+                d="M140.5,125A15.5,15.5,0,1,1,125,109.5,15.4,15.4,0,0,1,140.5,125Z"
               />
               <path
                 id="ANN3"
                 class="path7 blocker flubber visuals"
                 d="M124.7,103.4l53.8,35.8H70.4l.3-.2Z"
+              />
+              <path
+                id="ANN4"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN5"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN6"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN7"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN8"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />             
+              <path
+                id="ANN"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RNN"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_2"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_ptrn"
+                class="path7 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
               />
             </g>
             <g
@@ -428,12 +528,62 @@
               <path
                 id="ANN2"
                 class="path8 blocker flubber visuals"
-                d="M173.5,71.3l6.3,66.3-53.3-35.4Z"
+                d="M173.5,101.8A15.5,15.5,0,1,1,158,86.3,15.4,15.4,0,0,1,173.5,101.8Z"
               />
               <path
                 id="ANN3"
                 class="path8 blocker flubber visuals"
                 d="M173.5,71.3l6.3,66.3-53.3-35.4Z"
+              />
+              <path
+                id="ANN4"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN5"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN6"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN7"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="ANN8"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />             
+              <path
+                id="ANN"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RNN"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_2"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+              />
+              <path
+                id="RGCN_ptrn"
+                class="path8 blocker flubber visuals"
+                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
               />
             </g>                        
             <g
@@ -1331,13 +1481,13 @@
           }
 
           // remove/add beeswarm and legend on last step
-          if (this.step == 15 && response.direction == 'down') {
+          if (this.step == 23 && response.direction == 'down') {
             this.chartState.measure = this.RGCN_ptrn_both;
             self.fadeOut(this.d3.selectAll(".bees"), 500);
             self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
             self.fadeOut(this.d3.select(".main_line"), 500);
           }
-          if (this.step == 15 && response.direction == 'up') {
+          if (this.step == 23 && response.direction == 'up') {
             self.fadeIn(this.d3.selectAll(".bees"), 200);
             self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
              self.fadeIn(this.d3.select(".main_line"), 500);
@@ -1513,7 +1663,7 @@ figure.sticky.charts {
   stroke-width: 0.25px;
 }
 .blocker {
-
+  fill: #171717;
 }
 .other{
   fill: #e9854b;
