@@ -1,123 +1,112 @@
 <template>
   <section id="section_2">
+    <div class="text-content">
+      <div class="section-title-wrapper">
+        <h3 v-html="text.title1" />
+      </div>
+      <p v-html="text.paragraph1" />
+      <p v-html="text.paragraph2" />
+      <p v-html="text.paragraph3" />
+    </div>
+    <div id="map-and-bar-chart">
+      <div class="text-content viz-title-wrapper">
+        <h3 class="viz-title">
+          Measuring Temperature in the Basin
+        </h3>
+      </div>  
+      <div class="figure-content">
+        <div class="figure map">
+          <p class="viz-subtitle">All Monitoring Sites in the Basin</p>
+          <div id="DRB_map_c2p1" />
+        </div>
+        <div class="figure chart">
+          <p class="viz-subtitle">Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies</p>
+          <div id="barChart_c2p1" />
+        </div>
+      </div>      
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph4" />
+      <p v-html="text.paragraph5" />
+      <p>ICONS HERE</p>
+      <!-- <Chapter2Icons1 /> -->
+      <h2 v-html="text.title2" />
+      <p v-html="text.subtitle2" />
+      <p v-html="text.paragraph6" />
+      <p v-html="text.paragraph8" />
+      <p v-html="text.paragraph9" />
+    </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        How to Read the Matrices
+      </h3>
+      <p class="viz-subtitle">Visualizing data availability at temperature measuring sites across the basin</p>
+    </div> 
+    <div id="matrix-explainer-container" class="flex-container">
+      <div class="flex-item"><MatrixExplainerSpace /></div>
+      <div class="flex-item"><MatrixExplainerTime /></div>
+      <div class="flex-item"><MatrixExplainerColor /></div>            
+    </div>
+    <div class="text-content">
+      <p v-html="text.tiptextDesktop" />
+    </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Temperature Data Availability
+      </h3>
+      <p class="viz-subtitle">Visualizing the count of temperature measurements at all monitoring sites across the basin. </p>
+      <p class="viz-subtitle">Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.</p>
+    </div> 
+    <div id="data-availability-container" class="figure-content">
+      <div
+        id="DRB_map_c2p2"
+        class="figure map"
+      />
+      <div
+        id="matrixChart_c2p2"
+        class="figure matrix"
+      />
+    </div>
+    <div class="text-content">
+      <h2 v-html="text.title3" />
+      <p v-html="text.paragraph10" />
+      <!-- <Chapter2Icons2 /> -->
+      <p v-html="text.paragraph11" />
+    </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Daily Temperature readings in the Basin
+      </h3>
+      <p class="viz-subtitle">Data for 2019 only, including the most-observed reaches.</p>
+    </div> 
+    <div class="text-content">
+      <div class="chart"><MonitoringLineChart /></div>
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph12" />
+      <p v-html="text.paragraph13" />
+    </div>
+    <div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
+        Daily Temperature at each reach in the Basin
+      </h3>
+      <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+    </div> 
+    <div class="figure-content">
+      <div
+        id="DRB_map_c2p3"
+        class="figure map"
+      />
+      <div
+        id="matrixChart_c2p3"
+        class="figure matrix"
+      />
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph14" />
+    </div>
+    
     <div class="container-fluid">
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <h2 v-html="text.title1" />
-          <p v-html="text.paragraph1" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p1"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="barChart_c2p1"
-          class="col-xl-6 col-md-6 col-xs-12"
-        >
-          <p v-html="text.paragraph2" />
-          <p v-html="text.paragraph3" />
-        </div>
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <p v-html="text.paragraph5" />
-          <p>ICONS HERE</p>
-          <!-- <Chapter2Icons1 /> -->
-          <h2 v-html="text.title2" />
-          <p v-html="text.subtitle2" />
-          <p v-html="text.paragraph6" />
-          <p v-html="text.tiptext1" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p2"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="matrixChart_c2p2"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <h2 v-html="text.title3" />
-          <p v-html="text.paragraph10" />
-          <p>ICONS HERE</p>
-          <!-- <Chapter2Icons2 /> -->
-          <p v-html="text.paragraph11" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <MonitoringLineChart />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-        <div
-          class="col-xl-10 col-md-10 col-xs-12"
-        >
-          <p v-html="text.paragraph12" />
-          <p v-html="text.paragraph13" />
-        </div>
-        <div
-          class="col-xl-1 col-md-1 col-xs-0"
-        />
-      </div>
-      <div class="row">
-        <div
-          id="DRB_map_c2p3"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-        <div
-          id="matrixChart_c2p3"
-          class="col-xl-6 col-md-6 col-xs-12"
-        />
-      </div>
-      <div class="row">
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-        <div class="col-xl-10 col-md-10 col-xs-12">
-          <p v-html="text.paragraph14" />
-        </div>
-        <div class="col-xl-1 col-md-1 col-xs-0" />
-      </div>
       <div
         id="filter_row"
         class="row"
@@ -169,6 +158,7 @@
         </div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -179,11 +169,18 @@
   import * as ss from 'simple-statistics';
   import monitoringText from "./../../assets/text/monitoringText";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
+  import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
+  import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
+  import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
+
 
   export default {
       name: 'Set2',
       components: {
-        MonitoringLineChart
+        MonitoringLineChart,
+        MatrixExplainerSpace,
+        MatrixExplainerTime,
+        MatrixExplainerColor
       },
       data() {
         return {
@@ -228,7 +225,7 @@
         this.chart_height = window.innerHeight * 0.30 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
         this.matrix_height_c2 = window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
-
+      
         this.setPanels();  // begin script when window loads
       },
       methods: {
@@ -248,8 +245,8 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 600;
-          this.map_height = window.innerHeight * 0.79;
+          this.map_width = 400;
+          this.map_height = window.innerHeight * 0.5;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
@@ -336,6 +333,7 @@
             self.d3.csv(self.publicPath + "data/matrix_annual_obs.csv"),
             self.d3.csv(self.publicPath + "data/obs_annual_count.csv")
           ];
+
           Promise.all(promises_2).then(self.callback_2);
         },
         loadData_3() {
@@ -552,22 +550,22 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(2))
+                .attr("d", self.map_path_c2.pointRadius(1))
                 // assign class for styling
                 .attr("class", "c2p1 obs_sites")
                 // assign fill color based on agency
                 .style("fill", function(d){
                   if (d.properties.source === 'USGS'){
-                    return "#edb932"
+                    return "#e9eced"
                   } else {
-                    return "#eb4444"
+                    return "#e9eced"
                   }
                 })
                 // assign stroke in background color
-                .style("stroke", "#000000")
-                .style("stroke-width", 0.4)
+                // .style("stroke", "#000000")
+                // .style("stroke-width", 0.4)
                 // assign opacity
-                .style("opacity", 1)
+                .style("opacity", .4)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
@@ -597,7 +595,7 @@
 
           // set colors
           let z = this.d3.scaleOrdinal()
-              .range(["#edb932", "#eb4444"]);
+              .range(["#e9eced", "#e9eced"]);
 
           // stack to create an array for each of the series in the data
           let stack = this.d3.stack();
@@ -658,7 +656,7 @@
               // offset axis slightly to align closer to last bar
               .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
-              .call(this.d3.axisRight(y).ticks(10, "s").tickSize(- this.chart_width))
+              .call(this.d3.axisRight(y).ticks(2, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
 
           // place and rotate the y axis label
@@ -669,49 +667,14 @@
               .attr("x", -this.chart_height / 2)
               .attr("text-anchor", "middle")
               .attr("class", "c2p1 chartAxisText")
-              .text("# of unique temperature measurements")
+              .text("Unique temperature measurements")
               //.attr("transform", "translate(25, 0)")
               .attr("transform", "rotate(-90)")
               
 
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#000000").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 2"))
+          svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 1).attr("stroke-dasharray", ("1, 2"))
 
-          //  make the legend
-          let legend = g.selectAll(".legend")
-              // include all but the first column in the legend
-              .data(data.columns.slice(1).reverse())
-              // append an item for each series
-              .enter().append("g")
-              .attr("class", "c2p1 barChart legend")
-              .attr("transform", function(d, i) {
-                return "translate(" + 0 + "," + i * 17 + ")";
-              })
-
-          // append a rectangle for each series
-          legend.append("rect")
-              .attr("x", 14)
-              .attr("width", 8)
-              .attr("height", 8)
-              // set color based on z attribute
-              .attr("fill", z);
-
-          // append a label for each rectangle
-          legend.append("text")
-              .attr("x", 30)
-              .attr("y", 4)
-              .attr("dy", ".35em")
-              .attr("text-anchor", "start")
-              // set text as column name
-              .text(function(d) { return d; });
-
-          let narrative = this.d3.select("#barChart_c2p1").append("foreignObject")
-              .attr("text-align", "left")
-              //.attr("width", this.chart_width)
-              //.attr("height", 500)
-              .attr("x", 0)
-              .attr("y", 0)
-              .html(monitoringText.textContents.paragraph4)
         },
         setMap_c2p2(){
           const self = this;
@@ -837,7 +800,7 @@
                 return self.widthScale_c2(value);
               })
               // set fill to none
-              .style("fill", "None")
+              .style("fill", "none")
               // trigger interactions
               .on("mouseover", function(d) {
                 self.mouseoverSeg_c2p2(d, tooltip);
@@ -876,9 +839,25 @@
           // Find maximum count of observations to use in color scale
           self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
 
+          // Create Custom interpolator for a color scale using HEX codes
+            // Convert Hex to RGB
+          const hex2rgb = hex => {
+            var validHEXInput = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            if (!validHEXInput) {
+                return false;
+            }
+            var output = {
+                r: parseInt(validHEXInput[1], 16),
+                g: parseInt(validHEXInput[2], 16),
+                b: parseInt(validHEXInput[3], 16),
+            };
+            return `rgb(${output.r},${output.g},${output.b})`
+          }
+          let interpolatec2p2 = self.d3.interpolateRgb(hex2rgb("#10313e"), hex2rgb("#bec7ca")); // can only get two stops in this function
+    
           // build color scale
           let myColor = self.d3.scaleSequential()
-              .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma */
+              .interpolator(interpolatec2p2) /* interpolatePlasma */
               // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
               .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
 
@@ -941,7 +920,7 @@
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#000000")
+                  .attr("fill", "#201D1A")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1144,9 +1123,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#000000")
+              .style("fill", "#201D1A")
               .style("stroke-width", 2)
-              .style("stroke", "#000000")
+              .style("stroke", "#201D1A")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1173,9 +1152,9 @@
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#000000")
+              .style("fill", "#201D1A")
               .style("stroke-width", 2)
-              .style("stroke", "#000000")
+              .style("stroke", "#201D1A")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1418,7 +1397,7 @@
                   .attr("class", "c2p3 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#000000")
+                  .attr("fill", "#201D1A")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1713,7 +1692,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#000000")
+                  .style("fill", "#201D1A")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
@@ -2153,11 +2132,6 @@
 <style scoped lang="scss">
 #section_2 {
   margin-bottom: 0;
-  font-family: 'Open Sans', arial, sans-serif;
-  font-weight: 300;
-  font-size: 1em;
-  background-color: black;
-  color: #757474;
   text-align: left;
 
   .row {
@@ -2179,17 +2153,17 @@
 }
 
 .delaware_bay {
-  fill: #6399ba;
+  fill: #10313e; // original was #6399ba;
 }
 
 .river_segments {
-  stroke: #6399ba;
+  stroke: #10313e;// original was #6399ba;
   stroke-linecap: round;
 }
 
 .reservoirs {
-  fill:  #6399ba;
-  stroke: #6399ba;
+  fill: #10313e; // original was #6399ba;
+  stroke: #10313e;// original was #6399ba;
 }
 
 .chartAxis {
