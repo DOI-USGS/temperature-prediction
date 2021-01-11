@@ -478,42 +478,42 @@
               <path
                 id="ANN6"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="ANN7"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="ANN8"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />             
               <path
                 id="ANN"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="RNN"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="RGCN"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="RGCN_2"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
               <path
                 id="RGCN_ptrn"
                 class="path7 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,22.5Z"
               />
             </g>
             <g
@@ -523,12 +523,12 @@
               <path
                 id="ANN1"
                 class="path8 blocker flubber visuals"
-                d="M125,22.5Z"
+                d="M125,89.5Z"
               />
               <path
                 id="ANN2"
                 class="path8 blocker flubber visuals"
-                d="M125,22.5Z"
+                d="M125,89.5Z"
               />
               <path
                 id="ANN3"
@@ -548,42 +548,42 @@
               <path
                 id="ANN6"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="ANN7"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="ANN8"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />             
               <path
                 id="ANN"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="RNN"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="RGCN"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="RGCN_2"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="RGCN_ptrn"
                 class="path8 blocker flubber visuals"
-                d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
+                d="M125,89.5Z"
               />
             </g>                        
             <g
@@ -612,7 +612,7 @@
                 <polygon class="f_arrowhead" points="192.8 60.8 190.3 60.4 191.9 58.4 192.8 60.8"/>
               </g>
               <text class="f_main light" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
-              <text class="f_main light" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
               <line class="f_synapse high" x1="81.4" y1="44.8" x2="61.1" y2="68.9"/>
               <line class="f_synapse low" x1="81.4" y1="44.8" x2="126.5" y2="68.9"/>
               <line class="f_synapse medium" x1="81.4" y1="44.8" x2="192" y2="68.9"/>
@@ -626,7 +626,7 @@
               transform="translate(0 0) scale(1.333 1.333)"
             >
               <text class="f_main bold" transform="translate(91.8 127.7)">Hidden layer</text>
-              <text class="f_main light" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
               <line class="f_synapse high" x1="81.4" y1="44.8" x2="61.1" y2="68.9"/>
               <line class="f_synapse low" x1="81.4" y1="44.8" x2="126.5" y2="68.9"/>
               <line class="f_synapse medium" x1="81.4" y1="44.8" x2="192" y2="68.9"/>
@@ -645,7 +645,7 @@
               transform="translate(0 0) scale(1.333 1.333)"
             >
               <text class="f_main bold" transform="translate(91.8 127.7)">Hidden layer</text>
-              <text class="f_main light" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(111.9 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
               <line class="f_synapse high" x1="81.4" y1="44.8" x2="61.1" y2="68.9"/>
               <line class="f_synapse low" x1="81.4" y1="44.8" x2="126.5" y2="68.9"/>
               <line class="f_synapse medium" x1="81.4" y1="44.8" x2="192" y2="68.9"/>
@@ -1250,7 +1250,7 @@
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
           // add flubber model id as key in nested dictionary, with path as value
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
-          //console.log(this.flubber_dict)
+          console.log(this.flubber_dict)
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
@@ -1569,13 +1569,13 @@
           if (this.step == 23 && response.direction == 'down') {
             this.chartState.measure = this.RGCN_ptrn_both;
             self.fadeOut(this.d3.selectAll(".bees"), 500);
-            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
+            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
             self.fadeOut(this.d3.select(".main_line"), 500);
           }
-          if (this.step == 23 && response.direction == 'up') {
+          if (this.step == 22|23 && response.direction == 'up') {
             self.fadeIn(this.d3.selectAll(".bees"), 200);
-            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
-             self.fadeIn(this.d3.select(".main_line"), 500);
+            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
+            self.fadeIn(this.d3.select(".main_line"), 500);
           }
 
            // add class to active step
