@@ -17,11 +17,15 @@
       </div>  
       <div class="figure-content">
         <div class="figure map">
-          <p class="viz-subtitle">All Monitoring Sites in the Basin</p>
+          <p class="viz-subtitle">
+            All Monitoring Sites in the Basin
+          </p>
           <div id="DRB_map_c2p1" />
         </div>
         <div class="figure chart">
-          <p class="viz-subtitle">Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies</p>
+          <p class="viz-subtitle">
+            Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
+          </p>
           <div id="barChart_c2p1" />
         </div>
       </div>      
@@ -44,12 +48,23 @@
       <!-- h3 class="viz-title">
         How to Read the Matrices
       </h3 -->
-      <p class="viz-subtitle">Visualizing data availability at temperature measuring sites across the basin</p>
+      <p class="viz-subtitle">
+        Visualizing data availability at temperature measuring sites across the basin
+      </p>
     </div> 
-    <div id="matrix-explainer-container" class="flex-container">
-      <div class="flex-item"><MatrixExplainerSpace /></div>
-      <div class="flex-item"><MatrixExplainerTime /></div>
-      <div class="flex-item"><MatrixExplainerColor /></div>            
+    <div
+      id="matrix-explainer-container"
+      class="flex-container"
+    >
+      <div class="flex-item">
+        <MatrixExplainerSpace />
+      </div>
+      <div class="flex-item">
+        <MatrixExplainerTime />
+      </div>
+      <div class="flex-item">
+        <MatrixExplainerColor />
+      </div>            
     </div>
     <div class="text-content">
       <p v-html="text.tiptextDesktop" />
@@ -58,10 +73,17 @@
       <h3 class="viz-title">
         Temperature Data Availability
       </h3>
-      <p class="viz-subtitle">Visualizing the count of temperature measurements at all monitoring sites across the basin. </p>
-      <p class="viz-subtitle">Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.</p>
+      <p class="viz-subtitle">
+        Visualizing the count of temperature measurements at all monitoring sites across the basin.
+      </p>
+      <p class="viz-subtitle">
+        Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.
+      </p>
     </div> 
-    <div id="data-availability-container" class="figure-content">
+    <div
+      id="data-availability-container"
+      class="figure-content"
+    >
       <div
         id="DRB_map_c2p2"
         class="figure map"
@@ -81,10 +103,14 @@
       <h3 class="viz-title">
         Daily Temperature readings in the Basin
       </h3>
-      <p class="viz-subtitle">Data for 2019 only, including the most-observed reaches.</p>
+      <p class="viz-subtitle">
+        Data for 2019 only, including the most-observed reaches.
+      </p>
     </div> 
     <div class="text-content">
-      <div class="chart"><MonitoringLineChart /></div>
+      <div class="chart">
+        <MonitoringLineChart />
+      </div>
     </div>
     <div class="text-content">
       <p v-html="text.paragraph12" />
@@ -94,7 +120,9 @@
       <h3 class="viz-title">
         Daily Temperature at each reach in the Basin
       </h3>
-      <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+      <p class="viz-subtitle">
+        Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.
+      </p>
     </div> 
     <div class="figure-content">
       <div
@@ -162,7 +190,6 @@
         </div>
       </div>
     </div>
-
   </section>
 </template>
 
