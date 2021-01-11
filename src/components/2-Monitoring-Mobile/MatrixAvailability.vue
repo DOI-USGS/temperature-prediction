@@ -33028,7 +33028,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$backgroundCharcoal: #171717;
+
 #matrix-availability {
         width: 100%;
     }
@@ -34182,11 +34184,7 @@ export default {
         fill: url(#linear-gradient1);
       }
 
-      .cls-231 {
-        letter-spacing: 0em;
-      }
-
-      .cls-232 {
-        letter-spacing: -0.01em;
+      #matrix-background{
+        fill: $backgroundCharcoal;
       }
 </style>

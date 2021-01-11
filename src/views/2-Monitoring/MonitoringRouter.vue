@@ -1,9 +1,7 @@
 <template>
   <section id="monitoring-router">
-    <div class="text-content">
-      <h2>This heading is in the component "Router Testing"</h2>
-      <p>Content below will be loaded conditionally, in this case, it'll be the {{ msg }} version.</p>
-      <p>When we're done testing, delete this whole div and all that will be left will be the {{ msg }} component. </p>
+    <div class="text-content section-title-wrapper">
+      <h2>Monitoring Stream Temperature in the Delaware River Basin</h2>
     </div>
         
     <div 
