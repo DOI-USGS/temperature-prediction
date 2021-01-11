@@ -19,6 +19,7 @@
             y="71.6"
             width="650"
             height="1043.8"
+            class="background"
           />
         </g>
       </g>
@@ -376,7 +377,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+$backgroundCharcoal: #171717;
+
+.background{
+  fill: $backgroundCharcoal;
+}
+
 #matrix-space-view {
         width: 100%;
     }
@@ -597,39 +605,5 @@ export default {
         font-weight: 400;
       }
 
-      .cls-44 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-45, .cls-53 {
-        letter-spacing: 0em;
-      }
-
-      .cls-46 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-47, .cls-51 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-48 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-49 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-50 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-52 {
-        letter-spacing: 0em;
-      }
-
-      .cls-54 {
-        letter-spacing: -0.02em;
-      }
+     
 </style>

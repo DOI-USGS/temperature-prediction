@@ -133415,11 +133415,17 @@ export default {
 }
 </script>
 
-<style scoped>
+
+<style lang="scss" scoped>
+
+$backgroundCharcoal: #171717;
+#matrix-background{
+  fill: $backgroundCharcoal;
+}
+
 #matrix-temperature {
         width: 100%;
     }
-
 
 .cls-1, .cls-784 {
         isolation: isolate;
