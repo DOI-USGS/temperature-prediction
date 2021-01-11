@@ -48,11 +48,13 @@
               <path
                 id="ANN4"
                 class="path1 river flubber visuals"
+                style="fill: #6399ba"
                 d="M60.9,80.3A10.8,10.8,0,1,0,71.6,91H60.9Z"
               />
               <path
                 id="ANN5"
                 class="path1 river flubber visuals"
+                style="fill: #EDA550"
                 d="M64.1,91a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,64.1,91Z"
               />
               <path
@@ -68,6 +70,7 @@
               <path
                 id="ANN8"
                 class="path1 river flubber visuals"
+                style="fill: #EDA550"
                 d="M180.6,139.3,174,70.6v-.4l-46.9,32.3L80.7,70.6,65.3,138.2l-.4,1.6,9.3-.3,45.4-31.2,47.5,32.6Zm-7-68.2,6.4,67.8-52.5-36.1ZM74.4,138.8,86.6,85.6,119.1,108Z"
               />                                                                                                  
               <path
@@ -78,6 +81,7 @@
               <path
                 id="RNN"
                 class="path1 river flubber visuals"
+                style="fill: #6399ba"
                 d="M37.1,166.9l-4-.9c.5-3,13.5-72.2,44.3-83.5,15.2-5.6,32.1,3.8,49.9,28.4l-2.3,3.2C108,90.7,92.3,81.2,78.2,86.3,49.1,97,37.2,166.2,37.1,166.9Z"
               />
               <path
@@ -117,12 +121,14 @@
               />
               <path
                 id="ANN4"
+                style="fill: #6399ba"
                 class="path2 river flubber visuals"
                 d="M126.3,80.4A10.7,10.7,0,0,0,115.9,91h10.4Z"
               />
               <path
                 id="ANN5"
                 class="path2 river flubber visuals"
+                style="fill: #764893"
                 d="M137.4,91a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,137.4,91Z"
               />
               <path
@@ -138,6 +144,7 @@
               <path
                 id="ANN8"
                 class="path2 river flubber visuals"
+                style="fill: #764893"
                 d="M224.3,139.2H25.9a15.5,15.5,0,0,0,0,31H69.1l.2.2,57.4,49.7,1.2.9,53.3-49.7,1.2-1.1h41.9a15.5,15.5,0,0,0,0-31ZM59.5,154.7a10.1,10.1,0,1,1,10,10A10.1,10.1,0,0,1,59.5,154.7Zm66.4,64.1-56-48.6h108Zm54.3-54.1a10.1,10.1,0,1,1,10-10A10.1,10.1,0,0,1,180.2,164.7Z"
               />   
               <path
@@ -148,6 +155,7 @@
               <path
                 id="RNN"
                 class="path2 river flubber visuals"
+                style="fill: #6399ba"
                 d="M188.6,153.1c-18.7,0-41.5-12.7-64.3-39.2l2.8-2.7c25.4,28.7,48.8,40.7,67.6,37.3,23.9-4.3,36.2-33.1,42.8-48.6,1.4-3.3,2.6-6,3.5-7.7l3.4,2c-.8,1.5-1.9,4.1-3.3,7.3-6.9,16.2-19.7,46.3-45.7,51A38.2,38.2,0,0,1,188.6,153.1Z"
               />
               <path
@@ -188,11 +196,13 @@
               <path
                 id="ANN4"
                 class="path3 other flubber visuals"
+                style="fill: #e9854b"
                 d="M60.9,80.3V91H71.6A10.7,10.7,0,0,0,60.9,80.3Z"
               />
               <path
                 id="ANN5"
                 class="path3 other flubber visuals"
+                style="fill: #EDA550"
                 d="M64.1,91a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,64.1,91Z"
               />
               <path
@@ -208,6 +218,7 @@
               <path
                 id="ANN8"
                 class="path3 other flubber visuals"
+                style="fill: #EDA550"
                 d="M95.8,44l-7.1-.4a14.6,14.6,0,0,0-.3-2.2l10-5.3L87.8,39.5h0a14.3,14.3,0,0,0-1.6-2.4l4.2-5.2-4.9,4.3a9.5,9.5,0,0,0-2-1.5l3.2-10.3-5,9.4a13.3,13.3,0,0,0-3-.6L78,27.1l-.4,6.1a12.8,12.8,0,0,0-2.7.5L70,24.5l3.1,10a10.8,10.8,0,0,0-2.4,1.8l-4.9-3.8,4.1,4.6a17.6,17.6,0,0,0-1.4,2.3L58.3,36.3l9.6,5a12.7,12.7,0,0,0-.3,2.8l-6.4.7,6.5.5a10.5,10.5,0,0,0,.6,2.4L58.4,53l10.7-3.5a9.1,9.1,0,0,0,1.8,2.1L66.6,57l5.2-4.6,1.9,1L70.1,64.6l5.5-10.5a10.9,10.9,0,0,0,2.6.3l.8,7.3.4-7.4,1.9-.4,5.5,10.7L83.1,53.2a17,17,0,0,0,2.2-1.5l5.8,4.7-5-5.6a9.1,9.1,0,0,0,1.1-1.6l11.3,3.6L88.1,47.4a10.9,10.9,0,0,0,.5-2.6Z"
               />   
               <path
@@ -218,6 +229,7 @@
               <path
                 id="RNN"
                 class="path3 other flubber visuals"
+                style="fill: #e9854b"
                 d="M78.6,84.4a5.5,5.5,0,1,0,11,0C89,76.9,79,77.5,78.6,84.4Z"
               />
               <path
@@ -258,11 +270,13 @@
               <path
                 id="ANN4"
                 class="path4 other flubber visuals"
+                style="fill: #e9854b"
                 d="M126.7,80.3h-.4V91H115.9a10.8,10.8,0,1,0,10.8-10.7Z"
               />
               <path
                 id="ANN5"
                 class="path4 other flubber visuals"
+                style="fill: #764893"
                 d="M137.4,91a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,137.4,91Z"
               />
               <path
@@ -278,6 +292,7 @@
               <path
                 id="ANN8"
                 class="path4 other flubber visuals"
+                style="fill: #764893"
                 d="M181.7,49.8a8.2,8.2,0,1,1-16.4,0c0-4.6,6.7-10,8.2-18.9C175,39.6,181.7,45.2,181.7,49.8Z"
               />               
               <path
@@ -288,6 +303,7 @@
               <path
                 id="RNN"
                 class="path4 other flubber visuals"
+                style="fill: #e9854b"
                 d="M121.7,114.5c.2,7.2,10.4,7.5,10.9,0A5.5,5.5,0,0,0,121.7,114.5Z"
               />
               <path
@@ -328,11 +344,13 @@
               <path
                 id="ANN4"
                 class="path5 other flubber visuals"
+                style="fill: #e9854b"
                 d="M192,80.3v21.5a10.8,10.8,0,0,0,0-21.5Z"
               />
               <path
                 id="ANN5"
                 class="path5 other flubber visuals"
+                style="fill: #4EC1BE"
                 d="M198.5,91a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,198.5,91Z"
               />
               <path
@@ -347,8 +365,9 @@
               />
               <path
                 id="ANN8"
-                d="M178.1,218.8H114.9a10.1,10.1,0,0,0,0,20.1h63.2a10.1,10.1,0,0,0,0-20.1Zm-61.5,14.8H115v-8.1l-.9.6-1.2.3v-1.3l.8-.3.7-.3.7-.4.8-.5h.7Zm5.6,0h-1.6v-8.1l-.9.6-1.1.3v-1.3l.7-.3.8-.3.7-.4.7-.5h.7Zm2.2-8a1.7,1.7,0,0,1,1.9-1.9v.9a1,1,0,0,0,0,2v.9a2.1,2.1,0,0,1-1.9-1.9Zm3.3,1.3a1.8,1.8,0,0,1-1.3.6v-.9l.6-.3a1.1,1.1,0,0,0,.3-.7.9.9,0,0,0-.3-.7.9.9,0,0,0-.6-.3v-.9a2.1,2.1,0,0,1,1.3.5,2.2,2.2,0,0,1,.5,1.4A1.9,1.9,0,0,1,127.7,226.9Zm9.3-1.2a4.3,4.3,0,0,0-2.2-.6,3.4,3.4,0,0,0-2.6,1,4.1,4.1,0,0,0-1,2.7,3.6,3.6,0,0,0,.9,2.6,3.7,3.7,0,0,0,2.5,1,4.8,4.8,0,0,0,2.4-.7v1.5a6.1,6.1,0,0,1-2.8.6,4.6,4.6,0,0,1-3.4-1.4,5.5,5.5,0,0,1,.2-7.3,4.5,4.5,0,0,1,3.6-1.4,5.5,5.5,0,0,1,2.4.4Zm41.1,12.2H139.4a10,10,0,0,0,5.7-9.1,9.9,9.9,0,0,0-5.7-9h38.7a9.1,9.1,0,0,1,0,18.1Z"
                 class="path5 other flubber visuals"
+                style="fill: #4EC1BE"
+                d="M178.1,218.8H114.9a10.1,10.1,0,0,0,0,20.1h63.2a10.1,10.1,0,0,0,0-20.1Zm-61.5,14.8H115v-8.1l-.9.6-1.2.3v-1.3l.8-.3.7-.3.7-.4.8-.5h.7Zm5.6,0h-1.6v-8.1l-.9.6-1.1.3v-1.3l.7-.3.8-.3.7-.4.7-.5h.7Zm2.2-8a1.7,1.7,0,0,1,1.9-1.9v.9a1,1,0,0,0,0,2v.9a2.1,2.1,0,0,1-1.9-1.9Zm3.3,1.3a1.8,1.8,0,0,1-1.3.6v-.9l.6-.3a1.1,1.1,0,0,0,.3-.7.9.9,0,0,0-.3-.7.9.9,0,0,0-.6-.3v-.9a2.1,2.1,0,0,1,1.3.5,2.2,2.2,0,0,1,.5,1.4A1.9,1.9,0,0,1,127.7,226.9Zm9.3-1.2a4.3,4.3,0,0,0-2.2-.6,3.4,3.4,0,0,0-2.6,1,4.1,4.1,0,0,0-1,2.7,3.6,3.6,0,0,0,.9,2.6,3.7,3.7,0,0,0,2.5,1,4.8,4.8,0,0,0,2.4-.7v1.5a6.1,6.1,0,0,1-2.8.6,4.6,4.6,0,0,1-3.4-1.4,5.5,5.5,0,0,1,.2-7.3,4.5,4.5,0,0,1,3.6-1.4,5.5,5.5,0,0,1,2.4.4Zm41.1,12.2H139.4a10,10,0,0,0,5.7-9.1,9.9,9.9,0,0,0-5.7-9h38.7a9.1,9.1,0,0,1,0,18.1Z"
               />             
               <path
                 id="ANN"
@@ -358,6 +377,7 @@
               <path
                 id="RNN"
                 class="path5 other flubber visuals"
+                style="fill: #e9854b"
                 d="M165,147c.2,7.1,10.4,7.4,10.9,0S165.4,140,165,147Z"
               />
               <path
@@ -398,11 +418,13 @@
               <path
                 id="ANN4"
                 class="path6 river flubber visuals"
+                style="fill: #6399ba"
                 d="M192,80.3a10.8,10.8,0,0,0,0,21.5V80.3Z"
               />
               <path
                 id="ANN5"
                 class="path6 river flubber visuals"
+                style="fill: #4EC1BE"
                 d="M198.5,91a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,198.5,91Z"
               />
               <path
@@ -418,6 +440,7 @@
               <path
                 id="ANN8"
                 class="path6 river flubber visuals"
+                style="fill: #4EC1BE"
                 d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
               />             
               <path
@@ -433,6 +456,7 @@
               <path
                 id="RGCN"
                 class="path6 blocker flubber visuals"
+                style="fill: #6399ba"
                 d="M3,1a.9.9,0,0,1-.9.9.9.9,0,0,1-1-.9.9.9,0,0,1,1-1A.9.9,0,0,1,3,1Z"
               />
               <path
@@ -1249,8 +1273,12 @@
           // add path number as key to nested dictionary
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
           // add flubber model id as key in nested dictionary, with path as value
-          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
+          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id] = {})
+          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
+          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
+          // document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
           console.log(this.flubber_dict)
+          // console.log(document.querySelectorAll("#transform-svg-test g path"))
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN','RNN','RGCN','RGCN_2','RGCN_ptrn'];
@@ -1372,22 +1400,55 @@
               // loop through the paths in the dictionary for the current step id
               let path_num;
               for (path_num in self.flubber_dict) {
-                // define path end using the CURRENT STEP ID
-                let path_end = self.flubber_dict[path_num][step_id]
-                // define path end using the PREVIOUS STEP ID (as defined above)
-                let path_start = self.flubber_dict[path_num][previous_id]
+                if (path_num == "f_arrow") {
 
-                // transition between the two
-                // select path in the group element for that path number
-                self.d3.select("#" + path_num + ' path')
-                  .style("display", "block")
-                  .datum({ path_start, path_end })
-                  .transition()
-                  .duration(animationLength)
-                  .attrTween("d", function(d){
-                    return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 3 })
-                  })
+                } else {
+                  console.log("path num")
+                  console.log(path_num)
+                  // define path end using the CURRENT STEP ID
+                  let path_end = self.flubber_dict[path_num][step_id]['path_code']
+                  // define path end using the PREVIOUS STEP ID (as defined above)
+                  let path_start = self.flubber_dict[path_num][previous_id]['path_code']
+
+                  // let path_element = document.querySelector("#" + path_num + ' path')
+                  // let path_style = getComputedStyle(path_element)
+                  // let path_color = self.css('.river')
+                  // console.log(path_color)
+
+                  // transition between the two
+                  // select path in the group element for that path number
+                  self.d3.select("#" + path_num + ' path')
+                    .style("display", "block")
+                    .datum({ path_start, path_end })
+                    .transition()
+                    .duration(animationLength)
+                    .attrTween("d", function(d){
+                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 3 })
+                    })
+
+                  if (self.flubber_dict[path_num][step_id]['fill_color']) {
+                    self.d3.select("#" + path_num + ' path')
+                      .transition()
+                      .duration(animationLength)
+                      .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
+                      .attrTween("d", function(d){
+                        return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 3 })
+                      })
+                  }
+
+                  // if ((step_id == "ANN5") & (path_num == 'path1' | path_num == 'path3') & step_direction == "down") {
+                  //   self.d3.select("#" + path_num + ' path')
+                  //     .transition()
+                  //     .duration(animationLength)
+                  //     .style("fill", "#EDA550")
+                  //     .attrTween("d", function(d){
+                  //       return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 3 })
+                  //     })
+                  // }
+                }
               }
+
+
 
               // select associated annotations
               let previous_annotation_id = previous_id + "_annotations"
