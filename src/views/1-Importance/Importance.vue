@@ -1,11 +1,19 @@
 <template>
   <section id="importance">
-    <title id="page-title">Temperature Predition Modeling in the Delaware River Basin</title>
-    <desc id="page-desc">A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.</desc>
+    <title id="page-title">
+      Temperature Predition Modeling in the Delaware River Basin
+    </title>
+    <desc id="page-desc">
+      A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.
+    </desc>
     <div class="text-content">
       <h1>Temperature Prediction Modeling in the Delaware River Basin</h1>
-      <p class="byline">U.S. Geological Survey</p>
-      <p class="byline">Water Mission Area's Vizlab</p>
+      <p class="byline">
+        U.S. Geological Survey
+      </p>
+      <p class="byline">
+        Water Mission Area's Vizlab
+      </p>
       <div class="section-title-wrapper">
         <h2>Why is predicting stream temperature important?</h2>
       </div>
