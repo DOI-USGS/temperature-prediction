@@ -2,52 +2,52 @@ export default {
     textContents: {
         "":[
             {
-                'method': "To predict stream temperature, we provide the model with a set of observed stream temperatures and associated records of air temperature and precipitation. The model attempts to find a relationship between the meteorological inputs and stream temperature. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'method': "Like other models, ANNs are trained on a set of data. To predict stream temperature, we provide the model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model “learns” through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'ANN'
             },
             {
-                'method': "To predict stream temperature, we provide the model with a set of observed stream temperatures and associated records of air temperature and precipitation. The model attempts to find a relationship between the meteorological inputs and stream temperature. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'method': "The first component of an ANN is called an input layer – this is where the model receives the raw input data.",
                 'flubber_id': 'ANN2',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The machine learning model ‘learns’ through its attempts to capture these relationships. It begins by passing the information from the input layer to what is called a ‘hidden’ layer. The information is passed through connections. These connections can be weighted to adjust how much importance is assigned to a particular input value. Here, precipitation is weighted slightly less than air temperature.",
+                'method': "From the input layer, the information is passed to what is known as a ‘hidden’ layer through a series of connections. Each connection transmits an input value to a processing node in the hidden layer. The model can vary the weight of these connections to assign more or less importance to a particular piece of information.",
                 'flubber_id': 'ANN3',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The hidden layer receives the weighted information through its connections to the input layer. Each neuron in the hidden layer acts as a processing node, and passes the weighted information through a mathematical function. Each processing node produces a single output value, which is then passed to the next hidden layer, or, if it is the last, to the output layer.",
+                'method': "The receiving nodes compute a weighted sum of the received information…",
                 'flubber_id': 'ANN4',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The ouput layer compiles all of the information into a single prediction of stream temperature.",
+                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value. ",
                 'flubber_id': 'ANN5',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The model compares the value it produced to the actual stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the prediction temperature and the actual temperature and uses that difference to adjust the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'method': "This output value is then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer.",
                 'flubber_id': 'ANN6',
                 'bees_id': 'ANN'
             },
             {
-                'method': "Here, precipitation is heavily weighted, while air temperature is largely ignored by the model.",
+                'method': "The output layer computes a weighted sum of the information received from the hidden layer…",
                 'flubber_id': 'ANN7',
                 'bees_id': 'ANN'
             },
             {
-                'method': "While here, the opposite is true – air temperature is weighted much more heavily than precipitation.",
+                'method': "And passes the sum through a mathematical function to produce a final output value.",
                 'flubber_id': 'ANN8',
                 'bees_id': 'ANN'
             },
             {
-                'method': "This is a simplified stream network with 3 temperature gages. Using the data collected from these gages we can model water temperature across the stream network of the Delaware River Basin.",
+                'method': "This value is the model’s prediction of stream temperature, given the air temperature and precipitation amount provided as input to the model.",
                 'flubber_id': 'ANN9',
                 'bees_id': 'ANN'
             },
             {
-                'method': "One way to do this is to use an artifical neural network (ANN), a form of deep learning. ANNs have had huge success in identifying complex relationships and making accurate predictions.",
+                'method': "The model compares the value it produced to the actual stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the prediction temperature and the actual temperature and uses that difference to adjust the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
                 'flubber_id':'ANN10',
                 'bees_id' : 'ANN'
             }],

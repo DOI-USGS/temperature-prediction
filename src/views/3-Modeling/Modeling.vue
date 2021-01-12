@@ -7,9 +7,9 @@
       id="intro-container"
       class="text-content text-intro"
     >
-      <h2 id="initial_title">{{sectionTitle}}</h2>
+      <h2>{{sectionTitle}}</h2>
       <p/>
-      <p id="initial_paragraph">Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions.</p>
+      <p>Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions.</p>
 
     </div>
     </figure>
@@ -764,7 +764,7 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(200.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
               <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
               <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
               <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
@@ -790,7 +790,7 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(200.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
             </g>
             <g
               id="ANN5_annotations"
@@ -809,7 +809,7 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
             </g>
             <g
               id="ANN6_annotations"
@@ -831,7 +831,7 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
             </g>
             <g
               id="ANN7_annotations"
@@ -854,7 +854,7 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
             </g>
             <g
               id="ANN8_annotations"
@@ -876,12 +876,12 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
-              <text class="f_main bold" transform="translate(62 218.8)">Stream temperature</text>
-              <g>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <!-- text class="f_main bold" transform="translate(62 218.8)">Stream temperature</text -->
+              <!-- g>
                 <line class="f_synapse medium" x1="125.7" y1="182.5" x2="125.7" y2="199.6"/>
                 <polygon class="f_synapse arrowhead" points="122.9 198.8 125.7 203.5 128.4 198.8 122.9 198.8"/>
-              </g>
+              </g -->
             </g>
             <g
               id="ANN9_annotations"
@@ -903,13 +903,13 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
               <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
               <g>
                 <line class="f_synapse medium" x1="125.7" y1="182.5" x2="98.8" y2="200.1"/>
                 <polygon class="f_synapse arrowhead" points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"/>
               </g>
-              <text class="f_main bold" transform="translate(78.5 236.4)">11 °C</text>
+              <text class="f_temp pred" transform="translate(78.5 236.4)">11 °C</text>
               <text class="f_main light" transform="translate(7 236.4)">Prediction:</text>
             </g>
             <g
@@ -932,15 +932,15 @@
                 <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
-              <text class="f_minor" transform="translate(201.7 46.7)">thickness =<tspan class="cls-9" x="9.8" y="14">weight</tspan></text>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
               <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
               <g>
                 <line class="f_synapse medium" x1="125.7" y1="182.5" x2="98.8" y2="200.1"/>
                 <polygon class="f_synapse arrowhead" points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"/>
               </g>
-              <text class="f_main bold" transform="translate(78.5 236.4)">11 °C</text>
+              <text class="f_temp pred" transform="translate(78.5 236.4)">11 °C</text>
               <text class="f_main light" transform="translate(7 236.4)">Prediction:</text>
-              <text class="f_main bold" transform="translate(125.4 236.4)">17 °C</text>
+              <text class="f_temp actual" transform="translate(125.4 236.4)">17 °C</text>
               <text class="f_main light" transform="translate(189.9 236.4)">Actual</text>
               <g>
                 <line class="f_synapse medium" x1="185" y1="232.2" x2="172" y2="232.2"/>
@@ -1660,8 +1660,6 @@
                 if (path_num == "f_arrow") {
 
                 } else {
-                  console.log("path num")
-                  console.log(path_num)
                   // define path end using the CURRENT STEP ID
                   let path_end = self.flubber_dict[path_num][step_id]['path_code']
                   // define path end using the PREVIOUS STEP ID (as defined above)
@@ -1695,9 +1693,9 @@
 
               // select associated annotations
               let previous_annotation_id = previous_id + "_annotations"
-              console.log(previous_annotation_id)
+              // console.log(previous_annotation_id)
               let next_annotation_id = step_id + "_annotations"
-              console.log(next_annotation_id)
+              // console.log(next_annotation_id)
 
               // set length of annotation transition
               let transition_duration = animationLength/2
@@ -2171,6 +2169,16 @@ figure.sticky.charts {
 .f_synapse.arrowhead {
   stroke-width: 0.9px;
   fill: #ffffff;
+}
+.f_temp {
+  font-size: 14px;
+  font-weight: 600;
+} 
+.f_temp.pred {
+  fill: #285C70;
+}
+.f_temp.actual {
+  fill: #FDAD32;
 }
 #hex-map {
   padding: 4rem;
