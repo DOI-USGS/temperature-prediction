@@ -2,7 +2,7 @@ export default {
     textContents: {
         "":[
             {
-                'method': "Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions. At its most basic, an ANN consists of four components: an input layer, synapses that pass information between layers, one or more hidden layers, and an output layer.",
+                'method': "To predict stream temperature, we provide the model with a set of observed stream temperatures and associated records of air temperature and precipitation. The model attempts to find a relationship between the meteorological inputs and stream temperature. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'ANN'
             },

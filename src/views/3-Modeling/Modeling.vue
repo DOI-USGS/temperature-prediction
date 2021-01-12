@@ -7,8 +7,9 @@
       id="intro-container"
       class="text-content text-intro"
     >
-      <h2 >{{sectionTitle}}</h2>
-      <p>  </p>
+      <h2 id="initial_title">{{sectionTitle}}</h2>
+      <p/>
+      <p id="initial_paragraph">Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions.</p>
 
     </div>
     </figure>
@@ -1591,15 +1592,15 @@
               .attr("opacity", 0)
               // .style("visibility", "hidden");
 
-            // display visual associated with initial model id
-            self.d3.selectAll("#" + initial_model_id)
-              .attr("opacity", 1)
-              // .style("visibility", "visible");
+            // // display visual associated with initial model id
+            // self.d3.selectAll("#" + initial_model_id)
+            //   .attr("opacity", 1)
+            //   // .style("visibility", "visible");
 
-            // display visual associated with initial model id
-            self.d3.selectAll("#" + initial_annotation_id)
-              .attr("opacity", 1)
-              // .style("visibility", "visible");
+            // // display visual associated with initial model id
+            // self.d3.selectAll("#" + initial_annotation_id)
+            //   .attr("opacity", 1)
+            //   // .style("visibility", "visible");
 
           },
           // animate flubber svg
@@ -1850,7 +1851,27 @@
           
           //toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-          if (this.step >= 2 && response.direction == "down"){
+          if (this.step == 0 && response.direction == "down") {
+
+            // determine initial model id and initial annotation id
+            // NOTE currently assumes that we are beginning the visuals at step 0
+            let initial_model_id = self.flubber_id_order[this.step]
+            let initial_annotation_id = initial_model_id + "_annotations"
+
+            // display visual associated with initial model id
+            self.d3.selectAll("#" + initial_model_id)
+              .attr("opacity", 1)
+
+            // display visual associated with initial model id
+            self.d3.selectAll("#" + initial_annotation_id)
+              .attr("opacity", 1)
+            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
+          }
+          if (this.step == 0 && response.direction == "up") {
+            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
+          }
+          
+          if (this.step >= 0 && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
              self.fadeIn(this.d3.select(".main_line"), 500)
           }
