@@ -681,6 +681,7 @@
     import * as scrollama from 'scrollama';
     import { interpolatePath } from 'd3-interpolate-path';
     import * as flubber from "flubber";
+    import textures from 'textures';
 
     import modelingText from "./../../assets/text/modelingText";
 
@@ -705,11 +706,13 @@
             svg: null,
 
             chartState: {},
-            model_exp: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
-            model_data: {long: 'rmse_monthly', cast:'rmse_monthly_cast'},
+            model_exp: {error_x: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            model_y: {mid: 'mid', error: "error_pred"},
+            color_groups: {exp: 'experiment', error:'group'},
 
             // beeswarm
-            radius: 8,
+            step_start: 3,
+            radius: 4,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -718,7 +721,10 @@
             yScale: null,
             rmse_monthly: [],
             rmse_monthly_cast: [],
+            error_data: [],
             simulation: null,
+            texture: null,
+            line_thin: null,
 
             // scroll options
             scroller: null,
@@ -776,7 +782,8 @@
             const self = this;
             // read in data 
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_ann_test.csv", this.d3.autoType)];
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType)];
 
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
@@ -789,12 +796,19 @@
             // comes in as an array of objects
             this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_monthly_cast = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
-            //console.log(this.rmse_monthly);
-            this.paddedRadius = this.radius* 1.5;
+            this.error_data = data[2];
+
+            // computed properties
+            this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart
-            this.chartState.measure = this.model_exp.error;
+            this.chartState.measurex = this.model_exp.error;
             this.chartState.dataset = this.rmse_monthly_cast;
+            this.chartState.grouped = this.color_groups.error;
+
+            this.chartState.measurey = this.model_y.error;
+
+            // draw the chart
             this.makeBeeswarm();
 
           },
@@ -932,6 +946,7 @@
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("viewBox", [0, 0, this.width, this.height].join(' '))
+              .attr("preserveAspectRatio", "none")
               .attr("class", "bees-chart")
 
           // define where chart starts within svg
@@ -944,10 +959,22 @@
             .range([this.margin, this.width-this.margin])
             .domain([0,10]);
 
+          // y axis scale for error plot
+          this.yScale = this.d3.scaleLinear()
+            .range([this.margin, this.width-this.margin])
+            .domain([0,this.error_data.error_pred]);
+
+          // testing out texture fills
+            this.texture = textures
+              .lines()
+              .thicker();
+              
+            this.svg.call(this.texture);
+
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d001"])
-            .range(["#53354A", "#f8af26"]);
+            .domain(["d100","d02","d001"])
+            .range(["#53354A",this.texture.url(), "orangered"]);
 
             //add mid line for horizontal clustering vibes
             this.svg.append("line", 'svg')
@@ -956,12 +983,16 @@
               .attr("y1", this.height/2)
               .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
-              .attr("stroke-width", 4)
+              .attr("stroke-width", 2)
               .attr("opacity", 0)
               .attr("stroke", "#A3A0A6");
 
           },
-          addBees(step_in, data_var) {
+          addError() {
+
+
+          },
+          addBees(step_in, var_x, var_y) {
             const self = this;
 
           console.log(this.chartState.measure);
@@ -970,21 +1001,22 @@
         // need to make a different function for the initial force draw, because will want to defien
         // where things are coming from differently?
         self.simulation = this.d3.forceSimulation(this.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => this.xScale(d[this.chartState.measure])).strength(1))
-          .force('y', this.d3.forceY(this.height/2).strength(0.3))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10));
+          .force("x", this.d3.forceX((d) => this.xScale(d[var_x])).strength(1))
+          .force('y', this.d3.forceY((d) => this.yScale(d[var_y])).strength(0.3))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
+          .stop();
 
           // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
-            .attr("fill", (d) => self.set_colors(d.experiment));
-            // key value used to identify dots that are the same between datasets (((seg)))
+
 
             chart.exit()
               .transition()
                 .duration(1000)
+                .delay(function(d,i) { return 1* i})
                 .attr("cx", this.width/2) //where they exit from
-                .attr("cy", (this.height /2 ) - this.margin/2) //where they exit from
+                .attr("cy", var_y) //where they exit from
                 .remove();
 
             chart.enter()
@@ -996,8 +1028,8 @@
               .attr("r", this.radius) 
               .merge(chart)
               .transition()
-               //.duration(1000)
-               //.delay(function(d,i) { return 20* i})
+               .duration(1000)
+               .delay(function(d,i) { return 20* i})
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
@@ -1022,45 +1054,78 @@
         // add class on enter, update charts based on step
         handleStepEnter(response) {
           const self = this;
-          // response = { element, direction, index }
 
           // update step variable to match step in view
           this.step = response.index;
           console.log(response);
 
+          ///////////
+          // this.start_bees is the step where the error plot appears
+          // stage different events based on the active step
+          let step_error = this.step_start;
+          let step_diff = step_error + 1;
+          let step_rmse = step_diff + 1;
+          let step_ann = step_rmse + 1;
+          let step_ann_exp = step_ann + 1;
+          let step_rnn = step_ann_exp + 2;
+          let step_rgcn = step_rnn + 2;
+          let step_rgcn_ptrn = step_rgcn + 2;
+
+          ///////////
            // assign dataset by step
-          if (this.step >= 6 ){
+           if (this.step <= step_error ){
+            //contains only data for d100
+            this.chartState.dataset = this.error_data;
+          }
+          if (this.step >= step_ann ){
             //contains only data for d100
             this.chartState.dataset = this.rmse_monthly;
           }
-          if (this.step <= 5){
-            //contains data for d100 and d001 experiments
+          if (this.step <= step_ann_exp){
+            //contains data for 3 experiments 
             this.chartState.dataset = this.rmse_monthly_cast;
           }
 
-          // reassign variable used to set x-axis positions in beeswarm based on scroll step
-          if (this.step <= 7 && this.step >= 4) {
-            this.chartState.measure = this.model_exp.ANN;
-          }
-          if (this.step == 8) {
-            this.chartState.measure = this.model_exp.RNN;
-          }
-          if (this.step == 9) {
-            this.chartState.measure = this.model_exp.RNN;
-          }
-          if (this.step == 10) {
-            this.chartState.measure = this.model_exp.RGCN;
-          }
-           if (this.step >= 12) {
-            this.chartState.measure = this.model_exp.RGCN_ptrn;
+          ///////////
+          // assign chart axes and color scales
+          // seg is key for update()
+
+          // error chart
+          if (this.step >= step_error && this.step <= step_rmse) {
+            this.chartState.measurex = this.model_exp.error_x;
+            this.chartState.measurey = this.model_y.error;
           }
 
-          //redraw beeswarm chart based on step
-          if (this.step >= 2 ) {
-            self.addBees(this.step, this.chartState.measure);
+          // intro beeswarm, adding experiments
+          if (this.step <= step_ann_exp && this.step >= step_ann) {
+            this.chartState.measurex = this.model_exp.ANN;
+            this.chartState.measurey = this.model_y.mid;
           }
-          
-          //toggle intro header to stepped headers
+          // RNN
+          if (this.step >= step_rnn && this.step <= step_rgcn) {
+            this.chartState.measurex = this.model_exp.RNN;
+            this.chartState.measurey = this.model_y.mid;
+          }
+          // RGCN
+          if (this.step >= step_rgcn && this.step <= step_rgcn_ptrn) {
+            this.chartState.measurex = this.model_exp.RGCN;
+            this.chartState.measurey = this.model_y.mid;
+          }
+          // RGCN to end
+           if (this.step >= step_rgcn_ptrn) {
+            this.chartState.measurex = this.model_exp.RGCN_ptrn;
+            this.chartState.measurey = this.model_y.mid;
+          }
+
+          ///////////
+          // now redraw beeswarm chart and modify force based on active data
+          // only redraw if the data or forces change
+          if (this.step >= this.step_start ) {
+            self.addBees(this.step, this.chartState.measurex, this.chartState.measurey);
+          }
+
+          ///////////
+          // toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
           if (this.step >= 2 && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
@@ -1187,13 +1252,13 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
-  grid-template-rows: 1fr 10% 1fr;
+  grid-template-rows: 35% 10% 35% 10%;
   grid-template-columns: 2% auto 2%;
 
   position: -webkit-sticky;
   position: sticky;
   top: 10vh;
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
 
   #flubber-container {
@@ -1213,7 +1278,6 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    padding-bottom: 100px;
   }
   #bees_dotPlot {
     width: 100%;

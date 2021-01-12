@@ -34,6 +34,7 @@
     "mobile-device-detect": "^0.4.3",
     "scrollama": "^2.2.1",
     "simple-statistics": "^7.2.0",
+    "textures": "^1.2.2",
     "topojson-client": "^3.1.0",
     "uswds": "^2.8.0",
     "vue": "^2.6.11",
