@@ -73,7 +73,7 @@ $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
-$monotoneBlue5: #10313e;
+$monotoneBlue5: #285C70; //#10313e
 $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 // Type
@@ -226,9 +226,11 @@ h3{
   color: $offWhite;
   box-shadow: -5px -5px $monotoneBlue5;
   line-height: 1.3em;
+  padding-bottom: 0.5em;
 }
 .viz-subtitle {
-  color: $offWhite;
+  color: $monotoneBlue5; //$offWhite
+  font-style: italic;
  font-size: .8em;
  text-align: center;
  font-weight: 100;

@@ -1381,7 +1381,10 @@
           </svg>
         </div>
       </div>
-      <div id="bees-container" class="figure-content"/>
+      <div
+        id="bees-container"
+        class="figure-content"
+      />
       <div id="legend-container">
         <svg
           id="bees_legend"
@@ -1409,33 +1412,40 @@
     <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
       <div id="scrollama-container">
-      <!-- create scrolling/sticky headers for each model section -->
-      <div 
-        v-for="(models, model_group) in text" 
-        :key="model_group" 
-        :class="model_group" 
-        class="step-container text-content">
-        <div
-          class="scroll-sticky">
-          <h2 >
-          {{ model_group }}
-          </h2>
+        <!-- create scrolling/sticky headers for each model section -->
+        <div 
+          v-for="(models, model_group) in text" 
+          :key="model_group" 
+          :class="model_group" 
+          class="step-container text-content"
+        >
+          <div
+            class="scroll-sticky"
+          >
+            <h2>
+              {{ model_group }}
+            </h2>
+          </div>
+          <!-- populate nested steps using text about each model -->
+          <div class="scrollama-steps">
+            <div
+              v-for="model in models" 
+              :id="model.flubber_id" 
+              :key="model" 
+              class="step"
+            >
+              {{ model.method }}
+            </div>
+          </div>
         </div>
-        <!-- populate nested steps using text about each model -->
-        <div class="scrollama-steps">
-        <div class="step" 
-          v-for="model in models" 
-          :key="model" 
-          :id="model.flubber_id">
-          {{ model.method }}
-        </div></div>
-        </div>
-        </div>
-
+      </div>
     </article>
     <div id="map-container">
-   <img id="hex-map" src="@/assets/usa_hex_map_80-01.png" />
-   <!-- need to add legend and recolor beeswarm to mirror?? -->
+      <img
+        id="hex-map"
+        src="@/assets/usa_hex_map_80-01.png"
+      >
+      <!-- need to add legend and recolor beeswarm to mirror?? -->
     </div>
   </div>
 </template>
