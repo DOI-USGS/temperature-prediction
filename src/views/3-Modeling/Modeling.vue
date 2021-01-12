@@ -981,7 +981,11 @@
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A",this.texture.url(), "#f8af26", "teal","blue"]);
+            .range(["#53354A",this.texture.url(), "#f8af26", "#53354A","black"]);
+          // separate scale for stroke color to create open and filled points
+            this.stroke_colors = this.d3.scaleOrdinal()
+            .domain(["d100","d02","d001","obs","exp"])
+            .range(["#53354A","teal", "#f8af26", "#53354A","#53354A"]);
 
             //add mid line for horizontal clustering vibes
             this.svg
@@ -1006,18 +1010,14 @@
             .attr("d", line)
 
 
-            // initiate force
+          // initiate force simulation
           self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force("x", this.d3.forceX())
           .force('y', this.d3.forceY())
           .force("collide", this.d3.forceCollide(this.paddedRadius))
 
           },
-          // write a function for first draw and separate for update/redraw
-          addError() {
 
-
-          },
           addBees(step_in, var_x, var_y) {
             const self = this;
           console.log(this.chartState.var_x);
@@ -1033,8 +1033,7 @@
           .force('y', this.d3.forceY((d) => this.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(4))
 
-          
-          
+        //
           chart.exit()
               .transition()
                 .duration(1000)
@@ -1049,7 +1048,8 @@
               .classed("bees", true)
               //.attr("cx", this.width/2) // where they enter from
               //.attr("cy", (this.height/2))// where they enter from
-              .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) 
+              .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
+              .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
               .attr("r", 0) 
               .transition()
                 .duration(1000)
@@ -1065,14 +1065,19 @@
                 .duration(800)
                 .delay(function(d,i) { return 1* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color...but don't need that if relabel vars
-               
+                .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
                //.delay(function(d,i) { return 20* i})
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
+
+          // define forc velocity and tick positions
            self.simulation
-           .alpha(.3)
+           .alpha(.1)
+           .alphaDecay(0.01)
+           .velocityDecay(0.6)
            .restart()
             .on("tick", self.tick) 
+            // high velocity decay with low alpha decay so it cools more slowly
 
           },
 
@@ -1113,7 +1118,7 @@
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
-            console.log(this.chartState.dataset)
+
           }
           if (this.step == step_ann){
             //contains only data for d100
@@ -1165,8 +1170,7 @@
           ///////////
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
-          //this.chartState.dataset = this.error_data;
-            this.chartState.strengthy = .3;
+            this.chartState.strengthy = .4;
             this.chartState.strengthx = 1;
 
 
