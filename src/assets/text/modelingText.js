@@ -47,14 +47,14 @@ export default {
                 'bees_id': 'ANN'
             },
             {
-                'method': "The model compares the value it produced to the actual stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the prediction temperature and the actual temperature and uses that difference to adjust the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'method': "The model compares the predicted value to the observed stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the predicted temperature and the actual temperature and then adjusts the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
                 'flubber_id':'ANN10',
                 'bees_id' : 'ANN'
             }],
         "Artificial neural network (ANN)": [
             {
                 'method': "We can measure the success of a model, in the case a ANN, by how closely the predicted temperature matches our measured temperature. A model that closely matches our observations in the streams has low error or good accuracy.",
-                'flubber_id': '',
+                'flubber_id': 'ANN11',
                 'bees_id': 'ANN'
             },
             {
@@ -74,7 +74,7 @@ export default {
             },
             {
                 'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id': 'ANN10',
+                'flubber_id': 'ANN11',
                 'bees_id': 'ANN'
             }],
         "Recurrent neural network (RNN)": [
