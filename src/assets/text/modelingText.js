@@ -43,12 +43,12 @@ export default {
             },
             {
                 'method': "This is a simplified stream network with 3 temperature gages. Using the data collected from these gages we can model water temperature across the stream network of the Delaware River Basin.",
-                'flubber_id': 'ANN',
+                'flubber_id': 'ANN9',
                 'bees_id': 'ANN'
             },
             {
                 'method': "One way to do this is to use an artifical neural network (ANN), a form of deep learning. ANNs have had huge success in identifying complex relationships and making accurate predictions.",
-                'flubber_id':'ANN',
+                'flubber_id':'ANN10',
                 'bees_id' : 'ANN'
             }],
         "Artificial neural network (ANN)": [
@@ -69,12 +69,12 @@ export default {
             },
             {
                 'method': "But when data are sparse (e.g. 1%), ANN predictions become less accurate. How can we help the model learn more with less data? This is where we can use our understanding of the world to give a machine learning model the upper hand. ",
-                'flubber_id': 'ANN',
+                'flubber_id': '',
                 'bees_id': 'ANN'
             },
             {
                 'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id': 'ANN',
+                'flubber_id': 'ANN10',
                 'bees_id': 'ANN'
             }],
         "Recurrent neural network (RNN)": [
