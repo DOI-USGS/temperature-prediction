@@ -1004,22 +1004,24 @@
             .attr("class", "y-axis")
             .call(this.d3.axisLeft(self.yScale));
 
+        //add trendline?
           this.svg.append("path")
-            .datum(this.chartState.dataset.var_y)
+            .datum(this.chartState.dataset)
             .attr("class", "line")
             .attr("d", line)
 
-
           // initiate force simulation
-          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+          self.simulation = this.d3.forceSimulation()
           .force("x", this.d3.forceX())
           .force('y', this.d3.forceY())
           .force("collide", this.d3.forceCollide(this.paddedRadius))
 
           },
 
-          addBees(step_in, var_x, var_y) {
+          updateChart() {
             const self = this;
+
+          //where are we?!?!
           console.log(this.chartState.var_x);
           console.log(this.chartState.var_y);
 
@@ -1033,10 +1035,12 @@
           .force('y', this.d3.forceY((d) => this.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(4))
 
-        //
+        // define how elements are added and remove from view
+        // attributes and positioning define the starting point
           chart.exit()
               .transition()
                 .duration(1000)
+                .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 //.attr("r", 0)
                 //.attr("cx", this.width/2) //where they exit from
@@ -1053,7 +1057,7 @@
               .attr("r", 0) 
               .transition()
                 .duration(1000)
-                .delay(function(d,i) { return 1* i})
+                .delay(function(d,i) { return 5* i})
                 .attr("r", this.radius)
                 //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
                 //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
@@ -1063,7 +1067,7 @@
               .merge(chart)
               .transition()
                 .duration(800)
-                .delay(function(d,i) { return 1* i})
+                .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color...but don't need that if relabel vars
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
                //.delay(function(d,i) { return 20* i})
@@ -1103,17 +1107,18 @@
           ///////////
           // this.start_bees is the step where the error plot appears
           // stage different events based on the active step
-          let step_error = this.step_start;
-          let step_diff = step_error + 1;
-          let step_rmse = step_diff + 1; /// error data through this point
-          let step_ann = step_rmse + 1; /// just ann data
-          let step_ann_exp = step_ann + 1; // start experiment data
-          let step_rnn = step_ann_exp + 2;
-          let step_rgcn = step_rnn + 2;
-          let step_rgcn_ptrn = step_rgcn + 2;
+          let step_error = this.step_start; // the error chart appears
+          let step_diff = step_error + 1; // highlight difference between observed and expected
+          let step_rmse = step_diff + 1; /// data points to single RMSE
+          let step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
+          let step_ann_exp = step_ann + 1; // show RMSE for ANN with 3 experiments
+          let step_rnn = step_ann_exp + 2; // RNN
+          let step_rgcn = step_rnn + 2; // RGCN
+          let step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
 
           ///////////
            // assign dataset by step
+           // and grouping variable for color scale for respective df
            if (this.step <= step_rmse ){
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
@@ -1175,7 +1180,7 @@
 
 
           if (this.step >= this.step_start ) {
-            self.addBees(this.step, this.chartState.var_x, this.chartState.var_y);
+            self.updateChart();
           }
 
           ///////////
