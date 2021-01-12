@@ -700,27 +700,27 @@
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
 
             // dimensions
-            height: 1000,
+            height: 500,
             width: 1000,
             margin: 50,
             svg: null,
 
             chartState: {},
-            model_exp: {error_x: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
-            model_y: {mid: 'mid', error: "error_pred"},
-            color_groups: {exp: 'experiment', error:'group'},
+            chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            chart_y: {mid: 'mid', error: "error_pred"},
+            color_bees: {exp: 'experiment', error:'group'},
 
             // beeswarm
             step_start: 3,
-            radius: 4,
+            radius: 6,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
             bees: null,
             xScale: null,
             yScale: null,
-            rmse_monthly: [],
-            rmse_monthly_cast: [],
+            rmse_exp: [],
+            rmse_ann: [],
             error_data: [],
             simulation: null,
             texture: null,
@@ -794,19 +794,19 @@
 
             // make data how we like it
             // comes in as an array of objects
-            this.rmse_monthly = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
-            this.rmse_monthly_cast = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
+            this.rmse_exp = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
+            this.rmse_ann = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             this.error_data = data[2];
 
             // computed properties
             this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart
-            this.chartState.measurex = this.model_exp.error;
-            this.chartState.dataset = this.rmse_monthly_cast;
-            this.chartState.grouped = this.color_groups.error;
-
-            this.chartState.measurey = this.model_y.error;
+            this.chartState.dataset = this.error_data;
+            this.chartState.grouped = this.color_bees.error;
+            this.chartState.var_x = this.chart_x.error;
+            this.chartState.var_y = this.chart_y.error;
+            this.chartState.strengthr = .4
 
             // draw the chart
             this.makeBeeswarm();
@@ -859,7 +859,7 @@
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were other ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
-              let animationLength = 2400;
+              let animationLength = 1400;
 
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
@@ -910,9 +910,9 @@
 
               // select associated annotations
               let previous_annotation_id = previous_id + "_annotations"
-              console.log(previous_annotation_id)
+              //console.log(previous_annotation_id)
               let next_annotation_id = step_id + "_annotations"
-              console.log(next_annotation_id)
+              //console.log(next_annotation_id)
 
               // set length of annotation transition
               let transition_duration = animationLength/2
@@ -945,7 +945,7 @@
 
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
-              .attr("viewBox", [0, 0, this.width, this.height].join(' '))
+              .attr("viewBox", [0, 0, this.width+this.margin*2, this.height+this.margin*2].join(' '))
               .attr("preserveAspectRatio", "none")
               .attr("class", "bees-chart")
 
@@ -956,85 +956,121 @@
 
           // x axis scaled across full range of values
           this.xScale = this.d3.scaleLinear()
-            .range([this.margin, this.width-this.margin])
+            .range([this.margin, this.width+this.margin])
             .domain([0,10]);
 
           // y axis scale for error plot
           this.yScale = this.d3.scaleLinear()
-            .range([this.margin, this.width-this.margin])
-            .domain([0,this.error_data.error_pred]);
+            .range([this.height, this.margin])
+            .domain([0,31]);
+
+          // trend line
+          var line = this.d3.line()
+            .x(function(d,i) { return self.xScale(i); })
+            .y(function(d) { return self.yScale(d.y); })
+            .curve(this.d3.curveMonotoneX) // apply smoothing to the line
 
           // testing out texture fills
             this.texture = textures
               .lines()
-              .thicker();
+              .thicker()
+              .stroke("teal");
               
             this.svg.call(this.texture);
 
            // code experiment with color
            this.set_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d02","d001"])
-            .range(["#53354A",this.texture.url(), "orangered"]);
+            .domain(["d100","d02","d001","obs","exp"])
+            .range(["#53354A",this.texture.url(), "#f8af26", "teal","blue"]);
 
             //add mid line for horizontal clustering vibes
-            this.svg.append("line", 'svg')
+            this.svg
+              .append("line", 'svg')
               .classed("main_line", true)
               .attr("x1", this.margin)
-              .attr("y1", this.height/2)
+              .attr("y1", (this.height/2))
               .attr("x2", this.width-this.margin)
               .attr("y2", this.height/2)
               .attr("stroke-width", 2)
               .attr("opacity", 0)
               .attr("stroke", "#A3A0A6");
 
+          // draw axes on error chart
+          this.svg.select("g").append("g")
+            .attr("class", "y-axis")
+            .call(this.d3.axisLeft(self.yScale));
+
+          this.svg.append("path")
+            .datum(this.chartState.dataset.var_y)
+            .attr("class", "line")
+            .attr("d", line)
+
+
+            // initiate force
+          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY())
+          .force("collide", this.d3.forceCollide(this.paddedRadius))
+
           },
+          // write a function for first draw and separate for update/redraw
           addError() {
 
 
           },
           addBees(step_in, var_x, var_y) {
             const self = this;
+          console.log(this.chartState.var_x);
+          console.log(this.chartState.var_y);
 
-          console.log(this.chartState.measure);
-
-        // define and stop sim
-        // need to make a different function for the initial force draw, because will want to defien
-        // where things are coming from differently?
-        self.simulation = this.d3.forceSimulation(this.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => this.xScale(d[var_x])).strength(1))
-          .force('y', this.d3.forceY((d) => this.yScale(d[var_y])).strength(0.3))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(.9).iterations(10))
-          .stop();
-
-          // bind data
+        // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
 
+        // modify forces to update chart
+        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY((d) => this.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(4))
 
-            chart.exit()
+          
+          
+          chart.exit()
               .transition()
                 .duration(1000)
-                .delay(function(d,i) { return 1* i})
-                .attr("cx", this.width/2) //where they exit from
-                .attr("cy", var_y) //where they exit from
+                .attr("r", 0)
+                //.attr("r", 0)
+                //.attr("cx", this.width/2) //where they exit from
+                //.attr("cy", (this.height /2)) //where they exit from
                 .remove();
 
             chart.enter()
               .append("circle")
               .classed("bees", true)
-              .attr("cx", this.width/2) // where they enter from
-              .attr("cy", (this.height/2) - this.margin / 2)// where they enter from
-              .attr("fill", (d) => self.set_colors(d.experiment)) 
-              .attr("r", this.radius) 
+              //.attr("cx", this.width/2) // where they enter from
+              //.attr("cy", (this.height/2))// where they enter from
+              .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) 
+              .attr("r", 0) 
+              .transition()
+                .duration(1000)
+                .delay(function(d,i) { return 1* i})
+                .attr("r", this.radius)
+                //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
+                //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
+
+          // anything that should happen after points are updated
+            chart
               .merge(chart)
               .transition()
-               .duration(1000)
-               .delay(function(d,i) { return 20* i})
+                .duration(800)
+                .delay(function(d,i) { return 1* i})
+                .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color...but don't need that if relabel vars
+               
+               //.delay(function(d,i) { return 20* i})
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
-
            self.simulation
-           .alpha(.1)
+           .alpha(.3)
            .restart()
             .on("tick", self.tick) 
 
@@ -1064,26 +1100,30 @@
           // stage different events based on the active step
           let step_error = this.step_start;
           let step_diff = step_error + 1;
-          let step_rmse = step_diff + 1;
-          let step_ann = step_rmse + 1;
-          let step_ann_exp = step_ann + 1;
+          let step_rmse = step_diff + 1; /// error data through this point
+          let step_ann = step_rmse + 1; /// just ann data
+          let step_ann_exp = step_ann + 1; // start experiment data
           let step_rnn = step_ann_exp + 2;
           let step_rgcn = step_rnn + 2;
           let step_rgcn_ptrn = step_rgcn + 2;
 
           ///////////
            // assign dataset by step
-           if (this.step <= step_error ){
-            //contains only data for d100
+           if (this.step <= step_rmse ){
+            //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
+            this.chartState.grouped = this.color_bees.error;
+            console.log(this.chartState.dataset)
           }
-          if (this.step >= step_ann ){
+          if (this.step == step_ann){
             //contains only data for d100
-            this.chartState.dataset = this.rmse_monthly;
+            this.chartState.dataset = this.rmse_ann;
+            this.chartState.grouped = this.color_bees.exp;
           }
-          if (this.step <= step_ann_exp){
+          if (this.step >= step_ann_exp){
             //contains data for 3 experiments 
-            this.chartState.dataset = this.rmse_monthly_cast;
+            this.chartState.dataset = this.rmse_exp;
+            this.chartState.grouped = this.color_bees.exp;
           }
 
           ///////////
@@ -1091,37 +1131,47 @@
           // seg is key for update()
 
           // error chart
-          if (this.step >= step_error && this.step <= step_rmse) {
-            this.chartState.measurex = this.model_exp.error_x;
-            this.chartState.measurey = this.model_y.error;
+          if (this.step <= step_rmse) {
+            this.chartState.var_x = this.chart_x.error;
+            this.chartState.var_y = this.chart_y.error;
+            this.chartState.strengthy = 1;
           }
 
           // intro beeswarm, adding experiments
           if (this.step <= step_ann_exp && this.step >= step_ann) {
-            this.chartState.measurex = this.model_exp.ANN;
-            this.chartState.measurey = this.model_y.mid;
+            this.chartState.var_x = this.chart_x.ANN;
+            this.chartState.var_y = this.chart_y.mid;
+            this.chartState.strengthy = 0.01;
           }
           // RNN
-          if (this.step >= step_rnn && this.step <= step_rgcn) {
-            this.chartState.measurex = this.model_exp.RNN;
-            this.chartState.measurey = this.model_y.mid;
+          if (this.step >= step_rnn && this.step < step_rgcn) {
+            this.chartState.var_x = this.chart_x.RNN;
+            this.chartState.var_y = this.chart_y.mid;
+            this.chartState.strengthy = 0.01;
           }
           // RGCN
           if (this.step >= step_rgcn && this.step <= step_rgcn_ptrn) {
-            this.chartState.measurex = this.model_exp.RGCN;
-            this.chartState.measurey = this.model_y.mid;
+            this.chartState.var_x = this.chart_x.RGCN;
+            this.chartState.var_y = this.chart_y.mid;
+            this.chartState.strengthy = 0.01;
           }
           // RGCN to end
            if (this.step >= step_rgcn_ptrn) {
-            this.chartState.measurex = this.model_exp.RGCN_ptrn;
-            this.chartState.measurey = this.model_y.mid;
+            this.chartState.var_x = this.chart_x.RGCN_ptrn;
+            this.chartState.var_y = this.chart_y.mid;
+            this.chartState.strengthy = 0.01;
           }
 
           ///////////
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
+          //this.chartState.dataset = this.error_data;
+            this.chartState.strengthy = .3;
+            this.chartState.strengthx = 1;
+
+
           if (this.step >= this.step_start ) {
-            self.addBees(this.step, this.chartState.measurex, this.chartState.measurey);
+            self.addBees(this.step, this.chartState.var_x, this.chartState.var_y);
           }
 
           ///////////
