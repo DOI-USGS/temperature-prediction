@@ -62,49 +62,49 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions for all of the training data. At this point the model is considered ‘trained’ and can be used to make predictions using new sets of input data. But keep in mind that the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
+                'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on the training data. At this point the model is considered ‘trained’ and can be used to make predictions using new sets of input data. But keep in mind that the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
                 'flubber_id': 'ANN13',
                 'bees_id': 'step_error_exp'
             }],
         "Testing an artificial neural network (ANN)": [
             {
-                'method': "PREDICTED data on error plot",
+                'method': "PREDICTED data appears: Once the model is trained we can make predictions about water temperature in time and space. Here we show daily temperature predictions for a single gage over a one month period",
                 'flubber_id': '',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "Add on OBSERVED",
+                'method': "Add on OBSERVED: Prediction error, the difference between predicted temperatures and measured observations, is indicative of model accuracy.",
                 'flubber_id': '',
                 'bees_id': 'step_error_obs'
             }],
         "Evaluating overall model accuracy": [
             {
-                'method': "Collapse to RMSE for a single stream reach (100% of training data)",
+                'method': "Collapse to RMSE for a single stream reach (100% of training data): Using prediction errors we can calculate model RMSE across a series of [observations?] and quantify how well a model represents the system. A low RMSE near 0 indicates low error and high prediction accuracy, but as predictions are less accurate and error increases, so does the RMSE ",
                 'flubber_id': '',
                 'bees_id': 'step_error_rmse'
             },{
-                'method': "One site RMSE to all site RMSEs (still 100% of training data)",
+                'method': "One site RMSE to all site RMSEs (still 100% of training data): Using RMSE we can compare model accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the DRB based on 100% of training data available.",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             }],
         "Model performance under restricted data availability": [
             {
-                'method': "So how can we compare how a model performs when lots of data is available to how it performs when very little training data is available?",
+                'method': "But how does a model performs when the training data available is limited?",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             },
             {
-                'method': "We can artificially restrict how much training data is received by the model",
+                'method': "We can evaluate model performance at different levels of data availability by artificially restricting the amount of data used to train the model",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             },
             {
-                'method': "Add model trained on 2% of data, and model trained on 0.1% of data. Describe what they are seeing",
+                'method': "When we model the same river reaches using 2% and 0.01% of the training data, the models become less accurate an introduce more prediction error.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "So how can we improve the model so that it does better under sparse conditions?",
+                'method': "So how can we improve the model so that it does better under sparse data conditions?",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
@@ -116,7 +116,7 @@ export default {
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "In the DRB, giving the model a memory improved performance in some cases but decreased accuracy in others.",
+                'method': "In the DRB, giving the model a memory improved accuracy in some reaches but became more inaccurate in others.",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_rnn'
             }],

@@ -2770,12 +2770,12 @@
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
-          this.step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
-          this.step_ann_exp = step_ann + 1; // show RMSE for ANN with 3 experiments
-          this.step_rnn = step_ann_exp + 2; // RNN
-          this.step_rgcn = step_rnn + 2; // RGCN
-          this.step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
-          this.step_end = step_rgcn_ptrn +2;
+          this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
+          this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
+          this.step_rnn = this.step_ann_exp + 2; // RNN
+          this.step_rgcn = this.step_rnn + 2; // RGCN
+          this.step_rgcn_ptrn = this.step_rgcn + 2; //RGCN_ptrn
+          this.step_end = this.step_rgcn_ptrn +2;
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
