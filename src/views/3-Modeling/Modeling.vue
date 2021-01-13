@@ -973,7 +973,7 @@
               .lines()
               .thicker()
               .stroke("teal");
-           // this.svg.call(this.texture); // this is binding the background to the texture
+           this.svg.call(this.texture); // this is binding the background to the texture
 
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
@@ -1013,17 +1013,17 @@
             .attr("class", "x-axis")
             .call(xGen);
 
-        // style modifications and line drawin animation
+        // style modifications and line drawing animation
           this.xAxis
           .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.width)
-          .attr("stroke-dashoffset", this.width)
+          .attr("stroke-dasharray", this.width+this.margin)
+          .attr("stroke-dashoffset", this.width+this.margin)
 
           this.yAxis
           .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.height)
-          .attr("stroke-dashoffset", this.height)
+          .attr("stroke-dasharray", this.height+this.margin)
+          .attr("stroke-dashoffset", this.height+this.margin)
 
           // initiate force simulation
           self.simulation = this.d3.forceSimulation()
@@ -1032,7 +1032,10 @@
           .force("collide", this.d3.forceCollide(this.paddedRadius))
 
           },
-          drawAxes() {
+          drawAxes(axes_in) {
+            // controls axis aniamtions between error chart and beeswarm
+
+            if (axes_in === "error") {
             this.yAxis
               .transition()
               .duration(800)
@@ -1044,6 +1047,48 @@
               .duration(800)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", 0)
+
+            } else if (axes_in === "error_up") {
+            this.yAxis
+              .transition()
+              .duration(800)
+              .ease(this.d3.easeCircle)
+              .attr("stroke-dashoffset", this.height+this.margin)
+
+            this.xAxis
+              .transition()
+              .duration(800)
+              .ease(this.d3.easeCircle)
+              .attr("stroke-dashoffset", this.width+this.margin)
+
+            } else if (axes_in === "rmse"){
+              // move x-axis up to center line
+              this.xAxis
+                .transition()
+                .duration(800)
+                .ease(this.d3.easeCircle)
+                .attr("transform", "translate(" + -this.margin + "," + this.height/2 + ")")
+
+                this.yAxis
+                .transition(800)
+                .attr("opacity", 0)
+
+            } else if (axes_in === "rmse_up"){
+              // move x-axis down to bottom
+
+              this.xAxis
+                .transition()
+                .duration(800)
+                .ease(this.d3.easeCircle)
+                .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
+
+                this.yAxis
+                .transition(800)
+                .attr("opacity", 1)
+
+            } 
+
+            
 
           },
           updateChart() {
@@ -1220,7 +1265,7 @@
             this.chartState.strengthy = 0.01;
           }
 
-          ///////////
+          /////////// REDRAW
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
             this.chartState.strengthy = .4;
@@ -1234,18 +1279,16 @@
           ///////////
           // toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-          if (this.step >= step_rmse && response.direction == "down"){
-             this.d3.select("figure.intro").classed("sticky", false); 
-             self.fadeIn(this.d3.select(".main_line"), 500)
-          }
-          if (this.step >= 4 && response.direction == "down"){
-             self.fadeIn(this.d3.select(".main_line"), 500)
-          }
+  
 
           // update axes
           // draw error chart axes 
-          if (this.step == step_error) {
-            self.drawAxes();
+          if (this.step == step_error && response.direction == "down" ) {
+            self.drawAxes("error");
+          } else if (this.step == step_rmse && response.direction == "down") {
+            self.drawAxes("rmse");
+          } else if (this.step == step_rmse && response.direction == "up") {
+            self.drawAxes("rmse_up");
           }
 
           // remove/add beeswarm and legend on last step
