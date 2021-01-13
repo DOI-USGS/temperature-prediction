@@ -2668,10 +2668,7 @@
     import { interpolatePath } from 'd3-interpolate-path';
     import * as flubber from "flubber";
     import textures from 'textures';
-
     import modelingText from "./../../assets/text/modelingText";
-
-
   export default {
     name: 'Modeling',
     components: {
@@ -2681,22 +2678,18 @@
             // pull title, text, and methods 
             text: modelingText.textContents,
             sectionTitle: "Modeling Stream Temperature", // the initial
-
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
-
             // dimensions
             height: 500,
             width: 1000,
             margin: 50,
             svg: null,
-
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             chart_y: {mid: 'mid', error: "error_pred"},
             color_bees: {exp: 'experiment', error:'group'},
-
             // beeswarm
             step_start: 13,
             radius: 6,
@@ -2713,23 +2706,19 @@
             texture: null,
             yAxis: null,
             xAxis: null,
-
             // scroll options
             scroller: null,
             step: 0, // causing elements to refresh at step 0
             current_step: null,
-
             // flubber
             flubber_dict: {},
             flubber_id_order: [],
             current_flubber_id: null,
-
           }
         },
         mounted() {
         // this all happens before the page is rendered
            this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
-
           // set up scrollama scoller
           this.scroller = scrollama(), 
           this.scroller.setup({
@@ -2740,10 +2729,8 @@
                 })
                 .onStepEnter(this.handleStepEnter)
                 .onStepExit(this.handleStepExit);
-
           // setup resize event
           window.addEventListener("resize", this.resize);
-
           // Populate flubber dictionary
           // add path number as key to nested dictionary
           document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
@@ -2757,16 +2744,13 @@
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
-
           // set header based on refresh scroll
            if (this.step <= 2){
              this.d3.select("figure.intro").classed("sticky", true); 
-          }
 
-          
-          /////////// stage step sequence
+             /////////// stage chart step sequence
           // this.start_bees is the step where the error plot appears
-          // stage different events based on the active step
+          // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
@@ -2777,6 +2761,7 @@
           this.step_rgcn_ptrn = this.step_rgcn + 2; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
 
+          }
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
@@ -2790,23 +2775,19 @@
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType)];
-
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
           },
           callback(data) {
             const self = this;
             // this function organizes data and then draws first beeswarm view based on step
-
             // make data how we like it
             // comes in as an array of objects
             this.rmse_exp = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_ann = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             this.error_data = data[2];
-
             // computed properties
             this.paddedRadius = this.radius* 1.4;
-
           // define initial state of chart - default is an error chart to start
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
@@ -2815,10 +2796,8 @@
             this.chartState.strengthr = .4
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
-
             // draw the chart
             this.makeBeeswarm();
-
           },
           // resize to keep scroller accurate with window size changes
           resize () {
@@ -2833,27 +2812,22 @@
           // set up flubber svg
           setFlubber() {
             const self = this;
-
             // determine initial model id and initial annotation id
             // NOTE currently assumes that we are beginning the visuals at step 0
             let initial_model_id = self.flubber_id_order[self.step]
             let initial_annotation_id = initial_model_id + "_annotations"
-
             // Hide all flubber elements (visuals and annotations)
             self.d3.selectAll(".flubber")
               .attr("opacity", 0)
               // .style("visibility", "hidden");
-
             // // display visual associated with initial model id
             // self.d3.selectAll("#" + initial_model_id)
             //   .attr("opacity", 1)
             //   // .style("visibility", "visible");
-
             // // display visual associated with initial model id
             // self.d3.selectAll("#" + initial_annotation_id)
             //   .attr("opacity", 1)
             //   // .style("visibility", "visible");
-
           },
           // animate flubber svg
           animateFlubber(step_id, step_direction) {
@@ -2863,15 +2837,12 @@
             // // // "maxSegmentLength: the lower this number is, the smoother the resulting animation 
             // // // will be, at the expense of performance. Represents a number in pixels (if no 
             // // // transforms are involved). Set it to false or Infinity for no smoothing. (default: 10)"
-
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
               let animationLength = 1400;
-
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
-
               // identify which flubber id to transition to
               // get id of current step w/i flubber_id_order array
               let next_id_index = self.flubber_id_order.indexOf(step_id)
@@ -2895,18 +2866,15 @@
                 // // // we could potentially just use that to define the previous step?
                 previous_id = (next_id_index == self.flubber_id_order.length-1 || step_id == self.current_flubber_id) ? step_id : self.flubber_id_order[next_id_index + 1]  
               }
-
               // loop through the paths in the dictionary for the current step id
               let path_num;
               for (path_num in self.flubber_dict) {
                 if (path_num == "f_arrow") {
-
                 } else {
                   // define path end using the CURRENT STEP ID
                   let path_end = self.flubber_dict[path_num][step_id]['path_code']
                   // define path end using the PREVIOUS STEP ID (as defined above)
                   let path_start = self.flubber_dict[path_num][previous_id]['path_code']
-
                   // transition between the two
                   // select path in the group element for that path number
                   self.d3.select("#" + path_num + ' path')
@@ -2918,7 +2886,6 @@
                     .attrTween("d", function(d){
                       return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 1 })
                     })
-
                   // if (self.flubber_dict[path_num][step_id]['fill_color']) {
                   //   self.d3.select("#" + path_num + ' path')
                   //     .transition()
@@ -2930,35 +2897,27 @@
                   // }
                 }
               }
-
-
-
               // select associated annotations
               let previous_annotation_id = previous_id + "_annotations"
               // console.log(previous_annotation_id)
               let next_annotation_id = step_id + "_annotations"
               // console.log(next_annotation_id)
-
               // set length of annotation transition
               let transition_duration = animationLength/2
-
               if (next_annotation_id != previous_annotation_id) {
                 // display visual associated with initial model id
                 self.d3.selectAll("#" + previous_annotation_id)
                   .transition()
                   .duration(animationLength)
                   .style("opacity", "0");
-
                 // display visual associated with initial model id
                 self.d3.selectAll("#" + next_annotation_id)
                   .transition()
                   .duration(animationLength)
                   .style("opacity", "1");
               }
-
               // store current id
               self.current_flubber_id = step_id
-
             } else {
               //console.log("step has no id")
             }
@@ -2967,38 +2926,33 @@
           // define core chart elements that are constant and only need to be run this one time
             const self = this;
             let margin = 50;
-
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("viewBox", [0, 0, this.width+this.margin*2, this.height+this.margin*2].join(' '))
               .attr("preserveAspectRatio", "none")
+              .attr("width", '100%')
+              .attr("height", '100%')
               .attr("class", "bees-chart")
-
           // define where chart starts within svg
           this.svg
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
-
           ////////////////////
           // set scales
-
           // x axis 
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width+this.margin])
             .domain([0,this.chartState.domain_x]);
-
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
             .range([this.height, this.margin])
             .domain([0,this.chartState.domain_y]);
-
           // testing out texture fills
             this.texture = textures
               .lines()
               .thicker()
               .stroke("teal");
            this.svg.call(this.texture); // this is binding the background to the texture
-
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
@@ -3007,37 +2961,30 @@
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
             .range(["#53354A","teal", "#f8af26", "#53354A","#53354A"]);
-
           ///////////////////
           // generate axes
           let yGen = this.d3.axisLeft(self.yScale);
           let xGen = this.d3.axisBottom(self.xScale);
-
           // drop ticks
           xGen.ticks(0);
           yGen.ticks(0);
-
           // draw on chart
           this.yAxis = this.svg.select("g").append("g")
             .attr("class", "y-axis")
             .call(yGen);
-
           this.xAxis = this.svg.select("g").append("g")
             .attr("class", "x-axis")
             .call(xGen);
-
         // style modifications and line drawing animation
           this.xAxis
           .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.width+this.margin)
           .attr("stroke-dashoffset", this.width+this.margin)
-
           this.yAxis
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.height+this.margin)
           .attr("stroke-dashoffset", this.height+this.margin)
-
           // axi slabels
           // text label for the x axis
           this.svg.append("text")             
@@ -3047,8 +2994,6 @@
               .style("fill", "white")
               .style("font-size", "30px")
               .classed("axis-label", true);
-
-
           // text label for the y axis
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
@@ -3060,14 +3005,12 @@
               .style("fill", "black")
               .style("font-size", "30px")
               .classed("axis-label", true);    
-
           ////////////////
           // initiate force simulation
           self.simulation = this.d3.forceSimulation()
           .force("x", this.d3.forceX())
           .force('y', this.d3.forceY())
           .force("collide", this.d3.forceCollide(this.paddedRadius))
-
           },
           drawAxes(axes_in) {
             // controls axis aniamtions between error chart and beeswarm
@@ -3078,26 +3021,22 @@
               .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", 0)
-
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", 0)
-
             } else if (axes_in === "error_up") {
             this.yAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", this.height+this.margin)
-
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", this.width+this.margin)
-
             } else if (axes_in === "rmse"){
               // move x-axis up to center line
               this.xAxis
@@ -3105,20 +3044,16 @@
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + -this.margin + "," + this.height/2 + ")")
-
                 this.yAxis
                 .transition(time_slide)
                 .attr("opacity", 0)
-
             } else if (axes_in === "rmse_up"){
               // move x-axis down to bottom
-
               this.xAxis
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
-
                 this.yAxis
                 .transition(time_slide)
                 .attr("opacity", 1)
@@ -3126,31 +3061,25 @@
           },
           updateChart() {
             const self = this;
-
           // where are we?
           console.log(this.chartState.var_x);
           console.log(this.chartState.var_y);
-
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width+this.margin])
             .domain([0,this.chartState.domain_x]);
-
           this.yScale = this.d3.scaleLinear()
             .range([this.height, this.margin])
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
-
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
-
         // modify forces to update chart
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
-
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
           chart.exit()
@@ -3162,7 +3091,6 @@
                 //.attr("cx", this.width/2) //where they exit from
                 //.attr("cy", (this.height /2)) //where they exit from
                 .remove();
-
             chart.enter()
               .append("circle")
               .classed("bees", true)
@@ -3178,7 +3106,6 @@
                 .attr("r", this.radius)
                 //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
                 //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
-
           // anything that should happen after points are updated
             chart
               .merge(chart)
@@ -3189,7 +3116,6 @@
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
-
           // define force velocity and ticking
            self.simulation
            .alpha(.1)
@@ -3198,9 +3124,7 @@
            .restart()
             .on("tick", self.tick) 
             // high velocity decay with low alpha decay so it cools more slowly
-
           },
-
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
             // needs to be modified to only run if the beeswarm data changes
@@ -3209,17 +3133,15 @@
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
-
         },
         // scrollama event handler functions
         // add class on enter, update charts based on step
         handleStepEnter(response) {
           const self = this;
-
           // update step variable to match step in view
           this.step = response.index;
           console.log(response);
-
+    
           ///////////
           // assign dataset by step
           // and grouping variable for color scale for respective df
@@ -3244,17 +3166,14 @@
             this.chartState.domain_y = null;
             this.chartState.domain_x = 10;
           }
-
           ///////////
           // assign chart axes and color scales
-
           // error chart
           if (this.step <= this.step_rmse) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
             this.chartState.strengthy = 1;
           }
-
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.var_x = this.chart_x.ANN;
@@ -3279,105 +3198,79 @@
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
-
           /////////// REDRAW
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
           this.chartState.strengthy = .4;
           this.chartState.strengthx = .7;
 
-          // animate error axes 
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
-
           ///////////
           // toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-
           if (this.step == 0 && response.direction == "down") {
-
             // determine initial model id and initial annotation id
             // NOTE currently assumes that we are beginning the visuals at step 0
             let initial_model_id = self.flubber_id_order[this.step]
             let initial_annotation_id = initial_model_id + "_annotations"
-
             // display visual associated with initial model id
             self.d3.selectAll("#" + initial_model_id)
               .attr("opacity", 1)
-
             // display visual associated with initial model id
             self.d3.selectAll("#" + initial_annotation_id)
               .attr("opacity", 1)
             self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
           }
          
-          if (this.step >= 0 && response.direction == "down"){
-             this.d3.select("figure.intro").classed("sticky", false); 
-             self.fadeIn(this.d3.select(".main_line"), 500)
-          }
-          if (this.step >= 4 && response.direction == "down"){
-             self.fadeIn(this.d3.select(".main_line"), 500)
-          }
-
-          // remove/add beeswarm and legend on last step
-          if (this.step == 23 && response.direction == 'down') {
-            this.chartState.measure = this.RGCN_ptrn_both;
-            self.fadeOut(this.d3.selectAll(".bees"), 500);
-            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
-            self.fadeOut(this.d3.select(".main_line"), 500);
-          }
-          if (this.step == 22|23 && response.direction == 'up') {
-            self.fadeIn(this.d3.selectAll(".bees"), 200);
-            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
-            self.fadeIn(this.d3.select(".main_line"), 500);
-          }
+         //manage intro sticky header
           if (this.step <= 0 && response.direction == "down"){
-            //  this.d3.select("figure.intro").classed("sticky", true); 
-          } else if (this.step >= 0 && response.direction == "down") {
+            this.d3.select("figure.intro").classed("sticky", true); 
+          } else if (this.step >= 1 && response.direction == "down") {
               this.d3.select("figure.intro").classed("sticky", false);
           }
-
           // update axes
           if (this.step == this.step_start && response.direction == "down" ) {
             self.drawAxes("error");
           } else if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-          } else if (this.step == this.step_srmse && response.direction == "down") {
+          } else if (this.step == this.step_start+3 && response.direction == "down") {
             self.drawAxes("rmse");
-          } else if (this.step == this.step_rmse && response.direction == "up") {
+          } else if (this.step == this.step_start+3 && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
-
            // add class to active step
           response.element.classList.add("is-active");
-
           // trigger style changes
           //this.makePop(this.step);
-
           // trigger flubber
           this.animateFlubber(response.element.id, response.direction);
-
         },
         
         // add remove class on exit
         handleStepExit(response) {
+          const self = this;
           // changes css for class
           response.element.classList.remove("is-active");
-
         // make intro header sticky again if scrolling back
           if (this.step <= 2 && response.direction == "up"){
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
+          // reverse axis animations
           if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-            fadeOut(this.d3.selectAll(".bees"), 500)
-          } else if (this.step == this.step_start+3 && response.direction == "up") {
+
+          } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
 
-
+          //fade out error plot when scrolling back
+          if (this.step < this.step_error_exp ) {
+            self.fadeOut(this.d3.selectAll(".bees"), 500);
+            self.fadeOut(this.d3.selectAll("text.axis-label"), 500)
+          }
         },
         
         fadeOut(element, time) {
@@ -3396,7 +3289,6 @@
   }
 </script>
 <style scoped lang="scss">
-
 // IMPORT COLORS
 $backgroundCharcoal: #171717;
 $offWhite: rgb(241, 241, 241);
@@ -3406,8 +3298,6 @@ $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
 $monotoneBlue5: #10313e;
 $monotoneBlueTransparent: rgba(76,101,110, .6);
-
-
 //style steps
 article {
   position: relative;
@@ -3416,7 +3306,6 @@ article {
 }
 .step-container {
   width:100vw;
-
 }
 .step {
   position: relative;
@@ -3425,7 +3314,6 @@ article {
   z-index: 1;
   height: 100vh;
   border: 1px;
-
   p {
   text-align: left;
   padding: 1rem;
@@ -3436,7 +3324,6 @@ article {
 .step[data-scrollama-index='14'] {
   height: 10vh;
 }
-
 // add sticky header to steps to maintain while given model is shown
 .scroll-sticky {
   z-index: 1;
@@ -3445,13 +3332,11 @@ article {
   top: 40px;
   left: 0;
   padding-top: 0px;
-
   .step[data-scrollama-index='14'] {
   height: 10vh;
   padding-top: 5vh;
 }
 }
-
 //start at beginning
 //grid layout
 #modeling {
@@ -3468,19 +3353,16 @@ figure.sticky.intro {
 }
 #intro-container.text-content.text-intro h2 {
   margin: 0;
-
 }
 figure.sticky.charts {
   display: grid;
   grid-template-rows: 35% 10% 35% 10%;
   grid-template-columns: 2% auto 2%;
-
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
   height: 90vh;
   width: auto;
-
   #flubber-container {
     grid-column: 2 / 2;
     grid-row: 1 / 1;
@@ -3499,15 +3381,14 @@ figure.sticky.charts {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
   }
-  #bees_dotPlot {
-    width: 100%;
+  #bees-chart {
+    display: relative;
     height: 100%;
-
+    width: auto;
   }
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-
   }
 }
 .axis-line {
@@ -3519,20 +3400,16 @@ figure.sticky.charts {
   font-weight: 300;
   font-size: 20px;
 }
-
 .text-annotate {
   fill:$offWhite;
   font-weight: 300;
   font-size: 20px;
-
   .left {
     text-anchor: left;
-
   }
   .right {
     text-anchor: right;
   }
-
 }
 #flubber {
   opacity: 1;
@@ -3651,5 +3528,4 @@ figure.sticky.charts {
 #hex-map {
   padding: 4rem;
 }
-
 </style>
