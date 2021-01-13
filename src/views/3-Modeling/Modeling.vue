@@ -705,6 +705,7 @@
             margin: 50,
             svg: null,
 
+            // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             chart_y: {mid: 'mid', error: "error_pred"},
@@ -724,11 +725,12 @@
             error_data: [],
             simulation: null,
             texture: null,
-            line_thin: null,
+            yAxis: null,
+            xAxis: null,
 
             // scroll options
             scroller: null,
-            step: 0, //starts at 0 but this is also causing elements to refresh at step 0
+            step: 0, // causing elements to refresh at step 0
             current_step: null,
 
             // flubber
@@ -801,12 +803,14 @@
             // computed properties
             this.paddedRadius = this.radius* 1.4;
 
-          // define initial state of chart
+          // define initial state of chart - default is an error chart to start
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
             this.chartState.strengthr = .4
+            this.chartState.domain_y = 30;
+            this.chartState.domain_x = 30;
 
             // draw the chart
             this.makeBeeswarm();
@@ -957,28 +961,21 @@
           // x axis scaled across full range of values
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width+this.margin])
-            .domain([0,10]);
+            .domain([0,this.chartState.domain_x]);
 
           // y axis scale for error plot
           this.yScale = this.d3.scaleLinear()
             .range([this.height, this.margin])
-            .domain([0,31]);
-
-          // trend line
-          var line = this.d3.line()
-            .x(function(d,i) { return self.xScale(i); })
-            .y(function(d) { return self.yScale(d.y); })
-            .curve(this.d3.curveMonotoneX) // apply smoothing to the line
+            .domain([0,this.chartState.domain_y]);
 
           // testing out texture fills
             this.texture = textures
               .lines()
               .thicker()
               .stroke("teal");
-              
-            this.svg.call(this.texture);
+           // this.svg.call(this.texture); // this is binding the background to the texture
 
-           // code experiment with color
+           // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
             .range(["#53354A",this.texture.url(), "#f8af26", "#53354A","black"]);
@@ -992,23 +989,41 @@
               .append("line", 'svg')
               .classed("main_line", true)
               .attr("x1", this.margin)
-              .attr("y1", (this.height/2))
-              .attr("x2", this.width-this.margin)
-              .attr("y2", this.height/2)
+              .attr("y1", ((this.height+this.margin*2)/2))
+              .attr("x2", this.width+this.margin)
+              .attr("y2", ((this.height+this.margin*2)/2))
               .attr("stroke-width", 2)
               .attr("opacity", 0)
               .attr("stroke", "#A3A0A6");
 
-          // draw axes on error chart
-          this.svg.select("g").append("g")
-            .attr("class", "y-axis")
-            .call(this.d3.axisLeft(self.yScale));
+          // generate axes
+          let yGen = this.d3.axisLeft(self.yScale);
+          let xGen = this.d3.axisBottom(self.xScale);
 
-        //add trendline?
-          this.svg.append("path")
-            .datum(this.chartState.dataset)
-            .attr("class", "line")
-            .attr("d", line)
+          // drop ticks
+          xGen.ticks(0);
+          yGen.ticks(0);
+
+          // draw on chart
+          this.yAxis = this.svg.select("g").append("g")
+            .attr("class", "y-axis")
+            .call(yGen);
+
+          this.xAxis = this.svg.select("g").append("g")
+            .attr("class", "x-axis")
+            .call(xGen);
+
+        // style modifications and line drawin animation
+          this.xAxis
+          .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
+          .attr("stroke-width", "5px")
+          .attr("stroke-dasharray", this.width)
+          .attr("stroke-dashoffset", this.width)
+
+          this.yAxis
+          .attr("stroke-width", "5px")
+          .attr("stroke-dasharray", this.height)
+          .attr("stroke-dashoffset", this.height)
 
           // initiate force simulation
           self.simulation = this.d3.forceSimulation()
@@ -1017,29 +1032,47 @@
           .force("collide", this.d3.forceCollide(this.paddedRadius))
 
           },
+          drawAxes() {
+            this.yAxis
+              .transition()
+              .duration(800)
+              .ease(this.d3.easeCircle)
+              .attr("stroke-dashoffset", 0)
 
+            this.xAxis
+              .transition()
+              .duration(800)
+              .ease(this.d3.easeCircle)
+              .attr("stroke-dashoffset", 0)
+
+          },
           updateChart() {
             const self = this;
 
-          //where are we?!?!
+          // where are we?
           console.log(this.chartState.var_x);
           console.log(this.chartState.var_y);
+
+          // update axes based on active data
+          this.xScale = this.d3.scaleLinear()
+            .range([this.margin, this.width+this.margin])
+            .domain([0,this.chartState.domain_x]);
+
+          this.yScale = this.d3.scaleLinear()
+            .range([this.height, this.margin])
+            .domain([0,this.chartState.domain_y]);
+            // this totally works but hardly see movment vs scaling??
 
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
-
-        // modify forces to update chart
-        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-          .force('y', this.d3.forceY((d) => this.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(4))
+          
 
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
           chart.exit()
               .transition()
-                .duration(1000)
+                .duration(800)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 //.attr("r", 0)
@@ -1052,15 +1085,24 @@
               .classed("bees", true)
               //.attr("cx", this.width/2) // where they enter from
               //.attr("cy", (this.height/2))// where they enter from
+              .attr("cx", (d) => self.xScale(d[this.chartState.var_x]))
               .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
               .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
               .attr("r", 0) 
               .transition()
-                .duration(1000)
+                .duration(800)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", this.radius)
                 //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
                 //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
+          
+
+                
+        // modify forces to update chart
+        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
 
           // anything that should happen after points are updated
             chart
@@ -1070,11 +1112,10 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color...but don't need that if relabel vars
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
-               //.delay(function(d,i) { return 20* i})
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
-          // define forc velocity and tick positions
+          // define force velocity and ticking
            self.simulation
            .alpha(.1)
            .alphaDecay(0.01)
@@ -1115,6 +1156,7 @@
           let step_rnn = step_ann_exp + 2; // RNN
           let step_rgcn = step_rnn + 2; // RGCN
           let step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
+          let step_end = step_rgcn_ptrn +2;
 
           ///////////
            // assign dataset by step
@@ -1123,17 +1165,23 @@
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
+            this.chartState.domain_y = 30;
+            this.chartState.domain_x = 30;
 
           }
           if (this.step == step_ann){
             //contains only data for d100
             this.chartState.dataset = this.rmse_ann;
             this.chartState.grouped = this.color_bees.exp;
+            this.chartState.domain_y = null; // turn off yScale when force is used
+            this.chartState.domain_x = 10;
           }
           if (this.step >= step_ann_exp){
             //contains data for 3 experiments 
             this.chartState.dataset = this.rmse_exp;
             this.chartState.grouped = this.color_bees.exp;
+            this.chartState.domain_y = null;
+            this.chartState.domain_x = 10;
           }
 
           ///////////
@@ -1176,9 +1224,9 @@
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
             this.chartState.strengthy = .4;
-            this.chartState.strengthx = 1;
+            this.chartState.strengthx = .7;
 
-
+          // animate error axes 
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -1186,7 +1234,7 @@
           ///////////
           // toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-          if (this.step >= 2 && response.direction == "down"){
+          if (this.step >= step_rmse && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
              self.fadeIn(this.d3.select(".main_line"), 500)
           }
@@ -1194,14 +1242,20 @@
              self.fadeIn(this.d3.select(".main_line"), 500)
           }
 
+          // update axes
+          // draw error chart axes 
+          if (this.step == step_error) {
+            self.drawAxes();
+          }
+
           // remove/add beeswarm and legend on last step
-          if (this.step == 15 && response.direction == 'down') {
+          if (this.step == step_error && response.direction == 'down') {
             this.chartState.measure = this.RGCN_ptrn_both;
             self.fadeOut(this.d3.selectAll(".bees"), 500);
             self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
             self.fadeOut(this.d3.select(".main_line"), 500);
           }
-          if (this.step == 15 && response.direction == 'up') {
+          if (this.step == step_end && response.direction == 'up') {
             self.fadeIn(this.d3.selectAll(".bees"), 200);
             self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
              self.fadeIn(this.d3.select(".main_line"), 500);
@@ -1316,7 +1370,7 @@ figure.sticky.charts {
 
   position: -webkit-sticky;
   position: sticky;
-  top: 10vh;
+  top: 10vh; // leaving top for sticky header
   height: 100vh;
   width: 100vw;
 
@@ -1348,6 +1402,9 @@ figure.sticky.charts {
     grid-row: 3 / 3;
 
   }
+}
+.axis-line {
+  stroke-width: 5px;
 }
 
 .text-annotate {
