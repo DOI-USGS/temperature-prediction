@@ -2763,6 +2763,20 @@
              this.d3.select("figure.intro").classed("sticky", true); 
           }
 
+          
+          /////////// stage step sequence
+          // this.start_bees is the step where the error plot appears
+          // stage different events based on the active step
+          this.step_error_exp = this.step_start; // the error chart appears
+          this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
+          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
+          this.step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
+          this.step_ann_exp = step_ann + 1; // show RMSE for ANN with 3 experiments
+          this.step_rnn = step_ann_exp + 2; // RNN
+          this.step_rgcn = step_rnn + 2; // RGCN
+          this.step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
+          this.step_end = step_rgcn_ptrn +2;
+
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         this.setFlubber(); // get flubber going right away
@@ -3207,36 +3221,23 @@
           console.log(response);
 
           ///////////
-          // this.start_bees is the step where the error plot appears
-          // stage different events based on the active step
-          let step_error = this.step_start; // the error chart appears
-          let step_diff = step_error + 1; // highlight difference between observed and expected
-          let step_rmse = step_diff + 1; /// data points to single RMSE
-          let step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
-          let step_ann_exp = step_ann + 1; // show RMSE for ANN with 3 experiments
-          let step_rnn = step_ann_exp + 2; // RNN
-          let step_rgcn = step_rnn + 2; // RGCN
-          let step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
-          let step_end = step_rgcn_ptrn +2;
-
-          ///////////
           // assign dataset by step
           // and grouping variable for color scale for respective df
-          if (this.step <= step_rmse ){
+          if (this.step <= this.step_rmse ){
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
           }
-          if (this.step == step_ann){
+          if (this.step == this.step_ann){
             //contains only data for d100
             this.chartState.dataset = this.rmse_ann;
             this.chartState.grouped = this.color_bees.exp;
             this.chartState.domain_y = null; // turn off yScale when force is used
             this.chartState.domain_x = 10;
           }
-          if (this.step >= step_ann_exp){
+          if (this.step >= this.step_ann_exp){
             //contains data for 3 experiments 
             this.chartState.dataset = this.rmse_exp;
             this.chartState.grouped = this.color_bees.exp;
@@ -3248,32 +3249,32 @@
           // assign chart axes and color scales
 
           // error chart
-          if (this.step <= step_rmse) {
+          if (this.step <= this.step_rmse) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
             this.chartState.strengthy = 1;
           }
 
           // intro beeswarm, adding experiments
-          if (this.step <= step_ann_exp && this.step >= step_ann) {
+          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.var_x = this.chart_x.ANN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RNN
-          if (this.step >= step_rnn && this.step < step_rgcn) {
+          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
             this.chartState.var_x = this.chart_x.RNN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RGCN
-          if (this.step >= step_rgcn && this.step <= step_rgcn_ptrn) {
+          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RGCN to end
-          if (this.step >= step_rgcn_ptrn) {
+          if (this.step >= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN_ptrn;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
@@ -3342,9 +3343,9 @@
             self.drawAxes("error");
           } else if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-          } else if (this.step == this.step_start+3 && response.direction == "down") {
+          } else if (this.step == this.step_srmse && response.direction == "down") {
             self.drawAxes("rmse");
-          } else if (this.step == this.step_start+3 && response.direction == "up") {
+          } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
 
