@@ -9,7 +9,7 @@
     >
       <h2>{{sectionTitle}}</h2>
       <p/>
-      <p>Artificial neural networks (ANN), which are a type of machine learning model, have had huge success in identifying complex relationships and making accurate predictions.</p>
+      <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). These models have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
 
     </div>
     </figure>
@@ -97,6 +97,18 @@
                 class="path1 flubber visuals"
                 style="fill: #787878"
                 d="M239,202.3a.6.6,0,0,0-.6.6v8.3h-6.7v-2.3l-.3-.2-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-7.1v-2.3a.2.2,0,0,0-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-6.8v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7v-2.3l-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209l-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1v-2.3c0-.1-.1-.2-.3-.2l-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-6.7v-8.3a.6.6,0,0,0-1.2,0v8.3H156v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-6.7v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H103V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H88.3v-8.3a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v8.3H80.3V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H65.2V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H57.6V209l-.2-.2-.3.2v2.2H50.4v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4H42.5V209c0-.2-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H34.9V209l-.2-.2-.3.2v2.2h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2H19.8V209l-.2-.2c-.2,0-.3.1-.3.2v2.2H12.6v-8.3a.6.6,0,0,0-1.2,0v18.6a.6.6,0,0,0,1.2,0v-8.3h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.2.2-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7v2.3l.3.3c.1,0,.2-.2.2-.3v-2.3H42v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.3h7.1v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.8v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6v-8.3H95v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7v2.3c0,.1.1.2.3.2a.2.2,0,0,0,.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.4a.6.6,0,0,0,1.2,0v-8.4h6.7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7.1v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.8v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h7.1v2.3a.2.2,0,0,0,.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6V202.9A.6.6,0,0,0,239,202.3Z"
+              />
+              <path
+                id="ANN12"
+                class="path1 flubber visuals"
+                style="fill: #787878"
+                d="M239,202.3a.6.6,0,0,0-.6.6v8.3h-6.7v-2.3l-.3-.2-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-7.1v-2.3a.2.2,0,0,0-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-6.8v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7v-2.3l-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209l-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1v-2.3c0-.1-.1-.2-.3-.2l-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-6.7v-8.3a.6.6,0,0,0-1.2,0v8.3H156v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-6.7v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H103V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H88.3v-8.3a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v8.3H80.3V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H65.2V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H57.6V209l-.2-.2-.3.2v2.2H50.4v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4H42.5V209c0-.2-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H34.9V209l-.2-.2-.3.2v2.2h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2H19.8V209l-.2-.2c-.2,0-.3.1-.3.2v2.2H12.6v-8.3a.6.6,0,0,0-1.2,0v18.6a.6.6,0,0,0,1.2,0v-8.3h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.2.2-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7v2.3l.3.3c.1,0,.2-.2.2-.3v-2.3H42v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.3h7.1v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.8v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6v-8.3H95v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7v2.3c0,.1.1.2.3.2a.2.2,0,0,0,.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.4a.6.6,0,0,0,1.2,0v-8.4h6.7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7.1v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.8v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h7.1v2.3a.2.2,0,0,0,.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6V202.9A.6.6,0,0,0,239,202.3Z"
+              />
+              <path
+                id="ANN13"
+                class="path1 flubber visuals"
+                style="fill: #787878"
+                d="M239,202.3a.6.6,0,0,0-.6.6v8.3h-6.7v-2.3l-.3-.2-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-7.1v-2.3a.2.2,0,0,0-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2h-6.8v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7v-2.3l-.2-.2c-.2,0-.3.1-.3.2v2.3h-7V209l-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1v-2.3c0-.1-.1-.2-.3-.2l-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-6.7v-8.3a.6.6,0,0,0-1.2,0v8.3H156v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7v-2.3c0-.1-.1-.2-.3-.2a.2.2,0,0,0-.2.2v2.3h-7.1V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-6.7v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4h-6.7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.2-.2.3v2.2h-7.1V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H103V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H88.3v-8.3a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v8.3H80.3V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2h-7V209c0-.1-.1-.2-.3-.2l-.2.2v2.2H65.2V209c0-.1-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H57.6V209l-.2-.2-.3.2v2.2H50.4v-4.4a.6.6,0,0,0-.6-.6.6.6,0,0,0-.6.6v4.4H42.5V209c0-.2-.1-.3-.2-.3a.3.3,0,0,0-.3.3v2.2H34.9V209l-.2-.2-.3.2v2.2h-7V209a.3.3,0,0,0-.3-.3c-.1,0-.2.1-.2.3v2.2H19.8V209l-.2-.2c-.2,0-.3.1-.3.2v2.2H12.6v-8.3a.6.6,0,0,0-1.2,0v18.6a.6.6,0,0,0,1.2,0v-8.3h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.2.2-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7v2.3l.3.3c.1,0,.2-.2.2-.3v-2.3H42v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.3h7.1v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h6.8v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6v-8.3H95v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.3c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.3h7.1v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.7v2.3l.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7v2.3c0,.1.1.2.3.2a.2.2,0,0,0,.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.4a.6.6,0,0,0,1.2,0v-8.4h6.7v2.3c0,.1.1.2.3.2l.2-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h7.1v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h6.7v4.4a.6.6,0,0,0,.6.6.6.6,0,0,0,.6-.6v-4.4h6.8v2.3l.2.2.3-.2v-2.3h7v2.2a.3.3,0,0,0,.3.3c.1,0,.2-.1.2-.3v-2.2h7.1v2.3a.2.2,0,0,0,.2.2c.2,0,.3-.1.3-.2v-2.3h7.1v2.2c0,.2.1.3.2.3a.3.3,0,0,0,.3-.3v-2.2h6.7v8.3a.5.5,0,0,0,.6.6.6.6,0,0,0,.6-.6V202.9A.6.6,0,0,0,239,202.3Z"
               />              
               <path
                 id="RNN"
@@ -154,9 +166,10 @@
               <path
                 id="ANN5"
                 class="path2 flubber visuals"
-                style="fill: #787878"
-                d="M125,159.6Z"
+                style="fill: #141414"
+                d="M125,89.5Z"
               />
+              <!-- d="M125,159.6Z" -->
               <path
                 id="ANN6"
                 class="path2 flubber visuals"
@@ -189,6 +202,18 @@
               />
               <path
                 id="ANN11"
+                class="path2 flubber visuals"
+                style="fill: #333333"
+                d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              />
+              <path
+                id="ANN12"
+                class="path2 flubber visuals"
+                style="fill: #333333"
+                d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              />
+              <path
+                id="ANN13"
                 class="path2 flubber visuals"
                 style="fill: #333333"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
@@ -285,7 +310,19 @@
               <path
                 id="ANN11"
                 class="path3 flubber visuals"
-                style="fill: #7E03A8"
+                style="fill: #285C70"
+                d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              />
+              <path
+                id="ANN12"
+                class="path3 flubber visuals"
+                style="fill: #285C70"
+                d="M172.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,172.3,212.2Z"
+              />
+              <path
+                id="ANN13"
+                class="path3 flubber visuals"
+                style="fill: #285C70"
                 d="M133.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,133.3,212.2Z"
               />
               <path
@@ -380,8 +417,20 @@
               <path
                 id="ANN11"
                 class="path4 flubber visuals"
-                style="fill: #E4695E"
+                style="fill: #285C70"
+                d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              />
+              <path
+                id="ANN12"
+                class="path4 flubber visuals"
+                style="fill: #285C70"
                 d="M172.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,172.3,212.2Z"
+              />
+              <path
+                id="ANN13"
+                class="path4 flubber visuals"
+                style="fill: #285C70"
+                d="M133.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,133.3,212.2Z"
               />
               <path
                 id="RNN"
@@ -470,13 +519,25 @@
                 id="ANN10"
                 class="path5 flubber visuals"
                 style="fill: #FDAD32"
-                d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
+                d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
               />
               <path
                 id="ANN11"
                 class="path5 flubber visuals"
                 style="fill: #FDAD32"
-                d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
+                d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              />
+              <path
+                id="ANN12"
+                class="path5 flubber visuals"
+                style="fill: #FDAD32"
+                d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              />
+              <path
+                id="ANN13"
+                class="path5 flubber visuals"
+                style="fill: #FDAD32"
+                d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
               />
               <path
                 id="RNN"
@@ -570,14 +631,26 @@
               <path
                 id="ANN11"
                 class="path6 flubber visuals"
-                style="fill: #EBF222"
+                style="fill: #285C70"
                 d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              />
+              <path
+                id="ANN12"
+                class="path6 flubber visuals"
+                style="fill: #285C70"
+                d="M172.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,172.3,212.2Z"
+              />
+              <path
+                id="ANN13"
+                class="path6 flubber visuals"
+                style="fill: #285C70"
+                d="M133.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,133.3,212.2Z"
               />
               <path
                 id="RNN"
                 class="path6 flubber visuals"
                 style="fill: #141414"
-                d="M2.5,2.1Z"
+                d="M125.7,228.1Z"
               />
               <path
                 id="RGCN"
@@ -669,10 +742,22 @@
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
+                id="ANN12"
+                class="path7 flubber visuals"
+                style="fill: #333333"
+                d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
+              />
+              <path
+                id="ANN13"
+                class="path7 flubber visuals"
+                style="fill: #333333"
+                d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
+              />
+              <path
                 id="RNN"
                 class="path7 flubber visuals"
                 style="fill: #141414"
-                d="M2.5,2.1Z"
+                d="M124,22.5Z"
               />
               <path
                 id="RGCN"
@@ -702,6 +787,7 @@
                 style="fill: #787878"
                 d="M125,89.5Z"
               />
+              <!-- d="M125,22.5Z" -->
               <path
                 id="ANN2"
                 class="path8 flubber visuals"
@@ -761,12 +847,24 @@
                 class="path8 flubber visuals"
                 style="fill: #333333"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              />
+              <path
+                id="ANN12"
+                class="path8 flubber visuals"
+                style="fill: #333333"
+                d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              />
+              <path
+                id="ANN13"
+                class="path8 flubber visuals"
+                style="fill: #333333"
+                d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />   
               <path
                 id="RNN"
                 class="path8 flubber visuals"
                 style="fill: #141414"
-                d="M2.5,2.1Z"
+                d="M125,89.5Z"
               />
               <path
                 id="RGCN"
@@ -988,7 +1086,7 @@
               </g>
               <text class="f_temp pred" transform="translate(78.5 236.4)">11 °C</text>
               <text class="f_main light" transform="translate(7 236.4)">Prediction:</text>
-              <text class="f_temp actual" transform="translate(125.4 236.4)">17 °C</text>
+              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
               <text class="f_main light" transform="translate(189.9 236.4)">Actual</text>
               <g>
                 <line class="f_synapse medium" x1="185" y1="232.2" x2="172" y2="232.2"/>
@@ -1016,24 +1114,76 @@
                 <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
               </g>
               <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(1.1 236.4)">Final prediction</text>
-              <!--g>
-                <path class="f_synapse medium" d="M121.2,222.4c-4.2,4.8-7.7,7.6-10.3,8.3"/>
-                <polygon class="f_synapse arrowhead" points="120 221.8 122.3 221 121.8 223.4 120 221.8"/>
-              </g -->
-              <!-- text class="f_temp actual" transform="translate(125.4 236.4)">17 °C</text>
-              <text class="f_temp pred" transform="translate(186.7 236.2)">25 °C</text>
-              <text class="f_temp pred" transform="translate(158.8 236.2)">20.5 °C</text>
-              <text class="f_temp pred" transform="translate(100.1 236.2)">15.3 °C</text -->
-              <!-- g>
-                <path class="f_synapse medium" d="M170,222.3c4.8,5.3,12.4,10.3,24,10.3"/>
-                <polygon class="f_synapse arrowhead" points="169.3 223.4 168.8 221 171.2 221.8 169.3 223.4"/>
-              </g>
               <g>
-                <path class="f_synapse medium" d="M209.1,220.3c4,2.4,5.9,4.5,5.9,6.5"/>
-                <polygon class="f_synapse arrowhead" points="208.8 221.5 207.6 219.3 210.1 219.4 208.8 221.5"/>
-              </g -->
+                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="194.6" y2="200.6"/>
+                <polygon class="f_synapse arrowhead" points="193.1 203.1 198.4 201.6 194.5 197.8 193.1 203.1"/>
+              </g>
+              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
+              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
+              <text class="f_temp pred" transform="translate(186.7 236.2)">25 °C</text>
+            </g>
+            <g
+              id="ANN12_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
+              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
+              <line class="f_synapse low" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
+              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
+              <line class="f_synapse high" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
+              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
+              <line class="f_synapse low" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
+              <line class="f_synapse high" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
+              <line class="f_synapse high" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
+              <line class="f_synapse low" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
+              <line class="f_synapse medium" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <g>
+                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
+                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+              </g>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <g>
+                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="162" y2="199.9"/>
+                <polygon class="f_synapse arrowhead" points="160.1 202 165.6 201.6 162.5 197.1 160.1 202"/>
+              </g>
+              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
+              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
+              <text class="f_temp pred" transform="translate(162.8 236.2)">20.5 °C</text>
+            </g>
+            <g
+              id="ANN13_annotations"
+              class="flubber annotations"
+              transform="translate(0 0) scale(1.333 1.333)"
+            >
+              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
+              <line class="f_synapse low" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
+              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
+              <line class="f_synapse low" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
+              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
+              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
+              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
+              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
+              <line class="f_synapse low" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
+              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <g>
+                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
+                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+              </g>
+              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <g>
+                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="127.4" y2="198.4"/>
+                <polygon class="f_synapse arrowhead" points="124.6 197.9 127.9 202.3 130.1 197.3 124.6 197.9"/>
+              </g>
+              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
+              <text class="f_main bold" transform="translate(20.1 236.4)">Final:</text>
+              <g>
+                <line class="f_synapse medium" x1="121" y1="222.2" x2="110.9" y2="230.7"/>
+                <polygon class="f_synapse arrowhead" points="119.9 221.4 122.3 221 121.5 223.3 119.9 221.4"/>
+              </g>
+              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
+              <text class="f_temp pred" transform="translate(60.1 236.4)">15.3 °C</text>
             </g>
             <g 
               id="RNN_annotations"
@@ -1626,7 +1776,7 @@
           // console.log(document.querySelectorAll("#transform-svg-test g path"))
           
           // set order of flubber components
-          this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','RNN','RGCN','RGCN_2','RGCN_ptrn'];
+          this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
           // set header based on refresh scroll
            if (this.step <= 2){

@@ -2,7 +2,7 @@ export default {
     textContents: {
         "":[
             {
-                'method': "Like other models, ANNs are trained on a set of data. To predict stream temperature, we provide the model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model “learns” through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'ANN'
             },
@@ -17,17 +17,17 @@ export default {
                 'bees_id': 'ANN'
             },
             {
-                'method': "The receiving nodes compute a weighted sum of the received information…",
+                'method': "In the hidden layer, the receiving nodes compute a weighted sum of the received information…",
                 'flubber_id': 'ANN4',
                 'bees_id': 'ANN'
             },
             {
-                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value. ",
+                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value for each node. ",
                 'flubber_id': 'ANN5',
                 'bees_id': 'ANN'
             },
             {
-                'method': "This output value is then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer.",
+                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer.",
                 'flubber_id': 'ANN6',
                 'bees_id': 'ANN'
             },
@@ -42,31 +42,31 @@ export default {
                 'bees_id': 'ANN'
             },
             {
-                'method': "This value is the model’s prediction of stream temperature, given the air temperature and precipitation amount provided as input to the model.",
+                'method': "This value is the model’s prediction of stream temperature, given the air temperature and precipitation values provided as input to the model.",
                 'flubber_id': 'ANN9',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The model compares the predicted value to the observed stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the predicted temperature and the actual temperature and then adjusts the weights throughout the model. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'method': "The model compares the predicted value to the observed stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the predicted temperature and the actual temperature, which represents the error associated with the prediction.",
                 'flubber_id':'ANN10',
                 'bees_id' : 'ANN'
-            }],
-        "Artificial neural network (ANN)": [
+            },
             {
-                'method': "We can measure the success of a model, in the case a ANN, by how closely the predicted temperature matches our measured temperature. A model that closely matches our observations in the streams has low error or good accuracy.",
+                'method': "The model attempts to reduce the error by going back and adjusting the weights throughout the model. It then generates a new prediction and computes a new error value. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
                 'flubber_id': 'ANN11',
                 'bees_id': 'ANN'
             },
             {
-                'method': "Using an ANN to predict water temperatures in the DRB, we can use RMSE to compare prediction accuracy across different time periods, locations, and data coverage.",
-                'flubber_id': '',
+                'method': "The model keeps testing weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware Basin.",
+                'flubber_id': 'ANN12',
                 'bees_id': 'ANN'
             },
             {
-                'method': "If a model perfectly predicts the observed data the RMSE will be 0. But as model accuracy decreases, prediction error increases and so does RMSE. When trained on 100% of the data, the ANN predicts temperatures fairly consistently in time and space.",
-                'flubber_id': '',
+                'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions for all of the training data. At this point the model is considered ‘trained’ and can be used to make predictions using new sets of input data. But keep in mind that the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
+                'flubber_id': 'ANN13',
                 'bees_id': 'ANN'
-            },
+            }],
+        "Artificial neural network (ANN)": [
             {
                 'method': "But when data are sparse (e.g. 1%), ANN predictions become less accurate. How can we help the model learn more with less data? This is where we can use our understanding of the world to give a machine learning model the upper hand. ",
                 'flubber_id': '',
@@ -74,7 +74,7 @@ export default {
             },
             {
                 'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id': 'ANN11',
+                'flubber_id': 'ANN13',
                 'bees_id': 'ANN'
             }],
         "Recurrent neural network (RNN)": [
