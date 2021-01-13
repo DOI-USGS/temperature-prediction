@@ -22,7 +22,10 @@
         id="flubber-container"
         class="figure-content"
       >
-        <div id="flubber" class="figure-content">
+        <div
+          id="flubber"
+          class="figure-content"
+        >
           <svg
             id="flubber-svg"
             class="figure-content"
@@ -2599,12 +2602,15 @@
         id="bees-container"
         class="figure-content"
       />
-      <div id="legend-container" class="figure-content">
+      <div
+        id="legend-container"
+        class="figure-content"
+      >
         <svg
           id="bees_legend"
           xmlns="http://www.w3.org/2000/svg" 
         >
-        <!--viewBox="0 0 1000 1000" -->
+          <!--viewBox="0 0 1000 1000" -->
           <g
             id="legend-scale"
             transform="translate(0, 700)"
