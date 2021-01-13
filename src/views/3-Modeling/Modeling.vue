@@ -1578,14 +1578,14 @@
               >Layer</tspan></text>
               <g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="125.7"
                   y1="182.5"
                   x2="98.8"
                   y2="200.1"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
                 />
               </g>
