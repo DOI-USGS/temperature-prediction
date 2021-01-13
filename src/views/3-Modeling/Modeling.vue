@@ -1709,14 +1709,14 @@
               >Layer</tspan></text>
               <g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="125.7"
                   y1="182.5"
                   x2="98.8"
                   y2="200.1"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
                 />
               </g>
@@ -1725,31 +1725,31 @@
                 transform="translate(78.5 236.4)"
               >11 °C</text>
               <text
-                class="f_main light"
-                transform="translate(7 236.4)"
-              >Prediction:</text>
+                class="f_temp pred ital"
+                transform="translate(4 236.4)"
+              >Prediction</text>
               <text
                 class="f_temp actual"
                 transform="translate(123.4 236.4)"
               >17 °C</text>
               <text
-                class="f_main light"
-                transform="translate(189.9 236.4)"
+                class="f_temp actual ital"
+                transform="translate(165.9 236.4)"
               >Actual</text>
-              <g>
+              <!-- g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="185"
                   y1="232.2"
                   x2="172"
                   y2="232.2"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   transform="translate(7 -1)"
                   points="165 230.5 160.3 233.2 165 236 165 230.5"
                 />
-              </g>
+              </g -->
             </g>
             <g
               id="ANN11_annotations"
@@ -1854,14 +1854,14 @@
               >weight</tspan></text>
               <g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="125.7"
                   y1="182.5"
                   x2="194.6"
                   y2="200.6"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   points="193.1 203.1 198.4 201.6 194.5 197.8 193.1 203.1"
                 />
               </g>
@@ -1984,14 +1984,14 @@
               >weight</tspan></text>
               <g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="125.7"
                   y1="182.5"
                   x2="162"
                   y2="199.9"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   points="160.1 202 165.6 201.6 162.5 197.1 160.1 202"
                 />
               </g>
@@ -2114,14 +2114,14 @@
               >weight</tspan></text>
               <g>
                 <line
-                  class="f_synapse medium"
+                  class="f_arrow"
                   x1="125.7"
                   y1="182.5"
                   x2="127.4"
                   y2="198.4"
                 />
                 <polygon
-                  class="f_synapse arrowhead"
+                  class="f_arrowhead"
                   points="124.6 197.9 127.9 202.3 130.1 197.3 124.6 197.9"
                 />
               </g>
@@ -2133,10 +2133,10 @@
                 y="14.4"
               >Layer</tspan></text>
               <text
-                class="f_main bold"
-                transform="translate(20.1 236.4)"
-              >Final:</text>
-              <g>
+                class="f_temp pred ital"
+                transform="translate(48.1 236.4)"
+              >Final</text>
+              <!-- g>
                 <line
                   class="f_synapse medium"
                   x1="121"
@@ -2148,14 +2148,14 @@
                   class="f_synapse arrowhead"
                   points="119.9 221.4 122.3 221 121.5 223.3 119.9 221.4"
                 />
-              </g>
+              </g -->
               <text
                 class="f_temp actual"
-                transform="translate(123.4 236.4)"
+                transform="translate(136.4 236.4)"
               >17 °C</text>
               <text
                 class="f_temp pred"
-                transform="translate(60.1 236.4)"
+                transform="translate(85.1 236.4)"
               >15.3 °C</text>
             </g>
             <g 
@@ -3390,6 +3390,9 @@ figure.sticky.charts {
 }
 .f_temp.actual {
   fill: #FDAD32;
+}
+.f_temp.ital {
+  font-style: italic;
 }
 #hex-map {
   padding: 4rem;

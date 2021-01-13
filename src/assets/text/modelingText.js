@@ -2,7 +2,7 @@ export default {
     textContents: {
         "":[
             {
-                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the ANN model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the ANN model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'ANN'
             },
@@ -47,17 +47,17 @@ export default {
                 'bees_id': 'ANN'
             },
             {
-                'method': "The model compares the predicted value to the observed stream temperature. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with. The model computes the difference between the predicted temperature and the actual temperature, which represents the error associated with the prediction.",
+                'method': "The model compares the predicted value to the observed stream temperature. The difference between the two values represents the error associated with the prediction. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with.",
                 'flubber_id':'ANN10',
                 'bees_id' : 'ANN'
             },
             {
-                'method': "The model attempts to reduce the error by going back and adjusting the weights throughout the model. It then generates a new prediction and computes a new error value. Importantly, the model doesn’t adjust weights in any ‘smart’ way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'method': "The model attempts to reduce the error by going back and adjusting the weights throughout the model. It then generates a new prediction and computes the new error. Importantly, the model doesn’t adjust weights in any logical way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
                 'flubber_id': 'ANN11',
                 'bees_id': 'ANN'
             },
             {
-                'method': "The model keeps testing weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware Basin.",
+                'method': "The model keeps testing weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware River Basin.",
                 'flubber_id': 'ANN12',
                 'bees_id': 'ANN'
             },
