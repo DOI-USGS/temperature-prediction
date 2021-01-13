@@ -3,15 +3,14 @@
     <figure
       class="sticky intro"
     >
-    <div
-      id="intro-container"
-      class="text-content text-intro"
-    >
-      <h2>{{sectionTitle}}</h2>
-      <p/>
-      <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
-
-    </div>
+      <div
+        id="intro-container"
+        class="text-content text-intro"
+      >
+        <h2>{{ sectionTitle }}</h2>
+        <p />
+        <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+      </div>
     </figure>
     <!--  figure contains all the sticky elements -->
     <!-- old blue color: style="fill: #1E068E" -->
@@ -890,139 +889,580 @@
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(156 57.2)">Air temperature</text>
-              <text class="f_main bold" transform="translate(2 57.2)">Precipitation</text>
+              <text
+                class="f_main bold"
+                transform="translate(156 57.2)"
+              >Air temperature</text>
+              <text
+                class="f_main bold"
+                transform="translate(2 57.2)"
+              >Precipitation</text>
             </g>
             <g
               id="ANN2_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
             </g>
             <g
               id="ANN3_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(83.5 127.7)">Hidden layer</text>
+              <text
+                class="f_main bold"
+                transform="translate(83.5 127.7)"
+              >Hidden layer</text>
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
             </g>
             <g
               id="ANN4_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(83.5 127.7)">Hidden layer</text>
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
+              <text
+                class="f_main bold"
+                transform="translate(83.5 127.7)"
+              >Hidden layer</text>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
             </g>
             <g
               id="ANN5_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(83.5 127.7)">Hidden layer</text>
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
+              <text
+                class="f_main bold"
+                transform="translate(83.5 127.7)"
+              >Hidden layer</text>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
             </g>
             <g
               id="ANN6_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(86 195.6)">Output layer</text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(86 195.6)"
+              >Output layer</text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
             </g>
             <g
               id="ANN7_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <text class="f_main bold" transform="translate(86 195.6)">Output layer</text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <text
+                class="f_main bold"
+                transform="translate(86 195.6)"
+              >Output layer</text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
             </g>
             <g
               id="ANN8_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
               <!-- text class="f_main bold" transform="translate(62 218.8)">Stream temperature</text -->
               <!-- g>
                 <line class="f_synapse medium" x1="125.7" y1="182.5" x2="125.7" y2="199.6"/>
@@ -1034,63 +1474,281 @@
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(103 157.9)"
+              >Output<tspan
+                x="5"
+                y="14.4"
+              >Layer</tspan></text>
               <g>
-                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="98.8" y2="200.1"/>
-                <polygon class="f_synapse arrowhead" points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"/>
+                <line
+                  class="f_synapse medium"
+                  x1="125.7"
+                  y1="182.5"
+                  x2="98.8"
+                  y2="200.1"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
+                />
               </g>
-              <text class="f_temp pred" transform="translate(78.5 236.4)">11 °C</text>
-              <text class="f_main light" transform="translate(7 236.4)">Prediction:</text>
+              <text
+                class="f_temp pred"
+                transform="translate(78.5 236.4)"
+              >11 °C</text>
+              <text
+                class="f_main light"
+                transform="translate(7 236.4)"
+              >Prediction:</text>
             </g>
             <g
               id="ANN10_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(103 157.9)"
+              >Output<tspan
+                x="5"
+                y="14.4"
+              >Layer</tspan></text>
               <g>
-                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="98.8" y2="200.1"/>
-                <polygon class="f_synapse arrowhead" points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"/>
+                <line
+                  class="f_synapse medium"
+                  x1="125.7"
+                  y1="182.5"
+                  x2="98.8"
+                  y2="200.1"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
+                />
               </g>
-              <text class="f_temp pred" transform="translate(78.5 236.4)">11 °C</text>
-              <text class="f_main light" transform="translate(7 236.4)">Prediction:</text>
-              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
-              <text class="f_main light" transform="translate(189.9 236.4)">Actual</text>
+              <text
+                class="f_temp pred"
+                transform="translate(78.5 236.4)"
+              >11 °C</text>
+              <text
+                class="f_main light"
+                transform="translate(7 236.4)"
+              >Prediction:</text>
+              <text
+                class="f_temp actual"
+                transform="translate(123.4 236.4)"
+              >17 °C</text>
+              <text
+                class="f_main light"
+                transform="translate(189.9 236.4)"
+              >Actual</text>
               <g>
-                <line class="f_synapse medium" x1="185" y1="232.2" x2="172" y2="232.2"/>
-                <polygon class="f_synapse arrowhead" transform="translate(7 -1)" points="165 230.5 160.3 233.2 165 236 165 230.5"/>
+                <line
+                  class="f_synapse medium"
+                  x1="185"
+                  y1="232.2"
+                  x2="172"
+                  y2="232.2"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  transform="translate(7 -1)"
+                  points="165 230.5 160.3 233.2 165 236 165 230.5"
+                />
               </g>
             </g>
             <g
@@ -1098,92 +1756,407 @@
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse low" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse medium" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse high" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse medium"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse high"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
               <g>
-                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="194.6" y2="200.6"/>
-                <polygon class="f_synapse arrowhead" points="193.1 203.1 198.4 201.6 194.5 197.8 193.1 203.1"/>
+                <line
+                  class="f_synapse medium"
+                  x1="125.7"
+                  y1="182.5"
+                  x2="194.6"
+                  y2="200.6"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="193.1 203.1 198.4 201.6 194.5 197.8 193.1 203.1"
+                />
               </g>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
-              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
-              <text class="f_temp pred" transform="translate(186.7 236.2)">25 °C</text>
+              <text
+                class="f_main bold"
+                transform="translate(103 157.9)"
+              >Output<tspan
+                x="5"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_temp actual"
+                transform="translate(123.4 236.4)"
+              >17 °C</text>
+              <text
+                class="f_temp pred"
+                transform="translate(186.7 236.2)"
+              >25 °C</text>
             </g>
             <g
               id="ANN12_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse medium" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse high" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse high" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse medium" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse medium"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
               <g>
-                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="162" y2="199.9"/>
-                <polygon class="f_synapse arrowhead" points="160.1 202 165.6 201.6 162.5 197.1 160.1 202"/>
+                <line
+                  class="f_synapse medium"
+                  x1="125.7"
+                  y1="182.5"
+                  x2="162"
+                  y2="199.9"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="160.1 202 165.6 201.6 162.5 197.1 160.1 202"
+                />
               </g>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
-              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
-              <text class="f_temp pred" transform="translate(162.8 236.2)">20.5 °C</text>
+              <text
+                class="f_main bold"
+                transform="translate(103 157.9)"
+              >Output<tspan
+                x="5"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_temp actual"
+                transform="translate(123.4 236.4)"
+              >17 °C</text>
+              <text
+                class="f_temp pred"
+                transform="translate(162.8 236.2)"
+              >20.5 °C</text>
             </g>
             <g
               id="ANN13_annotations"
               class="flubber annotations"
               transform="translate(0 0) scale(1.333 1.333)"
             >
-              <text class="f_main bold" transform="translate(105.5 19.1)">Input<tspan x="0.1" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(91.8 94.6)">Hidden layer</text>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse low" x1="80.4" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="60.1" y2="68.9"/>
-              <line class="f_synapse high" x1="167.8" y1="44.8" x2="125.5" y2="68.9"/>
-              <line class="f_synapse medium" x1="167.8" y1="44.8" x2="191" y2="68.9"/>
-              <line class="f_synapse medium" x1="60.1" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="125.5" y1="113.3" x2="125.5" y2="137.2"/>
-              <line class="f_synapse low" x1="191" y1="113.3" x2="125.5" y2="137.2"/>
+              <text
+                class="f_main bold"
+                transform="translate(105.5 19.1)"
+              >Input<tspan
+                x="0.1"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(91.8 94.6)"
+              >Hidden layer</text>
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse low"
+                x1="80.4"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="60.1"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse high"
+                x1="167.8"
+                y1="44.8"
+                x2="125.5"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="167.8"
+                y1="44.8"
+                x2="191"
+                y2="68.9"
+              />
+              <line
+                class="f_synapse medium"
+                x1="60.1"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="125.5"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
+              <line
+                class="f_synapse low"
+                x1="191"
+                y1="113.3"
+                x2="125.5"
+                y2="137.2"
+              />
               <g>
-                <path class="f_arrow" d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"/>
-                <polygon class="f_arrowhead" points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"/>
+                <path
+                  class="f_arrow"
+                  d="M191,59.8c6-2.3,9.8-4.5,11.4-6.8"
+                />
+                <polygon
+                  class="f_arrowhead"
+                  points="191.8 60.8 189.3 60.4 190.9 58.4 191.8 60.8"
+                />
               </g>
-              <text class="f_minor" transform="translate(200.7 44.7)">thickness<tspan class="f_minor" x="22" y="12">=</tspan><tspan class="f_minor" x="9.8" y="22">weight</tspan></text>
+              <text
+                class="f_minor"
+                transform="translate(200.7 44.7)"
+              >thickness<tspan
+                class="f_minor"
+                x="22"
+                y="12"
+              >=</tspan><tspan
+                class="f_minor"
+                x="9.8"
+                y="22"
+              >weight</tspan></text>
               <g>
-                <line class="f_synapse medium" x1="125.7" y1="182.5" x2="127.4" y2="198.4"/>
-                <polygon class="f_synapse arrowhead" points="124.6 197.9 127.9 202.3 130.1 197.3 124.6 197.9"/>
+                <line
+                  class="f_synapse medium"
+                  x1="125.7"
+                  y1="182.5"
+                  x2="127.4"
+                  y2="198.4"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="124.6 197.9 127.9 202.3 130.1 197.3 124.6 197.9"
+                />
               </g>
-              <text class="f_main bold" transform="translate(103 157.9)">Output<tspan x="5" y="14.4">Layer</tspan></text>
-              <text class="f_main bold" transform="translate(20.1 236.4)">Final:</text>
+              <text
+                class="f_main bold"
+                transform="translate(103 157.9)"
+              >Output<tspan
+                x="5"
+                y="14.4"
+              >Layer</tspan></text>
+              <text
+                class="f_main bold"
+                transform="translate(20.1 236.4)"
+              >Final:</text>
               <g>
-                <line class="f_synapse medium" x1="121" y1="222.2" x2="110.9" y2="230.7"/>
-                <polygon class="f_synapse arrowhead" points="119.9 221.4 122.3 221 121.5 223.3 119.9 221.4"/>
+                <line
+                  class="f_synapse medium"
+                  x1="121"
+                  y1="222.2"
+                  x2="110.9"
+                  y2="230.7"
+                />
+                <polygon
+                  class="f_synapse arrowhead"
+                  points="119.9 221.4 122.3 221 121.5 223.3 119.9 221.4"
+                />
               </g>
-              <text class="f_temp actual" transform="translate(123.4 236.4)">17 °C</text>
-              <text class="f_temp pred" transform="translate(60.1 236.4)">15.3 °C</text>
+              <text
+                class="f_temp actual"
+                transform="translate(123.4 236.4)"
+              >17 °C</text>
+              <text
+                class="f_temp pred"
+                transform="translate(60.1 236.4)"
+              >15.3 °C</text>
             </g>
             <g 
               id="RNN_annotations"
