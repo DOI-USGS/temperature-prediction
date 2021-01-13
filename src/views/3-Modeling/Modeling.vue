@@ -958,12 +958,15 @@
             .append("g")
             .attr('transform', `translate(${margin}, ${margin})`);
 
-          // x axis scaled across full range of values
+          ////////////////////
+          // set scales
+
+          // x axis 
           this.xScale = this.d3.scaleLinear()
             .range([this.margin, this.width+this.margin])
             .domain([0,this.chartState.domain_x]);
 
-          // y axis scale for error plot
+          // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
             .range([this.height, this.margin])
             .domain([0,this.chartState.domain_y]);
@@ -984,18 +987,7 @@
             .domain(["d100","d02","d001","obs","exp"])
             .range(["#53354A","teal", "#f8af26", "#53354A","#53354A"]);
 
-            //add mid line for horizontal clustering vibes
-            this.svg
-              .append("line", 'svg')
-              .classed("main_line", true)
-              .attr("x1", this.margin)
-              .attr("y1", ((this.height+this.margin*2)/2))
-              .attr("x2", this.width+this.margin)
-              .attr("y2", ((this.height+this.margin*2)/2))
-              .attr("stroke-width", 2)
-              .attr("opacity", 0)
-              .attr("stroke", "#A3A0A6");
-
+          ///////////////////
           // generate axes
           let yGen = this.d3.axisLeft(self.yScale);
           let xGen = this.d3.axisBottom(self.xScale);
@@ -1025,6 +1017,30 @@
           .attr("stroke-dasharray", this.height+this.margin)
           .attr("stroke-dashoffset", this.height+this.margin)
 
+          // axi slabels
+          // text label for the x axis
+          this.svg.append("text")             
+              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + this.margin + 50) + ")")
+              .style("text-anchor", "middle")
+              .text("Time")
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .classed("axis-label", true);
+
+
+          // text label for the y axis
+          this.svg.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", this.height/2)
+              .attr("x",this.margin)
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .text("Temperature")
+              .style("fill", "black")
+              .style("font-size", "30px")
+              .classed("axis-label", true);    
+
+          ////////////////
           // initiate force simulation
           self.simulation = this.d3.forceSimulation()
           .force("x", this.d3.forceX())
@@ -1034,30 +1050,30 @@
           },
           drawAxes(axes_in) {
             // controls axis aniamtions between error chart and beeswarm
-
+            let time_slide = 500;
             if (axes_in === "error") {
             this.yAxis
               .transition()
-              .duration(800)
+              .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", 0)
 
             this.xAxis
               .transition()
-              .duration(800)
+              .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", 0)
 
             } else if (axes_in === "error_up") {
             this.yAxis
               .transition()
-              .duration(800)
+              .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", this.height+this.margin)
 
             this.xAxis
               .transition()
-              .duration(800)
+              .duration(time_slide)
               .ease(this.d3.easeCircle)
               .attr("stroke-dashoffset", this.width+this.margin)
 
@@ -1065,12 +1081,12 @@
               // move x-axis up to center line
               this.xAxis
                 .transition()
-                .duration(800)
+                .duration(time_slide)
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + -this.margin + "," + this.height/2 + ")")
 
                 this.yAxis
-                .transition(800)
+                .transition(time_slide)
                 .attr("opacity", 0)
 
             } else if (axes_in === "rmse_up"){
@@ -1078,12 +1094,12 @@
 
               this.xAxis
                 .transition()
-                .duration(800)
+                .duration(time_slide)
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
 
                 this.yAxis
-                .transition(800)
+                .transition(time_slide)
                 .attr("opacity", 1)
             } 
           },
@@ -1148,7 +1164,7 @@
               .transition()
                 .duration(800)
                 .delay(function(d,i) { return 5* i})
-                .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color...but don't need that if relabel vars
+                .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
@@ -1271,16 +1287,21 @@
           ///////////
           // toggle intro header to stepped headers
           // this is necessary because the first view is not in the same sticky scolling structure as the rest
-  
+         if (this.step <= 2 && response.direction == "down"){
+             this.d3.select("figure.intro").classed("sticky", true); 
+          } else if (this.step >= 2 && response.direction == "down") {
+              this.d3.select("figure.intro").classed("sticky", false);
+
+          }
 
           // update axes
-          if (this.step == step_error && response.direction == "down" ) {
+          if (this.step == this.step_start && response.direction == "down" ) {
             self.drawAxes("error");
-          } else if (this.step == step_error && response.direction == "up") {
+          } else if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-          } else if (this.step == step_ann && response.direction == "down") {
+          } else if (this.step == this.step_start+3 && response.direction == "down") {
             self.drawAxes("rmse");
-          } else if (this.step == step_ann && response.direction == "up") {
+          } else if (this.step == this.step_start+3 && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
 
@@ -1302,8 +1323,16 @@
 
         // make intro header sticky again if scrolling back
           if (this.step <= 2 && response.direction == "up"){
-             this.d3.select("figure.intro").classed("sticky", true); 
+             this.d3.select("figure.intro").classed("sticky", false); 
           }
+
+          if (this.step == this.step_start && response.direction == "up") {
+            self.drawAxes("error_up");
+            fadeOut(this.d3.selectAll(".bees"), 500)
+          } else if (this.step == this.step_start+3 && response.direction == "up") {
+            self.drawAxes("rmse_up");
+          }
+
 
         },
         
@@ -1429,8 +1458,14 @@ figure.sticky.charts {
 .axis-line {
   stroke-width: 5px;
 }
+.axis-label text {
+  fill:white;
+    font-family: SegoeUI-Semibold, Segoe UI;
+  font-weight: 300;
+  font-size: 20px;
+}
 
-.text-annotate {
+.text-annotate{
   fill:white;
     font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
@@ -1463,7 +1498,7 @@ figure.sticky.charts {
   font-weight: 300;
   font-size: 10px;
 }
-.other.label {
+.other.label{
   fill: #e9854b;
   stroke-width: 0px;
   font-family: SegoeUI-Semibold, Segoe UI;
