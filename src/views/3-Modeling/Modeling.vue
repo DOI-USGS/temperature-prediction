@@ -23,8 +23,8 @@
           <svg
             id="transform-svg-test"
             xmlns="http://www.w3.org/2000/svg"
-            height= 350px
-            width= 350px
+            height="350px"
+            width="350px"
           >
             <g
               id="path1"
