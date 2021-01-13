@@ -9,7 +9,7 @@
     >
       <h2>{{sectionTitle}}</h2>
       <p/>
-      <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). These models have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+      <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
 
     </div>
     </figure>

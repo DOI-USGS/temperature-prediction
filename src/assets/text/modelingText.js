@@ -2,7 +2,7 @@ export default {
     textContents: {
         "":[
             {
-                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
+                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the ANN model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'ANN'
             },
