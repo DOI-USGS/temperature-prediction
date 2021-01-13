@@ -2853,7 +2853,7 @@
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
-              let animationLength = 1400;
+              let animationLength = 2400;
 
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
@@ -3319,18 +3319,18 @@
              self.fadeIn(this.d3.select(".main_line"), 500)
           }
 
-          // remove/add beeswarm and legend on last step
-          if (this.step == 23 && response.direction == 'down') {
-            this.chartState.measure = this.RGCN_ptrn_both;
-            self.fadeOut(this.d3.selectAll(".bees"), 500);
-            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
-            self.fadeOut(this.d3.select(".main_line"), 500);
-          }
-          if (this.step == 22|23 && response.direction == 'up') {
-            self.fadeIn(this.d3.selectAll(".bees"), 200);
-            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
-            self.fadeIn(this.d3.select(".main_line"), 500);
-          }
+          // // remove/add beeswarm and legend on last step
+          // if (this.step == 23 && response.direction == 'down') {
+          //   this.chartState.measure = this.RGCN_ptrn_both;
+          //   self.fadeOut(this.d3.selectAll(".bees"), 500);
+          //   self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
+          //   self.fadeOut(this.d3.select(".main_line"), 500);
+          // }
+          // if (this.step == 22|23 && response.direction == 'up') {
+          //   self.fadeIn(this.d3.selectAll(".bees"), 200);
+          //   self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
+          //   self.fadeIn(this.d3.select(".main_line"), 500);
+          // }
           if (this.step <= 0 && response.direction == "down"){
             //  this.d3.select("figure.intro").classed("sticky", true); 
           } else if (this.step >= 0 && response.direction == "down") {

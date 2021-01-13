@@ -22,7 +22,7 @@ export default {
                 'bees_id': 'ANN'
             },
             {
-                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value for each node. ",
+                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value for each node.",
                 'flubber_id': 'ANN5',
                 'bees_id': 'ANN'
             },
