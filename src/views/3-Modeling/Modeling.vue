@@ -712,7 +712,7 @@
             color_bees: {exp: 'experiment', error:'group'},
 
             // beeswarm
-            step_start: 3,
+            step_start: 1,
             radius: 6,
             set_colors: null,
             color_exp: null, 
@@ -1085,11 +1085,7 @@
                 this.yAxis
                 .transition(800)
                 .attr("opacity", 1)
-
             } 
-
-            
-
           },
           updateChart() {
             const self = this;
@@ -1111,7 +1107,12 @@
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
-          
+
+        // modify forces to update chart
+        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
+          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
 
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
@@ -1140,14 +1141,6 @@
                 .attr("r", this.radius)
                 //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
                 //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
-          
-
-                
-        // modify forces to update chart
-        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
 
           // anything that should happen after points are updated
             chart
@@ -1231,7 +1224,6 @@
 
           ///////////
           // assign chart axes and color scales
-          // seg is key for update()
 
           // error chart
           if (this.step <= step_rmse) {
@@ -1282,26 +1274,14 @@
   
 
           // update axes
-          // draw error chart axes 
           if (this.step == step_error && response.direction == "down" ) {
             self.drawAxes("error");
-          } else if (this.step == step_rmse && response.direction == "down") {
+          } else if (this.step == step_error && response.direction == "up") {
+            self.drawAxes("error_up");
+          } else if (this.step == step_ann && response.direction == "down") {
             self.drawAxes("rmse");
-          } else if (this.step == step_rmse && response.direction == "up") {
+          } else if (this.step == step_ann && response.direction == "up") {
             self.drawAxes("rmse_up");
-          }
-
-          // remove/add beeswarm and legend on last step
-          if (this.step == step_error && response.direction == 'down') {
-            this.chartState.measure = this.RGCN_ptrn_both;
-            self.fadeOut(this.d3.selectAll(".bees"), 500);
-            self.fadeOut(this.d3.selectAll("#transform-svg-test"), 500);
-            self.fadeOut(this.d3.select(".main_line"), 500);
-          }
-          if (this.step == step_end && response.direction == 'up') {
-            self.fadeIn(this.d3.selectAll(".bees"), 200);
-            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 200);
-             self.fadeIn(this.d3.select(".main_line"), 500);
           }
 
            // add class to active step
