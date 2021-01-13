@@ -18,13 +18,17 @@
       ref="figure"
       class="sticky charts"
     >
-      <div id="flubber-container">
-        <div id="flubber">
+      <div 
+        id="flubber-container"
+        class="figure-content"
+      >
+        <div id="flubber" class="figure-content">
           <svg
-            id="transform-svg-test"
+            id="flubber-svg"
+            class="figure-content"
             xmlns="http://www.w3.org/2000/svg"
-            height="350px"
-            width="350px"
+            viewBox="0 0 350 350"
+            preserveAspectRatio="xMidYMid meet"
           >
             <g
               id="path1"
@@ -2595,12 +2599,12 @@
         id="bees-container"
         class="figure-content"
       />
-      <div id="legend-container">
+      <div id="legend-container" class="figure-content">
         <svg
           id="bees_legend"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1000 1000"
+          xmlns="http://www.w3.org/2000/svg" 
         >
+        <!--viewBox="0 0 1000 1000" -->
           <g
             id="legend-scale"
             transform="translate(0, 700)"
@@ -2665,7 +2669,6 @@
 <script>
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
-    import { interpolatePath } from 'd3-interpolate-path';
     import * as flubber from "flubber";
     import textures from 'textures';
 
@@ -2746,14 +2749,13 @@
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
-          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]]={});
-          // add flubber model id as key in nested dictionary, with path as value
-          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id] = {})
-          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
-          document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
-          // document.querySelectorAll("#transform-svg-test g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
+          document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]]={});
+          // add flubber model id as key in nested dictionary, with path and color as nested keys
+          document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id] = {})
+          document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
+          document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
+          // document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
           console.log(this.flubber_dict)
-          // console.log(document.querySelectorAll("#transform-svg-test g path"))
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
@@ -2764,8 +2766,8 @@
           }
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
+        this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
-        this.setFlubber(); // get flubber going right away
         },
         
         //methods are executed once, not cached as computed properties, rerun everytime deal with new step
@@ -2820,10 +2822,10 @@
           setFlubber() {
             const self = this;
 
-            // determine initial model id and initial annotation id
-            // NOTE currently assumes that we are beginning the visuals at step 0
-            let initial_model_id = self.flubber_id_order[self.step]
-            let initial_annotation_id = initial_model_id + "_annotations"
+            // // determine initial model id and initial annotation id
+            // // NOTE currently assumes that we are beginning the visuals at step 0
+            // let initial_model_id = self.flubber_id_order[self.step]
+            // let initial_annotation_id = initial_model_id + "_annotations"
 
             // Hide all flubber elements (visuals and annotations)
             self.d3.selectAll(".flubber")
@@ -2904,20 +2906,8 @@
                     .attrTween("d", function(d){
                       return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 1 })
                     })
-
-                  // if (self.flubber_dict[path_num][step_id]['fill_color']) {
-                  //   self.d3.select("#" + path_num + ' path')
-                  //     .transition()
-                  //     .duration(animationLength)
-                  //     .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
-                  //     .attrTween("d", function(d){
-                  //       return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 5 })
-                  //     })
-                  // }
                 }
               }
-
-
 
               // select associated annotations
               let previous_annotation_id = previous_id + "_annotations"
@@ -2946,7 +2936,7 @@
               self.current_flubber_id = step_id
 
             } else {
-              //console.log("step has no id")
+              //console.log("step has no flubber id")
             }
           },
           makeBeeswarm() {
@@ -2955,10 +2945,17 @@
             let margin = 50;
 
           // add svg for beeswarm 
+          console.log("setting beeswarm - width:")
+          console.log(this.width)
+          console.log("setting beeswarm - height:")
+          console.log(this.height)
+          console.log("setting beeswarm - margin:")
+          console.log(this.margin)
           this.svg = this.d3.select('#bees-container').append('svg')
-              .attr("viewBox", [0, 0, this.width+this.margin*2, this.height+this.margin*2].join(' '))
-              .attr("preserveAspectRatio", "none")
-              .attr("class", "bees-chart")
+              .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
+              // .attr("preserveAspectRatio", "none")
+              .attr("id", "bees-chart")
+              .attr("class", "figure-content")
 
           // define where chart starts within svg
           this.svg
@@ -3301,41 +3298,32 @@
             let initial_model_id = self.flubber_id_order[this.step]
             let initial_annotation_id = initial_model_id + "_annotations"
 
-            // display visual associated with initial model id
+            // display flubber visual associated with initial model id
             self.d3.selectAll("#" + initial_model_id)
               .attr("opacity", 1)
 
-            // display visual associated with initial model id
+            // display flubber visual associated with initial model id
             self.d3.selectAll("#" + initial_annotation_id)
               .attr("opacity", 1)
-            self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
+            self.fadeIn(this.d3.selectAll("#flubber-svg"), 2400);
           }
          
           if (this.step >= 0 && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
-             self.fadeIn(this.d3.select(".main_line"), 500)
-          }
-          if (this.step >= 4 && response.direction == "down"){
-             self.fadeIn(this.d3.select(".main_line"), 500)
           }
 
           // // remove/add beeswarm and legend on last step
           // if (this.step == 23 && response.direction == 'down') {
           //   this.chartState.measure = this.RGCN_ptrn_both;
           //   self.fadeOut(this.d3.selectAll(".bees"), 500);
-          //   self.fadeOut(this.d3.selectAll("#transform-svg-test"), 2400);
+          //   self.fadeOut(this.d3.selectAll("#flubber-svg"), 2400);
           //   self.fadeOut(this.d3.select(".main_line"), 500);
           // }
           // if (this.step == 22|23 && response.direction == 'up') {
           //   self.fadeIn(this.d3.selectAll(".bees"), 200);
-          //   self.fadeIn(this.d3.selectAll("#transform-svg-test"), 2400);
+          //   self.fadeIn(this.d3.selectAll("#flubber-svg"), 2400);
           //   self.fadeIn(this.d3.select(".main_line"), 500);
           // }
-          if (this.step <= 0 && response.direction == "down"){
-            //  this.d3.select("figure.intro").classed("sticky", true); 
-          } else if (this.step >= 0 && response.direction == "down") {
-              this.d3.select("figure.intro").classed("sticky", false);
-          }
 
           // update axes
           if (this.step == this.step_start && response.direction == "down" ) {
@@ -3411,7 +3399,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 article {
   position: relative;
   margin: 0 auto;
-  width: 100%;
+  height: 100%;
+  width: auto;
 }
 .step-container {
   width:100vw;
@@ -3471,7 +3460,7 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
-  grid-template-rows: 35% 10% 35% 10%;
+  grid-template-rows: 40% 5% 40% 5%;
   grid-template-columns: 2% auto 2%;
 
   position: -webkit-sticky;
@@ -3483,12 +3472,17 @@ figure.sticky.charts {
   #flubber-container {
     grid-column: 2 / 2;
     grid-row: 1 / 1;
-    z-index: 1;
-  }
-  #flubber {
-    display: relative;
     height: 100%;
     width: auto;
+    min-width: 0;
+    min-height: 0;
+  }
+  #flubber {
+    height: 100%;
+    width: auto;
+  }
+  #flubber-svg {
+    height: 100%;
   }
   #error-container {
     grid-column: 2 / 2;
@@ -3497,16 +3491,22 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-  }
-  #bees_dotPlot {
-    width: 100%;
     height: 100%;
-
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+  }
+  #bees-chart {
+    height: 100%;
+    width: auto;
   }
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-
+    height: 100%;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
   }
 }
 .axis-line {
@@ -3533,30 +3533,6 @@ figure.sticky.charts {
   }
 
 }
-#flubber {
-  opacity: 1;
-  position: relative;
-  text-align: center;
-}
-// .river{
-//   fill: $monotoneBlue5;
-//   stroke: $monotoneBlue5;
-//   // stroke: #6399ba;
-//   // fill: #6399ba;
-//   stroke-width: 0.25px;
-// }
-// .blocker {
-//   fill: #858585;
-// }
-// .other{
-//   fill: $offWhite;
-//   stroke: $offWhite;
-//   // fill: #e9854b;
-//   // stroke: #e9854b;
-//   stroke-width: 0px;
-//   font-weight: 300;
-//   font-size: 10px;
-// }
 .other.label {
   fill: #FDAD32;
   stroke-width: 0px;
