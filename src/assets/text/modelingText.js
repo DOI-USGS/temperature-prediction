@@ -1,6 +1,6 @@
 export default {
     textContents: {
-        "":[
+        "Training an automated neural network":[
             {
                 'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the ANN model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
@@ -66,66 +66,98 @@ export default {
                 'flubber_id': 'ANN13',
                 'bees_id': 'ANN'
             }],
-        "Artificial neural network (ANN)": [
+        "Testing an artificial neural network (ANN)": [
             {
-                'method': "But when data are sparse (e.g. 1%), ANN predictions become less accurate. How can we help the model learn more with less data? This is where we can use our understanding of the world to give a machine learning model the upper hand. ",
+                'method': "PREDICTED data on error plot",
                 'flubber_id': '',
-                'bees_id': 'ANN'
+                'bees_id': 'step_ann_exp'
             },
             {
-                'method': "So what do we know about the world, and how do we pass that information to a deep learning algorithm?",
-                'flubber_id': 'ANN13',
-                'bees_id': 'ANN'
+                'method': "Add on OBSERVED",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
             }],
+        "Evaluating overall model accuracy": [
+            {
+                'method': "Collapse to RMSE for a single stream reach (100% of training data)",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
+            },{
+                'method': "One site RMSE to all site RMSEs (still 100% of training data)",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            }],
+        "Model performance under restricted data availability": [
+            {
+                'method': "So how can we compare how a model performs when lots of data is available to how it performs when very little training data is available?",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            },
+            {
+                'method': "We can artificially restrict how much training data is received by the model",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            },
+            {
+                'method': "Add model trained on 2% of data, and model trained on 0.1% of data. Describe what they are seeing",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
+            },
+            {
+                'method': "So how can we improve the model so that it does better under sparse conditions?",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            },
+        ],
         "Recurrent neural network (RNN)": [
             {
                 'method': "One of the simplest forms of process knowledge we can use is time. Put simply, the water temperature today is likely to be similar the water temperature tomorrow. For data-driven modeling, this is as simple as using models that have memory or allow information from one timestep to be passed on to the next time step. The model we used is called a recurrent neural network (RNN)",
                 'flubber_id': 'RNN',
-                'bees_id': 'RNN'
+                'bees_id': 'step_ann_exp'
             },
             {
                 'method': "In the DRB, giving the model a memory improved performance in some cases but decreased accuracy in others.",
                 'flubber_id': 'RNN',
-                'bees_id': 'RNN'
+                'bees_id': 'step_rnn'
             }],
         "Graph convolutional network (RGCN)":[
             {
                 'method': "You don’t need to be a hydrologist to know water flows downstream, and that means the water temperature in downstream segments is likely to be similar to that in upstream segments. The spatial connections between streams allows us to leverage information across the stream network.",
                 'flubber_id': 'RGCN',
-                'bees_id': 'RGCN'
+                'bees_id': 'step_rnn'
             },
             {
                 'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance. The method we used is called a graph convolutional network.",
                 'flubber_id': 'RGCN_2',
-                'bees_id': 'RGCN'
+                'bees_id': 'step_rnn'
             },
             {
                 'method': "In the DRB, adding information about the spatial configuration of the river network improves predictions.",
                 'flubber_id': 'RGCN_2',
-                'bees_id': 'RGCN'
+                'bees_id': 'step_rgcn'
             }],
         "Deep learning (RGCN_ptrn)":[
             {
                 'method': "Beyond space and time, We know quite a bit about how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a data-driven approach. These process are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
                 'flubber_id': 'RGCN_ptrn',
-                'bees_id': 'RGCN_ptrn'
+                'bees_id': 'step_rgcn'
             },
             {
                 'method': "The way we inform our model about thermodynamics is by using a thermodynamic model to make predictions for all places and times.These predictions are used as “real data” to train our neural network.This creates a data- driven model that is emulating the physics of the system.",
                 'flubber_id': '',
-                'bees_id': 'RGCN_ptrn'
+                'bees_id': 'step_rgcn'
             },
             {
                 'method': "And the great news? Now that the deep learning model is capturing the physical system, it can do more with less. Even under highly data sparse conditions (< 1% of training data), the model is still able to make accurate predictions.",
                 'flubber_id': '',
-                'bees_id': 'RGCN_ptrn'
+                'bees_id': 'step_rgcn_ptrn'
             }],
         "Predicting water temperature at a national scale": [
             {
                 'title': "",
                 'method': "This is all really cool considering the distribution of temperature observations at the national scale",
                 'flubber_id': 'RGCN_ptrn',
-                'bees_id': 'RGCN_ptrn'
+                'bees_id': 'step_rgcn_ptrn'
             }]
     }
 }

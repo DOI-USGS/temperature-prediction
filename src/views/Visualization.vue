@@ -11,8 +11,8 @@
   export default {
     name: "Vizualization",
     components: {
-      Nav: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "nav"*/ "./components/Nav"),
-      Importance: () => import( /* webpackPreload: true */ /*webpackChunkName: "importance"*/ "./1-Importance/Importance")
+      //Nav: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "nav"*/ "./components/Nav"),
+      //Importance: () => import( /* webpackPreload: true */ /*webpackChunkName: "importance"*/ "./1-Importance/Importance")
     }
   }
 </script>
