@@ -1,10 +1,6 @@
 <template>
   <div id="monitoring-mobile">
     <div class="text-content">
-      <h2>Monitoring!</h2>
-      <p id="platform-test">
-        Can confirm, this is loading the {{ msg }} version.
-      </p>
       <h2 v-html="text.title1" />
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
@@ -22,7 +18,7 @@
       <h2 v-html="text.title2" />
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
-      <p v-html="text.paragraph7" />
+      <p v-html="text.tiptextMobile" />
     </div>
     <MonitoringMap2 />
     <div class="text-content">

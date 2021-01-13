@@ -1,12 +1,6 @@
 <template>
   <div id="monitoring-desktop">
-    <div class="text-content">
-      <h2>Monitoring!</h2>
-      <p id="platform-test">
-        Can confirm, this is loading the {{ msg }} version.
-      </p>
-      <p>Aaaaaand here's where we'll put all the code for ✨Chapter 2.✨  Load the components down below here.</p>
-    </div>  
+    <div class="text-content" />  
     <Set2 />
   </div>
 </template>

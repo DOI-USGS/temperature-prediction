@@ -66,27 +66,42 @@
 
 <style lang="scss">
 
+// IMPORT COLORS
+$backgroundCharcoal: #141414; //#171717
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #285C70; //#10313e
+$monotoneBlueTransparent: rgba(76,101,110, .6);
 
-  // Type
-
+// Type
 body {
       margin: 0;
       padding: 0;
-      color: #b4b1b1;
-      background-color: black;
+      color: $offWhite;
+      background-color: $backgroundCharcoal;
       line-height: 1.5;
-      font-size: 14pt;
+      font-size: 13pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
       font-weight: 400;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       width: 100%;
   }
+h1{
+  font-size: 4em;
+  font-weight: 100;
+  @media screen and (max-width: 600px) {
+    font-size: 3em;
+  }
+}
 
 h2{
   font-size: 2em;
   margin-top: 80px;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1.7;
   @media screen and (max-width: 600px) {
     font-size: 1.2em;
@@ -96,18 +111,24 @@ h2{
 h3{
     font-size: 1.4em;
     padding-top: .5em;
-    font-weight: 700;
+    font-weight: 600;
     @media screen and (max-width: 600px) {
         font-size: 1em;
     }
 }
+
+// .section-title-wrapper{
+//   padding: .5em 10px 0 10px;
+//   background-color: $monotoneBlue5;
+//   margin-top: 1em;
+// }
 
 
 
   // General Layout  
 
   .text-content {
-    min-width: 350px;
+    min-width: 375px;
     max-width: 700px;
     margin: 0 auto;
     padding: 2em;   
@@ -118,23 +139,20 @@ h3{
 
   .flex-container {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
     margin: auto;
-    overflow-x: hidden;
   }
 
   .flex-item {
-    flex: 1;
-    align-self: center;
-    text-align: center;
-    max-width: 90%;
-    min-width: 600px;
-  }
-
-  .flex-item img {
     padding: 20px;
+    min-width: 400px;
+    flex: 0 0 auto;
+    align-self: center;
+   
   }
 
   @media (max-width: 600px) {
@@ -148,21 +166,74 @@ h3{
     }
   }
 
+  .figure-content {
+    border: 1px white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    align-content: space-around;
+    max-width: 100%;
+    padding: 0 100px;
+    margin: auto;
+
+    @media screen and (max-width: 600px) {
+        padding: 0px; 
+    }
+
+  }
+  .figure {
+    display: block;
+    padding: 20px;
+  }
+
+  .map {
+    min-width: 400px;
+    max-width: 700px;
+    flex: 1 1 40%;
+
+    @media screen and (max-width: 600px) {
+        max-width: 300px;
+    }
+
+  }
+  .chart {
+    min-width: 600px;
+    flex: 1 1 40%;
+  }
+
+  .matrix {
+    min-width: 400px;
+    flex: 1 1 40%;
+  }
+
 // Specific Design Elements for Charts and Maps
 
-.viz-title {
-  font-size: 1.1em;
-  padding: 0 30px 10px;
+.viz-title-wrapper {
   margin: auto;
+  width: 80%;
   max-width: 600px;
-  border: 1px solid #545454;
-  padding: 10px;
-  box-shadow: 3px 3px #545454;
+  padding: 10px 30px;
   z-index: 100;
-  @media screen and (max-width: 600px) {
-    margin: 5px 20px;
-  }
   
+
+}
+
+.viz-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  text-align: center;
+  color: $offWhite;
+  box-shadow: -5px -5px $monotoneBlue5;
+  line-height: 1.3em;
+  padding-bottom: 0.5em;
+}
+.viz-subtitle {
+  color: $monotoneBlue5; //$offWhite
+  font-style: italic;
+ font-size: .8em;
+ text-align: center;
+ font-weight: 100;
 }
 
 .legend-text {
@@ -174,13 +245,22 @@ h3{
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
   font-weight: 400;
-  fill: #7d7d7d;
+  fill:rgb(224, 222, 222);
 }
 .viz-emph {
   font-weight:700;
   fill: white;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
+}
+
+.emph {
+  font-weight:700;
+  fill: white;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $monotoneBlueTransparent 40%);
+  line-height: 1.3em;
+  padding: 0 5px;
 }
 
 .dashed-axis {

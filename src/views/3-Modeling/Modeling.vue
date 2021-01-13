@@ -3,14 +3,13 @@
     <figure
       class="sticky intro"
     >
-    <div
-      id="intro-container"
-      class="text-content text-intro"
-    >
-      <h2 >{{sectionTitle}}</h2>
-      <p>  </p>
-
-    </div>
+      <div
+        id="intro-container"
+        class="text-content text-intro"
+      >
+        <h2>{{ sectionTitle }}</h2>
+        <p />
+      </div>
     </figure>
     <!--  figure contains all the sticky elements -->
     <figure
@@ -193,7 +192,7 @@
               ><tspan class="f_main light">yesterday</tspan></text>
               <text
                 id="text-2"
-                class="f_main bold"
+                class="f_main bold emph"
                 transform="translate(132.6 108.5)"
               ><tspan class="f_main bold">today</tspan></text>
               <text
@@ -615,7 +614,10 @@
           </svg>
         </div>
       </div>
-      <div id="bees-container" />
+      <div
+        id="bees-container"
+        class="figure-content"
+      />
       <div id="legend-container">
         <svg
           id="bees_legend"
@@ -643,33 +645,40 @@
     <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
       <div id="scrollama-container">
-      <!-- create scrolling/sticky headers for each model section -->
-      <div 
-        v-for="(models, model_group) in text" 
-        :key="model_group" 
-        :class="model_group" 
-        class="step-container text-content">
-        <div
-          class="scroll-sticky">
-          <h2 >
-          {{ model_group }}
-          </h2>
+        <!-- create scrolling/sticky headers for each model section -->
+        <div 
+          v-for="(models, model_group) in text" 
+          :key="model_group" 
+          :class="model_group" 
+          class="step-container text-content"
+        >
+          <div
+            class="scroll-sticky"
+          >
+            <h2>
+              {{ model_group }}
+            </h2>
+          </div>
+          <!-- populate nested steps using text about each model -->
+          <div class="scrollama-steps">
+            <div
+              v-for="model in models" 
+              :id="model.flubber_id" 
+              :key="model" 
+              class="step"
+            >
+              {{ model.method }}
+            </div>
+          </div>
         </div>
-        <!-- populate nested steps using text about each model -->
-        <div class="scrollama-steps">
-        <div class="step" 
-          v-for="model in models" 
-          :key="model" 
-          :id="model.flubber_id">
-          {{ model.method }}
-        </div></div>
-        </div>
-        </div>
-
+      </div>
     </article>
     <div id="map-container">
-   <img id="hex-map" src="@/assets/usa_hex_map_80-01.png" />
-   <!-- need to add legend and recolor beeswarm to mirror?? -->
+      <img
+        id="hex-map"
+        src="@/assets/usa_hex_map_80-01.png"
+      >
+      <!-- need to add legend and recolor beeswarm to mirror?? -->
     </div>
   </div>
 </template>
@@ -694,7 +703,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
-            sectionTitle: "Predicting water temperature", // the initial
+            sectionTitle: "Modeling Stream Temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -1353,6 +1362,17 @@
 </script>
 <style scoped lang="scss">
 
+// IMPORT COLORS
+$backgroundCharcoal: #171717;
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #10313e;
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
+
 //style steps
 article {
   position: relative;
@@ -1465,9 +1485,8 @@ figure.sticky.charts {
   font-size: 20px;
 }
 
-.text-annotate{
-  fill:white;
-    font-family: SegoeUI-Semibold, Segoe UI;
+.text-annotate {
+  fill:$offWhite;
   font-weight: 300;
   font-size: 20px;
 
@@ -1486,22 +1505,24 @@ figure.sticky.charts {
   text-align: center;
 }
 .river{
-  stroke: #6399ba;
-  fill: #6399ba;
+  fill: $monotoneBlue5;
+  stroke: $monotoneBlue5;
+  // stroke: #6399ba;
+  // fill: #6399ba;
   stroke-width: 0.25px;
 }
 .other{
-  fill: #e9854b;
-  stroke: #e9854b;
+  fill: $offWhite;
+  stroke: $offWhite;
+  // fill: #e9854b;
+  // stroke: #e9854b;
   stroke-width: 0px;
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 10px;
 }
-.other.label{
-  fill: #e9854b;
+.other.label {
+  fill: #A9CDD8;
   stroke-width: 0px;
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 400;
   font-size: 10px;
 }
@@ -1518,16 +1539,13 @@ figure.sticky.charts {
   fill: #969696;
 }
 .f_main.light, .f_minor {
-  font-family: SegoeUI-Semilight, Segoe UI;
-  font-weight: 300;
+  font-weight: 100;
   letter-spacing: 0em;
 }
 .f_main.bold {
-  font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 600;
 }
 .f_sec.reg {
-  font-family: SegoeUI-Semilight, Segoe UI;
   font-weight: 400;
   letter-spacing: 0em;
 }
@@ -1558,7 +1576,7 @@ figure.sticky.charts {
   fill: #4f4f4f;
 }
 .line_rain {
-  stroke:#e9854b;
+  stroke: #b0b0b0;
   stroke-miterlimit: 10;
   stroke-dasharray: 2 5;
   stroke-width: 0.8px;
