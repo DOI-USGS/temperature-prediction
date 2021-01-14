@@ -2789,9 +2789,9 @@
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
-          this.step_rnn = this.step_ann_exp + 2; // RNN
-          this.step_rgcn = this.step_rnn + 2; // RGCN
-          this.step_rgcn_ptrn = this.step_rgcn + 2; //RGCN_ptrn
+          this.step_rnn = this.step_ann_exp + 3; // RNN
+          this.step_rgcn = this.step_rnn + 3; // RGCN
+          this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
@@ -2832,6 +2832,7 @@
             this.chartState.strengthr = .4
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
+            this.chartState.radius = this.paddedRadius;
 
             // draw the chart
             this.makeBeeswarm();
@@ -2974,12 +2975,6 @@
           let margin = 50;
 
           // add svg for beeswarm 
-          console.log("setting beeswarm - width:")
-          console.log(this.width)
-          console.log("setting beeswarm - height:")
-          console.log(this.height)
-          console.log("setting beeswarm - margin:")
-          //console.log(this.margin)
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
               //.attr("class", "figure-content")
@@ -3016,11 +3011,11 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A",this.texture.url(), "#f8af26", "#53354A","black"]);
+            .range(["#53354A",this.texture.url(), "#f8af26", "#141414"," #285C70"]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A","teal", "#f8af26", "#53354A","#53354A"]);
+            .range(["#53354A","teal", "#f8af26", "#FDAD32"," #285C70"]);
 
           ///////////////////
           // generate axes
@@ -3071,7 +3066,7 @@
               .attr("dy", "1em")
               .style("text-anchor", "middle")
               .text("Temperature")
-              .style("fill", "black")
+              .style("fill", "white")
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
@@ -3147,6 +3142,18 @@
           console.log(this.chartState.var_y);
           let margin = 50;
 
+        // predicted data overlaps observed initially
+          if (this.step <= this.step_error_exp){
+            this.chartState.radius = 0;
+            this.chartState.strengthr = null;
+          } else if (this.step == this.step_error_exp) {
+             this.chartState.radius = 0;
+            this.chartState.strengthr = null;
+          } else {
+             this.chartState.radius = this.paddedRadius;
+            this.chartState.strengthr = .4;
+          }
+
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
             .range([margin, this.width+margin])
@@ -3162,10 +3169,10 @@
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
 
         // modify forces to update chart
-        self.simulation = this.d3.forceSimulation(this.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
+          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(3))
 
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
@@ -3237,19 +3244,6 @@
           console.log(response);
 
           ///////////
-          // this.start_bees is the step where the error plot appears
-          // stage different events based on the active step
-/*           let step_error = this.step_start; // the error chart appears
-          let step_diff = step_error + 1; // highlight difference between observed and expected
-          let step_rmse = step_diff + 1; /// data points to single RMSE
-          let step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
-          let step_ann_exp = step_ann + 1; // show RMSE for ANN with 3 experiments
-          let step_rnn = step_ann_exp + 2; // RNN
-          let step_rgcn = step_rnn + 2; // RGCN
-          let step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
-          let step_end = step_rgcn_ptrn +2;
- */
-          ///////////
           // assign dataset by step
           // and grouping variable for color scale for respective df
           if (this.step <= this.step_rmse){
@@ -3278,12 +3272,12 @@
           // assign chart axes and color scales
 
           // error chart
-          if (this.step <= this.step_error_exp) {
+          if (this.step === this.step_error_exp) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
           }
-           if (this.step <= this.step_error_obs && this.step > this.step_error_exp) {
+           if (this.step === this.step_error_obs ) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_obs;
             this.chartState.strengthy = 1;
@@ -3350,19 +3344,6 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // // remove/add beeswarm and legend on last step
-          // if (this.step == 23 && response.direction == 'down') {
-          //   this.chartState.measure = this.RGCN_ptrn_both;
-          //   self.fadeOut(this.d3.selectAll(".bees"), 500);
-          //   self.fadeOut(this.d3.selectAll("#flubber-svg"), 2400);
-          //   self.fadeOut(this.d3.select(".main_line"), 500);
-          // }
-          // if (this.step == 22|23 && response.direction == 'up') {
-          //   self.fadeIn(this.d3.selectAll(".bees"), 200);
-          //   self.fadeIn(this.d3.selectAll("#flubber-svg"), 2400);
-          //   self.fadeIn(this.d3.select(".main_line"), 500);
-          // }
-
           // update axes
           if (this.step == this.step_start && response.direction == "down" ) {
             self.drawAxes("error");
@@ -3391,7 +3372,7 @@
 
           if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-            self.fadeOut(this.d3.selectAll(".bees"), 500)
+            this.d3.selectAll(".bees").remove()
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
