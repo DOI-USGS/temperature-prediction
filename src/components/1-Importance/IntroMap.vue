@@ -2751,50 +2751,50 @@
                   <text
                     id="philly-dot"
                     class="city-dot"
-                    transform="translate(306.1 498.1) scale(8.1 8.1)"
+                    transform="translate(304.1 506.1) scale(11.1 11.1)"
                   >•</text>
                   <text
                     id="allentown-dot"
                     class="city-dot"
-                    transform="translate(262.5 384.5) scale(8.1 8.1)"
+                    transform="translate(261.5 389.5) scale(11.1 11.1)"
                   >•</text>
                   <text
                     id="wilmington-dot"
                     class="city-dot"
-                    transform="translate(255 533.9) scale(8.1 8.1)"
+                    transform="translate(253 539.9) scale(11.1 11.1)"
                   >•</text>
                   <text
                     id="trenton-dot"
                     class="city-dot"
-                    transform="translate(364 456) scale(8.1 8.1)"
+                    transform="translate(362 458) scale(11.1 11.1)"
                   >•</text>
                 </g>
                 <g id="outside_DRB">
                   <text
                     class="city-dot hidden-on-mobile"
-                    transform="translate(207.3 126.6) scale(8.1 8.1)"
+                    transform="translate(207.3 126.6) scale(11.1 11.1)"
                   >•</text>
                   <text
                     class="city-dot hidden-on-mobile"
-                    transform="translate(111.7 611.9) scale(8.1 8.1)"
+                    transform="translate(111.7 611.9) scale(11.1 11.1)"
                   >•</text>
                   <text
                     id="new-york-dot"
                     class="city-dot"
-                    transform="translate(458 364.5) scale(8.1 8.1)"
+                    transform="translate(458 364.5) scale(11.1 11.1)"
                   >•</text>
                   <text
                     class="city-dot hidden-on-mobile"
-                    transform="translate(77.7 441.2) scale(8.1 8.1)"
+                    transform="translate(77.7 441.2) scale(11.1 11.1)"
                   >•</text>
                   <text
                     class="city-dot hidden-on-mobile"
-                    transform="translate(53.5 679.4) scale(8.1 8.1)"
+                    transform="translate(53.5 679.4) scale(11.1 11.1)"
                   >•</text>
                   <text
                     id="scranton-dot"
                     class="city-dot"
-                    transform="translate(240 246.1) scale(8.1 8.1)"
+                    transform="translate(240 246.1) scale(11.1 11.1)"
                   >•</text>
                 </g>
               </g>
@@ -3056,59 +3056,59 @@
                   >Binghamton</text>
                   <text
                     class="city-label"
-                    transform="translate(195.4 241.9)"
+                    transform="translate(194.4 241.9)"
                   >Scranton</text>
                   <text
                     class="city-label hidden-on-mobile"
-                    transform="translate(85.4 435.9)"
+                    transform="translate(86.9 435.9)"
                   >Harrisburg</text>
                   <text
                     class="city-label"
-                    transform="translate(410.6 360)"
+                    transform="translate(409.6 359)"
                   >New York</text>
                   <text
                     class="city-label hidden-on-mobile"
-                    transform="translate(65.2 606.9)"
+                    transform="translate(64.2 606.9)"
                   >Baltimore</text>
                   <text
                     class="city-label hidden-on-mobile"
-                    transform="translate(60.3 674.3)"
+                    transform="translate(61.3 674.3)"
                   >Washington</text>
                 </g>
                 <g id="Inside_DRB">
                   <g id="text-masking">
                     <text
                       class="city-label masking"
-                      transform="translate(217.7 389.6)"
+                      transform="translate(217.7 391.6)"
                     >Allentown</text>
                     <text
                       class="city-label masking"
-                      transform="translate(372 458)"
+                      transform="translate(371.5 458)"
                     >Trenton</text>
                     <text
                       class="city-label masking"
-                      transform="translate(244 495.5)"
+                      transform="translate(240 495.5)"
                     >Philadelphia</text>
                     <text
                       class="city-label masking"
-                      transform="translate(210.1 522)"
+                      transform="translate(210.1 525)"
                     >Wilmington</text>
                   </g>
                   <text
                     class="city-label inside"
-                    transform="translate(217.7 389.6)"
+                    transform="translate(217.7 391.6)"
                   >Allentown</text>
                   <text
                     class="city-label inside"
-                    transform="translate(372 458)"
+                    transform="translate(371.5 458)"
                   >Trenton</text>
                   <text
                     class="city-label inside"
-                    transform="translate(244 495.5)"
+                    transform="translate(240 495.5)"
                   >Philadelphia</text>
                   <text
                     class="city-label inside"
-                    transform="translate(210.1 522)"
+                    transform="translate(210.1 525)"
                   >Wilmington</text>
                 
                 </g>
@@ -3178,15 +3178,15 @@
                 >W</text>
                 <text
                   class="state-label"
-                  transform="matrix(0.96, 0.28, -0.28, 0.96, 275.22, 741.23)"
+                  transform="matrix(0.96, 0.28, -0.28, 0.96, 275.22, 742.23)"
                 >A</text>
                 <text
                   class="state-label"
-                  transform="translate(287.4 744.5) rotate(9.8)"
+                  transform="translate(287.4 745.8) rotate(9.8)"
                 >R</text>
                 <text
                   class="state-label"
-                  transform="translate(299.7 746.4) rotate(5.9)"
+                  transform="translate(299.7 747.9) rotate(5.9)"
                 >E</text>
                 <g
                   id="connecticut"
@@ -3876,9 +3876,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
     .city-dot {
         font-size: 2px;
-        /* stroke: #000;
-        stroke-width: 1px;
-        stroke-miterlimit: 10; */
+        stroke: $backgroundCharcoal;
+        stroke-width: 0.1px;
+        stroke-miterlimit: 10;
         fill: #545454;
     }
 
@@ -3909,7 +3909,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
    .state-label {
         font-weight: 200;
         font-size: 16px;
-        fill: #444;
+        fill: #424242;
         letter-spacing: 20px;
     }
 

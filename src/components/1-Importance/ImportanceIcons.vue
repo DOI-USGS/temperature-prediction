@@ -140,7 +140,7 @@
 
 <style scoped lang="scss">
     .grid-container {
-        padding: 30px;
+        padding: 20px;
         display: grid;
         grid-template-columns: 30% 70%;
         grid-template-rows: repeat(4, 1fr);
@@ -165,11 +165,13 @@
     }
 
     .icon {
-      fill: white;
+      fill: #285C70;
     }
 
     .desc{
       margin: auto 0;
+      color: #285C70;
+      font-weight: 600;
     }
 
     #icon-1 {
