@@ -2703,7 +2703,7 @@
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
-            chart_y: {mid: 'mid', error: "error_pred"},
+            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
 
             // beeswarm
@@ -3252,7 +3252,7 @@
           ///////////
           // assign dataset by step
           // and grouping variable for color scale for respective df
-          if (this.step <= this.step_rmse ){
+          if (this.step <= this.step_rmse){
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
@@ -3278,9 +3278,14 @@
           // assign chart axes and color scales
 
           // error chart
-          if (this.step <= this.step_rmse) {
+          if (this.step <= this.step_error_exp) {
             this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error;
+            this.chartState.var_y = this.chart_y.error_exp;
+            this.chartState.strengthy = 1;
+          }
+           if (this.step <= this.step_error_obs && this.step > this.step_error_exp) {
+            this.chartState.var_x = this.chart_x.error;
+            this.chartState.var_y = this.chart_y.error_obs;
             this.chartState.strengthy = 1;
           }
 
@@ -3316,7 +3321,7 @@
           this.chartState.strengthx = .7;
 
           // animate error axes 
-          if (this.step >= this.step_start-1 ) {
+          if (this.step >= this.step_start ) {
             self.updateChart();
           }
 
