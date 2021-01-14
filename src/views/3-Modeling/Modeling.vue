@@ -2947,8 +2947,8 @@
           },
           makeBeeswarm() {
           // define core chart elements that are constant and only need to be run this one time
-            const self = this;
-            let margin = 50;
+          const self = this;
+          let margin = 50;
 
           // add svg for beeswarm 
           console.log("setting beeswarm - width:")
@@ -2958,10 +2958,12 @@
           console.log("setting beeswarm - margin:")
           console.log(this.margin)
           this.svg = this.d3.select('#bees-container').append('svg')
-              .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
-              // .attr("preserveAspectRatio", "none")
               .attr("id", "bees-chart")
               .attr("class", "figure-content")
+              // .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
+              .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
+              // .attr("preserveAspectRatio", "none")
+
 
           // define where chart starts within svg
           this.svg
@@ -3503,8 +3505,8 @@ figure.sticky.charts {
     min-height: 0;
   }
   #bees-chart {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
   }
   #legend-container {
     grid-column: 2 / 2;
