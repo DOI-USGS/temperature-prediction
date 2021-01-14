@@ -2600,7 +2600,7 @@
       </div>
       <div
         id="bees-container"
-        class="figure-content"
+
       />
       <div
         id="legend-container"
@@ -2697,7 +2697,7 @@
             // dimensions
             height: 500,
             width: 1000,
-            margin: 50,
+            //margin: 50,
             svg: null,
 
             // string keys to modify chart appearance
@@ -2733,6 +2733,16 @@
             flubber_id_order: [],
             current_flubber_id: null,
 
+            step_error_exp: null, 
+          step_error_obs : null,
+          step_rmse : null,
+          step_ann: null,
+          step_ann_exp : null,
+          step_rnn: null,
+          step_rgcn : null,
+          step_rgcn_ptrn : null,
+          step_end : null,
+
           }
         },
         mounted() {
@@ -2744,7 +2754,7 @@
           this.scroller.setup({
                   step: "article .step",
                   debug: false, // draw trigger line on page
-                  offset: 0.9, //bottom of the page to trigger onStepEnter events
+                  offset: 0.95, //bottom of the page to trigger onStepEnter events
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
                 .onStepEnter(this.handleStepEnter)
@@ -2770,6 +2780,19 @@
            if (this.step <= 2){
              this.d3.select("figure.intro").classed("sticky", true); 
           }
+
+          /////////// stage chart step sequence
+          // this.start_bees is the step where the error plot appears
+          // update data and trigger events based on the active step
+          this.step_error_exp = this.step_start; // the error chart appears
+          this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
+          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
+          this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
+          this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
+          this.step_rnn = this.step_ann_exp + 2; // RNN
+          this.step_rgcn = this.step_rnn + 2; // RGCN
+          this.step_rgcn_ptrn = this.step_rgcn + 2; //RGCN_ptrn
+          this.step_end = this.step_rgcn_ptrn +2;
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -2816,12 +2839,12 @@
           },
           // resize to keep scroller accurate with window size changes
           resize () {
-            const self = this;
+/*             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width = bounds.width
             this.height = bounds.height
             this.marginX = bounds.width * 0.1
-            this.marginY = bounds.height * 0.1
+            this.marginY = bounds.height * 0.1 */
             this.scroller.resize()
           },
           // set up flubber svg
@@ -2956,10 +2979,10 @@
           console.log("setting beeswarm - height:")
           console.log(this.height)
           console.log("setting beeswarm - margin:")
-          console.log(this.margin)
+          //console.log(this.margin)
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
-              .attr("class", "figure-content")
+              //.attr("class", "figure-content")
               // .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
               .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
               // .attr("preserveAspectRatio", "none")
@@ -2968,19 +2991,19 @@
           // define where chart starts within svg
           this.svg
             .append("g")
-            .attr('transform', `translate(${margin}, ${margin})`);
+            .attr('transform', `translate(50, 50)`);
 
           ////////////////////
           // set scales
 
           // x axis 
           this.xScale = this.d3.scaleLinear()
-            .range([this.margin, this.width+this.margin])
+            .range([margin, this.width+margin])
             .domain([0,this.chartState.domain_x]);
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, this.margin])
+            .range([this.height, margin])
             .domain([0,this.chartState.domain_y]);
 
           // testing out texture fills
@@ -3019,20 +3042,20 @@
 
         // style modifications and line drawing animation
           this.xAxis
-          .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
+          .attr("transform", "translate(" + -margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.width+this.margin)
-          .attr("stroke-dashoffset", this.width+this.margin)
+          .attr("stroke-dasharray", this.width+margin)
+          .attr("stroke-dashoffset", this.width+margin)
 
           this.yAxis
           .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.height+this.margin)
-          .attr("stroke-dashoffset", this.height+this.margin)
+          .attr("stroke-dasharray", this.height+margin)
+          .attr("stroke-dashoffset", this.height+margin)
 
           // axi slabels
           // text label for the x axis
           this.svg.append("text")             
-              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + this.margin + 50) + ")")
+              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 50) + ")")
               .style("text-anchor", "middle")
               .text("Time")
               .style("fill", "white")
@@ -3044,7 +3067,7 @@
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
               .attr("y", this.height/2)
-              .attr("x",this.margin)
+              .attr("x",margin)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
               .text("Temperature")
@@ -3063,6 +3086,7 @@
           drawAxes(axes_in) {
             // controls axis aniamtions between error chart and beeswarm
             let time_slide = 500;
+            let margin = 50;
             if (axes_in === "error") {
             this.yAxis
               .transition()
@@ -3081,13 +3105,13 @@
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.height+this.margin)
+              .attr("stroke-dashoffset", this.height+margin)
 
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.width+this.margin)
+              .attr("stroke-dashoffset", this.width+margin)
 
             } else if (axes_in === "rmse"){
               // move x-axis up to center line
@@ -3095,7 +3119,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -this.margin + "," + this.height/2 + ")")
+                .attr("transform", "translate(" + -margin + "," + this.height/2 + ")")
 
                 this.yAxis
                 .transition(time_slide)
@@ -3108,7 +3132,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -this.margin + "," + this.height + ")")
+                .attr("transform", "translate(" + -margin + "," + this.height + ")")
 
                 this.yAxis
                 .transition(time_slide)
@@ -3121,14 +3145,15 @@
           // where are we?
           console.log(this.chartState.var_x);
           console.log(this.chartState.var_y);
+          let margin = 50;
 
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
-            .range([this.margin, this.width+this.margin])
+            .range([margin, this.width+margin])
             .domain([0,this.chartState.domain_x]);
 
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, this.margin])
+            .range([this.height, margin])
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
@@ -3137,7 +3162,7 @@
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
 
         // modify forces to update chart
-        self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+        self.simulation = this.d3.forceSimulation(this.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.paddedRadius).strength(this.chartState.strengthr).iterations(1))
@@ -3185,7 +3210,7 @@
            self.simulation
            .alpha(.1)
            .alphaDecay(0.01)
-           .velocityDecay(0.6)
+           //.velocityDecay(0.6)
            .restart()
             .on("tick", self.tick) 
             // high velocity decay with low alpha decay so it cools more slowly
@@ -3214,7 +3239,7 @@
           ///////////
           // this.start_bees is the step where the error plot appears
           // stage different events based on the active step
-          let step_error = this.step_start; // the error chart appears
+/*           let step_error = this.step_start; // the error chart appears
           let step_diff = step_error + 1; // highlight difference between observed and expected
           let step_rmse = step_diff + 1; /// data points to single RMSE
           let step_ann = step_rmse + 1; /// show RMSE for ANN d100 experiment
@@ -3223,25 +3248,25 @@
           let step_rgcn = step_rnn + 2; // RGCN
           let step_rgcn_ptrn = step_rgcn + 2; //RGCN_ptrn
           let step_end = step_rgcn_ptrn +2;
-
+ */
           ///////////
           // assign dataset by step
           // and grouping variable for color scale for respective df
-          if (this.step <= step_rmse ){
+          if (this.step <= this.step_rmse ){
             //contains subset of d100 data with fake error data
             this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
           }
-          if (this.step == step_ann){
+          if (this.step == this.step_ann){
             //contains only data for d100
             this.chartState.dataset = this.rmse_ann;
             this.chartState.grouped = this.color_bees.exp;
             this.chartState.domain_y = null; // turn off yScale when force is used
             this.chartState.domain_x = 10;
           }
-          if (this.step >= step_ann_exp){
+          if (this.step >= this.step_ann_exp){
             //contains data for 3 experiments 
             this.chartState.dataset = this.rmse_exp;
             this.chartState.grouped = this.color_bees.exp;
@@ -3253,32 +3278,32 @@
           // assign chart axes and color scales
 
           // error chart
-          if (this.step <= step_rmse) {
+          if (this.step <= this.step_rmse) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
             this.chartState.strengthy = 1;
           }
 
           // intro beeswarm, adding experiments
-          if (this.step <= step_ann_exp && this.step >= step_ann) {
+          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.var_x = this.chart_x.ANN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RNN
-          if (this.step >= step_rnn && this.step < step_rgcn) {
+          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
             this.chartState.var_x = this.chart_x.RNN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RGCN
-          if (this.step >= step_rgcn && this.step <= step_rgcn_ptrn) {
+          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
           }
           // RGCN to end
-          if (this.step >= step_rgcn_ptrn) {
+          if (this.step >= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN_ptrn;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
@@ -3291,7 +3316,7 @@
           this.chartState.strengthx = .7;
 
           // animate error axes 
-          if (this.step >= this.step_start ) {
+          if (this.step >= this.step_start-1 ) {
             self.updateChart();
           }
 
@@ -3336,19 +3361,12 @@
           // update axes
           if (this.step == this.step_start && response.direction == "down" ) {
             self.drawAxes("error");
-          } else if (this.step == this.step_start && response.direction == "up") {
-            self.drawAxes("error_up");
-          } else if (this.step == this.step_start+3 && response.direction == "down") {
+          } else if (this.step == this.step_rmse && response.direction == "down") {
             self.drawAxes("rmse");
-          } else if (this.step == this.step_start+3 && response.direction == "up") {
-            self.drawAxes("rmse_up");
-          }
+          } 
 
            // add class to active step
           response.element.classList.add("is-active");
-
-          // trigger style changes
-          //this.makePop(this.step);
 
           // trigger flubber
           this.animateFlubber(response.element.id, response.direction);
@@ -3357,6 +3375,7 @@
         
         // add remove class on exit
         handleStepExit(response) {
+          const self = this;
           // changes css for class
           response.element.classList.remove("is-active");
 
@@ -3367,8 +3386,8 @@
 
           if (this.step == this.step_start && response.direction == "up") {
             self.drawAxes("error_up");
-            fadeOut(this.d3.selectAll(".bees"), 500)
-          } else if (this.step == this.step_start+3 && response.direction == "up") {
+            self.fadeOut(this.d3.selectAll(".bees"), 500)
+          } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
 
