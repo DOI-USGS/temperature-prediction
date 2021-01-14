@@ -2708,7 +2708,7 @@
 
             // beeswarm
             step_start: 13,
-            radius: 6,
+            radius: 8,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2829,7 +2829,7 @@
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
-            this.chartState.strengthr = 0
+            this.chartState.strengthr = 0;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
@@ -2999,7 +2999,7 @@
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, margin])
+            .range([this.height,0])
             .domain([0,this.chartState.domain_y]);
 
           // testing out texture fills
@@ -3036,19 +3036,50 @@
             .attr("class", "x-axis")
             .call(xGen);
 
-        // style modifications and line drawing animation
+        // style modifications and set up line drawing animation
+
+          /// draw arrowhead for axes
+           this.svg
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrowhead-right')
+            .attr('refX', 4)
+            .attr('refY', 6)
+            .attr('markerWidth', 12)
+            .attr('markerHeight', 10)
+            .append('path')
+            .attr('d', 'M 0 0 L 5 5 L 0 10')
+            .attr('stroke', 'white')
+            .attr('stroke-width', 1)
+            .attr('fill', 'none');
+
+          this.svg
+            .append('defs')
+            .append('marker')
+            .attr('id', 'arrowhead-up')
+            .attr('refX', 3)
+            .attr('refY', 6)
+            .attr('markerWidth', 12)
+            .attr('markerHeight', 10)
+            .append('path')
+            .attr('d', 'M 0 0 L 5 5 L 0 10')
+            .attr("transform", "rotate(90)")
+            .attr('stroke', 'white')
+            .attr('stroke-width', 1)
+            .attr('fill', 'none');
           this.xAxis
           .attr("transform", "translate(" + -margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.width+margin)
           .attr("stroke-dashoffset", this.width+margin)
+          .attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
 
           this.yAxis
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.height+margin)
           .attr("stroke-dashoffset", this.height+margin)
+          .attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
-          // axi slabels
           // text label for the x axis
           this.svg.append("text")             
               .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 50) + ")")
@@ -3062,7 +3093,7 @@
           // text label for the y axis
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
-              .attr("x", -this.height/2)
+              .attr("x", -(this.height/2+margin))
               .attr("y",0)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
@@ -3452,10 +3483,10 @@ article {
   left: 0;
   padding-top: 0px;
 
-  .step[data-scrollama-index='14'] {
+/*   .step[data-scrollama-index='14'] {
   height: 10vh;
   padding-top: 5vh;
-}
+} */
 }
 
 //start at beginning
@@ -3478,13 +3509,13 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
-  grid-template-rows: 40% 5% 40% 5%;
+  grid-template-rows: 30% 20% 30% 10%;
   grid-template-columns: 2% auto 2%;
 
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
-  height: 90vh;
+  height: 100vh;
   width: auto;
 
   #flubber-container {
@@ -3509,6 +3540,8 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
+    width: 80%;
+    margin: auto;
   }
   #bees-chart {
     height: 100%;
