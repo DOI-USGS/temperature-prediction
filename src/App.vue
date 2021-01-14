@@ -174,7 +174,7 @@ h3{
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
-    padding: 0 100px;
+    // padding: 0 100px;
     margin: auto;
 
     @media screen and (max-width: 600px) {
