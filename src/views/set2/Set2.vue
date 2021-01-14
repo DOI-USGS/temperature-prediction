@@ -53,15 +53,15 @@
     </div> 
     <div
       id="matrix-explainer-container"
-      class="flex-container"
+      class="grid-container"
     >
-      <div class="flex-item">
+      <div class="grid-item" id="MatrixExplainerSpace">
         <MatrixExplainerSpace />
       </div>
-      <div class="flex-item">
+      <div class="grid-item" id="MatrixExplainerTime">
         <MatrixExplainerTime />
       </div>
-      <div class="flex-item">
+      <div class="grid-item" id="MatrixExplainerColor">
         <MatrixExplainerColor />
       </div>            
     </div>
@@ -2211,6 +2211,34 @@
 
   #filter_row {
     height: 1vh;
+  }
+  .grid-container {
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 2% 32% 32% 32% 2%;
+        grid-template-rows: 100%;
+        gap: 5px 20px;
+        width: 100vw;
+        max-height: 80%;
+        min-width: 0;
+        min-height: 0;
+        @media screen and (max-width: 600px) {
+          padding: 10px 0;
+          gap: 0px;
+        }
+  }
+  .grid-item {
+        padding: 0px;
+        display: flex;
+  }
+  #MatrixExplainerSpace {
+    grid-column: 2
+  }
+  #MatrixExplainerTime {
+    grid-column: 3
+  }
+  #MatrixExplainerColor {
+    grid-column: 4
   }
 }
 </style>

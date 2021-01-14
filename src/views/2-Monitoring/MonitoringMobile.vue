@@ -13,8 +13,7 @@
     <div class="text-content">
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
-      <p>ICONS HERE</p>
-      <!-- <Chapter2Icons1 /> -->
+      <Chapter2Icons1 />
       <h2 v-html="text.title2" />
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
@@ -32,8 +31,7 @@
     <div class="text-content">
       <h2 v-html="text.title3" />
       <p v-html="text.paragraph10" />
-      <p>ICONS HERE</p>
-      <!-- <Chapter2Icons2 /> -->
+      <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
     <MonitoringLineChart />
@@ -72,7 +70,9 @@
       MatrixExplainerColor,
       MatrixAvailability,
       MonitoringLineChart,
-      MatrixTemperature
+      MatrixTemperature,
+      Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
+      Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
     },
     data() {
         return {

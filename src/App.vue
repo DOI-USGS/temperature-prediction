@@ -143,8 +143,11 @@ h3{
     align-items: flex-start;
     justify-content: space-evenly;
     align-content: space-around;
-    max-width: 100%;
+    max-width: 30%;
     margin: auto;
+    @media screen and (max-width: 600px) {
+        max-width: 100%;
+    }
   }
 
   .flex-item {

@@ -214,7 +214,7 @@
       margin: 0 auto;
       padding-right: 2em;   
       @media screen and (max-width: 600px) {
-          padding: 10px;
+          padding-right: 20px;
       }
     }
     .grid-container {
@@ -228,8 +228,8 @@
         min-width: 0;
         min-height: 0;
         @media screen and (max-width: 600px) {
-          padding: 30px 0;
-          gap: 30px;
+          padding: 10px 0;
+          gap: 0px;
         }
     }
 
