@@ -2789,7 +2789,7 @@
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
-          this.step_rnn = this.step_ann_exp + 3; // RNN
+          this.step_rnn = this.step_ann_exp + 3; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
@@ -2829,10 +2829,10 @@
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
-            this.chartState.strengthr = .4
+            this.chartState.strengthr = 0
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
-            this.chartState.radius = this.paddedRadius;
+            this.chartState.radius = 0;
 
             // draw the chart
             this.makeBeeswarm();
@@ -3172,7 +3172,7 @@
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(3))
+          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(10))
 
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
@@ -3345,11 +3345,11 @@
           }
 
           // update axes
-          if (this.step == this.step_start && response.direction == "down" ) {
+          if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
-          } else if (this.step == this.step_rmse && response.direction == "down") {
+          } /* else if (this.step == this.step_rmse && response.direction == "down") {
             self.drawAxes("rmse");
-          } 
+          }  */
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -3370,12 +3370,16 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          if (this.step == this.step_start && response.direction == "up") {
+          if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
           }
+
+          if (this.step == this.step_rmse && response.direction == "down") {
+            self.drawAxes("rmse");
+          } 
 
 
         },
@@ -3510,8 +3514,9 @@ figure.sticky.charts {
     min-height: 0;
   }
   #bees-chart {
-    height: auto;
-    width: 100%;
+    height: 100%;
+    width: auto;
+    max-width: 800px;
   }
   #legend-container {
     grid-column: 2 / 2;
