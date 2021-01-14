@@ -33,8 +33,7 @@
     <div class="text-content">
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
-      <p>ICONS HERE</p>
-      <!-- <Chapter2Icons1 /> -->
+      <Chapter2Icons1 />
       <!--"section-title-wrapper"-->
       <div class="viz-title">
         <h2 v-html="text.title2" />
@@ -96,7 +95,7 @@
     <div class="text-content">
       <h2 v-html="text.title3" />
       <p v-html="text.paragraph10" />
-      <!-- <Chapter2Icons2 /> -->
+      <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
     <div class="text-content viz-title-wrapper">
@@ -214,14 +213,15 @@
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
 
-
   export default {
       name: 'Set2',
       components: {
         MonitoringLineChart,
         MatrixExplainerSpace,
         MatrixExplainerTime,
-        MatrixExplainerColor
+        MatrixExplainerColor,
+        Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
+        Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
       },
       data() {
         return {
