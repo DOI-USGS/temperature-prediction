@@ -237,9 +237,9 @@ h3{
 }
 
 .legend-text {
-    fill: darkgray;
+    fill: #707070;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: 0.8em;
   }
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
