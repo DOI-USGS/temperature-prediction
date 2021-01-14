@@ -2660,13 +2660,6 @@
         </div>
       </div>
     </article>
-    <div id="map-container">
-      <img
-        id="hex-map"
-        src="@/assets/usa_hex_map_80-01.png"
-      >
-      <!-- need to add legend and recolor beeswarm to mirror?? -->
-    </div>
   </div>
 </template>
 
@@ -3438,10 +3431,6 @@ article {
   font-size: 1.5rem;
   }
 }
-// adjust spacing on last step with hex map
-.step[data-scrollama-index='14'] {
-  height: 10vh;
-}
 
 // add sticky header to steps to maintain while given model is shown
 .scroll-sticky {
@@ -3637,9 +3626,6 @@ figure.sticky.charts {
 }
 .f_temp.ital {
   font-style: italic;
-}
-#hex-map {
-  padding: 4rem;
 }
 
 </style>

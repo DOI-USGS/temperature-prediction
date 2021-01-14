@@ -136,8 +136,18 @@
     </div>
     <div class="text-content">
       <p v-html="text.paragraph14" />
+      <p v-html="text.paragraph15" />
     </div>
-    
+    <div id="map-container" class="figure-content">
+      <img
+        id="hex-map"
+        src="@/assets/usa_hex_map_80-01.png"
+      >
+      <!-- need to add legend and recolor beeswarm to mirror?? -->
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph16" />
+    </div>
     <div class="container-fluid">
       <div
         id="filter_row"
@@ -2247,12 +2257,14 @@
   fill: #999999;
   font-size: 1.1vh;
 }
-
 .tooltip {
   fill: #ffffff;
   font-family: sans-serif;
   font-size: 0.7em;
   font-weight: bold;
   line-height: 1em;
+}
+#hex-map {
+  padding: 4rem;
 }
 </style>
