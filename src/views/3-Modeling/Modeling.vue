@@ -2980,7 +2980,8 @@
               //.attr("class", "figure-content")
               // .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
               .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
-              // .attr("preserveAspectRatio", "none")
+              .attr("height", "100%")
+              .attr("width", "100%")
 
 
           // define where chart starts within svg
@@ -3061,8 +3062,8 @@
           // text label for the y axis
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
-              .attr("y", this.height/2)
-              .attr("x",margin)
+              .attr("x", -this.height/2)
+              .attr("y",0)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
               .text("Temperature")
@@ -3075,7 +3076,7 @@
           self.simulation = this.d3.forceSimulation()
           .force("x", this.d3.forceX())
           .force('y', this.d3.forceY())
-          .force("collide", this.d3.forceCollide(this.paddedRadius))
+          .force("collide", this.d3.forceCollide(this.chartState.strengthy))
 
           },
           drawAxes(axes_in) {
@@ -3313,8 +3314,6 @@
           // only redraw if the data or forces change
           this.chartState.strengthy = .4;
           this.chartState.strengthx = .7;
-
-          // animate error axes 
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -3347,9 +3346,10 @@
           // update axes
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
-          } /* else if (this.step == this.step_rmse && response.direction == "down") {
-            self.drawAxes("rmse");
-          }  */
+          }  else if (this.step == this.step_rmse && response.direction == "down") {
+            //self.drawAxes("rmse");
+            self.fadeOut(this.d3.selectAll(".axis-label"), 500);
+          }  
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -3375,6 +3375,7 @@
             this.d3.selectAll(".bees").remove()
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
+            self.fadeIn(this.d3.selectAll(".axis-label"), 500);
           }
 
           if (this.step == this.step_rmse && response.direction == "down") {
@@ -3508,10 +3509,6 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    height: 100%;
-    width: auto;
-    min-width: 0;
-    min-height: 0;
   }
   #bees-chart {
     height: 100%;
