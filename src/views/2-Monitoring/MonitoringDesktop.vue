@@ -1,6 +1,5 @@
 <template>
-  <div id="monitoring-desktop">
-    <div class="text-content" />  
+  <div id="monitoring-desktop"> 
     <Set2 />
   </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
   <div id="matrix-availability">
-    <h3 class="viz-title">
+    <!-- h3 class="viz-title">
       Observation Frequency for Reaches in the DRB
-    </h3>
+    </h3 -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -32910,23 +32910,23 @@
       </g>
       <g id="year_labels">
         <text
-          class="legend-text"
-          transform="translate(621.3 1126.4)"
+          class="explainer-minor-text"
+          transform="translate(609.3 1126.4)"
         >2019</text>
         <text
-          class="legend-text"
-          transform="translate(477.1 1126.4)"
+          class="explainer-minor-text"
+          transform="translate(476.1 1126.4)"
         >2010</text>
         <text
-          class="legend-text"
-          transform="translate(328 1126.4)"
+          class="explainer-minor-text"
+          transform="translate(327 1126.4)"
         >2000</text>
         <text
-          class="legend-text"
-          transform="translate(179 1126.4)"
+          class="explainer-minor-text"
+          transform="translate(176 1126.4)"
         >1990</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(29.9 1126.4)"
         >1980</text>
       </g>
@@ -32991,11 +32991,11 @@
           </g>
         </g>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(664.6 141.7)"
         >N</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(666.1 1083.6)"
         >S</text>
       </g>
@@ -33010,11 +33010,11 @@
       </g>
       <g id="legend_text">
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(120.1 75.1)"
         >yearly</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(528.1 75.1)"
         >daily</text>
       </g>

@@ -900,18 +900,18 @@
       </g>
       <g id="Time_axis_text">
         <text
-          class="legend-text"
-          transform="translate(611.5 1063.8)"
+          class="explainer-minor-text"
+          transform="translate(611.5 1062.8)"
         >2019</text>
         <text
-          class="legend-text"
-          transform="translate(43.2 1063.8)"
+          class="explainer-minor-text"
+          transform="translate(45.2 1062.8)"
         >1980</text>
       </g>
       <g id="label_2013">
         <text
-          class="legend-text"
-          transform="translate(550 98.5)"
+          class="explainer-minor-text"
+          transform="translate(548 100.5)"
         >2013</text>
       </g>
       <g id="Descriptor_text">

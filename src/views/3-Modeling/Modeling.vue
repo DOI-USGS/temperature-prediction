@@ -7,9 +7,14 @@
         id="intro-container"
         class="text-content text-intro"
       >
-        <h2>{{ sectionTitle }}</h2>
-        <p />
-        <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+        <!-- h2>{{ sectionTitle }}</h2 -->
+        <div class="text-content page-title section-title-wrapper">
+          <h2>Modeling Stream Temperature</h2>
+        </div>
+        <div class="text-content">
+          <p />
+          <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+        </div>
       </div>
     </figure>
     <!--  figure contains all the sticky elements -->
@@ -2600,7 +2605,6 @@
       </div>
       <div
         id="bees-container"
-
       />
       <div
         id="legend-container"
@@ -2613,13 +2617,25 @@
           xmlns="http://www.w3.org/2000/svg" 
         >
           <g>
-    <path class="arrow" d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"/>
-    <path class="arrow" d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"/>
-  </g>
-  <g>
-    <path class="arrow" d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"/>
-    <path class="arrow" d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"/>
-  </g>
+            <path
+              class="arrow"
+              d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"
+            />
+            <path
+              class="arrow"
+              d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"
+            />
+          </g>
+          <g>
+            <path
+              class="arrow"
+              d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"
+            />
+            <path
+              class="arrow"
+              d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"
+            />
+          </g>
 
         </svg>
       </div>
@@ -2637,9 +2653,9 @@
           <div
             class="scroll-sticky"
           >
-            <h2>
+            <h3 class="viz-title">
               {{ model_group }}
-            </h2>
+            </h3>
           </div>
           <!-- populate nested steps using text about each model -->
           <div class="scrollama-steps">
@@ -2655,13 +2671,6 @@
         </div>
       </div>
     </article>
-    <div id="map-container">
-      <img
-        id="hex-map"
-        src="@/assets/usa_hex_map_80-01.png"
-      >
-      <!-- need to add legend and recolor beeswarm to mirror?? -->
-    </div>
   </div>
 </template>
 
@@ -2684,7 +2693,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
-            sectionTitle: "Modeling Stream Temperature", // the initial
+            // sectionTitle: "Modeling Stream Temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -2930,7 +2939,7 @@
                     .duration(animationLength)
                     .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
                     .attrTween("d", function(d){
-                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 1 })
+                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2 })
                     })
                 }
               }
@@ -3531,15 +3540,18 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
+  padding-top: 2.1em;
   grid-template-rows: 30% 20% 30% 10%;
   grid-template-columns: 2% auto 2%;
   z-index: 1;
-
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
   height: 100vh;
   width: auto;
+  @media screen and (max-width: 600px) {
+          padding-top: 4em;
+        }
 
   #flubber-container {
     grid-column: 2 / 2;

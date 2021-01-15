@@ -1973,11 +1973,11 @@
           y="0"
         >daily</tspan></text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(362.9 534.8)"
         >1 observation</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(362.9 457.3)"
         >365 observations</text>
       </g>
@@ -2562,9 +2562,9 @@
         >how often that reach was observed,</text>
         <text
           class="viz-comment"
-          transform="translate(63 1010.7)"
+          transform="translate(72 1010.7)"
         >This allows us to see chunks of time and space<tspan
-          x="0"
+          x="-16"
           y="42"
         >when we are</tspan>
           <tspan
@@ -2573,7 +2573,7 @@
             y="42"
           >in the dark</tspan>
           <tspan
-            x="263.3"
+            x="273.3"
             y="42"
           >about stream temperature</tspan></text>
         <text

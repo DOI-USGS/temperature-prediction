@@ -3,9 +3,13 @@
     <svg
       id="line-chart-svg"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 500 550"
+      viewBox="0 0 500 500"
+      transform="translate(0 0) scale(0.85 0.85)"
     >
-      <g id="background-lines">
+      <g
+        id="background-lines"
+        transform="translate(15 0)"
+      >
         <path
           id="bkgrd-line-1556"
           class="background-line"
@@ -217,7 +221,10 @@
           d="M39.7,372h1.2l1.2-3,1.2,1.5,1.2-1.5h1.2l1.2,3,1.3,1.4,1.2,1.5,1.2,5.8,1.2,5.8,1.2,3,1.2,1.4,1.2,1.4,1.2,3,1.2,4.4,1.2,2.9h1.2l1.2,1.5,1.3,2.9,1.2,13.2,1.2,8.8,1.2,3,1.2-4.4,1.2-3h1.2l1.2-1.4,1.2-1.4,1.2-4.4h1.2l1.2-1.5,1.2,1.5h1.3l1.2-3,1.2-3H82l1.2,1.5,1.2,1.4h1.2l1.2,3,1.2-1.5,1.2-1.4,1.2-1.4,1.2-5.9h1.3l1.2-1.4,1.2-1.4,1.2-1.4,1.2-1.5,1.2,1.5h1.2l1.2,1.4,1.2-3,1.2-2.9,1.2-1.5h3.7l1.2-1.4h4.8l1.2,1.4,1.2,4.4h2.4l1.2-2.9,1.2-1.5,1.3-2.9,1.2-3,1.2-3,1.2-5.8,1.2-14.6,1.2-7.3,1.2,5.8,1.2-5.8,1.2-8.8,1.2-5.8,1.2,1.4,1.2,2.9h1.2l1.3-4.3,1.2-3,1.2,1.4h1.2l1.2-4.4,1.2,1.4,1.2-4.3,1.2-11.8,1.2,4.4,1.2,4.4,1.2-7.4,1.2-2.9,1.2,2.9,1.3-5.8,1.2-7.3,1.2-5.9,1.2-8.7,1.2-1.5,1.2,1.5h1.2l1.2-8.8,1.2-4.4,1.2-13.2,1.2,5.8,1.2,1.4,1.3-2.9,1.2-8.8,1.2-4.4,1.2-5.8,1.2-8.8,1.2-7.4,1.2-7.3,1.2,5.8,1.2,1.4,1.2-8.8,1.2,8.8h1.2l1.2-2.9,1.3,5.8,1.2-8.8h1.2l1.2-3,1.2,1.5h1.2l1.2-8.8,1.2-3,1.2,4.4,1.2-4.4,1.2-7.3,1.2,14.6h1.3l1.2,1.4,1.2,1.4,1.2,8.8,1.2-3,1.2-10.2,1.2-4.4,1.2-1.4,1.2-5.8,1.2-1.4,1.2-4.4,1.2-5.9,1.2,4.4,1.3-7.3,1.2-3,1.2-4.4,1.2-2.9,1.2,1.4,1.2-5.8,1.2-1.5,1.2-2.9,1.2-4.4h1.2l1.2-1.5,1.2-7.3,1.3,1.4,1.2,3,1.2,4.4,1.2-1.5,1.2-4.3,1.2-1.5,1.2,3,1.2-7.4,1.2,1.5,1.2,1.4h1.2l1.2-1.4h1.2l1.3,1.4,1.2-13.2,1.2,3,1.2,5.8,1.2,3h2.4l1.2,2.9,1.2,8.8,1.2,3,1.2-1.5h1.2l1.3-4.3,1.2-5.9,1.2,3h1.2l1.2-3,1.2-5.8.3-23,1.2-1.5,1.2,7.4,1.2,2.9,1.3-18.9,1.2,10.2,1.2,2.9,1.2,3h1.2l1.2,1.4,1.2-1.4h3.6l1.2-1.4,1.2-8.8h1.2l1.3,4.4,1.2,1.4h1.2l1.2-1.4h2.4l1.2-1.5,1.2-1.4,1.2-2.9,1.2-1.5h1.2l1.2-1.4H301l1.2-1.4,1.2-1.5h1.2l1.2,4.4H307l1.2-2.9,1.2,1.4h1.2l1.2-3H313l1.2,1.5,1.2-1.5,1.3-2.9,1.2,1.4h1.2l1.2,1.4,1.2,1.5h2.4l1.2-3h2.4l1.2,1.4h2.4l1.3,3h1.2l1.2-1.4H336l1.2,2.9,1.2,4.4,1.2-1.4H342l1.2,1.4,1.2,1.4h1.2l1.3,4.4h1.2l1.2-2.9h1.2l1.2,1.4,1.2,3,1.2,1.4h1.2l1.2,1.4,1.2-1.4h1.2l1.2,5.8,1.2,3,1.3-1.5,1.2,1.5,1.2-1.5,1.2-1.4,1.2,4.4,1.2-1.4,1.2-1.4,1.2,5.8h1.2l1.2-1.5,1.2-2.9,1.2,2.9,1.3,11.8,1.2,8.8,1.2,2.9,1.2,1.5h1.2l1.2,1.4,1.2,1.4,1.2,3,1.2,4.4,1.2,3,1.2,7.3,1.2,4.4,1.2,10.2,1.3,7.4,1.2,5.8,1.2-3,1.2,1.5,1.2,1.4,1.2,1.4,1.2,1.4,1.2-2.9h1.2l1.2,2.9,1.2-4.4L406,230l1.3,8.8,1.2,5.8,1.2,10.2,1.2,16.2,1.2,8.8,1.2,7.3,1.2,5.8,1.2,1.5,1.2,2.9,1.2,7.4,1.2,7.3,1.2,8.8,1.2,4.4,1.3,3,1.2,5.8,1.2,8.8,1.2,3,1.2,2.9,1.2,1.5,1.2-1.5h1.2l1.2,4.4,1.2,1.4h2.4l1.3,1.5,1.2-1.5,1.2,4.4,1.2,3,1.2,3,1.2,2.9,1.2,3,1.2,1.4,1.2,1.5,1.2,2.9,1.2,3,1.2,1.4h1.2l1.3-1.4,1.2,1.4,1.2,5.8h3.6l1.2,3h1.2l1.2,4.4L464,403l1.2,1.4,1.2,1.4,1.3-1.4,1.2-1.4,1.2,2.9,1.2-1.4,1.2-1.4h1.2l1.2-1.4h2.4l1.2-1.5"
         />
       </g>
-      <g id="axis">
+      <g
+        id="axis"
+        transform="translate(15 0)"
+      >
         <path
           id="x-axis"
           class="solid-axis"
@@ -227,6 +234,13 @@
           id="y-axis"
           class="solid-axis"
           d="M33.2,467V22.2"
+        />
+        <line
+          class="tick-marks"
+          x1="43"
+          y1="467"
+          x2="43"
+          y2="474.7"
         />
         <line
           class="tick-marks"
@@ -262,51 +276,93 @@
           d="M33.2,461.5H25.5m7.7-146.4H25.5m7.7-146.5H25.5M33.2,22.2H25.5"
         />
       </g>
-      <!-- <g id="axis-titles">
+      <g
+        id="axis-titles"
+        transform="translate(15 0)"
+      >
         <g>
           <text
-            class="legend-text"
-            transform="translate(40 535)"
-          >Stream Temperature in most-measured sites in 2019</text>
+            class="desc-text"
+            transform="translate(135 410)"
+          >Average<tspan
+            x="0"
+            y="15"
+          >stream</tspan><tspan
+            x="0"
+            y="30"
+          >temperature</tspan></text>
         </g>
-      </g> -->
-      <g id="axis-labels-x">
+        <g>
+          <text
+            class="site-text"
+            transform="translate(210 340)"
+          >Temperatures in<tspan
+            x="0"
+            y="15"
+          >individual stream</tspan><tspan
+            x="0"
+            y="30"
+          >reaches</tspan></text>
+        </g>
+        <g>
+          <text
+            class="highlight-text"
+            transform="translate(230 280)"
+          >Coolest reach</text>
+        </g>
+        <g>
+          <text
+            class="highlight-text"
+            transform="translate(327 80)"
+          >Warmest reach</text>
+        </g>
+      </g>>
+      <g
+        id="axis-labels-x"
+        transform="translate(15 0)"
+      >
         <text
           class="legend-text"
-          transform="translate(33.9 489.4)"
+          transform="translate(29.9 489.4)"
         >Jan</text>
         <text
           class="legend-text"
-          transform="translate(148.2 489.4)"
+          transform="translate(144.2 489.4)"
         >Apr</text>
         <text
           class="legend-text"
-          transform="translate(268.2 489.4)"
+          transform="translate(264.2 489.4)"
         >Aug</text>
         <text
           class="legend-text"
-          transform="translate(388.2 489.6)"
+          transform="translate(384.2 489.6)"
         >Oct</text>
       </g>
-      <g id="axis-labels-y">
+      <g
+        id="axis-labels-y"
+        transform="translate(13 0)"
+      >
         <text
           class="legend-text"
-          transform="translate(11.4 463.5)"
-        >0</text>
-        <!-- <text
-          class="legend-text"
-          transform="translate(8.8 318.7)"
-        >10</text>
+          transform="translate(-3 466.5)"
+        >0°C</text>
         <text
           class="legend-text"
-          transform="translate(8.8 171.4)"
-        >20</text> -->
+          transform="translate(-12 320.7)"
+        >10°C</text>
         <text
           class="legend-text"
-          transform="translate(9 27.4)"
+          transform="translate(-12 173.4)"
+        >20°C</text>
+        <text
+          class="legend-text"
+          transform="translate(-12 27.4)"
         >30°C</text>
       </g>
-      <g id="special-lines">
+      <g
+        id="special-lines"
+        transform="translate(15 0)"
+      >
         <path
           id="cold-reservoir-seg"
           class="cls-23 special-line"
@@ -369,7 +425,7 @@ $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
-$monotoneBlue5: #10313e;
+$monotoneBlue5: #285C70;
 $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 #line-chart-svg {
@@ -378,58 +434,87 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 .background-line {
     fill: none;
-    stroke: #828282;
+    stroke: #88989f; //#828282
     stroke-width: 1px;
-    opacity: .05;
+    opacity: .05; //0.05
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
 }
 
 .cls-1, .cls-23, .cls-24, .cls-25, .cls-3 {
-        fill: none;
-      }
+  fill: none;
+}
 
 
-      .cls-23, .cls-24, .cls-25 {
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
+.cls-23, .cls-24, .cls-25 {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-      .cls-2, .cls-23, .cls-24, .cls-25 {
-        stroke-width: 0.5px;
-      }
+.cls-2, .cls-23, .cls-24, .cls-25 {
+  stroke-width: 0.5px;
+}
 
-      .cls-2, .cls-3 {
-        stroke-miterlimit: 10;
-      }
+.cls-2, .cls-3 {
+  stroke-miterlimit: 10;
+}
 
-      .cls-3 {
-        stroke: #fff;
-      }
+.cls-3 {
+  stroke: #fff;
+}
 
-      .cls-22 {
-        fill: #fff;
-      }
-     
-
-      .cls-22 {
-        font-weight: 300;
-      }
+.cls-22 {
+  fill: #fff;
+}
 
 
-      .cls-23 {
-        stroke: $monotoneBlue5;
-      }
-
-      .cls-24 {
-        stroke: goldenrod;
-      }
-
-      .cls-25 {
-        stroke: $offWhite;
-      }
+.cls-22 {
+  font-weight: 300;
+}
 
 
+.cls-23 {
+  // stroke: #285C70; //monotoneBlue5 , darkest plasma blue: #17068B, lighter plasma blue: #3f2dc2
+  stroke: #285C70; // latest: #88989f  old: #828282
+  stroke-width: 1px;
+  opacity: 0.6; // 0.05
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.cls-24 {
+  // stroke: #4c656e; //goldenrod, plasma yellow: #EBF222
+  stroke: #285C70; // latest: #88989f  old: #828282
+  stroke-width: 1px;
+  opacity: 0.6; // 0.05
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.cls-25 {
+  stroke: #c3cccf; //latest: #c3cccf  old: offWhite #ce4b75 #e0e0e0 peachy pink: #ce4b75 lightlight blue: #c3cccf
+  stroke-width: 1px;
+}
+
+.desc-text {
+  fill: #c3cccf;
+  font-size: 16px;
+  font-style: italic;
+}
+.site-text {
+  fill: #88989f;
+  opacity: 0.4;
+  font-size: 16px;
+  font-style: italic;
+}
+.highlight-text {
+  fill: #285C70;
+  opacity: 0.6;
+  font-size: 16px;
+  font-style: italic;
+}
 
 </style>

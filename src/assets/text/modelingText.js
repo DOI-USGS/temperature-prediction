@@ -151,13 +151,6 @@ export default {
                 'method': "And the great news? Now that the deep learning model is capturing the physical system, it can do more with less. Even under highly data sparse conditions (< 1% of training data), the model is still able to make accurate predictions.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn_ptrn'
-            }],
-        "Predicting water temperature at a national scale": [
-            {
-                'title': "",
-                'method': "This is all really cool considering the distribution of temperature observations at the national scale",
-                'flubber_id': 'RGCN_ptrn',
-                'bees_id': 'step_rgcn_ptrn'
             }]
     }
 }
