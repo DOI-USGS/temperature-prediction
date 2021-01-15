@@ -3214,6 +3214,7 @@
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(10))
+          .stop();
 
         // define how elements are added and remove from view
         // attributes and positioning define the starting point
@@ -3255,6 +3256,12 @@
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
           // define force velocity and ticking
+          var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          console.log(step_transitions);
+          console.log(step_transitions.indexOf(this.step));
+
+          if (step_transitions.indexOf(this.step) !== -1){
+            
            self.simulation
            .alpha(this.chartState.alpha)
            .alphaDecay(0.1)
@@ -3263,6 +3270,7 @@
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
 
+          }
           },
 
           tick() {
