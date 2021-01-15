@@ -4,6 +4,7 @@
       <div class="viz-title">
         <h3 v-html="text.title1" />
       </div>
+      <br>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
     </div>   
@@ -19,6 +20,7 @@
       <div class="viz-title">
         <h3 v-html="text.title2" />
       </div>
+      <br>
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
       <p v-html="text.tiptextMobile" />
@@ -33,9 +35,11 @@
     <MatrixExplainerColor />
     <MatrixAvailability />
     <div class="text-content">
+      <br>
       <div class="viz-title">
         <h3 v-html="text.title3" />
       </div>
+      <br>
       <p v-html="text.paragraph10" />
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
@@ -47,6 +51,11 @@
     </div>
     <MatrixTemperature />
     <div class="text-content">
+      <br>
+      <div class="viz-title">
+        <h3 v-html="text.title4" />
+      </div>
+      <br>
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>

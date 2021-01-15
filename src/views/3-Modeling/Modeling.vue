@@ -3533,12 +3533,14 @@ figure.sticky.charts {
   grid-template-rows: 30% 20% 30% 10%;
   grid-template-columns: 2% auto 2%;
   z-index: 1;
-
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
   height: 100vh;
   width: auto;
+  @media screen and (max-width: 600px) {
+          padding-top: 4em;
+        }
 
   #flubber-container {
     grid-column: 2 / 2;
