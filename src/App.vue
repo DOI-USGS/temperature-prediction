@@ -242,7 +242,12 @@ h3{
 .legend-text {
     fill: #707070;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 0.8em;
+    font-size: 16px;
+  }
+.explainer-minor-text {
+    fill: #707070;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
   }
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -268,7 +273,7 @@ h3{
 
 .dashed-axis {
   stroke: #4d4c4d;
-  stroke-width: 1px;
+  stroke-width: 3px;
   fill: none;
   stroke-miterlimit: 10;
   stroke-dasharray: 2 6;
@@ -284,8 +289,8 @@ h3{
 .tick-marks {
   fill: none;
   stroke-miterlimit: 10;
-  stroke: #4d4c4d;
-  stroke-width: 0.5px;
+  stroke: #707070;
+  stroke-width: 0.75px;
 }
 
   // .axis-title {

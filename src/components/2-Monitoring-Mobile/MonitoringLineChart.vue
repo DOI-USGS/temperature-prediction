@@ -302,7 +302,7 @@
           transform="translate(384.2 489.6)"
         >Oct</text>
       </g>
-      <g id="axis-labels-y" transform="translate(15 0)">
+      <g id="axis-labels-y" transform="translate(13 0)">
         <text
           class="legend-text"
           transform="translate(-3 466.5)"
@@ -459,13 +459,13 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 .desc-text {
   fill: #c3cccf;
-  font-size: 0.8em;
+  font-size: 16px;
   font-style: italic;
 }
 .site-text {
   fill: #88989f;
   opacity: 0.4;
-  font-size: 0.8em;
+  font-size: 16px;
   font-style: italic;
 }
 

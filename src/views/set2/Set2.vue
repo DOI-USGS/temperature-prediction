@@ -53,15 +53,15 @@
     </div> 
     <div
       id="matrix-explainer-container"
-      class="grid-container"
+      class="explainer-grid-container"
     >
-      <div class="grid-item" id="MatrixExplainerSpace">
+      <div class="explainer-grid-item" id="MatrixExplainerSpace">
         <MatrixExplainerSpace />
       </div>
-      <div class="grid-item" id="MatrixExplainerTime">
+      <div class="explainer-grid-item" id="MatrixExplainerTime">
         <MatrixExplainerTime />
       </div>
-      <div class="grid-item" id="MatrixExplainerColor">
+      <div class="explainer-grid-item" id="MatrixExplainerColor">
         <MatrixExplainerColor />
       </div>            
     </div>
@@ -81,16 +81,19 @@
     </div> 
     <div
       id="data-availability-container"
-      class="figure-content"
+      class="map-matrix-grid-container"
     >
+      <!-- class="figure-content" -->
       <div
         id="DRB_map_c2p2"
-        class="figure map"
+        class="map mm-grid-item"
       />
+      <!-- class="figure" -->
       <div
         id="matrixChart_c2p2"
-        class="figure matrix"
+        class="matrix mm-grid-item"
       />
+      <!-- class="figure" -->
     </div>
     <div class="text-content">
       <h2 v-html="text.title3" />
@@ -123,14 +126,14 @@
         Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.
       </p>
     </div> 
-    <div class="figure-content">
+    <div class="map-matrix-grid-container">
       <div
         id="DRB_map_c2p3"
-        class="figure map"
+        class="map mm-grid-item"
       />
       <div
         id="matrixChart_c2p3"
-        class="figure matrix"
+        class="matrix mm-grid-item"
       />
     </div>
     <div class="text-content">
@@ -292,10 +295,10 @@
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
-              .center([0, 40.658894445])
+              .center([0, 40.688894445]) //40.658894445
               .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
-              .scale(this.map_height * 15)
+              .scale(this.map_height * 16)
               .translate([this.map_width / 2, this.map_height / 2]);
 
           this.map_path_c2 = self.d3.geoPath()
@@ -485,16 +488,16 @@
           // // graduated scale
           // set width classes
           let widthClasses = [
-            0.8,
+            0.7,
+            1.1,
             1.2,
-            1.4,
-            1.7,
-            2,
-            2.3,
-            2.6,
-            3,
-            3.5,
-            3.8
+            1.6,
+            1.9,
+            2.2,
+            2.5,
+            2.9,
+            3.4,
+            3.7
           ]; //[            0.6,            0.9,            1.2,            1.4,            1.7,            2,            2.3,            2.6,            3,            3.5,          ]
 
           // // graduated scale
@@ -591,7 +594,7 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(1))
+                .attr("d", self.map_path_c2.pointRadius(1.2))
                 // assign class for styling
                 .attr("class", "c2p1 obs_sites")
                 // assign fill color based on agency
@@ -2212,24 +2215,24 @@
   #filter_row {
     height: 1vh;
   }
-  .grid-container {
-        padding: 25px;
-        display: grid;
-        grid-template-columns: 2% 32% 32% 32% 2%;
-        grid-template-rows: 100%;
-        gap: 5px 20px;
-        width: 100vw;
-        max-height: 80%;
-        min-width: 0;
-        min-height: 0;
-        @media screen and (max-width: 600px) {
-          padding: 10px 0;
-          gap: 0px;
-        }
+  .explainer-grid-container {
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 2% 32% 32% 32% 2%;
+    grid-template-rows: 100%;
+    gap: 0px 10px;
+    width: 100%;
+    max-height: 90%;
+    min-width: 0;
+    min-height: 0;
+    @media screen and (max-width: 600px) {
+      padding: 10px 0;
+      gap: 0px;
+    }
   }
-  .grid-item {
-        padding: 0px;
-        display: flex;
+  .explainer-grid-item {
+    padding: 0px;
+    display: flex;
   }
   #MatrixExplainerSpace {
     grid-column: 2
@@ -2240,12 +2243,44 @@
   #MatrixExplainerColor {
     grid-column: 4
   }
+  .map-matrix-grid-container {
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    grid-template-areas:
+        "map matrix";
+    gap: 0px 10px;
+    height: 90vh;
+    min-width: 0;
+    min-height: 0;
+  }
+  .mm-grid-item {
+      padding: 0px;
+      display: flex;
+  }
+  #DRB_map_c2p2 {
+    grid-area: map;
+    display: flex;
+  }
+  #matrixChart_c2p2 {
+    grid-area: matrix;
+    display: flex;
+  }
+  #DRB_map_c2p3 {
+    grid-area: map;
+    display: flex;
+  }
+  #matrixChart_c2p3 {
+    grid-area: matrix;
+    display: flex;
+  }
 }
 </style>
 <style lang="scss">
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 .label, .domain{
-  color: #285C70;
+  color: #1f4f61; //#285C70
   font-size: 0.5em;
 }
 .c2p2.cellText {

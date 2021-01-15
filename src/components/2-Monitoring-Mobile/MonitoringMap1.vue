@@ -1353,12 +1353,12 @@
       </g>
       <text
         transform="matrix(1 0 0 1 440.9 941.3)"
-        class="legend-text"
+        class="scale-text"
       >50 kilometers</text>
       <text
         id="_25_miles"
         transform="matrix(1 0 0 1 443.2 976.5)"
-        class="legend-text"
+        class="scale-text"
       >25 miles</text>
       <g id="scale_bar_lines">
         <path
@@ -1370,7 +1370,7 @@
           d="M437.2,957.8h90.7"
         />
       </g>
-      <g id="stations">
+      <g id="stations" >
         <path
           class="cls-8"
           d="M372.8,408.7a1.8,1.8,0,0,1-1.9-1.9,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A1.9,1.9,0,0,1,372.8,408.7Z"
@@ -10068,7 +10068,7 @@
           d="M399.6,629.7a1.9,1.9,0,0,1-1.9-2,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A2,2,0,0,1,399.6,629.7Z"
         />
       </g>
-      <g id="legend">
+      <!-- g id="legend">
         <g id="legend_text">
           <text
             class="legend-text"
@@ -10097,7 +10097,7 @@
             rx="5.2"
           />
         </g>
-      </g>
+      </g -->
     </svg>
   </div>
 </template>
@@ -10115,19 +10115,23 @@ export default {
     }
     /* Rivers and Delaware Bay */
     .st0 {
-        fill:#6399BA;
-        stroke: #6399BA;
+        fill:#285C70;
+        stroke: #285C70;
         stroke-width: 1px;
         }
 
     #legend_text {
         transform: translate(0, 30)
     }
-	.scale-line{fill:none;stroke:#999999;}
-
+	.scale-line{fill:none;stroke:#1f4f61;}
+  .scale-text {
+    fill: #1f4f61;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 1em;
+  }
 
     /* Circles */
-	.cls-8{fill:#EB4444;stroke:#000000;stroke-width:0.5;}
-	.cls-9{fill:#EDB932;stroke:#000000;stroke-width:0.5;}
+	.cls-8{fill:#e9eced;stroke:#000000;opacity:0.4;} /* #EB4444  stroke-width:0.5*/
+	.cls-9{fill:#e9eced;stroke:#000000;opacity:0.4;} /* #EDB932 stroke-width:0.5*/
 
 </style>

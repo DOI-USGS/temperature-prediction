@@ -894,11 +894,11 @@ export default {
 
 
     .cls-1 {
-        fill: #edb932;
+        fill: #e9eced; /* #edb932  */
       }
 
       .cls-2 {
-        fill: #eb4444;
+        fill: #e9eced; /* #eb4444 */
       }
 
       .cls-3, .cls-5, .cls-6 {

@@ -163,32 +163,32 @@
       </g>
       <g id="date_labels">
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(420.6 1119.4)"
         >Sept</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(523.9 1119.4)"
         >Nov</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(610.2 1119.4)"
         >Dec</text>
         <text
-          class="legend-text"
-          transform="translate(322.4 1119.4)"
+          class="explainer-minor-text"
+          transform="translate(323.4 1119.4)"
         >Jul</text>
         <text
-          class="legend-text"
-          transform="translate(219.9 1119.4)"
+          class="explainer-minor-text"
+          transform="translate(218.9 1119.4)"
         >May</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(118.3 1119.4)"
         >Mar</text>
         <text
-          class="legend-text"
-          transform="translate(30 1119.4)"
+          class="explainer-minor-text"
+          transform="translate(29 1119.4)"
         >Jan</text>
       </g>
       <g id="date_tick_marks">
@@ -133365,11 +133365,11 @@
       </g>
       <g id="legend_text">
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(130 75)"
         >0 °C</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(528.6 75)"
         >30 °C</text>
       </g>
@@ -133397,11 +133397,11 @@
           </g>
         </g>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(664.9 142.9)"
         >N</text>
         <text
-          class="legend-text"
+          class="explainer-minor-text"
           transform="translate(666.3 1084.8)"
         >S</text>
       </g>
