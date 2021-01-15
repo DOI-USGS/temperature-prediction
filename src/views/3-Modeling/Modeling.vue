@@ -11,8 +11,10 @@
         <div class="text-content page-title section-title-wrapper">
           <h2>Modeling Stream Temperature</h2>
         </div>
-        <p />
-        <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+        <div class="text-content">
+          <p />
+          <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
+        </div>
       </div>
     </figure>
     <!--  figure contains all the sticky elements -->
@@ -2645,9 +2647,9 @@
           <div
             class="scroll-sticky"
           >
-            <h2>
+            <h3 class="viz-title">
               {{ model_group }}
-            </h2>
+            </h3>
           </div>
           <!-- populate nested steps using text about each model -->
           <div class="scrollama-steps">
@@ -3470,7 +3472,8 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
-  grid-template-rows: 40% 5% 40% 5%;
+  padding-top: 2.1em;
+  grid-template-rows: 45% 5% 45% 5%;
   grid-template-columns: 2% auto 2%;
 
   position: -webkit-sticky;
