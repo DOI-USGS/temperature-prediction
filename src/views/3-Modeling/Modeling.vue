@@ -3057,6 +3057,9 @@
              var label_o_rmse = 0;
            }
 
+           this.d3.selectAll("path.arrow")
+           .attr("opacity", label_o_rmse)
+
           // text label for the x axis
           this.svg.append("text")             
               .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 50) + ")")
@@ -3064,7 +3067,7 @@
               .text("Time")
               .style("fill", "white")
               .style("font-size", "30px")
-              .style("opacity", label_o)
+              .attr("opacity", label_o)
               .classed("axis-label", true);
 
 
@@ -3077,7 +3080,7 @@
               .style("text-anchor", "middle")
               .text("Temperature")
               .style("fill", "white")
-              .style("opacity", label_o)
+              .attr("opacity", label_o)
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
@@ -3088,7 +3091,7 @@
               .text("accurate")
               .style("fill", "white")
               .style("font-size", "30px")
-              .style("opacity", label_o_rmse)
+              .attr("opacity", label_o_rmse)
               .classed("rmse-label", true);
 
             this.svg.append("text")             
@@ -3097,8 +3100,16 @@
               .text("inaccurate")
               .style("fill", "white")
               .style("font-size", "30px")
-              .style("opacity", label_o_rmse)
+              .attr("opacity", label_o_rmse)
               .classed("rmse-label", true);
+
+
+              // create legend for beeswarm experiments
+              var legend = this.d3.legendColor()
+              .scale(this.set_colors);
+
+              this.svg.select(".legend")
+              .call(legend)
 
           ////////////////
           // initiate force simulation
@@ -3165,6 +3176,7 @@
             } 
           },
           updateChart() {
+            //controls decision making for the error >> beeswarm chart
             const self = this;
 
           // where are we?
@@ -3380,14 +3392,14 @@
           // update axes and labels
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
-            self.fadeIn(this.d3.selectAll(".axis-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
           }  else if (this.step == this.step_rmse && response.direction == "down") {
-            self.fadeOut(this.d3.selectAll(".axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll(".arrow"), 500);
+            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
-            self.fadeOut(this.d3.selectAll(".rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll(".arrow"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           }
             
             if (this.step == this.step_rmse && response.direction == "down") {
@@ -3417,15 +3429,15 @@
           if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
-            self.fadeOut(this.d3.selectAll(".axis-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
-            self.fadeIn(this.d3.selectAll(".axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll(".arrow"), 500);
+            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
-            self.fadeIn(this.d3.selectAll(".rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll(".arrow"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }
 
         },
@@ -3691,9 +3703,6 @@ figure.sticky.charts {
 }
 .f_temp.ital {
   font-style: italic;
-}
-#hex-map {
-  padding: 4rem;
 }
 
 </style>
