@@ -1,7 +1,9 @@
 <template>
   <div id="monitoring-mobile">
     <div class="text-content">
-      <h2 v-html="text.title1" />
+      <div class="viz-title">
+        <h3 v-html="text.title1" />
+      </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
     </div>   
@@ -14,7 +16,9 @@
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
       <Chapter2Icons1 />
-      <h2 v-html="text.title2" />
+      <div class="viz-title">
+        <h3 v-html="text.title2" />
+      </div>
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
       <p v-html="text.tiptextMobile" />
@@ -29,7 +33,9 @@
     <MatrixExplainerColor />
     <MatrixAvailability />
     <div class="text-content">
-      <h2 v-html="text.title3" />
+      <div class="viz-title">
+        <h3 v-html="text.title3" />
+      </div>
       <p v-html="text.paragraph10" />
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
@@ -42,6 +48,17 @@
     <MatrixTemperature />
     <div class="text-content">
       <p v-html="text.paragraph14" />
+      <p v-html="text.paragraph15" />
+    </div>
+    <div id="map-container" class="figure-content">
+      <img
+        id="hex-map"
+        src="@/assets/usa_hex_map_80-01.png"
+      >
+      <!-- need to add legend and recolor beeswarm to mirror?? -->
+    </div>
+    <div class="text-content">
+      <p v-html="text.paragraph16" />
     </div>
   </div>
 </template>
@@ -105,5 +122,8 @@
         font-weight: 300;
         fill: white;
         font-size: .9em;
+  }
+  #hex-map {
+    padding: 1em;
   }
 </style>

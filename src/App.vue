@@ -80,7 +80,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 body {
       margin: 0;
       padding: 0;
-      color: $offWhite;
+      color: #9e9e9e; //$offWhite
       background-color: $backgroundCharcoal;
       line-height: 1.5;
       font-size: 13pt;
@@ -93,6 +93,7 @@ body {
 h1{
   font-size: 4em;
   font-weight: 100;
+  color: $offWhite;
   @media screen and (max-width: 600px) {
     font-size: 3em;
   }
@@ -100,9 +101,9 @@ h1{
 
 h2{
   font-size: 2em;
-  margin-top: 80px;
-  font-weight: 600;
-  line-height: 1.7;
+  margin-top: 5px;
+  font-weight: 200;
+  line-height: 1.3;
   @media screen and (max-width: 600px) {
     font-size: 1.2em;
   }
@@ -186,8 +187,10 @@ h3{
 
   }
   .figure {
-    display: block;
+    display: flex; //block, flex
     padding: 20px;
+    align-items: center;
+    justify-content: center; 
   }
 
   .map {
@@ -211,6 +214,10 @@ h3{
   }
 
 // Specific Design Elements for Charts and Maps
+.page-title {
+  color: $monotoneBlue5;
+  font-size: 1.5em;
+}
 
 .viz-title-wrapper {
   margin: auto;
@@ -229,14 +236,14 @@ h3{
   color: $offWhite;
   box-shadow: -5px -5px $monotoneBlue5;
   line-height: 1.3em;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.8em;
 }
 .viz-subtitle {
   color: $monotoneBlue5; //$offWhite
   font-style: italic;
- font-size: .8em;
- text-align: center;
- font-weight: 100;
+  font-size: .8em;
+  text-align: center;
+  font-weight: 100;
 }
 
 .legend-text {

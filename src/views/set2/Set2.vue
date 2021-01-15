@@ -7,25 +7,29 @@
       </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-      <p v-html="text.paragraph3" />
     </div>
     <div id="map-and-bar-chart">
-      <div class="text-content viz-title-wrapper">
-        <!-- h3 class="viz-title">
+      <!-- div class="text-content viz-title-wrapper">
+        <h3 class="viz-title">
           Measuring Temperature in the Basin
-        </h3 -->
-      </div>  
+        </h3>
+      </div -->
+      <p class="viz-subtitle">
+            All Monitoring Sites in the Basin
+      </p>  
       <div class="figure-content">
         <div class="figure map">
-          <p class="viz-subtitle">
-            All Monitoring Sites in the Basin
-          </p>
           <div id="DRB_map_c2p1" />
         </div>
+      </div>
+      <div class="text-content">
+        <p v-html="text.paragraph3" />
+      </div>
+      <p class="viz-subtitle">
+        Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
+      </p>
+      <div class="figure-content">
         <div class="figure chart">
-          <p class="viz-subtitle">
-            Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
-          </p>
           <div id="barChart_c2p1" />
         </div>
       </div>      
@@ -36,21 +40,21 @@
       <Chapter2Icons1 />
       <!--"section-title-wrapper"-->
       <div class="viz-title">
-        <h2 v-html="text.title2" />
+        <h3 v-html="text.title2" />
       </div>
       <p v-html="text.subtitle2" />
       <p v-html="text.paragraph6" />
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
     </div>
-    <div class="text-content viz-title-wrapper">
-      <!-- h3 class="viz-title">
+    <!-- div class="text-content viz-title-wrapper">
+      <h3 class="viz-title">
         How to Read the Matrices
-      </h3 -->
+      </h3>
       <p class="viz-subtitle">
         Visualizing data availability at temperature measuring sites across the basin
       </p>
-    </div> 
+    </div --> 
     <div
       id="matrix-explainer-container"
       class="explainer-grid-container"
@@ -68,7 +72,7 @@
     <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
-    <div class="text-content viz-title-wrapper">
+    <!-- div class="text-content viz-title-wrapper">
       <h3 class="viz-title">
         Temperature Data Availability
       </h3>
@@ -78,7 +82,7 @@
       <p class="viz-subtitle">
         Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.
       </p>
-    </div> 
+    </div --> 
     <div
       id="data-availability-container"
       class="map-matrix-grid-container"
@@ -96,21 +100,23 @@
       <!-- class="figure" -->
     </div>
     <div class="text-content">
-      <h2 v-html="text.title3" />
+      <div class="viz-title">
+        <h3 v-html="text.title3" />
+      </div>
       <p v-html="text.paragraph10" />
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
-    <div class="text-content viz-title-wrapper">
+    <!-- div class="text-content viz-title-wrapper">
       <h3 class="viz-title">
         Daily Temperature readings in the Basin
       </h3>
-      <p class="viz-subtitle">
-        Data for 2019 only, including the most-observed reaches.
+    </div --> 
+    <p class="viz-subtitle">
+        Daily Temperature readings in the Basin in 2019
       </p>
-    </div> 
-    <div class="text-content">
-      <div class="chart">
+    <div class="figure-content">
+      <div class="figure chart" id="timeseries">
         <MonitoringLineChart />
       </div>
     </div>
@@ -118,14 +124,14 @@
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
     </div>
-    <div class="text-content viz-title-wrapper">
+    <!-- div class="text-content viz-title-wrapper">
       <h3 class="viz-title">
         Daily Temperature at each reach in the Basin
       </h3>
       <p class="viz-subtitle">
         Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.
       </p>
-    </div> 
+    </div --> 
     <div class="map-matrix-grid-container">
       <div
         id="DRB_map_c2p3"
@@ -2215,6 +2221,25 @@
   #filter_row {
     height: 1vh;
   }
+
+  #DRB_map_c2p1 {
+
+  }
+
+  #barChart_c2p1 {
+    display: block;
+    max-width: 700px;
+  }
+
+  #timeseries {
+    display: block;
+    max-width: 700px;
+  }
+
+  #hex-map {
+    padding: 5em;
+  }
+
   .explainer-grid-container {
     padding: 25px;
     display: grid;

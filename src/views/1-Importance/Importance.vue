@@ -1,6 +1,6 @@
 <template>
   <section id="importance">
-    <title id="page-title">
+    <title id="page-title" class="page-title">
       Temperature Predition Modeling in the Delaware River Basin
     </title>
     <desc id="page-desc">

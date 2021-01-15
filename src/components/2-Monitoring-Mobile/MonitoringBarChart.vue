@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 class="viz-title">
+    <!-- h3 class="viz-title">
       Individual Temperature Measurements in the DRB
-    </h3>
+    </h3 -->
     <svg
       id="bar-chart"
       xmlns="http://www.w3.org/2000/svg"
@@ -850,7 +850,7 @@
           transform="translate(616.2 448.6) rotate(-45)"
         >2019</text>
       </g>
-      <g id="legend_squares">
+      <!-- g id="legend_squares">
         <rect
           class="cls-2"
           x="60"
@@ -875,7 +875,7 @@
           class="cls-6"
           transform="translate(83.3 140.5)"
         >USGS</text>
-      </g>
+      </g -->
     </svg>
   </div>
 </template>

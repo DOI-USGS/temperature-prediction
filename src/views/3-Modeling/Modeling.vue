@@ -7,7 +7,10 @@
         id="intro-container"
         class="text-content text-intro"
       >
-        <h2>{{ sectionTitle }}</h2>
+        <!-- h2>{{ sectionTitle }}</h2 -->
+        <div class="text-content page-title section-title-wrapper">
+          <h2>Modeling Stream Temperature</h2>
+        </div>
         <p />
         <p>Process-guided deep learning is, at its core, a machine learning approach to modeling stream temperature. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used to great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>
       </div>
@@ -2682,7 +2685,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
-            sectionTitle: "Modeling Stream Temperature", // the initial
+            // sectionTitle: "Modeling Stream Temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -2927,7 +2930,7 @@
                     .duration(animationLength)
                     .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
                     .attrTween("d", function(d){
-                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 1 })
+                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2 })
                     })
                 }
               }

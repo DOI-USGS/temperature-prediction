@@ -1,8 +1,8 @@
 <template>
   <div id="matrix-temperature">
-    <h3 class="viz-title">
+    <!-- h3 class="viz-title">
       Temperature of all DRB reaches during a year
-    </h3>
+    </h3 -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
