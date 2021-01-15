@@ -2609,28 +2609,23 @@
       />
       <div
         id="legend-container"
-        class="figure-content"
       >
         <svg
-          id="bees_legend"
+          id="bees-legend"
+          viewBox="0 0 1000 500"
+          width="100%"
+          height="100%"
           xmlns="http://www.w3.org/2000/svg" 
         >
-          <!--viewBox="0 0 1000 1000" -->
-          <g
-            id="legend-scale"
-            transform="translate(0, 700)"
-          >
+          <g>
+    <path class="arrow" d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"/>
+    <path class="arrow" d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"/>
+  </g>
+  <g>
+    <path class="arrow" d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"/>
+    <path class="arrow" d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"/>
+  </g>
 
-            <text
-              class="text-annotate left"
-              transform="translate(50 27)"
-            >accurate</text>
-            <text
-              class="text-annotate right"
-              transform="translate(850 27)"
-            >inaccurate</text>
- 
-          </g>
         </svg>
       </div>
     </figure>
@@ -2700,13 +2695,13 @@
 
             // string keys to modify chart appearance
             chartState: {},
-            chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
 
             // beeswarm
             step_start: 13,
-            radius: 6,
+            radius: 8,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2786,7 +2781,7 @@
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
-          this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
+          this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 3; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
@@ -2827,10 +2822,11 @@
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
-            this.chartState.strengthr = 0
+            this.chartState.strengthr = 1;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
+            this.chartState.alpha = 1;
 
             // draw the chart
             this.makeBeeswarm();
@@ -2975,8 +2971,6 @@
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
-              //.attr("class", "figure-content")
-              // .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
               .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
               .attr("height", "100%")
               .attr("width", "100%")
@@ -2997,24 +2991,24 @@
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, margin])
+            .range([this.height,0])
             .domain([0,this.chartState.domain_y]);
 
-          // testing out texture fills
+          /* // testing out texture fills
             this.texture = textures
               .lines()
               .thicker()
-              .stroke("teal");
-           this.svg.call(this.texture); // this is binding the background to the texture
+              .stroke("#E4695E");
+           this.svg.call(this.texture); // this is binding the background to the texture */
 
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A",this.texture.url(), "#f8af26", "#141414"," #285C70"]);
+            .range(["#7E03A8","#E4695E", "#EBF222", "#141414","#285C70"]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A","teal", "#f8af26", "#FDAD32"," #285C70"]);
+            .range(["#7E03A8","#E4695E", "#EBF222", "#FDAD32","#285C70"]);
 
           ///////////////////
           // generate axes
@@ -3026,6 +3020,7 @@
           yGen.ticks(0);
 
           // draw on chart
+
           this.yAxis = this.svg.select("g").append("g")
             .attr("class", "y-axis")
             .call(yGen);
@@ -3034,19 +3029,35 @@
             .attr("class", "x-axis")
             .call(xGen);
 
-        // style modifications and line drawing animation
+        // style modifications and set up line drawing animation
           this.xAxis
           .attr("transform", "translate(" + -margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.width+margin)
           .attr("stroke-dashoffset", this.width+margin)
+          //.attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
 
           this.yAxis
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.height+margin)
           .attr("stroke-dashoffset", this.height+margin)
+          //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
-          // axi slabels
+           if (this.step >= this.step_start && this.step <= this.step_error_obs ){
+             var label_o = 1;
+           } else {
+             var label_o = 0;
+           }
+
+           if (this.step >= this.step_rmse && this.step <= this.step_ann + 1 ){
+             var label_o_rmse = 1;
+           } else {
+             var label_o_rmse = 0;
+           }
+
+           this.d3.selectAll("path.arrow")
+           .attr("opacity", label_o_rmse)
+
           // text label for the x axis
           this.svg.append("text")             
               .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 50) + ")")
@@ -3054,27 +3065,56 @@
               .text("Time")
               .style("fill", "white")
               .style("font-size", "30px")
+              .attr("opacity", label_o)
               .classed("axis-label", true);
 
 
           // text label for the y axis
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
-              .attr("x", -this.height/2)
+              .attr("x", -(this.height/2+margin))
               .attr("y",0)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
               .text("Temperature")
               .style("fill", "white")
+              .attr("opacity", label_o)
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
+              // text labels for the rmses
+          this.svg.append("text")             
+              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "left")
+              .text("accurate")
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .attr("opacity", label_o_rmse)
+              .classed("rmse-label", true);
+
+            this.svg.append("text")             
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "right")
+              .text("inaccurate")
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .attr("opacity", label_o_rmse)
+              .classed("rmse-label", true);
+
+
+              // create legend for beeswarm experiments
+              var legend = this.d3.legendColor()
+              .scale(this.set_colors);
+
+              this.svg.select(".legend")
+              .call(legend)
+
           ////////////////
           // initiate force simulation
-          self.simulation = this.d3.forceSimulation()
-          .force("x", this.d3.forceX())
-          .force('y', this.d3.forceY())
-          .force("collide", this.d3.forceCollide(this.chartState.strengthy))
+          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
+          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
           },
           drawAxes(axes_in) {
@@ -3113,7 +3153,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + this.height/2 + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-40) + ")")
 
                 this.yAxis
                 .transition(time_slide)
@@ -3134,24 +3174,13 @@
             } 
           },
           updateChart() {
+            //controls decision making for the error >> beeswarm chart
             const self = this;
 
           // where are we?
           console.log(this.chartState.var_x);
           console.log(this.chartState.var_y);
           let margin = 50;
-
-        // predicted data overlaps observed initially
-          if (this.step <= this.step_error_exp){
-            this.chartState.radius = 0;
-            this.chartState.strengthr = null;
-          } else if (this.step == this.step_error_exp) {
-             this.chartState.radius = 0;
-            this.chartState.strengthr = null;
-          } else {
-             this.chartState.radius = this.paddedRadius;
-            this.chartState.strengthr = .4;
-          }
 
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
@@ -3166,6 +3195,8 @@
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
+          .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
+                .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
         // modify forces to update chart
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
@@ -3214,11 +3245,11 @@
 
           // define force velocity and ticking
            self.simulation
-           .alpha(.1)
-           .alphaDecay(0.01)
+           .alpha(this.chartState.alpha)
+           .alphaDecay(0.1)
            //.velocityDecay(0.6)
            .restart()
-            .on("tick", self.tick) 
+            .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
 
           },
@@ -3252,7 +3283,7 @@
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
           }
-          if (this.step == this.step_ann){
+          if (this.step >= this.step_ann && this.step <= this.step_ann_exp){
             //contains only data for d100
             this.chartState.dataset = this.rmse_ann;
             this.chartState.grouped = this.color_bees.exp;
@@ -3275,11 +3306,22 @@
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
           }
            if (this.step === this.step_error_obs ) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_obs;
+            this.chartState.radius = 0;
+          }
+
+
+          // push to overlap as single RMSE
+          if (this.step === this.step_rmse) {
+            this.chartState.var_x = this.chart_x.mid;
+            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 2;
           }
 
           // intro beeswarm, adding experiments
@@ -3287,24 +3329,28 @@
             this.chartState.var_x = this.chart_x.ANN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RNN
           if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
             this.chartState.var_x = this.chart_x.RNN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RGCN
           if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RGCN to end
           if (this.step >= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN_ptrn;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
 
           /////////// REDRAW
@@ -3341,14 +3387,22 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // update axes
+          // update axes and labels
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
+            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
           }  else if (this.step == this.step_rmse && response.direction == "down") {
-            //self.drawAxes("rmse");
-            self.fadeOut(this.d3.selectAll(".axis-label"), 500);
-          }  
-
+            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
+          }  else if (this.step == this.step_ann+1 && response.direction == "down") {
+            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
+          }
+            
+            if (this.step == this.step_rmse && response.direction == "down") {
+            self.drawAxes("rmse");
+          } 
            // add class to active step
           response.element.classList.add("is-active");
 
@@ -3357,29 +3411,32 @@
 
         },
         
-        // add remove class on exit
+        
         handleStepExit(response) {
           const self = this;
           // changes css for class
-          response.element.classList.remove("is-active");
+          response.element.classList.remove("is-active");// add remove class on exit
 
         // make intro header sticky again if scrolling back
           if (this.step <= 2 && response.direction == "up"){
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
+        // scrolling back up options
+        // add and remove axes, axis labels
           if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
+            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
-            self.fadeIn(this.d3.selectAll(".axis-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
+          } else if (this.step == this.step_ann+1 && response.direction == "up") {
+            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }
-
-          if (this.step == this.step_rmse && response.direction == "down") {
-            self.drawAxes("rmse");
-          } 
-
 
         },
         
@@ -3426,7 +3483,7 @@ article {
   position: relative;
   width: 90%;
   margin: 2rem auto 4rem auto;
-  z-index: 1;
+  z-index: 0;
   height: 100vh;
   border: 1px;
 
@@ -3446,10 +3503,10 @@ article {
   left: 0;
   padding-top: 0px;
 
-  .step[data-scrollama-index='14'] {
+/*   .step[data-scrollama-index='14'] {
   height: 10vh;
   padding-top: 5vh;
-}
+} */
 }
 
 //start at beginning
@@ -3473,13 +3530,14 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 2.1em;
-  grid-template-rows: 45% 5% 45% 5%;
+  grid-template-rows: 30% 20% 30% 10%;
   grid-template-columns: 2% auto 2%;
+  z-index: 1;
 
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
-  height: 90vh;
+  height: 100vh;
   width: auto;
 
   #flubber-container {
@@ -3504,8 +3562,17 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
   }
   #bees-chart {
+    height: 100%;
+    width: auto;
+    max-width: 800px;
+  }
+
+   #bees-legend {
     height: 100%;
     width: auto;
     max-width: 800px;
@@ -3513,10 +3580,9 @@ figure.sticky.charts {
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    height: 100%;
-    width: auto;
-    min-width: 0;
-    min-height: 0;
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
   }
 }
 .axis-line {
@@ -3527,6 +3593,10 @@ figure.sticky.charts {
     font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 20px;
+}
+.arrow {
+  fill: white;
+
 }
 
 .text-annotate {
