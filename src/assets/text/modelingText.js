@@ -68,22 +68,22 @@ export default {
             }],
         "Testing an artificial neural network (ANN)": [
             {
-                'method': "PREDICTED data appears: Once the model is trained we can make predictions about water temperature in time and space. Here we show daily temperature predictions for a single gage over a one month period",
+                'method': "Once the model is trained we can make predictions about water temperature in time and space. Here we show daily temperature predictions for a single gage over a one month period",
                 'flubber_id': '',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "Add on OBSERVED: Prediction error, the difference between predicted temperatures and measured observations, is indicative of model accuracy.",
+                'method': "Prediction error, the difference between predicted temperatures and measured observations, decreases with increasing model accuracy.",
                 'flubber_id': '',
                 'bees_id': 'step_error_obs'
             }],
         "Evaluating overall model accuracy": [
             {
-                'method': "Collapse to RMSE for a single stream reach (100% of training data): Using prediction errors we can calculate model RMSE across a series of [observations?] and quantify how well a model represents the system. A low RMSE near 0 indicates low error and high prediction accuracy, but as predictions are less accurate and error increases, so does the RMSE ",
+                'method': "Using prediction errors we can calculate model RMSE across a series of [observations?] and quantify how well a model represents the system. Low RMSE indicates low error and high prediction accuracy, but as predictions are less accurate and error increases, so does RMSE ",
                 'flubber_id': '',
                 'bees_id': 'step_error_rmse'
             }, {
-                'method': "One site RMSE to all site RMSEs (still 100% of training data): Using RMSE we can compare model accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the DRB based on 100% of training data available.",
+                'method': "Using RMSE we can compare model accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the DRB based on 100% of training data available.",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             }],

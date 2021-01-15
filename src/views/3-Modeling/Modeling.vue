@@ -2702,7 +2702,7 @@
 
             // string keys to modify chart appearance
             chartState: {},
-            chart_x: {error: 'error_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
 
@@ -2788,7 +2788,7 @@
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
-          this.step_ann_exp = this.step_ann + 1; // show RMSE for ANN with 3 experiments
+          this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 3; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
@@ -2829,10 +2829,11 @@
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
-            this.chartState.strengthr = 0;
+            this.chartState.strengthr = 1;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
+            this.chartState.alpha = 1;
 
             // draw the chart
             this.makeBeeswarm();
@@ -2977,8 +2978,6 @@
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
-              //.attr("class", "figure-content")
-              // .attr("viewBox", [0, 0, (this.width+this.margin*2), (this.height+this.margin*2)].join(' '))
               .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
               .attr("height", "100%")
               .attr("width", "100%")
@@ -3028,6 +3027,7 @@
           yGen.ticks(0);
 
           // draw on chart
+
           this.yAxis = this.svg.select("g").append("g")
             .attr("class", "y-axis")
             .call(yGen);
@@ -3037,48 +3037,24 @@
             .call(xGen);
 
         // style modifications and set up line drawing animation
-
-          /// draw arrowhead for axes
-           this.svg
-            .append('defs')
-            .append('marker')
-            .attr('id', 'arrowhead-right')
-            .attr('refX', 4)
-            .attr('refY', 6)
-            .attr('markerWidth', 12)
-            .attr('markerHeight', 10)
-            .append('path')
-            .attr('d', 'M 0 0 L 5 5 L 0 10')
-            .attr('stroke', 'white')
-            .attr('stroke-width', 1)
-            .attr('fill', 'none');
-
-          this.svg
-            .append('defs')
-            .append('marker')
-            .attr('id', 'arrowhead-up')
-            .attr('refX', 3)
-            .attr('refY', 6)
-            .attr('markerWidth', 12)
-            .attr('markerHeight', 10)
-            .append('path')
-            .attr('d', 'M 0 0 L 5 5 L 0 10')
-            .attr("transform", "rotate(90)")
-            .attr('stroke', 'white')
-            .attr('stroke-width', 1)
-            .attr('fill', 'none');
           this.xAxis
           .attr("transform", "translate(" + -margin + "," + this.height + ")")
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.width+margin)
           .attr("stroke-dashoffset", this.width+margin)
-          .attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
+          //.attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
 
           this.yAxis
           .attr("stroke-width", "5px")
           .attr("stroke-dasharray", this.height+margin)
           .attr("stroke-dashoffset", this.height+margin)
-          .attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
+          //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
+
+           if (this.step >= this.step_start && this.step <= this.error_obs ){
+             var label_o = 1;
+           } else {
+             var label_o = 0;
+           }
 
           // text label for the x axis
           this.svg.append("text")             
@@ -3087,6 +3063,7 @@
               .text("Time")
               .style("fill", "white")
               .style("font-size", "30px")
+              .style("opacity", label_o)
               .classed("axis-label", true);
 
 
@@ -3099,15 +3076,16 @@
               .style("text-anchor", "middle")
               .text("Temperature")
               .style("fill", "white")
+              .style("opacity", label_o)
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
           ////////////////
           // initiate force simulation
-          self.simulation = this.d3.forceSimulation()
-          .force("x", this.d3.forceX())
-          .force('y', this.d3.forceY())
-          .force("collide", this.d3.forceCollide(this.chartState.strengthy))
+          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
+          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
           },
           drawAxes(axes_in) {
@@ -3174,18 +3152,6 @@
           console.log(this.chartState.var_y);
           let margin = 50;
 
-        // predicted data overlaps observed initially
-          if (this.step <= this.step_error_exp){
-            this.chartState.radius = 0;
-            this.chartState.strengthr = null;
-          } else if (this.step == this.step_error_exp) {
-             this.chartState.radius = 0;
-            this.chartState.strengthr = null;
-          } else {
-             this.chartState.radius = this.paddedRadius;
-            this.chartState.strengthr = .4;
-          }
-
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
             .range([margin, this.width+margin])
@@ -3247,11 +3213,11 @@
 
           // define force velocity and ticking
            self.simulation
-           .alpha(.1)
-           .alphaDecay(0.01)
+           .alpha(this.chartState.alpha)
+           .alphaDecay(0.1)
            //.velocityDecay(0.6)
            .restart()
-            .on("tick", self.tick) 
+            .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
 
           },
@@ -3285,7 +3251,7 @@
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
           }
-          if (this.step == this.step_ann){
+          if (this.step >= this.step_ann && this.step <= this.step_ann_exp){
             //contains only data for d100
             this.chartState.dataset = this.rmse_ann;
             this.chartState.grouped = this.color_bees.exp;
@@ -3308,11 +3274,22 @@
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
           }
            if (this.step === this.step_error_obs ) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_obs;
+            this.chartState.radius = 0;
+          }
+
+
+          // push to overlap as single RMSE
+          if (this.step === this.step_rmse) {
+            this.chartState.var_x = this.chart_x.mid;
+            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 2;
           }
 
           // intro beeswarm, adding experiments
@@ -3320,24 +3297,28 @@
             this.chartState.var_x = this.chart_x.ANN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RNN
           if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
             this.chartState.var_x = this.chart_x.RNN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RGCN
           if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
           // RGCN to end
           if (this.step >= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN_ptrn;
             this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.01;
+            this.chartState.radius = this.paddedRadius;
           }
 
           /////////// REDRAW
@@ -3377,6 +3358,7 @@
           // update axes
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
+            self.fadeIn(this.d3.selectAll(".axis-label"), 500);
           }  else if (this.step == this.step_rmse && response.direction == "down") {
             //self.drawAxes("rmse");
             self.fadeOut(this.d3.selectAll(".axis-label"), 500);
@@ -3390,20 +3372,23 @@
 
         },
         
-        // add remove class on exit
+        
         handleStepExit(response) {
           const self = this;
           // changes css for class
-          response.element.classList.remove("is-active");
+          response.element.classList.remove("is-active");// add remove class on exit
 
         // make intro header sticky again if scrolling back
           if (this.step <= 2 && response.direction == "up"){
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
+        // scrolling back up options
+        // add and remove axes, axis labels
           if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
+            self.fadeOut(this.d3.selectAll(".axis-label"), 500);
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
             self.fadeIn(this.d3.selectAll(".axis-label"), 500);
@@ -3468,10 +3453,6 @@ article {
   padding: 1rem;
   font-size: 1.5rem;
   }
-}
-// adjust spacing on last step with hex map
-.step[data-scrollama-index='14'] {
-  height: 10vh;
 }
 
 // add sticky header to steps to maintain while given model is shown
