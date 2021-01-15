@@ -14,9 +14,11 @@
       <p class="byline">
         Water Mission Area's Vizlab
       </p>
-      <div class="section-title-wrapper">
-        <h2>Why is predicting stream temperature important?</h2>
+      <br>
+      <div class="viz-title">
+        <h3>Why is predicting stream temperature important?</h3>
       </div>
+      <br>
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>
@@ -45,5 +47,7 @@
 .byline {
   font-style: italic;
   font-weight: 100;
+  font-size: .8em;
+  color: #285C70; //#808080
 }
 </style>

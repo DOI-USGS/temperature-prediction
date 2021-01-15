@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="viz-title-wrapper text-content">
+    <!-- div class="viz-title-wrapper text-content">
       <h3 class="viz-title">
         The Delaware River Basin
       </h3>
       <p class="viz-subtitle">
         Spanning New York, New Jersey, Pennsylvania, and Delaware
       </p>
-    </div>
+    </div -->
     
     <div
       id="intro-map"
