@@ -158,8 +158,9 @@
             "icon-3 desc-3"
             "icon-4 desc-4";
         @media screen and (max-width: 600px) {
-          padding: 30px 0;
-          gap: 30px;
+          padding: 0px 0;
+          max-width: 80vw;
+          gap: 0px;
         }
     }
 
@@ -169,6 +170,9 @@
 
     .icon-item{
         text-align: center;
+        @media screen and (max-width: 600px) {
+          display: flex;
+        }
     }
 
     .icon {

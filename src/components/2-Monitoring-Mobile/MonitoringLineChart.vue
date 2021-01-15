@@ -283,6 +283,18 @@
             transform="translate(210 340)"
           >Temperatures in<tspan x="0" y="15">individual stream</tspan><tspan x="0" y="30">reaches</tspan></text>
         </g>
+        <g>
+          <text
+            class="highlight-text"
+            transform="translate(230 280)"
+          >Coolest reach</text>
+        </g>
+        <g>
+          <text
+            class="highlight-text"
+            transform="translate(327 80)"
+          >Warmest reach</text>
+        </g>
       </g>>
       <g id="axis-labels-x" transform="translate(15 0)">
         <text
@@ -434,9 +446,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 .cls-23 {
   // stroke: #285C70; //monotoneBlue5 , darkest plasma blue: #17068B, lighter plasma blue: #3f2dc2
-  stroke: #88989f; // #828282
+  stroke: #285C70; // latest: #88989f  old: #828282
   stroke-width: 1px;
-  opacity: .05;
+  opacity: 0.6; // 0.05
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
@@ -444,16 +456,16 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 .cls-24 {
   // stroke: #4c656e; //goldenrod, plasma yellow: #EBF222
-  stroke: #88989f; // #828282
+  stroke: #285C70; // latest: #88989f  old: #828282
   stroke-width: 1px;
-  opacity: .05;
+  opacity: 0.6; // 0.05
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
 }
 
 .cls-25 {
-  stroke: #c3cccf; //offWhite #ce4b75 #e0e0e0 peachy pink: #ce4b75 lightlight blue: #c3cccf
+  stroke: #c3cccf; //latest: #c3cccf  old: offWhite #ce4b75 #e0e0e0 peachy pink: #ce4b75 lightlight blue: #c3cccf
   stroke-width: 1px;
 }
 
@@ -465,6 +477,12 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 .site-text {
   fill: #88989f;
   opacity: 0.4;
+  font-size: 16px;
+  font-style: italic;
+}
+.highlight-text {
+  fill: #285C70;
+  opacity: 0.6;
   font-size: 16px;
   font-style: italic;
 }
