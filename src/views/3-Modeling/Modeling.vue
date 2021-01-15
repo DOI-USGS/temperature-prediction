@@ -2604,28 +2604,23 @@
       />
       <div
         id="legend-container"
-        class="figure-content"
       >
         <svg
-          id="bees_legend"
+          id="bees-legend"
+          viewBox="0 0 1000 500"
+          width="100%"
+          height="100%"
           xmlns="http://www.w3.org/2000/svg" 
         >
-          <!--viewBox="0 0 1000 1000" -->
-          <g
-            id="legend-scale"
-            transform="translate(0, 700)"
-          >
+          <g>
+    <path class="arrow" d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"/>
+    <path class="arrow" d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"/>
+  </g>
+  <g>
+    <path class="arrow" d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"/>
+    <path class="arrow" d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"/>
+  </g>
 
-            <text
-              class="text-annotate left"
-              transform="translate(50 27)"
-            >accurate</text>
-            <text
-              class="text-annotate right"
-              transform="translate(850 27)"
-            >inaccurate</text>
- 
-          </g>
         </svg>
       </div>
     </figure>
@@ -3001,21 +2996,21 @@
             .range([this.height,0])
             .domain([0,this.chartState.domain_y]);
 
-          // testing out texture fills
+          /* // testing out texture fills
             this.texture = textures
               .lines()
               .thicker()
-              .stroke("teal");
-           this.svg.call(this.texture); // this is binding the background to the texture
+              .stroke("#E4695E");
+           this.svg.call(this.texture); // this is binding the background to the texture */
 
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A",this.texture.url(), "#f8af26", "#141414"," #285C70"]);
+            .range(["#7E03A8","#E4695E", "#EBF222", "#141414","#285C70"]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#53354A","teal", "#f8af26", "#FDAD32"," #285C70"]);
+            .range(["#7E03A8","#E4695E", "#EBF222", "#FDAD32","#285C70"]);
 
           ///////////////////
           // generate axes
@@ -3050,10 +3045,16 @@
           .attr("stroke-dashoffset", this.height+margin)
           //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
-           if (this.step >= this.step_start && this.step <= this.error_obs ){
+           if (this.step >= this.step_start && this.step <= this.step_error_obs ){
              var label_o = 1;
            } else {
              var label_o = 0;
+           }
+
+           if (this.step >= this.step_rmse && this.step <= this.step_ann + 1 ){
+             var label_o_rmse = 1;
+           } else {
+             var label_o_rmse = 0;
            }
 
           // text label for the x axis
@@ -3079,6 +3080,25 @@
               .style("opacity", label_o)
               .style("font-size", "30px")
               .classed("axis-label", true);    
+
+              // text labels for the rmses
+          this.svg.append("text")             
+              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "left")
+              .text("accurate")
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .style("opacity", label_o_rmse)
+              .classed("rmse-label", true);
+
+            this.svg.append("text")             
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "right")
+              .text("inaccurate")
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .style("opacity", label_o_rmse)
+              .classed("rmse-label", true);
 
           ////////////////
           // initiate force simulation
@@ -3124,7 +3144,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + this.height/2 + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-40) + ")")
 
                 this.yAxis
                 .transition(time_slide)
@@ -3165,6 +3185,8 @@
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
+          .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
+                .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
         // modify forces to update chart
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
@@ -3355,15 +3377,22 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // update axes
+          // update axes and labels
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
             self.fadeIn(this.d3.selectAll(".axis-label"), 500);
           }  else if (this.step == this.step_rmse && response.direction == "down") {
-            //self.drawAxes("rmse");
             self.fadeOut(this.d3.selectAll(".axis-label"), 500);
-          }  
-
+            self.fadeIn(this.d3.selectAll(".rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll(".arrow"), 500);
+          }  else if (this.step == this.step_ann+1 && response.direction == "down") {
+            self.fadeOut(this.d3.selectAll(".rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll(".arrow"), 500);
+          }
+            
+            if (this.step == this.step_rmse && response.direction == "down") {
+            self.drawAxes("rmse");
+          } 
            // add class to active step
           response.element.classList.add("is-active");
 
@@ -3392,12 +3421,12 @@
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
             self.fadeIn(this.d3.selectAll(".axis-label"), 500);
+            self.fadeOut(this.d3.selectAll(".rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll(".arrow"), 500);
+          } else if (this.step == this.step_ann+1 && response.direction == "up") {
+            self.fadeIn(this.d3.selectAll(".rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll(".arrow"), 500);
           }
-
-          if (this.step == this.step_rmse && response.direction == "down") {
-            self.drawAxes("rmse");
-          } 
-
 
         },
         
@@ -3444,7 +3473,7 @@ article {
   position: relative;
   width: 90%;
   margin: 2rem auto 4rem auto;
-  z-index: 1;
+  z-index: 0;
   height: 100vh;
   border: 1px;
 
@@ -3492,6 +3521,7 @@ figure.sticky.charts {
   display: grid;
   grid-template-rows: 30% 20% 30% 10%;
   grid-template-columns: 2% auto 2%;
+  z-index: 1;
 
   position: -webkit-sticky;
   position: sticky;
@@ -3522,6 +3552,7 @@ figure.sticky.charts {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
     width: 80%;
+    max-width: 700px;
     margin: auto;
   }
   #bees-chart {
@@ -3529,13 +3560,18 @@ figure.sticky.charts {
     width: auto;
     max-width: 800px;
   }
+
+   #bees-legend {
+    height: 100%;
+    width: auto;
+    max-width: 800px;
+  }
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    height: 100%;
-    width: auto;
-    min-width: 0;
-    min-height: 0;
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
   }
 }
 .axis-line {
@@ -3546,6 +3582,10 @@ figure.sticky.charts {
     font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 20px;
+}
+.arrow {
+  fill: white;
+
 }
 
 .text-annotate {
