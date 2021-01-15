@@ -59,7 +59,10 @@
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
-    <div id="map-container" class="figure-content">
+    <div
+      id="map-container"
+      class="figure-content"
+    >
       <img
         id="hex-map"
         src="@/assets/usa_hex_map_80-01.png"

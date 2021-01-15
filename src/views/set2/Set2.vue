@@ -16,7 +16,7 @@
         </h3>
       </div -->
       <p class="viz-subtitle">
-            All Monitoring Sites in the Basin
+        All Monitoring Sites in the Basin
       </p>  
       <div class="figure-content">
         <div class="figure map">
@@ -62,13 +62,22 @@
       id="matrix-explainer-container"
       class="explainer-grid-container"
     >
-      <div class="explainer-grid-item" id="MatrixExplainerSpace">
+      <div
+        id="MatrixExplainerSpace"
+        class="explainer-grid-item"
+      >
         <MatrixExplainerSpace />
       </div>
-      <div class="explainer-grid-item" id="MatrixExplainerTime">
+      <div
+        id="MatrixExplainerTime"
+        class="explainer-grid-item"
+      >
         <MatrixExplainerTime />
       </div>
-      <div class="explainer-grid-item" id="MatrixExplainerColor">
+      <div
+        id="MatrixExplainerColor"
+        class="explainer-grid-item"
+      >
         <MatrixExplainerColor />
       </div>            
     </div>
@@ -117,10 +126,13 @@
       </h3>
     </div --> 
     <p class="viz-subtitle">
-        Daily Temperature readings in the Basin in 2019
-      </p>
+      Daily Temperature readings in the Basin in 2019
+    </p>
     <div class="figure-content">
-      <div class="figure chart" id="timeseries">
+      <div
+        id="timeseries"
+        class="figure chart"
+      >
         <MonitoringLineChart />
       </div>
     </div>
@@ -154,7 +166,10 @@
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
-    <div id="map-container" class="figure-content">
+    <div
+      id="map-container"
+      class="figure-content"
+    >
       <img
         id="hex-map"
         src="@/assets/usa_hex_map_80-01.png"
