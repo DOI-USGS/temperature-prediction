@@ -630,16 +630,16 @@
                 // assign fill color based on agency
                 .style("fill", function(d){
                   if (d.properties.source === 'USGS'){
-                    return "#e9eced"
+                    return "#e9eced" // #e9eced
                   } else {
-                    return "#e9eced"
+                    return "#FDAD32" // #e9eced
                   }
                 })
                 // assign stroke in background color
-                // .style("stroke", "#000000")
-                // .style("stroke-width", 0.4)
+                .style("stroke", "#141414")
+                .style("stroke-width", 0.1)
                 // assign opacity
-                .style("opacity", .4)
+                .style("opacity", .8)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
@@ -668,7 +668,7 @@
 
           // set colors
           let z = this.d3.scaleOrdinal()
-              .range(["#e9eced", "#e9eced"]);
+              .range(["#e9eced", "#FDAD32"]); // USGS, other
 
           // stack to create an array for each of the series in the data
           let stack = this.d3.stack();
@@ -748,33 +748,33 @@
           // set the tick mark lines to background color
           svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 0.5) //.attr("stroke-dasharray", ("1, 2"))
 
-          // //  make the legend
-          // let legend = g.selectAll(".legend")
-          //     // include all but the first column in the legend
-          //     .data(data.columns.slice(1).reverse())
-          //     // append an item for each series
-          //     .enter().append("g")
-          //     .attr("class", "c2p1 barChart legend")
-          //     .attr("transform", function(d, i) {
-          //       return "translate(" + 0 + "," + i * 17 + ")";
-          //     })
+          //  make the legend
+          let legend = g.selectAll(".legend")
+              // include all but the first column in the legend
+              .data(data.columns.slice(1).reverse())
+              // append an item for each series
+              .enter().append("g")
+              .attr("class", "c2p1 barChart legend")
+              .attr("transform", function(d, i) {
+                return "translate(" + 0 + "," + i * 17 + ")";
+              })
 
-          // // append a rectangle for each series
-          // legend.append("rect")
-          //     .attr("x", 14)
-          //     .attr("width", 8)
-          //     .attr("height", 8)
-          //     // set color based on z attribute
-          //     .attr("fill", z);
+          // append a rectangle for each series
+          legend.append("rect")
+              .attr("x", 14)
+              .attr("width", 8)
+              .attr("height", 8)
+              // set color based on z attribute
+              .attr("fill", z);
 
-          // // append a label for each rectangle
-          // legend.append("text")
-          //     .attr("x", 30)
-          //     .attr("y", 4)
-          //     .attr("dy", ".35em")
-          //     .attr("text-anchor", "start")
-          //     // set text as column name
-          //     .text(function(d) { return d; });
+          // append a label for each rectangle
+          legend.append("text")
+              .attr("x", 30)
+              .attr("y", 4)
+              .attr("dy", ".35em")
+              .attr("text-anchor", "start")
+              // set text as column name
+              .text(function(d) { return d; });
 
         },
         setMap_c2p2(){
