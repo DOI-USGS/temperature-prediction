@@ -2272,39 +2272,33 @@
   .explainer-grid-container {
     padding: 5px;
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 5% 30% 30% 30% 5%;
-    grid-template-rows: 90%;
+    grid-template-columns: 1fr auto auto auto 1fr;
     gap: 0px 10px;
     width: 100vw;
-    max-height: 100%;
     min-width: 0;
-    min-height: 0;
+    max-height: 90vh;
     @media screen and (max-width: 600px) {
       padding: 10px 0;
       gap: 0px;
     }
   }
   .explainer-grid-item {
-    margin: auto;
     padding: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    min-width: 25vw;
+    max-width: 350px;
   }
   #MatrixExplainerSpace {
     grid-column: 2;
-    max-width: 350px;
-    align-self: center;
   }
   #MatrixExplainerTime {
     grid-column: 3;
-    max-width: 350px;
   }
   #MatrixExplainerColor {
     grid-column: 4;
-    max-width: 350px;
   }
   .map-matrix-grid-container {
     padding: 25px;
