@@ -3139,6 +3139,22 @@
                   .domain(["predicted","observed"])
                   .range([this.color_exp,"#171717"]);
 
+            // set opacity to legend elements based on initial step
+            // scrolling function fades them in and out as appropriate
+            if (this.step < this.step_start ) {
+                var o_pred = 0;
+                var o_obs = 0;
+              } else if (this.step == this.step_error_exp) {
+                var o_pred = 1;
+                var o_obs = 0;
+              } else if (this.step == this.step_error_obs) {
+                var o_pred = 1;
+                var o_obs = 1;
+              }  else if (this.step >= this.step_ann) {
+                var o_pred = 0;
+                var o_obs = 0;
+              }
+
               legend_error.append("text")
                 .text("Temperature")
                 .attr("x", nudge_x-20)
@@ -3146,6 +3162,7 @@
                 .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
+                 .style("opacity", o_pred)
 
                 var legend = legend_error.selectAll(".legend")
                   .data(error_fill.domain().slice().reverse())
@@ -3161,23 +3178,102 @@
                   .attr("r", this.radius)
                   .style("fill", error_fill)
                   .style("stroke", error_stroke)
+                  .style("opacity", o_pred)
 
                   legend.append("text")
+                  .attr("x", "20px")
+                  .attr("y", "5px")
+                  .text(function(d) { return d; })
+                  .style("fill", "white")
+
+                   this.d3.select("g.legend:nth-child(3) text")
+                  .attr("opacity", o_pred)
+
+                  this.d3.select("g.legend:nth-child(3) text")
+                  .attr("opacity", o_pred)
+
+
+                  this.d3.select("g.legend:nth-child(2) text")
+                  .attr("opacity", o_obs)
+
+                  this.d3.select("g.legend:nth-child(2) circle")
+                  .attr("opacity", o_obs)
+
+
+                  var legend_rmse = this.d3.select("#bees-legend")
+                    .append("g").classed("rmse-legend", true)
+                    .classed("rmse", true)
+              
+                 var nudge_x_rmse = this.width*.8;
+                 var nudge_y_rmse = this.height*.1;
+
+                var rmse_stroke = this.d3.scaleOrdinal()
+                  .domain(["100%","2%","0.1%"])
+                  .range([this.color_d100, this.color_d02, this.color_d001]);
+
+                  var rmse_fill = this.d3.scaleOrdinal()
+                  .domain(["100%","2%","0.1%"])
+                  .range([this.color_d100, this.color_d02, this.color_d001]);
+
+                /// color legend for experiments
+               if (this.step <= this.step_ann ) {
+                 var o_train = 0;
+               } else {
+                 var o_train = 1;
+               }
+
+              legend_rmse.append("text")
+                .text("Training data")
+                .attr("x", nudge_x_rmse-20)
+                .attr("y", nudge_y_rmse)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","bold")
+                 .style("opacity", o_train)
+                 .classed("rmse-title", true)
+
+                var legend_r = legend_rmse.selectAll(".legend-rmse")
+                  .data(rmse_fill.domain().slice())
+                  .enter().append("g")
+                    .attr("class", "legend-rmse")
+                    .attr("transform", function(d,i) {
+                      return "translate(" + (nudge_x_rmse) + " ,"  + (nudge_y_rmse + 30 + i * 30) + ")";
+                    });
+
+                legend_r.append("circle")
+                  .attr("x", nudge_x_rmse)
+                  .attr("y", nudge_y_rmse)
+                  .attr("r", this.radius)
+                  .style("fill", rmse_fill)
+                  .style("stroke", rmse_stroke)
+                  //.style("opacity", o_train)
+
+                  legend_r.append("text")
                   .attr("x", "20px")
                   .attr("y", "5px")
                   //.attr("dy", ".35em")
                   .text(function(d) { return d; })
                   .style("fill", "white")
+                  //.style("opacity", o_train)
 
-                  this.d3.select("g.legend:nth-child(2) text")
-                  .attr("opacity", 0)
+                  //this.d3.selectAll("g.legend-rmse text:nth-child(2)") //all text
+                  //.style("opacity", 0)
 
-                  this.d3.select("g.legend:nth-child(2) circle")
-                  .attr("opacity", 0)
+                   /// color legend for experiments
+               if (this.step <= this.step_ann_exp ) {
+                 var o_exp = 0;
+               } else {
+                 var o_exp = 1;
+               }
 
-                  
-                  //.classed("observed", true)
+                  this.d3.selectAll("g.legend-rmse:nth-child(2)") //
+                  .style("opacity", o_train)
 
+                  this.d3.selectAll("g.legend-rmse:nth-child(3)") //
+                  .style("opacity", o_exp)
+
+                  this.d3.selectAll("g.legend-rmse:nth-child(4)")
+                  .style("opacity", o_exp)
 
 
           ////////////////
@@ -3235,6 +3331,7 @@
             // controls axis aniamtions between error chart and beeswarm
             let time_slide = 500;
             let margin = 50;
+
             if (axes_in === "error") {
             this.yAxis
               .transition()
@@ -3550,7 +3647,14 @@
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
-          }
+          } else if (this.step == this.step_ann && response.direction == "down") {
+            // half of legend appears for beeswarm
+             self.fadeIn(this.d3.selectAll("text.rmse-title"), 500) 
+             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
+          } else if (this.step == this.step_ann_exp && response.direction == "down") {
+             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
+             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
+          } 
             
             if (this.step == this.step_rmse && response.direction == "down") {
             self.drawAxes("rmse");
@@ -3592,8 +3696,14 @@
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
-          }
-
+          } else if (this.step == this.step_ann && response.direction == "up") {
+            // half of legend for beeswarm
+             self.fadeOut(this.d3.selectAll("text.rmse-title"), 500) 
+             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
+          } else if (this.step == this.step_ann_exp && response.direction == "up") {
+             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
+             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
+          } 
         },
         
         fadeOut(element, time) {
@@ -3601,12 +3711,14 @@
           .transition()
           .duration(time)
           .attr("opacity",0)
+          .style("opacity",0)
         },
          fadeIn(element, time) {
           element
           .transition()
           .duration(time)
           .attr("opacity",1)
+          .style("opacity",1)
         }
     }
   }
