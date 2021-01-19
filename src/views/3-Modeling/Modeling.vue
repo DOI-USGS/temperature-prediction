@@ -2712,7 +2712,7 @@
 
             // beeswarm
             step_start: 13,
-            radius: 8,
+            radius: 6,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2766,6 +2766,7 @@
 
           // setup resize event
           window.addEventListener("resize", this.resize);
+          this.resize();
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
@@ -2781,7 +2782,7 @@
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
           // set header based on refresh scroll
-           if (this.step <= 2){
+           if (this.step <= 0){
              this.d3.select("figure.intro").classed("sticky", true); 
           }
 
@@ -2798,12 +2799,17 @@
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
 
+          this.color_d100 = '#7E03A8';
+          this.color_d02 = "#E4695E";
+          this.color_d001 = "#EBF222";
+          this.color_obs = "#FDAD32";  // #FDAD32
+          this.color_exp = "#FDAD32";
+
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
         this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         },
         
-        //methods are executed once, not cached as computed properties, rerun everytime deal with new step
         methods: {
           loadData() {
             const self = this;
@@ -2817,10 +2823,7 @@
           },
           callback(data) {
             const self = this;
-            // this function organizes data and then draws first beeswarm view based on step
-
-            // make data how we like it
-            // comes in as an array of objects
+            // organize data and draw chart
             this.rmse_exp = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_ann = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             this.error_data = data[2];
@@ -2838,6 +2841,7 @@
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
             this.chartState.alpha = 1;
+            this.chartState.aDecay = 0.1;
 
             // draw the chart
             this.makeBeeswarm();
@@ -2845,13 +2849,16 @@
           },
           // resize to keep scroller accurate with window size changes
           resize () {
-/*             const self = this;
+            const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
-            this.width = bounds.width
+/*             this.width = bounds.width
             this.height = bounds.height
             this.marginX = bounds.width * 0.1
             this.marginY = bounds.height * 0.1 */
             this.scroller.resize()
+            
+            console.log(bounds)
+
           },
           // set up flubber svg
           setFlubber() {
@@ -3015,11 +3022,11 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#7E03A8","#E4695E", "#EBF222", "#141414","#285C70"]);
+            .range([this.color_d100, this.color_d02, this.color_d001, "#171717", this.color_exp]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range(["#7E03A8","#E4695E", "#EBF222", "#FDAD32","#285C70"]);
+            .range([this.color_d100, this.color_d02, this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
           // generate axes
@@ -3031,7 +3038,6 @@
           yGen.ticks(0);
 
           // draw on chart
-
           this.yAxis = this.svg.select("g").append("g")
             .attr("class", "y-axis")
             .call(yGen);
@@ -3054,6 +3060,7 @@
           .attr("stroke-dashoffset", this.height+margin)
           //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
+          // set initial opacity based on load/refresh step for annotaitons etc
            if (this.step >= this.step_start && this.step <= this.step_error_obs ){
              var label_o = 1;
            } else {
@@ -3078,7 +3085,6 @@
               .style("font-size", "30px")
               .attr("opacity", label_o)
               .classed("axis-label", true);
-
 
           // text label for the y axis
           this.svg.append("text")
@@ -3113,12 +3119,52 @@
               .classed("rmse-label", true);
 
 
-              // create legend for beeswarm experiments
-              var legend = this.d3.legendColor()
-              .scale(this.set_colors);
+              // create legend for error plot colors
+              var legend_error = this.d3.select("#bees-legend")
+                .append("g").classed("legend_color", true)
+              
+                 var nudge_x = this.width*.1;
+                 var nudge_y = this.height*.1;
 
-              this.svg.select(".legend")
-              .call(legend)
+                var error_stroke = this.d3.scaleOrdinal()
+                  .domain(["observed","predicted"])
+                  .range([this.color_obs, this.color_exp]);
+
+                  var error_fill = this.d3.scaleOrdinal()
+                  .domain(["observed","predicted"])
+                  .range(["#171717", this.color_exp]);
+
+              legend_error.append("text")
+                .text("Temperature")
+                .attr("x", nudge_x)
+                .attr("y", nudge_y)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","bold")
+
+                var legend = legend_error.selectAll(".legend")
+                  .data(error_fill.domain().slice().reverse())
+                  .enter().append("g")
+                    .attr("class", "legend")
+                    .attr("transform", function(d,i) {
+                      return "translate(" + (nudge_x) + " ,"  + (nudge_y + 40 + i * 30) + ")";
+                    });
+
+                legend.append("circle")
+                  .attr("x", nudge_x)
+                  .attr("y", nudge_y)
+                  .attr("r", this.radius)
+                  .style("fill", error_fill)
+                  .style("stroke", error_stroke)
+
+                  legend.append("text")
+                  .attr("x", "20px")
+                  .attr("y", "5px")
+                  //.attr("dy", ".35em")
+                  .text(function(d) { return d; })
+                  .style("fill", "white")
+
+
 
           ////////////////
           // initiate force simulation
@@ -3189,8 +3235,8 @@
             const self = this;
 
           // where are we?
-          console.log(this.chartState.var_x);
-          console.log(this.chartState.var_y);
+          //console.log(this.chartState.var_x);
+         // console.log(this.chartState.var_y);
           let margin = 50;
 
           // update axes based on active data
@@ -3213,7 +3259,7 @@
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(10))
+          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(1))
           .stop();
 
         // define how elements are added and remove from view
@@ -3227,6 +3273,12 @@
                 //.attr("cx", this.width/2) //where they exit from
                 //.attr("cy", (this.height /2)) //where they exit from
                 .remove();
+          chart
+            .transition()
+            .duration(800)
+            .attr("r", this.radius)
+            .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
+            .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
             chart.enter()
               .append("circle")
@@ -3255,16 +3307,20 @@
                 //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
+          ///////////
           // define force velocity and ticking
-          var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-          console.log(step_transitions);
-          console.log(step_transitions.indexOf(this.step));
 
+         // array of transition steps
+          var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+         // console.log(step_transitions);
+         // console.log(step_transitions.indexOf(this.step));
+
+          // tick simulation only if the active step has a chart transition
           if (step_transitions.indexOf(this.step) !== -1){
             
            self.simulation
            .alpha(this.chartState.alpha)
-           .alphaDecay(0.1)
+           .alphaDecay(this.chartState.aDecay)
            //.velocityDecay(0.6)
            .restart()
             .on("tick", self.tick)
@@ -3326,11 +3382,15 @@
             this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.1;
           }
            if (this.step === this.step_error_obs ) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_obs;
             this.chartState.radius = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.1;
           }
 
 
@@ -3341,42 +3401,54 @@
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.1;
           }
 
           // intro beeswarm, adding experiments
+          // decrease alpha to reduce jitteriness
+          // corresponding decrease in alphaDecay to allow "cool down" 
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.var_x = this.chart_x.ANN;
             this.chartState.var_y = this.chart_y.mid;
-            this.chartState.strengthy = 0.01;
+            this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.3;
+            this.chartState.aDecay = 0.05;
           }
           // RNN
           if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
             this.chartState.var_x = this.chart_x.RNN;
             this.chartState.var_y = this.chart_y.mid;
-            this.chartState.strengthy = 0.01;
+            this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
           }
           // RGCN
           if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN;
             this.chartState.var_y = this.chart_y.mid;
-            this.chartState.strengthy = 0.01;
+            this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
           }
           // RGCN to end
           if (this.step >= this.step_rgcn_ptrn) {
             this.chartState.var_x = this.chart_x.RGCN_ptrn;
             this.chartState.var_y = this.chart_y.mid;
-            this.chartState.strengthy = 0.01;
+            this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
           }
 
           /////////// REDRAW
           // now redraw beeswarm chart and modify force based on active data
           // only redraw if the data or forces change
-          this.chartState.strengthy = .4;
-          this.chartState.strengthx = .7;
+          //this.chartState.strengthy = .2;
+          this.chartState.strengthx = 1;
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -3583,14 +3655,13 @@ figure.sticky.charts {
   #bees-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    width: 80%;
+    height: 100%;
+    width: 90%;
     max-width: 700px;
     margin: auto;
   }
   #bees-chart {
-    height: 100%;
-    width: auto;
-    max-width: 800px;
+ 
   }
 
    #bees-legend {
@@ -3601,7 +3672,8 @@ figure.sticky.charts {
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
-    width: 80%;
+    height: 100%;
+    width: 90%;
     max-width: 700px;
     margin: auto;
   }
