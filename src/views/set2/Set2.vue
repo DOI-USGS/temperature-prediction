@@ -2270,17 +2270,13 @@
   }
 
   .explainer-grid-container {
-    padding: 25px;
+    padding: 5px;
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 3% 28% 28% 28% 3%;
-    grid-template-rows: 100%;
+    grid-template-columns: 1fr auto auto auto 1fr;
     gap: 0px 10px;
-    width: 100%;
-    max-height: 90vh;
+    width: 100vw;
     min-width: 0;
-    min-height: 0;
+    max-height: 90vh;
     @media screen and (max-width: 600px) {
       padding: 10px 0;
       gap: 0px;
@@ -2289,19 +2285,20 @@
   .explainer-grid-item {
     padding: 0px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 25vw;
+    max-width: 350px;
   }
   #MatrixExplainerSpace {
     grid-column: 2;
-    display: flex;
   }
   #MatrixExplainerTime {
     grid-column: 3;
-    display: flex;
-    max-height: 90vh;
   }
   #MatrixExplainerColor {
     grid-column: 4;
-    display: flex;
   }
   .map-matrix-grid-container {
     padding: 25px;
@@ -2320,17 +2317,12 @@
     min-height: 0;
   }
   .mm-grid-item {
-      padding: 0px;
-      display: flex;
+    padding: 0px;
+    display: flex;
   }
   #DRB_map_c2p2 {
     grid-area: map;
     display: flex;
-  }
-  .map_c2p2 {
-    grid-area: map;
-    display: flex;
-    width: 100%;
     max-height: 100%;
   }
   #matrixChart_c2p2 {
