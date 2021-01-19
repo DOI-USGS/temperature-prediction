@@ -2637,6 +2637,7 @@
             />
           </g>
 
+
         </svg>
       </div>
     </figure>
@@ -2799,11 +2800,12 @@
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
 
-          this.color_d100 = '#7E03A8';
-          this.color_d02 = "#E4695E";
-          this.color_d001 = "#EBF222";
-          this.color_obs = "#FDAD32";  // #FDAD32
-          this.color_exp = "#FDAD32";
+        // colors for chart
+          this.color_d100 = '#3B14DD';
+          this.color_d02 = "#C60C54";
+          this.color_d001 = "#F1F326";
+          this.color_obs = "#B666C6";  // #FDAD32 is the current yellow in flubber
+          this.color_exp = "#B666C6";
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -3084,6 +3086,7 @@
               .style("fill", "white")
               .style("font-size", "30px")
               .attr("opacity", label_o)
+              .classed("error", true)
               .classed("axis-label", true);
 
           // text label for the y axis
@@ -3096,6 +3099,7 @@
               .text("Temperature")
               .style("fill", "white")
               .attr("opacity", label_o)
+              .classed("error", true)
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
@@ -3122,21 +3126,22 @@
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
                 .append("g").classed("legend_color", true)
+                .classed("error", true)
               
                  var nudge_x = this.width*.1;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
-                  .domain(["observed","predicted"])
+                  .domain(["prediction","observed"])
                   .range([this.color_obs, this.color_exp]);
 
                   var error_fill = this.d3.scaleOrdinal()
-                  .domain(["observed","predicted"])
-                  .range(["#171717", this.color_exp]);
+                  .domain(["predicted","observed"])
+                  .range([this.color_exp,"#171717"]);
 
               legend_error.append("text")
                 .text("Temperature")
-                .attr("x", nudge_x)
+                .attr("x", nudge_x-20)
                 .attr("y", nudge_y)
                 .style("fill", "white")
                  .style("font-size", "30px")
@@ -3147,7 +3152,7 @@
                   .enter().append("g")
                     .attr("class", "legend")
                     .attr("transform", function(d,i) {
-                      return "translate(" + (nudge_x) + " ,"  + (nudge_y + 40 + i * 30) + ")";
+                      return "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")";
                     });
 
                 legend.append("circle")
@@ -3164,6 +3169,15 @@
                   .text(function(d) { return d; })
                   .style("fill", "white")
 
+                  this.d3.select("g.legend:nth-child(2) text")
+                  .attr("opacity", 0)
+
+                  this.d3.select("g.legend:nth-child(2) circle")
+                  .attr("opacity", 0)
+
+                  
+                  //.classed("observed", true)
+
 
 
           ////////////////
@@ -3173,6 +3187,49 @@
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
+          },
+          moveLegend(direction) {
+              const self = this;
+            var drop_dot = this.d3.select("g.legend:nth-child(2)")
+
+            var nudge_x = this.width*.1;
+                 var nudge_y = this.height*.1;
+
+            if (direction == "down"){
+                  this.d3.select("g.legend:nth-child(2) circle")
+                  .transition()
+                  .duration(150)
+                  .style("opacity", 1)
+
+                  this.d3.select("g.legend:nth-child(2)")
+                  .transition()
+                  .duration(400)
+                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 60) + ")")
+
+                  this.d3.select("g.legend:nth-child(2) text")
+                  .transition()
+                  .duration(150)
+                  .style("opacity", 1)
+
+
+            } else if (direction == "up") {
+             this.d3.select("g.legend:nth-child(2) text")
+                  .transition()
+                  .duration(150)
+                  .style("opacity", 0)
+
+                this.d3.select("g.legend:nth-child(2)")
+                  .transition()
+                  .duration(400)
+                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")")
+
+                  this.d3.select("g.legend:nth-child(2) circle")
+                  .transition()
+                  .duration(150)
+                  .style("opacity", 0)
+
+              
+            }
           },
           drawAxes(axes_in) {
             // controls axis aniamtions between error chart and beeswarm
@@ -3377,7 +3434,7 @@
           // assign chart axes and color scales
 
           // error chart
-          if (this.step === this.step_error_exp) {
+          if (this.step <= this.step_error_exp) {
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
@@ -3473,7 +3530,7 @@
               .attr("opacity", 1)
             self.fadeIn(this.d3.selectAll("#flubber-svg"), 2400);
           }
-         
+         // drop sticky header
           if (this.step >= 0 && response.direction == "down"){
              this.d3.select("figure.intro").classed("sticky", false); 
           }
@@ -3482,8 +3539,12 @@
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
             self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeIn(this.d3.selectAll(".legend_color"), 500);
+          }  else if (this.step == this.step_error_obs && response.direction == "down" ) {
+            self.moveLegend("down");
           }  else if (this.step == this.step_rmse && response.direction == "down") {
             self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeOut(this.d3.selectAll(".legend_color"), 500);
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
@@ -3519,9 +3580,13 @@
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
             self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeOut(this.d3.selectAll(".legend_color"), 500);
+          }  else if (this.step == this.step_error_obs && response.direction == "up" ) {
+            self.moveLegend("up");
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
             self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
+            self.fadeIn(this.d3.selectAll(".legend_color"), 500);
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
@@ -3665,9 +3730,7 @@ figure.sticky.charts {
   }
 
    #bees-legend {
-    height: 100%;
-    width: auto;
-    max-width: 800px;
+
   }
   #legend-container {
     grid-column: 2 / 2;
