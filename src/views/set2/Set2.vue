@@ -20,7 +20,7 @@
       </p>  
       <div class="figure-content">
         <div class="figure map">
-          <div id="DRB_map_c2p1" />
+          <div id="DRB_map_c2p1"/>
         </div>
       </div>
       <div class="text-content">
@@ -103,7 +103,39 @@
       <div
         id="DRB_map_c2p2"
         class="map mm-grid-item"
-      />
+      >
+        <svg class="map_c2p2 map">
+          <svg x="15%" y="17%">
+            <text
+              class="annotation-text"
+              x="0"
+              y="1.2em"
+            >Hover over a stream reach<tspan
+              x="0"
+              y="2.4em"
+            >to see the amount of data</tspan><tspan
+              x="0"
+              y="3.6em"
+            >available for that reach over time</tspan></text>
+          </svg>
+          <svg x="74%" y="45%">
+            <text
+              class="annotation-text"
+              x="0"
+              y="1.2em"
+            >Hover over a column<tspan
+              x="0"
+              y="2.4em"
+            >in the matrix at right</tspan><tspan
+              x="0"
+              y="3.6em"
+            >to see which reaches have</tspan><tspan
+              x="0"
+              y="4.8em"
+            >data in a given year</tspan></text>
+          </svg>
+        </svg>
+      </div>
       <!-- class="figure" -->
       <div
         id="matrixChart_c2p2"
@@ -368,10 +400,16 @@
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
-          //create new svg container for the ch 2 panel 2 map
-          this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
-              .append("svg")
-              .attr("class", "map_c2p2 map")
+          // //create new svg container for the ch 2 panel 2 map
+          // this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
+          //     .append("svg")
+          //     .attr("class", "map_c2p2 map")
+          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+          
+          this.map_c2p2 = self.d3.select(".map_c2p2")
+              // .append("svg")
+              // .attr("class", "map_c2p2 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
@@ -2305,13 +2343,13 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto ;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
     height: 90vh;
-    max-height: 90%;
+    // max-height: 90%;
     // width: 100%;
     min-width: 0;
     min-height: 0;
@@ -2319,6 +2357,8 @@
   .mm-grid-item {
     padding: 0px;
     display: flex;
+    min-width: 45vw;
+    max-height: 90vh;
   }
   #DRB_map_c2p2 {
     grid-area: map;
@@ -2339,6 +2379,11 @@
     grid-area: matrix;
     display: flex;
     max-height: 100%;
+  }
+  .annotation-text {
+    fill: #c3cccf;
+    font-size: 0.5em;
+    font-style: italic;
   }
 }
 </style>
