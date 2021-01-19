@@ -2323,17 +2323,12 @@
     min-height: 0;
   }
   .mm-grid-item {
-      padding: 0px;
-      display: flex;
+    padding: 0px;
+    display: flex;
   }
   #DRB_map_c2p2 {
     grid-area: map;
     display: flex;
-  }
-  .map_c2p2 {
-    grid-area: map;
-    display: flex;
-    width: 100%;
     max-height: 100%;
   }
   #matrixChart_c2p2 {
