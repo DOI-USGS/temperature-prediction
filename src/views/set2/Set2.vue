@@ -2295,18 +2295,15 @@
   }
   #MatrixExplainerSpace {
     grid-column: 2;
-    // display: block;
     max-width: 350px;
     align-self: center;
   }
   #MatrixExplainerTime {
     grid-column: 3;
-    // display: block;
     max-width: 350px;
   }
   #MatrixExplainerColor {
     grid-column: 4;
-    // display: block;
     max-width: 350px;
   }
   .map-matrix-grid-container {

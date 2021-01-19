@@ -119,6 +119,7 @@
 
     .icon-item{
         text-align: center;
+        margin: auto;
     }
 
     .icon {
@@ -133,18 +134,28 @@
 
     #icon-1 {
         grid-area: icon-1;
-        display: block;
+        display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 80px;
+        }
     }
 
     #icon-2 {
         grid-area: icon-2;
-        display: block;
+        display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 80px;
+        }
     }
 
     #icon-3 {
         grid-area: icon-3;
-        display: block; 
+        display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 80px;
+        } 
     }
+    
 
     #desc-1 {
         grid-area: desc-1; 
