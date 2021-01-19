@@ -2270,15 +2270,15 @@
   }
 
   .explainer-grid-container {
-    padding: 25px;
+    padding: 5px;
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 3% 28% 28% 28% 3%;
-    grid-template-rows: 100%;
+    grid-template-columns: 5% 30% 30% 30% 5%;
+    grid-template-rows: 90%;
     gap: 0px 10px;
-    width: 100%;
-    max-height: 90vh;
+    width: 100vw;
+    max-height: 100%;
     min-width: 0;
     min-height: 0;
     @media screen and (max-width: 600px) {
@@ -2287,21 +2287,27 @@
     }
   }
   .explainer-grid-item {
+    margin: auto;
     padding: 0px;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
   #MatrixExplainerSpace {
     grid-column: 2;
-    display: flex;
+    // display: block;
+    max-width: 350px;
+    align-self: center;
   }
   #MatrixExplainerTime {
     grid-column: 3;
-    display: flex;
-    max-height: 90vh;
+    // display: block;
+    max-width: 350px;
   }
   #MatrixExplainerColor {
     grid-column: 4;
-    display: flex;
+    // display: block;
+    max-width: 350px;
   }
   .map-matrix-grid-container {
     padding: 25px;
