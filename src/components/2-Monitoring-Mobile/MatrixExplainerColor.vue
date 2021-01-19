@@ -1776,7 +1776,10 @@
           />
         </g>
       </g>
-      <g id="barchart_labels" transform="translate(-1, 0)">
+      <g
+        id="barchart_labels"
+        transform="translate(-1, 0)"
+      >
         <text
           class="cls-34"
           transform="translate(30.7 683.3)"
