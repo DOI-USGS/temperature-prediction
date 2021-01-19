@@ -57,7 +57,7 @@
       <p class="viz-subtitle">
         Visualizing data availability at temperature measuring sites across the basin
       </p>
-    </div --> 
+    </div -->
     <div
       id="matrix-explainer-container"
       class="explainer-grid-container"
@@ -94,7 +94,7 @@
       <p class="viz-subtitle">
         Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.
       </p>
-    </div --> 
+    </div -->
     <div
       id="data-availability-container"
       class="map-matrix-grid-container"
@@ -172,6 +172,7 @@
     >
       <img
         id="hex-map"
+        class="figure"
         src="@/assets/usa_hex_map_80-01.png"
       >
       <!-- need to add legend and recolor beeswarm to mirror?? -->
@@ -270,7 +271,7 @@
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 15, bottom: 15, left: 35},
+          matrix_margin: {top: 50, right: 15, bottom: 20, left: 35},
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -363,21 +364,21 @@
           //create new svg container for the ch 2 panel 1 map
           this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
               .append("svg")
-              .attr("class", "map_c2p1")
+              .attr("class", "map_c2p1 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2")
+              .attr("class", "map_c2p2 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
-              .attr("class", "map_c2p3")
+              .attr("class", "map_c2p3 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
           
@@ -650,8 +651,7 @@
               .append("svg")
               .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
                 (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
-
-              .attr("class", "c2p1 barChart")
+              .attr("class", "c2p1 barChart chart")
           let g = svgChart.append("g")
               .attr("class", "c2p1 transformedBarChart")
               .attr("transform", "translate(" + this.chart_margin.left + "," + this.chart_margin.top + ")");
@@ -928,7 +928,7 @@
               .append("svg")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("class", "c2p2 matrix_c2p2")
+              .attr("class", "c2p2 matrix_c2p2 matrix")
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -1415,7 +1415,7 @@
               // set viewbox
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("class", "c2p3 matrix_c2p3")
+              .attr("class", "c2p3 matrix_c2p3 matrix")
 
           // build array of all values of observed temperature
           let arrayObsTemps = [];
@@ -1582,8 +1582,8 @@
               .style("font-size", 10)
               .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2 + ")")
               .attr("class", "c2p3 matrixAxis bottom")
-              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(formatTime(parseTime()))
-            .select(".domain").remove()
+              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(self.d3.timeFormat("%Y"))
+              .select(".domain").remove()
           transformedMatrix.append("g")
               .style("font-size", 0)
               .attr("transform", "translate(" + 0 + "," + 0 + ")")
@@ -2246,12 +2246,15 @@
   }
 
   #DRB_map_c2p1 {
-
+    display: block;
+    max-width: 700px;
+    width: 100%;
   }
 
   #barChart_c2p1 {
     display: block;
     max-width: 700px;
+    width: 100%;
   }
 
   #timeseries {
@@ -2269,11 +2272,13 @@
   .explainer-grid-container {
     padding: 25px;
     display: grid;
-    grid-template-columns: 2% 32% 32% 32% 2%;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 3% 28% 28% 28% 3%;
     grid-template-rows: 100%;
     gap: 0px 10px;
     width: 100%;
-    max-height: 90%;
+    max-height: 90vh;
     min-width: 0;
     min-height: 0;
     @media screen and (max-width: 600px) {
@@ -2286,23 +2291,31 @@
     display: flex;
   }
   #MatrixExplainerSpace {
-    grid-column: 2
+    grid-column: 2;
+    display: flex;
   }
   #MatrixExplainerTime {
-    grid-column: 3
+    grid-column: 3;
+    display: flex;
+    max-height: 90vh;
   }
   #MatrixExplainerColor {
-    grid-column: 4
+    grid-column: 4;
+    display: flex;
   }
   .map-matrix-grid-container {
     padding: 25px;
     display: grid;
+    align-items: center;
+    justify-content: center;
     grid-template-columns: 50% 50%;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
     height: 90vh;
+    max-height: 90%;
+    // width: 100%;
     min-width: 0;
     min-height: 0;
   }
@@ -2314,17 +2327,26 @@
     grid-area: map;
     display: flex;
   }
+  .map_c2p2 {
+    grid-area: map;
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+  }
   #matrixChart_c2p2 {
     grid-area: matrix;
     display: flex;
+    max-height: 100%;
   }
   #DRB_map_c2p3 {
     grid-area: map;
     display: flex;
+    max-height: 100%;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
     display: flex;
+    max-height: 100%;
   }
 }
 </style>
@@ -2367,6 +2389,10 @@
   color: #ffffff;
   font-size: 1em;;
 }
+.matrixAxis {
+  fill: #999999;
+  font-size: 1.1vh;
+}
 .chartAxisText {
   fill: #999999;
   font-size: 1.1vh;
@@ -2380,5 +2406,6 @@
 }
 #hex-map {
   padding: 4rem;
+  max-height: 90vh;
 }
 </style>

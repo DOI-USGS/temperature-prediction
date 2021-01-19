@@ -1776,7 +1776,7 @@
           />
         </g>
       </g>
-      <g id="barchart_labels">
+      <g id="barchart_labels" transform="translate(-1, 0)">
         <text
           class="cls-34"
           transform="translate(30.7 683.3)"
@@ -2747,12 +2747,12 @@ $backgroundCharcoal: #171717;
       }
 
       .cls-34 {
-        font-size: 7px;
+        font-size: 8px;
         fill: #fcfcfc;
       }
 
       .cls-100, .cls-34, .cls-44 {
-        font-family: SourceSansPro-Regular, Source Sans Pro;
+        font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;//SourceSansPro-Regular, Source Sans Pro;
       }
 
       .cls-35 {
