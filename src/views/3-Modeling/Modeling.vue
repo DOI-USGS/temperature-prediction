@@ -3163,6 +3163,7 @@
                  .style("font-size", "30px")
                  .style("font-weight","bold")
                  .style("opacity", o_pred)
+                 .classed("error_1" , true)
 
                 var legend = legend_error.selectAll(".legend")
                   .data(error_fill.domain().slice().reverse())
@@ -3188,18 +3189,22 @@
 
                    this.d3.select("g.legend:nth-child(3) text")
                   .attr("opacity", o_pred)
+                  .classed("error_1" , true)
 
-                  this.d3.select("g.legend:nth-child(3) text")
+                  this.d3.select("g.legend:nth-child(3) circle")
                   .attr("opacity", o_pred)
+                  .classed("error_1" , true)
 
 
                   this.d3.select("g.legend:nth-child(2) text")
                   .attr("opacity", o_obs)
+                  .classed("error_2" , true)
 
                   this.d3.select("g.legend:nth-child(2) circle")
                   .attr("opacity", o_obs)
+                  .classed("error_2" , true)
 
-
+          /// rmse legend
                   var legend_rmse = this.d3.select("#bees-legend")
                     .append("g").classed("rmse-legend", true)
                     .classed("rmse", true)
@@ -3255,9 +3260,6 @@
                   .text(function(d) { return d; })
                   .style("fill", "white")
                   //.style("opacity", o_train)
-
-                  //this.d3.selectAll("g.legend-rmse text:nth-child(2)") //all text
-                  //.style("opacity", 0)
 
                    /// color legend for experiments
                if (this.step <= this.step_ann_exp ) {
@@ -3636,19 +3638,23 @@
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
             self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".legend_color"), 500);
+            self.fadeIn(this.d3.selectAll(".error_1"), 500);
+            //self.fadeIn(this.d3.select("g.legend:nth-child(3) circle"), 500)
           }  else if (this.step == this.step_error_obs && response.direction == "down" ) {
             self.moveLegend("down");
           }  else if (this.step == this.step_rmse && response.direction == "down") {
+            // rmse legend in and error legend out
             self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".legend_color"), 500);
+            self.fadeOut(this.d3.selectAll(".error_1"), 500);
+             self.fadeOut(this.d3.selectAll(".error_2"), 500);
+            //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), 500)
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann && response.direction == "down") {
-            // half of legend appears for beeswarm
+            // half of rmse legend appears for beeswarm
              self.fadeIn(this.d3.selectAll("text.rmse-title"), 500) 
              self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
           } else if (this.step == this.step_ann_exp && response.direction == "down") {
@@ -3679,18 +3685,20 @@
           }
 
         // scrolling back up options
-        // add and remove axes, axis labels
+        // add and remove axes, axis labels, legends,arrows
           if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
             self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".legend_color"), 500);
+            self.fadeOut(this.d3.selectAll(".error_1"), 500);
           }  else if (this.step == this.step_error_obs && response.direction == "up" ) {
             self.moveLegend("up");
+           self.fadeOut(this.d3.selectAll(".error_2"), 500);
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
             self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".legend_color"), 500);
+            self.fadeIn(this.d3.selectAll(".error_1"), 500);
+             self.fadeIn(this.d3.selectAll(".error_2"), 500);
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
