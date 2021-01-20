@@ -10081,7 +10081,7 @@
         </g>
         <g id="legend_squares">
           <rect
-            class="cls-8"
+            class="cls-9"
             x="57.7"
             y="318"
             width="10.4"
@@ -10089,7 +10089,7 @@
             rx="5.2"
           />
           <rect
-            class="cls-9"
+            class="cls-8"
             x="57.7"
             y="295.9"
             width="10.4"

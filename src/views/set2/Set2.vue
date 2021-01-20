@@ -19,41 +19,35 @@
         All Monitoring Sites in the Basin
       </p>  
       <div class="figure-content">
-        <div class="figure map">
-          <div id="DRB_map_c2p1">
-            <svg class="map_c2p1 map">
-              <svg id="legend" x="10%" y="10%" transform="scale(0.5 0.5)">
-                <g id="legend_text">
-                  <text
-                    class="legend-text"
-                    transform="translate(81 328.6)"
-                  >USGS</text>
-                  <text
-                    class="legend-text"
-                    transform="translate(81 306.5)"
-                  >State or other agency</text>
-                </g>
-                <g id="legend_squares">
-                  <rect
-                    class="USGS_station"
-                    x="57.7"
-                    y="318"
-                    width="10.4"
-                    height="10.38"
-                    rx="5.2"
-                  />
-                  <rect
-                    class="Other_station"
-                    x="57.7"
-                    y="295.9"
-                    width="10.4"
-                    height="10.38"
-                    rx="5.2"
-                  />
-                </g>
-              </svg>
+        <div class="figure map" id="DRB_map_c2p1">
+          <svg class="map_c2p1 map">
+            <svg x="20%" y="20%">
+                <text
+                  class="legend"
+                  x="2.5em" y="1em"
+                >State or other agency</text>
+                <text
+                  class="legend"
+                  x="2.5em" y="3em"
+                >USGS</text>
+                <rect
+                  class="Other_station"
+                  x="0.5em"
+                  y="0.18em"
+                  width="5.4"
+                  height="5.4"
+                  rx="5.2"
+                />
+                <rect
+                  class="USGS_station"
+                  x="0.5em"
+                  y="1.18em"
+                  width="5.4"
+                  height="5.4"
+                  rx="5.2"
+                />
             </svg>
-          </div>
+          </svg>
         </div>
       </div>
       <div class="text-content">
@@ -708,19 +702,19 @@
                     return "c2p1 obs_sites Other_station"
                   }
                 })
-                // assign fill color based on agency
-                .style("fill", function(d){
-                  if (d.properties.source === 'USGS'){
-                    return "#e9eced" // #e9eced
-                  } else {
-                    return "#FDAD32" // #e9eced
-                  }
-                })
-                // assign stroke in background color
-                .style("stroke", "#141414")
-                .style("stroke-width", 0.1)
-                // assign opacity
-                .style("opacity", .8)
+                // // assign fill color based on agency
+                // .style("fill", function(d){
+                //   if (d.properties.source === 'USGS'){
+                //     return "#e9eced" // #e9eced
+                //   } else {
+                //     return "#FDAD32" // #e9eced
+                //   }
+                // })
+                // // assign stroke in background color
+                // .style("stroke", "#141414")
+                // .style("stroke-width", 0.1)
+                // // assign opacity
+                // .style("opacity", .8)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
@@ -843,14 +837,14 @@
           // append a rectangle for each series
           legend.append("rect")
               .attr("x", 14)
-              .attr("width", 8)
-              .attr("height", 8)
+              .attr("width", 7)
+              .attr("height", 7)
               // set color based on z attribute
               .attr("fill", z);
 
           // append a label for each rectangle
           legend.append("text")
-              .attr("x", 30)
+              .attr("x", 27)
               .attr("y", 4)
               .attr("dy", ".35em")
               .attr("text-anchor", "start")
@@ -2428,6 +2422,11 @@
     font-size: 0.5em;
     font-style: italic;
   }
+  .annotation-text {
+    fill: #c3cccf;
+    font-size: 0.5em;
+    font-style: italic;
+  }
 }
 </style>
 <style lang="scss">
@@ -2455,19 +2454,19 @@
   stroke: #285C70;// original was #6399ba;
 }
 
-// .obs_sites {
-//   stroke: #141414;
-//   stroke-width: 0.1;
-//   opacity: 0.8;
-// }
+.obs_sites {
+  stroke: #141414;
+  stroke-width: 0.1;
+  opacity: 0.8;
+}
 
-// .USGS_station {
-//   fill: #e9eced;
-// }
+.USGS_station {
+  fill: #e9eced;
+}
 
-// .Other_station {
-//   fill: #FDAD32;
-// }
+.Other_station {
+  fill: #FDAD32;
+}
 
 .chartAxis {
   color: #999999;
@@ -2476,7 +2475,7 @@
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
-  font-size: 0.6em;
+  font-size: 0.5em;
   fill: #999999;
 }
 .legendAxis {
