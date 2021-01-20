@@ -20,7 +20,40 @@
       </p>  
       <div class="figure-content">
         <div class="figure map">
-          <div id="DRB_map_c2p1"/>
+          <div id="DRB_map_c2p1">
+            <svg class="map_c2p1 map">
+              <svg id="legend" x="10%" y="10%" transform="scale(0.5 0.5)">
+                <g id="legend_text">
+                  <text
+                    class="legend-text"
+                    transform="translate(81 328.6)"
+                  >USGS</text>
+                  <text
+                    class="legend-text"
+                    transform="translate(81 306.5)"
+                  >State or other agency</text>
+                </g>
+                <g id="legend_squares">
+                  <rect
+                    class="USGS_station"
+                    x="57.7"
+                    y="318"
+                    width="10.4"
+                    height="10.38"
+                    rx="5.2"
+                  />
+                  <rect
+                    class="Other_station"
+                    x="57.7"
+                    y="295.9"
+                    width="10.4"
+                    height="10.38"
+                    rx="5.2"
+                  />
+                </g>
+              </svg>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="text-content">
@@ -393,10 +426,15 @@
               .tickSize(null)
               .tickValues(null);
 
-          //create new svg container for the ch 2 panel 1 map
-          this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
-              .append("svg")
-              .attr("class", "map_c2p1 map")
+          // //create new svg container for the ch 2 panel 1 map
+          // this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
+          //     .append("svg")
+          //     .attr("class", "map_c2p1 map")
+          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+
+          // set viewbox for existing svg container for the ch 2 panel 1 map
+          this.map_c2p1 = self.d3.select(".map_c2p1")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
@@ -407,9 +445,8 @@
           //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
           //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
           
+          // set viewbox for existing svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select(".map_c2p2")
-              // .append("svg")
-              // .attr("class", "map_c2p2 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
@@ -662,9 +699,15 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(1.2))
+                .attr("d", self.map_path_c2.pointRadius(1.1))
                 // assign class for styling
-                .attr("class", "c2p1 obs_sites")
+                .attr("class", function(d) {
+                  if (d.properties.source === 'USGS'){
+                    return "c2p1 obs_sites USGS_station"
+                  } else {
+                    return "c2p1 obs_sites Other_station"
+                  }
+                })
                 // assign fill color based on agency
                 .style("fill", function(d){
                   if (d.properties.source === 'USGS'){
@@ -2411,6 +2454,20 @@
   fill: #285C70; // original was #6399ba;
   stroke: #285C70;// original was #6399ba;
 }
+
+// .obs_sites {
+//   stroke: #141414;
+//   stroke-width: 0.1;
+//   opacity: 0.8;
+// }
+
+// .USGS_station {
+//   fill: #e9eced;
+// }
+
+// .Other_station {
+//   fill: #FDAD32;
+// }
 
 .chartAxis {
   color: #999999;
