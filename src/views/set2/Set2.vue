@@ -16,41 +16,58 @@
         </h3>
       </div -->
       <div class="figure-content">
-        <div class="figure map" id="DRB_map_c2p1">
+        <div
+          id="DRB_map_c2p1"
+          class="figure map"
+        >
           <!-- p class="viz-subtitle">
             All Monitoring Sites in the Basin
           </p -->
           <svg class="map_c2p1 map">
-            <svg  x="30%" y="0%" width="auto" text-anchor="middle">
-              <text class="inset-viz-subtitle" x="8em" y="0.7em">
-                  All Monitoring Sites in the Basin
+            <svg
+              x="30%"
+              y="0%"
+              width="auto"
+              text-anchor="middle"
+            >
+              <text
+                class="inset-viz-subtitle"
+                x="8em"
+                y="0.7em"
+              >
+                All Monitoring Sites in the Basin
               </text>
             </svg>
-            <svg x="20%" y="20%">
-                <text
-                  class="legend"
-                  x="2.5em" y="1em"
-                >State or other agency</text>
-                <text
-                  class="legend"
-                  x="2.5em" y="3em"
-                >USGS</text>
-                <rect
-                  class="Other_station"
-                  x="0.5em"
-                  y="0.18em"
-                  width="5.4"
-                  height="5.4"
-                  rx="5.2"
-                />
-                <rect
-                  class="USGS_station"
-                  x="0.5em"
-                  y="1.18em"
-                  width="5.4"
-                  height="5.4"
-                  rx="5.2"
-                />
+            <svg
+              x="20%"
+              y="20%"
+            >
+              <text
+                class="legend"
+                x="2.5em"
+                y="1em"
+              >State or other agency</text>
+              <text
+                class="legend"
+                x="2.5em"
+                y="3em"
+              >USGS</text>
+              <rect
+                class="Other_station"
+                x="0.5em"
+                y="0.18em"
+                width="5.4"
+                height="5.4"
+                rx="5.2"
+              />
+              <rect
+                class="USGS_station"
+                x="0.5em"
+                y="1.18em"
+                width="5.4"
+                height="5.4"
+                rx="5.2"
+              />
             </svg>
           </svg>
         </div>
@@ -65,12 +82,25 @@
         <div class="figure chart">
           <div id="barChart_c2p1">
             <svg class="c2p1 barChart chart">
-              <svg  x="30%" y="8%" width="auto" text-anchor="middle">
-                <text class="inset-viz-subtitle" x="12em" y="0.7em">
-                    Number of Temperature Measurements by year,
+              <svg
+                x="30%"
+                y="8%"
+                width="auto"
+                text-anchor="middle"
+              >
+                <text
+                  class="inset-viz-subtitle"
+                  x="12em"
+                  y="0.7em"
+                >
+                  Number of Temperature Measurements by year,
                 </text>
-                <text class="inset-viz-subtitle" x="12em" y="1.7em">
-                    as measured by USGS or other state/local agencies,
+                <text
+                  class="inset-viz-subtitle"
+                  x="12em"
+                  y="1.7em"
+                >
+                  as measured by USGS or other state/local agencies,
                 </text>
               </svg>
             </svg>
@@ -149,7 +179,10 @@
         class="map mm-grid-item"
       >
         <svg class="map_c2p2 map">
-          <svg x="15%" y="17%">
+          <svg
+            x="15%"
+            y="17%"
+          >
             <text
               class="annotation-text"
               x="0"
@@ -162,7 +195,10 @@
               y="3.6em"
             >available for that reach over time</tspan></text>
           </svg>
-          <svg x="73%" y="45%">
+          <svg
+            x="73%"
+            y="45%"
+          >
             <text
               class="annotation-text"
               x="0"

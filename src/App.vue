@@ -92,7 +92,7 @@ body {
   }
 h1{
   font-size: 3em;
-  font-weight: 600;
+  font-weight: 100;
   padding: 1em;
   text-align: center;
   color: $backgroundCharcoal; //$offWhite #FDAD32

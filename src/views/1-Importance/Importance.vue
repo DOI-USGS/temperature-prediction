@@ -9,7 +9,9 @@
     <desc id="page-desc">
       A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.
     </desc>
-    <h1 class="overall-title">Temperature Prediction Modeling in the Delaware River Basin</h1>
+    <h1 class="overall-title">
+      Temperature Prediction Modeling in the Delaware River Basin
+    </h1>
     <div class="text-content">
       <p class="byline">
         U.S. Geological Survey
