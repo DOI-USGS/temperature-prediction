@@ -15,12 +15,17 @@
           Measuring Temperature in the Basin
         </h3>
       </div -->
-      <p class="viz-subtitle">
-        All Monitoring Sites in the Basin
-      </p>  
       <div class="figure-content">
         <div class="figure map" id="DRB_map_c2p1">
+          <!-- p class="viz-subtitle">
+            All Monitoring Sites in the Basin
+          </p -->
           <svg class="map_c2p1 map">
+            <svg  x="30%" y="0%" width="auto" text-anchor="middle">
+              <text class="inset-viz-subtitle" x="8em" y="0.7em">
+                  All Monitoring Sites in the Basin
+              </text>
+            </svg>
             <svg x="20%" y="20%">
                 <text
                   class="legend"
@@ -53,12 +58,23 @@
       <div class="text-content">
         <p v-html="text.paragraph3" />
       </div>
-      <p class="viz-subtitle">
+      <!-- p class="viz-subtitle">
         Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
-      </p>
+      </p -->
       <div class="figure-content">
         <div class="figure chart">
-          <div id="barChart_c2p1" />
+          <div id="barChart_c2p1">
+            <svg class="c2p1 barChart chart">
+              <svg  x="30%" y="8%" width="auto" text-anchor="middle">
+                <text class="inset-viz-subtitle" x="12em" y="0.7em">
+                    Number of Temperature Measurements by year,
+                </text>
+                <text class="inset-viz-subtitle" x="12em" y="1.7em">
+                    as measured by USGS or other state/local agencies,
+                </text>
+              </svg>
+            </svg>
+          </div>
         </div>
       </div>      
     </div>
@@ -145,7 +161,7 @@
               y="3.6em"
             >available for that reach over time</tspan></text>
           </svg>
-          <svg x="74%" y="45%">
+          <svg x="73%" y="45%">
             <text
               class="annotation-text"
               x="0"
@@ -184,14 +200,14 @@
         Daily Temperature readings in the Basin
       </h3>
     </div --> 
-    <p class="viz-subtitle">
-      Daily Temperature readings in the Basin in 2019
-    </p>
     <div class="figure-content">
       <div
         id="timeseries"
         class="figure chart"
       >
+        <p class="viz-subtitle">
+          Daily Temperature readings in the Basin in 2019
+        </p>
         <MonitoringLineChart />
       </div>
     </div>
@@ -721,12 +737,17 @@
             self.map_c2p1.append("g").call(self.scaleBarBottom_c2);
         },
         setBarChart_c2p1(csv_source_count) {
-          // append svg to div
-          let svgChart = this.d3.select("#barChart_c2p1")
-              .append("svg")
+          // // append svg to div
+          // let svgChart = this.d3.select("#barChart_c2p1")
+          //     .append("svg")
+          //     .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
+          //       (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
+          //     .attr("class", "c2p1 barChart chart")
+
+          // set viewbox for existing svg
+          let svgChart = this.d3.select(".c2p1.barChart.chart")
               .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
                 (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
-              .attr("class", "c2p1 barChart chart")
           let g = svgChart.append("g")
               .attr("class", "c2p1 transformedBarChart")
               .attr("transform", "translate(" + this.chart_margin.left + "," + this.chart_margin.top + ")");
@@ -831,7 +852,7 @@
               .enter().append("g")
               .attr("class", "c2p1 barChart legend")
               .attr("transform", function(d, i) {
-                return "translate(" + 0 + "," + i * 17 + ")";
+                return "translate(" + 0 + "," + ((i+1.5) * 15) + ")";
               })
 
           // append a rectangle for each series
@@ -2330,6 +2351,15 @@
     display: block;
     max-width: 700px;
     width: 100%;
+  }
+
+  .inset-viz-subtitle {
+    fill: #285C70; //$offWhite
+    font-style: italic;
+    font-size: .5em;
+    text-align: center;
+    font-weight: 100;
+    opacity: 1;
   }
 
   #timeseries {
