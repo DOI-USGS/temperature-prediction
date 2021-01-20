@@ -1,33 +1,33 @@
 export default {
     textContents: {
-        "Training an automated neural network": [
+        "Training an artificial neural network": [
             {
-                'method': "Like other environmental models, ANNs are trained using a set of observed data. To predict stream temperature, we provide the ANN model with input data (precipitation and air temperature records) and output data (observed stream temperatures). During training, the model 'learns' through its attempts to find a pattern linking the inputs and the output. Keep in mind that the model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model 'learns' the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'step_error'
             },
             {
-                'method': "The first component of an ANN is called an input layer – this is where the model receives the raw input data.",
+                'method': "The first component of an ANN is called an input layer – this is where the model receives the input data.",
                 'flubber_id': 'ANN2',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "From the input layer, the information is passed to what is known as a ‘hidden’ layer through a series of connections. Each connection transmits an input value to a processing node in the hidden layer. The model can vary the weight of these connections to assign more or less importance to a particular piece of information.",
+                'method': "From the input layer, the information is passed to what is known as a ‘hidden’ layer through a series of connections. Each connection transmits an input value to a node in the hidden layer. During training, the model can vary the weight of each connection to assign more or less importance to a particular piece of information.",
                 'flubber_id': 'ANN3',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "In the hidden layer, the receiving nodes compute a weighted sum of the received information…",
+                'method': "In the hidden layer, the receiving nodes calculate a weighted sum of the received information…",
                 'flubber_id': 'ANN4',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "…and then pass the weighted sum through a mathematical function, producing a single output value for each node. ",
+                'method': "…and then the weighted sum is adjusted by some simple rule, for example, keeping positive values as-is and setting negative values to zero.",
                 'flubber_id': 'ANN5',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer.",
+                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer. Adding nodes or layers to the model increases the complexity of relationships between inputs and outputs the model is able to mimic.",
                 'flubber_id': 'ANN6',
                 'bees_id': 'step_error_exp'
             },
@@ -52,12 +52,12 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "The model attempts to reduce the error by going back and adjusting the weights throughout the model. It then generates a new prediction and computes the new error. Importantly, the model doesn’t adjust weights in any logical way – it merely tries hundreds of combinations of weights and evaluates the model performance for each set of weights.",
+                'method': "The model reduces the error by going back and adjusting the weights throughout the model. Using calculus, the model efficiently calculates the relationship between the error and each weight in the model to figure out how much and in what direction to adjust the weights to improve prediction accuracy.",
                 'flubber_id': 'ANN11',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "The model keeps testing weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware River Basin.",
+                'method': "The model keeps adjusting weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware River Basin.",
                 'flubber_id': 'ANN12',
                 'bees_id': 'step_error_exp'
             },
