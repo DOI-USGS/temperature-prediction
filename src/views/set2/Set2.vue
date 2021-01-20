@@ -83,6 +83,7 @@
       <p v-html="text.paragraph5" />
       <Chapter2Icons1 />
       <br>
+      <br>
       <!--"section-title-wrapper"-->
       <div class="viz-title">
         <h3 v-html="text.title2" />
@@ -718,19 +719,6 @@
                     return "c2p1 obs_sites Other_station"
                   }
                 })
-                // // assign fill color based on agency
-                // .style("fill", function(d){
-                //   if (d.properties.source === 'USGS'){
-                //     return "#e9eced" // #e9eced
-                //   } else {
-                //     return "#FDAD32" // #e9eced
-                //   }
-                // })
-                // // assign stroke in background color
-                // .style("stroke", "#141414")
-                // .style("stroke-width", 0.1)
-                // // assign opacity
-                // .style("opacity", .8)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
