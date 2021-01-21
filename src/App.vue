@@ -91,11 +91,12 @@ body {
       width: 100%;
   }
 h1{
-  font-size: 3em;
+  font-size: 4em;
   font-weight: 100;
   padding: 1em;
-  text-align: center;
-  color: $backgroundCharcoal; //$offWhite #FDAD32
+  text-align: left;
+  color: white;
+  
   @media screen and (max-width: 600px) {
     font-size: 2em;
   }
@@ -218,7 +219,7 @@ h3{
 // Specific Design Elements for Charts and Maps
 .page-title {
   color: $monotoneBlue5;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .viz-title-wrapper {

@@ -10,7 +10,7 @@
       A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.
     </desc>
     <h1 class="overall-title">
-      Temperature Prediction Modeling in the Delaware River Basin
+      Temperature Prediction Modeling<br>in the<br>Delaware River Basin
     </h1>
     <div class="text-content">
       <p class="byline">
@@ -50,9 +50,28 @@
 </script>
 
 <style scoped lang="scss">
+// IMPORT COLORS
+$backgroundCharcoal: #141414; //#171717
+$offWhite: rgb(241, 241, 241);
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #285C70; //#10313e
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
 .overall-title {
-  background: #285C70;
-  opacity: 0.7;
+  padding-top: 3em;
+  margin: 0 auto;
+  max-width: 800px;
+  min-width: 300px;
+  background: $monotoneBlueTransparent;
+  @media screen and (max-width: 800px) {
+    font-size: 3em;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 2em;
+  }
 }
 .byline {
   font-style: italic;
