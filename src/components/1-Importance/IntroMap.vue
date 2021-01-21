@@ -16,8 +16,6 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="612"
-        height="792"
         viewBox="0 0 612 792"
         class="flex-item"
       >
@@ -86,8 +84,8 @@
         <g id="background">
           <rect
             y="-0.7"
-            width="612"
-            height="792.72"
+            width="100%"
+            height="auto"
           />
         </g>
         <g id="Map">
@@ -3721,6 +3719,11 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 #intro-map {
   margin-top: 20px;
+  overflow-x: hidden;
+  svg {
+    width: 100%;
+    height: auto;
+  }
 }
 
 #background {

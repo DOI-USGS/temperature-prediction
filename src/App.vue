@@ -111,8 +111,9 @@ h1{
   text-align: left;
   color: white;
   @media screen and (max-width: 600px) {
-    font-size: 2em;
+    font-size: 3em;
   }
+
 }
 
 
@@ -141,14 +142,10 @@ h3{
 .overall-title {
   padding-top: 20vh;
   margin: 0 auto;
-  max-width: 800px;
-  min-width: 500px;
   background: $monotoneBlue5;
-  @media screen and (max-width: 800px) {
-    font-size: 3em;
-  }
+  overflow-x: hidden;
   @media screen and (max-width: 600px) {
-    font-size: 2em;
+    padding: 0 20px 0 20px;
   }
 }
 
@@ -169,7 +166,7 @@ h3{
   // General Layout  
 
   .text-content {
-    min-width: 375px;
+    min-width: 350px;
     max-width: 700px;
     margin: 0 auto;
     padding: 2em;   

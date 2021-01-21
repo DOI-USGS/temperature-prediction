@@ -4,7 +4,7 @@
     class="text-content"
   > 
     <div class="viz-title">
-      <h3>Water temperature is a key indicator of water quality in the Delaware River Basin</h3>
+      <p>Water temperature is a key indicator of water quality in the Delaware River Basin.  It has implications for:</p>
     </div>
     <br>
     <div class="grid-container">
