@@ -91,11 +91,13 @@ body {
       width: 100%;
   }
 h1{
-  font-size: 4em;
+  font-size: 3em;
   font-weight: 100;
-  color: $offWhite;
+  padding: 1em;
+  text-align: center;
+  color: $backgroundCharcoal; //$offWhite #FDAD32
   @media screen and (max-width: 600px) {
-    font-size: 3em;
+    font-size: 2em;
   }
 }
 

@@ -10068,7 +10068,7 @@
           d="M399.6,629.7a1.9,1.9,0,0,1-1.9-2,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A2,2,0,0,1,399.6,629.7Z"
         />
       </g>
-      <!-- g id="legend">
+      <g id="legend">
         <g id="legend_text">
           <text
             class="legend-text"
@@ -10081,7 +10081,7 @@
         </g>
         <g id="legend_squares">
           <rect
-            class="cls-8"
+            class="cls-9"
             x="57.7"
             y="318"
             width="10.4"
@@ -10089,7 +10089,7 @@
             rx="5.2"
           />
           <rect
-            class="cls-9"
+            class="cls-8"
             x="57.7"
             y="295.9"
             width="10.4"
@@ -10097,7 +10097,7 @@
             rx="5.2"
           />
         </g>
-      </g -->
+      </g>
     </svg>
   </div>
 </template>
@@ -10131,7 +10131,7 @@ export default {
   }
 
     /* Circles */
-	.cls-8{fill:#e9eced;stroke:#000000;opacity:0.4;} /* #EB4444  stroke-width:0.5*/
-	.cls-9{fill:#e9eced;stroke:#000000;opacity:0.4;} /* #EDB932 stroke-width:0.5*/
+	.cls-8{fill:#FDAD32;stroke:#000000;stroke-width:0.5;opacity:0.8;} /* other #EB4444  stroke-width:0.5*/
+	.cls-9{fill:#e9eced;stroke:#000000;stroke-width:0.5;opacity:0.8;} /* USGS #EDB932 stroke-width:0.5*/
 
 </style>
