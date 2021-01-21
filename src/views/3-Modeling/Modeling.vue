@@ -2669,7 +2669,7 @@
               :key="model" 
               class="step"
             >
-              {{ model.method }}
+              <p class="step-text">{{ model.method }}</p>
             </div>
           </div>
         </div>
@@ -3766,10 +3766,10 @@ article {
   height: 100vh;
   border: 1px;
 
-  p {
-  text-align: left;
-  padding: 1rem;
-  font-size: 1.5rem;
+  .step-text {
+    padding: 1em;
+    background-color: rgba(241,241,241,.05);
+    border-radius: 5px;
   }
 }
 
