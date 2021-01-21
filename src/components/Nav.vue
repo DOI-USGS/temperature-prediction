@@ -1,14 +1,15 @@
 <template>
   <nav id="nav">
     <div>
+      <p>Go to Chapter</p>
       <router-link to="/">
-        Importance
+        1. Importance
       </router-link>
       <router-link to="/monitoring">
-        Monitoring
+        2. Monitoring
       </router-link>
       <router-link to="/modeling">
-        Modeling
+        3. Modeling
       </router-link>
     </div>
     <div>
