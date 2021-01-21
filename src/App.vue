@@ -131,12 +131,12 @@ h2{
 
 }
 h3{
-    font-size: 2em;
-    padding-top: .5em;
-    font-weight: 300;
-    @media screen and (max-width: 600px) {
-        font-size: 1.4em;
-    }  
+  font-size: 2em;
+  padding-top: .5em;
+  font-weight: 300;
+  @media screen and (max-width: 600px) {
+      font-size: 1.4em;
+  }  
 }
 
 .overall-title {
@@ -163,6 +163,9 @@ h3{
   font-style: italic;
 }
 
+.subheader {
+
+}
   // General Layout  
 
   .text-content {
@@ -252,27 +255,31 @@ h3{
 
 // Specific Design Elements for Charts and Maps
 
+.move-up {
+  margin-bottom: -100px;
+  padding: 0;
+}
 
 .viz-title-wrapper {
-  margin: auto;
-  width: 80%;
-  max-width: 600px;
-  padding: 10px 30px;
+  max-width: 350px;
   z-index: 100;
+}
+
+.viz-title {
+  // box-shadow: -5px -5px $monotoneBlue5;
+  font-size: 1.4em;
+  font-weight: 700;
+  color: $riverBlue;
+  margin-bottom: 0;
 
 }
 
-// .viz-title {
-//   // box-shadow: -5px -5px $monotoneBlue5;
-//   padding-bottom: 0.8em;
-// }
-
 .viz-subtitle {
-  color: $monotoneBlue5; //$offWhite
-  font-style: italic;
+  color: $offWhite;
   font-size: .8em;
-  text-align: center;
+  text-align: left;
   font-weight: 100;
+  margin-bottom: 0;
 }
 
 .legend-text {

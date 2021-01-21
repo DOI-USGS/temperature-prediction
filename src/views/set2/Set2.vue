@@ -9,36 +9,20 @@
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
     </div>
+    <div class="text-content move-up">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">Temperature Monitoring Sites in the DRB</p>
+        <p class="viz-subtitle">Subtitle</p>
+      </div>
+    </div>    
     <div id="map-and-bar-chart">
-      <!-- div class="text-content viz-title-wrapper">
-        <h3 class="viz-title">
-          Measuring Temperature in the Basin
-        </h3>
-      </div -->
       <div class="figure-content">
         <div
           id="DRB_map_c2p1"
           class="figure map"
         >
-          <!-- p class="viz-subtitle">
-            All Monitoring Sites in the Basin
-          </p -->
           <svg class="map_c2p1 map">
-            <svg
-              x="30%"
-              y="0%"
-              width="auto"
-              text-anchor="middle"
-            >
-              <text
-                class="inset-viz-subtitle"
-                x="8em"
-                y="0.7em"
-              >
-                All Monitoring Sites in the Basin
-              </text>
-            </svg>
-            <svg
+            <!-- <svg
               x="20%"
               y="20%"
             >
@@ -68,16 +52,20 @@
                 height="5.4"
                 rx="5.2"
               />
-            </svg>
+            </svg> -->
           </svg>
         </div>
       </div>
       <div class="text-content">
         <p v-html="text.paragraph3" />
       </div>
-      <!-- p class="viz-subtitle">
-        Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
-      </p -->
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">Number of Temperature Measurements by Year</p>
+          <p class="viz-subtitle">Data from USGS streamgages or other state/local agencies.</p>
+        </div>
+      </div>
+      
       <div class="figure-content">
         <div class="figure chart">
           <div id="barChart_c2p1">
@@ -88,7 +76,7 @@
                 width="auto"
                 text-anchor="middle"
               >
-                <text
+                <!-- <text
                   class="inset-viz-subtitle"
                   x="12em"
                   y="0.7em"
@@ -101,7 +89,7 @@
                   y="1.7em"
                 >
                   as measured by USGS or other state/local agencies,
-                </text>
+                </text> -->
               </svg>
             </svg>
           </div>
@@ -115,7 +103,7 @@
       <br>
       <br>
       <!--"section-title-wrapper"-->
-      <div class="viz-title">
+      <div class="subheader">
         <h3 v-html="text.title2" />
       </div>
       <br>
@@ -158,17 +146,13 @@
     <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
-    <!-- div class="text-content viz-title-wrapper">
-      <h3 class="viz-title">
-        Temperature Data Availability
-      </h3>
-      <p class="viz-subtitle">
-        Visualizing the count of temperature measurements at all monitoring sites across the basin.
-      </p>
-      <p class="viz-subtitle">
-        Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.
-      </p>
-    </div -->
+    <div class="text-content move-up">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">Availability of Temperature Data</p>
+        <p class="viz-subtitle">Visualizing the count of temperature measurements of all stream reaches in the basin.</p>
+        <p class="viz-subtitle">Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.</p>
+      </div>
+    </div>  
     <div
       id="data-availability-container"
       class="map-matrix-grid-container"
@@ -224,7 +208,7 @@
       <!-- class="figure" -->
     </div>
     <div class="text-content">
-      <div class="viz-title">
+      <div class="subheader">
         <h3 v-html="text.title3" />
       </div>
       <br>
@@ -232,19 +216,17 @@
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
-    <!-- div class="text-content viz-title-wrapper">
-      <h3 class="viz-title">
-        Daily Temperature readings in the Basin
-      </h3>
-    </div --> 
+    <div class="text-content move-up">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">Daily Temperature of DRB River Reaches in 2019</p>
+        <p class="viz-subtitle">Timeseries</p>
+      </div>
+    </div>  
     <div class="figure-content">
       <div
         id="timeseries"
         class="figure chart"
       >
-        <p class="viz-subtitle">
-          Daily Temperature readings in the Basin in 2019
-        </p>
         <MonitoringLineChart />
       </div>
     </div>
@@ -252,14 +234,12 @@
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
     </div>
-    <!-- div class="text-content viz-title-wrapper">
-      <h3 class="viz-title">
-        Daily Temperature at each reach in the Basin
-      </h3>
-      <p class="viz-subtitle">
-        Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.
-      </p>
-    </div --> 
+    <div class="text-content move-up">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">Daily Temperature of DRB River Reaches in 2019</p>
+        <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+      </div>
+    </div>  
     <div class="map-matrix-grid-container">
       <div
         id="DRB_map_c2p3"
@@ -271,13 +251,19 @@
       />
     </div>
     <div class="text-content">
-      <div class="viz-title">
+      <div class="subheader">
         <h3 v-html="text.title4" />
       </div>
       <br>
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
+    <div class="text-content">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">Availability of Temperature Data across the Continental US</p>
+        <p class="viz-subtitle">Subtitle</p>
+      </div>
+    </div>  
     <div
       id="map-container"
       class="figure-content"
@@ -863,35 +849,35 @@
               
 
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 0.5) //.attr("stroke-dasharray", ("1, 2"))
+          svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
 
-          //  make the legend
-          let legend = g.selectAll(".legend")
-              // include all but the first column in the legend
-              .data(data.columns.slice(1).reverse())
-              // append an item for each series
-              .enter().append("g")
-              .attr("class", "c2p1 barChart legend")
-              .attr("transform", function(d, i) {
-                return "translate(" + 0 + "," + ((i+1.5) * 15) + ")";
-              })
+          // //  make the legend
+          // let legend = g.selectAll(".legend")
+          //     // include all but the first column in the legend
+          //     .data(data.columns.slice(1).reverse())
+          //     // append an item for each series
+          //     .enter().append("g")
+          //     .attr("class", "c2p1 barChart legend")
+          //     .attr("transform", function(d, i) {
+          //       return "translate(" + 0 + "," + ((i+1.5) * 15) + ")";
+          //     })
 
-          // append a rectangle for each series
-          legend.append("rect")
-              .attr("x", 14)
-              .attr("width", 7)
-              .attr("height", 7)
-              // set color based on z attribute
-              .attr("fill", z);
+          // // append a rectangle for each series
+          // legend.append("rect")
+          //     .attr("x", 14)
+          //     .attr("width", 7)
+          //     .attr("height", 7)
+          //     // set color based on z attribute
+          //     .attr("fill", z);
 
-          // append a label for each rectangle
-          legend.append("text")
-              .attr("x", 27)
-              .attr("y", 4)
-              .attr("dy", ".35em")
-              .attr("text-anchor", "start")
-              // set text as column name
-              .text(function(d) { return d; });
+          // // append a label for each rectangle
+          // legend.append("text")
+          //     .attr("x", 27)
+          //     .attr("y", 4)
+          //     .attr("dy", ".35em")
+          //     .attr("text-anchor", "start")
+          //     // set text as column name
+          //     .text(function(d) { return d; });
 
         },
         setMap_c2p2(){
