@@ -58,12 +58,12 @@
       </g>
       <g id="Space_axis_text">
         <text
-          class="legend-text"
-          transform="translate(580 121.1)"
+          class="explainer-minor-text"
+          transform="translate(575 121.1)"
         >North</text>
         <text
-          class="legend-text"
-          transform="translate(580 1083.2)"
+          class="explainer-minor-text"
+          transform="translate(575 1083.2)"
         >South</text>
       </g>
       <g id="matrix_cells_seg1656">

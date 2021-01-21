@@ -67,20 +67,20 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #171717;
+$backgroundCharcoal: #141414; //#171717
 $offWhite: rgb(241, 241, 241);
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
-$monotoneBlue5: #10313e;
+$monotoneBlue5: #285C70; //#10313e
 $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 // Type
 body {
       margin: 0;
       padding: 0;
-      color: $offWhite;
+      color: #9e9e9e; //$offWhite
       background-color: $backgroundCharcoal;
       line-height: 1.5;
       font-size: 13pt;
@@ -93,6 +93,7 @@ body {
 h1{
   font-size: 4em;
   font-weight: 100;
+  color: $offWhite;
   @media screen and (max-width: 600px) {
     font-size: 3em;
   }
@@ -100,9 +101,9 @@ h1{
 
 h2{
   font-size: 2em;
-  margin-top: 80px;
-  font-weight: 600;
-  line-height: 1.7;
+  margin-top: 5px;
+  font-weight: 200;
+  line-height: 1.3;
   @media screen and (max-width: 600px) {
     font-size: 1.2em;
   }
@@ -143,8 +144,11 @@ h3{
     align-items: flex-start;
     justify-content: space-evenly;
     align-content: space-around;
-    max-width: 100%;
+    max-width: 30%;
     margin: auto;
+    @media screen and (max-width: 600px) {
+        max-width: 100%;
+    }
   }
 
   .flex-item {
@@ -174,7 +178,7 @@ h3{
     justify-content: space-evenly;
     align-content: space-around;
     max-width: 100%;
-    padding: 0 100px;
+    // padding: 0 100px;
     margin: auto;
 
     @media screen and (max-width: 600px) {
@@ -183,8 +187,10 @@ h3{
 
   }
   .figure {
-    display: block;
+    display: flex; //block, flex
     padding: 20px;
+    align-items: center;
+    justify-content: center; 
   }
 
   .map {
@@ -208,6 +214,10 @@ h3{
   }
 
 // Specific Design Elements for Charts and Maps
+.page-title {
+  color: $monotoneBlue5;
+  font-size: 1.5em;
+}
 
 .viz-title-wrapper {
   margin: auto;
@@ -226,18 +236,25 @@ h3{
   color: $offWhite;
   box-shadow: -5px -5px $monotoneBlue5;
   line-height: 1.3em;
+  padding-bottom: 0.8em;
 }
 .viz-subtitle {
-  color: $offWhite;
- font-size: .8em;
- text-align: center;
- font-weight: 100;
+  color: $monotoneBlue5; //$offWhite
+  font-style: italic;
+  font-size: .8em;
+  text-align: center;
+  font-weight: 100;
 }
 
 .legend-text {
-    fill: darkgray;
+    fill: #707070;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: 16px;
+  }
+.explainer-minor-text {
+    fill: #707070;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
   }
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -263,7 +280,7 @@ h3{
 
 .dashed-axis {
   stroke: #4d4c4d;
-  stroke-width: 1px;
+  stroke-width: 3px;
   fill: none;
   stroke-miterlimit: 10;
   stroke-dasharray: 2 6;
@@ -279,8 +296,8 @@ h3{
 .tick-marks {
   fill: none;
   stroke-miterlimit: 10;
-  stroke: #4d4c4d;
-  stroke-width: 0.5px;
+  stroke: #707070;
+  stroke-width: 0.75px;
 }
 
   // .axis-title {
