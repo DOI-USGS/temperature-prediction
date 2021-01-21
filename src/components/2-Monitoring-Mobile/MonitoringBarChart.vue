@@ -850,7 +850,7 @@
           transform="translate(616.2 448.6) rotate(-45)"
         >2019</text>
       </g>
-      <!-- g id="legend_squares">
+      <g id="legend_squares">
         <rect
           class="cls-2"
           x="60"
@@ -875,7 +875,7 @@
           class="cls-6"
           transform="translate(83.3 140.5)"
         >USGS</text>
-      </g -->
+      </g>
     </svg>
   </div>
 </template>
@@ -894,11 +894,11 @@ export default {
 
 
     .cls-1 {
-        fill: #e9eced; /* #edb932  */
+        fill: #e9eced; /* USGS #edb932  */
       }
 
       .cls-2 {
-        fill: #e9eced; /* #eb4444 */
+        fill: #FDAD32; /* other #eb4444 */
       }
 
       .cls-3, .cls-5, .cls-6 {

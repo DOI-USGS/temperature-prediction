@@ -17,6 +17,8 @@
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
       <Chapter2Icons1 />
+      <br>
+      <br>
       <div class="viz-title">
         <h3 v-html="text.title2" />
       </div>

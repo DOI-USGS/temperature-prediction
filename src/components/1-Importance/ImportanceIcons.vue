@@ -6,6 +6,7 @@
     <div class="viz-title">
       <h3>Water temperature is a key indicator of water quality in the Delaware River Basin</h3>
     </div>
+    <br>
     <div class="grid-container">
       <div
         id="icon-1"
@@ -151,7 +152,8 @@
         display: grid;
         grid-template-columns: 30% 70%;
         grid-template-rows: repeat(4, 1fr);
-        gap: 0px 10px;
+        gap: 0px 8px;
+        width: 80%;
         grid-template-areas:
             "icon-1 desc-1"
             "icon-2 desc-2"
@@ -165,7 +167,7 @@
     }
 
     .grid-item {
-        padding: 10px;
+        padding: 0px;
     }
 
     .icon-item{
@@ -176,12 +178,12 @@
     }
 
     .icon {
-      fill: #285C70;
+      fill: #6399ba; //285C70
     }
 
     .desc{
       margin: auto 0;
-      color: #285C70;
+      color: #6399ba; //#285C70
       font-style: italic;
       font-weight: 100;
     }
