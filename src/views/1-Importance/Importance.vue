@@ -1,29 +1,12 @@
 <template>
   <section id="importance">
-    <title
-      id="page-title"
-      class="page-title"
-    >
-      Temperature Prediction Modeling in the Delaware River Basin
-    </title>
-    <desc id="page-desc">
-      A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.
-    </desc>
-    <h1 class="overall-title">
-      Temperature Prediction Modeling<br>in the<br>Delaware River Basin
-    </h1>
-    <div class="text-content">
-      <p class="byline">
-        U.S. Geological Survey
-      </p>
-      <p class="byline">
-        Water Mission Area's Vizlab
-      </p>
-      <br>
-      <div class="viz-title">
-        <h3>Why is predicting stream temperature important?</h3>
+    <div class="text-content page-title section-title-wrapper">
+        <p class="chapter">
+          Chapter 1
+        </p>
+        <h2>The Importance of Predicting Stream Temperature</h2>
       </div>
-      <br>
+    <div class="text-content">
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>
@@ -60,23 +43,5 @@ $monotoneBlue4: #4c656e;
 $monotoneBlue5: #285C70; //#10313e
 $monotoneBlueTransparent: rgba(76,101,110, .6);
 
-.overall-title {
-  padding-top: 3em;
-  margin: 0 auto;
-  max-width: 800px;
-  min-width: 300px;
-  background: $monotoneBlueTransparent;
-  @media screen and (max-width: 800px) {
-    font-size: 3em;
-  }
-  @media screen and (max-width: 600px) {
-    font-size: 2em;
-  }
-}
-.byline {
-  font-style: italic;
-  font-weight: 100;
-  font-size: .8em;
-  color: #285C70; //#808080
-}
+
 </style>

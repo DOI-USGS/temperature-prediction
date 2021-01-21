@@ -5,6 +5,7 @@
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
     <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
+    <Title />
     <Nav />
     <router-view
       v-if="!isInternetExplorer"
@@ -21,6 +22,8 @@
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
     import Nav from './components/Nav'
+    import Title from './components/Title'
+    import { isMobile } from 'mobile-device-detect';
 
     export default {
         name: 'App',
@@ -29,6 +32,7 @@
             HeaderUSWDSBanner,
             HeaderUSGS,
             Nav,
+            Title,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
             WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
@@ -38,6 +42,7 @@
         data() {
             return {
                 isInternetExplorer: false,
+                mobileView: isMobile
             }
         },
         computed: {
@@ -59,6 +64,13 @@
             handleResize() {
                 this.$store.commit('recordWindowWidth', window.innerWidth);
                 this.$store.commit('recordWindowHeight', window.innerHeight);
+            },
+            isMobile() {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                } else {
+                    return false
+                }
             }
         }
     }
@@ -75,6 +87,7 @@ $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
 $monotoneBlue5: #285C70; //#10313e
 $monotoneBlueTransparent: rgba(76,101,110, .6);
+$riverBlue: #6399ba;
 
 // Type
 body {
@@ -85,49 +98,73 @@ body {
       line-height: 1.5;
       font-size: 13pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      font-weight: 400;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       width: 100%;
   }
+
+
 h1{
   font-size: 4em;
-  font-weight: 100;
-  padding: 1em;
+  font-weight: 700;
   text-align: left;
   color: white;
-  
   @media screen and (max-width: 600px) {
     font-size: 2em;
   }
 }
 
+
+
 h2{
-  font-size: 2em;
+  color: $riverBlue;
+  font-weight: 700;
+  text-align: center;
+  font-size: 3em;
   margin-top: 5px;
-  font-weight: 200;
   line-height: 1.3;
   @media screen and (max-width: 600px) {
-    font-size: 1.2em;
+    font-size: 2em;
   }
 
 }
 h3{
-    font-size: 1.4em;
+    font-size: 2em;
     padding-top: .5em;
-    font-weight: 600;
+    font-weight: 300;
     @media screen and (max-width: 600px) {
-        font-size: 1em;
-    }
+        font-size: 1.4em;
+    }  
 }
 
-// .section-title-wrapper{
-//   padding: .5em 10px 0 10px;
-//   background-color: $monotoneBlue5;
-//   margin-top: 1em;
-// }
+.overall-title {
+  padding-top: 20vh;
+  margin: 0 auto;
+  max-width: 800px;
+  min-width: 500px;
+  background: $monotoneBlue5;
+  @media screen and (max-width: 800px) {
+    font-size: 3em;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 2em;
+  }
+}
 
+.byline {
+  font-style: italic;
+  font-weight: 300;
+  font-size: .8em;
+  color: $offWhite; //#808080
+}
 
+.chapter {
+  text-align: center;
+  font-weight: 300;
+  font-size: .8em;
+  font-style: italic;
+}
 
   // General Layout  
 
@@ -217,10 +254,7 @@ h3{
   }
 
 // Specific Design Elements for Charts and Maps
-.page-title {
-  color: $monotoneBlue5;
-  font-size: 2em;
-}
+
 
 .viz-title-wrapper {
   margin: auto;
@@ -228,19 +262,14 @@ h3{
   max-width: 600px;
   padding: 10px 30px;
   z-index: 100;
-  
 
 }
 
-.viz-title {
-  font-size: 1.4em;
-  font-weight: 600;
-  text-align: center;
-  color: $offWhite;
-  box-shadow: -5px -5px $monotoneBlue5;
-  line-height: 1.3em;
-  padding-bottom: 0.8em;
-}
+// .viz-title {
+//   // box-shadow: -5px -5px $monotoneBlue5;
+//   padding-bottom: 0.8em;
+// }
+
 .viz-subtitle {
   color: $monotoneBlue5; //$offWhite
   font-style: italic;

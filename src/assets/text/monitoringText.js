@@ -1,6 +1,6 @@
 export default {
    textContents: {
-        title1: "What we know, and what we don't",
+        title1: "",//"We know a lot about temperature. But there's a lot we don't know too.",
         paragraph1: "At first glance, it appears that there is a lot of information about stream temperature in the Basin. The map below shows all of the locations where the USGS or other agencies have ever measured the temperature of medium to large streams.",
         paragraph3: "The USGS has been monitoring temperature in the Delaware River Basin since 1901, and has amassed over 450,000 site-days worth of temperature measurements. Temperature monitoring really picked up in the mid-1960s, and has grown considerably in recent decades.",
         paragraph4: "Since 2017, an uptick in temperature monitoring can be attributed to the USGS's Next Generation Water Observing Systems (NGWOS). NGWOS is a targeted effort in the Delaware River Basin to develop and apply new monitoring techniques for a wide range of water characteristics.",

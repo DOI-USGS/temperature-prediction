@@ -1,7 +1,10 @@
 <template>
   <section id="monitoring-router">
     <div class="text-content page-title section-title-wrapper">
-      <h2>Monitoring Stream Temperature in the Delaware River Basin</h2>
+       <p class="chapter">
+          Chapter 2
+        </p>
+      <h2>Monitoring Stream Temperature</h2>
     </div>
         
     <div 

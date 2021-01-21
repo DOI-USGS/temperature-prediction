@@ -5,10 +5,12 @@
     >
       <div
         id="intro-container"
-        class="text-content text-intro"
+        class="text-intro"
       >
-        <!-- h2>{{ sectionTitle }}</h2 -->
         <div class="text-content page-title section-title-wrapper">
+           <p class="chapter">
+              Chapter 3
+            </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
         <div class="text-content">
