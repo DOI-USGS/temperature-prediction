@@ -175,10 +175,7 @@
         class="figure"
         src="@/assets/usa_hex_map_80-01.png"
       >
-      <!-- need to add legend and recolor beeswarm to mirror?? -->
-    </div>
-    <div class="text-content">
-      <p v-html="text.paragraph16" />
+      <!-- need to add legend -->
     </div>
     <div class="container-fluid">
       <div
