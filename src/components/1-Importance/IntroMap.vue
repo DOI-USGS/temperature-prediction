@@ -11,13 +11,17 @@
     
     <div
       id="intro-map"
-      class="flex-container-window-height"
     >
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">The Delaware River Basin</p>
+
+        </div>
+      </div>  
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 612 792"
-        class="flex-item"
       >
         <defs>
           <clipPath id="clip-path">
@@ -3695,9 +3699,18 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 #intro-map {
   margin-top: 20px;
   overflow-x: hidden;
+  background-color: $boxCharcoal;
+  border-radius: 5px;
+  max-width: 80%;
+  margin: auto;
   svg {
     width: 100%;
     height: auto;
+    padding-top: 20px;
+  }
+  @media screen and (max-width: 600px) {
+    max-width: 100%;
+    margin: 10px;
   }
 }
 
@@ -3833,11 +3846,12 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .city-label{
         font-size: 10px;
         font-weight: 200;
-        fill: #707070;
+        fill: $offWhite;
+  
         letter-spacing: .5px;
     }
     .inside {
-        fill: #7e7e7e;
+        fill: $offWhite;
         font-weight: 400;
         /* background-color: black; */
         /* stroke: black;
@@ -3891,8 +3905,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
    .state-label {
         font-weight: 200;
         font-size: 16px;
-        fill: #424242;
+        fill: $offWhite;
         letter-spacing: 20px;
+        opacity: .5;
     }
 
 

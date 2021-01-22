@@ -203,19 +203,6 @@ h3{
     }
   }
 
-  .flex-container-window-height {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    align-content: space-around;
-    max-width: 60%;
-    margin: auto;
-    @media screen and (max-width: 600px) {
-        max-width: 100%;
-    }
-  }
-
   .flex-item {
     padding: 20px;
     min-width: 400px;
