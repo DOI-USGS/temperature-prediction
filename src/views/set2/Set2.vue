@@ -9,53 +9,25 @@
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
     </div>
-    <div class="text-content move-up">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">Temperature Monitoring Sites in the DRB</p>
-        <p class="viz-subtitle">Subtitle</p>
-      </div>
-    </div>    
+       
     <div id="map-and-bar-chart">
-      <div class="figure-content">
-        <div
-          id="DRB_map_c2p1"
-          class="figure map"
-        >
-          <svg class="map_c2p1 map">
-            <!-- <svg
-              x="20%"
-              y="20%"
-            >
-              <text
-                class="legend"
-                x="2.5em"
-                y="1em"
-              >State or other agency</text>
-              <text
-                class="legend"
-                x="2.5em"
-                y="3em"
-              >USGS</text>
-              <rect
-                class="Other_station"
-                x="0.5em"
-                y="0.18em"
-                width="5.4"
-                height="5.4"
-                rx="5.2"
-              />
-              <rect
-                class="USGS_station"
-                x="0.5em"
-                y="1.18em"
-                width="5.4"
-                height="5.4"
-                rx="5.2"
-              />
-            </svg> -->
-          </svg>
+      <div class="box">
+        <div class="text-content move-up">
+          <div class="viz-title-wrapper">
+            <p class="viz-title">Temperature Monitoring Sites in the DRB</p>
+            <p class="viz-subtitle">Subtitle</p>
+          </div>
+        </div> 
+        <div class="figure-content">
+          <div
+            id="DRB_map_c2p1"
+            class="figure map"
+          >
+            <svg id= "map_c2p1" class="map_c2p1 map"></svg>
+          </div>
         </div>
       </div>
+      
       <div class="text-content">
         <p v-html="text.paragraph3" />
       </div>
@@ -464,7 +436,7 @@
           //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           // set viewbox for existing svg container for the ch 2 panel 1 map
-          this.map_c2p1 = self.d3.select(".map_c2p1")
+          this.map_c2p1 = self.d3.select("#map_c2p1")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 

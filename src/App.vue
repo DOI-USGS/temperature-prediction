@@ -190,6 +190,16 @@ h3{
     }  
   }
 
+  .box {
+    background-color: $boxCharcoal;
+    border-radius: 5px;
+    margin: 50px;
+    padding: 10px;
+    @media screen and (max-width: 600px) {
+        margin: 10px;
+    } 
+  }
+
   .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -243,8 +253,6 @@ h3{
     padding: 20px;
     align-items: center;
     justify-content: center; 
-    background-color: $boxCharcoal;
-    border-radius: 5px;
   }
 
   .map {
@@ -269,10 +277,10 @@ h3{
 
 // Specific Design Elements for Charts and Maps
 
-// .move-up {
-//   margin-bottom: -100px;
-//   padding: 0;
-// }
+.move-up {
+  margin-bottom: -100px;
+
+}
 
 .viz-title-wrapper {
   max-width: 350px;
@@ -281,7 +289,7 @@ h3{
 
 .viz-title {
   // box-shadow: -5px -5px $monotoneBlue5;
-  font-size: 1.4em;
+  font-size: 1.8em;
   font-weight: 700;
   color: $mediumBlue;
   margin-bottom: 0;
