@@ -36,31 +36,11 @@
           >
             <stop
               offset="0.02"
-              stop-color="#316d84"
-            />
-            <stop
-              offset="0.05"
-              stop-color="#2c6479"
-            />
-            <stop
-              offset="0.12"
-              stop-color="#225163"
-            />
-            <stop
-              offset="0.21"
-              stop-color="#1a4352"
-            />
-            <stop
-              offset="0.31"
-              stop-color="#143847"
-            />
-            <stop
-              offset="0.46"
-              stop-color="#113340"
+              stop-color="#63B1E6"
             />
             <stop
               offset="0.87"
-              stop-color="#10313e"
+              stop-color="#00264C"
             />
           </linearGradient>
           <linearGradient
@@ -3708,8 +3688,19 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #141414; //171717
-$offWhite: rgb(241, 241, 241);
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+// Old colors
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
@@ -3736,7 +3727,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
       stroke-linejoin: round;
       stroke-linecap: round;
       /* stroke: #184654; */
-      stroke: #416d88;
+      stroke: $grayBlue;
       stroke-width: .4px;
     }
 
@@ -3753,18 +3744,19 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
      .ocean {
-        fill: #10313e;
-        opacity: 1;
-        stroke: #416d88;
+        fill: $footerBlue;
+        opacity: .8;
+        stroke: $footerBlue;
         stroke-width: .4px;
         stroke-opacity: .8;
     }
 
 
     .reservoir {
-        fill: #6399ba;
+        fill: $footerBlue;
+        opacity: .8;
         stroke-width: 0.5px;
-        /* stroke: #6399ba; */
+  
     }
 
     /* State Lines */
@@ -3804,8 +3796,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
 
+    // These are river strokes
     .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .reservoir {
-        stroke: #6399ba;
+        stroke: $mediumBlue;
     }
 
     .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29 {
@@ -3888,9 +3881,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .water-label {
         font-size: 8pt;
         font-weight: 100;
-        fill: #27565e;
-        /* stroke: #10313e;
-        stroke-width: 1px; */
+        fill: $grayBlue;
+
     }
 
     /* river label masking */
@@ -3900,12 +3892,13 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
     .delaware-water-label text {
       /* fill: #5a98a3; */
-      fill: #6399ba;
+      fill: $grayBlue;
     }
     .ocean-label {
         font-weight: 200;
         font-size: 16px;
-        fill: #1d4b56;
+        fill: $grayBlue;
+        opacity: .8;
     }
 
 
@@ -3922,7 +3915,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .river-label {
         font-size: 5pt;
         font-style: italic;
-        fill: #316d84;
+        fill: $mediumBlue;
     }
 
   /* Scale bar transforms */
@@ -3939,18 +3932,18 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .scale-bar-label {
       font-size: 7pt;
       font-weight: 500;
-      fill: #14414e;
+      fill: $grayBlue;
       letter-spacing: .5px;
     }
   /* scale bar lines */
     .cls-80 {
-        stroke: #14414e;
+        stroke: $grayBlue;
     }
 
 
   .north-arrow {
-    color: #14414e;
-    fill: #14414e;
+    color: $grayBlue;
+    fill: $grayBlue;
     stroke: none;
   }
 
