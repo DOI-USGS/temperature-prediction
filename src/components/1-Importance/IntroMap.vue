@@ -3745,7 +3745,6 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
      .ocean {
         fill: $footerBlue;
-        opacity: .8;
         stroke: $footerBlue;
         stroke-width: .4px;
         stroke-opacity: .8;
@@ -3753,8 +3752,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
     .reservoir {
-        fill: $footerBlue;
-        opacity: .8;
+        fill: $mediumBlue;
         stroke-width: 0.5px;
   
     }
@@ -3844,7 +3842,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .cls-43 {
-        fill: url(#linear-gradient-2);
+        fill: $mediumBlue;
+        stroke: none;
     }
 
     .city-label{
@@ -3863,12 +3862,15 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .masking {
         fill: $backgroundCharcoal;
         font-weight: 400;
-        /* background-color: black; */
+        background-color: $backgroundCharcoal;
         stroke: $backgroundCharcoal;
         stroke-width: 7px;
         stroke-linejoin: round;
     }
 
+    #river_masks path {
+      fill: $backgroundCharcoal;
+    }
 
     .city-dot {
         font-size: 2px;
