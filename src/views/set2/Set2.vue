@@ -15,7 +15,7 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">Temperature Monitoring <span class="yellow">Sites</span> in the Delaware River Basin</p>
-            <p class="viz-subtitle">Subtitle</p>
+            <p class="viz-subtitle"></p>
           </div>
         </div> 
         <div class="figure-content">
@@ -136,7 +136,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title"><span class="yellow">Daily Temperature</span> of River Reaches in 2019</p>
-          <p class="viz-subtitle">Timeseries</p>
+          <p class="viz-subtitle"></p>
         </div>
       </div>  
       <div class="figure-content">
@@ -182,7 +182,7 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title"><span class="yellow">Availability</span> of Temperature Data across the Continental US</p>
-          <p class="viz-subtitle">Subtitle</p>
+          <p class="viz-subtitle"></p>
         </div>
       </div>
       <div
@@ -1828,19 +1828,19 @@
                   // raise the spatial rectangle
                   .raise();
           }
-          // dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#285C70") //#164152
-              .style("stroke", "#285C70")
-          this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#285C70")
-          this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#285C70")
+          // dim reservoirs, bay, and river segments  //EXCEPT NOW I MADE IT STAY THE SAME COLOR! Can revert back if we decide we wlike it.
+          // this.d3.selectAll(".c2p2.reservoirs")
+          //     .style("fill", "#4F5C67")
+          //     .style("stroke", "#4F5C67")
+          // this.d3.selectAll(".c2p2.delaware_bay")
+          //     .style("fill", "#4F5C67")
+          // this.d3.selectAll(".c2p2.river_segments")
+          //     .style("stroke", "#4F5C67")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter", "url(#shadow1)") 
-              .style("stroke", "#ffffff")
+              .style("stroke", "#F1F1F1")
               .style("opacity", 1)
               .raise()
         },
@@ -1883,18 +1883,18 @@
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
           this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
               .attr("filter","None")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
               .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#285C70")
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67")
+              .style("stroke", "#4F5C67")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
               .lower()
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -1936,13 +1936,13 @@
           this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[self.timestep_c2p2])
               .style("opacity", 0)
           // dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#285C70") //#164152
-              .style("stroke", "#285C70")
-          this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#285C70")
-          this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#285C70")
+          // this.d3.selectAll(".c2p2.reservoirs")
+          //     .style("fill", "#285C70") //#164152
+          //     .style("stroke", "#285C70")
+          // this.d3.selectAll(".c2p2.delaware_bay")
+          //     .style("fill", "#285C70")
+          // this.d3.selectAll(".c2p2.river_segments")
+          //     .style("stroke", "#285C70")
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
@@ -1972,7 +1972,7 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
               .style("opacity", 1)
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .style("stroke", "#141414")
@@ -1980,11 +1980,11 @@
               .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#285C70")
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67")
+              .style("stroke", "#4F5C67")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
               .lower()
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -2058,13 +2058,13 @@
                 .raise()
           }
           // dim reservoirs, bay, and river segments
-          this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70") //#164152
-              .style("stroke", "#285C70")
-          this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
-          this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+          // this.d3.selectAll(".c2p3.reservoirs")
+          //     .style("fill", "#285C70") //#164152
+          //     .style("stroke", "#285C70")
+          // this.d3.selectAll(".c2p3.delaware_bay")
+          //     .style("fill", "#285C70")
+          // this.d3.selectAll(".c2p3.river_segments")
+          //     .style("stroke", "#285C70")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
@@ -2107,18 +2107,18 @@
           // un-dim river segments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
               .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70")
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67")
+              .style("stroke", "#4F5C67")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
               .lower()
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p3.matrixBkgdRect")

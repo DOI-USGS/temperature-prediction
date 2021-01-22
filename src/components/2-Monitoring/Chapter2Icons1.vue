@@ -342,6 +342,21 @@
 </script>
 
 <style scoped lang="scss">
+
+// IMPORT COLORS
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
     #icons {
       min-width: 375px;
       max-width: 700px;
