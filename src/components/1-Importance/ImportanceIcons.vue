@@ -147,6 +147,21 @@
 </script>
 
 <style scoped lang="scss">
+
+// IMPORT COLORS
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
     .grid-container {
         padding: 0px;
         display: grid;
@@ -162,7 +177,6 @@
         @media screen and (max-width: 600px) {
           padding: 0px 0;
           max-width: 80vw;
-          gap: 0px;
         }
     }
 
@@ -177,31 +191,60 @@
         }
     }
 
-    .icon {
-      fill: #6399ba; //285C70
-    }
+    // .icon {
+    //   fill: $mediumBlue; //285C70
+    // }
 
     .desc{
       margin: auto 0;
-      color: #6399ba; //#285C70
-      font-style: italic;
+      color: $offWhite; 
+      // font-style: italic;
       font-weight: 100;
     }
 
     #icon-1 {
         grid-area: icon-1; 
+        svg {
+          fill: $plasmaBlue;
+        }
+         svg:hover, svg:active {
+          transform: rotate(5deg) scale(1.1);
+          transition: transform .2s ease;
+        }
     }
 
     #icon-2 {
         grid-area: icon-2; 
+         svg {
+          fill: $plasmaPurple;
+        }
+         svg:hover, svg:active {
+          transform: rotate(5deg) scale(1.1);
+          transition: transform .2s ease;
+        }
     }
 
     #icon-3 {
         grid-area: icon-3; 
+         svg {
+          fill: $plasmaPink;
+        
+        }
+        svg:hover, svg:active {
+          transform: rotate(5deg) scale(1.1);
+          transition: transform .2s ease;
+        }
     }
 
     #icon-4 {
         grid-area: icon-4; 
+         svg {
+          fill: $plasmaYellow;
+        }
+         svg:hover, svg:active {
+          transform: rotate(5deg) scale(1.1);
+          transition: transform .2s ease;
+        }
     }
 
     #desc-1 {
