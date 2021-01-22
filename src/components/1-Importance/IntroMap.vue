@@ -39,25 +39,8 @@
               stop-color="#63B1E6"
             />
             <stop
-              offset="0.87"
+              offset="0.7"
               stop-color="#00264C"
-            />
-          </linearGradient>
-          <linearGradient
-            id="linear-gradient-2"
-            x1="318.1"
-            y1="478.84"
-            x2="284.53"
-            y2="526.77"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop
-              offset="0"
-              stop-color="#6399ba"
-            />
-            <stop
-              offset="1"
-              stop-color="#316d84"
             />
           </linearGradient>
         </defs>
@@ -3769,7 +3752,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .cls-1, .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-4, .cls-45, .cls-52, .cls-6, .cls-65, .cls-7, .cls-76, .cls-78, .cls-8, .cls-9 {
-        fill: none;
+        fill: $backgroundCharcoal;
     }
 
     .cls-2 {
@@ -3889,7 +3872,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
     /* river label masking */
     .cls-52, .cls-65, .cls-76, .cls-78 {
-        stroke: #000;
+        stroke: $backgroundCharcoal;
     }
 
     .delaware-water-label text {
