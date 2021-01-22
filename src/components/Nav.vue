@@ -57,9 +57,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     }
 
     #nav a {
-      font-weight: bold;
+      font-weight: 100;
       text-align: center;
-      box-shadow: 0 5px 0 $monotoneBlue5;
+      box-shadow: 0 1px 0 $monotoneBlue5;
       color: $offWhite;
       position: relative;
       padding: 0px 6px;
@@ -70,6 +70,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
 
   #nav a:hover {
     background-color: $monotoneBlueTransparent;
+    transition: background-color .2s ease;
     cursor: pointer;
   }
 
