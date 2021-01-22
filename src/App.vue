@@ -79,8 +79,19 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #141414; //#171717
-$offWhite: rgb(241, 241, 241);
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+// Old colors
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
@@ -93,7 +104,7 @@ $riverBlue: #6399ba;
 body {
       margin: 0;
       padding: 0;
-      color: #9e9e9e; //$offWhite
+      color: $offWhite;
       background-color: $backgroundCharcoal;
       line-height: 1.5;
       font-size: 13pt;
@@ -119,7 +130,7 @@ h1{
 
 
 h2{
-  color: $riverBlue;
+  color: $mediumBlue;
   font-weight: 700;
   text-align: center;
   font-size: 3em;
@@ -142,7 +153,7 @@ h3{
 .overall-title {
   padding-top: 20vh;
   margin: 0 auto;
-  background: $monotoneBlue5;
+  background: $footerBlue;
   overflow-x: hidden;
   @media screen and (max-width: 600px) {
     padding: 0 20px 0 20px;
@@ -231,6 +242,8 @@ h3{
     padding: 20px;
     align-items: center;
     justify-content: center; 
+    background-color: $boxCharcoal;
+    border-radius: 5px;
   }
 
   .map {
@@ -255,10 +268,10 @@ h3{
 
 // Specific Design Elements for Charts and Maps
 
-.move-up {
-  margin-bottom: -100px;
-  padding: 0;
-}
+// .move-up {
+//   margin-bottom: -100px;
+//   padding: 0;
+// }
 
 .viz-title-wrapper {
   max-width: 350px;
@@ -269,7 +282,7 @@ h3{
   // box-shadow: -5px -5px $monotoneBlue5;
   font-size: 1.4em;
   font-weight: 700;
-  color: $riverBlue;
+  color: $mediumBlue;
   margin-bottom: 0;
 
 }
@@ -309,13 +322,13 @@ h3{
   font-weight:700;
   fill: white;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $monotoneBlueTransparent 40%);
+  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $footerBlue 40%);
   line-height: 1.3em;
   padding: 0 5px;
 }
 
 .dashed-axis {
-  stroke: #4d4c4d;
+  stroke: $backgroundCharcoal;
   stroke-width: 3px;
   fill: none;
   stroke-miterlimit: 10;
@@ -323,7 +336,7 @@ h3{
 }
 
 .solid-axis {
-  stroke: #4d4c4d;
+  stroke: $boxCharcoal;
   stroke-width: 1px;
   fill: none;
   stroke-miterlimit: 10;
@@ -332,7 +345,7 @@ h3{
 .tick-marks {
   fill: none;
   stroke-miterlimit: 10;
-  stroke: #707070;
+  stroke: $boxCharcoal;
   stroke-width: 0.75px;
 }
 
