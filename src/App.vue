@@ -256,7 +256,7 @@ h3{
   }
 
   .map {
-    min-width: 400px;
+    min-width: 300px;
     max-width: 700px;
     flex: 1 1 40%;
 
@@ -283,15 +283,15 @@ h3{
 }
 
 .viz-title-wrapper {
-  max-width: 350px;
+  max-width: 400px;
   z-index: 100;
 }
 
 .viz-title {
   // box-shadow: -5px -5px $monotoneBlue5;
-  font-size: 1.8em;
+  font-size: 1.4em;
   font-weight: 700;
-  color: $mediumBlue;
+  color: $offWhite;
   margin-bottom: 0;
 
 }
@@ -334,6 +334,10 @@ h3{
   background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $footerBlue 40%);
   line-height: 1.3em;
   padding: 0 5px;
+}
+
+.yellow {
+  color: $plasmaYellow;
 }
 
 .dashed-axis {

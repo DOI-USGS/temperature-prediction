@@ -14,7 +14,7 @@
       <div class="box">
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
-            <p class="viz-title">Temperature Monitoring Sites in the DRB</p>
+            <p class="viz-title">Temperature Monitoring <span class="yellow">Sites</span> in the Delaware River Basin</p>
             <p class="viz-subtitle">Subtitle</p>
           </div>
         </div> 
@@ -31,42 +31,22 @@
       <div class="text-content">
         <p v-html="text.paragraph3" />
       </div>
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">Number of Temperature Measurements by Year</p>
-          <p class="viz-subtitle">Data from USGS streamgages or other state/local agencies.</p>
-        </div>
-      </div>
-      
-      <div class="figure-content">
-        <div class="figure chart">
-          <div id="barChart_c2p1">
-            <svg class="c2p1 barChart chart">
-              <svg
-                x="30%"
-                y="8%"
-                width="auto"
-                text-anchor="middle"
-              >
-                <!-- <text
-                  class="inset-viz-subtitle"
-                  x="12em"
-                  y="0.7em"
-                >
-                  Number of Temperature Measurements by year,
-                </text>
-                <text
-                  class="inset-viz-subtitle"
-                  x="12em"
-                  y="1.7em"
-                >
-                  as measured by USGS or other state/local agencies,
-                </text> -->
-              </svg>
-            </svg>
+
+      <div class="box">
+        <div class="text-content move-up">
+          <div class="viz-title-wrapper">
+            <p class="viz-title"><span class="yellow">Number of Temperature Measurements</span> by Year</p>
+            <p class="viz-subtitle">Data from USGS streamgages or other state/local agencies.</p>
           </div>
         </div>
-      </div>      
+        <div class="figure-content">
+          <div class="figure chart">
+            <div id="barChart_c2p1">
+              <svg class="c2p1 barChart chart"></svg>
+            </div>
+          </div>
+        </div> 
+      </div>
     </div>
     <div class="text-content">
       <p v-html="text.paragraph4" />
@@ -118,67 +98,31 @@
     <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
-    <div class="text-content move-up">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">Availability of Temperature Data</p>
-        <p class="viz-subtitle">Visualizing the count of temperature measurements of all stream reaches in the basin.</p>
-        <p class="viz-subtitle">Hover over a reach on the map, to see it's bar chart.  Or hover a matrix cell to see which reaches had temperature data collected for that year.</p>
+    <div class="box">
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title"><span class="yellow">Availability</span> of Temperature Data</p>
+          <p class="viz-subtitle">Visualizing the count of temperature measurements of all stream reaches in the basin.</p>
+          <p class="viz-subtitle">Hover over a stream reach on the map to see the amount of data avialble for that reach over time.</p>
+          <p class="viz-subtitle">Hover over a column in the matrix to see which reaches have data for a given year.</p>
+        </div>
       </div>
-    </div>  
-    <div
-      id="data-availability-container"
-      class="map-matrix-grid-container"
-    >
-      <!-- class="figure-content" -->
       <div
-        id="DRB_map_c2p2"
-        class="map mm-grid-item"
+        id="data-availability-container"
+        class="map-matrix-grid-container"
       >
-        <svg class="map_c2p2 map">
-          <svg
-            x="15%"
-            y="17%"
-          >
-            <text
-              class="annotation-text"
-              x="0"
-              y="1.2em"
-            >Hover over a stream reach<tspan
-              x="0"
-              y="2.4em"
-            >to see the amount of data</tspan><tspan
-              x="0"
-              y="3.6em"
-            >available for that reach over time</tspan></text>
-          </svg>
-          <svg
-            x="73%"
-            y="45%"
-          >
-            <text
-              class="annotation-text"
-              x="0"
-              y="1.2em"
-            >Hover over a column<tspan
-              x="0"
-              y="2.4em"
-            >in the matrix at right</tspan><tspan
-              x="0"
-              y="3.6em"
-            >to see which reaches have</tspan><tspan
-              x="0"
-              y="4.8em"
-            >data in a given year</tspan></text>
-          </svg>
-        </svg>
-      </div>
-      <!-- class="figure" -->
-      <div
-        id="matrixChart_c2p2"
-        class="matrix mm-grid-item"
-      />
-      <!-- class="figure" -->
-    </div>
+        <div
+          id="DRB_map_c2p2"
+          class="map mm-grid-item"
+        >
+          <svg class="map_c2p2 map"></svg>
+        </div>
+        <div
+          id="matrixChart_c2p2"
+          class="matrix mm-grid-item"
+        />
+      </div>  
+    </div>   
     <div class="text-content">
       <div class="subheader">
         <h3 v-html="text.title3" />
@@ -188,39 +132,43 @@
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
-    <div class="text-content move-up">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">Daily Temperature of DRB River Reaches in 2019</p>
-        <p class="viz-subtitle">Timeseries</p>
-      </div>
-    </div>  
-    <div class="figure-content">
-      <div
-        id="timeseries"
-        class="figure chart"
-      >
-        <MonitoringLineChart />
+    <div class="box">
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title"><span class="yellow">Daily Temperature</span> of River Reaches in 2019</p>
+          <p class="viz-subtitle">Timeseries</p>
+        </div>
+      </div>  
+      <div class="figure-content">
+        <div
+          id="timeseries"
+          class="figure chart"
+        >
+          <MonitoringLineChart />
+        </div>
       </div>
     </div>
     <div class="text-content">
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
     </div>
-    <div class="text-content move-up">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">Daily Temperature of DRB River Reaches in 2019</p>
-        <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+    <div class="box">
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title"><span class="yellow">Daily Temperature</span> of DRB River Reaches in 2019</p>
+          <p class="viz-subtitle">Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.</p>
+        </div>
+      </div>  
+      <div class="map-matrix-grid-container">
+        <div
+          id="DRB_map_c2p3"
+          class="map mm-grid-item"
+        />
+        <div
+          id="matrixChart_c2p3"
+          class="matrix mm-grid-item"
+        />
       </div>
-    </div>  
-    <div class="map-matrix-grid-container">
-      <div
-        id="DRB_map_c2p3"
-        class="map mm-grid-item"
-      />
-      <div
-        id="matrixChart_c2p3"
-        class="matrix mm-grid-item"
-      />
     </div>
     <div class="text-content">
       <div class="subheader">
@@ -230,23 +178,27 @@
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
-    <div class="text-content">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">Availability of Temperature Data across the Continental US</p>
-        <p class="viz-subtitle">Subtitle</p>
+    <div class="box">
+      <div class="text-content">
+        <div class="viz-title-wrapper">
+          <p class="viz-title"><span class="yellow">Availability</span> of Temperature Data across the Continental US</p>
+          <p class="viz-subtitle">Subtitle</p>
+        </div>
       </div>
-    </div>  
-    <div
-      id="map-container"
-      class="figure-content"
-    >
-      <img
-        id="hex-map"
-        class="figure"
-        src="@/assets/usa_hex_map_80-01.png"
+      <div
+        id="map-container"
+        class="figure-content"
       >
-      <!-- need to add legend -->
-    </div>
+        <img
+          id="hex-map"
+          class="figure"
+          src="@/assets/usa_hex_map_80-01.png"
+        >
+        <!-- need to add legend -->
+      </div>
+
+    </div>     
+   
     <div class="container-fluid">
       <div
         id="filter_row"
@@ -701,7 +653,7 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(1.1))
+                .attr("d", self.map_path_c2.pointRadius(.9))
                 // assign class for styling
                 .attr("class", function(d) {
                   if (d.properties.source === 'USGS'){
@@ -743,7 +695,7 @@
 
           // set colors
           let z = this.d3.scaleOrdinal()
-              .range(["#e9eced", "#FDAD32"]); // USGS, other
+              .range(["#FAB62F", "#FAB62F"]); // all yellow
 
           // stack to create an array for each of the series in the data
           let stack = this.d3.stack();
@@ -821,7 +773,7 @@
               
 
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
+          svgChart.selectAll(".tick line").attr("stroke", "#28292D").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
 
           // //  make the legend
           // let legend = g.selectAll(".legend")
@@ -2322,7 +2274,6 @@
 
   #DRB_map_c2p1 {
     display: block;
-    max-width: 700px;
     width: 100%;
   }
 
@@ -2438,10 +2389,27 @@
   }
 }
 </style>
+
 <style lang="scss">
+
+// IMPORT COLORS
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 .label, .domain{
-  color: #1f4f61; //#285C70
+  color: $grayBlue; //#285C70
   font-size: 0.5em;
 }
 .c2p2.cellText {
@@ -2450,31 +2418,31 @@
 }
 
 .delaware_bay {
-  fill: #285C70; // original was #6399ba;
+  fill: $grayBlue; 
 }
 
 .river_segments {
-  stroke: #285C70;// original was #6399ba;
+  stroke: $grayBlue;
   stroke-linecap: round;
 }
 
 .reservoirs {
-  fill: #285C70; // original was #6399ba;
-  stroke: #285C70;// original was #6399ba;
+  fill: $grayBlue; 
+  stroke: $grayBlue;// o
 }
 
 .obs_sites {
-  stroke: #141414;
+  stroke: $boxCharcoal;
   stroke-width: 0.1;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .USGS_station {
-  fill: #e9eced;
+  fill: $plasmaYellow;
 }
 
 .Other_station {
-  fill: #FDAD32;
+  fill: $plasmaYellow;
 }
 
 .chartAxis {
