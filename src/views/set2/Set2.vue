@@ -185,7 +185,7 @@
       >
         <svg class="c2p2 matrix_c2p2 matrix">
           <g transform="translate(35,50) scale(0.9, 0.9)">
-            <DummyMatrix/>
+            <DummyMatrix />
           </g>
         </svg>
       </div>
