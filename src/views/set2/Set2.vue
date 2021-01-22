@@ -184,7 +184,9 @@
         class="matrix mm-grid-item"
       >
         <svg class="c2p2 matrix_c2p2 matrix">
-          <DummyMatrix/>
+          <g transform="translate(35,50) scale(0.9, 0.9)">
+            <DummyMatrix/>
+          </g>
         </svg>
       </div>
       <!-- class="figure" -->
