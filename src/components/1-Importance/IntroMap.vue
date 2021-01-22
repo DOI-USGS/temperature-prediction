@@ -11,7 +11,7 @@
     
     <div
       id="intro-map"
-      class="flex-container"
+      class="flex-container-window-height"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
             />
             <stop
               offset="0.7"
-              stop-color="#00264C"
+              stop-color="#0F2237"
             />
           </linearGradient>
         </defs>
@@ -3678,6 +3678,7 @@ $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
+$darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #63B1E6;
 $lightBlue: #AAD1EC;
@@ -3727,8 +3728,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
      .ocean {
-        fill: $footerBlue;
-        stroke: $footerBlue;
+        fill: $darkBlue;
+        stroke: $darkBlue;
         stroke-width: .4px;
         stroke-opacity: .8;
     }

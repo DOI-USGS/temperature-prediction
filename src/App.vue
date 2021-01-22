@@ -86,6 +86,7 @@ $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
+$darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #63B1E6;
 $lightBlue: #AAD1EC;
@@ -202,13 +203,26 @@ h3{
     }
   }
 
+  .flex-container-window-height {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    align-content: space-around;
+    max-width: 60%;
+    margin: auto;
+    @media screen and (max-width: 600px) {
+        max-width: 100%;
+    }
+  }
+
   .flex-item {
     padding: 20px;
     min-width: 400px;
     flex: 0 0 auto;
     align-self: center;
-   
   }
+
 
   @media (max-width: 600px) {
     .flex-container {
