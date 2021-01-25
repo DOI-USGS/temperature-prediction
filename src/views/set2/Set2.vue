@@ -659,10 +659,13 @@
           let drb_bay = self.map_c2p1.append("path")
               .datum(self.bay)
               .attr("class", "c2p1 delaware_bay")
+              .attr("id", "drb_bay")
               .attr("d", self.map_path_c2)
 
           // add drb reservoirs to map
-          let drb_reservoirs = self.map_c2p1.selectAll(".reservoirs")
+          let drb_reservoirs = self.map_c2p1.append('defs').append("g").attr("id","drbReservoirs");
+          
+          drb_reservoirs.selectAll(".reservoirs")
               // bind polygons to each element to be created
               .data(self.reservoirs)
               // create an element for each datum
@@ -933,31 +936,31 @@
                 self.mouseoutSeg_c2p2(d, tooltip);
               });
 
-          // add delaware bay to map
-          let drb_bay = self.map_c2p2.append("path")
-              // bind data to element
-              .datum(self.bay)
-              // assign class for styling
-              .attr("class", "c2p2 delaware_bay")
-              // project element
-              .attr("d", self.map_path_c2);
+          // // add delaware bay to map
+          // let drb_bay = self.map_c2p2.append("path")
+          //     // bind data to element
+          //     .datum(self.bay)
+          //     // assign class for styling
+          //     .attr("class", "c2p2 delaware_bay")
+          //     // project element
+          //     .attr("d", self.map_path_c2);
 
-          // add drb reservoirs to map
-          let drb_reservoirs = self.map_c2p2.selectAll(".reservoirs")
-              // bind polygons to each element to be created
-              .data(self.reservoirs)
-              // create an element for each datum
-              .enter()
-              // append each element to the svg as a path element
-              .append("path")
-              // project polygons
-              .attr("d", self.map_path_c2)
-              // assign class for styling
-              .attr("class", function(d){
-                return "c2p2 reservoirs res_id" + d.properties.GRAND_ID
-              })
-              // set stroke width so that polygons appear larger
-              .style("stroke-width", 0.75)
+          // // add drb reservoirs to map
+          // let drb_reservoirs = self.map_c2p2.selectAll(".reservoirs")
+          //     // bind polygons to each element to be created
+          //     .data(self.reservoirs)
+          //     // create an element for each datum
+          //     .enter()
+          //     // append each element to the svg as a path element
+          //     .append("path")
+          //     // project polygons
+          //     .attr("d", self.map_path_c2)
+          //     // assign class for styling
+          //     .attr("class", function(d){
+          //       return "c2p2 reservoirs res_id" + d.properties.GRAND_ID
+          //     })
+          //     // set stroke width so that polygons appear larger
+          //     .style("stroke-width", 0.75)
 
           // add drb segments to map
           let drb_segments = self.map_c2p2.selectAll(".river_segments")
