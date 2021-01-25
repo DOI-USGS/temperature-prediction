@@ -67,7 +67,7 @@
     >
       <img
         id="hex-map"
-        src="@/assets/usa_hex_map_80-01.png"
+        src="@/assets/temp_hex_map.svg"
       >
       <!-- need to add legend and recolor beeswarm to mirror?? -->
     </div>
