@@ -2803,7 +2803,6 @@
 
         // colors for chart
           this.color_d100 = '#3B14DD';
-          this.color_d02 = "#C60C54";
           this.color_d001 = "#F1F326";
           this.color_obs = "#B666C6";  // #FDAD32 is the current yellow in flubber
           this.color_exp = "#B666C6";
@@ -3015,21 +3014,14 @@
             .range([this.height,0])
             .domain([0,this.chartState.domain_y]);
 
-          /* // testing out texture fills
-            this.texture = textures
-              .lines()
-              .thicker()
-              .stroke("#E4695E");
-           this.svg.call(this.texture); // this is binding the background to the texture */
-
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d02","d001","obs","exp"])
-            .range([this.color_d100, this.color_d02, this.color_d001, "#171717", this.color_exp]);
+            .domain(["d100","d001","obs","exp"])
+            .range([this.color_d100, this.color_d001, "#171717", this.color_exp]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range([this.color_d100, this.color_d02, this.color_d001, this.color_obs, this.color_exp]);
+            .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
           // generate axes
@@ -3187,6 +3179,7 @@
                   .attr("y", "5px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
+                  .style("font-size", "20px")
 
                    this.d3.select("g.legend:nth-child(3) text")
                   .attr("opacity", o_pred)
@@ -3252,15 +3245,13 @@
                   .attr("r", this.radius)
                   .style("fill", rmse_fill)
                   .style("stroke", rmse_stroke)
-                  //.style("opacity", o_train)
 
                   legend_r.append("text")
                   .attr("x", "20px")
                   .attr("y", "5px")
-                  //.attr("dy", ".35em")
                   .text(function(d) { return d; })
                   .style("fill", "white")
-                  //.style("opacity", o_train)
+                  .style("font-size", "20px")
 
                    /// color legend for experiments
                if (this.step <= this.step_ann_exp ) {
@@ -3288,8 +3279,8 @@
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.05+50;
-                 var nudge_y = this.height*.1;
+            var nudge_x = this.width*.05+50*2;
+            var nudge_y = this.height*.1;
 
             if (direction == "down"){
                   this.d3.select("g.legend:nth-child(2) circle")
