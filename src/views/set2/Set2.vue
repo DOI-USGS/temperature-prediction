@@ -282,8 +282,7 @@
       id="map-container"
       class="figure-content"
     >
-      <svg id="hex-map" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="100%" height="100%" viewBox="0 0 801 512">
-  <defs/>
+      <svg id="hex-map" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 801 512">
   <g fill-rule="evenodd"  class="hex" stroke-linejoin="round" stroke-width="1.3">
     <path fill="#22078b" d="M32.5 218.2L29 216v-4.3l3.7-2.1 3.7 2.1v4.3z"/>
     <path fill="#100887" d="M32.5 205.4l-3.7-2.2V199l3.7-2.1 3.7 2.1v4.3z"/>
@@ -4049,6 +4048,7 @@
     <path fill="#2e078f" d="M764.8 64.5l-3.7-2.2V58l3.6-2 3.7 2v4.3z"/>
     <path fill="#4b049a" d="M768.5 70.9l-3.7-2.2v-4.2l3.7-2.2 3.7 2.2v4.2z"/>
   </g>
+  <g id="hex-legend" transform="translate(110 29.7)">
   <path d="M454.7 19.9l3.5 6.1h7.2l3.5-6.1-3.5-6.1h-7.2z" style="isolation:isolate" fill="#f5e12a" class="hex" />
   <path d="M432.5 19.9L436 26h7l3.6-6.1-3.5-6.1H436z" style="isolation:isolate" fill="#fcad35" class="hex" />
   <path d="M410.3 19.9L414 26h7.1l3.6-6.1-3.6-6.1h-7.1z" style="isolation:isolate" fill="#ed8053" class="hex" />
@@ -4067,12 +4067,16 @@
   <path d="M310.5 13.6l3.5 6.1h7.1l3.6-6-3.5-6.2H314z" style="isolation:isolate" fill="#4c049a" class="hex" />
   <path fill="#0d0887" class="hex" stroke-linecap="square"  d="M288.3 13.6l3.6 6.1h7.1l3.6-6-3.6-6.2h-7.1z"/>
   <path d="M465.8 13.6l3.5 6.1h7.1l3.6-6-3.6-6.2h-7z" style="isolation:isolate" fill="#f0f821" class="hex" />
-  <text transform="translate(261.6 19.7)" style="isolation:isolate" fill="#ffffff" font-size="1em" class="legendAxis" >
+  <text transform="translate(200 -10)" style="isolation:isolate" font-weight="550" fill="#ffffff" font-size="1.5em"  >
+    Water temperature observations
+  </text>
+  <text transform="translate(260 19.7)" style="isolation:isolate" fill="#ffffff" font-size="1em" class="legendAxis" >
     0
   </text>
-  <text transform="translate(487 19.7)" style="isolation:isolate" fill="#ffffff" font-size="1em" class="legendAxis" >
+  <text transform="translate(487 19.7)" style="isolation:isolate" fill="#ffffff" class="legendAxis" >
     200,000
   </text>
+  </g>
 </svg>
 
 
@@ -6345,8 +6349,8 @@
 }
 .hex {
   fill-rule: evenodd;
-  stroke: #141414;
+  stroke:#141414; //#141414
   stroke-miterlimit: 10;
-  stroke-width: 1.4;
+  stroke-width: 0.1;
 }
 </style>
