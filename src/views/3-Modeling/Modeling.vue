@@ -2717,6 +2717,9 @@
             o_obs: 0, // legend observed
             o_train: 0, // legend training data
             o_exp: 0, // legend added experiments
+            o_arrow: 0,
+            o_ermse_title: 0,
+            model_current:  '',
 
             // beeswarm
             step_start: 13,
@@ -2746,14 +2749,14 @@
             current_flubber_id: null,
 
             step_error_exp: null, 
-          step_error_obs: null,
-          step_rmse: null,
-          step_ann: null,
-          step_ann_exp : null,
-          step_rnn: null,
-          step_rgcn: null,
-          step_rgcn_ptrn: null,
-          step_end: null,
+            step_error_obs: null,
+            step_rmse: null,
+            step_ann: null,
+            step_ann_exp : null,
+            step_rnn: null,
+            step_rgcn: null,
+            step_rgcn_ptrn: null,
+            step_end: null,
 
           }
         },
@@ -2853,7 +2856,8 @@
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
-            this.makeBeeswarm();
+            this.setDataVars(); // pull data for first draw
+            this.makeBeeswarm(); // build chart based on step
 
           },
           // resize to keep scroller accurate with window size changes
@@ -3003,16 +3007,18 @@
               this.o_train = 0; // legend training data
               this.o_exp = 0; // legend added experiments
               this.o_arrow = 0;
-              break;
+              this.o_rmse_title = 0;
+               break;
             case this.step_error_obs:
-              this.label_o = 1;
+              //this.label_o = 1;
               this.label_o_rmse = 0;
               this.o_pred = 1;
               this.o_obs = 1;
               this.o_train = 0;
               this.o_exp = 0;
               this.o_arrow = 0;
-              break;
+              this.o_rmse_title = 0;
+               break;
             case this.step_rmse:
               this.label_o = 0;
               this.label_o_rmse = 1;
@@ -3021,6 +3027,7 @@
               this.o_train = 0;
               this.o_exp = 0;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3032,6 +3039,7 @@
               this.o_train = 1;
               this.o_exp = 0;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3045,6 +3053,7 @@
               this.o_train = 1;
               this.o_exp = 1;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3056,6 +3065,7 @@
               this.o_train = 1;
               this.o_exp = 1;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3067,6 +3077,7 @@
               this.o_train = 1;
               this.o_exp = 1;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3079,6 +3090,7 @@
               this.o_train = 1;
               this.o_exp = 1;
               this.o_arrow = 0;
+              this.o_rmse_title = 1;
               break;
             default:
               this.label_o = 0;
@@ -3088,9 +3100,7 @@
               this.o_train = 0;
               this.o_exp = 0;
               this.o_arrow = 0;
-
-              this.setDataVars(); // for first draw
-
+              this.o_rmse_title = 0;
           }
           },
           setDataVars(){
@@ -3103,6 +3113,7 @@
               this.chartState.var_y = this.chart_y.error_exp;
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
+              this.model_current = '';
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3111,6 +3122,7 @@
               this.chartState.var_y = this.chart_y.error_obs;
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
+              this.model_current = '';
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
@@ -3119,6 +3131,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
+              this.model_current = '';
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3129,6 +3142,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
+              this.model_current = ': ANN';
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3141,6 +3155,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
+              this.model_current = ': ANN';
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3151,6 +3166,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
+              this.model_current = ': RNN';
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3161,6 +3177,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
+              this.model_current = ': RGCN';
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3172,6 +3189,7 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
+              this.model_current = ': PGDL';
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3180,6 +3198,7 @@
               this.chartState.var_y = this.chart_y.exp;
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
+              this.model_current = '';
 
           }
           },
@@ -3368,6 +3387,28 @@
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
+                  // rmse updating conent label
+                  legend_error.append("text")
+                .text("Model RMSE")
+                .attr("x", nudge_x-20)
+                .attr("y", nudge_y)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","bold")
+                 .style("opacity", this.o_rmse_title)
+                 .classed("rmse-name" , true)
+
+              //updating label
+                 legend_error.append("text")
+                .text(this.model_current)
+                .attr("x", nudge_x+165)
+                .attr("y", nudge_y)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","100")
+                 .style("opacity", this.o_rmse_title)
+                 .classed("rmse-name" , true)
+
           /// rmse legend
                   var legend_rmse = this.d3.select("#bees-legend")
                     .append("g").classed("rmse-legend", true)
@@ -3549,6 +3590,8 @@
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
+
+
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
@@ -3625,10 +3668,8 @@
            .restart()
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
-
           }
           },
-
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
             // needs to be modified to only run if the beeswarm data changes
@@ -3639,6 +3680,19 @@
             .attr('cy', function(d){return d.y})
 
         },
+        /* updateodelName(){
+                      //updating rmse model label
+            let legend_error = this.d3.select("#text..rmse-name")
+            .transition()
+            .duration(300)
+            .attr("opacity", 0)
+
+            legend_error
+            .transition()
+            .text(this.model_current)
+            .duration(300)
+
+        }, */
         // scrollama event handler functions
         // add class on enter, update charts based on step
         handleStepEnter(response) {
@@ -3649,7 +3703,7 @@
           console.log(response);
 
           ///////////
-          // assign chart axes and color scales
+          // assign force
 
           // error chart
           if (this.step <= this.step_error_exp) {
@@ -3710,7 +3764,8 @@
           // only redraw if the data or forces change
           //this.chartState.strengthy = .2;
           this.chartState.strengthx = 1;
-          this.setDataVars();
+          this.setDataVars(); /// refresh data chart is based on
+
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -3755,9 +3810,11 @@
              self.fadeOut(this.d3.selectAll(".error_2"), 500);
             //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), 500)
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann && response.direction == "down") {
             // half of rmse legend appears for beeswarm
@@ -3806,9 +3863,11 @@
             self.fadeIn(this.d3.selectAll(".error_1"), 500);
              self.fadeIn(this.d3.selectAll(".error_2"), 500);
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann && response.direction == "up") {
             // half of legend for beeswarm
