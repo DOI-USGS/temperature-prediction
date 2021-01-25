@@ -205,7 +205,7 @@ $grayBlue: #4F5C67;
     #icon-1 {
         grid-area: icon-1; 
         svg {
-          fill: $plasmaBlue;
+          fill: $grayBlue;
         }
          svg:hover, svg:active {
           transform: rotate(5deg) scale(1.1);
