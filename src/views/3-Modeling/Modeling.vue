@@ -3002,6 +3002,7 @@
               this.o_obs = 0; // legend observed
               this.o_train = 0; // legend training data
               this.o_exp = 0; // legend added experiments
+              this.o_arrow = 0;
               break;
             case this.step_error_obs:
               this.label_o = 1;
@@ -3010,6 +3011,7 @@
               this.o_obs = 1;
               this.o_train = 0;
               this.o_exp = 0;
+              this.o_arrow = 0;
               break;
             case this.step_rmse:
               this.label_o = 0;
@@ -3018,6 +3020,7 @@
               this.o_obs = 0;
               this.o_train = 0;
               this.o_exp = 0;
+              this.o_arrow = 0;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3028,6 +3031,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 0;
+              this.o_arrow = 0;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3039,7 +3043,8 @@
               this.o_pred =0;
               this.o_obs = 0;
               this.o_train = 1;
-              this.o_exp = 1
+              this.o_exp = 1;
+              this.o_arrow = 0;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3050,6 +3055,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
+              this.o_arrow = 0;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3060,6 +3066,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
+              this.o_arrow = 0;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3071,6 +3078,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
+              this.o_arrow = 0;
               break;
             default:
               this.label_o = 0;
@@ -3079,6 +3087,99 @@
               this.o_obs = 0;
               this.o_train = 0;
               this.o_exp = 0;
+              this.o_arrow = 0;
+
+              this.setDataVars(); // for first draw
+
+          }
+          },
+          setDataVars(){
+          // setting data variables
+          switch(this.step) {
+            case this.step_error_exp:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.error_exp;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              break;
+            case this.step_error_obs:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.error_obs;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              break;
+            case this.step_rmse:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.mid;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              break;
+            case this.step_ann:
+            case this.step_ann+1:
+            case this.step_ann+2:
+              this.chartState.dataset = this.rmse_ann;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.ANN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              break;
+            case this.step_ann_exp:
+            case this.step_ann_exp+1:
+            case this.step_ann_exp+2:
+            case this.step_ann_exp+3:
+            case this.step_ann_exp+4:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.ANN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              break;
+            case this.step_rnn:
+            case this.step_rnn+1:
+            case this.step_rnn+2:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RNN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              break;
+            case this.step_rgcn:
+            case this.step_rgcn+1:
+            case this.step_rgcn+2:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RGCN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              break;
+            case this.step_rgcn_ptrn:
+            case this.step_rgcn_ptrn+1:
+            case this.step_rgcn_ptrn+2:
+            case this.step_rgcn_ptrn+3:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RGCN_ptrn;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              break;
+            default:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.exp;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
 
           }
           },
@@ -3370,7 +3471,6 @@
                   .duration(150)
                   .style("opacity", 0)
 
-              
             }
           },
           drawAxes(axes_in) {
@@ -3549,45 +3649,16 @@
           console.log(response);
 
           ///////////
-          // assign dataset by step
-          // and grouping variable for color scale for respective df
-          if (this.step <= this.step_rmse){
-            //contains subset of d100 data with fake error data
-            this.chartState.dataset = this.error_data;
-            this.chartState.grouped = this.color_bees.error;
-            this.chartState.domain_y = 30;
-            this.chartState.domain_x = 30;
-          }
-          if (this.step >= this.step_ann && this.step <= this.step_ann_exp){
-            //contains only data for d100
-            this.chartState.dataset = this.rmse_ann;
-            this.chartState.grouped = this.color_bees.exp;
-            this.chartState.domain_y = null; // turn off yScale when force is used
-            this.chartState.domain_x = 10;
-          }
-          if (this.step >= this.step_ann_exp){
-            //contains data for 3 experiments 
-            this.chartState.dataset = this.rmse_exp;
-            this.chartState.grouped = this.color_bees.exp;
-            this.chartState.domain_y = null;
-            this.chartState.domain_x = 10;
-          }
-
-          ///////////
           // assign chart axes and color scales
 
           // error chart
           if (this.step <= this.step_error_exp) {
-            this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
           }
            if (this.step === this.step_error_obs ) {
-            this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error_obs;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
@@ -3596,8 +3667,6 @@
 
           // push to overlap as single RMSE
           if (this.step === this.step_rmse) {
-            this.chartState.var_x = this.chart_x.mid;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
@@ -3609,8 +3678,6 @@
           // decrease alpha to reduce jitteriness
           // corresponding decrease in alphaDecay to allow "cool down" 
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-            this.chartState.var_x = this.chart_x.ANN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.3;
@@ -3618,8 +3685,6 @@
           }
           // RNN
           if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.var_x = this.chart_x.RNN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3627,8 +3692,6 @@
           }
           // RGCN
           if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.var_x = this.chart_x.RGCN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3636,8 +3699,6 @@
           }
           // RGCN to end
           if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.var_x = this.chart_x.RGCN_ptrn;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3649,6 +3710,7 @@
           // only redraw if the data or forces change
           //this.chartState.strengthy = .2;
           this.chartState.strengthx = 1;
+          this.setDataVars();
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -3916,6 +3978,7 @@ figure.sticky.charts {
 }
 .arrow {
   fill: white;
+  opacity: 0;
 
 }
 
