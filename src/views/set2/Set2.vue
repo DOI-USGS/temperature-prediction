@@ -15,23 +15,96 @@
           Measuring Temperature in the Basin
         </h3>
       </div -->
-      <p class="viz-subtitle">
-        All Monitoring Sites in the Basin
-      </p>  
       <div class="figure-content">
-        <div class="figure map">
-          <div id="DRB_map_c2p1" />
+        <div
+          id="DRB_map_c2p1"
+          class="figure map"
+        >
+          <!-- p class="viz-subtitle">
+            All Monitoring Sites in the Basin
+          </p -->
+          <svg class="map_c2p1 map">
+            <svg
+              x="30%"
+              y="0%"
+              width="auto"
+              text-anchor="middle"
+            >
+              <text
+                class="inset-viz-subtitle"
+                x="8em"
+                y="0.7em"
+              >
+                All Monitoring Sites in the Basin
+              </text>
+            </svg>
+            <svg
+              x="20%"
+              y="20%"
+            >
+              <text
+                class="legend"
+                x="2.5em"
+                y="1em"
+              >State or other agency</text>
+              <text
+                class="legend"
+                x="2.5em"
+                y="3em"
+              >USGS</text>
+              <rect
+                class="Other_station"
+                x="0.5em"
+                y="0.18em"
+                width="5.4"
+                height="5.4"
+                rx="5.2"
+              />
+              <rect
+                class="USGS_station"
+                x="0.5em"
+                y="1.18em"
+                width="5.4"
+                height="5.4"
+                rx="5.2"
+              />
+            </svg>
+          </svg>
         </div>
       </div>
       <div class="text-content">
         <p v-html="text.paragraph3" />
       </div>
-      <p class="viz-subtitle">
+      <!-- p class="viz-subtitle">
         Number of Temperature Measurements by year,<br>as measured by USGS or other state/local agencies
-      </p>
+      </p -->
       <div class="figure-content">
         <div class="figure chart">
-          <div id="barChart_c2p1" />
+          <div id="barChart_c2p1">
+            <svg class="c2p1 barChart chart">
+              <svg
+                x="30%"
+                y="8%"
+                width="auto"
+                text-anchor="middle"
+              >
+                <text
+                  class="inset-viz-subtitle"
+                  x="12em"
+                  y="0.7em"
+                >
+                  Number of Temperature Measurements by year,
+                </text>
+                <text
+                  class="inset-viz-subtitle"
+                  x="12em"
+                  y="1.7em"
+                >
+                  as measured by USGS or other state/local agencies,
+                </text>
+              </svg>
+            </svg>
+          </div>
         </div>
       </div>      
     </div>
@@ -39,6 +112,7 @@
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
       <Chapter2Icons1 />
+      <br>
       <br>
       <!--"section-title-wrapper"-->
       <div class="viz-title">
@@ -103,7 +177,45 @@
       <div
         id="DRB_map_c2p2"
         class="map mm-grid-item"
-      />
+      >
+        <svg class="map_c2p2 map">
+          <svg
+            x="15%"
+            y="17%"
+          >
+            <text
+              class="annotation-text"
+              x="0"
+              y="1.2em"
+            >Hover over a stream reach<tspan
+              x="0"
+              y="2.4em"
+            >to see the amount of data</tspan><tspan
+              x="0"
+              y="3.6em"
+            >available for that reach over time</tspan></text>
+          </svg>
+          <svg
+            x="73%"
+            y="45%"
+          >
+            <text
+              class="annotation-text"
+              x="0"
+              y="1.2em"
+            >Hover over a column<tspan
+              x="0"
+              y="2.4em"
+            >in the matrix at right</tspan><tspan
+              x="0"
+              y="3.6em"
+            >to see which reaches have</tspan><tspan
+              x="0"
+              y="4.8em"
+            >data in a given year</tspan></text>
+          </svg>
+        </svg>
+      </div>
       <!-- class="figure" -->
       <div
         id="matrixChart_c2p2"
@@ -125,14 +237,14 @@
         Daily Temperature readings in the Basin
       </h3>
     </div --> 
-    <p class="viz-subtitle">
-      Daily Temperature readings in the Basin in 2019
-    </p>
     <div class="figure-content">
       <div
         id="timeseries"
         class="figure chart"
       >
+        <p class="viz-subtitle">
+          Daily Temperature readings in the Basin in 2019
+        </p>
         <MonitoringLineChart />
       </div>
     </div>
@@ -175,10 +287,7 @@
         class="figure"
         src="@/assets/usa_hex_map_80-01.png"
       >
-      <!-- need to add legend and recolor beeswarm to mirror?? -->
-    </div>
-    <div class="text-content">
-      <p v-html="text.paragraph16" />
+      <!-- need to add legend -->
     </div>
     <div class="container-fluid">
       <div
@@ -361,17 +470,27 @@
               .tickSize(null)
               .tickValues(null);
 
-          //create new svg container for the ch 2 panel 1 map
-          this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
-              .append("svg")
-              .attr("class", "map_c2p1 map")
+          // //create new svg container for the ch 2 panel 1 map
+          // this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
+          //     .append("svg")
+          //     .attr("class", "map_c2p1 map")
+          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+
+          // set viewbox for existing svg container for the ch 2 panel 1 map
+          this.map_c2p1 = self.d3.select(".map_c2p1")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
-          //create new svg container for the ch 2 panel 2 map
-          this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
-              .append("svg")
-              .attr("class", "map_c2p2 map")
+          // //create new svg container for the ch 2 panel 2 map
+          // this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
+          //     .append("svg")
+          //     .attr("class", "map_c2p2 map")
+          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
+          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+          
+          // set viewbox for existing svg container for the ch 2 panel 2 map
+          this.map_c2p2 = self.d3.select(".map_c2p2")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
@@ -624,34 +743,32 @@
                 // append each element to the svg as a circle element
                 .append("path")
                 // project points and SET SIZE
-                .attr("d", self.map_path_c2.pointRadius(1.2))
+                .attr("d", self.map_path_c2.pointRadius(1.1))
                 // assign class for styling
-                .attr("class", "c2p1 obs_sites")
-                // assign fill color based on agency
-                .style("fill", function(d){
+                .attr("class", function(d) {
                   if (d.properties.source === 'USGS'){
-                    return "#e9eced"
+                    return "c2p1 obs_sites USGS_station"
                   } else {
-                    return "#e9eced"
+                    return "c2p1 obs_sites Other_station"
                   }
                 })
-                // assign stroke in background color
-                // .style("stroke", "#000000")
-                // .style("stroke-width", 0.4)
-                // assign opacity
-                .style("opacity", .4)
 
             // add scale bar
             self.map_c2p1.append("g").call(self.scaleBarTop_c2);
             self.map_c2p1.append("g").call(self.scaleBarBottom_c2);
         },
         setBarChart_c2p1(csv_source_count) {
-          // append svg to div
-          let svgChart = this.d3.select("#barChart_c2p1")
-              .append("svg")
+          // // append svg to div
+          // let svgChart = this.d3.select("#barChart_c2p1")
+          //     .append("svg")
+          //     .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
+          //       (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
+          //     .attr("class", "c2p1 barChart chart")
+
+          // set viewbox for existing svg
+          let svgChart = this.d3.select(".c2p1.barChart.chart")
               .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
                 (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
-              .attr("class", "c2p1 barChart chart")
           let g = svgChart.append("g")
               .attr("class", "c2p1 transformedBarChart")
               .attr("transform", "translate(" + this.chart_margin.left + "," + this.chart_margin.top + ")");
@@ -668,7 +785,7 @@
 
           // set colors
           let z = this.d3.scaleOrdinal()
-              .range(["#e9eced", "#e9eced"]);
+              .range(["#e9eced", "#FDAD32"]); // USGS, other
 
           // stack to create an array for each of the series in the data
           let stack = this.d3.stack();
@@ -748,33 +865,33 @@
           // set the tick mark lines to background color
           svgChart.selectAll(".tick line").attr("stroke", "#141414").attr("stroke-width", 0.5) //.attr("stroke-dasharray", ("1, 2"))
 
-          // //  make the legend
-          // let legend = g.selectAll(".legend")
-          //     // include all but the first column in the legend
-          //     .data(data.columns.slice(1).reverse())
-          //     // append an item for each series
-          //     .enter().append("g")
-          //     .attr("class", "c2p1 barChart legend")
-          //     .attr("transform", function(d, i) {
-          //       return "translate(" + 0 + "," + i * 17 + ")";
-          //     })
+          //  make the legend
+          let legend = g.selectAll(".legend")
+              // include all but the first column in the legend
+              .data(data.columns.slice(1).reverse())
+              // append an item for each series
+              .enter().append("g")
+              .attr("class", "c2p1 barChart legend")
+              .attr("transform", function(d, i) {
+                return "translate(" + 0 + "," + ((i+1.5) * 15) + ")";
+              })
 
-          // // append a rectangle for each series
-          // legend.append("rect")
-          //     .attr("x", 14)
-          //     .attr("width", 8)
-          //     .attr("height", 8)
-          //     // set color based on z attribute
-          //     .attr("fill", z);
+          // append a rectangle for each series
+          legend.append("rect")
+              .attr("x", 14)
+              .attr("width", 7)
+              .attr("height", 7)
+              // set color based on z attribute
+              .attr("fill", z);
 
-          // // append a label for each rectangle
-          // legend.append("text")
-          //     .attr("x", 30)
-          //     .attr("y", 4)
-          //     .attr("dy", ".35em")
-          //     .attr("text-anchor", "start")
-          //     // set text as column name
-          //     .text(function(d) { return d; });
+          // append a label for each rectangle
+          legend.append("text")
+              .attr("x", 27)
+              .attr("y", 4)
+              .attr("dy", ".35em")
+              .attr("text-anchor", "start")
+              // set text as column name
+              .text(function(d) { return d; });
 
         },
         setMap_c2p2(){
@@ -2257,6 +2374,15 @@
     width: 100%;
   }
 
+  .inset-viz-subtitle {
+    fill: #285C70; //$offWhite
+    font-style: italic;
+    font-size: .5em;
+    text-align: center;
+    font-weight: 100;
+    opacity: 1;
+  }
+
   #timeseries {
     display: block;
     max-width: 700px;
@@ -2305,13 +2431,13 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto ;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
     height: 90vh;
-    max-height: 90%;
+    // max-height: 90%;
     // width: 100%;
     min-width: 0;
     min-height: 0;
@@ -2319,6 +2445,8 @@
   .mm-grid-item {
     padding: 0px;
     display: flex;
+    min-width: 45vw;
+    max-height: 90vh;
   }
   #DRB_map_c2p2 {
     grid-area: map;
@@ -2339,6 +2467,16 @@
     grid-area: matrix;
     display: flex;
     max-height: 100%;
+  }
+  .annotation-text {
+    fill: #c3cccf;
+    font-size: 0.5em;
+    font-style: italic;
+  }
+  .annotation-text {
+    fill: #c3cccf;
+    font-size: 0.5em;
+    font-style: italic;
   }
 }
 </style>
@@ -2367,6 +2505,20 @@
   stroke: #285C70;// original was #6399ba;
 }
 
+.obs_sites {
+  stroke: #141414;
+  stroke-width: 0.1;
+  opacity: 0.8;
+}
+
+.USGS_station {
+  fill: #e9eced;
+}
+
+.Other_station {
+  fill: #FDAD32;
+}
+
 .chartAxis {
   color: #999999;
   font-size: .60em;
@@ -2374,7 +2526,7 @@
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
-  font-size: 0.6em;
+  font-size: 0.5em;
   fill: #999999;
 }
 .legendAxis {

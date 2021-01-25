@@ -123,12 +123,12 @@
     }
 
     .icon {
-      fill: #285C70;
+      fill: #6399ba; //#285C70
     }
 
     .desc{
       margin: auto 0;
-      color: #285C70;
+      color: #6399ba; //#285C70
       font-weight: 600;
     }
 
