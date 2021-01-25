@@ -286,13 +286,13 @@
             id="cool"
             class="highlight-text"
             transform="translate(230 320)"
-          >Cool Reach,<tspan
+          >Coldest Reach,<tspan
             x="0"
             y="15"
-          >showing bursts of </tspan><tspan
+          >showing temperature </tspan><tspan
             x="0"
             y="30"
-          >cold water after</tspan><tspan
+          >drops after summertime</tspan><tspan
             x="0"
             y="45"
           >reservoir releases.</tspan>
@@ -302,8 +302,11 @@
           <text
             id="warm"
             class="highlight-text"
-            transform="translate(370 100)"
-          >Warmest reach</text>
+            transform="translate(120 100)"
+          >Warmest river reach<tspan
+            x="0"
+            y="15"
+          >in the DRB</tspan></text>
         </g>
       </g>>
       <g
@@ -516,7 +519,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 .highlight-text {
   fill: $plasmaPink;
   opacity: 0.6;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
 }
 
