@@ -289,7 +289,7 @@
           >Cool Reach,<tspan
             x="0"
             y="15"
-          >showing burst of </tspan><tspan
+          >showing bursts of </tspan><tspan
             x="0"
             y="30"
           >cold water after</tspan><tspan
