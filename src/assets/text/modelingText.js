@@ -99,7 +99,7 @@ export default {
                 'bees_id': 'step_ann'
             },
             {
-                'method': "When only 2% and 0.01% of the training data is used, the ANN model becomes less accurate and has a hard time capturing temperature dynamics of the river.",
+                'method': "When only 0.01% of the training data is used, the ANN model becomes less accurate and has a hard time capturing temperature dynamics of the river.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },

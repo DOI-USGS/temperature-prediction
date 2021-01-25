@@ -4079,8 +4079,6 @@
   </g>
 </svg>
 
-
-      <!-- need to add legend -->
     </div>
     <div class="container-fluid">
       <div
