@@ -854,7 +854,7 @@
               // set stroke width to be large for selection
               .style("stroke-width", 6)
               // set stroke to background color
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               // no fill
               .style("fill", "None")
               // set opacity to 0 so segments aren't visible but can be selected
@@ -1049,7 +1049,7 @@
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#141414")
+                  .attr("fill", "#28292D")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1252,9 +1252,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#141414")
+              .style("fill", "#28292D")
               .style("stroke-width", 2)
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1281,9 +1281,9 @@
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#141414")
+              .style("fill", "#28292D")
               .style("stroke-width", 2)
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1345,7 +1345,7 @@
               })
               .attr("d", self.map_path_c2)
               .style("stroke-width", 6)
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("fill", "None")
               .style("opacity", 0)
               .on("mouseover", function(d) {
@@ -1526,7 +1526,7 @@
                   .attr("class", "c2p3 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#141414")
+                  .attr("fill", "#28292D")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -1689,9 +1689,9 @@
                 return 'c2p3 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#141414")
+              .style("fill", "#28292D")
               .style("stroke-width", 1)
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1718,9 +1718,9 @@
                 return 'c2p3 matrixTemporalRect time' + d[self.timestep_c2p3];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#141414")
+              .style("fill", "#28292D")
               .style("stroke-width", 2)
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1821,7 +1821,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#141414")
+                  .style("fill", "#28292D")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
@@ -1858,8 +1858,8 @@
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("stroke", "#141414")
-              .style("fill", "#141414")
+              .style("stroke", "#28292D")
+              .style("fill", "#28292D")
               .style("stroke-width", 1)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
@@ -1867,8 +1867,8 @@
           // select all *temporal* rectangles and set fill and stroke back
           // to black and raise so that they are selectable
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("fill", "#141414")
-              .style("stroke", "#141414")
+              .style("fill", "#28292D")
+              .style("stroke", "#28292D")
               .raise()
           // resize spatial cells associated with segment
           this.d3.selectAll(".c2p2.cell.segment" + data.properties.seg_id_nat) 
@@ -1955,8 +1955,8 @@
           const self = this;
           // select all *spatial* rectangles and reset fill and stroke to black and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("fill", "#141414")
-              .style("stroke", "#141414")
+              .style("fill", "#28292D")
+              .style("stroke", "#28292D")
               .raise()
 
           // hide tooltip
@@ -1965,8 +1965,8 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity and raise (so available for selection but not visible)
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("stroke", "#141414")
-              .style("fill", "#141414")
+              .style("stroke", "#28292D")
+              .style("fill", "#28292D")
               .style("opacity", 0)
               .raise()
           // un-dim river segments, reservoirs, and bay
@@ -1975,7 +1975,7 @@
               .style("stroke", "#4F5C67")
               .style("opacity", 1)
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -2089,16 +2089,16 @@
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .attr("height", yScale_matrix_c2p3.bandwidth())
               .style("stroke", "None")
-              .style("stroke", "#141414")
-              .style("fill", "#141414")
+              .style("stroke", "#28292D")
+              .style("fill", "#28292D")
               .style("stroke-width", 1)
               .style("opacity", 0)
               .raise()
           // select all *temporal* rectangles and set fill and stroke back
           // to black and raise so that they are selectable
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#141414")
-              .style("stroke", "#141414")
+              .style("fill", "#28292D")
+              .style("stroke", "#28292D")
               .raise()
           // resize matrix cells associated with segment
           this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
@@ -2172,8 +2172,8 @@
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0.6)
-              .style("stroke", "#141414")
-              .style("fill", "#141414")
+              .style("stroke", "#28292D")
+              .style("fill", "#28292D")
               .style("stroke-width", 2)
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
@@ -2203,8 +2203,8 @@
           
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
-              .style("fill", "#141414")
-              .style("stroke", "#141414")
+              .style("fill", "#28292D")
+              .style("stroke", "#28292D")
               .raise()
 
           // hide tooltip
@@ -2220,8 +2220,8 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#141414")
-              .style("stroke", "#141414")
+              .style("fill", "#28292D")
+              .style("stroke", "#28292D")
               .style("stroke-width", 2)
               .style("opacity", 0)
               .raise()
@@ -2238,7 +2238,7 @@
               .style("stroke", "#285C70")
               .style("opacity", 1)
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
-              .style("stroke", "#141414")
+              .style("stroke", "#28292D")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -2340,14 +2340,12 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: auto ;
+    grid-template-columns: 30% 70%;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
     height: 90vh;
-    // max-height: 90%;
-    // width: 100%;
     min-width: 0;
     min-height: 0;
   }
@@ -2356,6 +2354,8 @@
     display: flex;
     min-width: 45vw;
     max-height: 90vh;
+    align-self: center;
+
   }
   #DRB_map_c2p2 {
     grid-area: map;

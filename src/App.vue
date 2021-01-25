@@ -258,7 +258,8 @@ h3{
   .map {
     min-width: 300px;
     max-width: 700px;
-    flex: 1 1 40%;
+    flex: 1 1 30%;
+    justify-self: center;
 
     @media screen and (max-width: 600px) {
         max-width: 300px;
@@ -272,18 +273,20 @@ h3{
 
   .matrix {
     min-width: 400px;
-    flex: 1 1 40%;
+    flex: 1 1 50%;
+    padding: 10px;
+    justify-self: stretch;
   }
 
 // Specific Design Elements for Charts and Maps
 
-.move-up {
-  margin-bottom: -100px;
+// .move-up {
+//   margin-bottom: -100px;
 
-}
+// }
 
 .viz-title-wrapper {
-  max-width: 400px;
+  max-width: 100%;
   z-index: 100;
 }
 
