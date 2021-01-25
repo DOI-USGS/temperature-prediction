@@ -3129,7 +3129,7 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = this.width*.1;
+                 var nudge_x = this.width*.05+margin*2;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
@@ -3214,12 +3214,12 @@
                  var nudge_y_rmse = this.height*.1;
 
                 var rmse_stroke = this.d3.scaleOrdinal()
-                  .domain(["100%","2%","0.1%"])
-                  .range([this.color_d100, this.color_d02, this.color_d001]);
+                  .domain(["100%","0.1%"])
+                  .range([this.color_d100,  this.color_d001]);
 
                   var rmse_fill = this.d3.scaleOrdinal()
-                  .domain(["100%","2%","0.1%"])
-                  .range([this.color_d100, this.color_d02, this.color_d001]);
+                  .domain(["100%","0.1%"])
+                  .range([this.color_d100,  this.color_d001]);
 
                 /// color legend for experiments
                if (this.step <= this.step_ann ) {
@@ -3275,9 +3275,6 @@
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", o_exp)
 
-                  this.d3.selectAll("g.legend-rmse:nth-child(4)")
-                  .style("opacity", o_exp)
-
 
           ////////////////
           // initiate force simulation
@@ -3291,7 +3288,7 @@
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.1;
+            var nudge_x = this.width*.05+50;
                  var nudge_y = this.height*.1;
 
             if (direction == "down"){
