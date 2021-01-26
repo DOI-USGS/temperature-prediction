@@ -207,7 +207,9 @@
           <p class="viz-title">
             <span class="yellow">Most Observed</span> Areas in Continental United States
           </p>
-          <p class="viz-subtitle">USGS, State, or Local agency stream temperature observations since 1985.</p>
+          <p class="viz-subtitle">
+            USGS, State, or Local agency stream temperature observations since 1985.
+          </p>
         </div>
       </div>
       <div
