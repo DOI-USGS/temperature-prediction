@@ -67,9 +67,8 @@
     >
       <img
         id="hex-map"
-        src="@/assets/usa_hex_map_80-01.png"
+        src="@/assets/temp_hex_map_mobile.png"
       >
-      <!-- need to add legend and recolor beeswarm to mirror?? -->
     </div>
     <div class="text-content">
       <p v-html="text.paragraph16" />
@@ -139,5 +138,7 @@
   }
   #hex-map {
     padding: 1em;
+    width: 80vw;
+    height: auto;
   }
 </style>

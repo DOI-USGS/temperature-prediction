@@ -2713,6 +2713,15 @@
             chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
             chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
+            label_o: 1, //error axis labels
+            label_o_rmse: 0, // rmse axis labels
+            o_pred: 1, //legend predicted
+            o_obs: 0, // legend observed
+            o_train: 0, // legend training data
+            o_exp: 0, // legend added experiments
+            o_arrow: 0,
+            o_ermse_title: 0,
+            model_current:  '',
 
             // beeswarm
             step_start: 13,
@@ -2742,14 +2751,14 @@
             current_flubber_id: null,
 
             step_error_exp: null, 
-          step_error_obs : null,
-          step_rmse : null,
-          step_ann: null,
-          step_ann_exp : null,
-          step_rnn: null,
-          step_rgcn : null,
-          step_rgcn_ptrn : null,
-          step_end : null,
+            step_error_obs: null,
+            step_rmse: null,
+            step_ann: null,
+            step_ann_exp : null,
+            step_rnn: null,
+            step_rgcn: null,
+            step_rgcn_ptrn: null,
+            step_end: null,
 
           }
         },
@@ -2798,7 +2807,7 @@
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
-          this.step_rnn = this.step_ann_exp + 3; // RNN with some flubber and narrative steps
+          this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
           this.step_end = this.step_rgcn_ptrn +2;
@@ -2849,7 +2858,9 @@
             this.chartState.aDecay = 0.1;
 
             // draw the chart
-            this.makeBeeswarm();
+            this.setChartState(); // pull fadein/out start state based on step
+            this.setDataVars(); // pull data for first draw
+            this.makeBeeswarm(); // build chart based on step
 
           },
           // resize to keep scroller accurate with window size changes
@@ -2986,6 +2997,214 @@
               //console.log("step has no flubber id")
             }
           },
+          setChartState() {
+            /////////////////////////
+          // define which labels and annotations are drawn initially based on scroll step
+          // setting opacity
+          switch(this.step) {
+            case this.step_error_exp:
+              this.label_o = 1; //error axis labels
+              this.label_o_rmse = 0; // rmse axis labels
+              this.o_pred = 1; //legend predicted
+              this.o_obs = 0; // legend observed
+              this.o_train = 0; // legend training data
+              this.o_exp = 0; // legend added experiments
+              this.o_arrow = 0;
+              this.o_rmse_title = 0;
+               break;
+            case this.step_error_obs:
+              //this.label_o = 1;
+              this.label_o_rmse = 0;
+              this.o_pred = 1;
+              this.o_obs = 1;
+              this.o_train = 0;
+              this.o_exp = 0;
+              this.o_arrow = 0;
+              this.o_rmse_title = 0;
+               break;
+            case this.step_rmse:
+              this.label_o = 0;
+              this.label_o_rmse = 1;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 0;
+              this.o_exp = 0;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            case this.step_ann:
+            case this.step_ann+1:
+            case this.step_ann+2:
+              this.label_o = 0;
+              this.label_o_rmse = 1;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 1;
+              this.o_exp = 0;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            case this.step_ann_exp:
+            case this.step_ann_exp+1:
+            case this.step_ann_exp+2:
+            case this.step_ann_exp+3:
+            case this.step_ann_exp+4:
+              this.label_o = 0;
+              this.label_o_rmse = 0;
+              this.o_pred =0;
+              this.o_obs = 0;
+              this.o_train = 1;
+              this.o_exp = 1;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            case this.step_rnn:
+            case this.step_rnn+1:
+            case this.step_rnn+2:
+              this.label_o = 0;
+              this.label_o_rmse = 1;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 1;
+              this.o_exp = 1;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            case this.step_rgcn:
+            case this.step_rgcn+1:
+            case this.step_rgcn+2:
+              this.label_o = 0;
+              this.label_o_rmse = 0;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 1;
+              this.o_exp = 1;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            case this.step_rgcn_ptrn:
+            case this.step_rgcn_ptrn+1:
+            case this.step_rgcn_ptrn+2:
+            case this.step_rgcn_ptrn+3:
+              this.label_o = 0;
+              this.label_o_rmse = 0;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 1;
+              this.o_exp = 1;
+              this.o_arrow = 0;
+              this.o_rmse_title = 1;
+              break;
+            default:
+              this.label_o = 0;
+              this.label_o_rmse = 0;
+              this.o_pred = 0;
+              this.o_obs = 0;
+              this.o_train = 0;
+              this.o_exp = 0;
+              this.o_arrow = 0;
+              this.o_rmse_title = 0;
+          }
+          },
+          setDataVars(){
+          // setting data variables
+          switch(this.step) {
+            case this.step_error_exp:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.error_exp;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '';
+              break;
+            case this.step_error_obs:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.error_obs;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '';
+              break;
+            case this.step_rmse:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.mid;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '';
+              break;
+            case this.step_ann:
+            case this.step_ann+1:
+            case this.step_ann+2:
+              this.chartState.dataset = this.rmse_ann;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.ANN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              this.model_current = ': ANN';
+              break;
+            case this.step_ann_exp:
+            case this.step_ann_exp+1:
+            case this.step_ann_exp+2:
+            case this.step_ann_exp+3:
+            case this.step_ann_exp+4:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.ANN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              this.model_current = ': ANN';
+              break;
+            case this.step_rnn:
+            case this.step_rnn+1:
+            case this.step_rnn+2:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RNN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              this.model_current = ': RNN';
+              break;
+            case this.step_rgcn:
+            case this.step_rgcn+1:
+            case this.step_rgcn+2:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RGCN;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              this.model_current = ': RGCN';
+              break;
+            case this.step_rgcn_ptrn:
+            case this.step_rgcn_ptrn+1:
+            case this.step_rgcn_ptrn+2:
+            case this.step_rgcn_ptrn+3:
+              this.chartState.dataset = this.rmse_exp;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.RGCN_ptrn;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 8;
+              this.chartState.domain_y = null;
+              this.model_current = ': PGDL';
+              break;
+            default:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.error;
+              this.chartState.var_x = this.chart_x.error;
+              this.chartState.var_y = this.chart_y.exp;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '';
+
+          }
+          },
           makeBeeswarm() {
           // define core chart elements that are constant and only need to be run this one time
           const self = this;
@@ -2997,7 +3216,6 @@
               .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
               .attr("height", "100%")
               .attr("width", "100%")
-
 
           // define where chart starts within svg
           this.svg
@@ -3017,21 +3235,14 @@
             .range([this.height,0])
             .domain([0,this.chartState.domain_y]);
 
-          /* // testing out texture fills
-            this.texture = textures
-              .lines()
-              .thicker()
-              .stroke("#E4695E");
-           this.svg.call(this.texture); // this is binding the background to the texture */
-
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d02","d001","obs","exp"])
-            .range([this.color_d100, this.color_d02, this.color_d001, "#171717", this.color_exp]);
+            .domain(["d100","d001","obs","exp"])
+            .range([this.color_d100, this.color_d001, "#171717", this.color_exp]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d02","d001","obs","exp"])
-            .range([this.color_d100, this.color_d02, this.color_d001, this.color_obs, this.color_exp]);
+            .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
           // generate axes
@@ -3065,21 +3276,8 @@
           .attr("stroke-dashoffset", this.height+margin)
           //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
-          // set initial opacity based on load/refresh step for annotaitons etc
-           if (this.step >= this.step_start && this.step <= this.step_error_obs ){
-             var label_o = 1;
-           } else {
-             var label_o = 0;
-           }
-
-           if (this.step >= this.step_rmse && this.step <= this.step_ann + 1 ){
-             var label_o_rmse = 1;
-           } else {
-             var label_o_rmse = 0;
-           }
-
            this.d3.selectAll("path.arrow")
-           .attr("opacity", label_o_rmse)
+           .attr("opacity", this.label_o_rmse)
 
           // text label for the x axis
           this.svg.append("text")             
@@ -3088,7 +3286,7 @@
               .text("Time")
               .style("fill", "white")
               .style("font-size", "30px")
-              .attr("opacity", label_o)
+              .attr("opacity", this.label_o)
               .classed("error", true)
               .classed("axis-label", true);
 
@@ -3101,7 +3299,7 @@
               .style("text-anchor", "middle")
               .text("Temperature")
               .style("fill", "white")
-              .attr("opacity", label_o)
+              .attr("opacity", this.label_o)
               .classed("error", true)
               .style("font-size", "30px")
               .classed("axis-label", true);    
@@ -3113,7 +3311,7 @@
               .text("accurate")
               .style("fill", "white")
               .style("font-size", "30px")
-              .attr("opacity", label_o_rmse)
+              .attr("opacity", this.label_o_rmse)
               .classed("rmse-label", true);
 
             this.svg.append("text")             
@@ -3122,7 +3320,7 @@
               .text("inaccurate")
               .style("fill", "white")
               .style("font-size", "30px")
-              .attr("opacity", label_o_rmse)
+              .attr("opacity", this.label_o_rmse)
               .classed("rmse-label", true);
 
 
@@ -3131,7 +3329,7 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = this.width*.1;
+                 var nudge_x = this.width*.05+margin*2;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
@@ -3142,22 +3340,6 @@
                   .domain(["predicted","observed"])
                   .range([this.color_exp,"#171717"]);
 
-            // set opacity to legend elements based on initial step
-            // scrolling function fades them in and out as appropriate
-            if (this.step < this.step_start ) {
-                var o_pred = 0;
-                var o_obs = 0;
-              } else if (this.step == this.step_error_exp) {
-                var o_pred = 1;
-                var o_obs = 0;
-              } else if (this.step == this.step_error_obs) {
-                var o_pred = 1;
-                var o_obs = 1;
-              }  else if (this.step >= this.step_ann) {
-                var o_pred = 0;
-                var o_obs = 0;
-              }
-
               legend_error.append("text")
                 .text("Temperature")
                 .attr("x", nudge_x-20)
@@ -3165,7 +3347,7 @@
                 .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
-                 .style("opacity", o_pred)
+                 .style("opacity", this.o_pred)
                  .classed("error_1" , true)
 
                 var legend = legend_error.selectAll(".legend")
@@ -3182,30 +3364,53 @@
                   .attr("r", this.radius)
                   .style("fill", error_fill)
                   .style("stroke", error_stroke)
-                  .style("opacity", o_pred)
+                  .style("opacity", this.o_pred)
 
                   legend.append("text")
                   .attr("x", "20px")
                   .attr("y", "5px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
+                  .style("font-size", "20px")
 
                    this.d3.select("g.legend:nth-child(3) text")
-                  .attr("opacity", o_pred)
+                  .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
                   this.d3.select("g.legend:nth-child(3) circle")
-                  .attr("opacity", o_pred)
+                  .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
 
                   this.d3.select("g.legend:nth-child(2) text")
-                  .attr("opacity", o_obs)
+                  .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
                   this.d3.select("g.legend:nth-child(2) circle")
-                  .attr("opacity", o_obs)
+                  .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
+
+                  // rmse updating conent label
+                  legend_error.append("text")
+                .text("Model RMSE")
+                .attr("x", nudge_x-20)
+                .attr("y", nudge_y)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","bold")
+                 .style("opacity", this.o_rmse_title)
+                 .classed("rmse-name" , true)
+
+              //updating label
+                 legend_error.append("text")
+                .text(this.model_current)
+                .attr("x", nudge_x+165)
+                .attr("y", nudge_y)
+                .style("fill", "white")
+                 .style("font-size", "30px")
+                 .style("font-weight","100")
+                 .style("opacity", this.o_rmse_title)
+                 .classed("rmse-name" , true)
 
           /// rmse legend
                   var legend_rmse = this.d3.select("#bees-legend")
@@ -3216,19 +3421,12 @@
                  var nudge_y_rmse = this.height*.1;
 
                 var rmse_stroke = this.d3.scaleOrdinal()
-                  .domain(["100%","2%","0.1%"])
-                  .range([this.color_d100, this.color_d02, this.color_d001]);
+                  .domain(["100%","0.1%"])
+                  .range([this.color_d100,  this.color_d001]);
 
                   var rmse_fill = this.d3.scaleOrdinal()
-                  .domain(["100%","2%","0.1%"])
-                  .range([this.color_d100, this.color_d02, this.color_d001]);
-
-                /// color legend for experiments
-               if (this.step <= this.step_ann ) {
-                 var o_train = 0;
-               } else {
-                 var o_train = 1;
-               }
+                  .domain(["100%","0.1%"])
+                  .range([this.color_d100,  this.color_d001]);
 
               legend_rmse.append("text")
                 .text("Training data provided")
@@ -3237,7 +3435,7 @@
                 .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
-                 .style("opacity", o_train)
+                 .style("opacity", this.o_train)
                  .classed("rmse-title", true)
 
                 var legend_r = legend_rmse.selectAll(".legend-rmse")
@@ -3254,31 +3452,19 @@
                   .attr("r", this.radius)
                   .style("fill", rmse_fill)
                   .style("stroke", rmse_stroke)
-                  //.style("opacity", o_train)
 
                   legend_r.append("text")
                   .attr("x", "20px")
                   .attr("y", "5px")
-                  //.attr("dy", ".35em")
                   .text(function(d) { return d; })
                   .style("fill", "white")
-                  //.style("opacity", o_train)
-
-                   /// color legend for experiments
-               if (this.step <= this.step_ann_exp ) {
-                 var o_exp = 0;
-               } else {
-                 var o_exp = 1;
-               }
+                  .style("font-size", "20px")
 
                   this.d3.selectAll("g.legend-rmse:nth-child(2)") //
-                  .style("opacity", o_train)
+                  .style("opacity", this.o_train)
 
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
-                  .style("opacity", o_exp)
-
-                  this.d3.selectAll("g.legend-rmse:nth-child(4)")
-                  .style("opacity", o_exp)
+                  .style("opacity", this.o_exp)
 
 
           ////////////////
@@ -3293,8 +3479,8 @@
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.1;
-                 var nudge_y = this.height*.1;
+            var nudge_x = this.width*.05+50*2;
+            var nudge_y = this.height*.1;
 
             if (direction == "down"){
                   this.d3.select("g.legend:nth-child(2) circle")
@@ -3329,7 +3515,6 @@
                   .duration(150)
                   .style("opacity", 0)
 
-              
             }
           },
           drawAxes(axes_in) {
@@ -3408,6 +3593,8 @@
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
+
+
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
@@ -3484,10 +3671,8 @@
            .restart()
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
-
           }
           },
-
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
             // needs to be modified to only run if the beeswarm data changes
@@ -3498,6 +3683,19 @@
             .attr('cy', function(d){return d.y})
 
         },
+        /* updateodelName(){
+                      //updating rmse model label
+            let legend_error = this.d3.select("#text..rmse-name")
+            .transition()
+            .duration(300)
+            .attr("opacity", 0)
+
+            legend_error
+            .transition()
+            .text(this.model_current)
+            .duration(300)
+
+        }, */
         // scrollama event handler functions
         // add class on enter, update charts based on step
         handleStepEnter(response) {
@@ -3508,45 +3706,16 @@
           console.log(response);
 
           ///////////
-          // assign dataset by step
-          // and grouping variable for color scale for respective df
-          if (this.step <= this.step_rmse){
-            //contains subset of d100 data with fake error data
-            this.chartState.dataset = this.error_data;
-            this.chartState.grouped = this.color_bees.error;
-            this.chartState.domain_y = 30;
-            this.chartState.domain_x = 30;
-          }
-          if (this.step >= this.step_ann && this.step <= this.step_ann_exp){
-            //contains only data for d100
-            this.chartState.dataset = this.rmse_ann;
-            this.chartState.grouped = this.color_bees.exp;
-            this.chartState.domain_y = null; // turn off yScale when force is used
-            this.chartState.domain_x = 10;
-          }
-          if (this.step >= this.step_ann_exp){
-            //contains data for 3 experiments 
-            this.chartState.dataset = this.rmse_exp;
-            this.chartState.grouped = this.color_bees.exp;
-            this.chartState.domain_y = null;
-            this.chartState.domain_x = 10;
-          }
-
-          ///////////
-          // assign chart axes and color scales
+          // assign force
 
           // error chart
           if (this.step <= this.step_error_exp) {
-            this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error_exp;
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
           }
            if (this.step === this.step_error_obs ) {
-            this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error_obs;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
@@ -3555,8 +3724,6 @@
 
           // push to overlap as single RMSE
           if (this.step === this.step_rmse) {
-            this.chartState.var_x = this.chart_x.mid;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
@@ -3568,8 +3735,6 @@
           // decrease alpha to reduce jitteriness
           // corresponding decrease in alphaDecay to allow "cool down" 
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-            this.chartState.var_x = this.chart_x.ANN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.3;
@@ -3577,8 +3742,6 @@
           }
           // RNN
           if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.var_x = this.chart_x.RNN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3586,8 +3749,6 @@
           }
           // RGCN
           if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.var_x = this.chart_x.RGCN;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3595,8 +3756,6 @@
           }
           // RGCN to end
           if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.var_x = this.chart_x.RGCN_ptrn;
-            this.chartState.var_y = this.chart_y.mid;
             this.chartState.strengthy = 0.2;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.2;
@@ -3608,6 +3767,8 @@
           // only redraw if the data or forces change
           //this.chartState.strengthy = .2;
           this.chartState.strengthx = 1;
+          this.setDataVars(); /// refresh data chart is based on
+
           if (this.step >= this.step_start ) {
             self.updateChart();
           }
@@ -3652,9 +3813,11 @@
              self.fadeOut(this.d3.selectAll(".error_2"), 500);
             //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), 500)
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann && response.direction == "down") {
             // half of rmse legend appears for beeswarm
@@ -3703,9 +3866,11 @@
             self.fadeIn(this.d3.selectAll(".error_1"), 500);
              self.fadeIn(this.d3.selectAll(".error_2"), 500);
             self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeOut(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
             self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
+            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
             self.fadeIn(this.d3.selectAll("path.arrow"), 500);
           } else if (this.step == this.step_ann && response.direction == "up") {
             // half of legend for beeswarm
@@ -3888,6 +4053,7 @@ figure.sticky.charts {
 }
 .arrow {
   fill: white;
+  opacity: 0;
 
 }
 
