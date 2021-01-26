@@ -193,7 +193,19 @@ h3{
   .box {
     background-color: $boxCharcoal;
     border-radius: 5px;
-    margin: 50px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+    @media screen and (max-width: 600px) {
+        margin: 10px;
+    } 
+  }
+
+  .box-matrix {
+    background-color: $boxCharcoal;
+    border-radius: 5px;
+    max-width: 95%;
+    margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
         margin: 10px;
@@ -256,8 +268,8 @@ h3{
   }
 
   .map {
-    min-width: 300px;
-    max-width: 700px;
+    min-width: 400px;
+    max-width: 600px;
     flex: 1 1 30%;
     justify-self: center;
 
@@ -273,6 +285,7 @@ h3{
 
   .matrix {
     min-width: 400px;
+    max-width: 700px;
     flex: 1 1 50%;
     padding: 10px;
     justify-self: stretch;

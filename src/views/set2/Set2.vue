@@ -107,7 +107,7 @@
     <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
-    <div class="box">
+    <div class="box-matrix">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
@@ -171,7 +171,7 @@
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
     </div>
-    <div class="box">
+    <div class="box-matrix">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
@@ -205,9 +205,9 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of Temperature Data across the Continental US
+            <span class="yellow">Most Observed</span> Areas in Continental United States
           </p>
-          <p class="viz-subtitle" />
+          <p class="viz-subtitle">USGS, State, or Local agency stream temperature observations since 1985.</p>
         </div>
       </div>
       <div
@@ -15282,7 +15282,7 @@
           </g>
           <g
             id="hex-legend"
-            transform="translate(110 29.7)"
+            transform="translate(0 29.7)"
           >
             <path
               d="M454.7 19.9l3.5 6.1h7.2l3.5-6.1-3.5-6.1h-7.2z"
@@ -15392,13 +15392,13 @@
               class="hex"
             />
             <text
-              transform="translate(200 -10)"
+              transform="translate(280 -10)"
               style="isolation:isolate"
               font-weight="550"
               fill="#ffffff"
-              font-size="1.5em"
+              font-size="1em"
             >
-              Water temperature observations
+              Total temperature observations
             </text>
             <text
               transform="translate(260 19.7)"
@@ -17567,15 +17567,12 @@
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
-    height: 90vh;
     min-width: 0;
     min-height: 0;
   }
   .mm-grid-item {
     padding: 0px;
     display: flex;
-    min-width: 45vw;
-    max-height: 90vh;
     align-self: center;
 
   }
@@ -17697,8 +17694,6 @@ $grayBlue: #4F5C67;
   line-height: 1em;
 }
 #hex-map {
-  padding: 4rem;
-  width: 80%;
   height: auto;
   max-height: 80vh;
 }
