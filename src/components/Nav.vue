@@ -1,7 +1,9 @@
 <template>
   <nav id="nav">
     <div>
-      <p class="chapter">Go to Chapter</p>
+      <p class="chapter">
+        Go to Chapter
+      </p>
       <router-link to="/">
         1. Importance
       </router-link>

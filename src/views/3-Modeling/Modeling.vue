@@ -8,9 +8,9 @@
         class="text-intro"
       >
         <div class="text-content page-title section-title-wrapper">
-           <p class="chapter">
-              Chapter 3
-            </p>
+          <p class="chapter">
+            Chapter 3
+          </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
         <div class="text-content">
@@ -2669,7 +2669,9 @@
               :key="model" 
               class="step"
             >
-              <p class="step-text">{{ model.method }}</p>
+              <p class="step-text">
+                {{ model.method }}
+              </p>
             </div>
           </div>
         </div>

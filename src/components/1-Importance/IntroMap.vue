@@ -14,7 +14,9 @@
     >
       <div class="text-content">
         <div class="viz-title-wrapper">
-          <p class="viz-title">The Delaware River Basin</p>
+          <p class="viz-title">
+            The Delaware River Basin
+          </p>
         </div>
       </div>  
       <div class="figure-content">
@@ -3664,7 +3666,6 @@
           </g>
         </svg>
       </div>
-     
     </div>
   </div>
 </template>
