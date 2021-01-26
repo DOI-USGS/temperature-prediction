@@ -3243,7 +3243,7 @@
             .range([this.color_d100, this.color_d001, "#171717", this.color_exp]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d02","d001","obs","exp"])
+            .domain(["d100","d001","obs","exp"]) // took out d002
             .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
