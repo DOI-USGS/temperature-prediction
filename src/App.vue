@@ -79,8 +79,8 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #232529; //#1E1F23 
+$boxCharcoal: #1E1F23; //#28292D
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -152,9 +152,9 @@ h3{
 }
 
 .overall-title {
-  padding-top: 20vh;
+  padding-top: 0vh;
   margin: 0 auto;
-  background: $footerBlue;
+  // background: $footerBlue;
   overflow-x: hidden;
   @media screen and (max-width: 600px) {
     padding: 0 20px 0 20px;
