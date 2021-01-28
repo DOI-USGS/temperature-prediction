@@ -280,41 +280,33 @@
         id="axis-titles"
         transform="translate(15 0)"
       >
+
         <g>
           <text
-            class="desc-text"
-            transform="translate(135 410)"
-          >Average<tspan
+            id="cool"
+            class="highlight-text"
+            transform="translate(230 320)"
+          >Coldest Reach,<tspan
             x="0"
             y="15"
-          >stream</tspan><tspan
+          >showing temperature </tspan><tspan
             x="0"
             y="30"
-          >temperature</tspan></text>
+          >drops after summertime</tspan><tspan
+            x="0"
+            y="45"
+          >reservoir releases.</tspan>
+          </text>
         </g>
         <g>
           <text
-            class="site-text"
-            transform="translate(210 340)"
-          >Temperatures in<tspan
+            id="warm"
+            class="highlight-text"
+            transform="translate(120 100)"
+          >Warmest river reach<tspan
             x="0"
             y="15"
-          >individual stream</tspan><tspan
-            x="0"
-            y="30"
-          >reaches</tspan></text>
-        </g>
-        <g>
-          <text
-            class="highlight-text"
-            transform="translate(230 280)"
-          >Coolest reach</text>
-        </g>
-        <g>
-          <text
-            class="highlight-text"
-            transform="translate(327 80)"
-          >Warmest reach</text>
+          >in the DRB</tspan></text>
         </g>
       </g>>
       <g
@@ -419,6 +411,21 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+
+// Old colors
 $backgroundCharcoal: #171717;
 $offWhite: rgb(241, 241, 241);
 $monotoneBlue1: #e9eced;
@@ -434,9 +441,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 .background-line {
     fill: none;
-    stroke: #88989f; //#828282
+    stroke: $grayBlue;
     stroke-width: 1px;
-    opacity: .05; //0.05
+    opacity: .1;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
@@ -474,9 +481,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 
 
-.cls-23 {
-  // stroke: #285C70; //monotoneBlue5 , darkest plasma blue: #17068B, lighter plasma blue: #3f2dc2
-  stroke: #285C70; // latest: #88989f  old: #828282
+.cls-23 { // cool reach
+  stroke: $mediumBlue; 
   stroke-width: 1px;
   opacity: 0.6; // 0.05
   stroke-linecap: round;
@@ -484,9 +490,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   stroke-miterlimit: 10;
 }
 
-.cls-24 {
-  // stroke: #4c656e; //goldenrod, plasma yellow: #EBF222
-  stroke: #285C70; // latest: #88989f  old: #828282
+.cls-24 { // warm reach
+  stroke: $plasmaYellow; 
   stroke-width: 1px;
   opacity: 0.6; // 0.05
   stroke-linecap: round;
@@ -494,8 +499,9 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   stroke-miterlimit: 10;
 }
 
-.cls-25 {
-  stroke: #c3cccf; //latest: #c3cccf  old: offWhite #ce4b75 #e0e0e0 peachy pink: #ce4b75 lightlight blue: #c3cccf
+.cls-25 { // average
+  stroke: $grayBlue; 
+  opacity: .1;
   stroke-width: 1px;
 }
 
@@ -511,10 +517,18 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   font-style: italic;
 }
 .highlight-text {
-  fill: #285C70;
+  fill: $plasmaPink;
   opacity: 0.6;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
+}
+
+#warm {
+  fill: $plasmaYellow;
+}
+
+#cool {
+  fill: $mediumBlue;
 }
 
 </style>
