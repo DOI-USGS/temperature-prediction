@@ -16153,7 +16153,7 @@
 
           // use forEach loop over self.segmentsWithData array IF ONLY ADDING SEGMENTS WITH DATA
           // (HERE ADDING ALL, SO USE FOR LOOP over self.segmentDict built from self.segments)
-          // (ACTUALLY, FOR M)
+          // (ACTUALLY, FOR MOUSEOVER NEED TO USE FOREACH, so iterating over list of segment ids)
           // self.segmentsWithData.forEach(function(segment_id) {
           self.segment_id_list.forEach(function(segment_id) {
           // let segment_id = null;
