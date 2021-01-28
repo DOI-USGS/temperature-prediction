@@ -2617,7 +2617,7 @@
           height="100%"
           xmlns="http://www.w3.org/2000/svg" 
         >
-          <g>
+          <!-- <g>
             <path
               class="arrow"
               d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"
@@ -2637,7 +2637,7 @@
               d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"
             />
           </g>
-
+ -->
 
         </svg>
       </div>
@@ -2757,6 +2757,16 @@
             step_rgcn: null,
             step_rgcn_ptrn: null,
             step_end: null,
+
+            time_fade: 500,
+            axis_label: null,
+            legend_predicted: null,
+            legend_observed: null,
+            axis_label_rmse: null,
+            legend_model: null,
+            legend_training:  null, 
+            legend_training_d100: null,
+            legend_training_d001: null,
 
           }
         },
@@ -3126,7 +3136,7 @@
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.error;
+              this.chartState.grouped = this.color_bees.exp;
               this.chartState.var_x = this.chart_x.mid;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 30;
@@ -3326,7 +3336,7 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = this.width*.05+margin*2;
+                 var nudge_x = this.width*.05+margin;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
@@ -3389,9 +3399,9 @@
 
                   // rmse updating conent label
                   legend_error.append("text")
-                .text("Model RMSE")
-                .attr("x", nudge_x-20)
-                .attr("y", nudge_y)
+                .text("Root mean square error (RMSE)")
+                .attr("x", nudge_x)
+                .attr("y", nudge_y+450)
                 .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
@@ -3401,8 +3411,8 @@
               //updating label
                  legend_error.append("text")
                 .text(this.model_current)
-                .attr("x", nudge_x+165)
-                .attr("y", nudge_y)
+                .attr("x", nudge_x+435)
+                .attr("y", nudge_y+450)
                 .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","100")
@@ -3476,7 +3486,7 @@
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.05+50*2;
+            var nudge_x = this.width*.05+50;
             var nudge_y = this.height*.1;
 
             if (direction == "down"){
@@ -3609,7 +3619,7 @@
         // attributes and positioning define the starting point
           chart.exit()
               .transition()
-                .duration(800)
+                .duration(600)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 //.attr("r", 0)
@@ -3670,6 +3680,9 @@
             // high velocity decay with low alpha decay so it cools more slowly
           }
           },
+          drawErrorDiff() {
+
+          },
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
             // needs to be modified to only run if the beeswarm data changes
@@ -3680,7 +3693,7 @@
             .attr('cy', function(d){return d.y})
 
         },
-        /* updateodelName(){
+        /* updateModelName(){
                       //updating rmse model label
             let legend_error = this.d3.select("#text..rmse-name")
             .transition()
@@ -3717,8 +3730,6 @@
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
           }
-
-
           // push to overlap as single RMSE
           if (this.step === this.step_rmse) {
             this.chartState.strengthy = 1;
@@ -3796,33 +3807,42 @@
           }
 
           // update axes and labels
+          this.time_fade = 500;
+          this.axis_label = this.d3.selectAll("text.axis-label");
+          this.legend_predicted = this.d3.selectAll(".error_1");
+          this.legend_observed = this.d3.selectAll(".error_2");
+          this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
+          this.legend_model = this.d3.selectAll("text.rmse-name");
+          this.legend_training = this.d3.selectAll("text.rmse-title");
+          this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
+          this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)");
+
           if (this.step == this.step_error_exp && response.direction == "down" ) {
             self.drawAxes("error");
-            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".error_1"), 500);
-            //self.fadeIn(this.d3.select("g.legend:nth-child(3) circle"), 500)
+            self.fadeIn(this.axis_label, this.time_fade);
+            self.fadeIn(this.legend_predicted, this.time_fade);
+            //self.fadeIn(this.d3.select("g.legend:nth-child(3) circle"), this.time_fade)
           }  else if (this.step == this.step_error_obs && response.direction == "down" ) {
             self.moveLegend("down");
           }  else if (this.step == this.step_rmse && response.direction == "down") {
             // rmse legend in and error legend out
-            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".error_1"), 500);
-             self.fadeOut(this.d3.selectAll(".error_2"), 500);
-            //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), 500)
-            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
+            self.fadeOut(this.axis_label, this.time_fade);
+            self.fadeOut(this.legend_predicted, this.time_fade);
+            self.fadeOut(this.legend_observed, this.time_fade);
+            //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), this.time_fade)
+            self.fadeIn(this.axis_label_rmse, this.time_fade);
+            self.fadeIn(this.legend_model, this.time_fade);
+            //self.fadeIn(this.d3.selectAll("path.arrow"), this.time_fade);
           }  else if (this.step == this.step_ann+1 && response.direction == "down") {
-            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
+            self.fadeOut(this.axis_label_rmse, this.time_fade);
+            //self.fadeOut(this.legend_model, this.time_fade);
+            //self.fadeOut(this.d3.selectAll("path.arrow"), this.time_fade);
           } else if (this.step == this.step_ann && response.direction == "down") {
             // half of rmse legend appears for beeswarm
-             self.fadeIn(this.d3.selectAll("text.rmse-title"), 500) 
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
+             self.fadeIn(this.legend_training, this.time_fade) 
+             self.fadeIn(this.legend_training_d100, this.time_fade)
           } else if (this.step == this.step_ann_exp && response.direction == "down") {
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
+             self.fadeIn(this.legend_training_d001, this.time_fade) 
           } 
             
             if (this.step == this.step_rmse && response.direction == "down") {
@@ -3852,30 +3872,29 @@
           if (this.step == this.step_error_exp && response.direction == "up") {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
-            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".error_1"), 500);
+            self.fadeOut(this.axis_label, this.time_fade);
+            self.fadeOut(this.legend_predicted, this.time_fade);
           }  else if (this.step == this.step_error_obs && response.direction == "up" ) {
             self.moveLegend("up");
-           self.fadeOut(this.d3.selectAll(".error_2"), 500);
+           self.fadeOut(this.legend_observed, this.time_fade);
           } else if (this.step == this.step_rmse && response.direction == "up") {
             self.drawAxes("rmse_up");
-            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".error_1"), 500);
-             self.fadeIn(this.d3.selectAll(".error_2"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
+            self.fadeIn(this.axis_label, this.time_fade);
+            self.fadeIn(this.legend_predicted, this.time_fade);
+             self.fadeIn(this.legend_observed, this.time_fade);
+            self.fadeOut(this.axis_label_rmse, this.time_fade);
+            self.fadeOut(this.legend_model, this.time_fade);
+            //self.fadeOut(this.d3.selectAll("path.arrow"), this.time_fade);
           } else if (this.step == this.step_ann+1 && response.direction == "up") {
-            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
+            self.fadeIn(this.axis_label_rmse, this.time_fade);
+            //self.fadeIn(this.legend_model, this.time_fade);
+            //self.fadeIn(this.d3.selectAll("path.arrow"), this.time_fade);
           } else if (this.step == this.step_ann && response.direction == "up") {
             // half of legend for beeswarm
-             self.fadeOut(this.d3.selectAll("text.rmse-title"), 500) 
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
+             self.fadeOut(this.legend_training, this.time_fade) 
+             self.fadeOut(this.legend_training_d100, this.time_fade)
           } else if (this.step == this.step_ann_exp && response.direction == "up") {
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
+             self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
         },
         
