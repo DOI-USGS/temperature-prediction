@@ -2874,13 +2874,11 @@
           resize () {
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
-/*             this.width = bounds.width
-            this.height = bounds.height
-            this.marginX = bounds.width * 0.1
-            this.marginY = bounds.height * 0.1 */
+            this.width_screen = bounds.width
+            //this.height = bounds.height
+            //this.marginX = bounds.width * 0.1
+            //this.marginY = bounds.height * 0.1 
             this.scroller.resize()
-            
-            console.log(bounds)
 
           },
           // set up flubber svg
@@ -3313,7 +3311,7 @@
 
               // text labels for the rmses
           this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
+              .attr("transform","translate(" + margin + " ," + (this.height + margin + 100) + ")")
               .style("text-anchor", "left")
               .text("accurate")
               .style("fill", "white")
@@ -3322,7 +3320,7 @@
               .classed("rmse-label", true);
 
             this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 100) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
               .style("fill", "white")
@@ -3336,7 +3334,7 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = this.width*.05+margin;
+                 var nudge_x = 150;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
@@ -3486,7 +3484,7 @@
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.05+50;
+            var nudge_x = 150;
             var nudge_y = this.height*.1;
 
             if (direction == "down"){
