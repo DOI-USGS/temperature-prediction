@@ -5,6 +5,7 @@
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
     <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
+    <Title />
     <Nav />
     <router-view
       v-if="!isInternetExplorer"
@@ -21,6 +22,8 @@
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
     import Nav from './components/Nav'
+    import Title from './components/Title'
+    import { isMobile } from 'mobile-device-detect';
 
     export default {
         name: 'App',
@@ -29,6 +32,7 @@
             HeaderUSWDSBanner,
             HeaderUSGS,
             Nav,
+            Title,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
             WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
@@ -38,6 +42,7 @@
         data() {
             return {
                 isInternetExplorer: false,
+                mobileView: isMobile
             }
         },
         computed: {
@@ -59,6 +64,13 @@
             handleResize() {
                 this.$store.commit('recordWindowWidth', window.innerWidth);
                 this.$store.commit('recordWindowHeight', window.innerHeight);
+            },
+            isMobile() {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                } else {
+                    return false
+                }
             }
         }
     }
@@ -67,77 +79,137 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #141414; //#171717
-$offWhite: rgb(241, 241, 241);
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+// Old colors
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
 $monotoneBlue5: #285C70; //#10313e
 $monotoneBlueTransparent: rgba(76,101,110, .6);
+$riverBlue: #6399ba;
 
 // Type
 body {
       margin: 0;
       padding: 0;
-      color: #9e9e9e; //$offWhite
+      color: $offWhite;
       background-color: $backgroundCharcoal;
       line-height: 1.5;
       font-size: 13pt;
       font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      font-weight: 400;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       width: 100%;
   }
+
+
 h1{
-  font-size: 3em;
-  font-weight: 100;
-  padding: 1em;
-  text-align: center;
-  color: $backgroundCharcoal; //$offWhite #FDAD32
+  font-size: 4em;
+  font-weight: 700;
+  text-align: left;
+  color: white;
   @media screen and (max-width: 600px) {
-    font-size: 2em;
+    font-size: 3em;
   }
+
 }
 
+
+
 h2{
-  font-size: 2em;
+  color: $mediumBlue;
+  font-weight: 700;
+  text-align: center;
+  font-size: 3em;
   margin-top: 5px;
-  font-weight: 200;
   line-height: 1.3;
   @media screen and (max-width: 600px) {
-    font-size: 1.2em;
+    font-size: 2em;
   }
 
 }
 h3{
-    font-size: 1.4em;
-    padding-top: .5em;
-    font-weight: 600;
-    @media screen and (max-width: 600px) {
-        font-size: 1em;
-    }
+  font-size: 2em;
+  padding-top: .5em;
+  font-weight: 300;
+  @media screen and (max-width: 600px) {
+      font-size: 1.4em;
+  }  
 }
 
-// .section-title-wrapper{
-//   padding: .5em 10px 0 10px;
-//   background-color: $monotoneBlue5;
-//   margin-top: 1em;
-// }
+.overall-title {
+  padding-top: 20vh;
+  margin: 0 auto;
+  background: $footerBlue;
+  overflow-x: hidden;
+  @media screen and (max-width: 600px) {
+    padding: 0 20px 0 20px;
+  }
+}
 
+.byline {
+  font-style: italic;
+  font-weight: 300;
+  font-size: .8em;
+  color: $offWhite; //#808080
+}
 
+.chapter {
+  text-align: center;
+  font-weight: 300;
+  font-size: .8em;
+  font-style: italic;
+}
 
+.subheader {
+
+}
   // General Layout  
 
   .text-content {
-    min-width: 375px;
+    min-width: 350px;
     max-width: 700px;
     margin: 0 auto;
     padding: 2em;   
     @media screen and (max-width: 600px) {
         padding: 10px;
     }  
+  }
+
+  .box {
+    background-color: $boxCharcoal;
+    border-radius: 5px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+    @media screen and (max-width: 600px) {
+        margin: 10px;
+    } 
+  }
+
+  .box-matrix {
+    background-color: $boxCharcoal;
+    border-radius: 5px;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+    @media screen and (max-width: 600px) {
+        margin: 10px;
+    } 
   }
 
   .flex-container {
@@ -158,8 +230,8 @@ h3{
     min-width: 400px;
     flex: 0 0 auto;
     align-self: center;
-   
   }
+
 
   @media (max-width: 600px) {
     .flex-container {
@@ -197,8 +269,9 @@ h3{
 
   .map {
     min-width: 400px;
-    max-width: 700px;
-    flex: 1 1 40%;
+    max-width: 600px;
+    flex: 1 1 30%;
+    justify-self: center;
 
     @media screen and (max-width: 600px) {
         max-width: 300px;
@@ -212,40 +285,39 @@ h3{
 
   .matrix {
     min-width: 400px;
-    flex: 1 1 40%;
+    max-width: 700px;
+    flex: 1 1 50%;
+    padding: 10px;
+    justify-self: stretch;
   }
 
 // Specific Design Elements for Charts and Maps
-.page-title {
-  color: $monotoneBlue5;
-  font-size: 1.5em;
-}
+
+// .move-up {
+//   margin-bottom: -100px;
+
+// }
 
 .viz-title-wrapper {
-  margin: auto;
-  width: 80%;
-  max-width: 600px;
-  padding: 10px 30px;
+  max-width: 100%;
   z-index: 100;
-  
-
 }
 
 .viz-title {
+  // box-shadow: -5px -5px $monotoneBlue5;
   font-size: 1.4em;
-  font-weight: 600;
-  text-align: center;
+  font-weight: 700;
   color: $offWhite;
-  box-shadow: -5px -5px $monotoneBlue5;
-  line-height: 1.3em;
-  padding-bottom: 0.8em;
+  margin-bottom: 0;
+
 }
+
 .viz-subtitle {
-  color: $monotoneBlue5; //$offWhite
-  font-style: italic;
+  color: $offWhite;
   font-size: .8em;
-  text-align: center;
+  text-align: left;
   font-weight: 100;
+  margin-bottom: 0;
 }
 
 .legend-text {
@@ -275,13 +347,17 @@ h3{
   font-weight:700;
   fill: white;
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $monotoneBlueTransparent 40%);
+  background: linear-gradient(180deg,rgba(255,255,255,0) 60%, $footerBlue 40%);
   line-height: 1.3em;
   padding: 0 5px;
 }
 
+.yellow {
+  color: $plasmaYellow;
+}
+
 .dashed-axis {
-  stroke: #4d4c4d;
+  stroke: $backgroundCharcoal;
   stroke-width: 3px;
   fill: none;
   stroke-miterlimit: 10;
@@ -289,7 +365,7 @@ h3{
 }
 
 .solid-axis {
-  stroke: #4d4c4d;
+  stroke: $boxCharcoal;
   stroke-width: 1px;
   fill: none;
   stroke-miterlimit: 10;
@@ -298,7 +374,7 @@ h3{
 .tick-marks {
   fill: none;
   stroke-miterlimit: 10;
-  stroke: #707070;
+  stroke: $boxCharcoal;
   stroke-width: 0.75px;
 }
 

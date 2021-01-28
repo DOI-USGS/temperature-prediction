@@ -5,10 +5,12 @@
     >
       <div
         id="intro-container"
-        class="text-content text-intro"
+        class="text-intro"
       >
-        <!-- h2>{{ sectionTitle }}</h2 -->
         <div class="text-content page-title section-title-wrapper">
+          <p class="chapter">
+            Chapter 3
+          </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
         <div class="text-content">
@@ -2667,7 +2669,9 @@
               :key="model" 
               class="step"
             >
-              {{ model.method }}
+              <p class="step-text">
+                {{ model.method }}
+              </p>
             </div>
           </div>
         </div>
@@ -2811,8 +2815,9 @@
           this.step_end = this.step_rgcn_ptrn +2;
 
         // colors for chart
-          this.color_d100 = '#3B14DD';
-          this.color_d001 = "#F1F326";
+          this.color_d100 = '#FAB62F';
+          this.color_d02 = "#BE3D7D";
+          this.color_d001 = "#62039A";
           this.color_obs = "#B666C6";  // #FDAD32 is the current yellow in flubber
           this.color_exp = "#B666C6";
 
@@ -2910,7 +2915,7 @@
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
-              let animationLength = 2400;
+              let animationLength = 900; // original was 2400
 
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
@@ -3238,7 +3243,7 @@
             .range([this.color_d100, this.color_d001, "#171717", this.color_exp]);
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d02","d001","obs","exp"])
+            .domain(["d100","d001","obs","exp"]) // took out d002
             .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
@@ -3426,7 +3431,7 @@
                   .range([this.color_d100,  this.color_d001]);
 
               legend_rmse.append("text")
-                .text("Training data")
+                .text("Training data provided")
                 .attr("x", nudge_x_rmse-20)
                 .attr("y", nudge_y_rmse)
                 .style("fill", "white")
@@ -3899,6 +3904,20 @@
 <style scoped lang="scss">
 
 // IMPORT COLORS
+$backgroundCharcoal: #1E1F23;
+$boxCharcoal: #28292D;
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #63B1E6;
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
+// Old colors
 $backgroundCharcoal: #171717;
 $offWhite: rgb(241, 241, 241);
 $monotoneBlue1: #e9eced;
@@ -3928,10 +3947,10 @@ article {
   height: 100vh;
   border: 1px;
 
-  p {
-  text-align: left;
-  padding: 1rem;
-  font-size: 1.5rem;
+  .step-text {
+    padding: 1em;
+    background-color: $boxCharcoal;
+    border-radius: 5px;
   }
 }
 
@@ -4031,7 +4050,6 @@ figure.sticky.charts {
 }
 .axis-label text {
   fill:white;
-    font-family: SegoeUI-Semibold, Segoe UI;
   font-weight: 300;
   font-size: 20px;
 }
