@@ -15800,7 +15800,7 @@
               .attr("class", "delaware_bay")
               .attr("d", self.map_path_c2)
           // append bay group to c2p1 map  (ONCE PER MAP)
-          self.map_c2p1.append("g").attr("class","c2p1")
+          self.map_c2p1.append("g").attr("class","c2p1 drb_bay")
             .append("use").attr("xlink:href","#drbBay")
           /////////////////////////
 
@@ -15824,7 +15824,7 @@
               // set stroke width so that polygons appear larger
               .style("stroke-width", 0.75)
           // append reservoir group to c2p1 map  (ONCE PER MAP)
-          self.map_c2p1.append("g").attr("class","c2p1")
+          self.map_c2p1.append("g").attr("class","c2p1 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
           ////////////////////////////////          
 
@@ -15832,12 +15832,17 @@
           // build array of all segment ids of segments (previously: that HAVE DATA)
           let i;
           for (i=0; i<self.segments.length; i++){
+            // If only building array of segments that have data:
             // let segment_obs_count = parseFloat(self.segments[i].properties.total_count);
             // if (segment_obs_count > 0) {
               // self.segmentsWithData.push(self.segments[i].properties.seg_id_nat);
             // }
+
+            // Otherwise, if building an array of all segment ids:
             self.segment_id_list.push(self.segments[i].properties.seg_id_nat);
           };
+
+          // If including all segments WITHOUT DATA in a single group:
           // // define group of segments WITHOUT DATA (ONCE PER CHAPTER)
           // let drb_segments = self.map_c2p1.append('defs').append("g").attr("id", "drbSegments");
           // // append paths of segments WITHOUT DATA to segment group  (ONCE PER CHAPTER)
@@ -15886,9 +15891,10 @@
           //   .style("stroke", "#285C70")
           //   .append("use").attr("xlink:href","#drbSegments")
           
-
+          // Otherwise, if defining separate group for EVERY segment
           //////////////////////////////
           // Define individual group <use> elements FOR EACH SEGMENT
+          // for loop works here b/c not assigning mouseover event using segment_id
           let segment_id = null;
           for (segment_id in self.segmentDict) {
           // self.segmentsWithData.forEach(function(segment_id) {
@@ -16111,53 +16117,23 @@
           let tooltip = self.map_c2p2.append("text")
               .attr("class", "c2p2 tooltip map")
 
-          // // add drb segments to map BACKGROUND - for selection only
-          self.segment_id_list.forEach(function(transparent_segment_id) {
-          // let transparent_segment_id = null;
-          // for (transparent_segment_id in self.segmentDict) {
-            let href_id = '#seg' + transparent_segment_id
-            self.map_c2p2.append("g")
-              // // assign classes for c2p2 interaction
-              .attr("class", function(d) {
-                let seg_class = 'c2p2 segs_transparent seg'
-                seg_class += transparent_segment_id
-                let key = null;
-                for (key in self.segmentDict[transparent_segment_id]['year_count']) {
-                  if (self.segmentDict[transparent_segment_id]['year_count'][key] > 0) {
-                    seg_class += " " + self.timestep_c2p2 + key
-                  }
-                }
-                return seg_class
-              })
-              // set opacity to 0 so segments aren't visible but can be selected
-              .style("opacity", 0)
-              // set stroke color to background color
-              .style("stroke", "#141414")
-              // set stroke width to be large for selection
-              .style("stroke-width", 6)
-              // trigger interactions
-              .on("mouseover", function(d) {
-                self.mouseoverSeg_c2p2(transparent_segment_id, tooltip);
-              })
-              .on("mousemove", function(d) {
-                // pass mouse coordinates
-                let mouse_x = loc_map_c2p2.x
-                let mouse_y = loc_map_c2p2.y
-                self.mousemoveSeg_c2p2(transparent_segment_id, tooltip, mouse_x, mouse_y); 
-              })
-              .on("mouseout", function(d) {
-                self.mouseoutSeg_c2p2(transparent_segment_id, tooltip);
-              })
-              .append("use").attr("xlink:href", href_id)
-          })
+          // // add delaware bay to map
+          // re-use bay group
+          self.map_c2p2.append("g").attr("class","c2p2 drb_bay")
+		        .append("use").attr("xlink:href","#drbBay")
 
-          // use forEach loop over self.segmentsWithData array IF ONLY ADDING SEGMENTS WITH DATA
-          // (HERE ADDING ALL, SO USE FOR LOOP over self.segmentDict built from self.segments)
-          // (ACTUALLY, FOR MOUSEOVER NEED TO USE FOREACH, so iterating over list of segment ids)
+          // // add drb reservoirs to map
+          // re-use reservoirs group
+          self.map_c2p2.append("g").attr("class","c2p2 drb_reservoirs")
+		        .append("use").attr("xlink:href","#drbReservoirs")
+
+          // // use forEach loop over self.segmentsWithData array IF ONLY ADDING SEGMENTS WITH DATA
           // self.segmentsWithData.forEach(function(segment_id) {
-          self.segment_id_list.forEach(function(segment_id) {
+          // // If adding all segments, WITHOUT MOUSEOVER, USE FOR LOOP over self.segmentDict built from self.segments)
           // let segment_id = null;
           // for (segment_id in self.segmentDict) {
+          // // If adding all segments, AND ADDING MOUSEOVER, use forEach to iterate over list of segment ids         
+          self.segment_id_list.forEach(function(segment_id) {
             let href_id = '#seg' + segment_id
             self.map_c2p2.append("g")
               .attr("class", function(d) {
@@ -16196,145 +16172,43 @@
               .append("use").attr("xlink:href", href_id)
           })
 
-          // // add drb segments to map BACKGROUND - for selection only
-          // let drb_segments_transparent = self.map_c2p2.selectAll(".segs_transparent")
-          //     // bind segments to each element to be created
-          //     .data(self.segments)
-          //     // create an element for each datum
-          //     .enter()
-          //     // append each element to the svg as a path element
-          //     .append("path")
-          //     // assign class for styling
-          //     .attr("class", function(d) {
-          //       let transparent_seg_class = 'c2p2 segs_transparent'
-          //       let key = null;
-          //       for (key in d.properties.year_count) {
-          //         if (d.properties.year_count[key] > 0) {
-          //           transparent_seg_class += " " + self.timestep_c2p2 + key
-          //         }
-          //       }
-          //       return transparent_seg_class
-          //     })
-          //     // project each element
-          //     .attr("d", self.map_path_c2)
-          //     // set stroke width to be large for selection
-          //     .style("stroke-width", 6)
-          //     // set stroke to background color
-          //     .style("stroke", "#141414")
-          //     // no fill
-          //     .style("fill", "None")
-          //     // set opacity to 0 so segments aren't visible but can be selected
-          //     .style("opacity", 0)
-          //     // trigger interactions
-          //     .on("mouseover", function(d) {
-          //       self.mouseoverSeg_c2p2(d, tooltip);
-          //     })
-          //     .on("mousemove", function(d) {
-          //       // pass mouse coordinates
-          //       let mouse_x = loc_map_c2p2.x
-          //       let mouse_y = loc_map_c2p2.y
-          //       self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y); 
-          //     })
-          //     .on("mouseout", function(d) {
-          //       self.mouseoutSeg_c2p2(d, tooltip);
-          //     });
-
-          // re-use bay group
-          self.map_c2p2.append("g").attr("class","c2p2")
-		        .append("use").attr("xlink:href","#drbBay")
-
-          // // add delaware bay to map
-          // let drb_bay = self.map_c2p2.append("path")
-          //     // bind data to element
-          //     .datum(self.bay)
-          //     // assign class for styling
-          //     .attr("class", "c2p2 delaware_bay")
-          //     // project element
-          //     .attr("d", self.map_path_c2);
-
-          // re-use reservoirs group
-          self.map_c2p2.append("g").attr("class","c2p2")
-		        .append("use").attr("xlink:href","#drbReservoirs")
-
-          // // add drb reservoirs to map
-          // let drb_reservoirs = self.map_c2p2.selectAll(".reservoirs")
-          //     // bind polygons to each element to be created
-          //     .data(self.reservoirs)
-          //     // create an element for each datum
-          //     .enter()
-          //     // append each element to the svg as a path element
-          //     .append("path")
-          //     // project polygons
-          //     .attr("d", self.map_path_c2)
-          //     // assign class for styling
-          //     .attr("class", function(d){
-          //       return "c2p2 reservoirs res_id" + d.properties.GRAND_ID
-          //     })
-          //     // set stroke width so that polygons appear larger
-          //     .style("stroke-width", 0.75)
-
-          // // re-use segments group
-          // self.map_c2p2.append("g").attr("class","c2p2")
-          //   .style("stroke", "#285C70")          
-          //   // // trigger interactions
-          //   // .on("mouseover", function(d) {
-          //   //   self.mouseoverSeg_c2p2(d, tooltip);
-          //   // })
-          //   // .on("mousemove", function(d) {
-          //   //   // pass mouse coordinates
-          //   //   let mouse_x = loc_map_c2p2.x
-          //   //   let mouse_y = loc_map_c2p2.y
-          //   //   self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
-          //   // })
-          //   // .on("mouseout", function(d) {
-          //   //   self.mouseoutSeg_c2p2(d, tooltip);
-          //   // })
-          //   .append("use").attr("xlink:href","#drbSegments");
-		        
-
-          // // add drb segments to map
-          // let drb_segments = self.map_c2p2.selectAll(".river_segments")
-          //     // bind segments to each element to be created
-          //     .data(self.segments)
-          //     // create an element for each datum
-          //     .enter()
-          //     // append each element to the svg as a path element
-          //     .append("path")
-          //     // assign class for styling - based on segment id
-          //     // and based on years in which each segment has data
-          //     .attr("class", function(d) {
-          //       let seg_class = 'c2p2 river_segments seg'
-          //       seg_class += d.properties.seg_id_nat
-          //       let key = null;
-          //       for (key in d.properties.year_count) {
-          //         if (d.properties.year_count[key] > 0) {
-          //           seg_class += " " + self.timestep_c2p2 + key
-          //         }
-          //       }
-          //       return seg_class
-          //     })
-          //     // project segments
-          //     .attr("d", self.map_path_c2)
-          //     // add stroke width based on widthScale function
-          //     .style("stroke-width", function(d){
-          //       let value = d.properties['avg_ann_flow'];
-          //       return self.widthScale_c2(value);
-          //     })
-          //     // set fill to none
-          //     .style("fill", "none")
-          //     // trigger interactions
-          //     .on("mouseover", function(d) {
-          //       self.mouseoverSeg_c2p2(d, tooltip);
-          //     })
-          //     .on("mousemove", function(d) {
-          //       // pass mouse coordinates
-          //       let mouse_x = loc_map_c2p2.x
-          //       let mouse_y = loc_map_c2p2.y
-          //       self.mousemoveSeg_c2p2(d, tooltip, mouse_x, mouse_y);
-          //     })
-          //     .on("mouseout", function(d) {
-          //       self.mouseoutSeg_c2p2(d, tooltip);
-          //     });
+          // // add drb segments as TRANSPARENT wide segments - for selection only
+          self.segment_id_list.forEach(function(transparent_segment_id) {
+            let href_id = '#seg' + transparent_segment_id
+            self.map_c2p2.append("g")
+              // // assign classes for c2p2 interaction
+              .attr("class", function(d) {
+                let seg_class = 'c2p2 segs_transparent seg'
+                seg_class += transparent_segment_id
+                let key = null;
+                for (key in self.segmentDict[transparent_segment_id]['year_count']) {
+                  if (self.segmentDict[transparent_segment_id]['year_count'][key] > 0) {
+                    seg_class += " " + self.timestep_c2p2 + key
+                  }
+                }
+                return seg_class
+              })
+              // set opacity to 0 so segments aren't visible but can be selected
+              .style("opacity", 0)
+              // set stroke color to background color
+              .style("stroke", "#141414")
+              // set stroke width to be large for selection
+              .style("stroke-width", 6)
+              // trigger interactions
+              .on("mouseover", function(d) {
+                self.mouseoverSeg_c2p2(transparent_segment_id, tooltip);
+              })
+              .on("mousemove", function(d) {
+                // pass mouse coordinates
+                let mouse_x = loc_map_c2p2.x
+                let mouse_y = loc_map_c2p2.y
+                self.mousemoveSeg_c2p2(transparent_segment_id, tooltip, mouse_x, mouse_y); 
+              })
+              .on("mouseout", function(d) {
+                self.mouseoutSeg_c2p2(transparent_segment_id, tooltip);
+              })
+              .append("use").attr("xlink:href", href_id)
+          })
 
           // add scale bar
           self.map_c2p2.append("g").call(self.scaleBarTop_c2)
@@ -17232,7 +17106,7 @@
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id)
-              .attr("filter", "url(#shadow1)") 
+              // .attr("filter", "url(#shadow1)") 
               .style("stroke", "#ffffff")
               .style("opacity", 1)
               .raise()
@@ -17277,10 +17151,14 @@
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
-              .attr("filter","None")
+              // .attr("filter","None")
               .style("stroke", "#285C70")
               .style("opacity", 1)
               .lower()
+          // select mouseovered segment and set to white with a shadow
+          // and raise segment
+          this.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
+              .raise()
           // // reset filter on background rectangle and lower
           // this.d3.selectAll(".c2p2.matrixBkgdRect")
           //     .attr("filter", "url(#shadow2)")
@@ -17743,7 +17621,7 @@
   stroke: inherit;
   stroke-width: inherit;
   // stroke: #285C70;// original was #6399ba;
-  // stroke-linecap: round;
+  stroke-linecap: round;
 }
 
 .reservoirs {
