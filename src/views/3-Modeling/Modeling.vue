@@ -3128,7 +3128,7 @@
               this.model_current = '';
               this.chartState.axis_x = 0; // x end for axis
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = 0;
+              this.chartState.axis_x_on_y = this.height;
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3141,6 +3141,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = 0;
+              this.chartState.axis_x_on_y = this.height;
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
@@ -3237,7 +3238,7 @@
               this.model_current = '';
               this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
               this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = this.height;
 
           }
           },
@@ -3532,17 +3533,12 @@
           transitionAxes(element, end) {
             const self = this;
             let time_slide = 500;
-            this.yAxis
+            element
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
               .style("stroke-dashoffset", end)
 
-            this.xAxis
-              .transition()
-              .duration(time_slide)
-              .ease(this.d3.easeCircle)
-              .style("stroke-dashoffset", end)
           },
           moveLegend(direction) {
               const self = this;
@@ -3597,12 +3593,13 @@
                 .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
           },
           drawAxes(axes_in) {
+            const self = this;
             // controls axis aniamtions between error chart and beeswarm
             let time_slide = 500;
             let margin = 50;
 
             if (axes_in === "error") {
-            this.yAxis
+             this.yAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
