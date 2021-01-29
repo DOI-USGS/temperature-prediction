@@ -2724,6 +2724,7 @@
             o_arrow: 0,
             o_ermse_title: 0,
             model_current:  '',
+            obs_pos: 0,
 
             // beeswarm
             step_start: 13,
@@ -3018,11 +3019,12 @@
               this.o_obs = 0; // legend observed
               this.o_train = 0; // legend training data
               this.o_exp = 0; // legend added experiments
-              this.o_arrow = 0;
-              this.o_rmse_title = 0;
+              this.o_arrow = 0; // rmse arrow legend
+              this.o_rmse_title = 0; // rmse model naming
+              this.obs_pos = 0; // 
                break;
             case this.step_error_obs:
-              //this.label_o = 1;
+              this.label_o = 1;
               this.label_o_rmse = 0;
               this.o_pred = 1;
               this.o_obs = 1;
@@ -3030,6 +3032,7 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 0;
+              this.obs_pos = 30;
                break;
             case this.step_rmse:
               this.label_o = 0;
@@ -3040,6 +3043,7 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3052,6 +3056,7 @@
               this.o_exp = 0;
               this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3066,6 +3071,7 @@
               this.o_exp = 1;
               this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3078,6 +3084,7 @@
               this.o_exp = 1;
               this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3090,6 +3097,7 @@
               this.o_exp = 1;
               this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3103,6 +3111,7 @@
               this.o_exp = 1;
               this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             default:
               this.label_o = 0;
@@ -3113,6 +3122,7 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 0;
+              this.obs_pos = 0;
           }
           },
           setDataVars(){
@@ -3301,14 +3311,14 @@
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#4f4f4f")
-          //style('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
+          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
          this.yAxis
           .style("stroke-width", "3px")
           .style("stroke-dasharray", this.height+margin)
           .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#4f4f4f")
-          //style('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
+          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
           /// define arrow head for rmse label
         this.svg.append("svg:defs").append("svg:marker")
@@ -3330,7 +3340,7 @@
             .attr("x2", this.width)
             .attr("y2", (this.height-50))
             .attr("stroke-width", 2)
-            .attr("stroke", "#4f4f4f")// not the right grey color
+            .attr("stroke", "#4f4f4f")// not the right grey color.........................
             .attr("stroke-dasharray", "5px")
             .attr("marker-end", "url(#triangle)")
             .classed("arrow", true)
@@ -3356,7 +3366,6 @@
               .classed("rmse-label", true);
 
         // if refreshed on any of the error chart views, do the line drawing animation to put it on the page
-        // if entry ste is after this.step_rmse, draw y axis
         let error_steps = [this.step_error_exp, this.step_error_obs];
         if (error_steps.indexOf(this.step) !== -1) {
              self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
@@ -3396,7 +3405,6 @@
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
-
             ////////////////////////////// colors + legends
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
@@ -3424,6 +3432,7 @@
                  .style("opacity", this.o_pred)
                  .classed("error_1" , true)
 
+                // set positioning for error legend
                 var legend = legend_error.selectAll(".legend")
                   .data(error_fill.domain().slice().reverse())
                   .enter().append("g")
@@ -3464,32 +3473,32 @@
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
-                  // rmse updating conent label
+                  // rmse updating model label
                   legend_error.append("text")
-                .text("Root mean square error (RMSE)")
-                .attr("x", 50)
-                .attr("y", nudge_y+450)
-                .style("fill", "white")
-                 .style("font-size", "30px")
-                 .attr("line-height", "30px")
-                 .style("font-weight","bold")
-                 .style("opacity", this.o_rmse_title)
-                 .classed("rmse-name" , true)
+                  .text("Root mean square error (RMSE)")
+                  .attr("x", 50)
+                  .attr("y", nudge_y+450)
+                  .style("fill", "white")
+                  .style("font-size", "30px")
+                  .attr("line-height", "30px")
+                  .style("font-weight","bold")
+                  .style("opacity", this.o_rmse_title)
+                  .classed("rmse-name" , true)
 
               //updating label
                  legend_error.append("text")
-                .text(this.model_current)
-                .attr("x", 510)
-                .attr("y", nudge_y+450)
-                .style("fill", "white")
-                 .style("font-size", "30px")
-                 .attr("line-height", "30px")
-                 .style("font-weight","100")
-                 .style("opacity", this.o_rmse_title)
-                 .classed("rmse-name" , true)
-                 .classed("model" , true)
+                  .text(this.model_current)
+                  .attr("x", 510)
+                  .attr("y", nudge_y+450)
+                  .style("fill", "white")
+                  .style("font-size", "30px")
+                  .attr("line-height", "30px")
+                  .style("font-weight","100")
+                  .style("opacity", this.o_rmse_title)
+                  .classed("rmse-name" , true)
+                  .classed("model" , true)
 
-          /// rmse legend
+             /// rmse legend
                   var legend_rmse = this.d3.select("#bees-legend")
                     .append("g").classed("rmse-legend", true)
                     .classed("rmse", true)
@@ -3506,7 +3515,7 @@
                   .range([this.color_d100,  this.color_d001]);
 
               legend_rmse.append("text")
-                .text("Training data used")
+                .text("Training data")
                 .attr("x", nudge_x_rmse-20)
                 .attr("y", nudge_y_rmse)
                 .style("fill", "white")
@@ -3543,7 +3552,7 @@
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
           
-          if (this.step >= this.step_error)
+          if (this.step >= this.step_error_exp)
 
           ////////////////
           // initiate force simulation
@@ -3551,6 +3560,18 @@
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+
+          // define for updating axes and labels
+            this.time_fade = 500;
+            this.axis_label = this.d3.selectAll("text.axis-label");
+            this.legend_predicted = this.d3.selectAll(".error_1");
+            this.legend_observed = this.d3.selectAll(".error_2");
+            this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
+            this.axis_arrow = this.d3.select("line.arrow")
+            this.legend_model = this.d3.selectAll("text.rmse-name");
+            this.legend_training = this.d3.selectAll("text.rmse-title");
+            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
+            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)");
 
           },
           transitionAxes(element, end) {
@@ -3665,8 +3686,6 @@
                 .duration(time_slide)
                 .style("opacity", 1)
             } 
-            // what if page is loaded after step_rmse? then the line is never drawn
-            //draw it no matter what, but with opacity to 0 if it's a later step
           },
           updateChart() {
             //controls decision making for the error >> beeswarm chart
@@ -3774,8 +3793,6 @@
 
          // array of transition steps
           var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-         // console.log(step_transitions);
-         // console.log(step_transitions.indexOf(this.step));
 
           // tick simulation only if the active step has a chart transition
           if (step_transitions.indexOf(this.step) !== -1){
@@ -3902,18 +3919,6 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // update axes and labels
-          this.time_fade = 500;
-          this.axis_label = this.d3.selectAll("text.axis-label");
-          this.legend_predicted = this.d3.selectAll(".error_1");
-          this.legend_observed = this.d3.selectAll(".error_2");
-          this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
-           this.axis_arrow = this.d3.select("line.arrow")
-          this.legend_model = this.d3.selectAll("text.rmse-name");
-          this.legend_training = this.d3.selectAll("text.rmse-title");
-          this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
-          this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)");
-
         // updates to go with downscroll
           if (response.direction == "down"){
             if (this.step == this.step_error_exp) {
@@ -3962,17 +3967,6 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // update axes and labels
-          this.time_fade = 500;
-          this.axis_label = this.d3.selectAll("text.axis-label");
-          this.legend_predicted = this.d3.selectAll(".error_1");
-          this.legend_observed = this.d3.selectAll(".error_2");
-          this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
-          this.axis_arrow = this.d3.select("line.arrow")
-          this.legend_model = this.d3.selectAll("text.rmse-name");
-          this.legend_training = this.d3.selectAll("text.rmse-title");
-          this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
-          this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)");
 
         // updates to go with upscroll
         if (response.direction == "up") {
