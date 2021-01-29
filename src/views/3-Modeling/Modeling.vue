@@ -3126,6 +3126,8 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = 0; // x end for axis
+              this.chartState.axis_y = 0;
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3135,6 +3137,8 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
@@ -3144,6 +3148,8 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3155,6 +3161,8 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3168,6 +3176,8 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3179,6 +3189,8 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN + time';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3190,6 +3202,8 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN + time + space';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3201,7 +3215,9 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
-              this.model_current = ': ANN + time + knowledge';
+              this.model_current = ': ANN + time + space + knowledge';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3211,6 +3227,8 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
+              this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
 
           }
           },
@@ -3271,22 +3289,36 @@
             .attr("class", "x-axis")
             .call(xGen);
 
-        // style modifications and set up line drawing animation
-          this.xAxis
+        // style modifications and set up axis drawing animation
+         this.xAxis
           .attr("transform", "translate(" + -margin + "," + this.height + ")")
-          .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.width+margin)
-          .attr("stroke-dashoffset", this.width+margin)
-          //.attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
+          .style("stroke-width", "2px")
+          .style("stroke-dasharray", this.width+margin)
+          .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
+          .style("color", "#F1F1F1")
+          //style('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
 
-          this.yAxis
-          .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.height+margin)
-          .attr("stroke-dashoffset", this.height+margin)
-          //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
+         this.yAxis
+          .style("stroke-width", "2px")
+          .style("stroke-dasharray", this.height+margin)
+          .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
+          .style("color", "#F1F1F1")
+          //style('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
-           this.d3.selectAll("path.arrow")
-           .attr("opacity", this.label_o_rmse)
+        // if refreshed on any of the error chart views, do the line drawing animation to put it on the page
+        let error_steps = [this.step_error_exp, this.step_error_obs];
+        if (error_steps.indexOf(this.step) !== -1) {
+             self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+             self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
+
+        // if starts on any rmse steps, draw the rmse axis only
+        } else if (this.step >= this.step_rmse) {
+           this.yAxis 
+            .style("opacity", 0)
+            
+          self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+        }
+
 
           // text label for the x axis
           this.svg.append("text")             
@@ -3477,6 +3509,8 @@
 
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
+          
+          if (this.step >= this.step_error)
 
           ////////////////
           // initiate force simulation
@@ -3485,6 +3519,21 @@
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
+          },
+          transitionAxes(element, end) {
+            const self = this;
+            let time_slide = 500;
+            this.yAxis
+              .transition()
+              .duration(time_slide)
+              .ease(this.d3.easeCircle)
+              .style("stroke-dashoffset", end)
+
+            this.xAxis
+              .transition()
+              .duration(time_slide)
+              .ease(this.d3.easeCircle)
+              .style("stroke-dashoffset", end)
           },
           moveLegend(direction) {
               const self = this;
@@ -3538,26 +3587,26 @@
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", 0)
+              .style("stroke-dashoffset", 0)
 
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", 0)
+              .style("stroke-dashoffset", 0)
 
             } else if (axes_in === "error_up") {
             this.yAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.height+margin)
+              .style("stroke-dashoffset", this.height+margin)
 
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.width+margin)
+              .style("stroke-dashoffset", this.width+margin)
 
             } else if (axes_in === "rmse"){
               // move x-axis up to center line
@@ -3568,8 +3617,9 @@
                 .attr("transform", "translate(" + -margin + "," + (this.height/2-40) + ")")
 
                 this.yAxis
-                .transition(time_slide)
-                .attr("opacity", 0)
+                .transition()
+                .duration(time_slide)
+                .style("opacity", 0)
 
             } else if (axes_in === "rmse_up"){
               // move x-axis down to bottom
@@ -3581,8 +3631,9 @@
                 .attr("transform", "translate(" + -margin + "," + this.height + ")")
 
                 this.yAxis
-                .transition(time_slide)
-                .attr("opacity", 1)
+                .transition()
+                .duration(time_slide)
+                .style("opacity", 1)
             } 
           },
           updateChart() {
