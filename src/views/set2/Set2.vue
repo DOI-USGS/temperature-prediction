@@ -109,9 +109,10 @@
         class="matrix mm-grid-item"
       >
         <svg class="c2p2 matrix_c2p2 matrix">
-          <g transform="translate(35,50) scale(0.9, 0.9)">
+          <!--  transform="translate(35,50) scale(0.9, 0.9)" -->
+          <svg class="dummy_matrix">
             <DummyMatrix />
-          </g>
+          </svg>
         </svg>
       </div>
       <!-- class="figure" -->
@@ -16226,6 +16227,10 @@
           
           // set viewBox for existing svg
           let svgMatrix = self.d3.select(".matrix_c2p2")
+              .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
+                (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
+
+          let dummyMatrix = self.d3.select(".dummy_matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
 
