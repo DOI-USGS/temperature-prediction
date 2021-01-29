@@ -2557,11 +2557,11 @@
       <g id="Descriptor_text">
         <text
           class="viz-comment"
-          transform="translate(134.3 141.4)"
+          transform="translate(134.3 139.4)"
         >Each cell for each reach is color-coded by</text>
         <text
           class="viz-emph"
-          transform="translate(134.3 180.4)"
+          transform="translate(134.3 179.4)"
         >how often that reach was observed,</text>
         <text
           class="viz-comment"
@@ -2581,10 +2581,10 @@
           >about stream temperature</tspan></text>
         <text
           class="viz-comment"
-          transform="translate(250 850.2)"
+          transform="translate(240 855.2)"
         >If a reach is not observed at all<tspan
           x="65"
-          y="42"
+          y="40"
         >that year, the cell is dark.</tspan></text>
       </g>
 
@@ -2600,10 +2600,22 @@ export default {
 
 <style lang="scss" scoped>
 
-$backgroundCharcoal: #171717;
+// IMPORT COLORS
+$backgroundCharcoal: #202226; //#1E1F23 #26282b 
+$boxCharcoal: #171717; //#28292D #1a1b1f
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
 
 .background{
-  fill: $backgroundCharcoal;
+  fill: $boxCharcoal;
 }
 
 #matrix-color-view {
@@ -2767,7 +2779,7 @@ $backgroundCharcoal: #171717;
       }
 
       .cls-44, .cls-81 {
-        fill: #7d7d7d;
+        fill: $grayBlue; //#7d7d7d
       }
 
       .cls-37, .cls-38, .cls-39, .cls-40, .cls-41, .cls-42 {
@@ -2940,7 +2952,7 @@ $backgroundCharcoal: #171717;
 
       .cls-102, .cls-80 {
         fill: none;
-        stroke: #7d7d7d;
+        stroke: $grayBlue; //#7d7d7d
         stroke-miterlimit: 10;
         
       }

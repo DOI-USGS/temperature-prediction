@@ -3745,7 +3745,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
       stroke-linejoin: round;
       stroke-linecap: round;
       /* stroke: #184654; */
-      stroke: #556c80;
+      stroke: #61788c; //#556c80
       stroke-width: .4px;
     }
 

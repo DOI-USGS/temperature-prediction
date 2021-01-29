@@ -24,15 +24,15 @@
     </div>
     <div class="box">
       <div class="text-content move-up">
-          <div class="viz-title-wrapper">
-            <p class="viz-title">
-              <span class="yellow">Number of Temperature Measurements</span> by Year
-            </p>
-            <p class="viz-subtitle">
-              Data from USGS streamgages or other state/local agencies.
-            </p>
-          </div>
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            <span class="yellow">Number of Temperature Measurements</span> by Year
+          </p>
+          <p class="viz-subtitle">
+            Data from USGS streamgages or other state/local agencies.
+          </p>
         </div>
+      </div>
       <MonitoringBarChart />
     </div>
     <div class="text-content">
@@ -49,7 +49,17 @@
       <p v-html="text.paragraph6" />
       <p v-html="text.tiptextMobile" />
     </div>
-    <div class = "box">
+    <div class="box">
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            <span class="yellow">40 Years</span> of Temperature Data
+          </p>
+          <p class="viz-subtitle">
+            Every reach with data in each of the last 40 years.
+          </p>
+        </div>
+      </div>
       <MonitoringMap2 />
     </div>
     <div class="text-content">

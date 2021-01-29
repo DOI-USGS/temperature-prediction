@@ -199,7 +199,7 @@
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
-    <div class="box">
+    <div class="box-matrix">
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
@@ -220,6 +220,7 @@
           width="100%"
           height="100%"
           viewBox="0 0 801 512"
+          transform="translate(0, -20)"
         >
           <g
             fill-rule="evenodd"
@@ -15282,8 +15283,9 @@
           </g>
           <g
             id="hex-legend"
-            transform="translate(0 29.7)"
+            transform="translate(-220 455)"
           >
+            <!-- 0 297.7 -->
             <path
               d="M454.7 19.9l3.5 6.1h7.2l3.5-6.1-3.5-6.1h-7.2z"
               style="isolation:isolate"
@@ -15392,28 +15394,23 @@
               class="hex"
             />
             <text
-              transform="translate(280 -10)"
+              transform="translate(280 -5)"
               style="isolation:isolate"
-              font-weight="550"
-              fill="#ffffff"
-              font-size="1em"
+              class="hex_title"
             >
               Total temperature observations
             </text>
             <text
-              transform="translate(260 19.7)"
+              transform="translate(275 20)"
               style="isolation:isolate"
-              fill="#ffffff"
-              font-size="1em"
-              class="legendAxis"
+              class="hex_label"
             >
               0
             </text>
             <text
-              transform="translate(487 19.7)"
+              transform="translate(487 20)"
               style="isolation:isolate"
-              fill="#ffffff"
-              class="legendAxis"
+              class="hex_label"
             >
               200,000
             </text>
@@ -16189,22 +16186,6 @@
 
           // Find maximum count of observations to use in color scale
           self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
-
-          // // Create Custom interpolator for a color scale using HEX codes
-          //   // Convert Hex to RGB
-          // const hex2rgb = hex => {
-          //   var validHEXInput = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-          //   if (!validHEXInput) {
-          //       return false;
-          //   }
-          //   var output = {
-          //       r: parseInt(validHEXInput[1], 16),
-          //       g: parseInt(validHEXInput[2], 16),
-          //       b: parseInt(validHEXInput[3], 16),
-          //   };
-          //   return `rgb(${output.r},${output.g},${output.b})`
-          // }
-          // let interpolatec2p2 = self.d3.interpolateRgb(hex2rgb("#285C70"), hex2rgb("#bec7ca")); // can only get two stops in this function
     
           // build color scale
           let myColor = self.d3.scaleSequential()
@@ -16246,7 +16227,6 @@
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
               .attr("y", 17)
-              .attr("fill", "#ffffff")
               .text("1 daily value")
 
           // append legend rectangle
@@ -16263,7 +16243,6 @@
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
               .attr("y", 17)
-              .attr("fill", "#ffffff")
               .text("365 daily values")
 
           // append background rectangle for matrix
@@ -17406,12 +17385,12 @@
               .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70") //#164152
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67") //#164152
+              .style("stroke", "#4F5C67")
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -17457,7 +17436,7 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
               .style("opacity", 1)
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
               .style("stroke", "#171717")
@@ -17465,11 +17444,11 @@
               .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70")
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67")
+              .style("stroke", "#4F5C67")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
               .lower()
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
@@ -17506,7 +17485,7 @@
   }
 
   .inset-viz-subtitle {
-    fill: #285C70; //$offWhite
+    fill: #4F5C67; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17520,8 +17499,8 @@
   }
 
   #hex-map {
-    padding-left: 5em;
-    padding-right: 5em;
+    padding-left: 0em;
+    padding-right: 0em;
     padding-top: 0em;
     padding-bottom: 1em;
   }
@@ -17629,7 +17608,7 @@ $grayBlue: #4F5C67;
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 .label, .domain{
   color: $grayBlue; //#285C70
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 .c2p2.cellText {
   font-size: 0.45em;
@@ -17665,25 +17644,27 @@ $grayBlue: #4F5C67;
 }
 
 .chartAxis {
-  color: #999999;
+  color: $grayBlue; //#707070
   font-size: .60em;
 }
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
   font-size: 0.5em;
-  fill: #999999;
+  fill: $grayBlue;
 }
 .legendAxis {
-  color: #ffffff;
+  color: $grayBlue;
+  fill: $grayBlue;
   font-size: 1em;;
 }
 .matrixAxis {
-  fill: #999999;
+  fill: $grayBlue;
+  color: $grayBlue;
   font-size: 1.1vh;
 }
 .chartAxisText {
-  fill: #999999;
+  fill: $grayBlue;
   font-size: 1.1vh;
 }
 .tooltip {
@@ -17702,5 +17683,14 @@ $grayBlue: #4F5C67;
   stroke:#141414; //#141414
   stroke-miterlimit: 10;
   stroke-width: 0.1;
+}
+.hex_title {
+  fill: $grayBlue;
+  font-size: 0.8em;
+  font-weight: 550;
+}
+.hex_label {
+  fill: $grayBlue;
+  font-size: 0.7em;
 }
 </style>

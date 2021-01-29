@@ -145,7 +145,7 @@ $grayBlue: #4F5C67;
     grid-area: icon-1;
     display: flex;
     @media screen and (max-width: 600px) {
-      max-width: 80px;
+      max-width: 75px;
     }
 }
 
@@ -153,7 +153,7 @@ $grayBlue: #4F5C67;
     grid-area: icon-2;
     display: flex;
     @media screen and (max-width: 600px) {
-      max-width: 80px;
+      max-width: 75px;
     }
 }
 
@@ -161,7 +161,7 @@ $grayBlue: #4F5C67;
     grid-area: icon-3;
     display: flex;
     @media screen and (max-width: 600px) {
-      max-width: 80px;
+      max-width: 75px;
     } 
 }
     

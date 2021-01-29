@@ -33036,13 +33036,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$backgroundCharcoal: #171717;
+
+// IMPORT COLORS
+$backgroundCharcoal: #202226; //#1E1F23 #26282b 
+$boxCharcoal: #171717; //#28292D #1a1b1f
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
+
 .filter {
   height: 0;
   width: 0;
 }
 .matrix_background {
-  fill: $backgroundCharcoal;
+  fill: $boxCharcoal;
   filter: url(#shadow2);
 }
 #matrix-availability {
@@ -34192,14 +34206,14 @@ $backgroundCharcoal: #171717;
       }
 
       .cls-228 {
-        fill: #4d4c4d;
+        fill: $grayBlue; //#4d4c4d
       }
 
       .cls-230 {
         fill: url(#linear-gradient1);
       }
       .NS_arrow {
-        stroke: #4d4c4d;
+        stroke: $grayBlue; //#4d4c4d
         stroke-width: 3px;
         stroke-dasharray: 2 6;
       }

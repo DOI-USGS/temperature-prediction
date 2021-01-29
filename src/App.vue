@@ -206,7 +206,7 @@ h3{
     border-radius: 5px;
     max-width: 95%;
     margin: 0 auto;
-    padding: 10px;
+    padding: 15px;
     @media screen and (max-width: 600px) {
         margin: 10px;
     } 
@@ -314,6 +314,7 @@ h3{
   margin-bottom: 0;
   @media screen and (max-width: 600px) {
        font-size: 1.2em;
+       line-height: 1.2em;
   }
 }
 
@@ -329,12 +330,12 @@ h3{
 }
 
 .legend-text {
-    fill: #707070;
+    fill: $grayBlue;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 16px;
   }
 .explainer-minor-text {
-    fill: #707070;
+    fill: $grayBlue; //#707070
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 1.2em;
   }

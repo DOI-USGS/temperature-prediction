@@ -917,7 +917,7 @@ export default {
 
       .cls-3, .cls-5, .cls-6 {
         isolation: isolate;
-        fill: #999;
+        fill: $grayBlue;
         font-family: ArialMT, Arial;
       }
 
