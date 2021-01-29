@@ -158,9 +158,9 @@ $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd;;
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67;
+$grayBlue: #556c80;
 
     .grid-container {
         padding: 0px;
@@ -205,7 +205,7 @@ $grayBlue: #4F5C67;
     #icon-1 {
         grid-area: icon-1; 
         svg {
-          fill: $grayBlue;
+          fill: $mediumBlue; //$grayBlue
         }
          svg:hover, svg:active {
           transform: rotate(5deg) scale(1.1);

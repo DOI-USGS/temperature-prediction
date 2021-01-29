@@ -43,11 +43,28 @@
             >
               <stop
                 offset="0.02"
-                stop-color="#63B1E6"
+                stop-color="#295675"
               />
               <stop
                 offset="0.7"
-                stop-color="#0F2237"
+                stop-color="#122438"
+              />
+            </linearGradient>
+            <linearGradient
+              id="linear-gradient-2"
+              x1="318.1"
+              y1="478.84"
+              x2="284.53"
+              y2="526.77"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop
+                offset="0"
+                stop-color="#5191bd"
+              />
+              <stop
+                offset="1"
+                stop-color="#295675"
               />
             </linearGradient>
           </defs>
@@ -2781,39 +2798,39 @@
                   >
                     <text
                       class="water-label"
-                      transform="translate(142.1 746.6) rotate(-90.8)"
+                      transform="translate(144.05 746.6) rotate(-90.8)"
                     >C</text>
                     <text
                       class="water-label"
-                      transform="matrix(-0.01, -1, 1, -0.01, 142.01, 738.21)"
+                      transform="matrix(-0.01, -1, 1, -0.01, 143.01, 738.21)"
                     >h</text>
                     <text
                       class="water-label"
-                      transform="translate(141.9 730.2) rotate(-90.4)"
+                      transform="translate(141.8 730.2) rotate(-90.4)"
                     >e</text>
                     <text
                       class="water-label"
-                      transform="translate(141.9 722.7) rotate(-90.1)"
+                      transform="translate(141.7 722.7) rotate(-90.1)"
                     >s</text>
                     <text
                       class="water-label"
-                      transform="translate(141.9 715.9) rotate(-89.7)"
+                      transform="translate(141.6 715.9) rotate(-89.7)"
                     >a</text>
                     <text
                       class="water-label"
-                      transform="translate(141.9 708.2) rotate(-89.2)"
+                      transform="translate(141.3 708.2) rotate(-89.2)"
                     >p</text>
                     <text
                       class="water-label"
-                      transform="translate(142.1 700) rotate(-88.5)"
+                      transform="translate(141.6 700) rotate(-88.5)"
                     >e</text>
                     <text
                       class="water-label"
-                      transform="translate(142.3 692.6) rotate(-87.8)"
+                      transform="translate(141.6 692.6) rotate(-87.8)"
                     >a</text>
                     <text
                       class="water-label"
-                      transform="translate(142.6 685) rotate(-86.8)"
+                      transform="translate(142.0 685) rotate(-86.8)"
                     >k</text>
                     <text
                       class="water-label"
@@ -3020,15 +3037,15 @@
                   >
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(147.7 121.3)"
+                      transform="translate(145.7 121.3)"
                     >Binghamton</text>
                     <text
                       class="city-label"
-                      transform="translate(194.4 241.9)"
+                      transform="translate(192.4 241.9)"
                     >Scranton</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(86.9 435.9)"
+                      transform="translate(88.9 435.9)"
                     >Harrisburg</text>
                     <text
                       class="city-label"
@@ -3036,18 +3053,18 @@
                     >New York</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(64.2 606.9)"
+                      transform="translate(62.2 606.9)"
                     >Baltimore</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(61.3 674.3)"
+                      transform="translate(63.3 674.3)"
                     >Washington</text>
                   </g>
                   <g id="Inside_DRB">
                     <g id="text-masking">
                       <text
                         class="city-label masking"
-                        transform="translate(217.7 391.6)"
+                        transform="translate(217.7 393.6)"
                       >Allentown</text>
                       <text
                         class="city-label masking"
@@ -3064,7 +3081,7 @@
                     </g>
                     <text
                       class="city-label inside"
-                      transform="translate(217.7 391.6)"
+                      transform="translate(217.7 393.6)"
                     >Allentown</text>
                     <text
                       class="city-label inside"
@@ -3679,18 +3696,18 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #202226; //#1E1F23
+$boxCharcoal: #1a1a1f; //#28292D
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #122438; //#0F2237 #19334f
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd; //#63B1E6
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67;
+$grayBlue: #556c80; //#4F5C67
 
 // Old colors
 $monotoneBlue1: #e9eced;
@@ -3745,8 +3762,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
      .ocean {
-        fill: $darkBlue;
-        stroke: $darkBlue;
+        fill: $darkBlue; //$darkBlue
+        stroke: $darkBlue; //$darkBlue
         stroke-width: .4px;
         stroke-opacity: .8;
     }
@@ -3843,7 +3860,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .cls-43 {
-        fill: $mediumBlue;
+        fill: url(#linear-gradient-2); //$mediumBlue
         stroke: none;
     }
 
@@ -3870,6 +3887,10 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
         stroke-linejoin: round;
     }
 
+    #Outside_DRB-2 {
+      opacity: 0.7;
+    }
+
     #river_masks path {
       fill: $backgroundCharcoal;
     }
@@ -3885,7 +3906,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .water-label {
         font-size: 8pt;
         font-weight: 100;
-        fill: $grayBlue;
+        fill: #2e4969; //$grayBlue
 
     }
 
@@ -3896,20 +3917,20 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
     .delaware-water-label text {
       /* fill: #5a98a3; */
-      fill: $grayBlue;
+      fill: #4a6585; //$grayBlue
     }
     .ocean-label {
         font-weight: 200;
         font-size: 16px;
-        fill: $grayBlue;
+        fill: #2b4766; //$grayBlue
         opacity: .8;
     }
 
 
    .state-label {
-        font-weight: 200;
+        font-weight: 100; //200
         font-size: 16px;
-        fill: $offWhite;
+        fill: #b0b0b0; //$offWhite
         letter-spacing: 20px;
         opacity: .5;
     }

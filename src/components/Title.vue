@@ -34,7 +34,7 @@
 <style lang="scss" scoped>
 .overall-title {
   background-image: url("../assets/c2p2_matrix_FOR_TITLE_40_stretched.png");
-  background-color: #232529;
+  background-color: #202226; //#1a1a1f
   background-size: cover;
   background-position: center;
 }

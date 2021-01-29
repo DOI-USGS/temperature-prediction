@@ -34,7 +34,7 @@
 
 <style scoped lang="scss">
 // IMPORT COLORS
-$backgroundCharcoal: #141414; //#171717
+$backgroundCharcoal: #202226; //#171717
 $offWhite: rgb(241, 241, 241);
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
