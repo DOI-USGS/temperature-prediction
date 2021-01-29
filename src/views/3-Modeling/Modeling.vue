@@ -3050,7 +3050,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 0;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
               break;
             case this.step_ann_exp:
@@ -3064,7 +3064,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
               break;
             case this.step_rnn:
@@ -3076,7 +3076,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
               break;
             case this.step_rgcn:
@@ -3088,7 +3088,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
               break;
             case this.step_rgcn_ptrn:
@@ -3101,7 +3101,7 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
               break;
             default:
@@ -3140,7 +3140,6 @@
               this.model_current = '';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = 0;
               this.chartState.axis_x_on_y = this.height;
               break;
             case this.step_rmse:
@@ -3153,7 +3152,7 @@
               this.model_current = '  quantifies model prediction error';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3167,7 +3166,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3183,7 +3182,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3197,7 +3196,7 @@
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3211,7 +3210,7 @@
               this.model_current = ': ANN + time + space';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3226,7 +3225,7 @@
               this.model_current = ': ANN + time + space + knowledge';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-40);
+              this.chartState.axis_x_on_y = (this.height/2-50);
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3283,12 +3282,8 @@
 
           ///////////////////
           // generate axes
-          let yGen = this.d3.axisLeft(self.yScale);
-          let xGen = this.d3.axisBottom(self.xScale);
-
-          // drop ticks
-          xGen.ticks(0);
-          yGen.ticks(0);
+          let yGen = this.d3.axisLeft(self.yScale).ticks(0).tickSize(0);
+          let xGen = this.d3.axisBottom(self.xScale).ticks(0).tickSize(0);
 
           // draw on chart
           this.yAxis = this.svg.select("g").append("g")
@@ -3302,20 +3297,66 @@
         // style modifications and set up axis drawing animation
          this.xAxis
           .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
-          .style("stroke-width", "2px")
+          .style("stroke-width", "3px")
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
-          .style("color", "#F1F1F1")
+          .style("color", "#4f4f4f")
           //style('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
 
          this.yAxis
-          .style("stroke-width", "2px")
+          .style("stroke-width", "3px")
           .style("stroke-dasharray", this.height+margin)
           .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
-          .style("color", "#F1F1F1")
+          .style("color", "#4f4f4f")
           //style('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
 
+          /// define arrow head for rmse label
+        this.svg.append("svg:defs").append("svg:marker")
+          .attr("id", "triangle")
+          .attr("refX", 10)
+          .attr("refY", 5)
+          .attr("markerWidth", 16)
+          .attr("markerHeight", 16)
+          .attr("orient", "auto")
+          .append("path")
+          .attr("d", "M 0 0 L 10 5 L 0 10 z")
+          .style("fill", "#4f4f4f");
+          
+          // draw arrow and labels opacity 0 unless 
+          this.svg.select("g")
+          .append("line")
+            .attr("x1", 0)
+            .attr("y1", (this.height-50))
+            .attr("x2", this.width)
+            .attr("y2", (this.height-50))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#4f4f4f")// not the right grey color
+            .attr("stroke-dasharray", "5px")
+            .attr("marker-end", "url(#triangle)")
+            .classed("arrow", true)
+            .style("opacity", this.o_rmse_title);
+
+          // text labels for the rmse axis
+          this.svg.select("g").append("text")             
+              .attr("transform","translate(" + 0 + " ," + (this.height-50 - 40) + ")")
+              .style("text-anchor", "left")
+              .text("accurate")
+              .style("fill", "#4f4f4f")// not the right grey color
+              .style("font-size", "24px")
+              .style("opacity", this.o_rmse_title)
+              .classed("rmse-label", true);
+
+            this.svg.select("g").append("text")             
+              .attr("transform","translate(" + (this.width-margin*2) + " ," + (this.height-50-40) + ")")
+              .style("text-anchor", "right")
+              .text("inaccurate")
+              .style("fill", "#4f4f4f")// not the right grey color
+              .style("font-size", "24px")
+              .style("opacity", this.o_rmse_title)
+              .classed("rmse-label", true);
+
         // if refreshed on any of the error chart views, do the line drawing animation to put it on the page
+        // if entry ste is after this.step_rmse, draw y axis
         let error_steps = [this.step_error_exp, this.step_error_obs];
         if (error_steps.indexOf(this.step) !== -1) {
              self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
@@ -3327,8 +3368,8 @@
             .style("opacity", 0)
             
           self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+          self.transitionAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
         }
-
 
           // text label for the x axis
           this.svg.append("text")             
@@ -3355,26 +3396,8 @@
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
-              // text labels for the rmses
-          this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height + margin + 100) + ")")
-              .style("text-anchor", "left")
-              .text("accurate")
-              .style("fill", "white")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
 
-            this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 100) + ")")
-              .style("text-anchor", "right")
-              .text("inaccurate")
-              .style("fill", "white")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
-
-
+            ////////////////////////////// colors + legends
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
                 .append("g").classed("legend_color", true)
@@ -3582,19 +3605,10 @@
 
             }
           },
-          moveXAxis() {
-            const self = this;
-            let time_slide = 500;
-            let margin = 50;
-            this.xAxis
-                .transition()
-                .duration(time_slide)
-                .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
-          },
           drawAxes(axes_in) {
             const self = this;
             // controls axis aniamtions between error chart and beeswarm
+            // to do: clean up and reuse moveXAxis and transitionAxes functions to simplify code here
             let time_slide = 500;
             let margin = 50;
 
@@ -3630,7 +3644,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-40) + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-50) + ")")
 
                 this.yAxis
                 .transition()
@@ -3651,6 +3665,8 @@
                 .duration(time_slide)
                 .style("opacity", 1)
             } 
+            // what if page is loaded after step_rmse? then the line is never drawn
+            //draw it no matter what, but with opacity to 0 if it's a later step
           },
           updateChart() {
             //controls decision making for the error >> beeswarm chart
@@ -3694,8 +3710,7 @@
               .transition()
                 .duration(200)
                 .style("opacity", 1)
-                
-                
+
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
@@ -3774,9 +3789,6 @@
             // high velocity decay with low alpha decay so it cools more slowly
           }
           },
-          drawErrorDiff() {
-
-          },
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
             // needs to be modified to only run if the beeswarm data changes
@@ -3785,21 +3797,7 @@
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
-
-        },
-        /* updateModelName(){
-                      //updating rmse model label
-            let legend_error = this.d3.select("#text..rmse-name")
-            .transition()
-            .duration(300)
-            .attr("opacity", 0)
-
-            legend_error
-            .transition()
-            .text(this.model_current)
-            .duration(300)
-
-        }, */
+        }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
         handleStepEnter(response) {
@@ -3811,6 +3809,10 @@
 
           ///////////
           // assign force
+          // to do: implement with switch to make faster and set forces to be different on intial draw and update
+          // the biggest problem with force right now if that if the page is refreshed in the middle of the chart sequence
+          // it doesn't have enough heat to make it to the mid line because alpha is down to reduce jitter
+          // also work could be done to slow down the dots and exaggerate the transitions more, while still making sure they get to their home spots
 
           // error chart
           if (this.step <= this.step_error_exp) {
@@ -3906,6 +3908,7 @@
           this.legend_predicted = this.d3.selectAll(".error_1");
           this.legend_observed = this.d3.selectAll(".error_2");
           this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
+           this.axis_arrow = this.d3.select("line.arrow")
           this.legend_model = this.d3.selectAll("text.rmse-name");
           this.legend_training = this.d3.selectAll("text.rmse-title");
           this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
@@ -3926,18 +3929,17 @@
                 self.fadeOut(this.axis_label, this.time_fade); // remove error axis labels
                 self.fadeOut(this.legend_predicted, this.time_fade); // remove error legend
                 self.fadeOut(this.legend_observed, this.time_fade); // remove error legend
-
-                self.fadeIn(this.axis_label_rmse, this.time_fade);// add rmse title
+                //arrow appears for rmse axis labelling
+                self.fadeIn(this.axis_arrow)
+                self.fadeIn(this.axis_label_rmse, this.time_fade);// add rmse accurate to inaccurate labels
                 self.fadeIn(this.legend_model, this.time_fade); // show rmse model type
-              }  else if (this.step == this.step_ann+1) {
-                //self.fadeOut(this.axis_label_rmse, this.time_fade);
-                //self.fadeOut(this.legend_model, this.time_fade);
-                //self.fadeOut(this.d3.selectAll("path.arrow"), this.time_fade);
+
               } else if (this.step == this.step_ann) {
                 // half of rmse legend appears for beeswarm
                 self.fadeIn(this.legend_training, this.time_fade) 
                 self.fadeIn(this.legend_training_d100, this.time_fade)
-              } else if (this.step == this.step_ann_exp) {
+
+              } else if (this.step == this.step_ann_exp, this.time_fade) {
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
           }
@@ -3950,7 +3952,6 @@
 
         },
         
-        
         handleStepExit(response) {
           const self = this;
           // changes css for class
@@ -3961,13 +3962,13 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-
           // update axes and labels
           this.time_fade = 500;
           this.axis_label = this.d3.selectAll("text.axis-label");
           this.legend_predicted = this.d3.selectAll(".error_1");
           this.legend_observed = this.d3.selectAll(".error_2");
           this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
+          this.axis_arrow = this.d3.select("line.arrow")
           this.legend_model = this.d3.selectAll("text.rmse-name");
           this.legend_training = this.d3.selectAll("text.rmse-title");
           this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
@@ -3990,12 +3991,8 @@
             self.fadeIn(this.legend_predicted, this.time_fade);
              self.fadeIn(this.legend_observed, this.time_fade);
             self.fadeOut(this.axis_label_rmse, this.time_fade);
+            self.fadeOut(this.axis_arrow, this.time_fade);
             self.fadeOut(this.legend_model, this.time_fade);
-            //self.fadeOut(this.d3.selectAll("path.arrow"), this.time_fade);
-          } else if (this.step == this.step_ann+1) {
-            self.fadeIn(this.axis_label_rmse, this.time_fade);
-            //self.fadeIn(this.legend_model, this.time_fade);
-            //self.fadeIn(this.d3.selectAll("path.arrow"), this.time_fade);
           } else if (this.step == this.step_ann) {
             // half of legend for beeswarm
              self.fadeOut(this.legend_training, this.time_fade) 
@@ -4004,7 +4001,6 @@
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
         }
-
         },
         
         fadeOut(element, time) {
@@ -4152,13 +4148,6 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
   }
-  #bees-chart {
- 
-  }
-
-   #bees-legend {
-
-  }
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
@@ -4168,18 +4157,11 @@ figure.sticky.charts {
     margin: auto;
   }
 }
-.axis-line {
-  stroke-width: 5px;
-}
+
 .axis-label text {
   fill:white;
   font-weight: 300;
   font-size: 20px;
-}
-.arrow {
-  fill: white;
-  opacity: 0;
-
 }
 
 .text-annotate {
