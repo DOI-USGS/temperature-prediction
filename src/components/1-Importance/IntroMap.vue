@@ -3705,17 +3705,14 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   overflow-x: hidden;
   // background-color: $boxCharcoal;
   border-radius: 5px;
-  max-width: 80%;
   margin: auto;
+   
   svg {
     width: 100%;
     height: auto;
     padding-top: 20px;
   }
-  @media screen and (max-width: 600px) {
-    max-width: 100%;
-    margin: 10px;
-  }
+  
 }
 
 #background {
