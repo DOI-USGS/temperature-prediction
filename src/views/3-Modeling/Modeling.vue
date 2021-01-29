@@ -3128,6 +3128,7 @@
               this.model_current = '';
               this.chartState.axis_x = 0; // x end for axis
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = 0;
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3139,6 +3140,7 @@
               this.model_current = '';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = 0;
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
@@ -3150,6 +3152,7 @@
               this.model_current = '  quantifies model prediction error';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3163,6 +3166,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3178,6 +3182,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3191,6 +3196,7 @@
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3204,6 +3210,7 @@
               this.model_current = ': ANN + time + space';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3218,6 +3225,7 @@
               this.model_current = ': ANN + time + space + knowledge';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2-40);
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3229,6 +3237,7 @@
               this.model_current = '';
               this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
               this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
+              this.chartState.axis_x_on_y = (this.height/2-40);
 
           }
           },
@@ -3291,7 +3300,7 @@
 
         // style modifications and set up axis drawing animation
          this.xAxis
-          .attr("transform", "translate(" + -margin + "," + this.height + ")")
+          .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
           .style("stroke-width", "2px")
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
@@ -3576,6 +3585,16 @@
                   .style("opacity", 0)
 
             }
+          },
+          moveXAxis() {
+            const self = this;
+            let time_slide = 500;
+            let margin = 50;
+            this.xAxis
+                .transition()
+                .duration(time_slide)
+                .ease(this.d3.easeCircle)
+                .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
           },
           drawAxes(axes_in) {
             // controls axis aniamtions between error chart and beeswarm
