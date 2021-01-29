@@ -344,8 +344,8 @@
 <style scoped lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #202226; //#1E1F23 #26282b 
+$boxCharcoal: #171717; //#28292D #1a1b1f
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -353,7 +353,7 @@ $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #AAD1EC;
 $grayBlue: #4F5C67;
 
@@ -391,13 +391,7 @@ $grayBlue: #4F5C67;
     }
 
     .icon {
-      fill: #6399ba; //#285C70
-    }
-
-    .desc{
-      margin: auto 0;
-      color: #6399ba; //#285C70
-      font-weight: 600;
+      fill: $mediumBlue; //#285C70
     }
 
     #icon-1 {
@@ -433,22 +427,6 @@ $grayBlue: #4F5C67;
     #icon-7 {
         grid-area: icon-7;
         display: flex; 
-    }
-
-    #desc-1 {
-        grid-area: desc-1; 
-    }
-
-    #desc-2 {
-        grid-area: desc-2; 
-    }
-
-    #desc-3 {
-        grid-area: desc-3; 
-    }
-
-    #desc-4 {
-        grid-area: desc-4; 
     }
 
 </style>

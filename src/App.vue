@@ -80,7 +80,7 @@
 
 // IMPORT COLORS
 $backgroundCharcoal: #202226; //#1E1F23 #26282b 
-$boxCharcoal: #1a1a1f; //#28292D #1a1b1f
+$boxCharcoal: #171717; //#28292D #1a1b1f
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -197,7 +197,7 @@ h3{
     margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
-        margin: 10px;
+        margin: 20px;
     } 
   }
 
@@ -301,6 +301,9 @@ h3{
 .viz-title-wrapper {
   max-width: 100%;
   z-index: 100;
+  @media screen and (max-width: 600px) {
+        max-width: 90%;
+  }
 }
 
 .viz-title {
@@ -309,7 +312,9 @@ h3{
   font-weight: 700;
   color: $offWhite;
   margin-bottom: 0;
-
+  @media screen and (max-width: 600px) {
+       font-size: 1.2em;
+  }
 }
 
 .viz-subtitle {
@@ -318,6 +323,9 @@ h3{
   text-align: left;
   font-weight: 100;
   margin-bottom: 0;
+  @media screen and (max-width: 600px) {
+        font-size: .6em;
+  }
 }
 
 .legend-text {

@@ -850,7 +850,7 @@
           transform="translate(616.2 448.6) rotate(-45)"
         >2019</text>
       </g>
-      <g id="legend_squares">
+      <!-- g id="legend_squares">
         <rect
           class="cls-2"
           x="60"
@@ -875,7 +875,7 @@
           class="cls-6"
           transform="translate(83.3 140.5)"
         >USGS</text>
-      </g>
+      </g -->
     </svg>
   </div>
 </template>
@@ -886,7 +886,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+// IMPORT COLORS
+  $backgroundCharcoal: #202226; //#1E1F23 #26282b 
+  $boxCharcoal: #171717; //#28292D #1a1b1f
+  $offWhite: #F1F1F1;
+  $plasmaYellow: #FAB62F;
+  $plasmaPink: #BE3D7D;
+  $plasmaPurple: #62039A;
+  $plasmaBlue: #142167;
+  $darkBlue: #0F2237;
+  $footerBlue: #00264C;
+  $mediumBlue: #5191bd; //#63B1E6 #579ecf
+  $lightBlue: #AAD1EC;
+  $grayBlue: #4F5C67;
+
 #bar-chart {
         width: 100%;
         padding: 10px;
@@ -894,11 +908,11 @@ export default {
 
 
     .cls-1 {
-        fill: #e9eced; /* USGS #edb932  */
+        fill: $plasmaYellow; /* USGS #edb932  */
       }
 
       .cls-2 {
-        fill: #FDAD32; /* other #eb4444 */
+        fill: $plasmaYellow; /* other #eb4444 */
       }
 
       .cls-3, .cls-5, .cls-6 {

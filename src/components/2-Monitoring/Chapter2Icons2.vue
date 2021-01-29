@@ -87,90 +87,83 @@
 </script>
 
 <style scoped lang="scss">
-    #icons {
-      min-width: 375px;
-      max-width: 700px;
-      margin: 0 auto;
-      padding-right: 2em;   
-      @media screen and (max-width: 600px) {
-          padding-right: 25px;
-      }
-    }
-    .grid-container {
-        padding: 10px;
-        padding-bottom: 20px;
-        display: grid;
-        grid-template-columns: 33.33% 33.33% 33.33%;
-        grid-template-rows: 100%;
-        gap: 0px 5px;
-        grid-template-areas:
-            "icon-1 icon-2 icon-3";
-        min-width: 0;
-        min-height: 0;
-        @media screen and (max-width: 600px) {
-          padding: 10px 0;
-          gap: 0px;
-        }
-    }
 
-    .grid-item {
-        padding: 5px;
-    }
+// IMPORT COLORS
+$backgroundCharcoal: #202226; //#1E1F23 #26282b 
+$boxCharcoal: #171717; //#28292D #1a1b1f
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #4F5C67;
 
-    .icon-item{
-        text-align: center;
-        margin: auto;
+#icons {
+  min-width: 375px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-right: 2em;   
+  @media screen and (max-width: 600px) {
+      padding-right: 25px;
+  }
+}
+.grid-container {
+    padding: 10px;
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-rows: 100%;
+    gap: 0px 5px;
+    grid-template-areas:
+        "icon-1 icon-2 icon-3";
+    min-width: 0;
+    min-height: 0;
+    @media screen and (max-width: 600px) {
+      padding: 10px 0;
+      gap: 0px;
     }
+}
 
-    .icon {
-      fill: #6399ba; //#285C70
-    }
+.grid-item {
+    padding: 5px;
+}
 
-    .desc{
-      margin: auto 0;
-      color: #6399ba; //#285C70
-      font-weight: 600;
-    }
+.icon-item{
+    text-align: center;
+    margin: auto;
+}
 
-    #icon-1 {
-        grid-area: icon-1;
-        display: flex;
-        @media screen and (max-width: 600px) {
-          max-width: 80px;
-        }
-    }
+.icon {
+  fill: $mediumBlue; //#285C70
+}
 
-    #icon-2 {
-        grid-area: icon-2;
-        display: flex;
-        @media screen and (max-width: 600px) {
-          max-width: 80px;
-        }
+#icon-1 {
+    grid-area: icon-1;
+    display: flex;
+    @media screen and (max-width: 600px) {
+      max-width: 80px;
     }
+}
 
-    #icon-3 {
-        grid-area: icon-3;
-        display: flex;
-        @media screen and (max-width: 600px) {
-          max-width: 80px;
-        } 
+#icon-2 {
+    grid-area: icon-2;
+    display: flex;
+    @media screen and (max-width: 600px) {
+      max-width: 80px;
     }
+}
+
+#icon-3 {
+    grid-area: icon-3;
+    display: flex;
+    @media screen and (max-width: 600px) {
+      max-width: 80px;
+    } 
+}
     
-
-    #desc-1 {
-        grid-area: desc-1; 
-    }
-
-    #desc-2 {
-        grid-area: desc-2; 
-    }
-
-    #desc-3 {
-        grid-area: desc-3; 
-    }
-
-    #desc-4 {
-        grid-area: desc-4; 
-    }
 
 </style>

@@ -3707,7 +3707,7 @@ $darkBlue: #122438; //#0F2237 #19334f
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6
 $lightBlue: #AAD1EC;
-$grayBlue: #556c80; //#4F5C67
+$grayBlue: #4F5C67; //
 
 // Old colors
 $monotoneBlue1: #e9eced;
@@ -3745,7 +3745,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
       stroke-linejoin: round;
       stroke-linecap: round;
       /* stroke: #184654; */
-      stroke: $grayBlue;
+      stroke: #556c80;
       stroke-width: .4px;
     }
 
@@ -3958,18 +3958,18 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .scale-bar-label {
       font-size: 7pt;
       font-weight: 500;
-      fill: $grayBlue;
+      fill: #2e4969;
       letter-spacing: .5px;
     }
   /* scale bar lines */
     .cls-80 {
-        stroke: $grayBlue;
+        stroke: #2e4969;
     }
 
 
   .north-arrow {
-    color: $grayBlue;
-    fill: $grayBlue;
+    color: #2b4766;
+    fill: #2b4766;
     stroke: none;
   }
 

@@ -6,8 +6,9 @@
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 50 610 1020"
+      transform="scale(1.05, 1.05)"
     >
-      <g id="delaware_bay">
+      <g id="delaware_bay" transform="translate(0, 20)">
         <path
           class="st0"
           d="M381,891.2c0-0.8-0.2-1.7-0.4-2.5c-1.2-0.2-1.3-1.4-1.7-2.4s-2.9-2.5-4.8-1.7s-0.6-1.9-1.2-2.4
@@ -35,7 +36,7 @@
                 c2-12.7,12-20.8,12.9-33.4c-0.6-0.4,0.4-0.9,0.6-1.2C380.1,894.2,381.1,893.2,381,891.2z"
         />
       </g>
-      <g id="rivers">
+      <g id="rivers" transform="translate(0, 20)">
         <g>
           <path
             class="st0"
@@ -1370,7 +1371,7 @@
           d="M437.2,957.8h90.7"
         />
       </g>
-      <g id="stations">
+      <g id="stations" transform="translate(0, 20)">
         <path
           class="cls-8"
           d="M372.8,408.7a1.8,1.8,0,0,1-1.9-1.9,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A1.9,1.9,0,0,1,372.8,408.7Z"
@@ -10068,7 +10069,7 @@
           d="M399.6,629.7a1.9,1.9,0,0,1-1.9-2,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A2,2,0,0,1,399.6,629.7Z"
         />
       </g>
-      <g id="legend">
+      <!-- g id="legend">
         <g id="legend_text">
           <text
             class="legend-text"
@@ -10097,7 +10098,7 @@
             rx="5.2"
           />
         </g>
-      </g>
+      </g -->
     </svg>
   </div>
 </template>
@@ -10108,30 +10109,44 @@ export default {
 }
 </script>
 
-<style scoped>
-    #monitoring-map-1 {
-        width: 100%;
-        padding: 10px;
-    }
-    /* Rivers and Delaware Bay */
-    .st0 {
-        fill:#285C70;
-        stroke: #285C70;
-        stroke-width: 1px;
-        }
+<style scoped lang="scss">
+  // IMPORT COLORS
+  $backgroundCharcoal: #202226; //#1E1F23 #26282b 
+  $boxCharcoal: #171717; //#28292D #1a1b1f
+  $offWhite: #F1F1F1;
+  $plasmaYellow: #FAB62F;
+  $plasmaPink: #BE3D7D;
+  $plasmaPurple: #62039A;
+  $plasmaBlue: #142167;
+  $darkBlue: #0F2237;
+  $footerBlue: #00264C;
+  $mediumBlue: #5191bd; //#63B1E6 #579ecf
+  $lightBlue: #AAD1EC;
+  $grayBlue: #4F5C67;
 
-    #legend_text {
-        transform: translate(0, 30)
-    }
-	.scale-line{fill:none;stroke:#1f4f61;}
+  #monitoring-map-1 {
+      width: 100%;
+      padding: 0px; //10px
+  }
+  /* Rivers and Delaware Bay */
+  .st0 {
+      fill:$grayBlue;
+      stroke: $grayBlue;
+      stroke-width: 1px;
+      }
+
+  #legend_text {
+      transform: translate(0, 30)
+  }
+	.scale-line{fill:none;stroke:$grayBlue;}
   .scale-text {
-    fill: #1f4f61;
+    fill: $grayBlue; //#1f4f61
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 1em;
   }
 
-    /* Circles */
-	.cls-8{fill:#FDAD32;stroke:#000000;stroke-width:0.5;opacity:0.8;} /* other #EB4444  stroke-width:0.5*/
-	.cls-9{fill:#e9eced;stroke:#000000;stroke-width:0.5;opacity:0.8;} /* USGS #EDB932 stroke-width:0.5*/
+  /* Circles */
+	.cls-8{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;} /* other #EB4444  stroke-width:0.5*/
+	.cls-9{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;} /* USGS #EDB932 stroke-width:0.5*/
 
 </style>
