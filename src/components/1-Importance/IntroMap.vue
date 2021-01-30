@@ -3745,7 +3745,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
       stroke-linejoin: round;
       stroke-linecap: round;
       /* stroke: #184654; */
-      stroke: #566d82; //#556c80 #61788c
+      stroke: #56738f; //#556c80 #61788c #566d82
       stroke-width: .4px;
     }
 
@@ -3920,6 +3920,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
     .delaware-water-label text {
       /* fill: #5a98a3; */
+      font-size: 8pt;
       fill: #305f80; //$grayBlue #4a6585
     }
     .ocean-label {
