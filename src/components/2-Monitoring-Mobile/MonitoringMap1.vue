@@ -8,7 +8,10 @@
       viewBox="0 50 610 1020"
       transform="scale(1.05, 1.05)"
     >
-      <g id="delaware_bay" transform="translate(0, 20)">
+      <g
+        id="delaware_bay"
+        transform="translate(0, 20)"
+      >
         <path
           class="st0"
           d="M381,891.2c0-0.8-0.2-1.7-0.4-2.5c-1.2-0.2-1.3-1.4-1.7-2.4s-2.9-2.5-4.8-1.7s-0.6-1.9-1.2-2.4
@@ -36,7 +39,10 @@
                 c2-12.7,12-20.8,12.9-33.4c-0.6-0.4,0.4-0.9,0.6-1.2C380.1,894.2,381.1,893.2,381,891.2z"
         />
       </g>
-      <g id="rivers" transform="translate(0, 20)">
+      <g
+        id="rivers"
+        transform="translate(0, 20)"
+      >
         <g>
           <path
             class="st0"
@@ -1371,7 +1377,10 @@
           d="M437.2,957.8h90.7"
         />
       </g>
-      <g id="stations" transform="translate(0, 20)">
+      <g
+        id="stations"
+        transform="translate(0, 20)"
+      >
         <path
           class="cls-8"
           d="M372.8,408.7a1.8,1.8,0,0,1-1.9-1.9,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A1.9,1.9,0,0,1,372.8,408.7Z"

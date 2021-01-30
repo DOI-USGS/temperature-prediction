@@ -66,7 +66,7 @@
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
     </div>
-    <div class = "box">
+    <div class="box">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
@@ -92,7 +92,7 @@
       <Chapter2Icons2 />
       <p v-html="text.paragraph11" />
     </div>
-    <div class = "box">
+    <div class="box">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
@@ -144,10 +144,10 @@
         </div>
       </div>
       <!-- div class="hex-container" -->
-        <img
-          id="hex-map"
-          src="@/assets/temp_hex_map_mobile.png"
-        >
+      <img
+        id="hex-map"
+        src="@/assets/temp_hex_map_mobile.png"
+      >
       <!-- /div -->
     </div>
     <div class="text-content">
