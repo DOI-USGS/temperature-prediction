@@ -1,7 +1,6 @@
 <template>
   <section id="section_2">
     <div class="text-content">
-      <!--"section-title-wrapper"-->
       <div class="viz-title"> 
         <h3 v-html="text.title1" />
       </div>
@@ -63,7 +62,6 @@
       <Chapter2Icons1 />
       <br>
       <br>
-      <!--"section-title-wrapper"-->
       <div class="subheader">
         <h3 v-html="text.title2" />
       </div>
@@ -73,14 +71,6 @@
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
     </div>
-    <!-- div class="text-content viz-title-wrapper">
-      <h3 class="viz-title">
-        How to Read the Matrices
-      </h3>
-      <p class="viz-subtitle">
-        Visualizing data availability at temperature measuring sites across the basin
-      </p>
-    </div -->
     <div
       id="matrix-explainer-container"
       class="explainer-grid-container"
@@ -117,7 +107,7 @@
             Visualizing the count of temperature measurements of all stream reaches in the basin.
           </p>
           <p class="viz-subtitle">
-            Hover over a stream reach on the map to see the amount of data avialble for that reach over time.
+            Hover over a stream reach on the map to see the amount of data available for that reach over time.
           </p>
           <p class="viz-subtitle">
             Hover over a column in the matrix to see which reaches have data for a given year.
@@ -155,7 +145,9 @@
           <p class="viz-title">
             <span class="yellow">Daily Temperature</span> of River Reaches in 2019
           </p>
-          <p class="viz-subtitle" />
+          <p class="viz-subtitle">
+            Each line = one reach.
+          </p>
         </div>
       </div>  
       <div class="figure-content">
@@ -175,10 +167,16 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Daily Temperature</span> of DRB River Reaches in 2019
+            <span class="yellow">Variability</span> of Temperature Data in 2019
           </p>
           <p class="viz-subtitle">
-            Data for 2019 only. Hover over a reach on the map, or over a matrix cell to see more.
+            Visualizing measured stream temperature in the basin in 2019.
+          </p>
+          <p class="viz-subtitle">
+            Hover over a stream reach on the map to see the temperature in that reach during 2019.
+          </p>
+          <p class="viz-subtitle">
+            Hover over a column in the matrix to see the temperature of all measured reaches on a given day.
           </p>
         </div>
       </div>  
@@ -201,14 +199,14 @@
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
-    <div class="box">
+    <div class="box-matrix">
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
             <span class="yellow">Most Observed</span> Areas in Continental United States
           </p>
           <p class="viz-subtitle">
-            USGS, State, or Local agency stream temperature observations since 1985.
+            USGS, state, or local agency stream temperature observations since 1985.
           </p>
         </div>
       </div>
@@ -222,6 +220,7 @@
           width="100%"
           height="100%"
           viewBox="0 0 801 512"
+          transform="translate(0, -20)"
         >
           <g
             fill-rule="evenodd"
@@ -15284,8 +15283,9 @@
           </g>
           <g
             id="hex-legend"
-            transform="translate(0 29.7)"
+            transform="translate(-220 455)"
           >
+            <!-- 0 297.7 -->
             <path
               d="M454.7 19.9l3.5 6.1h7.2l3.5-6.1-3.5-6.1h-7.2z"
               style="isolation:isolate"
@@ -15394,28 +15394,23 @@
               class="hex"
             />
             <text
-              transform="translate(280 -10)"
+              transform="translate(280 -5)"
               style="isolation:isolate"
-              font-weight="550"
-              fill="#ffffff"
-              font-size="1em"
+              class="hex_title"
             >
               Total temperature observations
             </text>
             <text
-              transform="translate(260 19.7)"
+              transform="translate(275 20)"
               style="isolation:isolate"
-              fill="#ffffff"
-              font-size="1em"
-              class="legendAxis"
+              class="hex_label"
             >
               0
             </text>
             <text
-              transform="translate(487 19.7)"
+              transform="translate(487 20)"
               style="isolation:isolate"
-              fill="#ffffff"
-              class="legendAxis"
+              class="hex_label"
             >
               200,000
             </text>
@@ -15997,7 +15992,7 @@
               
 
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#28292D").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
+          svgChart.selectAll(".tick line").attr("stroke", "#1a1b1c").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
 
           // //  make the legend
           // let legend = g.selectAll(".legend")
@@ -16078,7 +16073,7 @@
               // set stroke width to be large for selection
               .style("stroke-width", 6)
               // set stroke to background color
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               // no fill
               .style("fill", "None")
               // set opacity to 0 so segments aren't visible but can be selected
@@ -16191,22 +16186,6 @@
 
           // Find maximum count of observations to use in color scale
           self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
-
-          // // Create Custom interpolator for a color scale using HEX codes
-          //   // Convert Hex to RGB
-          // const hex2rgb = hex => {
-          //   var validHEXInput = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-          //   if (!validHEXInput) {
-          //       return false;
-          //   }
-          //   var output = {
-          //       r: parseInt(validHEXInput[1], 16),
-          //       g: parseInt(validHEXInput[2], 16),
-          //       b: parseInt(validHEXInput[3], 16),
-          //   };
-          //   return `rgb(${output.r},${output.g},${output.b})`
-          // }
-          // let interpolatec2p2 = self.d3.interpolateRgb(hex2rgb("#285C70"), hex2rgb("#bec7ca")); // can only get two stops in this function
     
           // build color scale
           let myColor = self.d3.scaleSequential()
@@ -16248,7 +16227,6 @@
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
               .attr("y", 17)
-              .attr("fill", "#ffffff")
               .text("1 daily value")
 
           // append legend rectangle
@@ -16265,7 +16243,6 @@
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
               .attr("y", 17)
-              .attr("fill", "#ffffff")
               .text("365 daily values")
 
           // append background rectangle for matrix
@@ -16273,7 +16250,7 @@
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#28292D")
+                  .attr("fill", "#1a1b1c")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -16476,9 +16453,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#28292D")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 2)
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -16505,9 +16482,9 @@
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#28292D")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 2)
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -16569,7 +16546,7 @@
               })
               .attr("d", self.map_path_c2)
               .style("stroke-width", 6)
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("fill", "None")
               .style("opacity", 0)
               .on("mouseover", function(d) {
@@ -16750,7 +16727,7 @@
                   .attr("class", "c2p3 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#28292D")
+                  .attr("fill", "#1a1b1c")
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -16913,9 +16890,9 @@
                 return 'c2p3 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#28292D")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 1)
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -16942,9 +16919,9 @@
                 return 'c2p3 matrixTemporalRect time' + d[self.timestep_c2p3];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#28292D")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 2)
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -17045,7 +17022,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#28292D")
+                  .style("fill", "#1a1b1c")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
@@ -17082,8 +17059,8 @@
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("stroke", "#28292D")
-              .style("fill", "#28292D")
+              .style("stroke", "#1a1b1c")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 1)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
@@ -17091,8 +17068,8 @@
           // select all *temporal* rectangles and set fill and stroke back
           // to black and raise so that they are selectable
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("fill", "#28292D")
-              .style("stroke", "#28292D")
+              .style("fill", "#1a1b1c")
+              .style("stroke", "#1a1b1c")
               .raise()
           // resize spatial cells associated with segment
           this.d3.selectAll(".c2p2.cell.segment" + data.properties.seg_id_nat) 
@@ -17179,8 +17156,8 @@
           const self = this;
           // select all *spatial* rectangles and reset fill and stroke to black and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("fill", "#28292D")
-              .style("stroke", "#28292D")
+              .style("fill", "#1a1b1c")
+              .style("stroke", "#1a1b1c")
               .raise()
 
           // hide tooltip
@@ -17189,8 +17166,8 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity and raise (so available for selection but not visible)
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("stroke", "#28292D")
-              .style("fill", "#28292D")
+              .style("stroke", "#1a1b1c")
+              .style("fill", "#1a1b1c")
               .style("opacity", 0)
               .raise()
           // un-dim river segments, reservoirs, and bay
@@ -17199,7 +17176,7 @@
               .style("stroke", "#4F5C67")
               .style("opacity", 1)
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -17313,16 +17290,16 @@
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .attr("height", yScale_matrix_c2p3.bandwidth())
               .style("stroke", "None")
-              .style("stroke", "#28292D")
-              .style("fill", "#28292D")
+              .style("stroke", "#1a1b1c")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 1)
               .style("opacity", 0)
               .raise()
           // select all *temporal* rectangles and set fill and stroke back
           // to black and raise so that they are selectable
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#28292D")
-              .style("stroke", "#28292D")
+              .style("fill", "#1a1b1c")
+              .style("stroke", "#1a1b1c")
               .raise()
           // resize matrix cells associated with segment
           this.d3.selectAll(".c2p3.cell.segment" + data.properties.seg_id_nat) 
@@ -17396,8 +17373,8 @@
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixTemporalRect")
               .style("opacity", 0.6)
-              .style("stroke", "#28292D")
-              .style("fill", "#28292D")
+              .style("stroke", "#1a1b1c")
+              .style("fill", "#1a1b1c")
               .style("stroke-width", 2)
           // select matrix cells for highlighted timestep and raise
           this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
@@ -17408,12 +17385,12 @@
               .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70") //#164152
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67") //#164152
+              .style("stroke", "#4F5C67")
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -17427,8 +17404,8 @@
           
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
-              .style("fill", "#28292D")
-              .style("stroke", "#28292D")
+              .style("fill", "#1a1b1c")
+              .style("stroke", "#1a1b1c")
               .raise()
 
           // hide tooltip
@@ -17444,8 +17421,8 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixTemporalRect")
-              .style("fill", "#28292D")
-              .style("stroke", "#28292D")
+              .style("fill", "#1a1b1c")
+              .style("stroke", "#1a1b1c")
               .style("stroke-width", 2)
               .style("opacity", 0)
               .raise()
@@ -17459,19 +17436,19 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#285C70")
+              .style("stroke", "#4F5C67")
               .style("opacity", 1)
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
-              .style("stroke", "#28292D")
+              .style("stroke", "#1a1b1c")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#285C70")
-              .style("stroke", "#285C70")
+              .style("fill", "#4F5C67")
+              .style("stroke", "#4F5C67")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#285C70")
+              .style("fill", "#4F5C67")
               .lower()
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
@@ -17508,7 +17485,7 @@
   }
 
   .inset-viz-subtitle {
-    fill: #285C70; //$offWhite
+    fill: #4F5C67; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17522,8 +17499,8 @@
   }
 
   #hex-map {
-    padding-left: 5em;
-    padding-right: 5em;
+    padding-left: 0em;
+    padding-right: 0em;
     padding-top: 0em;
     padding-bottom: 1em;
   }
@@ -17614,8 +17591,8 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -17623,15 +17600,15 @@ $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67;
+$grayBlue: #576069; //#4F5C67
 
 
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 .label, .domain{
   color: $grayBlue; //#285C70
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 .c2p2.cellText {
   font-size: 0.45em;
@@ -17667,25 +17644,27 @@ $grayBlue: #4F5C67;
 }
 
 .chartAxis {
-  color: #999999;
+  color: $grayBlue; //#707070
   font-size: .60em;
 }
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
   font-size: 0.5em;
-  fill: #999999;
+  fill: $grayBlue;
 }
 .legendAxis {
-  color: #ffffff;
+  color: $grayBlue;
+  fill: $grayBlue;
   font-size: 1em;;
 }
 .matrixAxis {
-  fill: #999999;
+  fill: $grayBlue;
+  color: $grayBlue;
   font-size: 1.1vh;
 }
 .chartAxisText {
-  fill: #999999;
+  fill: $grayBlue;
   font-size: 1.1vh;
 }
 .tooltip {
@@ -17704,5 +17683,14 @@ $grayBlue: #4F5C67;
   stroke:#141414; //#141414
   stroke-miterlimit: 10;
   stroke-width: 0.1;
+}
+.hex_title {
+  fill: $grayBlue;
+  font-size: 0.8em;
+  font-weight: 550;
+}
+.hex_label {
+  fill: $grayBlue;
+  font-size: 0.7em;
 }
 </style>

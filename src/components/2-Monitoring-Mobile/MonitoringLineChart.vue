@@ -286,7 +286,7 @@
             id="cool"
             class="highlight-text"
             transform="translate(230 320)"
-          >Coldest Reach,<tspan
+          >Coldest reach,<tspan
             x="0"
             y="15"
           >showing temperature </tspan><tspan
@@ -295,14 +295,14 @@
           >drops after summertime</tspan><tspan
             x="0"
             y="45"
-          >reservoir releases.</tspan>
+          >reservoir releases</tspan>
           </text>
         </g>
         <g>
           <text
             id="warm"
             class="highlight-text"
-            transform="translate(120 100)"
+            transform="translate(115 100)"
           >Warmest river reach<tspan
             x="0"
             y="15"
@@ -411,8 +411,8 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -420,9 +420,9 @@ $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67;
+$grayBlue: #576069; //#4F5C67
 
 
 // Old colors
