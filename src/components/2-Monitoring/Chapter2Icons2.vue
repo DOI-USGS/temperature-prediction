@@ -113,9 +113,10 @@ $grayBlue: #4F5C67;
 }
 .grid-container {
     padding: 10px;
+    padding-left: 35px;
     padding-bottom: 20px;
     display: grid;
-    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100%;
     gap: 0px 5px;
     grid-template-areas:
