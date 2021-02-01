@@ -139,7 +139,7 @@
             <span class="yellow">Most Observed</span> Areas in Continental United States
           </p>
           <p class="viz-subtitle">
-            USGS, State, or Local agency stream temperature observations since 1985.
+            USGS, state, or local agency stream temperature observations since 1985.
           </p>
         </div>
       </div>
@@ -197,31 +197,45 @@
 
 <style scoped lang="scss">
 
-  .axis-title {
-      font-size: 1.2em;
-      font-family: SourceSansPro-Bold, Source Sans Pro;
-      font-weight: 700;
-      fill: white;
-  }
+// IMPORT COLORS
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #576069; //#4F5C67
 
-  .axis-subtitle {
-        font-family: SourceSansPro-Light, Source Sans Pro;
-        font-weight: 300;
-        fill: white;
-  }
+  // .axis-title {
+  //     font-size: 1.2em;
+  //     font-family: SourceSansPro-Bold, Source Sans Pro;
+  //     font-weight: 700;
+  //     fill: white;
+  // }
 
-  .tick-label {
-        font-family: SourceSansPro-Light, Source Sans Pro;
-        font-weight: 300;
-        fill: white;
-        font-size: .9em;
-  }
-  .hex-container {
-    text-align: center;
-  }
-  #hex-map {
-    padding: 0em; //1em
-    width: 80vw;
-    height: auto;
-  }
+  // .axis-subtitle {
+  //       font-family: SourceSansPro-Light, Source Sans Pro;
+  //       font-weight: 300;
+  //       fill: white;
+  // }
+
+  // .tick-label {
+  //       font-family: SourceSansPro-Light, Source Sans Pro;
+  //       font-weight: 300;
+  //       fill: white;
+  //       font-size: .9em;
+  // }
+  // .hex-container {
+  //   text-align: center;
+  // }
+  // #hex-map {
+  //   padding: 0em; //1em
+  //   width: 80vw;
+  //   height: auto;
+  // }
 </style>

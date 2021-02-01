@@ -3696,8 +3696,8 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #202226; //#1E1F23
-$boxCharcoal: #1a1a1f; //#28292D
+$backgroundCharcoal: #292b30; //#1E1F23
+$boxCharcoal: #1a1b1c; //#28292D #171717
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -3707,7 +3707,7 @@ $darkBlue: #192c42; //#0F2237 #19334f #122438
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67; //
+$grayBlue: #576069; //
 
 // Old colors
 $monotoneBlue1: #e9eced;
@@ -3754,16 +3754,16 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .middle {
-      opacity: .4;
+      opacity: .35;
     }
 
     .shallow {
-      opacity: .5;
+      opacity: .45;
     }
 
      .ocean {
         fill: $darkBlue; //$darkBlue
-        stroke: #3a506b; //$darkBlue
+        stroke: #384b63; //$darkBlue #3a506b
         stroke-width: .4px;
         stroke-opacity: .8;
     }
@@ -3909,7 +3909,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .water-label {
         font-size: 7.5pt;
         font-weight: 100;
-        fill: #255270; //$grayBlue #2e4969
+        fill: #2f5b7a; //$grayBlue #2e4969 #255270
 
     }
 
@@ -3921,12 +3921,12 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .delaware-water-label text {
       /* fill: #5a98a3; */
       font-size: 8pt;
-      fill: #305f80; //$grayBlue #4a6585
+      fill: #3a7094; //$grayBlue #4a6585
     }
     .ocean-label {
         font-weight: 200;
         font-size: 16px;
-        fill: #1a4663; //$grayBlue
+        fill: #306082; //$grayBlue #1a4663
         opacity: .8;
     }
 
@@ -3962,18 +3962,18 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .scale-bar-label {
       font-size: 7pt;
       font-weight: 500;
-      fill: #204d6b;
+      fill: #2e5f82;
       letter-spacing: .5px;
     }
   /* scale bar lines */
     .cls-80 {
-        stroke: #204d6b;
+        stroke: #2e5f82;
     }
 
 
   .north-arrow {
-    color: #1a4663;
-    fill: #1a4663;
+    color: #1e4e6e;
+    fill: #1e4e6e; //#1a4663
     stroke: none;
   }
 
