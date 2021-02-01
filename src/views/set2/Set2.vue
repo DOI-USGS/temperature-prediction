@@ -23,12 +23,7 @@
           <div
             id="DRB_map_c2p1"
             class="figure map"
-          >
-            <svg
-              id="map_c2p1"
-              class="map_c2p1 map"
-            />
-          </div>
+          />
         </div>
       </div>
       
@@ -49,9 +44,7 @@
         </div>
         <div class="figure-content">
           <div class="figure chart">
-            <div id="barChart_c2p1">
-              <svg class="c2p1 barChart chart" />
-            </div>
+            <div id="barChart_c2p1" />
           </div>
         </div> 
       </div>
@@ -121,9 +114,7 @@
         <div
           id="DRB_map_c2p2"
           class="map mm-grid-item"
-        >
-          <svg class="map_c2p2 map" />
-        </div>
+        />
         <div
           id="matrixChart_c2p2"
           class="matrix mm-grid-item"
@@ -15599,27 +15590,17 @@
               .tickSize(null)
               .tickValues(null);
 
-          // //create new svg container for the ch 2 panel 1 map
-          // this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
-          //     .append("svg")
-          //     .attr("class", "map_c2p1 map")
-          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
-          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
-
-          // set viewbox for existing svg container for the ch 2 panel 1 map
-          this.map_c2p1 = self.d3.select("#map_c2p1")
+          //create new svg container for the ch 2 panel 1 map
+          this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
+              .append("svg")
+              .attr("class", "map_c2p1 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
-          // //create new svg container for the ch 2 panel 2 map
-          // this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
-          //     .append("svg")
-          //     .attr("class", "map_c2p2 map")
-          //     .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
-          //       (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
-          
-          // set viewbox for existing svg container for the ch 2 panel 2 map
-          this.map_c2p2 = self.d3.select(".map_c2p2")
+          //create new svg container for the ch 2 panel 2 map
+          this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
+              .append("svg")
+              .attr("class", "map_c2p2 map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
@@ -15639,7 +15620,7 @@
 
           // First set of data and scripts to generate all Ch2 maps and Ch2 panel 1 bar chart
           let promises_1 = [self.d3.csv("data/segment_maflow.csv"),
-            self.d3.csv(self.publicPath + "data/source_annual_count.csv", self.type), // process data for stacked bar chart as it is loaded
+            self.d3.csv(self.publicPath + "data/source_annual_count.csv", self.type), // process data for bar chart as it is loaded
             self.d3.json(self.publicPath + "data/topojson/segment_data.json"),
             self.d3.json(self.publicPath + "data/topojson/unique_drb_sites.json"),
             self.d3.json(self.publicPath + "data/topojson/DelawareBay.json"),
@@ -15668,7 +15649,7 @@
           ];
           Promise.all(promises_3).then(self.callback_3); 
         },
-        // Function to process data for stacked bar chart
+        // Function to process data for bar chart
         type(d, i, columns) {
           let t = 0;
           for (i = 1, t; i < columns.length; ++i)
@@ -15887,15 +15868,14 @@
             self.map_c2p1.append("g").call(self.scaleBarBottom_c2);
         },
         setBarChart_c2p1(csv_source_count) {
-          // // append svg to div
-          // let svgChart = this.d3.select("#barChart_c2p1")
-          //     .append("svg")
-          //     .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
-          //       (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
-          //     .attr("class", "c2p1 barChart chart")
+          const self = this;
 
-          // set viewbox for existing svg
-          let svgChart = this.d3.select(".c2p1.barChart.chart")
+          // append svg to div
+          let svgChart = this.d3.select("#barChart_c2p1")
+              .append("svg")
+              .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
+                (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
+              .attr("class", "c2p1 barChart chart")
               .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
                 (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
           let g = svgChart.append("g")
@@ -15910,46 +15890,36 @@
 
           // make y scale
           let y = this.d3.scaleLinear()
+              // define range of output values
               .range([this.chart_height, 0]);
 
-          // set colors
-          let z = this.d3.scaleOrdinal()
-              .range(["#FAB62F", "#FAB62F"]); // all yellow
-
-          // stack to create an array for each of the series in the data
-          let stack = this.d3.stack();
-
-          // load processed data
+          // // load processed data
           let data = csv_source_count
 
           // set x domain - create an array of the two site agency categories
           x.domain(data.map(function(d) { return d.year; }));
 
-          // set y domain
+          // set y domain (range of input values)
           y.domain([0, this.d3.max(data, function(d) { return d.total })]).nice();
 
-          // remove the year column from the data
-          z.domain(data.columns.slice(1));
-
           // set up the series
-          g.selectAll(".series")
-              // keys for the stack are all but the first column
-              .data(stack.keys(data.columns.slice(1))(data))
-              // each agency series is given its own g
-              .enter().append("g")
-              .attr("class", "series")
-              // keys passed to the z domain to be assigned a color
-              .attr("fill", function(d) { return z(d.key); })
-              .selectAll("rect")
-              .data(function(d) { return d;})
-              .enter().append("rect")
+          let bars = g.selectAll(".bar")
+              // bind data to element
+              .data(data)
+              // create each element
+              .enter()
+              // append a rectangle for each element
+              .append("rect")
+              // assign a class to each element
+              .attr("class", "bar_total")
+              // assign fill color
+              .attr("fill", "#FAB62F")
               // set x attribute based on year
-              .attr("x", function(d) { return x(d.data.year); })
-              // from the slice method d is a pair of coordinates, the upper and lower
-              // bounds of the area to be displayed. This sets the upper y value
-              .attr("y", function(d) { return y(d[1]); })
+              .attr("x", function(d) { return x(d.year); })
+              // set y attribute
+              .attr("y", function(d) { return y(d.total); })
               // this calculates the height down from the starting point
-              .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+              .attr("height", function(d) { return (self.chart_height - y(d.total)); })
               // calculate width for each band
               .attr("width", x.bandwidth())
 
@@ -15975,7 +15945,7 @@
               // offset axis slightly to align closer to last bar
               .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
-              .call(this.d3.axisRight(y).ticks(2, "s").tickSize(- this.chart_width))
+              .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
 
           // place and rotate the y axis label
@@ -15990,37 +15960,8 @@
               //.attr("transform", "translate(25, 0)")
               .attr("transform", "rotate(-90)")
               
-
           // set the tick mark lines to background color
           svgChart.selectAll(".tick line").attr("stroke", "#1a1b1c").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
-
-          // //  make the legend
-          // let legend = g.selectAll(".legend")
-          //     // include all but the first column in the legend
-          //     .data(data.columns.slice(1).reverse())
-          //     // append an item for each series
-          //     .enter().append("g")
-          //     .attr("class", "c2p1 barChart legend")
-          //     .attr("transform", function(d, i) {
-          //       return "translate(" + 0 + "," + ((i+1.5) * 15) + ")";
-          //     })
-
-          // // append a rectangle for each series
-          // legend.append("rect")
-          //     .attr("x", 14)
-          //     .attr("width", 7)
-          //     .attr("height", 7)
-          //     // set color based on z attribute
-          //     .attr("fill", z);
-
-          // // append a label for each rectangle
-          // legend.append("text")
-          //     .attr("x", 27)
-          //     .attr("y", 4)
-          //     .attr("dy", ".35em")
-          //     .attr("text-anchor", "start")
-          //     // set text as column name
-          //     .text(function(d) { return d; });
 
         },
         setMap_c2p2(){

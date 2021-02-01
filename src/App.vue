@@ -189,6 +189,9 @@ h3{
         padding: 10px;
     }  
   }
+  .text-content.move-up {
+    padding-bottom: 5px;
+  }
 
   .box {
     background-color: $boxCharcoal;
