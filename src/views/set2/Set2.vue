@@ -15554,7 +15554,7 @@
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
-              .center([0, 40.688894445]) //40.658894445
+              .center([0, 40.668894445]) //40.658894445
               .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
               .scale(this.map_height * 16)
@@ -16972,12 +16972,12 @@
           }
           // dim reservoirs, bay, and river segments  //EXCEPT NOW I MADE IT STAY THE SAME COLOR! Can revert back if we decide we wlike it.
           // this.d3.selectAll(".c2p2.reservoirs")
-          //     .style("fill", "#4F5C67")
-          //     .style("stroke", "#4F5C67")
+          //     .style("fill", "#576069")
+          //     .style("stroke", "#576069")
           // this.d3.selectAll(".c2p2.delaware_bay")
-          //     .style("fill", "#4F5C67")
+          //     .style("fill", "#576069")
           // this.d3.selectAll(".c2p2.river_segments")
-          //     .style("stroke", "#4F5C67")
+          //     .style("stroke", "#576069")
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat)
@@ -17025,18 +17025,18 @@
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
           this.d3.selectAll(".c2p2.river_segments.seg" + data.properties.seg_id_nat) 
               .attr("filter","None")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#4F5C67")
-              .style("stroke", "#4F5C67")
+              .style("fill", "#576069")
+              .style("stroke", "#576069")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#4F5C67")
+              .style("fill", "#576069")
               .lower()
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -17114,7 +17114,7 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
               .style("stroke", "#1a1b1c")
@@ -17122,11 +17122,11 @@
               .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p2.reservoirs")
-              .style("fill", "#4F5C67")
-              .style("stroke", "#4F5C67")
+              .style("fill", "#576069")
+              .style("stroke", "#576069")
               .lower()
           this.d3.selectAll(".c2p2.delaware_bay")
-              .style("fill", "#4F5C67")
+              .style("fill", "#576069")
               .lower()
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
@@ -17249,18 +17249,18 @@
           // un-dim river segments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#4F5C67")
-              .style("stroke", "#4F5C67")
+              .style("fill", "#576069")
+              .style("stroke", "#576069")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#4F5C67")
+              .style("fill", "#576069")
               .lower()
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p3.matrixBkgdRect")
@@ -17326,12 +17326,12 @@
               .raise()
           // dim reservoirs, bay, and river segments
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#4F5C67") //#164152
-              .style("stroke", "#4F5C67")
+              .style("fill", "#576069") //#164152
+              .style("stroke", "#576069")
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#4F5C67")
+              .style("fill", "#576069")
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -17377,7 +17377,7 @@
           // un-dim river segments, reservoirs, and bay
           // lower elements as needed
           this.d3.selectAll(".c2p3.river_segments")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
               .style("stroke", "#1a1b1c")
@@ -17385,11 +17385,11 @@
               .style("opacity", 0)
               .lower()
           this.d3.selectAll(".c2p3.reservoirs")
-              .style("fill", "#4F5C67")
-              .style("stroke", "#4F5C67")
+              .style("fill", "#576069")
+              .style("stroke", "#576069")
               .lower()
           this.d3.selectAll(".c2p3.delaware_bay")
-              .style("fill", "#4F5C67")
+              .style("fill", "#576069")
               .lower()
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
@@ -17401,6 +17401,21 @@
 </script>
 
 <style scoped lang="scss">
+
+// IMPORT COLORS
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #576069; //#4F5C67
+
 #section_2 {
   margin-bottom: 0;
   text-align: left;
@@ -17426,7 +17441,7 @@
   }
 
   .inset-viz-subtitle {
-    fill: #4F5C67; //$offWhite
+    fill: $grayBlue; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17482,7 +17497,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
@@ -17516,21 +17531,10 @@
     display: flex;
     max-height: 100%;
   }
-  .annotation-text {
-    fill: #c3cccf;
-    font-size: 0.5em;
-    font-style: italic;
-  }
-  .annotation-text {
-    fill: #c3cccf;
-    font-size: 0.5em;
-    font-style: italic;
-  }
 }
 </style>
 
 <style lang="scss">
-
 // IMPORT COLORS
 $backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
 $boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
@@ -17545,14 +17549,13 @@ $mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #AAD1EC;
 $grayBlue: #576069; //#4F5C67
 
-
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 .label, .domain{
   color: $grayBlue; //#285C70
   font-size: 0.6em;
 }
 .c2p2.cellText {
-  font-size: 0.45em;
+  font-size: 0.49em;
   //text-anchor: middle;
 }
 
