@@ -2690,7 +2690,7 @@
 
             // string keys to modify chart appearance
             chartState: {},
-            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
             chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
@@ -2725,6 +2725,8 @@
             scroller: null,
             step: 0, // causing elements to refresh at step 0
             current_step: null,
+            last_step: 70,
+            now_step: null,
 
             // flubber
             flubber_dict: {},
@@ -2796,7 +2798,7 @@
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
           this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
-          this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
+          this.step_ann = this.step_rmse + 3; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
@@ -2836,7 +2838,7 @@
             this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart - default is an error chart to start
-            this.chartState.dataset = this.error_data;
+  /*           this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
@@ -2845,7 +2847,7 @@
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
             this.chartState.alpha = 1;
-            this.chartState.aDecay = 0.1;
+            this.chartState.aDecay = 0.1; */
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -3013,6 +3015,7 @@
               this.obs_pos = 30;
                break;
             case this.step_rmse:
+            case this.step_rmse+1:
               this.label_o = 0;
               this.label_o_rmse = 1;
               this.o_pred = 0;
@@ -3140,7 +3143,31 @@
               this.model_current = '  quantifies model prediction error';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              break;
+            case this.step_rmse+1:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.low;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
+              break;
+             case this.step_rmse+2:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.high;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3154,7 +3181,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3170,7 +3197,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3184,7 +3211,7 @@
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3198,7 +3225,7 @@
               this.model_current = ': ANN + time + space';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3210,10 +3237,10 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
-              this.model_current = ': ANN + time + space + knowledge';
+              this.model_current = ': ANN + time + space + physics';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2);
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3530,14 +3557,24 @@
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
           
-          if (this.step >= this.step_error_exp)
+          if (this.step >= this.step_error_exp) {
 
-          ////////////////
-          // initiate force simulation
-          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+            ////////////////
+            // initiate force simulation
+            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(1))
+            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+
+          // tick to make sure dots are poistioned on first draw
+           self.simulation
+           .alpha(this.chartState.alpha)
+           .alphaDecay(this.chartState.aDecay)
+           .velocityDecay(0.6)
+           .restart()
+            .on("tick", self.tick)
+
+          };
 
           // define for updating axes and labels
             this.time_fade = 500;
@@ -3770,7 +3807,7 @@
           // define force velocity and ticking
 
          // array of transition steps
-          var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          var step_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
 
           // tick simulation only if the active step has a chart transition
           if (step_transitions.indexOf(this.step) !== -1){
@@ -3797,6 +3834,7 @@
         // add class on enter, update charts based on step
         handleStepEnter(response) {
           const self = this;
+          this.now_step = this.last_step+1;
 
           // update step variable to match step in view
           this.step = response.index;
@@ -3814,7 +3852,7 @@
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.aDecay = 0.05;
           }
            if (this.step === this.step_error_obs ) {
             this.chartState.radius = 0;
@@ -3825,9 +3863,24 @@
           if (this.step === this.step_rmse) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
-             this.chartState.strengthr = 2;
+             this.chartState.strengthr = 1;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (this.step === this.step_rmse+1) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
+
+          }
+                    if (this.step === this.step_rmse+2) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
           }
 
           // intro beeswarm, adding experiments
@@ -3916,7 +3969,6 @@
                 self.fadeIn(this.axis_arrow);
                 self.fadeIn(this.axis_label_rmse, this.time_fade);// add rmse accurate to inaccurate labels
                 self.fadeIn(this.legend_model, this.time_fade); // show rmse model type
-
               } else if (this.step == this.step_ann) {
                 // half of rmse legend appears for beeswarm
                 self.fadeIn(this.legend_training, this.time_fade) 
@@ -3965,6 +4017,7 @@
             self.fadeOut(this.axis_label_rmse, this.time_fade);
             self.fadeOut(this.axis_arrow, this.time_fade);
             self.fadeOut(this.legend_model, this.time_fade);
+
           } else if (this.step == this.step_ann) {
             // half of legend for beeswarm
              self.fadeOut(this.legend_training, this.time_fade) 
@@ -3979,14 +4032,12 @@
           element
           .transition()
           .duration(time)
-          .attr("opacity",0)
           .style("opacity",0)
         },
          fadeIn(element, time) {
           element
           .transition()
           .duration(time)
-          .attr("opacity",1)
           .style("opacity",1)
         }
     }
