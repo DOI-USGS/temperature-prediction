@@ -79,8 +79,8 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #1E1F23;
-$boxCharcoal: #28292D;
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
 $offWhite: #F1F1F1;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
@@ -88,9 +88,9 @@ $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
-$mediumBlue: #63B1E6;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #AAD1EC;
-$grayBlue: #4F5C67;
+$grayBlue: #576069; //#4F5C67
 
 // Old colors
 $monotoneBlue1: #e9eced;
@@ -152,9 +152,9 @@ h3{
 }
 
 .overall-title {
-  padding-top: 20vh;
+  padding-top: 0vh;
   margin: 0 auto;
-  background: $footerBlue;
+  // background: $footerBlue;
   overflow-x: hidden;
   @media screen and (max-width: 600px) {
     padding: 0 20px 0 20px;
@@ -197,7 +197,7 @@ h3{
     margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
-        margin: 10px;
+        margin: 20px;
     } 
   }
 
@@ -206,7 +206,7 @@ h3{
     border-radius: 5px;
     max-width: 95%;
     margin: 0 auto;
-    padding: 10px;
+    padding: 15px;
     @media screen and (max-width: 600px) {
         margin: 10px;
     } 
@@ -304,6 +304,9 @@ h3{
 .viz-title-wrapper {
   max-width: 100%;
   z-index: 100;
+  @media screen and (max-width: 600px) {
+        max-width: 90%;
+  }
 }
 
 .viz-title {
@@ -312,7 +315,10 @@ h3{
   font-weight: 700;
   color: $offWhite;
   margin-bottom: 0;
-
+  @media screen and (max-width: 600px) {
+       font-size: 1.2em;
+       line-height: 1.2em;
+  }
 }
 
 .viz-subtitle {
@@ -321,15 +327,18 @@ h3{
   text-align: left;
   font-weight: 100;
   margin-bottom: 0;
+  @media screen and (max-width: 600px) {
+        font-size: .6em;
+  }
 }
 
 .legend-text {
-    fill: #707070;
+    fill: $grayBlue;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 16px;
   }
 .explainer-minor-text {
-    fill: #707070;
+    fill: $grayBlue; //#707070
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 1.2em;
   }

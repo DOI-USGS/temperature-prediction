@@ -10,7 +10,7 @@ export default {
         paragraph6: "The top 1% of measured river reaches - only about 5 sites - makes up nearly 20% of all data. There are whole chunks of space and time where we don't know anything about the river, where we are \"in the dark.\"",
         tiptextMobile: "Watch below as the stream reaches in the Basin light up if they were monitored for temperature in each of the last forty years.",
         tiptextDesktop: "Explore the availability of temperature observations across the Delaware River Basin by selecting a river reach (on the left) or a year (on the right) to explore where and when we have the most information.",
-        paragraph8: "To show how gaps in temperature observations in space and time might impact our understanding of the river, we've simplified data availability into a matrix.",
+        paragraph8: "To show how gaps in temperature observations in space and time might impact our understanding of stream temperature dynamics, we can represent the availability of data as a matrix with two axes: space and time.",
         title3: "Water Temperature Dynamics",
         paragraph10: "Our understanding of temperature dynamics in the basin gets even more complicated by the fact than not all streams behave the same way. Features of the landscape can have large effects on water temperature that create differences in temperature dynamics. Groundwater inputs, reservoirs, and urban areas all have distinct temperature signatures.",
         paragraph11: "If we look at a single year of data, we can see that stream temperatures are not uniform throughout the basin.",

@@ -34,8 +34,20 @@
 
 <style scoped lang="scss">
 // IMPORT COLORS
-$backgroundCharcoal: #141414; //#171717
-$offWhite: rgb(241, 241, 241);
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #576069; //#4F5C67
+
+// OLD COLORS
 $monotoneBlue1: #e9eced;
 $monotoneBlue2: #c3cccf;
 $monotoneBlue3: #88989f;
