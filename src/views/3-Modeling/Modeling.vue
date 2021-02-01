@@ -2619,28 +2619,6 @@
           height="100%"
           xmlns="http://www.w3.org/2000/svg" 
         >
-          <!-- <g>
-            <path
-              class="arrow"
-              d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"
-            />
-            <path
-              class="arrow"
-              d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"
-            />
-          </g>
-          <g>
-            <path
-              class="arrow"
-              d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"
-            />
-            <path
-              class="arrow"
-              d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"
-            />
-          </g>
- -->
-
         </svg>
       </div>
     </figure>
@@ -2722,7 +2700,7 @@
             o_train: 0, // legend training data
             o_exp: 0, // legend added experiments
             o_arrow: 0,
-            o_ermse_title: 0,
+            o_rmse_title: 0,
             model_current:  '',
             obs_pos: 0,
 
@@ -3162,7 +3140,7 @@
               this.model_current = '  quantifies model prediction error';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3176,7 +3154,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3192,7 +3170,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3206,7 +3184,7 @@
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3220,7 +3198,7 @@
               this.model_current = ': ANN + time + space';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3235,7 +3213,7 @@
               this.model_current = ': ANN + time + space + knowledge';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2-50);
+              this.chartState.axis_x_on_y = (this.height/2);
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3935,7 +3913,7 @@
                 self.fadeOut(this.legend_predicted, this.time_fade); // remove error legend
                 self.fadeOut(this.legend_observed, this.time_fade); // remove error legend
                 //arrow appears for rmse axis labelling
-                self.fadeIn(this.axis_arrow)
+                self.fadeIn(this.axis_arrow);
                 self.fadeIn(this.axis_label_rmse, this.time_fade);// add rmse accurate to inaccurate labels
                 self.fadeIn(this.legend_model, this.time_fade); // show rmse model type
 
@@ -4050,8 +4028,12 @@ article {
 }
 .step-container {
   width:100vw;
-
 }
+
+.viz-title  {
+  margin-top: 70vh;
+}
+
 .step {
   position: relative;
   width: 90%;
@@ -4076,10 +4058,9 @@ article {
   left: 0;
   padding-top: 0px;
 
-/*   .step[data-scrollama-index='14'] {
-  height: 10vh;
-  padding-top: 5vh;
-} */
+  .step:nth-last-child {
+  background-color: red;
+}
 }
 
 //start at beginning

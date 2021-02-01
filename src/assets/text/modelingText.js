@@ -76,8 +76,7 @@ export default {
                 'method': "Prediction error (the difference between predicted temperatures and measured observations) is small when the model can accurately predict the observed water temperature.",
                 'flubber_id': '',
                 'bees_id': 'step_error_obs'
-            }],
-        "Evaluating overall model accuracy": [
+            },
             {
                 'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors – for example, by taking the root mean squared error (RMSE). Small errors translate to low RMSE, indicating the model is accurately predicting water temperature. Large errors and high RMSE indicate the model is doing a poor job of predicting water temperature dynamics.",
                 'flubber_id': '',
@@ -86,8 +85,7 @@ export default {
                 'method': "We can use RMSE to compare different models or assess accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the Basin based on all available data in the training period.",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
-            }],
-        "Model performance under restricted data availability": [
+            },
             {
                 'method': "But recall that the Delaware River Basin is one of the most observed basins in the U.S. How does the ANN perform when we don't have a lot of training data?",
                 'flubber_id': '',
