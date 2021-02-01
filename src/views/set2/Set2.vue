@@ -23,8 +23,7 @@
           <div
             id="DRB_map_c2p1"
             class="figure map"
-          >
-          </div>
+          />
         </div>
       </div>
       
@@ -45,8 +44,7 @@
         </div>
         <div class="figure-content">
           <div class="figure chart">
-            <div id="barChart_c2p1">
-            </div>
+            <div id="barChart_c2p1" />
           </div>
         </div> 
       </div>
@@ -116,8 +114,7 @@
         <div
           id="DRB_map_c2p2"
           class="map mm-grid-item"
-        >
-        </div>
+        />
         <div
           id="matrixChart_c2p2"
           class="matrix mm-grid-item"
