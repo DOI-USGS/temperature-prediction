@@ -1,29 +1,12 @@
 <template>
   <section id="importance">
-    <title
-      id="page-title"
-      class="page-title"
-    >
-      Temperature Prediction Modeling in the Delaware River Basin
-    </title>
-    <desc id="page-desc">
-      A three-chapter explainer on how and why the USGS monitors and models stream temperature in the Delaware River Basin.
-    </desc>
-    <h1 class="overall-title">
-      Temperature Prediction Modeling in the Delaware River Basin
-    </h1>
+    <div class="text-content page-title section-title-wrapper">
+      <p class="chapter">
+        Chapter 1
+      </p>
+      <h2>The Importance of Predicting Stream Temperature</h2>
+    </div>
     <div class="text-content">
-      <p class="byline">
-        U.S. Geological Survey
-      </p>
-      <p class="byline">
-        Water Mission Area's Vizlab
-      </p>
-      <br>
-      <div class="viz-title">
-        <h3>Why is predicting stream temperature important?</h3>
-      </div>
-      <br>
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>
@@ -50,14 +33,27 @@
 </script>
 
 <style scoped lang="scss">
-.overall-title {
-  background: #285C70;
-  opacity: 0.7;
-}
-.byline {
-  font-style: italic;
-  font-weight: 100;
-  font-size: .8em;
-  color: #285C70; //#808080
-}
+// IMPORT COLORS
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #576069; //#4F5C67
+
+// OLD COLORS
+$monotoneBlue1: #e9eced;
+$monotoneBlue2: #c3cccf;
+$monotoneBlue3: #88989f;
+$monotoneBlue4: #4c656e;
+$monotoneBlue5: #285C70; //#10313e
+$monotoneBlueTransparent: rgba(76,101,110, .6);
+
+
 </style>

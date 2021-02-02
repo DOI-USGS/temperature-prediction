@@ -10,7 +10,7 @@ export default new Router({
             path: '/',
             name: 'nonImportance',
             component: () =>
-                    import('@/views/1-Importance/Importance.vue')
+                    import('@/views/1-Importance/Importance.vue/')
         },
         {
             path: '/importance',
