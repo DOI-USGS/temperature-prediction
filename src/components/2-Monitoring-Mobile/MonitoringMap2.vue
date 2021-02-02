@@ -5,7 +5,7 @@
   >
     <img
       class="animated-map-gif"
-      src="./../../assets/components/Ch2_TemporalSparsity_Equal_v1.gif"
+      src="./../../assets/components/c2p2_matrix_temporal.gif"
     >
   </div>
 </template>
