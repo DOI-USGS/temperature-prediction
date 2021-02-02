@@ -281,17 +281,24 @@ h3{
     }
 
   }
+  .map_matrix {
+    justify-self: center;
+    min-width: 250px;
+    max-width: 600px;
+    max-height: 90vh;
+    // flex: 1 1 30%;
+  }
   .chart {
     min-width: 600px;
     flex: 1 1 40%;
   }
 
   .matrix {
-    min-width: 400px;
-    max-width: 700px;
-    flex: 1 1 50%;
-    padding: 10px;
     justify-self: stretch;
+    min-width: 400px;
+    // max-width: 700px;
+    max-height: 90vh;
+    // flex: 1 1 50%;
   }
 
 // Specific Design Elements for Charts and Maps

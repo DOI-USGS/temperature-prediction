@@ -113,7 +113,7 @@
       >
         <div
           id="DRB_map_c2p2"
-          class="map mm-grid-item"
+          class="map_matrix mm-grid-item"
         />
         <div
           id="matrixChart_c2p2"
@@ -174,7 +174,7 @@
       <div class="map-matrix-grid-container">
         <div
           id="DRB_map_c2p3"
-          class="map mm-grid-item"
+          class="map_matrix mm-grid-item"
         />
         <div
           id="matrixChart_c2p3"
@@ -15527,7 +15527,7 @@
         this.chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
         this.chart_height = window.innerHeight * 0.25 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
-        this.matrix_height_c2 = window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
+        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom;//window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
       
         this.setPanels();  // begin script when window loads
       },
@@ -15548,14 +15548,14 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 400;
+          this.map_width = 300;
           this.map_height = window.innerHeight * 0.5;
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
-              .center([0, 40.668894445]) //40.658894445
-              .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
+              .center([0, 40.678894445]) //40.658894445
+              .rotate([75.413333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
               .scale(this.map_height * 16)
               .translate([this.map_width / 2, this.map_height / 2]);
@@ -15568,7 +15568,7 @@
               .orient(self.d3.geoScaleBottom)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.25) // .15 centered, .45 far right
+              .left(.10) // .15 centered, .45 far right
               .top(.96)
               .units(self.d3.geoScaleKilometers)
               .distance(50)
@@ -15581,7 +15581,7 @@
               .orient(self.d3.geoScaleTop)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.25) // .15 centered, .45 far right
+              .left(.10) // .15 centered, .45 far right
               .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
@@ -15600,14 +15600,14 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2 map")
+              .attr("class", "map_c2p2 map_matrix")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
 
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
-              .attr("class", "map_c2p3 map")
+              .attr("class", "map_c2p3 map_matrix")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
           
@@ -17493,38 +17493,57 @@ $grayBlue: #576069; //#4F5C67
     grid-column: 4;
   }
   .map-matrix-grid-container {
-    padding: 25px;
+    // padding: 25px;
+    // margin: 15px;
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 50% 50%;
+    // align-items: center;
+    // justify-content: center;
+    grid-template-columns: 50px minmax(0, 1fr) minmax(0, 2fr) 50px;
     grid-template-rows: 100%;
     grid-template-areas:
-        "map matrix";
+        "left-border map matrix right-border";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
+    height: 90vh;
+    // max-height: 95vh;
+    @media screen and (max-width: 1000px) {
+      grid-template-columns: 15px minmax(0, 1fr) minmax(0, 2fr) 15px;
+      height: 50vh;
+    }
   }
   .mm-grid-item {
     padding: 0px;
     display: flex;
-    align-self: center;
-
+    // align-items: center;
+    justify-content: center;
+    // text-align: center;
+    // align-self: center;
+    margin: 0 auto;
+    // max-height: 90vh;
+    // min-width: 45vw;
+    // max-height: 90vh;
   }
   #DRB_map_c2p2 {
+    padding: 1em;
     grid-area: map;
     display: flex;
-    max-height: 100%;
+    justify-self: center;
   }
   #matrixChart_c2p2 {
+    padding: 1em;
     grid-area: matrix;
     display: flex;
+    justify-self: stretch;
     max-height: 100%;
+    // max-height: 90vh;
+    // height: 100vh;
   }
   #DRB_map_c2p3 {
     grid-area: map;
     display: flex;
     max-height: 100%;
+    max-width: 100%;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
@@ -17555,7 +17574,7 @@ $grayBlue: #576069; //#4F5C67
   font-size: 0.6em;
 }
 .c2p2.cellText {
-  font-size: 0.49em;
+  font-size: 0.48em;
   //text-anchor: middle;
 }
 
