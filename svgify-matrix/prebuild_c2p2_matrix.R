@@ -30,8 +30,8 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
   # Define some basic configs using the data and SVG size
   max_x <- diff(range_obs_years)
   max_y <- n_segs
-  rect_width <- round(width/(max_x+1),3)
-  rect_height <- height/(max_y+1)
+  rect_width <- round(width/(max_x+1),1)
+  rect_height <- round(height/(max_y+1),4) # `y` precision needs to be higher or there are weird offsets with the horizontal grid
 
   ##### Setup the SVG #####
 
