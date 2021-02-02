@@ -268,6 +268,9 @@ h3{
     padding: 20px;
     align-items: center;
     justify-content: center; 
+    @media screen and (max-width: 600px) {
+      padding: 0px;
+     }
   }
 
   .map {
