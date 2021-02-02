@@ -62,31 +62,6 @@
       <p v-html="text.paragraph6" />
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
-    </div>
-    <div
-      id="matrix-explainer-container"
-      class="explainer-grid-container"
-    >
-      <div
-        id="MatrixExplainerSpace"
-        class="explainer-grid-item"
-      >
-        <MatrixExplainerSpace />
-      </div>
-      <div
-        id="MatrixExplainerTime"
-        class="explainer-grid-item"
-      >
-        <MatrixExplainerTime />
-      </div>
-      <div
-        id="MatrixExplainerColor"
-        class="explainer-grid-item"
-      >
-        <MatrixExplainerColor />
-      </div>            
-    </div>
-    <div class="text-content">
       <p v-html="text.tiptextDesktop" />
     </div>
     <div class="box-matrix">
@@ -105,6 +80,37 @@
             Hover over a column in the matrix to see which reaches have data for a given year.
           </p>
         </div>
+      </div>
+      <div
+        id="matrix-explainer-container"
+        class="hidden"
+      >
+        <div
+          id="MatrixExplainerSpace"
+          class="explainer-grid-item"
+        >
+          <MatrixExplainerSpace />
+        </div>
+        <div
+          id="MatrixExplainerTime"
+          class="explainer-grid-item"
+        >
+          <MatrixExplainerTime />
+        </div>
+        <div
+          id="MatrixExplainerColor"
+          class="explainer-grid-item"
+        >
+          <MatrixExplainerColor />
+        </div>            
+      </div>
+      <div id="button-container">
+        <button 
+          id="matrix-explainer-button"
+          @click="explain"
+        >
+          Show me how to read this
+        </button>
       </div>
       <div
         id="data-availability-container"
@@ -17450,6 +17456,27 @@
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
+        },
+        explain() {
+          const self = this;
+
+          let button = this.d3.select("#matrix-explainer-button");
+          let explainer = this.d3.select("#matrix-explainer-container");
+
+          let visible = explainer.attr("class");
+          
+          if (visible==="hidden") {
+             explainer.classed("hidden", false);
+             explainer.classed("visible", true);
+             button.html("Hide Explanation")
+          } else {
+             explainer.classed("hidden", true);
+             explainer.classed("visible", false);
+             button.html("Show Explanation")
+          }
+         
+          
+
         }
       }
   }
@@ -17457,6 +17484,20 @@
 </script>
 
 <style scoped lang="scss">
+// IMPORT COLORS
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #AAD1EC;
+$grayBlue: #576069; //#4F5C67
+
 #section_2 {
   margin-bottom: 0;
   text-align: left;
@@ -17502,36 +17543,106 @@
     padding-bottom: 1em;
   }
 
-  .explainer-grid-container {
-    padding: 5px;
-    display: grid;
-    grid-template-columns: 1fr auto auto auto 1fr;
-    gap: 0px 10px;
-    width: 100vw;
-    min-width: 0;
-    max-height: 90vh;
-    @media screen and (max-width: 600px) {
-      padding: 10px 0;
-      gap: 0px;
-    }
-  }
-  .explainer-grid-item {
-    padding: 0px;
+  #button-container { 
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 1em;
+  }
+
+  button {
+    text-align: center;
+    margin: 0 40px;
+    font-weight: 100;
+    background-color: transparent;
+    border: 0;
+    box-shadow: 0 1px 0 $mediumBlue;
+    color: $offWhite;
+    position: relative;
+    padding: 6px;
+    margin: 0px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @media (max-width: 600px) {
+      font-size: .7em;
+    }
+  }
+  button:hover {
+    background-color: $mediumBlue;
+    border-radius: 5px;
+    padding: 6px;
+    transition: background-color .2s ease;
+    cursor: pointer;
+  }
+
+  button:active {
+    box-shadow: none;
+    top: 5px;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+
+  #matrix-explainer-button {
+    margin: auto;
+  }
+
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition: visibility 0s, height .5s ease, opacity .5s ease;
+  }
+
+  .visible {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    transition: visibility 0s, height .5s ease, opacity .5s ease;
+  }
+
+  #matrix-explainer-container {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+      "header header header"
+      "space time color";
+    gap: 0px 10px;
+    width: 100%;
+    min-width: 300px;
+    max-height: 90vh;
+    padding: 0 100px;
+    @media screen and (max-width: 600px) {
+      padding: 0 10px;
+      gap: 0px;
+    }
+  }
+
+  .explainer-grid-item {
+    padding: 0px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
     text-align: center;
     min-width: 25vw;
     max-width: 350px;
   }
+
   #MatrixExplainerSpace {
-    grid-column: 2;
+    grid-area: space;
   }
+
   #MatrixExplainerTime {
-    grid-column: 3;
+    grid-area: time;
   }
+
   #MatrixExplainerColor {
-    grid-column: 4;
+    grid-area: color;
   }
   .map-matrix-grid-container {
     padding: 25px;
