@@ -108,7 +108,7 @@
       <div id="button-container">
         <button 
           id="matrix-explainer-button"
-          v-on:click="explain"
+          @click="explain"
         >
           Show me how to read this
         </button>
