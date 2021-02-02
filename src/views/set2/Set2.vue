@@ -110,8 +110,8 @@
       >
         <svg class="c2p2 matrix_c2p2 matrix">
           <!--  transform="translate(35,50) scale(0.9, 0.9)" -->
-          <svg class="dummy_matrix">
-            <DummyMatrix />
+          <svg class="prebuilt_c2p2_matrix matrix">
+            <PrebuiltC2P2Matrix />
           </svg>
         </svg>
       </div>
@@ -15447,7 +15447,7 @@
   import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
-  import DummyMatrix from "./../../components/2-Monitoring/DummyMatrix";
+  import PrebuiltC2P2Matrix from "./../../components/2-Monitoring/PrebuiltC2P2Matrix";
 
   export default {
       name: 'Set2',
@@ -15456,7 +15456,7 @@
         MatrixExplainerSpace,
         MatrixExplainerTime,
         MatrixExplainerColor,
-        DummyMatrix,
+        PrebuiltC2P2Matrix,
         Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
         Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
       },
@@ -15504,7 +15504,7 @@
         this.chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
         this.chart_height = window.innerHeight * 0.25 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
-        this.matrix_height_c2 = window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
+        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; //window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
       
         this.setPanels();  // begin script when window loads
       },
@@ -16230,9 +16230,10 @@
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
 
-          let dummyMatrix = self.d3.select(".dummy_matrix")
-              .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
-                (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
+          let prebuiltMatrix_c2p2 = self.d3.select(".prebuilt_c2p2_matrix")
+              .attr("transform", "translate(35,50)")
+              .attr("viewBox", [0, 0, (self.matrix_width_c2),
+                (self.matrix_height_c2)].join(' '))
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
