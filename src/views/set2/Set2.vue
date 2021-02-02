@@ -17410,16 +17410,12 @@
           let visible = explainer.attr("class");
           
           if (visible==="hidden") {
-             console.log(visible, "hidden??")
              explainer.classed("hidden", false);
              explainer.classed("visible", true);
-            //  explainer.attr("display","grid")
              button.html("Hide Explanation")
           } else {
-             console.log(visible, "visible!")
              explainer.classed("hidden", true);
              explainer.classed("visible", false);
-            //  explainer.attr("display","none")
              button.html("Show Explanation")
           }
          
