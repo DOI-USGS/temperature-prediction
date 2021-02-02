@@ -125,10 +125,10 @@
         class="matrix mm-grid-item"
         >
           <svg class="c2p2 matrix_c2p2 matrix">
-            <!--  transform="translate(35,50) scale(0.9, 0.9)" -->
-            <svg class="prebuilt_c2p2_matrix matrix">
-              <PrebuiltC2P2Matrix />
-            </svg>
+            <!--  transform="translate(35,50)" -->
+              <svg class="prebuilt_c2p2_matrix">
+                <PrebuiltC2P2Matrix />
+              </svg>
           </svg>
         </div>
       </div>  
@@ -15507,6 +15507,7 @@
           timestep_c2p2: 'year',
           myGroups_c2p2: null,
           myVars_c2p2: null,
+          availabilityColor: null,
           myGroups_c2p3: null,
           myVars_c2p3: null,
           temporalCountMax_c2p2: null,
@@ -15717,6 +15718,7 @@
               self.segmentDict[segment.properties.seg_id_nat]['day_count'][day_key] = segment.properties.day_count[day_key]
             }
           })
+          console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -15928,7 +15930,7 @@
           //     .style("fill", "None")
           // // append group of segments WITHOUT data to c2p1 map (ONCE PER MAP)
           // self.map_c2p1.append("g").attr("class","c2p1_segments")
-          //   .style("stroke", "#285C70")
+          //   .style("stroke", "#576069")
           //   .append("use").attr("xlink:href","#drbSegments")
           
           // Otherwise, if defining separate group for EVERY segment
@@ -15963,7 +15965,7 @@
             // append group of single segment to c2p1 map (ONCE PER MAP)
             let href_id = '#seg' + segment_id
             self.map_c2p1.append("g").attr("class",function(d) {return 'c2p1 seg' + segment_id})
-              .style("stroke", "#285C70")
+              .style("stroke", "#576069")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16152,7 +16154,7 @@
                 }
                 return seg_class
               })
-              .style("stroke", "#285C70")
+              .style("stroke", "#576069")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16235,7 +16237,8 @@
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
 
           let prebuiltMatrix_c2p2 = self.d3.select(".prebuilt_c2p2_matrix")
-              .attr("transform", "translate(35,50)")
+              .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
               .attr("viewBox", [0, 0, (self.matrix_width_c2),
                 (self.matrix_height_c2)].join(' '))
 
@@ -16251,7 +16254,8 @@
           self.temporalCountMax_c2p2 = Math.round(Math.max(...domainArrayTemporalCounts));
     
           // build color scale
-          let myColor = self.d3.scaleSequential()
+          // let availabilityColor = self.d3.scaleSequential()
+          self.availabilityColor = self.d3.scaleSequential()
               .interpolator(self.d3.interpolatePlasma) /* interpolatePlasma interpolatec2p2*/
               // .domain([self.temporalCountMax_c2p2,1]) // if INVERTING color scale
               .domain([1, self.temporalCountMax_c2p2]) // if NOT INVERTING color scale
@@ -16275,7 +16279,7 @@
                 return i/(count_list.length-1);
               })
               .attr("stop-color", function(d) {
-                return myColor(d)
+                return self.availabilityColor(d)
               })
 
           // append legend container
@@ -16381,11 +16385,11 @@
           //     })
           //     // style based on # of observations for that segment in that year
           //     .style("fill", function(d) {
-          //       return myColor(d.obs_count);
+          //       return self.availabilityColor(d.obs_count);
           //     })
           //     .style("stroke-width", 0.5)
           //     .style("stroke", function(d){
-          //       return myColor(d.obs_count);
+          //       return self.availabilityColor(d.obs_count);
           //     })
           //     .style("opacity", 1);
 
@@ -16561,6 +16565,17 @@
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p2(d, tooltip);
               })
+
+          // add text labels for each temporal rectangle (x, y, and text content defined on interaction)
+          let cellText = transformedMatrix.selectAll(".text")
+              .data(csv_annual_count)
+              // create an element for each data item
+              .enter()
+              // append text for each element in data
+              .append("text")
+              .attr("class", function(d) {
+                return "c2p2 cellText year" + d.year;
+              })
         },
         setMap_c2p3(){
           const self = this;
@@ -16726,7 +16741,7 @@
           let obsTempMin = Math.round(Math.min(...arrayObsTemps));
 
           // build color scale
-          let myColor = self.d3.scaleSequential()
+          let tempColor = self.d3.scaleSequential()
               .interpolator(self.d3.interpolatePlasma) /* interpolateRdYlBu */
               // .domain([obsTempMax, obsTempMin]) // if INVERTING color scale
               .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
@@ -16750,7 +16765,7 @@
                 return i/(temp_list.length-1);
               })
               .attr("stop-color", function(d) {
-                return myColor(d)
+                return tempColor(d)
               })
 
           // append legend container
@@ -16858,11 +16873,11 @@
               })
               // style based on # of observations for that segment in that year
               .style("fill", function(d) {
-                return myColor(d.temp_c);
+                return tempColor(d.temp_c);
               })
               .style("stroke-width", 0.5)
               .style("stroke", function(d) {
-                return myColor(d.temp_c);
+                return tempColor(d.temp_c);
               })
               .style("opacity", 1);
 
@@ -17016,12 +17031,6 @@
         mouseoverSeg_c2p2(segment_id, tooltip) {
           const self = this;
 
-          // select all *temporal* rectangles and set fill and stroke to none
-          // so they can't be selected
-          this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("fill", "None")
-              .style("stroke", "None")
-
           // build y scale for hover bar chart
           let barMax = this.matrix_height_c2/16
           let yScale_barChart_c2p2 = this.d3.scaleLinear()
@@ -17043,6 +17052,47 @@
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("opacity", 0.8)
               .style("stroke-width", 1);
+          // select all *temporal* rectangles and repurpose for bar chart
+          if (self.segmentDict[segment_id].total_count > 0) {
+              for (let i = 0; i < this.myGroups_c2p2.length; i++) {
+                  let seg_year = this.myGroups_c2p2[i]
+                  let barHeight;
+                  // if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
+                    this.d3.selectAll(".c2p2.matrixTemporalRect.time" + seg_year)
+                        .attr("height", function(i) {
+                            // if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
+                              barHeight = (barMax - yScale_barChart_c2p2(self.segmentDict[segment_id].year_count[seg_year]))+1;
+                              return barHeight;
+                            // }
+                        })
+                        .attr("y", function(d) {
+                            return yScale_matrix_c2p2(segment_id) - barHeight; 
+                        })
+                        // // style based on # of observations for that segment in that year
+                        // .style("fill", "#fcba03")
+                        .style("fill", function(d) {
+                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
+                        })
+                        .style("stroke-width", 0.5)
+                        .style("stroke", function(d){
+                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
+                        })
+                        .style("opacity", 1)
+                        .raise()
+                  // }
+                  this.d3.selectAll(".c2p2.cellText.year" + seg_year)
+                      .attr("y", function(d) {
+                            return yScale_matrix_c2p2(segment_id) - barHeight - 5;
+                        })
+                      .attr("x", 35)
+                      .attr("fill", "None")
+                      .text(function(d) {
+                        return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
+                      })
+                      .attr("fill", "#ffffff")
+                      .raise()
+              }
+          }
           // // select background rectangle and remove filter
           // this.d3.selectAll(".c2p2.matrixBkgdRect")
           //     .attr("filter", "url(#shadow3)")
@@ -17127,24 +17177,30 @@
           // select all *temporal* rectangles and set fill and stroke back
           // to black and raise so that they are selectable
           this.d3.selectAll(".c2p2.matrixTemporalRect")
+              // set y value to 0
+              .attr("y", 0)
+              // set height to height of matrix
+              .attr("height", self.matrix_height_c2)
+              // style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
+              .style("stroke-width", 2)
               .style("stroke", "#1a1b1c")
+              .style("opacity", 0)
               .raise()
           // // resize spatial cells associated with segment
           // this.d3.selectAll(".c2p2.cell.segment" + segment_id) 
           //     .attr("height", yScale_matrix_c2p2.bandwidth())
           //     .attr("y", yScale_matrix_c2p2(segment_id))
-          // // turn off text for cells associated with segment
-          // this.d3.selectAll(".c2p2.cellText.seg" + segment_id) 
-          //     .attr("y", function(d) {
-          //         return yScale_matrix_c2p2(segment_id) - 5; 
-          //     })
-          //     .attr("fill", "None")
+          // turn off text for cells associated with segment
+          this.d3.selectAll(".c2p2.cellText") 
+              .attr("y", 0)
+              .text('')
+              .attr("fill", "None")
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
               // .attr("filter","None")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
               .lower()
           // select mouseovered segment and set to white with a shadow
@@ -17339,7 +17395,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
-              .style("stroke", "#4F5C67")
+              .style("stroke", "#576069")
               .style("opacity", 1)
               .lower()
           // reset filter on background rectangle and lower
@@ -17523,7 +17579,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   .inset-viz-subtitle {
-    fill: #4F5C67; //$offWhite
+    fill: #576069; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
