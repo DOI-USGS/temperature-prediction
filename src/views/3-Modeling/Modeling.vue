@@ -13,14 +13,26 @@
           </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
-        <div id="modeling-intro" class="text-content">
+        <div
+          id="modeling-intro"
+          class="text-content"
+        >
           <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "process-guided deep learning".</p>
           <p>Process-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
           <div id="arrows">            
             <svg id="more-arrows">
-              <polygon class="arrow-top" points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "/>
-              <polygon class="arrow-middle" points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "/>
-              <polygon class="arrow-bottom" points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "/>
+              <polygon
+                class="arrow-top"
+                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+              />
+              <polygon
+                class="arrow-middle"
+                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+              />
+              <polygon
+                class="arrow-bottom"
+                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+              />
             </svg>
             <p>Scroll</p>
           </div>
