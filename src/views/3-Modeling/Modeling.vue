@@ -3289,7 +3289,8 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, "#1E1F23", this.color_exp]);
+            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]);
+
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"]) // took out d002
@@ -3411,6 +3412,25 @@
               .classed("axis-label", true);    
 
             ////////////////////////////// colors + legends
+              // text labels for the rmses
+          this.svg.append("text")             
+              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "left")
+              .text("accurate")
+              .style("fill", "#f1f1f1")
+              .style("font-size", "30px")
+              .attr("opacity", this.label_o_rmse)
+              .classed("rmse-label", true);
+
+            this.svg.append("text")             
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
+              .style("text-anchor", "right")
+              .text("inaccurate")
+              .style("fill", "#f1f1f1")
+              .style("font-size", "30px")
+              .attr("opacity", this.label_o_rmse)
+              .classed("rmse-label", true);
+
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
                 .append("g").classed("legend_color", true)
@@ -3425,7 +3445,7 @@
 
                   var error_fill = this.d3.scaleOrdinal()
                   .domain(["predicted","observed"])
-                  .range([this.color_exp,"#1E1F23"]);
+                  .range([this.color_exp,"#292b30"]);
 
               legend_error.append("text")
                 .text("Temperature")
@@ -4174,6 +4194,19 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
   }
+
+  #bees-chart {
+
+  }
+  .x-axis {
+    fill: #91989e; //$grayBlue
+    color: #91989e; //$grayBlue
+    stroke: #91989e; //$grayBlue
+  }
+   #bees-legend {
+
+  }
+
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
@@ -4188,6 +4221,20 @@ figure.sticky.charts {
   fill:white;
   font-weight: 300;
   font-size: 20px;
+}
+
+.axis-line {
+  stroke-width: 5px;
+}
+.axis-label {
+  fill: #91989e; //$grayBlue
+  font-weight: 300;
+  font-size: 20px;
+}
+.arrow {
+  fill: $offWhite;
+  opacity: 0;
+
 }
 
 .text-annotate {
