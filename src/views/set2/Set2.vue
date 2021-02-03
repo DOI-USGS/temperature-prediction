@@ -121,16 +121,17 @@
           class="map mm-grid-item"
         />
         <div
-        id="matrixChart_c2p2"
-        class="matrix mm-grid-item"
+        id="prebuilt_matrix_c2p2"
+        class="mm-grid-item"
         >
-          <svg class="c2p2 matrix_c2p2 matrix">
-            <!--  transform="translate(35,50)" -->
-              <svg class="prebuilt_c2p2_matrix">
-                <PrebuiltC2P2Matrix />
-              </svg>
+          <svg class="prebuilt_c2p2_matrix matrix">
+              <PrebuiltC2P2Matrix />
           </svg>
         </div>
+        <div
+        id="matrixChart_c2p2"
+        class="mm-grid-item"
+        />
       </div>  
     </div>
     <div class="text-content">
@@ -16224,23 +16225,19 @@
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
 
-          // // append the svg object to the body of the page
-          // let svgMatrix = self.d3.select("#matrixChart_c2p2")
-          //     .append("svg")
-          //     .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
-          //       (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-          //     .attr("class", "c2p2 matrix_c2p2 matrix")
-          
-          // set viewBox for existing svg
-          let svgMatrix = self.d3.select(".matrix_c2p2")
+          // append the svg object to the body of the page
+          let svgMatrix = self.d3.select("#matrixChart_c2p2")
+              .append("svg")
+              .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
+                (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
+              .attr("class", "c2p2 matrix_c2p2 matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
 
           let prebuiltMatrix_c2p2 = self.d3.select(".prebuilt_c2p2_matrix")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .attr("viewBox", [0, 0, (self.matrix_width_c2),
-                (self.matrix_height_c2)].join(' '))
+              .attr("viewBox", [0, 0, 700, 1000].join(' '))
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -17728,6 +17725,13 @@ $grayBlue: #576069; //#4F5C67
     grid-area: matrix;
     display: flex;
     max-height: 100%;
+    z-index: 1;
+  }
+  #prebuilt_matrix_c2p2 {
+    grid-area: matrix;
+    display: flex;
+    max-height: 100%;
+    z-index: 0;
   }
   #DRB_map_c2p3 {
     grid-area: map;
