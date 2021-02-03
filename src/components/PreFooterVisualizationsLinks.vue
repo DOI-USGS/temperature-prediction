@@ -7,10 +7,11 @@
           :href="LinkOne"
         >
           <figure>
-            <figcaption>Enter appropriate caption</figcaption>
+            <figcaption>Water Science and Management in the Delaware River Basin</figcaption>
             <img
-              src="@/assets/components/PreFooterVisualizationsLinks/images/thumbnailGeneric.png"
+              src="@/assets/components/PreFooterVisualizationsLinks/images/DRBthumb.png"
               alt=""
+              loading="lazy"
             >
           </figure>
         </a>
@@ -18,10 +19,11 @@
           :href="LinkTwo"
         >
           <figure>
-            <figcaption>Enter appropriate caption</figcaption>
+            <figcaption>Gages Through the Ages</figcaption>
             <img
-              src="@/assets/components/PreFooterVisualizationsLinks/images/thumbnailGeneric.png"
+              src="@/assets/components/PreFooterVisualizationsLinks/images/Gages.png"
               alt=""
+              loading="lazy"
             >
           </figure>
         </a>
@@ -35,8 +37,8 @@
         name: 'PreFooterVisualizationsLinks',
         data() {
             return {
-                LinkOne: process.env.VUE_APP_FOOTER_LINK_1,
-                LinkTwo: process.env.VUE_APP_FOOTER_LINK_2
+                LinkOne: "https://labs.waterdata.usgs.gov/visualizations/delaware-basin-story/index.html#/",
+                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/gages-through-the-ages/index.html#/"
             };
         }
     }

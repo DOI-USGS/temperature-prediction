@@ -393,18 +393,9 @@ h3{
   stroke-width: 0.75px;
 }
 
-  // .axis-title {
-  //     font-size: 1.2em;
-  //     font-family: SourceSansPro-Bold, Source Sans Pro;
-  //     font-weight: 700;
-  //     fill: white;
-  // }
 
-  // .axis-subtitle {
-  //       font-family: SourceSansPro-Light, Source Sans Pro;
-  //       font-weight: 300;
-  //       fill: white;
-  //       font-size: 1em;
-  // }
+a:focus {
+    outline: none;
+  }
 
 </style>
