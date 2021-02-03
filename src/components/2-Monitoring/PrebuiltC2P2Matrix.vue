@@ -125,11 +125,6 @@
       stroke="#1a1b1c"
       stroke-width="0.5"
     />
-    <path
-      id="matrix-border"
-      d="M0,0 H700 V1000 H0 Z"
-      fill="transparent"
-    />
   </svg>
 </template>
 
