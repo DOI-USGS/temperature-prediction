@@ -16240,11 +16240,22 @@
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
 
+          // // append background rectangle for matrix
+          svgMatrix.append("rect")
+                  .attr("class", "c2p2 matrixBkgdRect")
+                  .attr("width", self.matrix_width_c2)
+                  .attr("height", self.matrix_height_c2)
+                  .attr("fill", "#1a1b1c")
+                  .attr("stroke", "#1a1b1c")
+                  .attr("stroke-width", 1)
+                  .attr("filter", "url(#shadow2)")
+                  .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+                  .lower()
+
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-
-          // id = matrix-colored-boxes, id = matrix-grid-horizontal, id = matrix-grid-vertical, id = matrix-border
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -16316,12 +16327,12 @@
               .attr("y", 17)
               .text("365 daily values")
 
-          // // append background rectangle for matrix
+          // // // append background rectangle for matrix
           // svgMatrix.append("rect")
           //         .attr("class", "c2p2 matrixBkgdRect")
           //         .attr("width", self.matrix_width_c2)
           //         .attr("height", self.matrix_height_c2)
-          //         .attr("fill", "#141414")
+          //         .attr("fill", "#1a1b1c")
           //         .attr("filter", "url(#shadow2)")
           //         .attr("transform",
           //             "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -17096,9 +17107,9 @@
                       .raise()
               }
           }
-          // // select background rectangle and remove filter
-          // this.d3.selectAll(".c2p2.matrixBkgdRect")
-          //     .attr("filter", "url(#shadow3)")
+          // select background rectangle and change filter
+          this.d3.selectAll(".c2p2.matrixBkgdRect")
+              .attr("filter", "url(#shadow3)")
           // // select matrix cells for highlighted segment and raise
           // for (let i = 0; i < this.myGroups_c2p2.length; i++) {
           //     let seg_year = this.myGroups_c2p2[i]
@@ -17210,9 +17221,9 @@
           // and raise segment
           this.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
               .raise()
-          // // reset filter on background rectangle and lower
-          // this.d3.selectAll(".c2p2.matrixBkgdRect")
-          //     .attr("filter", "url(#shadow2)")
+          // reset filter on background rectangle and lower
+          this.d3.selectAll(".c2p2.matrixBkgdRect")
+              .attr("filter", "url(#shadow2)")
         },
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           const self = this;
@@ -17239,7 +17250,7 @@
           // show tooltip
           tooltip
               .style("opacity", 1);
-          // select background rectangle and remove filter
+          // select background rectangle and change filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
@@ -17324,7 +17335,7 @@
           this.d3.selectAll(".c2p3.matrixSpatialRect")
               .style("opacity", 0.7)
               .style("stroke-width", 1);
-          // select background rectangle and remove filter
+          // select background rectangle and change filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select matrix cells for highlighted segment and raise
@@ -17447,7 +17458,7 @@
           // show tooltip
           tooltip
               .style("opacity", 1)
-          // select background rectangle and remove filter
+          // select background rectangle and change filter
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
