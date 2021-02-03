@@ -16230,12 +16230,7 @@
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
 
-          // // append the svg object to the body of the page
-          // let svgMatrix = self.d3.select("#matrixChart_c2p2")
-          //     .append("svg")
-          //     .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
-          //       (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-          //     .attr("class", "c2p2 matrix_c2p2 matrix")
+          // set viewbox for existing svg
           let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
@@ -16253,6 +16248,7 @@
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
                   .lower()
 
+          // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
@@ -16326,16 +16322,6 @@
               .attr("x", self.matrix_width_c2*3/4 + 10)
               .attr("y", 17)
               .text("365 daily values")
-
-          // // // append background rectangle for matrix
-          // svgMatrix.append("rect")
-          //         .attr("class", "c2p2 matrixBkgdRect")
-          //         .attr("width", self.matrix_width_c2)
-          //         .attr("height", self.matrix_height_c2)
-          //         .attr("fill", "#1a1b1c")
-          //         .attr("filter", "url(#shadow2)")
-          //         .attr("transform",
-          //             "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
@@ -17040,50 +17026,55 @@
               .attr("y", mouse_y - 10)
               .attr("x", mouse_x + 10)
               .attr("text-align", "left")
-              .text(this.d3.format(',')(num_obs) + " obs.")
+              .text(self.d3.format(',')(num_obs) + " obs.")
               .raise()
         },
         mouseoverSeg_c2p2(segment_id, tooltip) {
           const self = this;
 
           // build y scale for hover bar chart
-          let barMax = this.matrix_height_c2/16
-          let yScale_barChart_c2p2 = this.d3.scaleLinear()
+          let barMax = self.matrix_height_c2/16
+          let yScale_barChart_c2p2 = self.d3.scaleLinear()
               // set range of possible output values 
               .range([barMax, 0])
               // define range of input values
-              .domain([1, this.temporalCountMax_c2p2]);
+              .domain([1, self.temporalCountMax_c2p2]);
           
           // re-build y scale for matrix
-          let yScale_matrix_c2p2 = this.d3.scaleBand()
-              .range([this.matrix_height_c2, 0])
-              .domain(this.myVars_c2p2)
+          let yScale_matrix_c2p2 = self.d3.scaleBand()
+              .range([self.matrix_height_c2, 0])
+              .domain(self.myVars_c2p2)
               .padding(0.075);
+
+          //re-build x scale fore matrix
+          let xScale_matrix_c2p2 = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2])
+              .domain(self.myGroups_c2p2)
+              .padding(0.1);
 
           // make tooltip visible
           tooltip
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
-          this.d3.selectAll(".c2p2.matrixSpatialRect")
+          self.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("opacity", 0.65)
           // select all *temporal* rectangles and repurpose for bar chart
           if (self.segmentDict[segment_id].total_count > 0) {
-              for (let i = 0; i < this.myGroups_c2p2.length; i++) {
-                  let seg_year = this.myGroups_c2p2[i]
+              for (let i = 0; i < self.myGroups_c2p2.length; i++) {
+                  let seg_year = self.myGroups_c2p2[i]
                   let barHeight;
-                  // if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
-                    this.d3.selectAll(".c2p2.matrixTemporalRect.time" + seg_year)
+                  // for all segment-years with observations...
+                  if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
+                    // convert the temporal rectangles into a bar chart of data availability over time
+                    self.d3.selectAll(".c2p2.matrixTemporalRect.time" + seg_year)
                         .attr("height", function(i) {
-                            // if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
                               barHeight = (barMax - yScale_barChart_c2p2(self.segmentDict[segment_id].year_count[seg_year]))+1;
                               return barHeight;
-                            // }
                         })
                         .attr("y", function(d) {
                             return yScale_matrix_c2p2(segment_id) - barHeight; 
                         })
                         // // style based on # of observations for that segment in that year
-                        // .style("fill", "#fcba03")
                         .style("fill", function(d) {
                           return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
                         })
@@ -17093,62 +17084,36 @@
                         })
                         .style("opacity", 1)
                         .raise()
-                  // }
-                  this.d3.selectAll(".c2p2.cellText.year" + seg_year)
-                      .attr("y", function(d) {
-                            return yScale_matrix_c2p2(segment_id) - barHeight - 5;
+                    // and populate the text annotations with the observation counts
+                    self.d3.selectAll(".c2p2.cellText.year" + seg_year)
+                        .attr("y", function(d) {
+                              return yScale_matrix_c2p2(segment_id) - barHeight - 5;
+                          })
+                        .attr("x", function(d) {
+                            if (self.segmentDict[segment_id].year_count[seg_year] > 99) {
+                                return xScale_matrix_c2p2(seg_year);
+                            } else if (self.segmentDict[segment_id].year_count[seg_year] < 10) {
+                                return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/3;
+                            } else {
+                                return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/6;
+                            }
                         })
-                      .attr("x", 35)
-                      .attr("fill", "None")
-                      .text(function(d) {
-                        return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
-                      })
-                      .attr("fill", "#ffffff")
-                      .raise()
+                        .attr("fill", "None")
+                        .text(function(d) {
+                          return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
+                        })
+                        .attr("fill", "#ffffff")
+                        .raise()
+                  }
               }
           }
           // select background rectangle and change filter
-          this.d3.selectAll(".c2p2.matrixBkgdRect")
+          self.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
-          // // select matrix cells for highlighted segment and raise
-          // for (let i = 0; i < this.myGroups_c2p2.length; i++) {
-          //     let seg_year = this.myGroups_c2p2[i]
-          //     let barHeight;
-          //     this.d3.selectAll(".c2p2.cell.segment" + segment_id + ".timestep" + seg_year) 
-          //         .attr("height", function(i) {
-          //             if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
-          //               barHeight = (barMax - yScale_barChart_c2p2(self.segmentDict[segment_id].year_count[seg_year]))+1;
-          //               return barHeight;
-          //             }
-          //         })
-          //         .attr("y", function(i){
-          //             if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
-          //                 return yScale_matrix_c2p2(segment_id) - barHeight; 
-          //             }
-          //         })
-          //         .raise()
-          //     // turn on text for cells associated with segment
-          //     this.d3.selectAll(".c2p2.cellText.seg" + segment_id + ".year" + seg_year) 
-          //         .attr("y", function(d) {
-          //             return yScale_matrix_c2p2(segment_id) - barHeight - 5; 
-          //         })
-          //         .attr("fill", "#ffffff")
-          //         .raise()   
-          // }
           // select the spatial rectangle corresponding to the highlighted segment
-          if (self.segmentDict[segment_id].total_count > 0) {
-              // // select the spatial rectangle corresponding to the highlighted segment
-              // this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
-              //     // set stroke width, opacity, and stroke color
-              //     // based on whether segment has any observations in record
-              //     .attr("height", 0.5)
-              //     .style("stroke-width", 0)
-              //     .style("opacity", 1)
-              //     .style("stroke", "None")
-              //     .raise()
-          } else {
+          if (self.segmentDict[segment_id].total_count == 0) {
               // select the spatial rectangle corresponding to the highlighted segment
-              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
+              self.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
@@ -17159,10 +17124,9 @@
                   // raise the spatial rectangle
                   .raise();
           }
-          // select mouseovered segment and set to white with a shadow
+          // select mouseovered segment and set to white
           // and raise segment
-          this.d3.selectAll(".c2p2.river_segments.seg" + segment_id)
-              // .attr("filter", "url(#shadow1)") 
+          self.d3.selectAll(".c2p2.river_segments.seg" + segment_id)
               .style("stroke", "#ffffff")
               .style("opacity", 1)
               .raise()
