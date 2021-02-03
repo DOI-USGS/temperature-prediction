@@ -189,6 +189,9 @@ h3{
         padding: 10px;
     }  
   }
+  .text-content.move-up {
+    padding-bottom: 5px;
+  }
 
   .box {
     background-color: $boxCharcoal;
@@ -265,6 +268,9 @@ h3{
     padding: 20px;
     align-items: center;
     justify-content: center; 
+    @media screen and (max-width: 600px) {
+      padding: 0px;
+     }
   }
 
   .map {
