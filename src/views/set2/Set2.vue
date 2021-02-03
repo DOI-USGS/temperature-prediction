@@ -15349,7 +15349,7 @@
               class="hex"
             />
             <path
-              fill="#141414"
+              fill="#1a1b1c"
               class="hex"
               d="M277.2 19.9l3.6 6.1h7.1l3.6-6.1-3.6-6.1h-7.1z"
             />
@@ -15882,75 +15882,16 @@
           ////////////////////////////////          
 
           ////////// SEGMENTS //////////
-          // build array of all segment ids of segments (previously: that HAVE DATA)
+          // build array of all segment ids of segments
           let i;
           for (i=0; i<self.segments.length; i++){
-            // If only building array of segments that have data:
-            // let segment_obs_count = parseFloat(self.segments[i].properties.total_count);
-            // if (segment_obs_count > 0) {
-              // self.segmentsWithData.push(self.segments[i].properties.seg_id_nat);
-            // }
-
-            // Otherwise, if building an array of all segment ids:
             self.segment_id_list.push(self.segments[i].properties.seg_id_nat);
           };
-
-          // If including all segments WITHOUT DATA in a single group:
-          // // define group of segments WITHOUT DATA (ONCE PER CHAPTER)
-          // let drb_segments = self.map_c2p1.append('defs').append("g").attr("id", "drbSegments");
-          // // append paths of segments WITHOUT DATA to segment group  (ONCE PER CHAPTER)
-          // drb_segments.selectAll(".river_segments")
-          //     // bind segments to each element to be created
-          //     .data(self.segments)
-          //     // create an element for each datum
-          //     .enter()
-          //     // filter to ONLY segments WITHOUT data
-          //     .filter(function (d){
-          //       return d.properties.total_count == 0
-          //     })
-          //     // append each element to the svg as a path element
-          //     .append("path")
-          //     // assign class for styling
-          //     .attr("class", function(d){
-          //       return 'river_segments seg' + d.properties.seg_id_nat
-          //     })
-          //     // // assign classes for c2p2 interaction
-          //     // .attr("class", function(d) {
-          //     //   let seg_class = 'river_segments seg'
-          //     //   seg_class += d.properties.seg_id_nat
-          //     //   let key = null;
-          //     //   for (key in d.properties.year_count) {
-          //     //     if (d.properties.year_count[key] > 0) {
-          //     //       seg_class += " " + self.timestep_c2p2 + key
-          //     //     }
-          //     //   }
-          //     //   return seg_class
-          //     // })
-          //       // project segments
-          //     .attr("d", self.map_path_c2)
-          //     // add stroke width based on widthScale function
-          //     .style("stroke-width", function(d){
-          //       let value = d.properties['avg_ann_flow'];
-          //       if (value){
-          //         return self.widthScale_c2(value);
-          //       } else {
-          //         return "#ccc";
-          //       }
-          //     })
-          //     // set fill to none
-          //     .style("fill", "None")
-          // // append group of segments WITHOUT data to c2p1 map (ONCE PER MAP)
-          // self.map_c2p1.append("g").attr("class","c2p1_segments")
-          //   .style("stroke", "#576069")
-          //   .append("use").attr("xlink:href","#drbSegments")
           
-          // Otherwise, if defining separate group for EVERY segment
-          //////////////////////////////
           // Define individual group <use> elements FOR EACH SEGMENT
           // for loop works here b/c not assigning mouseover event using segment_id
           let segment_id = null;
           for (segment_id in self.segmentDict) {
-          // self.segmentsWithData.forEach(function(segment_id) {
             // define group of single segment (ONCE PER CHAPTER, PER SEGMENT)
             let segment_group = self.map_c2p1.append('defs').append("g").attr("id", function(d) {return 'seg' + segment_id});
             // append path of single segment to the segment group  (ONCE PER CHAPTER)
@@ -15987,7 +15928,7 @@
                 }
               })
               .append("use").attr("xlink:href", href_id)
-          } //)
+          }
           // add drb sites to map (directly b/c don't need to be re-used elsewhere in chapter)
           let drb_sites = self.map_c2p1.selectAll(".obs_sites")
               // bind points to each element to be created
@@ -16145,11 +16086,6 @@
           self.map_c2p2.append("g").attr("class","c2p2 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
 
-          // // use forEach loop over self.segmentsWithData array IF ONLY ADDING SEGMENTS WITH DATA
-          // self.segmentsWithData.forEach(function(segment_id) {
-          // // If adding all segments, WITHOUT MOUSEOVER, USE FOR LOOP over self.segmentDict built from self.segments)
-          // let segment_id = null;
-          // for (segment_id in self.segmentDict) {
           // // If adding all segments, AND ADDING MOUSEOVER, use forEach to iterate over list of segment ids         
           self.segment_id_list.forEach(function(segment_id) {
             let href_id = '#seg' + segment_id
@@ -16175,18 +16111,6 @@
                   return "#ccc";
                 }
               })
-              // .on("mouseover", function(d) {
-              //   self.mouseoverSeg_c2p2(segment_id, tooltip);
-              // })
-              // .on("mousemove", function(d) {
-              //   // pass mouse coordinates
-              //   let mouse_x = loc_map_c2p2.x
-              //   let mouse_y = loc_map_c2p2.y
-              //   self.mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y); 
-              // })
-              // .on("mouseout", function(d) {
-              //   self.mouseoutSeg_c2p2(segment_id, tooltip);
-              // })
               .append("use").attr("xlink:href", href_id)
           })
 
@@ -16209,7 +16133,7 @@
               // set opacity to 0 so segments aren't visible but can be selected
               .style("opacity", 0)
               // set stroke color to background color
-              .style("stroke", "#141414")
+              .style("stroke", "#1a1b1c")
               // set stroke width to be large for selection
               .style("stroke-width", 6)
               // trigger interactions
@@ -16342,131 +16266,9 @@
           self.myGroups_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
           self.myVars_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
 
-          // // build x scale for matrix cells
-          // let x = self.d3.scaleBand()
-          //     .range([0, self.matrix_width_c2])
-          //     .domain(self.myGroups_c2p2)
-          //     .padding(0.1);
-
-          // // build y scale for matrix cells
-          // let y = self.d3.scaleBand()
-          //     .range([self.matrix_height_c2, 0])
-          //     .domain(self.myVars_c2p2)
-          //     .padding(0.1);
-
-          // // add the cells to the matrix
-          // // select transformed matrix
-          // let transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
-          // // append rectangles to the matrix
-          // let matrixCells = transformedMatrix.selectAll('matrixCells')
-          //     // bind data to rectangles
-          //     .data(csv_matrix_annual, function(d) {
-          //       if (d.total_count > 0) { /* d.total_obs */
-          //         return d[self.timestep_c2p2] +':'+ d.seg_id_nat;
-          //       }
-          //     })
-          //     // create element for each data item
-          //     .enter()
-          //     // filter data to only include sites and times
-          //     // with more than 0 observations (to limit # rectangles)
-          //     .filter(function (d){
-          //       return d.obs_count > 0
-          //     })
-          //     // append rectangles for each element in filtered data
-          //     .append("rect")
-          //     // set x position based on year
-          //     .attr("x", function (d){
-          //       return x(d[self.timestep_c2p2])
-          //     })
-          //     // set y position based on segment id
-          //     .attr("y", function(d) {
-          //       return y(d.seg_id_nat)
-          //     })
-          //     // set width and height based on bandwidth of axes
-          //     .attr("width", x.bandwidth())
-          //     .attr("height", y.bandwidth())
-          //     // assign class with segment id AND year for styling
-          //     .attr("class", function(d) {
-          //       return 'c2p2 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p2]
-          //     })
-          //     // style based on # of observations for that segment in that year
-          //     .style("fill", function(d) {
-          //       return self.availabilityColor(d.obs_count);
-          //     })
-          //     .style("stroke-width", 0.5)
-          //     .style("stroke", function(d){
-          //       return self.availabilityColor(d.obs_count);
-          //     })
-          //     .style("opacity", 1);
-
-          // // add text labels for each cell
-          // let cellText = transformedMatrix.selectAll(".text")
-          //     .data(csv_matrix_annual, function(d) {
-          //       if (d.total_count > 0) { 
-          //         return d[self.timestep_c2p2] + ':' + d.seg_id_nat;
-          //       }
-          //     })
-          //     // create an element for each data item
-          //     .enter()
-          //     // filter data to only include sites and times
-          //     // with more than 0 observations (to limit # rectangles)
-          //     .filter(function (d){
-          //       return d.obs_count > 0
-          //     })
-          //     // append text for each element in filtered data
-          //     .append("text")
-          //     .attr("class", function(d) {
-          //       return "c2p2 cellText seg" + d.seg_id_nat + " year" + d.year;
-          //     })
-          //     .attr("x", function(d) {
-          //         if (d.obs_count > 99) {
-          //             return x(d[self.timestep_c2p2]);
-          //         } else if (d.obs_count < 10) {
-          //             return x(d[self.timestep_c2p2]) + x.bandwidth()/3;
-          //         } else {
-          //             return x(d[self.timestep_c2p2]) + x.bandwidth()/6;
-          //         }
-          //     })
-          //     .attr("y", function(d) {
-          //         return y(d.seg_id_nat) - 5;
-          //     })
-          //     // .attr("dy", ".75em")
-          //     .attr("fill", "None")
-          //     .text(function(d) {
-          //       return parseInt(d.obs_count);
-          //     })
-
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
           self.createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, tooltip);
 
-          // // draw x axes
-          // transformedMatrix.append("g")
-          //     .style("font-size", 10)
-          //     .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2 + ")")
-          //     .attr("class", "c2p2 matrixAxis bottom")
-          //     .call(self.d3.axisBottom(x).tickSize(0).tickValues(['1980', '1990', '2000', '2010', '2019']).tickPadding(7)) /* '1980-01', '1990-01', '2000-01', '2010-01', '2019-01' */
-          //     .select(".domain").remove()
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("transform", "translate(" + 0 + "," + 0 + ")")
-          //     .attr("class", "c2p2 matrixAxis top")
-          //     .call(self.d3.axisTop(x).tickSize(0))
-          //     .select(".domain").remove()
-
-          // // draw y axes
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("class", "c2p2 matrixAxis left")
-          //     //.call(self.d3.axisLeft(y).tickSize(0))
-          //     .call(self.d3.axisLeft(y).tickSize(0))
-          //     .select(".domain").remove()
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("transform", "translate(" + self.matrix_width_c2 + "," + 0 + ")")
-          //     .attr("class", "c2p2 matrixAxis right")
-          //     // .call(self.d3.axisRight(y).tickSize(0))
-          //     .call(self.d3.axisRight(y).tickSize(0))
-          //     .select(".domain").remove()
         },
         createMatrixRectangles_c2p2(csv_matrix_annual, csv_annual_count, tooltip) {
           const self = this;
@@ -17170,10 +16972,6 @@
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               .raise()
-          // // resize spatial cells associated with segment
-          // this.d3.selectAll(".c2p2.cell.segment" + segment_id) 
-          //     .attr("height", yScale_matrix_c2p2.bandwidth())
-          //     .attr("y", yScale_matrix_c2p2(segment_id))
           // turn off text for cells associated with segment
           this.d3.selectAll(".c2p2.cellText") 
               .attr("y", 0)
@@ -17260,7 +17058,7 @@
           // lower elements as needed
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
           // this.d3.selectAll(".river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
-              .style("stroke", "#141414")
+              .style("stroke", "#1a1b1c")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -17695,6 +17493,7 @@ $grayBlue: #576069; //#4F5C67
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
+    max-height: 90vh;
   }
   .mm-grid-item {
     padding: 0px;
@@ -17836,7 +17635,7 @@ $grayBlue: #576069; //#4F5C67
 }
 .hex {
   fill-rule: evenodd;
-  stroke:#141414; //#141414
+  stroke:#1a1b1c; //#141414
   stroke-miterlimit: 10;
   stroke-width: 0.1;
 }
