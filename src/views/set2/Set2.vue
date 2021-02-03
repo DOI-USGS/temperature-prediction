@@ -17493,51 +17493,35 @@ $grayBlue: #576069; //#4F5C67
     grid-column: 4;
   }
   .map-matrix-grid-container {
-    // padding: 25px;
-    // margin: 15px;
+    padding: 25px;
     display: grid;
-    // align-items: center;
-    // justify-content: center;
-    grid-template-columns: 50px minmax(0, 1fr) minmax(0, 2fr) 50px;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 30% 70%;
     grid-template-rows: 100%;
     grid-template-areas:
-        "left-border map matrix right-border";
+        "map matrix";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
-    height: 90vh;
-    // max-height: 95vh;
-    @media screen and (max-width: 1000px) {
-      grid-template-columns: 15px minmax(0, 1fr) minmax(0, 2fr) 15px;
-      height: 50vh;
-    }
+    max-height: 90vh;
   }
   .mm-grid-item {
     padding: 0px;
     display: flex;
-    // align-items: center;
-    justify-content: center;
-    // text-align: center;
-    // align-self: center;
-    margin: 0 auto;
-    // max-height: 90vh;
-    // min-width: 45vw;
-    // max-height: 90vh;
+    align-self: center;
   }
   #DRB_map_c2p2 {
-    padding: 1em;
     grid-area: map;
     display: flex;
-    justify-self: center;
+    // max-height: 100%;
+    max-height: 90vh;
   }
   #matrixChart_c2p2 {
-    padding: 1em;
     grid-area: matrix;
     display: flex;
-    justify-self: stretch;
-    max-height: 100%;
-    // max-height: 90vh;
-    // height: 100vh;
+    max-height: 90vh;
+    // max-height: 100%;
   }
   #DRB_map_c2p3 {
     grid-area: map;
