@@ -8,12 +8,12 @@
       <div class="tmp-container">
         <a
           class="logo-header"
-          href="https://www.usgs.gov/"
+          href="https://www.usgs.gov/mission-areas/water-resources/science/water-data-visualizations?qt-science_center_objects=0#qt-science_center_objects"
           title="Home"
         >
           <img
             class="img"
-            src="@/assets/usgsHeaderAndFooter/images/logo.png"
+            src="@/assets/usgsHeaderAndFooter/images/usgsvizlab-logo-wordmark-white.png"
             alt="Home"
           >
         </a>
@@ -52,7 +52,7 @@
   }
   /* header (only) nav */
   .header-nav {
-    background: #00264c;
+    background: #292b30;
   }
   .logo-header img {
     margin-top: 8px;
