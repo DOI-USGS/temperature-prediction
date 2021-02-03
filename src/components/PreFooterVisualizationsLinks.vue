@@ -1,7 +1,7 @@
 <template>
   <div class="pre-footer-links">
     <div class="inner-pre-footer-links-container">
-      <p>Other visualizations of interest</p>
+      <p>Other Visualizations of Interest</p>
       <div class="footer-viz-links">
         <a
           :href="LinkOne"
@@ -52,10 +52,14 @@
     font-family: 'Source Sans Pro',sans-serif;
     font-size: 12px;
     font-weight: 600;
+    border-top: 1px #FFFFFF10 solid;
+    padding-top: 1em;
     p {
       color: white;
+      font-size: 1.3em;
     }
-    background-color: #00264c;
+    background-color: #292b30;
+
     .footer-viz-links {
       margin: 0 auto;
       display: flex;

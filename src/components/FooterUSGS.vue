@@ -26,9 +26,6 @@
           <!--/ footer nav links -->
         </div>
         <!-- /.footer-doi -->
-
-        <hr>
-
         <!-- .footer-utl-links -->
         <div class="footer-doi">
           <ul class="menu nav">
@@ -186,11 +183,10 @@
     content: none;
   }
   footer.footer {
-    background: #00264c;
+    background: #292b30;
     padding-bottom: 0;
     position: relative;
     width: 100%;
-    border-top: 1px solid #E5E5E5;
   }
 
   footer.footer .footer-doi {
