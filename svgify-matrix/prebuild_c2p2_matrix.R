@@ -97,8 +97,8 @@ add_grids <- function(svg, full_width, full_height, rh, rv) {
   horiz_d <- paste(sprintf('M0,%s H%s', horiz_lines, full_width), collapse = " ")
   vert_d <- paste(sprintf('M%s,0 V%s', vert_lines, full_height), collapse = " ")
 
-  xml_add_child(svg, "path", d = horiz_d, id = 'matrix-grid-horizontal', stroke = "black", `stroke-width` = 0.15)
-  xml_add_child(svg, "path", d = vert_d, id = 'matrix-grid-vertical', stroke = "black", `stroke-width` = 0.15)
+  xml_add_child(svg, "path", d = horiz_d, id = 'matrix-grid-horizontal', stroke = "#1a1b1c", `stroke-width` = 0.5)
+  xml_add_child(svg, "path", d = vert_d, id = 'matrix-grid-vertical', stroke = "#1a1b1c", `stroke-width` = 0.5)
 
 }
 
