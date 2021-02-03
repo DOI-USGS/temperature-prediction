@@ -68,7 +68,7 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
 
 init_svg <- function(width, height) {
   # create the main "parent" svg node. This is the top-level part of the svg
-  svg_root <- xml_new_root('svg', #viewbox = sprintf("0, 0, %s, %s", height, width),
+  svg_root <- xml_new_root('svg', viewbox = sprintf("0, 0, %s, %s", width, height),
                            preserveAspectRatio="xMidYMid meet", id = "matrix-svg",
                            xmlns="http://www.w3.org/2000/svg", `xmlns:xlink`="http://www.w3.org/1999/xlink")
   return(svg_root)
