@@ -69,7 +69,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of temperature data
+            Matrix 1: <span class="yellow">Availability</span> of temperature data
           </p>
           <p class="viz-subtitle">
             Visualizing the count of temperature measurements of all stream reaches in the basin.
@@ -164,7 +164,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Variability</span> of temperature data in 2019
+            Matrix 2: <span class="yellow">Variability</span> of temperature data in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
