@@ -57,9 +57,8 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
     add_path_per_color(g_color_blocks, col, data_col$year_i, data_col$rank, rect_width, rect_height, height)
   }
 
-  # Add grid of black lines & border around outside
+  # Add grid of black lines
   add_grids(svg_root, width, height, rect_width, rect_height)
-  add_border(svg_root, width, height)
 
   ##### Write out final SVG to file #####
 
@@ -99,15 +98,6 @@ add_grids <- function(svg, full_width, full_height, rh, rv) {
 
   xml_add_child(svg, "path", d = horiz_d, id = 'matrix-grid-horizontal', stroke = "#1a1b1c", `stroke-width` = 0.5)
   xml_add_child(svg, "path", d = vert_d, id = 'matrix-grid-vertical', stroke = "#1a1b1c", `stroke-width` = 0.5)
-
-}
-
-add_border <- function(svg, full_width, full_height) {
-
-  # Build path string
-  border_d <- sprintf('M0,0 H%s V%s H0 Z', full_width, full_height)
-
-  xml_add_child(svg, "path", d = border_d, id = 'matrix-border', fill = "transparent")
 
 }
 
