@@ -129,11 +129,16 @@
           </svg>
         </div -->
         <div
-        id="matrixChart_c2p2"
-        class="matrix mm-grid-item">
+          id="matrixChart_c2p2"
+          class="matrix mm-grid-item"
+        >
           <svg class="c2p2 matrix_c2p2 matrix">
-            <g class="prebuilt_c2p2_group matrix" width="650" height="930">
-                <PrebuiltC2P2Matrix />
+            <g
+              class="prebuilt_c2p2_group matrix"
+              width="650"
+              height="930"
+            >
+              <PrebuiltC2P2Matrix />
             </g>
           </svg>
         </div>
