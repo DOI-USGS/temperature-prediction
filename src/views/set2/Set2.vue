@@ -15521,7 +15521,7 @@
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 15, bottom: 20, left: 35},
+          matrix_margin: {top: 50, right: 15, bottom: 20, left: 35}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -16027,7 +16027,7 @@
           let x = this.d3.scaleBand()
               .rangeRound([0, this.chart_width])
               // set padding between bars
-              .padding(0.1)
+              .padding(0.075)
 
           // make y scale
           let y = this.d3.scaleLinear()
@@ -16494,13 +16494,13 @@
           let xscale = self.d3.scaleBand()
               .range([0,self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.1);
+              .padding(0.075);
 
           // build y scale using data read in for matrix in createMatrix_c2p2()
           let yscale = self.d3.scaleBand()
               .range([self.matrix_height_c2, 0])
               .domain(self.myVars_c2p2)
-              .padding(0.1);
+              .padding(0.075);
 
           // //  build spatial rectangles
           // append to transformed matrix
@@ -17047,15 +17047,14 @@
           let yScale_matrix_c2p2 = this.d3.scaleBand()
               .range([this.matrix_height_c2, 0])
               .domain(this.myVars_c2p2)
-              .padding(0.1);
+              .padding(0.075);
 
           // make tooltip visible
           tooltip
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("opacity", 0.8)
-              .style("stroke-width", 1);
+              .style("opacity", 0.65)
           // select all *temporal* rectangles and repurpose for bar chart
           if (self.segmentDict[segment_id].total_count > 0) {
               for (let i = 0; i < this.myGroups_c2p2.length; i++) {
@@ -17127,15 +17126,15 @@
           // }
           // select the spatial rectangle corresponding to the highlighted segment
           if (self.segmentDict[segment_id].total_count > 0) {
-              // select the spatial rectangle corresponding to the highlighted segment
-              this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
-                  // set stroke width, opacity, and stroke color
-                  // based on whether segment has any observations in record
-                  .attr("height", 0.5)
-                  .style("stroke-width", 0)
-                  .style("opacity", 1)
-                  .style("stroke", "None")
-                  .raise()
+              // // select the spatial rectangle corresponding to the highlighted segment
+              // this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
+              //     // set stroke width, opacity, and stroke color
+              //     // based on whether segment has any observations in record
+              //     .attr("height", 0.5)
+              //     .style("stroke-width", 0)
+              //     .style("opacity", 1)
+              //     .style("stroke", "None")
+              //     .raise()
           } else {
               // select the spatial rectangle corresponding to the highlighted segment
               this.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
@@ -17164,7 +17163,7 @@
           let yScale_matrix_c2p2 = this.d3.scaleBand()
               .range([this.matrix_height_c2, 0])
               .domain(this.myVars_c2p2)
-              .padding(0.1);
+              .padding(0.075);
 
           // hide tooltip
           tooltip
@@ -17174,7 +17173,7 @@
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 1)
+              .style("stroke-width", 2)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
               .raise()
