@@ -3585,8 +3585,8 @@
             this.axis_arrow = this.d3.select("line.arrow")
             this.legend_model = this.d3.selectAll("text.rmse-name");
             this.legend_training = this.d3.selectAll("text.rmse-title");
-            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)");
-            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)");
+            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)"); //
+            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)"); // 0.1% dot and label
 
           },
           transitionAxes(element, end) {
