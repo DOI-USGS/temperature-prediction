@@ -277,7 +277,7 @@ h3{
   .map {
     min-width: 400px;
     max-width: 600px;
-    max-height: 100vh;
+    max-height: 90vh;
     flex: 1 1 30%;
     justify-self: center;
 

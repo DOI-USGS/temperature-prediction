@@ -130,7 +130,7 @@
         </div -->
         <div
           id="matrixChart_c2p2"
-          class="matrix mm-grid-item"
+          class="mm-grid-item"
         >
           <svg class="c2p2 matrix_c2p2 matrix">
             <g
@@ -15576,7 +15576,7 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 300;
+          this.map_width = 350;
           this.map_height = 600; //
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
@@ -15585,7 +15585,7 @@
               .center([0, 40.678894445]) //40.658894445
               .rotate([75.413333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
-              .scale(this.map_height * 16)
+              .scale(this.map_height * 15)
               .translate([this.map_width / 2, this.map_height / 2]);
 
           this.map_path_c2 = self.d3.geoPath()
@@ -15629,9 +15629,10 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2") //map_matrix
+              .attr("class", "map_c2p2 map_matrix") //map_matrix
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
+              .attr("width", "100%")
           
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
@@ -15951,7 +15952,7 @@
           // add scale bar
           let scaleBarGroup = self.map_c2p1.append("g")
             .attr("class", "c2p1 scaleBar")
-            .attr("transform", "translate(" + 50 + "," + 20 + ")")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
 
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)");
@@ -16159,7 +16160,7 @@
           // add scale bar
           let scaleBarGroup = self.map_c2p2.append("g")
             .attr("class", "c2p2 scaleBar")
-            .attr("transform", "translate(" + 10 + "," + 20 + ")")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
 
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
@@ -16171,6 +16172,8 @@
           let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
+              .attr("width", "100%")
+              // .attr("preserveAspectRatio", "none") // STRETCHES MATRIX - including legend and bar chart labels
 
           // // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -16231,13 +16234,16 @@
               })
 
           // append legend container
-          let legendsvg = svgMatrix.append("g")
+          let legendsvg = svgMatrix.append("svg")
               .attr("class", "c2p2 legendWrapper")
+              
+          let legendGroup = legendsvg.append("g")
+              .attr("class", "c2p2 legendColor")
               .attr("width", self.matrix_width_c2)
               .attr("transform", "translate(" + (self.matrix_margin.left) + "," + 0 + ")")
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p2 legendAxis")
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
@@ -16245,7 +16251,7 @@
               .text("1 daily value")
 
           // append legend rectangle
-          legendsvg.append("rect")
+          legendGroup.append("rect")
               .attr("class", "c2p2 matrixLegend")
               .attr("width", self.matrix_width_c2/2)
               .attr("height", 20)
@@ -16253,7 +16259,7 @@
               .attr("x", self.matrix_width_c2/4)
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p2 legendAxis")
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
@@ -16527,7 +16533,7 @@
           // add scale bar
           let scaleBarGroup = self.map_c2p3.append("g")
             .attr("class", "c2p3 scaleBar")
-            .attr("transform", "translate(" + 10 + "," + 20 + ")")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
 
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
@@ -17361,7 +17367,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   #DRB_map_c2p1 {
-    display: block;
+    display: flex;
     width: 100%;
   }
 
@@ -17454,7 +17460,8 @@ $grayBlue: #576069; //#4F5C67
   }
 
   #matrix-explainer-container {
-    padding: 5px;
+    margin: auto;
+    padding: 20px;
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto 1fr;
@@ -17462,10 +17469,9 @@ $grayBlue: #576069; //#4F5C67
       "header header header"
       "space time color";
     gap: 0px 10px;
-    width: 100%;
+    max-width: 100%;
     min-width: 300px;
     max-height: 90vh;
-    padding: 0 100px;
     @media screen and (max-width: 600px) {
       padding: 0 10px;
       gap: 0px;
@@ -17495,17 +17501,20 @@ $grayBlue: #576069; //#4F5C67
   }
   .map-matrix-grid-container {
     // padding: 25px;
+    margin: auto;
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 5% 25% 70%;
+    // align-items: center;
+    // justify-content: center;
+    // justify-items: center;
+    grid-template-columns: 1.5fr 3fr;
     grid-template-rows: 100%;
     grid-template-areas:
-        "left-buffer map matrix";
+        "map matrix";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
-    max-height: 90vh;
+    max-height: 85vh;
+    max-width: 2000px;
   }
   .mm-grid-item {
     padding: 0px;
@@ -17515,14 +17524,11 @@ $grayBlue: #576069; //#4F5C67
   #DRB_map_c2p2 {
     grid-area: map;
     display: flex;
-    // max-height: 100%;
-    // max-height: 90vh;
-    // min-width: 30%;
+    max-height: 80vh;
   }
   #matrixChart_c2p2 {
     grid-area: matrix;
     display: flex;
-    align-self: stretch;
     max-height: 100%;
     z-index: 1;
   }
@@ -17573,17 +17579,17 @@ $grayBlue: #576069; //#4F5C67
   font-size: 1em; //base font setting for all scale bar labels
 }
 .c2p1.scaleBar {
-  color: $lightBlue; //#285C70
-  font-size: 0.33em;
+  color: $grayBlue; //#285C70
+  font-size: 0.5em;
   stroke-width: 0.5px;
 }
 .c2p2.scaleBar {
-  color: $lightBlue; //#285C70
+  color: $grayBlue; //#285C70
   font-size: 0.7em;
   stroke-width: 0.5px;
 }
 .c2p3.scaleBar {
-  color: $lightBlue; //#285C70
+  color: $grayBlue; //#285C70
   stroke-width: 0.5px;
 }
 .c2p2.cellText {
