@@ -76,18 +76,27 @@ export default {
                 'method': "Prediction error (the difference between predicted temperatures and measured observations) is small when the model can accurately predict the observed water temperature.",
                 'flubber_id': '',
                 'bees_id': 'step_error_obs'
-            }],
-        "Evaluating overall model accuracy": [
+            },
             {
-                'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors – for example, by taking the root mean squared error (RMSE). Small errors translate to low RMSE, indicating the model is accurately predicting water temperature. Large errors and high RMSE indicate the model is doing a poor job of predicting water temperature dynamics.",
+                'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors – for example, by taking the root mean squared error (RMSE).",
                 'flubber_id': '',
                 'bees_id': 'step_error_rmse'
-            }, {
+            }, 
+            {
+                'method': "Small errors translate to low RMSE, indicating the model is accurately predicting water temperature.",
+                'flubber_id': '',
+                'bees_id': 'step_error_rmse'
+            }, 
+            {
+                'method': "Large errors and high RMSE indicate the model is doing a poor job of predicting water temperature dynamics.",
+                'flubber_id': '',
+                'bees_id': 'step_error_rmse_scale'
+            }, 
+            {
                 'method': "We can use RMSE to compare different models or assess accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the Basin based on all available data in the training period.",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
-            }],
-        "Model performance under restricted data availability": [
+            },
             {
                 'method': "But recall that the Delaware River Basin is one of the most observed basins in the U.S. How does the ANN perform when we don't have a lot of training data?",
                 'flubber_id': '',
@@ -104,7 +113,7 @@ export default {
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "So how can we improve the ANN so that it does better even when we lack temperature observations?",
+                'method': "How can we improve model predictions when temperature observations are limited?",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
@@ -121,12 +130,12 @@ export default {
         ],
         "Recurrent neural network (RNN)": [
             {
-                'method': "One of the simplest things we know that can be used in our favor is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory or allow information from one timestep to be passed on to the next time step. The model we used is called a recurrent neural network (RNN).",
+                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory or allow information from one timestep to be passed on to the next time step. The model we used is called a recurrent neural network (RNN).",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "In the Delaware River Basin, giving the model a memory improved model accuracy in some reaches but worsened model performance in others.",
+                'method': "In the Delaware River Basin, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_rnn'
             }],

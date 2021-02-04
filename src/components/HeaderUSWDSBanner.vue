@@ -109,6 +109,14 @@
 </script>
 
 <style scoped lang="scss">
+  .usa-banner {
+    background: #292b30;
+    color: #F1F1F1;
+  }
+
+  .usa-banner__header {
+    color: #F1F1F1;
+  }
   @import '~uswds/dist/css/uswds.css';
   .usa-banner__inner {
     margin-left: 10px;
