@@ -5,6 +5,15 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
+    mode: 'history',
+    scrollBehavior() {
+        document.getElementById('app').scrollIntoView();
+    },
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
+    },
     routes: [
         {
             path: '/',

@@ -6,7 +6,6 @@
     <div class="viz-title">
       <p>Water temperature is a key indicator of water quality in the Delaware River Basin.  It has implications for:</p>
     </div>
-    <br>
     <div class="grid-container">
       <div
         id="icon-1"
@@ -14,8 +13,6 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="100"
-          height="100"
           viewBox="0 0 100 100"
         >
           <!-- bubbles by alison from the Noun Project -->
@@ -41,8 +38,6 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="100"
-          height="100"
           viewBox="0 0 100 100"
         >
           <!-- Aquaponics by Rhys de Dezsery from the Noun Project -->
@@ -63,8 +58,6 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="100"
-          height="100"
           viewBox="0 0 100 100"
         >
           <!-- Recycle by IconMark from the Noun Project -->
@@ -86,8 +79,6 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="100"
-          height="100"
           viewBox="0 0 100 100"
         >
           <!-- cell by Yu luck from the Noun Project -->
@@ -163,11 +154,10 @@ $lightBlue: #AAD1EC;
 $grayBlue: #576069; //#4F5C67
 
     .grid-container {
-        padding: 0px;
         display: grid;
         grid-template-columns: 30% 70%;
-        grid-template-rows: repeat(4, 1fr);
-        gap: 0px 8px;
+        // grid-template-rows: repeat(4, 1fr);
+        gap: 0px 0px;
         width: 80%;
         grid-template-areas:
             "icon-1 desc-1"
@@ -175,7 +165,6 @@ $grayBlue: #576069; //#4F5C67
             "icon-3 desc-3"
             "icon-4 desc-4";
         @media screen and (max-width: 600px) {
-          padding: 0px 0;
           max-width: 80vw;
         }
     }
@@ -186,6 +175,9 @@ $grayBlue: #576069; //#4F5C67
 
     .icon-item{
         text-align: center;
+        width: 70%;
+        height: 70%;
+        margin: auto;
         @media screen and (max-width: 600px) {
           display: flex;
         }

@@ -14,7 +14,7 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">
-              Temperature Monitoring <span class="yellow">Sites</span> in the Delaware River Basin
+              <span class="yellow">Temperature monitoring sites</span> in the Delaware River Basin
             </p>
             <p class="viz-subtitle" />
           </div>
@@ -34,7 +34,7 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">
-              <span class="yellow">Number of Temperature Measurements</span> by Year
+              <span class="yellow">Number of temperature measurements</span> by year
             </p>
             <p class="viz-subtitle">
               Data from USGS streamgages or other state/local agencies.
@@ -68,7 +68,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of Temperature Data
+            Variability in <span class="yellow">data availability</span> of stream temperature
           </p>
           <p class="viz-subtitle">
             Visualizing the count of temperature measurements of all stream reaches in the basin.
@@ -118,7 +118,7 @@
       >
         <div
           id="DRB_map_c2p2"
-          class="map mm-grid-item"
+          class="mm-grid-item"
         />
         <!--div
         id="prebuilt_matrix_c2p2"
@@ -130,7 +130,7 @@
         </div -->
         <div
           id="matrixChart_c2p2"
-          class="matrix mm-grid-item"
+          class="mm-grid-item"
         >
           <svg class="c2p2 matrix_c2p2 matrix">
             <g
@@ -157,7 +157,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Daily Temperature</span> of River Reaches in 2019
+            <span class="yellow">Daily temperature</span> of river reaches in 2019
           </p>
           <p class="viz-subtitle">
             Each line = one reach.
@@ -181,7 +181,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Variability</span> of Temperature Data in 2019
+            Variability of <span class="yellow">water temperature</span> in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
@@ -197,7 +197,7 @@
       <div class="map-matrix-grid-container">
         <div
           id="DRB_map_c2p3"
-          class="map mm-grid-item"
+          class="map_matrix mm-grid-item"
         />
         <div
           id="matrixChart_c2p3"
@@ -217,7 +217,7 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Most Observed</span> Areas in Continental United States
+            <span class="yellow">Most observed</span> areas in continental United States
           </p>
           <p class="viz-subtitle">
             USGS, state, or local agency stream temperature observations since 1985.
@@ -15577,16 +15577,16 @@
 
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 400;
-          this.map_height = window.innerHeight * 0.5;
+          this.map_width = 350;
+          this.map_height = 600; //
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
-              .center([0, 40.688894445]) //40.658894445
-              .rotate([75.533333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
+              .center([0, 40.678894445]) //40.658894445
+              .rotate([75.413333335, 0, 0]) //75.363333335 centered, 76.2 far right, 74.6 far left
               .parallels([39.9352537033, 41.1825351867])
-              .scale(this.map_height * 15.9)
+              .scale(this.map_height * 15)
               .translate([this.map_width / 2, this.map_height / 2]);
 
           this.map_path_c2 = self.d3.geoPath()
@@ -15597,8 +15597,8 @@
               .orient(self.d3.geoScaleBottom)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.25) // .15 centered, .45 far right
-              .top(.96)
+              // .left(.10) // .15 centered, .45 far right
+              // .top(.96)
               .units(self.d3.geoScaleKilometers)
               .distance(50)
               .label("50 kilometers")
@@ -15610,8 +15610,8 @@
               .orient(self.d3.geoScaleTop)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.25) // .15 centered, .45 far right
-              .top(.97)
+              // .left(.10) // .15 centered, .45 far right
+              // .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
               .label("25 miles")
@@ -15622,7 +15622,7 @@
           //create new svg container for the ch 2 panel 1 map
           this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
               .append("svg")
-              .attr("class", "map_c2p1 map")
+              .attr("class", "map_c2p1 map") //map
               .attr("id", "drb_map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
@@ -15630,14 +15630,15 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2 map")
+              .attr("class", "map_c2p2 map_matrix") //map_matrix
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
-                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
+              .attr("width", "100%")
           
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
-              .attr("class", "map_c2p3 map")
+              .attr("class", "map_c2p3 map_matrix")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
           
@@ -15799,17 +15800,17 @@
           // // graduated scale
           // set width classes
           let widthClasses = [
-            0.7,
-            1.1,
+            0.6,
+            0.9,
             1.2,
-            1.6,
-            1.9,
-            2.2,
-            2.5,
-            2.9,
-            3.4,
-            3.7
-          ]; //[            0.6,            0.9,            1.2,            1.4,            1.7,            2,            2.3,            2.6,            3,            3.5,          ]
+            1.4,
+            1.7,
+            2,
+            2.3,
+            2.6,
+            3,
+            3.5
+          ];
 
           // // graduated scale
           // create width scale generator for natural breaks classification
@@ -15824,7 +15825,7 @@
           }
 
           // graduated scale
-          // cluster data using ckmeans clustering algoritm to create natural breaks
+          // cluster data using ckmeans clustering algorithm to create natural breaks
           let clusters = ss.ckmeans(domainArrayFlow, 10);
 
           // graduated scale
@@ -15920,7 +15921,7 @@
             // append group of single segment to c2p1 map (ONCE PER MAP)
             let href_id = '#seg' + segment_id
             self.map_c2p1.append("g").attr("class",function(d) {return 'c2p1 seg' + segment_id})
-              .style("stroke", "#576069")
+              .style("stroke", "#777b80")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -15941,7 +15942,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(1.1))
+              .attr("d", self.map_path_c2.pointRadius(0.9))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -15952,8 +15953,12 @@
               })
 
           // add scale bar
-          self.map_c2p1.append("g").call(self.scaleBarTop_c2);
-          self.map_c2p1.append("g").call(self.scaleBarBottom_c2);
+          let scaleBarGroup = self.map_c2p1.append("g")
+            .attr("class", "c2p1 scaleBar")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)");
         },
         setBarChart_c2p1(csv_source_count) {
           const self = this;
@@ -15976,7 +15981,7 @@
           let x = this.d3.scaleBand()
               .rangeRound([0, this.chart_width])
               // set padding between bars
-              .padding(0.075)
+              .padding(0.1)
 
           // make y scale
           let y = this.d3.scaleLinear()
@@ -16104,7 +16109,7 @@
                 }
                 return seg_class
               })
-              .style("stroke", "#576069")
+              .style("stroke", "#777b80")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16156,8 +16161,12 @@
           })
 
           // add scale bar
-          self.map_c2p2.append("g").call(self.scaleBarTop_c2)
-          self.map_c2p2.append("g").call(self.scaleBarBottom_c2)
+          let scaleBarGroup = self.map_c2p2.append("g")
+            .attr("class", "c2p2 scaleBar")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
         },
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
@@ -16166,6 +16175,8 @@
           let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
+              .attr("width", "100%")
+              // .attr("preserveAspectRatio", "none") // STRETCHES MATRIX - including legend and bar chart labels
 
           // // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -16226,13 +16237,16 @@
               })
 
           // append legend container
-          let legendsvg = svgMatrix.append("g")
+          let legendsvg = svgMatrix.append("svg")
               .attr("class", "c2p2 legendWrapper")
+              
+          let legendGroup = legendsvg.append("g")
+              .attr("class", "c2p2 legendColor")
               .attr("width", self.matrix_width_c2)
               .attr("transform", "translate(" + (self.matrix_margin.left) + "," + 0 + ")")
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p2 legendAxis")
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
@@ -16240,7 +16254,7 @@
               .text("1 daily value")
 
           // append legend rectangle
-          legendsvg.append("rect")
+          legendGroup.append("rect")
               .attr("class", "c2p2 matrixLegend")
               .attr("width", self.matrix_width_c2/2)
               .attr("height", 20)
@@ -16248,7 +16262,7 @@
               .attr("x", self.matrix_width_c2/4)
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p2 legendAxis")
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
@@ -16491,8 +16505,12 @@
           })
 
           // add scale bar
-          self.map_c2p3.append("g").call(self.scaleBarTop_c2)
-          self.map_c2p3.append("g").call(self.scaleBarBottom_c2)
+          let scaleBarGroup = self.map_c2p3.append("g")
+            .attr("class", "c2p3 scaleBar")
+            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
 
         },
         createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019){
@@ -16957,7 +16975,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
               // .attr("filter","None")
-              .style("stroke", "#576069")
+              .style("stroke", "#777b80")
               .style("opacity", 1)
               .lower()
           // select mouseovered transparent segment and raise segment
@@ -17167,7 +17185,7 @@
           // and reset to default styling
           self.d3.selectAll(".c2p3.river_segments.seg" + segment_id)
               // .attr("filter","None")
-              .style("stroke", "#576069")
+              .style("stroke", "#777b80")
               .style("opacity", 1)
               .lower()
           // select mouseovered transparent segment and raise segment
@@ -17326,8 +17344,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 #section_2 {
   margin-bottom: 0;
@@ -17343,7 +17361,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   #DRB_map_c2p1 {
-    display: block;
+    display: flex;
     width: 100%;
   }
 
@@ -17354,7 +17372,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   .inset-viz-subtitle {
-    fill: #576069; //$offWhite
+    fill: $grayBlue; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17378,7 +17396,7 @@ $grayBlue: #576069; //#4F5C67
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
   }
 
   button {
@@ -17436,7 +17454,8 @@ $grayBlue: #576069; //#4F5C67
   }
 
   #matrix-explainer-container {
-    padding: 5px;
+    margin: auto;
+    padding: 20px;
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto 1fr;
@@ -17444,10 +17463,9 @@ $grayBlue: #576069; //#4F5C67
       "header header header"
       "space time color";
     gap: 0px 10px;
-    width: 100%;
+    max-width: 100%;
     min-width: 300px;
     max-height: 90vh;
-    padding: 0 100px;
     @media screen and (max-width: 600px) {
       padding: 0 10px;
       gap: 0px;
@@ -17476,29 +17494,31 @@ $grayBlue: #576069; //#4F5C67
     grid-area: color;
   }
   .map-matrix-grid-container {
-    padding: 25px;
+    // padding: 25px;
+    margin: auto;
     display: grid;
-    align-items: center;
-    justify-content: center;
-    grid-template-columns: 30% 70%;
+    // align-items: center;
+    // justify-content: center;
+    // justify-items: center;
+    grid-template-columns: 1.5fr 3fr;
     grid-template-rows: 100%;
     grid-template-areas:
         "map matrix";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
-    max-height: 90vh;
+    max-height: 85vh;
+    max-width: 2000px;
   }
   .mm-grid-item {
     padding: 0px;
     display: flex;
     align-self: center;
-
   }
   #DRB_map_c2p2 {
     grid-area: map;
     display: flex;
-    max-height: 98%;
+    max-height: 80vh;
   }
   #matrixChart_c2p2 {
     grid-area: matrix;
@@ -17510,27 +17530,17 @@ $grayBlue: #576069; //#4F5C67
     grid-area: map;
     display: flex;
     max-height: 100%;
+    max-width: 100%;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
     display: flex;
     max-height: 100%;
   }
-  .annotation-text {
-    fill: #c3cccf;
-    font-size: 0.5em;
-    font-style: italic;
-  }
-  .annotation-text {
-    fill: #c3cccf;
-    font-size: 0.5em;
-    font-style: italic;
-  }
 }
 </style>
 
 <style lang="scss">
-
 // IMPORT COLORS
 $backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
 $boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
@@ -17542,17 +17552,36 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
-
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
-.label, .domain{
+// .label, .domain{
+//   color: $grayBlue; //#285C70
+//   font-size: 0.4em;
+//   stroke-width: 0.5px;
+//   position: absolute;
+//   left: 10vw;
+// }
+.label {
+  font-size: 1em; //base font setting for all scale bar labels
+}
+.c2p1.scaleBar {
   color: $grayBlue; //#285C70
-  font-size: 0.6em;
+  font-size: 0.5em;
+  stroke-width: 0.5px;
+}
+.c2p2.scaleBar {
+  color: $grayBlue; //#285C70
+  font-size: 0.7em;
+  stroke-width: 0.5px;
+}
+.c2p3.scaleBar {
+  color: $grayBlue; //#285C70
+  stroke-width: 0.5px;
 }
 .c2p2.cellText {
-  font-size: 0.45em;
+  font-size: 0.48em;
   //text-anchor: middle;
 }
 
@@ -17599,7 +17628,10 @@ $grayBlue: #576069; //#4F5C67
 .legendAxis {
   color: $grayBlue;
   fill: $grayBlue;
-  font-size: 1em;;
+  font-size: .8em;;
+}
+.tick text {
+  font-size: .8em;
 }
 .matrixAxis {
   fill: $grayBlue;
@@ -17623,17 +17655,17 @@ $grayBlue: #576069; //#4F5C67
 }
 .hex {
   fill-rule: evenodd;
-  stroke:#1a1b1c; //#141414
+  stroke: $boxCharcoal; //#141414
   stroke-miterlimit: 10;
   stroke-width: 0.1;
 }
 .hex_title {
-  fill: $grayBlue;
+  fill: $offWhite;
   font-size: 0.8em;
   font-weight: 550;
 }
 .hex_label {
-  fill: $grayBlue;
+  fill: $offWhite;
   font-size: 0.7em;
 }
 </style>

@@ -1,16 +1,17 @@
 <template>
   <div class="pre-footer-links">
     <div class="inner-pre-footer-links-container">
-      <p>Other visualizations of interest</p>
+      <p>Other Visualizations of Interest</p>
       <div class="footer-viz-links">
         <a
           :href="LinkOne"
         >
           <figure>
-            <figcaption>Enter appropriate caption</figcaption>
+            <figcaption>Water Science and Management in the Delaware River Basin</figcaption>
             <img
-              src="@/assets/components/PreFooterVisualizationsLinks/images/thumbnailGeneric.png"
+              src="@/assets/components/PreFooterVisualizationsLinks/images/DRBthumb.png"
               alt=""
+              loading="lazy"
             >
           </figure>
         </a>
@@ -18,10 +19,11 @@
           :href="LinkTwo"
         >
           <figure>
-            <figcaption>Enter appropriate caption</figcaption>
+            <figcaption>Gages Through the Ages</figcaption>
             <img
-              src="@/assets/components/PreFooterVisualizationsLinks/images/thumbnailGeneric.png"
+              src="@/assets/components/PreFooterVisualizationsLinks/images/Gages.png"
               alt=""
+              loading="lazy"
             >
           </figure>
         </a>
@@ -35,8 +37,8 @@
         name: 'PreFooterVisualizationsLinks',
         data() {
             return {
-                LinkOne: process.env.VUE_APP_FOOTER_LINK_1,
-                LinkTwo: process.env.VUE_APP_FOOTER_LINK_2
+                LinkOne: "https://labs.waterdata.usgs.gov/visualizations/delaware-basin-story/index.html#/",
+                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/gages-through-the-ages/index.html#/"
             };
         }
     }
@@ -52,10 +54,14 @@
     font-family: 'Source Sans Pro',sans-serif;
     font-size: 12px;
     font-weight: 600;
+    border-top: 1px #FFFFFF10 solid;
+    padding-top: 1em;
     p {
       color: white;
+      font-size: 1.3em;
     }
-    background-color: #00264c;
+    background-color: #292b30;
+
     .footer-viz-links {
       margin: 0 auto;
       display: flex;

@@ -13,10 +13,31 @@
           </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
-        <div class="text-content">
-          <p />
+        <div
+          id="modeling-intro"
+          class="text-content"
+        >
           <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "process-guided deep learning".</p>
           <p>Process-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
+          <div id="arrows">            
+            <svg id="more-arrows">
+              <polygon
+                class="arrow-top"
+                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+              />
+              <polygon
+                class="arrow-middle"
+                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+              />
+              <polygon
+                class="arrow-bottom"
+                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+              />
+            </svg>
+            <p id="scroll-cue">
+              Scroll
+            </p>
+          </div>
         </div>
       </div>
     </figure>
@@ -49,7 +70,7 @@
                 id="ANN1"
                 class="path1 flubber visuals"
                 style="fill: #5191bd"
-                d="M86.1,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C81.4,19.1,86.1,23,86.1,26.2Z"
+                d="M49.6,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C44.9,19.1,49.6,23,49.6,26.2Z"
               />
               <path
                 id="ANN2"
@@ -156,7 +177,7 @@
                 id="ANN1"
                 class="path2 flubber visuals"
                 style="fill: #5191bd"
-                d="M86.1,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C81.4,19.1,86.1,23,86.1,26.2Z"
+                d="M49.6,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C44.9,19.1,49.6,23,49.6,26.2Z"
               />
               <path
                 id="ANN2"
@@ -204,31 +225,31 @@
               <path
                 id="ANN9"
                 class="path2 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
               />
               <path
                 id="ANN10"
                 class="path2 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
               />
               <path
                 id="ANN11"
                 class="path2 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
               />
               <path
                 id="ANN12"
                 class="path2 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
               />
               <path
                 id="ANN13"
                 class="path2 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
               /> 
               <path
@@ -264,7 +285,7 @@
                 id="ANN1"
                 class="path3 flubber visuals"
                 style="fill: #FAB62F"
-                d="M178.5,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
+                d="M216,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
               />
               <path
                 id="ANN2"
@@ -371,7 +392,7 @@
                 id="ANN1"
                 class="path4 flubber visuals"
                 style="fill: #FAB62F"
-                d="M178.5,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
+                d="M216,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
               />
               <path
                 id="ANN2"
@@ -478,7 +499,7 @@
                 id="ANN1"
                 class="path5 flubber visuals"
                 style="fill: #FAB62F"
-                d="M178.5,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
+                d="M216,22.2l-4.4-.3a5.7,5.7,0,0,0-.1-1.3l6.1-3.3-6.5,2.1h-.1a6,6,0,0,0-.9-1.5l2.5-3.2-3,2.7a2.7,2.7,0,0,0-1.2-.9l2-6.3-3.1,5.7a5.2,5.2,0,0,0-1.8-.3l-.4-3.8-.3,3.8a4.5,4.5,0,0,0-1.6.3l-3.1-5.7,1.9,6.2a4.9,4.9,0,0,0-1.4,1.1l-3-2.4,2.5,2.9-.9,1.4-6.3-1.9,5.9,3a5,5,0,0,0-.1,1.7l-4,.5,4,.3a8.3,8.3,0,0,0,.4,1.5l-6.1,3.2,6.6-2.1a6.9,6.9,0,0,0,1.1,1.3l-2.6,3.3,3.2-2.9a4.1,4.1,0,0,0,1.1.7l-2.2,6.9,3.4-6.5,1.6.2.5,4.5.2-4.6,1.2-.2,3.4,6.5-2.3-7a3.8,3.8,0,0,0,1.3-.9l3.6,2.9-3.1-3.4a6.1,6.1,0,0,0,.7-1l6.9,2.2-6.4-3.3a9.4,9.4,0,0,0,.4-1.6Z"
               />
               <path
                 id="ANN2"
@@ -585,7 +606,7 @@
                 id="ANN1"
                 class="path6 flubber visuals"
                 style="fill: #5191bd"
-                d="M86.1,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C81.4,19.1,86.1,23,86.1,26.2Z"
+                d="M49.6,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C44.9,19.1,49.6,23,49.6,26.2Z"
               />
               <path
                 id="ANN2"
@@ -709,61 +730,61 @@
               <path
                 id="ANN4"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN5"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN6"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN7"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN8"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />             
               <path
                 id="ANN9"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN10"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN11"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN12"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
                 id="ANN13"
                 class="path7 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
               />
               <path
@@ -834,43 +855,43 @@
               <path
                 id="ANN7"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />
               <path
                 id="ANN8"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />             
               <path
                 id="ANN9"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />
               <path
                 id="ANN10"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />
               <path
                 id="ANN11"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />
               <path
                 id="ANN12"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />
               <path
                 id="ANN13"
                 class="path8 flubber visuals"
-                style="fill: #576069"
+                style="fill: #777b80"
                 d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
               />   
               <path
@@ -905,7 +926,7 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(156 57.2)"
+                transform="translate(154 57.2)"
               >Air temperature</text>
               <text
                 class="f_main bold"
@@ -919,11 +940,11 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
             </g>
             <g
               id="ANN3_annotations"
@@ -949,20 +970,20 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <line
                 class="f_synapse high"
                 x1="80.4"
@@ -1017,11 +1038,11 @@
               >Hidden layer</text>
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <line
                 class="f_synapse high"
                 x1="80.4"
@@ -1079,12 +1100,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
             </g>
             <g
@@ -1098,11 +1119,11 @@
               >Hidden layer</text>
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <line
                 class="f_synapse high"
                 x1="80.4"
@@ -1160,12 +1181,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
             </g>
             <g
@@ -1175,11 +1196,11 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
                 transform="translate(86 195.6)"
@@ -1262,12 +1283,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
             </g>
             <g
@@ -1277,14 +1298,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <text
                 class="f_main bold"
@@ -1368,12 +1389,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
             </g>
             <g
@@ -1383,14 +1404,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse high"
@@ -1470,12 +1491,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <!-- text class="f_main bold" transform="translate(62 218.8)">Stream temperature</text -->
               <!-- g>
@@ -1490,14 +1511,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse high"
@@ -1577,20 +1598,20 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <text
                 class="f_main bold"
                 transform="translate(103 157.9)"
               >Output<tspan
-                x="5"
+                x="8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <g>
                 <line
                   class="f_arrow"
@@ -1620,14 +1641,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse high"
@@ -1707,20 +1728,20 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <text
                 class="f_main bold"
                 transform="translate(103 157.9)"
               >Output<tspan
-                x="5"
+                x="8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <g>
                 <line
                   class="f_arrow"
@@ -1739,17 +1760,17 @@
                 transform="translate(78.5 236.4)"
               >11 °C</text>
               <text
-                class="f_temp pred ital"
-                transform="translate(4 236.4)"
-              >Prediction</text>
+                class="f_minor ital"
+                transform="translate(21 236.4)"
+              >prediction</text>
               <text
                 class="f_temp actual"
                 transform="translate(123.4 236.4)"
               >17 °C</text>
               <text
-                class="f_temp actual ital"
-                transform="translate(165.9 236.4)"
-              >Actual</text>
+                class="f_minor ital"
+                transform="translate(164.9 236.4)"
+              >actual</text>
               <!-- g>
                 <line
                   class="f_arrow"
@@ -1772,14 +1793,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse medium"
@@ -1859,12 +1880,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <g>
                 <line
@@ -1883,9 +1904,9 @@
                 class="f_main bold"
                 transform="translate(103 157.9)"
               >Output<tspan
-                x="5"
+                x="8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_temp actual"
                 transform="translate(123.4 236.4)"
@@ -1902,14 +1923,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse low"
@@ -1989,12 +2010,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <g>
                 <line
@@ -2013,9 +2034,9 @@
                 class="f_main bold"
                 transform="translate(103 157.9)"
               >Output<tspan
-                x="5"
+                x="8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_temp actual"
                 transform="translate(123.4 236.4)"
@@ -2032,14 +2053,14 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(105.5 19.1)"
+                transform="translate(106.5 19.1)"
               >Input<tspan
-                x="0.1"
+                x="0.8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
                 class="f_main bold"
-                transform="translate(91.8 94.6)"
+                transform="translate(83.5 95.6)"
               >Hidden layer</text>
               <line
                 class="f_synapse low"
@@ -2119,12 +2140,12 @@
                 transform="translate(200.7 44.7)"
               >thickness<tspan
                 class="f_minor"
-                x="22"
-                y="12"
+                x="21"
+                y="11.5"
               >=</tspan><tspan
                 class="f_minor"
-                x="9.8"
-                y="22"
+                x="9"
+                y="22.5"
               >weight</tspan></text>
               <g>
                 <line
@@ -2143,13 +2164,16 @@
                 class="f_main bold"
                 transform="translate(103 157.9)"
               >Output<tspan
-                x="5"
+                x="8"
                 y="14.4"
-              >Layer</tspan></text>
+              >layer</tspan></text>
               <text
-                class="f_temp pred ital"
-                transform="translate(48.1 236.4)"
-              >Final</text>
+                class="f_minor"
+                transform="translate(57.6 236.4)"
+              >f<tspan
+                x="4.2"
+                y="0"
+              >inal</tspan></text>
               <!-- g>
                 <line
                   class="f_synapse medium"
@@ -2180,18 +2204,18 @@
               <text
                 id="text-1"
                 class="f_main light"
-                transform="translate(93.9 75.1)"
-              ><tspan class="f_main light">yesterday</tspan></text>
+                transform="translate(87.9 74.5)"
+              ><tspan class="f_main light">Yesterday</tspan></text>
               <text
                 id="text-2"
                 class="f_main bold emph"
-                transform="translate(134.6 108.5)"
-              ><tspan class="f_main bold">today</tspan></text>
+                transform="translate(132.6 108.5)"
+              ><tspan class="f_main bold">Today</tspan></text>
               <text
                 id="text-3"
                 class="f_main light"
-                transform="translate(102.7 157.2)"
-              ><tspan class="f_main light">tomorrow</tspan></text>
+                transform="translate(99.7 159.2)"
+              ><tspan class="f_main light">Tomorrow</tspan></text>
               <g id="arrow">
                 <g>
                   <line
@@ -2288,8 +2312,8 @@
               <g>
                 <text
                   class="f_minor"
-                  transform="matrix(0.58, 0.82, -0.82, 0.58, 163.88, 151.43)"
-                >F</text>
+                  transform="matrix(0.58, 0.82, -0.82, 0.58, 164.88, 152.43)"
+                >f</text>
                 <text
                   class="f_minor"
                   transform="matrix(0.56, 0.83, -0.83, 0.56, 167.7, 156.89)"
@@ -2306,8 +2330,8 @@
               <g>
                 <text
                   class="f_minor"
-                  transform="translate(49.8 118.3) rotate(23.8)"
-                >F</text>
+                  transform="translate(50.8 118.8) rotate(22.8)"
+                >f</text>
                 <text
                   class="f_minor"
                   transform="matrix(0.94, 0.34, -0.34, 0.94, 56.13, 120.97)"
@@ -2389,7 +2413,7 @@
               >E</text>
               <text
                 class="other label"
-                transform="translate(152 211.6) rotate(1.8)"
+                transform="translate(150 211.6) rotate(1.8)"
               >C</text>
               <text
                 class="other label"
@@ -2413,7 +2437,7 @@
               >B</text>
               <text
                 class="other label"
-                transform="translate(134.2 244) rotate(11)"
+                transform="translate(133.2 244) rotate(11)"
               >D</text>
               <text
                 class="other label"
@@ -2618,30 +2642,7 @@
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg" 
-        >
-          <g>
-            <path
-              class="arrow"
-              d="M935.52,445.63a111.67,111.67,0,0,0,14-50c.53-16.71-3.1-33.36-7.65-49.28a189.52,189.52,0,0,0-9.53-25.9c-1.14-2.52-5.38-1.24-4.22,1.32A215.78,215.78,0,0,1,942.37,367c3.41,16.47,3.89,33.34-.15,49.83a110.31,110.31,0,0,1-10.57,26.82c-1.36,2.48,2.55,4.48,3.91,2Z"
-            />
-            <path
-              class="arrow"
-              d="M958.33,337.88A146.73,146.73,0,0,1,931,317.2a2.23,2.23,0,0,0-3.12.15,2,2,0,0,0-.32.45A247.8,247.8,0,0,1,911,350.45c-1.47,2.44,2.44,4.42,3.9,2a247.33,247.33,0,0,0,16.59-32.66l-3.46.63a151.05,151.05,0,0,0,28.3,21.3c2.44,1.42,4.51-2.46,2.07-3.87Z"
-            />
-          </g>
-          <g>
-            <path
-              class="arrow"
-              d="M68.21,437.81A99.38,99.38,0,0,1,61.49,392c1.44-14.86,6.56-29.16,12.42-42.72a169.22,169.22,0,0,1,11.41-21.8c1.3-2.1,4.92-.47,3.6,1.66A191.39,191.39,0,0,0,71.1,367.46c-4.91,14.18-7.26,29.05-5.55,44.11a98.47,98.47,0,0,0,6.32,25c.92,2.35-2.77,3.67-3.7,1.32Z"
-            />
-            <path
-              class="arrow"
-              d="M60.26,339.81A130.31,130.31,0,0,0,86.87,324.7a2,2,0,0,1,2.76.5,2.22,2.22,0,0,1,.23.43,220.53,220.53,0,0,0,11,30.83c1,2.33-2.68,3.63-3.7,1.32a220.48,220.48,0,0,1-11-30.83l3,.95a133.83,133.83,0,0,1-27.55,15.55c-2.33,1-3.72-2.7-1.39-3.66Z"
-            />
-          </g>
-
-
-        </svg>
+        />
       </div>
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
@@ -2686,10 +2687,7 @@
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
     import * as flubber from "flubber";
-    import textures from 'textures';
-
     import modelingText from "./../../assets/text/modelingText";
-
 
   export default {
     name: 'Modeling',
@@ -2712,7 +2710,7 @@
 
             // string keys to modify chart appearance
             chartState: {},
-            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn'},
+            chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
             chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
@@ -2722,8 +2720,9 @@
             o_train: 0, // legend training data
             o_exp: 0, // legend added experiments
             o_arrow: 0,
-            o_ermse_title: 0,
+            o_rmse_title: 0,
             model_current:  '',
+            obs_pos: 0,
 
             // beeswarm
             step_start: 13,
@@ -2746,6 +2745,8 @@
             scroller: null,
             step: 0, // causing elements to refresh at step 0
             current_step: null,
+            last_step: 70,
+            now_step: null,
 
             // flubber
             flubber_dict: {},
@@ -2761,6 +2762,16 @@
             step_rgcn: null,
             step_rgcn_ptrn: null,
             step_end: null,
+
+            time_fade: 500,
+            axis_label: null,
+            legend_predicted: null,
+            legend_observed: null,
+            axis_label_rmse: null,
+            legend_model: null,
+            legend_training:  null, 
+            legend_training_d100: null,
+            legend_training_d001: null,
 
           }
         },
@@ -2806,8 +2817,8 @@
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
-          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
-          this.step_ann = this.step_rmse + 1; /// show RMSE for ANN d100 experiment
+          this.step_rmse = this.step_error_obs + 2; /// data points to single RMSE
+          this.step_ann = this.step_rmse + 3; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
@@ -2816,9 +2827,8 @@
 
         // colors for chart
           this.color_d100 = '#FAB62F';
-          this.color_d02 = "#BE3D7D";
           this.color_d001 = "#62039A";
-          this.color_obs = "#B666C6";  // #FAB62F is the current yellow in flubber
+          this.color_obs = "#B666C6";  // #FDAD32 is the current yellow in flubber
           this.color_exp = "#B666C6";
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
@@ -2848,7 +2858,7 @@
             this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart - default is an error chart to start
-            this.chartState.dataset = this.error_data;
+  /*           this.chartState.dataset = this.error_data;
             this.chartState.grouped = this.color_bees.error;
             this.chartState.var_x = this.chart_x.error;
             this.chartState.var_y = this.chart_y.error;
@@ -2857,7 +2867,7 @@
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
             this.chartState.alpha = 1;
-            this.chartState.aDecay = 0.1;
+            this.chartState.aDecay = 0.1; */
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -2869,13 +2879,11 @@
           resize () {
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
-/*             this.width = bounds.width
-            this.height = bounds.height
-            this.marginX = bounds.width * 0.1
-            this.marginY = bounds.height * 0.1 */
+            this.width_screen = bounds.width
+            //this.height = bounds.height
+            //this.marginX = bounds.width * 0.1
+            //this.marginY = bounds.height * 0.1 
             this.scroller.resize()
-            
-            console.log(bounds)
 
           },
           // set up flubber svg
@@ -2915,7 +2923,7 @@
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
-              let animationLength = 900; // original was 2400
+              let animationLength = 1400; // original was 2400
 
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
@@ -3011,11 +3019,12 @@
               this.o_obs = 0; // legend observed
               this.o_train = 0; // legend training data
               this.o_exp = 0; // legend added experiments
-              this.o_arrow = 0;
-              this.o_rmse_title = 0;
+              this.o_arrow = 0; // rmse arrow legend
+              this.o_rmse_title = 0; // rmse model naming
+              this.obs_pos = 0; // 
                break;
             case this.step_error_obs:
-              //this.label_o = 1;
+              this.label_o = 1;
               this.label_o_rmse = 0;
               this.o_pred = 1;
               this.o_obs = 1;
@@ -3023,8 +3032,11 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 0;
+              this.obs_pos = 30;
                break;
             case this.step_rmse:
+            case this.step_rmse+1:
+            case this.step_rmse+2:
               this.label_o = 0;
               this.label_o_rmse = 1;
               this.o_pred = 0;
@@ -3033,6 +3045,7 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3043,8 +3056,9 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 0;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3057,8 +3071,9 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3069,8 +3084,9 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3081,8 +3097,9 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3094,8 +3111,9 @@
               this.o_obs = 0;
               this.o_train = 1;
               this.o_exp = 1;
-              this.o_arrow = 0;
+              this.o_arrow = 1;
               this.o_rmse_title = 1;
+              this.obs_pos = 30;
               break;
             default:
               this.label_o = 0;
@@ -3106,6 +3124,7 @@
               this.o_exp = 0;
               this.o_arrow = 0;
               this.o_rmse_title = 0;
+              this.obs_pos = 0;
           }
           },
           setDataVars(){
@@ -3119,6 +3138,9 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = 0; // x end for axis
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = this.height;
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3128,15 +3150,45 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = this.height;
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.error;
+              this.chartState.grouped = this.color_bees.exp;
               this.chartState.var_x = this.chart_x.mid;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
-              this.model_current = '';
+              this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              break;
+            case this.step_rmse+1:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.low;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
+              break;
+             case this.step_rmse+2:
+              this.chartState.dataset = this.error_data;
+              this.chartState.grouped = this.color_bees.exp;
+              this.chartState.var_x = this.chart_x.high;
+              this.chartState.var_y = this.chart_y.mid;
+              this.chartState.domain_x = 30;
+              this.chartState.domain_y = 30;
+              this.model_current = '  quantifies model prediction error';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3148,6 +3200,9 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3161,6 +3216,9 @@
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
               this.model_current = ': ANN';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3171,7 +3229,10 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
-              this.model_current = ': RNN';
+              this.model_current = ': ANN + time';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3182,7 +3243,10 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
-              this.model_current = ': RGCN';
+              this.model_current = ': ANN + time + space';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3194,7 +3258,10 @@
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
               this.chartState.domain_y = null;
-              this.model_current = ': PGDL';
+              this.model_current = ': ANN + time + space + physics';
+              this.chartState.axis_x = 0;
+              this.chartState.axis_y = 0;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3204,6 +3271,9 @@
               this.chartState.domain_x = 30;
               this.chartState.domain_y = 30;
               this.model_current = '';
+              this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
+              this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
+              this.chartState.axis_x_on_y = this.height;
 
           }
           },
@@ -3241,6 +3311,7 @@
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
             .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]);
+
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"]) // took out d002
@@ -3248,46 +3319,99 @@
 
           ///////////////////
           // generate axes
-          let yGen = this.d3.axisLeft(self.yScale);
-          let xGen = this.d3.axisBottom(self.xScale);
-
-          // drop ticks
-          xGen.ticks(0);
-          yGen.ticks(0);
+          let yGen = this.d3.axisLeft(self.yScale).ticks(0).tickSize(0);
+          let xGen = this.d3.axisBottom(self.xScale).ticks(0).tickSize(0);
 
           // draw on chart
           this.yAxis = this.svg.select("g").append("g")
             .attr("class", "y-axis")
-            .attr("color", "#91989e")
             .call(yGen);
 
           this.xAxis = this.svg.select("g").append("g")
             .attr("class", "x-axis")
-            .attr("color", "#91989e")
             .call(xGen);
 
-        // style modifications and set up line drawing animation
-          this.xAxis
-          .attr("transform", "translate(" + -margin + "," + this.height + ")")
-          .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.width+margin)
-          .attr("stroke-dashoffset", this.width+margin)
-          //.attr('marker-end', 'url(#arrowhead-right)'); // append arrow to axis
+        // style modifications and set up axis drawing animation
+         this.xAxis
+          .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
+          .style("stroke-width", "3px")
+          .style("stroke-dasharray", this.width+margin)
+          .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
+          .style("color", "#91989e")
+          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
-          this.yAxis
-          .attr("stroke-width", "5px")
-          .attr("stroke-dasharray", this.height+margin)
-          .attr("stroke-dashoffset", this.height+margin)
-          //.attr('marker-end', 'url(#arrowhead-up)'); // append arrow to axis
+         this.yAxis
+          .style("stroke-width", "3px")
+          .style("stroke-dasharray", this.height+margin)
+          .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
+          .style("color", "#91989e")
+          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
-           this.d3.selectAll("path.arrow")
-           .attr("opacity", this.label_o_rmse)
+          /// define arrow head for rmse label
+        this.svg.append("svg:defs").append("svg:marker")
+          .attr("id", "triangle")
+          .attr("refX", 10)
+          .attr("refY", 5)
+          .attr("markerWidth", 16)
+          .attr("markerHeight", 16)
+          .attr("orient", "auto")
+          .append("path")
+          .attr("d", "M 0 0 L 10 5 L 0 10 z")
+          .style("fill", "#91989e");
+          
+          // draw arrow and labels opacity 0 unless 
+          this.svg.select("g")
+          .append("line")
+            .attr("x1", 0)
+            .attr("y1", (this.height-50))
+            .attr("x2", this.width)
+            .attr("y2", (this.height-50))
+            .attr("stroke-width", 2)
+            .attr("stroke", "#91989e")// not the right grey color.........................
+            .attr("stroke-dasharray", "5px")
+            .attr("marker-end", "url(#triangle)")
+            .classed("arrow", true)
+            .style("opacity", this.o_rmse_title);
+
+          // text labels for the rmse axis
+          this.svg.select("g").append("text")             
+              .attr("transform","translate(" + 0 + " ," + (this.height-50 - 40) + ")")
+              .style("text-anchor", "left")
+              .text("accurate")
+              .style("fill", "#91989e")// not the right grey color
+              .style("font-size", "24px")
+              .style("opacity", this.o_rmse_title)
+              .classed("rmse-label", true);
+
+            this.svg.select("g").append("text")             
+              .attr("transform","translate(" + (this.width-margin*2) + " ," + (this.height-50-40) + ")")
+              .style("text-anchor", "right")
+              .text("inaccurate")
+              .style("fill", "#91989e")// not the right grey color
+              .style("font-size", "24px")
+              .style("opacity", this.o_rmse_title)
+              .classed("rmse-label", true);
+
+        // if refreshed on any of the error chart views, do the line drawing animation to put it on the page
+        let error_steps = [this.step_error_exp, this.step_error_obs];
+        if (error_steps.indexOf(this.step) !== -1) {
+             self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+             self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
+
+        // if starts on any rmse steps, draw the rmse axis only
+        } else if (this.step >= this.step_rmse) {
+           this.yAxis 
+            .style("opacity", 0)
+            
+          self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+          self.transitionAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
+        }
 
           // text label for the x axis
           this.svg.append("text")             
-              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 50) + ")")
+              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 48) + ")")
               .style("text-anchor", "middle")
-              .text("Time")
+              .text("time")
               .style("fill", "#91989e")
               .style("font-size", "30px")
               .attr("opacity", this.label_o)
@@ -3301,39 +3425,20 @@
               .attr("y",0)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
-              .text("Temperature")
+              .text("temperature")
               .style("fill", "#91989e")
               .attr("opacity", this.label_o)
               .classed("error", true)
               .style("font-size", "30px")
               .classed("axis-label", true);    
 
-              // text labels for the rmses
-          this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
-              .style("text-anchor", "left")
-              .text("accurate")
-              .style("fill", "#f1f1f1")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
-
-            this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
-              .style("text-anchor", "right")
-              .text("inaccurate")
-              .style("fill", "#f1f1f1")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
-
-
+            ////////////////////////////// colors + legends
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = this.width*.05+margin*2;
+                 var nudge_x = 150;
                  var nudge_y = this.height*.1;
 
                 var error_stroke = this.d3.scaleOrdinal()
@@ -3341,19 +3446,20 @@
                   .range([this.color_obs, this.color_exp]);
 
                   var error_fill = this.d3.scaleOrdinal()
-                  .domain(["predicted","observed"])
+                  .domain(["Predicted","Observed"])
                   .range([this.color_exp,"#292b30"]);
 
               legend_error.append("text")
                 .text("Temperature")
                 .attr("x", nudge_x-20)
                 .attr("y", nudge_y)
-                .style("fill", "#91989e")
+                .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
                  .style("opacity", this.o_pred)
                  .classed("error_1" , true)
 
+                // set positioning for error legend
                 var legend = legend_error.selectAll(".legend")
                   .data(error_fill.domain().slice().reverse())
                   .enter().append("g")
@@ -3374,7 +3480,7 @@
                   .attr("x", "20px")
                   .attr("y", "5px")
                   .text(function(d) { return d; })
-                  .style("fill", "#91989e")
+                  .style("fill", "white")
                   .style("font-size", "20px")
 
                    this.d3.select("g.legend:nth-child(3) text")
@@ -3394,29 +3500,32 @@
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
-                  // rmse updating conent label
+                  // rmse updating model label
                   legend_error.append("text")
-                .text("Model RMSE")
-                .attr("x", nudge_x-20)
-                .attr("y", nudge_y)
-                .style("fill", "#91989e")
-                 .style("font-size", "30px")
-                 .style("font-weight","bold")
-                 .style("opacity", this.o_rmse_title)
-                 .classed("rmse-name" , true)
+                  .text("Root mean square error (RMSE)")
+                  .attr("x", 50)
+                  .attr("y", nudge_y+420)
+                  .style("fill", "white")
+                  .style("font-size", "30px")
+                  .attr("line-height", "35px")
+                  .style("font-weight","bold")
+                  .style("opacity", this.o_rmse_title)
+                  .classed("rmse-name" , true)
 
               //updating label
                  legend_error.append("text")
-                .text(this.model_current)
-                .attr("x", nudge_x+165)
-                .attr("y", nudge_y)
-                .style("fill", "#91989e")
-                 .style("font-size", "30px")
-                 .style("font-weight","100")
-                 .style("opacity", this.o_rmse_title)
-                 .classed("rmse-name" , true)
+                  .text(this.model_current)
+                  .attr("x", 510)
+                  .attr("y", nudge_y+420)
+                  .style("fill", "white")
+                  .style("font-size", "30px")
+                  .attr("line-height", "35px")
+                  .style("font-weight","100")
+                  .style("opacity", this.o_rmse_title)
+                  .classed("rmse-name" , true)
+                  .classed("model" , true)
 
-          /// rmse legend
+             /// rmse legend
                   var legend_rmse = this.d3.select("#bees-legend")
                     .append("g").classed("rmse-legend", true)
                     .classed("rmse", true)
@@ -3433,10 +3542,10 @@
                   .range([this.color_d100,  this.color_d001]);
 
               legend_rmse.append("text")
-                .text("Training data provided")
+                .text("Training data")
                 .attr("x", nudge_x_rmse-20)
                 .attr("y", nudge_y_rmse)
-                .style("fill", "#91989e")
+                .style("fill", "white")
                  .style("font-size", "30px")
                  .style("font-weight","bold")
                  .style("opacity", this.o_train)
@@ -3461,29 +3570,64 @@
                   .attr("x", "20px")
                   .attr("y", "5px")
                   .text(function(d) { return d; })
-                  .style("fill", "#91989e")
+                  .style("fill", "white")
                   .style("font-size", "20px")
 
                   this.d3.selectAll("g.legend-rmse:nth-child(2)") //
                   .style("opacity", this.o_train)
+                  .classed("d_100", true)
 
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
+                  .classed("d_001", true)
+          
+          if (this.step >= this.step_error_exp) {
 
+            ////////////////
+            // initiate force simulation
+            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(1))
+            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
-          ////////////////
-          // initiate force simulation
-          self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-          .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-          .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
-          .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+          // tick to make sure dots are poistioned on first draw
+           self.simulation
+           .alpha(this.chartState.alpha)
+           .alphaDecay(this.chartState.aDecay)
+           .velocityDecay(0.6)
+           .restart()
+            .on("tick", self.tick)
+
+          };
+
+          // define for updating axes and labels
+            this.time_fade = 500;
+            this.axis_label = this.d3.selectAll("text.axis-label");
+            this.legend_predicted = this.d3.selectAll(".error_1");
+            this.legend_observed = this.d3.selectAll(".error_2");
+            this.axis_label_rmse = this.d3.selectAll("text.rmse-label");
+            this.axis_arrow = this.d3.select("line.arrow")
+            this.legend_model = this.d3.selectAll("text.rmse-name");
+            this.legend_training = this.d3.selectAll("text.rmse-title");
+            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
+            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
+
+          },
+          transitionAxes(element, end) {
+            const self = this;
+            let time_slide = 500;
+            element
+              .transition()
+              .duration(time_slide)
+              .ease(this.d3.easeCircle)
+              .style("stroke-dashoffset", end)
 
           },
           moveLegend(direction) {
               const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
-            var nudge_x = this.width*.05+50*2;
+            var nudge_x = 150;
             var nudge_y = this.height*.1;
 
             if (direction == "down"){
@@ -3522,35 +3666,37 @@
             }
           },
           drawAxes(axes_in) {
+            const self = this;
             // controls axis aniamtions between error chart and beeswarm
+            // to do: clean up and reuse moveXAxis and transitionAxes functions to simplify code here
             let time_slide = 500;
             let margin = 50;
 
             if (axes_in === "error") {
-            this.yAxis
+             this.yAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", 0)
+              .style("stroke-dashoffset", 0)
 
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", 0)
+              .style("stroke-dashoffset", 0)
 
             } else if (axes_in === "error_up") {
             this.yAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.height+margin)
+              .style("stroke-dashoffset", this.height+margin)
 
             this.xAxis
               .transition()
               .duration(time_slide)
               .ease(this.d3.easeCircle)
-              .attr("stroke-dashoffset", this.width+margin)
+              .style("stroke-dashoffset", this.width+margin)
 
             } else if (axes_in === "rmse"){
               // move x-axis up to center line
@@ -3558,11 +3704,12 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-40) + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-50) + ")")
 
                 this.yAxis
-                .transition(time_slide)
-                .attr("opacity", 0)
+                .transition()
+                .duration(time_slide)
+                .style("opacity", 0)
 
             } else if (axes_in === "rmse_up"){
               // move x-axis down to bottom
@@ -3574,8 +3721,9 @@
                 .attr("transform", "translate(" + -margin + "," + this.height + ")")
 
                 this.yAxis
-                .transition(time_slide)
-                .attr("opacity", 1)
+                .transition()
+                .duration(time_slide)
+                .style("opacity", 1)
             } 
           },
           updateChart() {
@@ -3597,7 +3745,29 @@
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
+            // update label under beesawrm with current model data in view
+            this.d3.selectAll("text.rmse-name.model")
+              .transition()
+              .duration(500)
+              .style("opacity", 0)
+              .remove()
 
+            // redraw label
+            this.d3.select("g.legend_color.error")
+              .append("text")
+              .classed("rmse-name" , true)
+              .classed("model" , true)
+              .text(this.model_current) // pulls current step model
+              .attr("x", 510)
+              .attr("y", (this.height*.1)+420)
+              .style("fill", "white")
+              .style("font-size", "30px")
+              .attr("line-height", "30px")
+              .style("font-weight","100")
+              .style("opacity", 0)
+              .transition()
+                .duration(200)
+                .style("opacity", 1)
 
         // bind data
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
@@ -3616,7 +3786,7 @@
         // attributes and positioning define the starting point
           chart.exit()
               .transition()
-                .duration(800)
+                .duration(600)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 //.attr("r", 0)
@@ -3661,9 +3831,7 @@
           // define force velocity and ticking
 
          // array of transition steps
-          var step_transitions = [this.step_error_exp, this.step_error_obs, this.step_rmse, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-         // console.log(step_transitions);
-         // console.log(step_transitions.indexOf(this.step));
+          var step_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
 
           // tick simulation only if the active step has a chart transition
           if (step_transitions.indexOf(this.step) !== -1){
@@ -3685,25 +3853,12 @@
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
-
-        },
-        /* updateodelName(){
-                      //updating rmse model label
-            let legend_error = this.d3.select("#text..rmse-name")
-            .transition()
-            .duration(300)
-            .attr("opacity", 0)
-
-            legend_error
-            .transition()
-            .text(this.model_current)
-            .duration(300)
-
-        }, */
+        }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
         handleStepEnter(response) {
           const self = this;
+          this.now_step = this.last_step+1;
 
           // update step variable to match step in view
           this.step = response.index;
@@ -3711,28 +3866,45 @@
 
           ///////////
           // assign force
+          // to do: implement with switch to make faster and set forces to be different on intial draw and update
+          // the biggest problem with force right now if that if the page is refreshed in the middle of the chart sequence
+          // it doesn't have enough heat to make it to the mid line because alpha is down to reduce jitter
+          // also work could be done to slow down the dots and exaggerate the transitions more, while still making sure they get to their home spots
 
           // error chart
           if (this.step <= this.step_error_exp) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.aDecay = 0.05;
           }
            if (this.step === this.step_error_obs ) {
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
           }
-
-
           // push to overlap as single RMSE
           if (this.step === this.step_rmse) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
-             this.chartState.strengthr = 2;
+             this.chartState.strengthr = 1;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (this.step === this.step_rmse+1) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
+
+          }
+          if (this.step === this.step_rmse+2) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
           }
 
           // intro beeswarm, adding experiments
@@ -3802,39 +3974,35 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-          // update axes and labels
-          if (this.step == this.step_error_exp && response.direction == "down" ) {
-            self.drawAxes("error");
-            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".error_1"), 500);
-            //self.fadeIn(this.d3.select("g.legend:nth-child(3) circle"), 500)
-          }  else if (this.step == this.step_error_obs && response.direction == "down" ) {
-            self.moveLegend("down");
-          }  else if (this.step == this.step_rmse && response.direction == "down") {
-            // rmse legend in and error legend out
-            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".error_1"), 500);
-             self.fadeOut(this.d3.selectAll(".error_2"), 500);
-            //self.fadeOut(this.d3.select("g.legend:nth-child(2) circle"), 500)
-            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
-          }  else if (this.step == this.step_ann+1 && response.direction == "down") {
-            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
-          } else if (this.step == this.step_ann && response.direction == "down") {
-            // half of rmse legend appears for beeswarm
-             self.fadeIn(this.d3.selectAll("text.rmse-title"), 500) 
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
-          } else if (this.step == this.step_ann_exp && response.direction == "down") {
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
-             self.fadeIn(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
-          } 
-            
-            if (this.step == this.step_rmse && response.direction == "down") {
-            self.drawAxes("rmse");
-          } 
+        // updates to go with downscroll
+          if (response.direction == "down"){
+            if (this.step == this.step_error_exp) {
+                self.drawAxes("error"); // draw axes
+                self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
+                self.fadeIn(this.legend_predicted, this.time_fade); // show predicted in legend
+
+              }  else if (this.step == this.step_error_obs) {
+                self.moveLegend("down"); // add observed to legend
+              }  else if (this.step == this.step_rmse) {
+                self.drawAxes("rmse"); // move legend up to center plot for RMSEs
+                // rmse legend in and error legend out
+                self.fadeOut(this.axis_label, this.time_fade); // remove error axis labels
+                self.fadeOut(this.legend_predicted, this.time_fade); // remove error legend
+                self.fadeOut(this.legend_observed, this.time_fade); // remove error legend
+                //arrow appears for rmse axis labelling
+                self.fadeIn(this.axis_arrow);
+                self.fadeIn(this.axis_label_rmse, this.time_fade);// add rmse accurate to inaccurate labels
+                self.fadeIn(this.legend_model, this.time_fade); // show rmse model type
+              } else if (this.step == this.step_ann) {
+                // half of rmse legend appears for beeswarm
+                self.fadeIn(this.legend_training, this.time_fade) 
+                self.fadeIn(this.legend_training_d100, this.time_fade)
+
+              } else if (this.step == this.step_ann_exp) {
+                self.fadeIn(this.legend_training_d001, this.time_fade) 
+              } 
+          }
+
            // add class to active step
           response.element.classList.add("is-active");
 
@@ -3842,7 +4010,6 @@
           this.animateFlubber(response.element.id, response.direction);
 
         },
-        
         
         handleStepExit(response) {
           const self = this;
@@ -3854,50 +4021,47 @@
              this.d3.select("figure.intro").classed("sticky", false); 
           }
 
-        // scrolling back up options
-        // add and remove axes, axis labels, legends,arrows
-          if (this.step == this.step_error_exp && response.direction == "up") {
+
+        // updates to go with upscroll
+        if (response.direction == "up") {
+
+          if (this.step == this.step_error_exp) {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
-            self.fadeOut(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeOut(this.d3.selectAll(".error_1"), 500);
-          }  else if (this.step == this.step_error_obs && response.direction == "up" ) {
+            self.fadeOut(this.axis_label, this.time_fade);
+            self.fadeOut(this.legend_predicted, this.time_fade);
+          }  else if (this.step == this.step_error_obs ) {
             self.moveLegend("up");
-           self.fadeOut(this.d3.selectAll(".error_2"), 500);
-          } else if (this.step == this.step_rmse && response.direction == "up") {
+           self.fadeOut(this.legend_observed, this.time_fade);
+          } else if (this.step == this.step_rmse) {
             self.drawAxes("rmse_up");
-            self.fadeIn(this.d3.selectAll("text.axis-label"), 500);
-            self.fadeIn(this.d3.selectAll(".error_1"), 500);
-             self.fadeIn(this.d3.selectAll(".error_2"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeOut(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeOut(this.d3.selectAll("path.arrow"), 500);
-          } else if (this.step == this.step_ann+1 && response.direction == "up") {
-            self.fadeIn(this.d3.selectAll("text.rmse-label"), 500);
-            self.fadeIn(this.d3.selectAll("text.rmse-name"), 500);
-            self.fadeIn(this.d3.selectAll("path.arrow"), 500);
-          } else if (this.step == this.step_ann && response.direction == "up") {
+            self.fadeIn(this.axis_label, this.time_fade);
+            self.fadeIn(this.legend_predicted, this.time_fade);
+            self.fadeIn(this.legend_observed, this.time_fade);
+            self.fadeOut(this.axis_label_rmse, this.time_fade);
+            self.fadeOut(this.axis_arrow, this.time_fade);
+            self.fadeOut(this.legend_model, this.time_fade);
+
+          } else if (this.step == this.step_ann) {
             // half of legend for beeswarm
-             self.fadeOut(this.d3.selectAll("text.rmse-title"), 500) 
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(2)"), 500)
-          } else if (this.step == this.step_ann_exp && response.direction == "up") {
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(3)"), 500) 
-             self.fadeOut(this.d3.selectAll("g.legend-rmse:nth-child(4)"), 500)
+             self.fadeOut(this.legend_training, this.time_fade) 
+             self.fadeOut(this.legend_training_d100, this.time_fade)
+          } else if (this.step == this.step_ann_exp) {
+             self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
+        }
         },
         
         fadeOut(element, time) {
           element
           .transition()
           .duration(time)
-          .attr("opacity",0)
           .style("opacity",0)
         },
          fadeIn(element, time) {
           element
           .transition()
           .duration(time)
-          .attr("opacity",1)
           .style("opacity",1)
         }
     }
@@ -3916,8 +4080,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 // Old colors
 $backgroundCharcoal: #171717;
@@ -3930,6 +4094,73 @@ $monotoneBlue5: #10313e;
 $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
+// Intro
+#modeling-intro {
+  margin-bottom: 200px;
+}
+#arrows {
+  margin: 100px auto;
+
+  text-align: center;
+  p{
+    padding-top: 1em;
+  }
+}
+#more-arrows {
+  width: 75px;
+  height: 65px;
+  transform: scale(.6);
+  polygon {
+    fill: $offWhite;
+    transition: all .2s ease-out;
+    opacity: .4;
+  }
+  .arrow-bottom {
+    opacity: .8;
+    animation: bounceDown 3s infinite;
+  }
+
+  .arrow-top {
+    opacity: .3;
+    animation-duration: 3s;
+    animation: bounceUp 3s infinite;
+  }
+}
+
+// write animation
+@keyframes bounceUp {
+  from {
+    transform: translateY(18px); 
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  to{
+    transform: translateY(18px);
+  }
+}
+
+#scroll-cue {
+  font-size: .6em;
+  font-style: italic;
+}
+
+@keyframes bounceDown {
+  from {
+    transform: translateY(-18px); 
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  to{
+    transform: translateY(-18px);
+  }
+}
+
+
+// apply animation
+
+
 //style steps
 article {
   position: relative;
@@ -3939,8 +4170,12 @@ article {
 }
 .step-container {
   width:100vw;
-
 }
+
+.viz-title  {
+  margin-top: 70vh;
+}
+
 .step {
   position: relative;
   width: 90%;
@@ -3965,10 +4200,9 @@ article {
   left: 0;
   padding-top: 0px;
 
-/*   .step[data-scrollama-index='14'] {
-  height: 10vh;
-  padding-top: 5vh;
-} */
+  .step:nth-last-child {
+  background-color: red;
+}
 }
 
 //start at beginning
@@ -3992,7 +4226,7 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 2.1em;
-  grid-template-rows: 30% 20% 30% 10%;
+  grid-template-rows: 30% 25% 30% 5%;
   grid-template-columns: 2% auto 2%;
   z-index: 1;
   position: -webkit-sticky;
@@ -4031,6 +4265,7 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
   }
+
   #bees-chart {
 
   }
@@ -4042,6 +4277,7 @@ figure.sticky.charts {
    #bees-legend {
 
   }
+
   #legend-container {
     grid-column: 2 / 2;
     grid-row: 3 / 3;
@@ -4051,6 +4287,13 @@ figure.sticky.charts {
     margin: auto;
   }
 }
+
+.axis-label text {
+  fill:white;
+  font-weight: 300;
+  font-size: 20px;
+}
+
 .axis-line {
   stroke-width: 5px;
 }
@@ -4091,11 +4334,11 @@ figure.sticky.charts {
 }
 .f_sec {
   font-size: 10px;
-  fill: $offWhite
+  fill: $offWhite;
 }
 .f_minor {
   font-size: 12px;
-  fill: #91989e; //$grayBlue
+  fill: #91989e;
 }
 .f_main.light, .f_minor {
   font-weight: 100;
@@ -4110,29 +4353,29 @@ figure.sticky.charts {
 }
 .f_arrow {
   fill: None;
-  stroke: #91989e; //$grayBlue
+  stroke: #91989e;
   stroke-miterlimit: 10;
   stroke-dasharray: 1 2;
   stroke-width: 0.8px;
 }
 .f_arrowhead {
-  fill: #91989e; //$grayBlue
+  fill: #91989e;
 }
 .line_solid {
   fill: None;
-  stroke: #91989e; //$grayBlue
+  stroke: #91989e; //#969696
   stroke-miterlimit: 10;
   stroke-width: 0.8px;
 }
 .line_dot {
   fill: None;
-  stroke: #91989e; //$grayBlue
+  stroke: #91989e;
   stroke-miterlimit: 10;
   stroke-dasharray: 1 2;
   stroke-width: 0.8px;
 }
 .line_arrowhead {
-  fill: #91989e; //$grayBlue
+  fill: #91989e;
 }
 .line_rain {
   stroke: $plasmaYellow;
