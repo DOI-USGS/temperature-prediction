@@ -62,6 +62,7 @@
       </div>
       <MonitoringMap2 />
     </div>
+    <br>
     <div class="text-content">
       <p v-html="text.paragraph8" />
       <p v-html="text.paragraph9" />
@@ -106,6 +107,7 @@
       </div>
       <MonitoringLineChart />
     </div>
+    <br>
     <div class="text-content">
       <p v-html="text.paragraph12" />
       <p v-html="text.paragraph13" />
