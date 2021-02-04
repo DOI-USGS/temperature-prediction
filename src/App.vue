@@ -89,8 +89,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 // Old colors
 $monotoneBlue1: #e9eced;
@@ -266,6 +266,7 @@ h3{
   .figure {
     display: flex; //block, flex
     padding: 20px;
+    max-height: 100vh;
     align-items: center;
     justify-content: center; 
     @media screen and (max-width: 600px) {
@@ -276,6 +277,7 @@ h3{
   .map {
     min-width: 400px;
     max-width: 600px;
+    max-height: 90vh;
     flex: 1 1 30%;
     justify-self: center;
 
@@ -284,17 +286,24 @@ h3{
     }
 
   }
+  .map_matrix {
+    justify-self: center;
+    min-width: 250px;
+    max-width: 600px;
+    max-height: 90vh;
+    // flex: 1 1 30%;
+  }
   .chart {
     min-width: 600px;
     flex: 1 1 40%;
   }
 
   .matrix {
-    min-width: 400px;
-    max-width: 700px;
-    flex: 1 1 50%;
-    padding: 10px;
     justify-self: stretch;
+    min-width: 400px;
+    // max-width: 700px;
+    max-height: 90vh;
+    // flex: 1 1 50%;
   }
 
 // Specific Design Elements for Charts and Maps

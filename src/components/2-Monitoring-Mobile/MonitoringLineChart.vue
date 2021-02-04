@@ -421,8 +421,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 
 // Old colors
@@ -482,7 +482,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
 .cls-23 { // cool reach
-  stroke: $lightBlue; 
+  stroke: $mediumBlue; 
   stroke-width: 1px;
   opacity: 0.6; // 0.05
   stroke-linecap: round;
@@ -500,7 +500,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 
 .cls-25 { // average
-  stroke: $lightBlue; 
+  stroke: $mediumBlue; 
   opacity: .1;
   stroke-width: 1px;
 }
@@ -528,7 +528,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 
 #cool {
-  fill: $lightBlue;
+  fill: $mediumBlue;
 }
 
 </style>
