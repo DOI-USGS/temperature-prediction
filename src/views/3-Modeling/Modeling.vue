@@ -2797,7 +2797,7 @@
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
-          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
+          this.step_rmse = this.step_error_obs + 2; /// data points to single RMSE
           this.step_ann = this.step_rmse + 3; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
@@ -3016,6 +3016,7 @@
                break;
             case this.step_rmse:
             case this.step_rmse+1:
+            case this.step_rmse+2:
               this.label_o = 0;
               this.label_o_rmse = 1;
               this.o_pred = 0;
@@ -3181,7 +3182,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3197,7 +3198,7 @@
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3211,7 +3212,7 @@
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3240,7 +3241,7 @@
               this.model_current = ': ANN + time + space + physics';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3412,25 +3413,6 @@
               .classed("axis-label", true);    
 
             ////////////////////////////// colors + legends
-              // text labels for the rmses
-          this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height + margin + 50) + ")")
-              .style("text-anchor", "left")
-              .text("accurate")
-              .style("fill", "#f1f1f1")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
-
-            this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height + margin + 50) + ")")
-              .style("text-anchor", "right")
-              .text("inaccurate")
-              .style("fill", "#f1f1f1")
-              .style("font-size", "30px")
-              .attr("opacity", this.label_o_rmse)
-              .classed("rmse-label", true);
-
               // create legend for error plot colors
               var legend_error = this.d3.select("#bees-legend")
                 .append("g").classed("legend_color", true)
@@ -3502,10 +3484,10 @@
                   legend_error.append("text")
                   .text("Root mean square error (RMSE)")
                   .attr("x", 50)
-                  .attr("y", nudge_y+450)
+                  .attr("y", nudge_y+420)
                   .style("fill", "white")
                   .style("font-size", "30px")
-                  .attr("line-height", "30px")
+                  .attr("line-height", "35px")
                   .style("font-weight","bold")
                   .style("opacity", this.o_rmse_title)
                   .classed("rmse-name" , true)
@@ -3514,10 +3496,10 @@
                  legend_error.append("text")
                   .text(this.model_current)
                   .attr("x", 510)
-                  .attr("y", nudge_y+450)
+                  .attr("y", nudge_y+420)
                   .style("fill", "white")
                   .style("font-size", "30px")
-                  .attr("line-height", "30px")
+                  .attr("line-height", "35px")
                   .style("font-weight","100")
                   .style("opacity", this.o_rmse_title)
                   .classed("rmse-name" , true)
@@ -3573,9 +3555,11 @@
 
                   this.d3.selectAll("g.legend-rmse:nth-child(2)") //
                   .style("opacity", this.o_train)
+                  .classed("d_100", true)
 
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
+                  .classed("d_001", true)
           
           if (this.step >= this.step_error_exp) {
 
@@ -3605,8 +3589,8 @@
             this.axis_arrow = this.d3.select("line.arrow")
             this.legend_model = this.d3.selectAll("text.rmse-name");
             this.legend_training = this.d3.selectAll("text.rmse-title");
-            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse:nth-child(2)"); //
-            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse:nth-child(3)"); // 0.1% dot and label
+            this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
+            this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
 
           },
           transitionAxes(element, end) {
@@ -3755,7 +3739,7 @@
               .classed("model" , true)
               .text(this.model_current) // pulls current step model
               .attr("x", 510)
-              .attr("y", this.height*.1+450)
+              .attr("y", (this.height*.1)+420)
               .style("fill", "white")
               .style("font-size", "30px")
               .attr("line-height", "30px")
@@ -3895,7 +3879,7 @@
              this.chartState.aDecay = 0.05;
 
           }
-                    if (this.step === this.step_rmse+2) {
+          if (this.step === this.step_rmse+2) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 1;
@@ -3994,7 +3978,7 @@
                 self.fadeIn(this.legend_training, this.time_fade) 
                 self.fadeIn(this.legend_training_d100, this.time_fade)
 
-              } else if (this.step == this.step_ann_exp, this.time_fade) {
+              } else if (this.step == this.step_ann_exp) {
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
           }
@@ -4033,7 +4017,7 @@
             self.drawAxes("rmse_up");
             self.fadeIn(this.axis_label, this.time_fade);
             self.fadeIn(this.legend_predicted, this.time_fade);
-             self.fadeIn(this.legend_observed, this.time_fade);
+            self.fadeIn(this.legend_observed, this.time_fade);
             self.fadeOut(this.axis_label_rmse, this.time_fade);
             self.fadeOut(this.axis_arrow, this.time_fade);
             self.fadeOut(this.legend_model, this.time_fade);
