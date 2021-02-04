@@ -14,7 +14,7 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">
-              Temperature Monitoring <span class="yellow">Sites</span> in the Delaware River Basin
+              <span class="yellow">Temperature monitoring sites</span> in the Delaware River Basin
             </p>
             <p class="viz-subtitle" />
           </div>
@@ -34,7 +34,7 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">
-              <span class="yellow">Number of Temperature Measurements</span> by Year
+              <span class="yellow">Number of temperature measurements</span> by year
             </p>
             <p class="viz-subtitle">
               Data from USGS streamgages or other state/local agencies.
@@ -68,7 +68,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of Temperature Data
+            Variability in <span class="yellow">data availability</span> of stream temperature
           </p>
           <p class="viz-subtitle">
             Visualizing the count of temperature measurements of all stream reaches in the basin.
@@ -157,7 +157,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Daily Temperature</span> of River Reaches in 2019
+            <span class="yellow">Daily temperature</span> of river reaches in 2019
           </p>
           <p class="viz-subtitle">
             Each line = one reach.
@@ -181,7 +181,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Variability</span> of Temperature Data in 2019
+            Variability of <span class="yellow">water temperature</span> in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
@@ -217,7 +217,7 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Most Observed</span> Areas in Continental United States
+            <span class="yellow">Most observed</span> areas in continental United States
           </p>
           <p class="viz-subtitle">
             USGS, state, or local agency stream temperature observations since 1985.

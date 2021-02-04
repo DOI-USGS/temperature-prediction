@@ -13,10 +13,29 @@
           </p>
           <h2>Modeling Stream Temperature</h2>
         </div>
-        <div class="text-content">
-          <p />
+        <div
+          id="modeling-intro"
+          class="text-content"
+        >
           <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "process-guided deep learning".</p>
           <p>Process-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
+          <div id="arrows">            
+            <svg id="more-arrows">
+              <polygon
+                class="arrow-top"
+                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+              />
+              <polygon
+                class="arrow-middle"
+                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+              />
+              <polygon
+                class="arrow-bottom"
+                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+              />
+            </svg>
+            <p>Scroll</p>
+          </div>
         </div>
       </div>
     </figure>
@@ -4072,6 +4091,66 @@ $monotoneBlue3: #88989f;
 $monotoneBlue4: #4c656e;
 $monotoneBlue5: #10313e;
 $monotoneBlueTransparent: rgba(76,101,110, .6);
+
+
+// Intro
+#modeling-intro {
+  margin-bottom: 200px;
+}
+#arrows {
+  margin: 100px auto;
+  text-align: center;
+  p{
+    padding-top: 1em;
+  }
+}
+#more-arrows {
+  width: 75px;
+  height: 65px;
+  polygon {
+    fill: $offWhite;
+    transition: all .2s ease-out;
+    opacity: .5;
+  }
+  .arrow-bottom {
+    opacity: 1;
+    animation: bounceDown 3s infinite;
+  }
+
+  .arrow-top {
+    opacity: .3;
+    animation-duration: 3s;
+    animation: bounceUp 3s infinite;
+  }
+}
+
+// write animation
+@keyframes bounceUp {
+  from {
+    transform: translateY(18px); 
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  to{
+    transform: translateY(18px);
+  }
+}
+
+@keyframes bounceDown {
+  from {
+    transform: translateY(-18px); 
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  to{
+    transform: translateY(-18px);
+  }
+}
+
+
+// apply animation
 
 
 //style steps

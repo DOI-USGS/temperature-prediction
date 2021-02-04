@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #00264c;
+    background-color: #292b30;
     margin: 0 auto;
     padding-bottom: 0.4rem;
     a {
