@@ -34,7 +34,9 @@
                 points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
               />
             </svg>
-            <p>Scroll</p>
+            <p id="scroll-cue">
+              Scroll
+            </p>
           </div>
         </div>
       </div>
@@ -4101,6 +4103,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 #arrows {
   margin: 100px auto;
+
   text-align: center;
   p{
     padding-top: 1em;
@@ -4109,13 +4112,14 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 #more-arrows {
   width: 75px;
   height: 65px;
+  transform: scale(.6);
   polygon {
     fill: $offWhite;
     transition: all .2s ease-out;
-    opacity: .5;
+    opacity: .4;
   }
   .arrow-bottom {
-    opacity: 1;
+    opacity: .8;
     animation: bounceDown 3s infinite;
   }
 
@@ -4137,6 +4141,11 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   to{
     transform: translateY(18px);
   }
+}
+
+#scroll-cue {
+  font-size: .6em;
+  font-style: italic;
 }
 
 @keyframes bounceDown {

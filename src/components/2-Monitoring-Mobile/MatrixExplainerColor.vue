@@ -1499,7 +1499,10 @@
           />
         </g>
       </g>
-      <g id="barchart_bars">
+      <g 
+        v-if="!mobileView"
+        id="barchart_bars"
+      >
         <g>
           <rect
             class="cls-3"
@@ -1777,6 +1780,7 @@
         </g>
       </g>
       <g
+        v-if="!mobileView"
         id="barchart_labels"
         transform="translate(-1, 0)"
       >
@@ -2593,9 +2597,26 @@
 </template>
 
 <script>
-export default {
-    name: "MatrixExplainerColor"
-}
+  import { isMobile } from 'mobile-device-detect';
+
+  export default {
+      name: "MatrixExplainerColor",
+      data() {
+            return {
+                msg: isMobile ? "Mobile" : "Desktop",
+                mobileView: isMobile
+            }
+        },
+        methods: {
+            isMobile() {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+  }
 </script>
 
 <style lang="scss" scoped>
