@@ -482,7 +482,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
 .cls-23 { // cool reach
-  stroke: $mediumBlue; 
+  stroke: $lightBlue; 
   stroke-width: 1px;
   opacity: 0.6; // 0.05
   stroke-linecap: round;
@@ -500,7 +500,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 
 .cls-25 { // average
-  stroke: $grayBlue; 
+  stroke: $lightBlue; 
   opacity: .1;
   stroke-width: 1px;
 }
@@ -528,7 +528,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 }
 
 #cool {
-  fill: $mediumBlue;
+  fill: $lightBlue;
 }
 
 </style>

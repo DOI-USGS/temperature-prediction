@@ -391,7 +391,7 @@ $grayBlue: #576069; //#4F5C67
     }
 
     .icon {
-      fill: $mediumBlue; //#285C70
+      fill: $lightBlue; //#285C70
     }
 
     #icon-1 {

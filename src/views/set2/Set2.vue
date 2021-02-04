@@ -15917,7 +15917,7 @@
             // append group of single segment to c2p1 map (ONCE PER MAP)
             let href_id = '#seg' + segment_id
             self.map_c2p1.append("g").attr("class",function(d) {return 'c2p1 seg' + segment_id})
-              .style("stroke", "#576069")
+              .style("stroke", "#95b5cb")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16105,7 +16105,7 @@
                 }
                 return seg_class
               })
-              .style("stroke", "#576069")
+              .style("stroke", "#95b5cb")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16993,7 +16993,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
               // .attr("filter","None")
-              .style("stroke", "#576069")
+              .style("stroke", "#95b5cb")
               .style("opacity", 1)
               .lower()
           // select mouseovered segment and set to white with a shadow
@@ -17188,7 +17188,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
-              .style("stroke", "#576069")
+              .style("stroke", "#95b5cb")
               .style("opacity", 1)
               .lower()
           // reset filter on background rectangle and lower
@@ -17344,7 +17344,7 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
+$lightBlue: #95b5cb; //aad1ec
 $grayBlue: #576069; //#4F5C67
 
 #section_2 {
@@ -17372,7 +17372,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   .inset-viz-subtitle {
-    fill: $grayBlue; //$offWhite
+    fill: $lightBlue; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17558,7 +17558,7 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
+$lightBlue: #95b5cb;
 $grayBlue: #576069; //#4F5C67
 
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
@@ -17573,17 +17573,17 @@ $grayBlue: #576069; //#4F5C67
   font-size: 1em; //base font setting for all scale bar labels
 }
 .c2p1.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $lightBlue; //#285C70
   font-size: 0.33em;
   stroke-width: 0.5px;
 }
 .c2p2.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $lightBlue; //#285C70
   font-size: 0.7em;
   stroke-width: 0.5px;
 }
 .c2p3.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $lightBlue; //#285C70
   stroke-width: 0.5px;
 }
 .c2p2.cellText {
@@ -17592,7 +17592,7 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .delaware_bay {
-  fill: $grayBlue; 
+  fill: $lightBlue; 
 }
 
 .river_segments {
@@ -17603,8 +17603,8 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .reservoirs {
-  fill: $grayBlue; 
-  stroke: $grayBlue;// o
+  fill: $lightBlue; 
+  stroke: $lightBlue;// o
 }
 
 .obs_sites {
@@ -17622,27 +17622,30 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .chartAxis {
-  color: $grayBlue; //#707070
+  color: $lightBlue; //#707070
   font-size: .60em;
 }
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
   font-size: 0.5em;
-  fill: $grayBlue;
+  fill: $lightBlue;
 }
 .legendAxis {
-  color: $grayBlue;
-  fill: $grayBlue;
-  font-size: 1em;;
+  color: $lightBlue;
+  fill: $lightBlue;
+  font-size: .8em;;
+}
+.tick text {
+  font-size: .8em;
 }
 .matrixAxis {
-  fill: $grayBlue;
-  color: $grayBlue;
+  fill: $lightBlue;
+  color: $lightBlue;
   font-size: 1.1vh;
 }
 .chartAxisText {
-  fill: $grayBlue;
+  fill: $lightBlue;
   font-size: 1.1vh;
 }
 .tooltip {
@@ -17663,12 +17666,12 @@ $grayBlue: #576069; //#4F5C67
   stroke-width: 0.1;
 }
 .hex_title {
-  fill: $grayBlue;
+  fill: $offWhite;
   font-size: 0.8em;
   font-weight: 550;
 }
 .hex_label {
-  fill: $grayBlue;
+  fill: $offWhite;
   font-size: 0.7em;
 }
 </style>
