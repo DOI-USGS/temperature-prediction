@@ -120,14 +120,6 @@
           id="DRB_map_c2p2"
           class="mm-grid-item"
         />
-        <!--div
-        id="prebuilt_matrix_c2p2"
-        class="matrix mm-grid-item"
-        >
-          <svg class="prebuilt_c2p2_matrix matrix">
-              <PrebuiltC2P2Matrix />
-          </svg>
-        </div -->
         <div
           id="matrixChart_c2p2"
           class="mm-grid-item"
@@ -197,12 +189,15 @@
       <div class="map-matrix-grid-container">
         <div
           id="DRB_map_c2p3"
-          class="map_matrix mm-grid-item"
+          class="mm-grid-item"
         />
         <div
           id="matrixChart_c2p3"
-          class="matrix mm-grid-item"
-        />
+          class="mm-grid-item"
+        >
+            <svg class="c2p3 matrix_c2p3 matrix">
+            </svg>
+        </div>
       </div>
     </div>
     <div class="text-content">
@@ -15640,8 +15635,8 @@
               .append("svg")
               .attr("class", "map_c2p3 map_matrix")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
-                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
-          
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
+              .attr("width", "100%")
 
           // // LOAD IN DATA AND CALL SCRIPTS IN STAGES
           self.loadData_1();
@@ -16175,7 +16170,7 @@
           let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("width", "100%")
+              .attr("width", "90%")
               // .attr("preserveAspectRatio", "none") // STRETCHES MATRIX - including legend and bar chart labels
 
           // // append background rectangle for matrix
@@ -16453,7 +16448,7 @@
                 }
                 return seg_class
               })
-              .style("stroke", "#576069")
+              .style("stroke", "#777b80")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16515,13 +16510,12 @@
         },
         createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019){
           const self = this;
-          // append the svg object to the body of the page
-          let svgMatrix = self.d3.select("#matrixChart_c2p3")
-              .append("svg")
-              // set viewbox
+
+          // set viewbox for existing svg
+          let svgMatrix = self.d3.select(".c2p3.matrix_c2p3.matrix")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("class", "c2p3 matrix_c2p3 matrix")
+              .attr("width", "90%")
 
           // build array of all values of observed temperature
           let arrayObsTemps = [];
@@ -16569,13 +16563,16 @@
               })
 
           // append legend container
-          let legendsvg = svgMatrix.append("g")
+          let legendsvg = svgMatrix.append("svg")
               .attr("class", "c2p3 legendWrapper")
+          
+          let legendGroup = legendsvg.append("g")
+              .attr("class", "c2p3 legendColor")
               .attr("width", self.matrix_width_c2)
               .attr("transform", "translate(" + (self.matrix_margin.left) + "," + 0 + ")")
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p3 legendAxis")
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
@@ -16584,7 +16581,7 @@
               .text(obsTempMin + " °C")
 
           // append legend rectangle
-          legendsvg.append("rect")
+          legendGroup.append("rect")
               .attr("class", "c2p3 matrixLegend")
               .attr("width", self.matrix_width_c2/2)
               .attr("height", 20)
@@ -16592,7 +16589,7 @@
               .attr("x", self.matrix_width_c2/4)
 
           // append legend text
-          legendsvg.append("text")
+          legendGroup.append("text")
               .attr("class", "c2p3 legendAxis")
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
@@ -17541,6 +17538,9 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 </style>
 
 <style lang="scss">
+// this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
+
+
 // IMPORT COLORS
 $backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
 $boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
@@ -17555,14 +17555,6 @@ $mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #95b5cb;
 $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
-// this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
-// .label, .domain{
-//   color: $grayBlue; //#285C70
-//   font-size: 0.4em;
-//   stroke-width: 0.5px;
-//   position: absolute;
-//   left: 10vw;
-// }
 .label {
   font-size: 1em; //base font setting for all scale bar labels
 }
@@ -17578,6 +17570,7 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 }
 .c2p3.scaleBar {
   color: $grayBlue; //#285C70
+  font-size: 0.7em;
   stroke-width: 0.5px;
 }
 .c2p2.cellText {
