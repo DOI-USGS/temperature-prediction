@@ -15918,7 +15918,7 @@
             // append group of single segment to c2p1 map (ONCE PER MAP)
             let href_id = '#seg' + segment_id
             self.map_c2p1.append("g").attr("class",function(d) {return 'c2p1 seg' + segment_id})
-              .style("stroke", "#95b5cb")
+              .style("stroke", "#777b80")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16106,7 +16106,7 @@
                 }
                 return seg_class
               })
-              .style("stroke", "#95b5cb")
+              .style("stroke", "#777b80")
               // add stroke width based on widthScale function
               .style("stroke-width", function(d){
                 let value = self.segmentDict[segment_id]['avg_ann_flow'];
@@ -16999,7 +16999,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
               // .attr("filter","None")
-              .style("stroke", "#95b5cb")
+              .style("stroke", "#777b80")
               .style("opacity", 1)
               .lower()
           // select mouseovered segment and set to white with a shadow
@@ -17194,7 +17194,7 @@
           // and reset to default styling
           this.d3.selectAll(".c2p3.river_segments.seg" + data.properties.seg_id_nat)
               .attr("filter","None")
-              .style("stroke", "#95b5cb")
+              .style("stroke", "#777b80")
               .style("opacity", 1)
               .lower()
           // reset filter on background rectangle and lower
@@ -17350,8 +17350,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb; //aad1ec
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 #section_2 {
   margin-bottom: 0;
@@ -17378,7 +17378,7 @@ $grayBlue: #576069; //#4F5C67
   }
 
   .inset-viz-subtitle {
-    fill: $lightBlue; //$offWhite
+    fill: $grayBlue; //$offWhite
     font-style: italic;
     font-size: .5em;
     text-align: center;
@@ -17402,7 +17402,7 @@ $grayBlue: #576069; //#4F5C67
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
   }
 
   button {
@@ -17565,7 +17565,7 @@ $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
 $lightBlue: #95b5cb;
-$grayBlue: #576069; //#4F5C67
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
 // .label, .domain{
@@ -17598,7 +17598,7 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .delaware_bay {
-  fill: $lightBlue; 
+  fill: $grayBlue; 
 }
 
 .river_segments {
@@ -17609,8 +17609,8 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .reservoirs {
-  fill: $lightBlue; 
-  stroke: $lightBlue;// o
+  fill: $grayBlue; 
+  stroke: $grayBlue;// o
 }
 
 .obs_sites {
@@ -17628,30 +17628,30 @@ $grayBlue: #576069; //#4F5C67
 }
 
 .chartAxis {
-  color: $lightBlue; //#707070
+  color: $grayBlue; //#707070
   font-size: .60em;
 }
 
 .legend {
   font-family: 'Open Sans', arial, sans-serif;
   font-size: 0.5em;
-  fill: $lightBlue;
+  fill: $grayBlue;
 }
 .legendAxis {
-  color: $lightBlue;
-  fill: $lightBlue;
+  color: $grayBlue;
+  fill: $grayBlue;
   font-size: .8em;;
 }
 .tick text {
   font-size: .8em;
 }
 .matrixAxis {
-  fill: $lightBlue;
-  color: $lightBlue;
+  fill: $grayBlue;
+  color: $grayBlue;
   font-size: 1.1vh;
 }
 .chartAxisText {
-  fill: $lightBlue;
+  fill: $grayBlue;
   font-size: 1.1vh;
 }
 .tooltip {

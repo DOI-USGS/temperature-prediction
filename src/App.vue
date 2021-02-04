@@ -89,8 +89,8 @@ $plasmaBlue: #142167;
 $darkBlue: #0F2237;
 $footerBlue: #00264C;
 $mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 // Old colors
 $monotoneBlue1: #e9eced;
