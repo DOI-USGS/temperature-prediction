@@ -15973,7 +15973,7 @@
           let x = this.d3.scaleBand()
               .rangeRound([0, this.chart_width])
               // set padding between bars
-              .padding(0.075)
+              .padding(0.1)
 
           // make y scale
           let y = this.d3.scaleLinear()
