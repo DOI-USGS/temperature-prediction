@@ -118,7 +118,7 @@
       >
         <div
           id="DRB_map_c2p2"
-          class="map_matrix mm-grid-item"
+          class="mm-grid-item"
         />
         <!--div
         id="prebuilt_matrix_c2p2"
@@ -15577,7 +15577,7 @@
           // // CHAPTER 2 MAPS
           // set universal map frame dimensions for Ch 2 panel maps
           this.map_width = 300;
-          this.map_height = window.innerHeight * 0.5;
+          this.map_height = 600; //
           this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
@@ -15596,8 +15596,8 @@
               .orient(self.d3.geoScaleBottom)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.10) // .15 centered, .45 far right
-              .top(.96)
+              // .left(.10) // .15 centered, .45 far right
+              // .top(.96)
               .units(self.d3.geoScaleKilometers)
               .distance(50)
               .label("50 kilometers")
@@ -15609,8 +15609,8 @@
               .orient(self.d3.geoScaleTop)
               .projection(map_projection_c2)
               .size([this.map_width, this.map_height])
-              .left(.10) // .15 centered, .45 far right
-              .top(.97)
+              // .left(.10) // .15 centered, .45 far right
+              // .top(.97)
               .units(self.d3.geoScaleMiles)
               .distance(25)
               .label("25 miles")
@@ -15621,7 +15621,7 @@
           //create new svg container for the ch 2 panel 1 map
           this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
               .append("svg")
-              .attr("class", "map_c2p1 map")
+              .attr("class", "map_c2p1 map") //map
               .attr("id", "drb_map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
@@ -15629,9 +15629,9 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2 map_matrix")
+              .attr("class", "map_c2p2") //map_matrix
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
-                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
+                (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
           
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
@@ -15796,17 +15796,17 @@
           // // graduated scale
           // set width classes
           let widthClasses = [
-            0.7,
-            1.1,
+            0.6,
+            0.9,
             1.2,
-            1.6,
-            1.9,
-            2.2,
-            2.5,
-            2.9,
-            3.4,
-            3.7
-          ]; //[            0.6,            0.9,            1.2,            1.4,            1.7,            2,            2.3,            2.6,            3,            3.5,          ]
+            1.4,
+            1.7,
+            2,
+            2.3,
+            2.6,
+            3,
+            3.5
+          ];
 
           // // graduated scale
           // create width scale generator for natural breaks classification
@@ -15821,7 +15821,7 @@
           }
 
           // graduated scale
-          // cluster data using ckmeans clustering algoritm to create natural breaks
+          // cluster data using ckmeans clustering algorithm to create natural breaks
           let clusters = ss.ckmeans(domainArrayFlow, 10);
 
           // graduated scale
@@ -15938,7 +15938,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(1.1))
+              .attr("d", self.map_path_c2.pointRadius(0.9))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -15949,8 +15949,12 @@
               })
 
           // add scale bar
-          self.map_c2p1.append("g").call(self.scaleBarTop_c2);
-          self.map_c2p1.append("g").call(self.scaleBarBottom_c2);
+          let scaleBarGroup = self.map_c2p1.append("g")
+            .attr("class", "c2p1 scaleBar")
+            .attr("transform", "translate(" + 50 + "," + 20 + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)");
         },
         setBarChart_c2p1(csv_source_count) {
           const self = this;
@@ -16153,8 +16157,12 @@
           })
 
           // add scale bar
-          self.map_c2p2.append("g").call(self.scaleBarTop_c2)
-          self.map_c2p2.append("g").call(self.scaleBarBottom_c2)
+          let scaleBarGroup = self.map_c2p2.append("g")
+            .attr("class", "c2p2 scaleBar")
+            .attr("transform", "translate(" + 10 + "," + 20 + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
         },
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
@@ -16517,8 +16525,12 @@
                 self.mouseoutSeg_c2p3(d, tooltip);
               });
           // add scale bar
-          self.map_c2p3.append("g").call(self.scaleBarTop_c2)
-          self.map_c2p3.append("g").call(self.scaleBarBottom_c2)
+          let scaleBarGroup = self.map_c2p3.append("g")
+            .attr("class", "c2p3 scaleBar")
+            .attr("transform", "translate(" + 10 + "," + 20 + ")")
+
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
 
         },
         createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019){
@@ -17482,14 +17494,14 @@ $grayBlue: #576069; //#4F5C67
     grid-area: color;
   }
   .map-matrix-grid-container {
-    padding: 25px;
+    // padding: 25px;
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 5% 25% 70%;
     grid-template-rows: 100%;
     grid-template-areas:
-        "map matrix";
+        "left-buffer map matrix";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
@@ -17504,11 +17516,13 @@ $grayBlue: #576069; //#4F5C67
     grid-area: map;
     display: flex;
     // max-height: 100%;
-    max-height: 90vh;
+    // max-height: 90vh;
+    // min-width: 30%;
   }
   #matrixChart_c2p2 {
     grid-area: matrix;
     display: flex;
+    align-self: stretch;
     max-height: 100%;
     z-index: 1;
   }
@@ -17548,9 +17562,29 @@ $lightBlue: #AAD1EC;
 $grayBlue: #576069; //#4F5C67
 
 // this is a unscoped style tag, since the elements were added with d3 after Vue processed the template we to target the selectors we have to use an unscoped style block--that means these are global styles
-.label, .domain{
+// .label, .domain{
+//   color: $grayBlue; //#285C70
+//   font-size: 0.4em;
+//   stroke-width: 0.5px;
+//   position: absolute;
+//   left: 10vw;
+// }
+.label {
+  font-size: 1em; //base font setting for all scale bar labels
+}
+.c2p1.scaleBar {
   color: $grayBlue; //#285C70
-  font-size: 0.6em;
+  font-size: 0.33em;
+  stroke-width: 0.5px;
+}
+.c2p2.scaleBar {
+  color: $grayBlue; //#285C70
+  font-size: 0.7em;
+  stroke-width: 0.5px;
+}
+.c2p3.scaleBar {
+  color: $grayBlue; //#285C70
+  stroke-width: 0.5px;
 }
 .c2p2.cellText {
   font-size: 0.48em;
@@ -17624,7 +17658,7 @@ $grayBlue: #576069; //#4F5C67
 }
 .hex {
   fill-rule: evenodd;
-  stroke:#1a1b1c; //#141414
+  stroke: $boxCharcoal; //#141414
   stroke-miterlimit: 10;
   stroke-width: 0.1;
 }

@@ -266,6 +266,7 @@ h3{
   .figure {
     display: flex; //block, flex
     padding: 20px;
+    max-height: 100vh;
     align-items: center;
     justify-content: center; 
     @media screen and (max-width: 600px) {
@@ -276,6 +277,7 @@ h3{
   .map {
     min-width: 400px;
     max-width: 600px;
+    max-height: 100vh;
     flex: 1 1 30%;
     justify-self: center;
 
