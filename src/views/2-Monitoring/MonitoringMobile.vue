@@ -146,7 +146,7 @@
       <!-- div class="hex-container" -->
       <img
         id="hex-map"
-        src="@/assets/temp_hex_map_mobile.png"
+        src="@/assets/temp_hex_map_mobile_transparent.png"
       >
       <!-- /div -->
     </div>
