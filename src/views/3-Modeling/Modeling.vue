@@ -2687,10 +2687,7 @@
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
     import * as flubber from "flubber";
-    import textures from 'textures';
-
     import modelingText from "./../../assets/text/modelingText";
-
 
   export default {
     name: 'Modeling',

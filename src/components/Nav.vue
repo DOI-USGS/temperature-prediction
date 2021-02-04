@@ -4,13 +4,22 @@
       <p class="chapter">
         Go to Chapter
       </p>
-      <router-link to="/">
+      <router-link
+        to="/"
+        @click.native="$scrollToTop"
+      >
         1. Importance
       </router-link>
-      <router-link to="/monitoring">
+      <router-link
+        to="/monitoring"
+        @click.native="scrollToTop"
+      >
         2. Monitoring
       </router-link>
-      <router-link to="/modeling">
+      <router-link
+        to="/modeling"
+        @click.native="scrollToTop"
+      >
         3. Modeling
       </router-link>
     </div>
