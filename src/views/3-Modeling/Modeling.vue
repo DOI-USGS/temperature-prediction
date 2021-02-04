@@ -175,7 +175,7 @@
                 id="ANN1"
                 class="path2 flubber visuals"
                 style="fill: #5191bd"
-                 d="M49.6,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C44.9,19.1,49.6,23,49.6,26.2Z"
+                d="M49.6,26.2a5.8,5.8,0,1,1-11.5,0c0-3.2,4.7-7,5.8-13.3C44.9,19.1,49.6,23,49.6,26.2Z"
               />
               <path
                 id="ANN2"
@@ -2168,7 +2168,10 @@
               <text
                 class="f_minor"
                 transform="translate(57.6 236.4)"
-              >f<tspan x="4.2" y="0">inal</tspan></text>
+              >f<tspan
+                x="4.2"
+                y="0"
+              >inal</tspan></text>
               <!-- g>
                 <line
                   class="f_synapse medium"
@@ -2637,8 +2640,7 @@
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg" 
-        >
-        </svg>
+        />
       </div>
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
