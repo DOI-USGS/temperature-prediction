@@ -1501,7 +1501,8 @@
       </g>
       <g 
         v-if="!mobileView"
-        id="barchart_bars">
+        id="barchart_bars"
+      >
         <g>
           <rect
             class="cls-3"

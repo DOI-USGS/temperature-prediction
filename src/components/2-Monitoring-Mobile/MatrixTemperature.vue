@@ -9,7 +9,7 @@
       viewBox="0 0 700 1160"
     >
       <defs>
-       <linearGradient
+        <linearGradient
           id="linear-gradient-temp"
           x1="43.84"
           y1="1008.65"

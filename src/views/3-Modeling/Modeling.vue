@@ -34,7 +34,9 @@
                 points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
               />
             </svg>
-            <p id="scroll-cue">Scroll</p>
+            <p id="scroll-cue">
+              Scroll
+            </p>
           </div>
         </div>
       </div>
@@ -2637,8 +2639,7 @@
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg" 
-        >
-        </svg>
+        />
       </div>
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
