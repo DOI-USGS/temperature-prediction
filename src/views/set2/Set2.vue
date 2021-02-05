@@ -184,6 +184,7 @@
           <p class="viz-subtitle">
             Hover over a column in the matrix to see the temperature of all measured reaches on a given day.
           </p>
+          <br>
         </div>
       </div>  
       <div class="map-matrix-grid-container">
@@ -203,6 +204,33 @@
               >
                 <PrebuiltC2P3Matrix />
               </g>
+              <!-- g
+                class="rects_c2p3_group matrix"
+                width="650"
+                height="930"
+              >
+                <svg 
+                    id="matrix-temporal-boxes"
+                    width="650"
+                    height="930"
+                    viewBox="0 0 700 1000"
+                    preserveAspectRatio="none">
+                    <g id="matrix-monthly-boxes"  transform="scale(1.007,1)">
+                      <rect x="0" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJanuary" data="January"/>
+                      <rect x="58.9" width="53.2" y="0" height="1000" class="c2p3 matrixMonthlyRect timeFebruary" data="February"/>
+                      <rect x="112.1" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeMarch" data="March"/>
+                      <rect x="171" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeApril" data="April"/>
+                      <rect x="228" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeMay" data="May"/>
+                      <rect x="286.9" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJune" data="June"/>
+                      <rect x="343.9" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJuly" data="July"/>
+                      <rect x="402.8" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeAugust" data="August"/>
+                      <rect x="461.7" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeSeptember" data="September"/>
+                      <rect x="518.7" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeOctober" data="October"/>
+                      <rect x="577.6" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeNovember" data="November"/>
+                      <rect x="634.6" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeDecember" data="December"/>
+                    </g>
+                </svg>
+              </g -->
             </svg>
         </div>
       </div>
@@ -481,7 +509,8 @@
           // Third set of data and scripts to generate Ch2 panel 3 matrix
           let promises_3 = [
             self.d3.csv(self.publicPath + "data/matrix_daily_2019_obs.csv"),
-            self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv")
+            self.d3.csv(self.publicPath + "data/obs_daily_count_2019.csv"),
+            self.d3.csv(self.publicPath + "data/MonthlyRectangles2019.csv")
           ];
           Promise.all(promises_3).then(self.callback_3); 
         },
@@ -567,12 +596,13 @@
         callback_3(data) {
           let csv_matrix_daily_2019 = data[0];
           let csv_daily_count_2019 = data[1];
+          let csv_monthly_rects_2019 = data[2];
 
           // Set up Ch 2 panel 3 -
           // set up panel 3 map
           this.setMap_c2p3();
           // create panel 3 matrix
-          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019);
+          this.createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019);
         },
         // Join modeled flow data to simplified segment geometries
         joinData(segments, csv_flow) {
@@ -1000,6 +1030,7 @@
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+              .attr("width", "90%")
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -1318,7 +1349,7 @@
           scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
 
         },
-        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019){
+        createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019){
           const self = this;
 
           // set viewbox for existing svg
@@ -1344,6 +1375,13 @@
           let prebuiltMatrix_c2p3 = svgMatrix.select(".prebuilt_c2p3_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+          
+          // and group containing monthly rectangles
+          let prebuiltRects_c2p3 = svgMatrix.select(".rects_c2p3_group")
+              .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+              .attr("width", "90%")
+              .raise()
 
           // build array of all values of observed temperature
           let arrayObsTemps = [];
@@ -1497,7 +1535,7 @@
           //     .style("opacity", 1);
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip);
+          self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip);
 
           // transformedMatrix.append("g")
           //     .style("font-size", 10)
@@ -1526,7 +1564,7 @@
           //     .select(".domain").remove()
 
         },
-        createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip) {
+        createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip) {
           const self = this;
 
           // // Set up necessary elements for mousemove event within svg with viewBox
@@ -1614,7 +1652,48 @@
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1.5)
+              .style("stroke", "#1a1b1c")
+              .style("opacity", 0)
+              // // trigger interactions and coordination with map on mouseover
+              // .on("mouseover", function(d) {
+              //   self.mouseoverRect_c2p3(d, tooltip);
+              // })
+              // .on("mousemove", function(d) {
+              //   let mouse_x = loc_matrix_c2p3.x
+              //   let mouse_y = loc_matrix_c2p3.y
+              //   self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
+              // })
+              // .on("mouseout", function(d) {
+              //   self.mouseoutRect_c2p3(d, tooltip);
+              // })
+
+          let MonthlyRectangles = transformedMatrix.selectAll('.c2p3.matrixMonthlyRect')
+              // bind data (count of observations on each date) to each element
+              .data(csv_monthly_rects_2019)
+              // create element for each datum
+              .enter()
+              // append rectangle for each element
+              .append("rect")
+              // set x value based on date and xscale
+              .attr("x", function(d){
+                return xscale(d.start_date);
+              })
+              // set y value to 0
+              .attr("y", 0)
+              // set width based on bandwidth of x scale
+              .attr("width", function(d) {
+                return ((self.matrix_width_c2/365) * d.num_days);
+              })
+              // set height to height of matrix
+              .attr("height", self.matrix_height_c2)
+              // set class based on date
+              .attr("class", function(d) {
+                return 'c2p3 matrixMonthlyRect month' + d.month;
+              })
+              // style rectangles to be transparent but available for selection
+              .style("fill", "#1a1b1c")
+              .style("stroke-width", 1.5)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
@@ -1630,12 +1709,24 @@
                 self.mouseoutRect_c2p3(d, tooltip);
               })
 
-            // let allTemporalRect = self.d3.selectAll(".c2p3.temporalRect")
-            //   // style rectangles to be transparent but available for selection
-            //   .style("fill", "#1a1b1c")
-            //   .style("stroke-width", 2)
-            //   .style("stroke", "#1a1b1c")
-            //   .style("opacity", 0)
+          // let allTemporalRect = self.d3.selectAll(".c2p3.matrixMonthlyRect")
+          //     // style rectangles to be transparent but available for selection
+          //     .style("fill", "#fcba03")
+          //     .style("stroke-width", 1.5)
+          //     .style("stroke", "#1a1b1c")
+          //     .style("opacity", 1)
+          //     .on("mouseover", function(d) {
+          //       self.mouseoverRect_c2p3(d, tooltip);
+          //     })
+          //     .on("mousemove", function(d) {
+          //       let mouse_x = loc_matrix_c2p3.x
+          //       let mouse_y = loc_matrix_c2p3.y
+          //       self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
+          //     })
+          //     .on("mouseout", function(d) {
+          //       self.mouseoutRect_c2p3(d, tooltip);
+          //     })
+          //     .raise()
           
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
@@ -1985,7 +2076,7 @@
               .style("fill", "#1a1b1c")
               .style("stroke-width", 1)
               .style("opacity", 0)
-              .raise()
+              // .raise()
           // select all *temporal* rectangles
           // set y position and height back to defaults
           // and set fill and stroke back
@@ -1997,10 +2088,12 @@
               .attr("height", self.matrix_height_c2)
               //style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1.5)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
-              .raise()
+          // select all monthly rectangles and raise
+          self.d3.selectAll(".c2p3.matrixMonthlyRect")
+            .raise()
           // // resize matrix cells associated with segment
           // this.d3.selectAll(".c2p3.cell.segment" + segment_id) 
           //     .attr("height", yScale_matrix_c2p3.bandwidth())
@@ -2020,8 +2113,9 @@
               .attr("filter", "url(#shadow2)")
         },
         mousemoveRect_c2p3(data, tooltip, mouse_x, mouse_y) {
+
           // identify selected date
-          let selected_year = data[this.timestep_c2p3];
+          let selected_month = data.month;
 
           // set tooltip x coordinate based on mouse coordinates and position w/i matrix
           let x_position;
@@ -2036,12 +2130,15 @@
               .attr("y", mouse_y - 20)
               .attr("x", x_position)
               .attr("text-align", "left")
-              .text(selected_year)
+              .text(selected_month)
               .raise()
 
         },
         mouseoverRect_c2p3(data, tooltip) {
           const self = this;
+
+          console.log("mouseover Rect")
+          console.log(data)
 
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
@@ -2065,21 +2162,21 @@
           this.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
-          this.d3.selectAll(".c2p3.matrixTemporalRect")
+          this.d3.selectAll(".c2p3.matrixMonthlyRect")
               .style("opacity", 0.6)
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1.5)
           // select temporalRect for highlighted timestep and make transparent
-          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
+          this.d3.selectAll(".c2p3.matrixMonthlyRect.month" + data.month)
               .style("opacity", 0)
-          // select all river segments that have data in highlighted year
-          // and make white
-          this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
-              .style("stroke", "#ffffff")
-              .style("stroke-width", 1.25)
-              .style("opacity", 1)
-              .raise()
+          // // select all river segments that have data in highlighted year
+          // // and make white
+          // this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
+          //     .style("stroke", "#ffffff")
+          //     .style("stroke-width", 1.25)
+          //     .style("opacity", 1)
+          //     .raise()
         },
         mouseoutRect_c2p3(data, tooltip) {
           const self = this;
@@ -2102,10 +2199,10 @@
           
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
-          this.d3.selectAll(".c2p3.matrixTemporalRect")
+          this.d3.selectAll(".c2p3.matrixMonthlyRect")
               .style("fill", "#1a1b1c")
               .style("stroke", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 1.5)
               .style("opacity", 0)
               .raise()
           // un-dim river segments
@@ -2196,6 +2293,7 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
   #timeseries {
     display: block;
     max-width: 700px;
+    max-height: 100%;
   }
 
   #hex-map {
@@ -2320,7 +2418,7 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
-    max-height: 85vh;
+    height: 85vh;
     max-width: 2000px;
   }
   .mm-grid-item {
