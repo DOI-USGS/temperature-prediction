@@ -2807,10 +2807,10 @@
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
-          // set header based on refresh scroll
-           if (this.step <= 0){
-             this.d3.select("figure.intro").classed("sticky", true); 
-          }
+          // // set header based on refresh scroll
+          //  if (this.step <= 0){
+          //    this.d3.select("figure.intro").classed("sticky", true); 
+          // }
 
           /////////// stage chart step sequence
           // this.start_bees is the step where the error plot appears
@@ -2890,15 +2890,15 @@
           setFlubber() {
             const self = this;
 
+            // Hide all flubber elements (visuals and annotations)
+            self.d3.selectAll(".flubber")
+              .style("opacity", 0)
+              // .style("visibility", "hidden");
+            
             // // determine initial model id and initial annotation id
             // // NOTE currently assumes that we are beginning the visuals at step 0
             // let initial_model_id = self.flubber_id_order[self.step]
             // let initial_annotation_id = initial_model_id + "_annotations"
-
-            // Hide all flubber elements (visuals and annotations)
-            self.d3.selectAll(".flubber")
-              .attr("opacity", 0)
-              // .style("visibility", "hidden");
 
             // // display visual associated with initial model id
             // self.d3.selectAll("#" + initial_model_id)
@@ -2923,7 +2923,7 @@
             // If the step has an id (in this case all the ids are in the flubber id array)
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
-              let animationLength = 1400; // original was 2400
+              let animationLength = 1600; // original was 2400
 
               //console.log('current flubber id')
              // console.log(self.current_flubber_id)
@@ -2972,7 +2972,7 @@
                     .duration(animationLength)
                     .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
                     .attrTween("d", function(d){
-                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2 })
+                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2.5 })
                     })
                 }
               }
@@ -3962,17 +3962,19 @@
 
             // display flubber visual associated with initial model id
             self.d3.selectAll("#" + initial_model_id)
-              .attr("opacity", 1)
+              .style("opacity", 1)
 
-            // display flubber visual associated with initial model id
+            // display flubber annotation associated with initial model id
             self.d3.selectAll("#" + initial_annotation_id)
-              .attr("opacity", 1)
-            self.fadeIn(this.d3.selectAll("#flubber-svg"), 2400);
+              .transition()
+              .duration(900)
+              .style("opacity", 1)
+            // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
-         // drop sticky header
-          if (this.step >= 0 && response.direction == "down"){
-             this.d3.select("figure.intro").classed("sticky", false); 
-          }
+        //  // drop sticky header
+        //   if (this.step >= 0 && response.direction == "down"){
+        //      this.d3.select("figure.intro").classed("sticky", false); 
+        //   }
 
         // updates to go with downscroll
           if (response.direction == "down"){
@@ -4016,13 +4018,33 @@
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
 
-        // make intro header sticky again if scrolling back
-          if (this.step <= 2 && response.direction == "up"){
-             this.d3.select("figure.intro").classed("sticky", false); 
-          }
+        // // make intro header sticky again if scrolling back
+        //   if (this.step <= 2 && response.direction == "up"){
+        //      this.d3.select("figure.intro").classed("sticky", false); 
+        //   }
 
 
         // updates to go with upscroll
+        if (this.step == 0 && response.direction == "up") {
+
+            /// determine initial model id and initial annotation id
+            // NOTE currently assumes that we are beginning the visuals at step 0
+            let initial_model_id = self.flubber_id_order[this.step]
+            let initial_annotation_id = initial_model_id + "_annotations"
+
+            // fade flubber visual associated with initial model id
+            self.d3.selectAll("#" + initial_model_id)
+              .transition()
+              .duration(500)
+              .style("opacity", 0)
+
+            // fade flubber annotation associated with initial model id
+            self.d3.selectAll("#" + initial_annotation_id)
+              .transition()
+              .duration(500)
+              .style("opacity", 0)
+          }
+
         if (response.direction == "up") {
 
           if (this.step == this.step_error_exp) {
@@ -4213,8 +4235,8 @@ article {
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
 figure.sticky.intro {
-  position: -webkit-sticky;
-  position: sticky;
+  // position: -webkit-sticky;
+  // position: sticky;
   top: 0;
   height: 10vh;
   width: 100vw;
