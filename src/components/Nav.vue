@@ -6,19 +6,16 @@
       </p>
       <router-link
         to="/"
-        
       >
         1. Importance
       </router-link>
       <router-link
         to="/monitoring"
-        
       >
         2. Monitoring
       </router-link>
       <router-link
         to="/modeling"
-        
       >
         3. Modeling
       </router-link>

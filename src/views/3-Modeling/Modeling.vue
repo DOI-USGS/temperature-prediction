@@ -19,7 +19,10 @@
         >
           <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "process-guided deep learning".</p>
           <p>Process-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
-          <div id="arrows">            
+          <div 
+            v-if="!mobileView"
+            id="arrows"
+          >            
             <svg id="more-arrows">
               <polygon
                 class="arrow-top"
@@ -2687,6 +2690,7 @@
     import * as d3Base from "d3";
     import * as scrollama from 'scrollama';
     import * as flubber from "flubber";
+    import { isMobile } from 'mobile-device-detect';
     import modelingText from "./../../assets/text/modelingText";
 
   export default {
@@ -2697,6 +2701,8 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
+            mobileView: isMobile, // test if mobile
+
             // sectionTitle: "Modeling Stream Temperature", // the initial
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
@@ -2837,6 +2843,13 @@
         },
         
         methods: {
+          isMobile() {
+              if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                  return true
+              } else {
+                  return false
+              }
+          },
           loadData() {
             const self = this;
             // read in data 
