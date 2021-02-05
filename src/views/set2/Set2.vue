@@ -196,6 +196,12 @@
           class="mm-grid-item"
         >
             <svg class="c2p3 matrix_c2p3 matrix">
+              <g
+                class="prebuilt_c2p3_group matrix"
+                width="650"
+                height="930"
+              >
+              </g>
             </svg>
         </div>
       </div>
@@ -1318,6 +1324,24 @@
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
               .attr("width", "90%")
 
+          // append background rectangle for matrix
+          svgMatrix.append("rect")
+                  .attr("class", "c2p3 matrixBkgdRect")
+                  .attr("width", self.matrix_width_c2)
+                  .attr("height", self.matrix_height_c2)
+                  .attr("fill", "#1a1b1c")
+                  .attr("stroke", "#1a1b1c")
+                  .attr("stroke-width", 1)
+                  .attr("filter", "url(#shadow2)")
+                  .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+                  .lower()
+
+          // translate group containing prebuilt matrix
+          let prebuiltMatrix_c2p3 = svgMatrix.select(".prebuilt_c2p3_group")
+              .attr("transform",
+                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+
           // build array of all values of observed temperature
           let arrayObsTemps = [];
           for (i=0; i<csv_matrix_daily_2019.length; i++){
@@ -1398,16 +1422,6 @@
               .attr("fill", "#ffffff")
               .text(obsTempMax + " °C")
 
-          // append background rectangle for matrix
-          svgMatrix.append("rect")
-                  .attr("class", "c2p3 matrixBkgdRect")
-                  .attr("width", self.matrix_width_c2)
-                  .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#1a1b1c")
-                  .attr("filter", "url(#shadow2)")
-                  .attr("transform",
-                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
               .attr("class", "c2p3 tooltip matrix")
@@ -1422,95 +1436,96 @@
           self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
           self.myVars_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
-          // build x scale
-          let x = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2])
-              .domain(self.myGroups_c2p3)
-              .padding(0.0);
+          // // build x scale
+          // let x = self.d3.scaleBand()
+          //     .range([0, self.matrix_width_c2])
+          //     .domain(self.myGroups_c2p3)
+          //     .padding(0.0);
 
-          // build y scale
-          let y = self.d3.scaleBand()
-              .range([self.matrix_height_c2, 0])
-              .domain(self.myVars_c2p3)
-              .padding(0.0);
+          // // build y scale
+          // let y = self.d3.scaleBand()
+          //     .range([self.matrix_height_c2, 0])
+          //     .domain(self.myVars_c2p3)
+          //     .padding(0.0);
 
-          // // add the cells to the matrix
-          // select transformed matrix
-          let transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
-          // append rectangles to the matrix
-          let matrixCells = transformedMatrix.selectAll('matrixCells')
-              // bind data to rectangles
-              .data(csv_matrix_daily_2019, function(d) {
-                if (d.total_count > 0) {  
-                  return d[self.timestep_c2p3] +':'+ d.seg_id_nat; 
-                }
-              })
-              // create element for each data item
-              .enter()
-              // filter data to only include sites and times
-              // with more than 0 observations (to limit # rectangles)
-              .filter(function (d){
-                return d.obs_count > 0
-              })
-              // append rectangles for each element in filtered data
-              .append("rect")
-              // set x position based on date
-              .attr("x", function (d){
-                return x(d[self.timestep_c2p3])
-              })
-              // set y position based on segment id
-              .attr("y", function(d) {
-                return y(d.seg_id_nat)
-              })
-              // set width and height based on bandwidth of axes
-              .attr("width", x.bandwidth())
-              .attr("height", y.bandwidth())
-              // assign class with segment id AND date for styling
-              .attr("class", function(d) {
-                return 'c2p3 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p3]
-              })
-              // style based on # of observations for that segment in that year
-              .style("fill", function(d) {
-                return self.tempColor(d.temp_c);
-              })
-              .style("stroke-width", 0.5)
-              .style("stroke", function(d) {
-                return self.tempColor(d.temp_c);
-              })
-              .style("opacity", 1);
+          // // // add the cells to the matrix
+          // // select transformed matrix
+          // let transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
+          // // append rectangles to the matrix
+          // let matrixCells = transformedMatrix.selectAll('matrixCells')
+          //     // bind data to rectangles
+          //     .data(csv_matrix_daily_2019, function(d) {
+          //       if (d.total_count > 0) {  
+          //         return d[self.timestep_c2p3] +':'+ d.seg_id_nat; 
+          //       }
+          //     })
+          //     // create element for each data item
+          //     .enter()
+          //     // filter data to only include sites and times
+          //     // with more than 0 observations (to limit # rectangles)
+          //     .filter(function (d){
+          //       return d.obs_count > 0
+          //     })
+          //     // append rectangles for each element in filtered data
+          //     .append("rect")
+          //     // set x position based on date
+          //     .attr("x", function (d){
+          //       return x(d[self.timestep_c2p3])
+          //     })
+          //     // set y position based on segment id
+          //     .attr("y", function(d) {
+          //       return y(d.seg_id_nat)
+          //     })
+          //     // set width and height based on bandwidth of axes
+          //     .attr("width", x.bandwidth())
+          //     .attr("height", y.bandwidth())
+          //     // assign class with segment id AND date for styling
+          //     .attr("class", function(d) {
+          //       return 'c2p3 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p3]
+          //     })
+          //     // style based on # of observations for that segment in that year
+          //     .style("fill", function(d) {
+          //       return self.tempColor(d.temp_c);
+          //     })
+          //     .style("stroke-width", 0.5)
+          //     .style("stroke", function(d) {
+          //       return self.tempColor(d.temp_c);
+          //     })
+          //     .style("opacity", 1);
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
           self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip);
 
-          transformedMatrix.append("g")
-              .style("font-size", 10)
-              .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2 + ")")
-              .attr("class", "c2p3 matrixAxis bottom")
-              .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(self.d3.timeFormat("%Y"))
-              .select(".domain").remove()
-          transformedMatrix.append("g")
-              .style("font-size", 0)
-              .attr("transform", "translate(" + 0 + "," + 0 + ")")
-              .attr("class", "c2p3 matrixAxis top")
-              .call(self.d3.axisTop(x).tickSize(0))
-              .select(".domain").remove()
+          // transformedMatrix.append("g")
+          //     .style("font-size", 10)
+          //     .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2 + ")")
+          //     .attr("class", "c2p3 matrixAxis bottom")
+          //     .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(self.d3.timeFormat("%Y"))
+          //     .select(".domain").remove()
+          // transformedMatrix.append("g")
+          //     .style("font-size", 0)
+          //     .attr("transform", "translate(" + 0 + "," + 0 + ")")
+          //     .attr("class", "c2p3 matrixAxis top")
+          //     .call(self.d3.axisTop(x).tickSize(0))
+          //     .select(".domain").remove()
 
-          // draw y axes
-          transformedMatrix.append("g")
-              .style("font-size", 0)
-              .attr("class", "c2p3 matrixAxis left")
-              .call(self.d3.axisLeft(y).tickSize(0))
-              .select(".domain").remove()
-          transformedMatrix.append("g")
-              .style("font-size", 0)
-              .attr("transform", "translate(" + self.matrix_width_c2 + "," + 0 + ")")
-              .attr("class", "c2p3 matrixAxis right")
-              .call(self.d3.axisRight(y).tickSize(0))
-              .select(".domain").remove()
+          // // draw y axes
+          // transformedMatrix.append("g")
+          //     .style("font-size", 0)
+          //     .attr("class", "c2p3 matrixAxis left")
+          //     .call(self.d3.axisLeft(y).tickSize(0))
+          //     .select(".domain").remove()
+          // transformedMatrix.append("g")
+          //     .style("font-size", 0)
+          //     .attr("transform", "translate(" + self.matrix_width_c2 + "," + 0 + ")")
+          //     .attr("class", "c2p3 matrixAxis right")
+          //     .call(self.d3.axisRight(y).tickSize(0))
+          //     .select(".domain").remove()
 
         },
         createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, tooltip) {
           const self = this;
+
           // // Set up necessary elements for mousemove event within svg with viewBox
           // find root svg element
           let svg_matrix_c2p3 = document.querySelector('.matrix_c2p3');
@@ -1611,6 +1626,7 @@
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p3(d, tooltip);
               })
+          
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
