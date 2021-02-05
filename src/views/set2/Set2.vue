@@ -201,6 +201,7 @@
                 width="650"
                 height="930"
               >
+                <PrebuiltC2P3Matrix />
               </g>
             </svg>
         </div>
@@ -298,6 +299,7 @@
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
   import PrebuiltC2P2Matrix from "./../../components/2-Monitoring/PrebuiltC2P2Matrix";
+  import PrebuiltC2P3Matrix from "./../../components/2-Monitoring/PrebuiltC2P3Matrix";
   import DesktopHexMap from "./../../components/2-Monitoring/HexMap";
 
   export default {
@@ -308,6 +310,7 @@
         MatrixExplainerTime,
         MatrixExplainerColor,
         PrebuiltC2P2Matrix,
+        PrebuiltC2P3Matrix,
         DesktopHexMap,
         Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
         Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
@@ -1626,6 +1629,13 @@
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p3(d, tooltip);
               })
+
+            // let allTemporalRect = self.d3.selectAll(".c2p3.temporalRect")
+            //   // style rectangles to be transparent but available for selection
+            //   .style("fill", "#1a1b1c")
+            //   .style("stroke-width", 2)
+            //   .style("stroke", "#1a1b1c")
+            //   .style("opacity", 0)
           
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
@@ -1904,7 +1914,7 @@
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p3.matrixSpatialRect")
-              .style("opacity", 0.7)
+              .style("opacity", 0.65)
               .style("stroke-width", 1);
           // select background rectangle and change filter
           self.d3.selectAll(".c2p3.matrixBkgdRect")
@@ -1987,7 +1997,7 @@
               .attr("height", self.matrix_height_c2)
               //style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 1)
+              .style("stroke-width", 2)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               .raise()
@@ -2039,14 +2049,14 @@
               .style("fill", "None")
               .style("stroke", "None")
 
-          // rebuild x scale for matrix cells
-          let x = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2])
-              .domain(self.myGroups_c2p3)
-              .padding(0.0);
+          // // rebuild x scale for matrix cells
+          // let x = self.d3.scaleBand()
+          //     .range([0, self.matrix_width_c2])
+          //     .domain(self.myGroups_c2p3)
+          //     .padding(0.0);
 
-          // set width for hovered matrix cells
-          let cellWidth_c2p3 = 8
+          // // set width for hovered matrix cells
+          // let cellWidth_c2p3 = 8
 
           // show tooltip
           tooltip
@@ -2060,13 +2070,9 @@
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
               .style("stroke-width", 2)
-          // select matrix cells for highlighted timestep and raise
-          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
-              .attr("x", function (d){
-                return x(data[self.timestep_c2p3]) - cellWidth_c2p3/2 
-              })
-              .attr("width", cellWidth_c2p3)
-              .raise()
+          // select temporalRect for highlighted timestep and make transparent
+          this.d3.selectAll(".c2p3.matrixTemporalRect.time" + data[self.timestep_c2p3])
+              .style("opacity", 0)
           // select all river segments that have data in highlighted year
           // and make white
           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -2088,11 +2094,11 @@
           tooltip
               .style("opacity", 0)
 
-          // rebuild x scale for matrix cells
-          let x = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2])
-              .domain(self.myGroups_c2p3)
-              .padding(0.0);
+          // // rebuild x scale for matrix cells
+          // let x = self.d3.scaleBand()
+          //     .range([0, self.matrix_width_c2])
+          //     .domain(self.myGroups_c2p3)
+          //     .padding(0.0);
           
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
@@ -2102,13 +2108,6 @@
               .style("stroke-width", 2)
               .style("opacity", 0)
               .raise()
-          // select matrix cells for highlighted timestep
-          this.d3.selectAll(".c2p3.cell.timestep" + data[self.timestep_c2p3])
-              .attr("x", function(d){
-                  return x(data[self.timestep_c2p3])
-              })
-              // set width and height based on bandwidth of axes
-              .attr("width", x.bandwidth())
           // un-dim river segments
           // lower elements as needed
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
@@ -2338,13 +2337,11 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
     grid-area: matrix;
     display: flex;
     max-height: 100%;
-    z-index: 1;
   }
   #DRB_map_c2p3 {
     grid-area: map;
     display: flex;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 80vh;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
