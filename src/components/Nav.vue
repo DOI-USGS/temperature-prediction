@@ -6,19 +6,16 @@
       </p>
       <router-link
         to="/"
-        @click.native="$scrollToTop"
       >
         1. Importance
       </router-link>
       <router-link
         to="/monitoring"
-        @click.native="scrollToTop"
       >
         2. Monitoring
       </router-link>
       <router-link
         to="/modeling"
-        @click.native="scrollToTop"
       >
         3. Modeling
       </router-link>

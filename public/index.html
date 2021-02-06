@@ -14,42 +14,62 @@
     <%= process.env.VUE_APP_TIER !== '' ? '<meta name=”robots” content=”noindex,nofollow”>' : '' %><!-- an empty string in this case means the 'prod' version of the application   -->
       <!-- Primary Meta Tags -->
       <title><%= VUE_APP_TIER %><%= VUE_APP_TITLE %></title>
-      <meta name="title" content="FILL THIS OUT">
-      <meta name="description" content="FILL THIS OUT">
+      <meta name="title" content="Predicting Stream Temperature in the Delaware River Basin">
+      <meta name="description" content="The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.">
       <!-- Open Graph / Facebook -->
       <meta property="og:type" content="website">
-      <meta property="og:url" content="FILL THIS OUT">
-      <meta property="og:title" content="FILL THIS OUT">
-      <meta property="og:description" content="FILL THIS OUT">
-      <meta property="og:image" content="FILL THIS OUT">
+      <meta property="og:url" content="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html#/">
+      <meta property="og:title" content="Predicting Stream Temperature in the Delaware River Basin">
+      <meta property="og:description" content="The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.">
+      <meta property="og:image" content="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/temp_noleg.PNG">
       <!-- Twitter -->
       <meta property="twitter:card" content="summary_large_image">
-      <meta property="twitter:url" content="FILL THIS OUT">
-      <meta property="twitter:title" content="FILL THIS OUT">
-      <meta property="twitter:description" content="FILL THIS OUT">
-      <meta property="twitter:image" content="FILL THIS OUT">
+      <meta property="twitter:url" content="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html#/">
+      <meta property="twitter:title" content="Predicting Stream Temperature in the Delaware River Basin">
+      <meta property="twitter:description" content="The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.">
+      <meta property="twitter:image" content="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/temp_noleg.PNG">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script type='application/ld+json'>
       { "@context": "http://www.schema.org",
-        "@type": "WebSite", "name": "FILL THIS OUT",
-        "url": "FILL THIS OUT",
-        "about": "FILL THIS OUT",
+        "@type": "WebSite", "name": "Predicting Stream Temperature in the Delaware River Basin",
+        "url": "https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html#/,
+        "about": "The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy. Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.",
         "datePublished": "FILL THIS OUT",
         "contributor": [
           { "@type": "Person",
-            "name": "DUPLICATE THIS OBJECT FOR EACH CONTRIBUTOR",
-            "email": "FILL THIS OUT",
+            "name": "Hayley Corson-Dosch",
+            "email": "hcorson-dosch@usgs.gov",
+            "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
+          },
+          { "@type": "Person",
+            "name": "Colleen Nell",
+            "email": "cnell@usgs.gov",
+            "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
+          },
+          { "@type": "Person",
+            "name": "Ellen Bechtel",
+            "email": "ebechtel@contractor.usgs.gov",
+            "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
+          },
+          { "@type": "Person",
+            "name": "Lindsay Platt",
+            "email": "lplatt@usgs.gov",
             "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
           },
           { "@type": "Person",
             "name": "Aaron Briggs",
             "email": "abriggs@contractor.usgs.gov",
             "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
+          },
+          { "@type": "Person",
+            "name": "Samantha Oliver",
+            "email": "soliver@usgs.gov",
+            "affiliation": { "@type": "Organization", "legalName": "U.S. Geological Survey" }
           }]
       },
       "audience": { "@context": "http://schema.org", "@type": "Audience", "audienceType": "General public"},
       "publisher": { "@context": "http://schema.org", "@type": "Organization", "legalName": "U.S. Geological Survey" },
-      "keywords": "FILL THIS OUT WITH COMMA DELINIATED LIST" }
+      "keywords": "water temperature, predictive modeling, neural network, Delaware River Basin" }
     </script>
   </head>
   <body>
