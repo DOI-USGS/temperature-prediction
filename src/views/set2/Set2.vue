@@ -637,8 +637,13 @@
               self.segmentDict[segment.properties.seg_id_nat]['data_2019'][day_key]['day_count'] = segment.properties.day_count[day_key]
               self.segmentDict[segment.properties.seg_id_nat]['data_2019'][day_key]['day_t_c'] = segment.properties.day_t_c[day_key]
             }
+            self.segmentDict[segment.properties.seg_id_nat]['month_count'] = {}
+            let month_key = null;
+            for (month_key in segment.properties.month_count) {
+              self.segmentDict[segment.properties.seg_id_nat]['month_count'][month_key] = segment.properties.month_count[month_key]
+            }
           })
-          console.log(self.segmentDict)
+          // console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -1352,10 +1357,10 @@
               .attr("class", function(d) {
                 let seg_class = 'c2p3 river_segments seg'
                 seg_class += segment_id
-                let day_key = null;
-                for (day_key in self.segmentDict[segment_id].data_2019) {
-                  if (self.segmentDict[segment_id].data_2019[day_key].day_count > 0) {
-                    seg_class += " " + self.timestep_c2p3 + day_key
+                let month_key = null;
+                for (month_key in self.segmentDict[segment_id].month_count) {
+                  if (self.segmentDict[segment_id].month_count[month_key] > 0) {
+                    seg_class += " " + self.timestep_c2p3 + month_key
                   }
                 }
                 return seg_class
@@ -1381,10 +1386,10 @@
               .attr("class", function(d) {
                 let seg_class = 'c2p3 segs_transparent seg'
                 seg_class += transparent_segment_id
-                let day_key = null;
-                for (day_key in self.segmentDict[transparent_segment_id].data_2019) {
-                  if (self.segmentDict[transparent_segment_id].data_2019[day_key].day_count > 0) {
-                    seg_class += " " + self.timestep_c2p3 + day_key
+                let month_key = null;
+                for (month_key in self.segmentDict[transparent_segment_id].month_count) {
+                  if (self.segmentDict[transparent_segment_id].month_count[month_key] > 0) {
+                    seg_class += " " + self.timestep_c2p3 + month_key
                   }
                 }
                 return seg_class
@@ -2107,9 +2112,6 @@
         mouseoverRect_c2p3(data, tooltip) {
           const self = this;
 
-          console.log("mouseover Rect")
-          console.log(data)
-
           // select all the *spatial* rectangles and make them unselectable
           // by setting fill to none and stroke to none
           this.d3.selectAll(".c2p3.matrixSpatialRect")
@@ -2140,13 +2142,13 @@
           // select temporalRect for highlighted timestep and make transparent
           this.d3.selectAll(".c2p3.matrixMonthlyRect.month" + data.month)
               .style("opacity", 0)
-          // // select all river segments that have data in highlighted year
-          // // and make white
-          // this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
-          //     .style("stroke", "#ffffff")
-          //     .style("stroke-width", 1.25)
-          //     .style("opacity", 1)
-          //     .raise()
+          // select all river segments that have data in highlighted year
+          // and make white
+          this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
+              .style("stroke", "#ffffff")
+              .style("stroke-width", 1.25)
+              .style("opacity", 1)
+              .raise()
         },
         mouseoutRect_c2p3(data, tooltip) {
           const self = this;
@@ -2177,7 +2179,7 @@
               .raise()
           // un-dim river segments
           // lower elements as needed
-           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data[self.timestep_c2p3])
+           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
               .style("stroke", "#1a1b1c")
               .style("stroke-width", 6)
               .style("opacity", 0)
