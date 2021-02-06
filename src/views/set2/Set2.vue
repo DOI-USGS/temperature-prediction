@@ -1691,16 +1691,6 @@
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p3(d, tooltip);
               })
-              // .append("text")
-              //   .attr("class", "c2p3 monthlyLabels")
-              //   .attr("x", function(d){
-              //     return xscale(d.start_date);
-              //   })
-              //   .attr("y", self.matrix_height_c2 + 5)
-              //   .style("opacity", 1)
-              //   .text(function(d) {
-              //     return d.month;
-              //   })
           
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
@@ -2069,12 +2059,7 @@
           // select all monthly rectangles and raise
           self.d3.selectAll(".c2p3.matrixMonthlyRect")
             .raise()
-          // // resize matrix cells associated with segment
-          // this.d3.selectAll(".c2p3.cell.segment" + segment_id) 
-          //     .attr("height", yScale_matrix_c2p3.bandwidth())
-          //     .attr("y", yScale_matrix_c2p3(segment_id))
-          // un-dim river segments, reservoirs, and bay
-          // and reset to default styling
+          // reset river segments to default styling
           self.d3.selectAll(".c2p3.river_segments.seg" + segment_id)
               // .attr("filter","None")
               .style("stroke", "#777b80")
@@ -2118,15 +2103,6 @@
               .style("fill", "None")
               .style("stroke", "None")
 
-          // // rebuild x scale for matrix cells
-          // let x = self.d3.scaleBand()
-          //     .range([0, self.matrix_width_c2])
-          //     .domain(self.myGroups_c2p3)
-          //     .padding(0.0);
-
-          // // set width for hovered matrix cells
-          // let cellWidth_c2p3 = 8
-
           // show tooltip
           tooltip
               .style("opacity", 1)
@@ -2162,13 +2138,7 @@
           // hide tooltip
           tooltip
               .style("opacity", 0)
-
-          // // rebuild x scale for matrix cells
-          // let x = self.d3.scaleBand()
-          //     .range([0, self.matrix_width_c2])
-          //     .domain(self.myGroups_c2p3)
-          //     .padding(0.0);
-          
+        
           // select all monthly rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixMonthlyRect")
