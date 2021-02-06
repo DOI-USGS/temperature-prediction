@@ -97,7 +97,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     background-color: $mediumBlue;
     border-radius: 5px;
     padding: 6px;
-    transition: background-color .2s ease;
+    // transition: background-color .2s ease;
     cursor: pointer;
   }
 

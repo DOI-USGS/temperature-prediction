@@ -77,7 +77,7 @@
             Hover over a stream reach on the map to see the amount of data available for that reach over time.
           </p>
           <p class="viz-subtitle">
-            Hover over a column in the matrix to see which reaches have data for a given year.
+            Hover over a column in the matrix to see which reaches have data in a given year.
           </p>
         </div>
       </div>
@@ -128,9 +128,56 @@
             <g
               class="prebuilt_c2p2_group matrix"
               width="650"
-              height="930"
+              height="920"
             >
               <PrebuiltC2P2Matrix />
+            </g>
+            <g id="year_labels">
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(25 997)"
+              >1980</text>
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(187 997)"
+              >1990</text>
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(351 997)"
+              >2000</text>
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(513 997)"
+              >2010</text>
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(660 997)"
+              >2019</text>
+            </g>
+            <g>
+              <line
+                class="c2p2 NS_arrow"
+                x1="710"
+                y1="90"
+                x2="710"
+                y2="935"
+              />
+              <polygon
+                class="c2p2 NS_arrowhead"
+                points="701.6 103.3 709.9 88.2 718.3 103.3 701.6 103.3"
+              />
+              <polygon
+                class="c2p2 NS_arrowhead"
+                points="701.6 917.6 709.9 932.8 718.3 917.6 701.6 917.6"
+              />
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(705 70)"
+              >N</text>
+              <text
+                class="c2p2 matrixAxis"
+                transform="translate(705 960)"
+              >S</text>
             </g>
           </svg>
         </div>
@@ -182,7 +229,7 @@
             Hover over a stream reach on the map to see the temperature in that reach during 2019.
           </p>
           <p class="viz-subtitle">
-            Hover over a column in the matrix to see the temperature of all measured reaches on a given day.
+            Hover over a column in the matrix to see stream temperatures during a given month.
           </p>
           <br>
         </div>
@@ -200,37 +247,61 @@
               <g
                 class="prebuilt_c2p3_group matrix"
                 width="650"
-                height="930"
+                height="920"
               >
                 <PrebuiltC2P3Matrix />
               </g>
-              <!-- g
-                class="rects_c2p3_group matrix"
-                width="650"
-                height="930"
-              >
-                <svg 
-                    id="matrix-temporal-boxes"
-                    width="650"
-                    height="930"
-                    viewBox="0 0 700 1000"
-                    preserveAspectRatio="none">
-                    <g id="matrix-monthly-boxes"  transform="scale(1.007,1)">
-                      <rect x="0" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJanuary" data="January"/>
-                      <rect x="58.9" width="53.2" y="0" height="1000" class="c2p3 matrixMonthlyRect timeFebruary" data="February"/>
-                      <rect x="112.1" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeMarch" data="March"/>
-                      <rect x="171" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeApril" data="April"/>
-                      <rect x="228" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeMay" data="May"/>
-                      <rect x="286.9" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJune" data="June"/>
-                      <rect x="343.9" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeJuly" data="July"/>
-                      <rect x="402.8" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeAugust" data="August"/>
-                      <rect x="461.7" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeSeptember" data="September"/>
-                      <rect x="518.7" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeOctober" data="October"/>
-                      <rect x="577.6" width="57" y="0" height="1000" class="c2p3 matrixMonthlyRect timeNovember" data="November"/>
-                      <rect x="634.6" width="58.9" y="0" height="1000" class="c2p3 matrixMonthlyRect timeDecember" data="December"/>
-                    </g>
-                </svg>
-              </g -->
+              <g id="month_labels">
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(48 997)"
+                >Jan</text>
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(153 997)"
+                >Mar</text>
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(263 997)"
+                >May</text>
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(375 997)"
+                >Jul</text>
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(478 997)"
+                >Sept</text>
+                <text
+                  class="c2p3 matrixAxis"
+                  transform="translate(590 997)"
+                >Nov</text>
+              </g>
+              <g>
+              <line
+                class="c2p3 NS_arrow"
+                x1="710"
+                y1="90"
+                x2="710"
+                y2="935"
+              />
+              <polygon
+                class="c2p3 NS_arrowhead"
+                points="701.6 103.3 709.9 88.2 718.3 103.3 701.6 103.3"
+              />
+              <polygon
+                class="c2p3 NS_arrowhead"
+                points="701.6 917.6 709.9 932.8 718.3 917.6 701.6 917.6"
+              />
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(705 70)"
+              >N</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(705 960)"
+              >S</text>
+            </g>
             </svg>
         </div>
       </div>
@@ -360,7 +431,7 @@
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 15, bottom: 20, left: 35}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 15, bottom: 30, left: 35}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -412,7 +483,7 @@
           // set universal map frame dimensions for Ch 2 panel maps
           this.map_width = 350;
           this.map_height = 600; //
-          this.map_margin = {top: 15, right: 5, bottom: 5, left: 5};
+          this.map_margin = {top: 15, right: 20, bottom: 5, left: 5};
 
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
@@ -1477,91 +1548,8 @@
           self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
           self.myVars_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
 
-          // // build x scale
-          // let x = self.d3.scaleBand()
-          //     .range([0, self.matrix_width_c2])
-          //     .domain(self.myGroups_c2p3)
-          //     .padding(0.0);
-
-          // // build y scale
-          // let y = self.d3.scaleBand()
-          //     .range([self.matrix_height_c2, 0])
-          //     .domain(self.myVars_c2p3)
-          //     .padding(0.0);
-
-          // // // add the cells to the matrix
-          // // select transformed matrix
-          // let transformedMatrix = self.d3.select(".c2p3.transformedMatrix")
-          // // append rectangles to the matrix
-          // let matrixCells = transformedMatrix.selectAll('matrixCells')
-          //     // bind data to rectangles
-          //     .data(csv_matrix_daily_2019, function(d) {
-          //       if (d.total_count > 0) {  
-          //         return d[self.timestep_c2p3] +':'+ d.seg_id_nat; 
-          //       }
-          //     })
-          //     // create element for each data item
-          //     .enter()
-          //     // filter data to only include sites and times
-          //     // with more than 0 observations (to limit # rectangles)
-          //     .filter(function (d){
-          //       return d.obs_count > 0
-          //     })
-          //     // append rectangles for each element in filtered data
-          //     .append("rect")
-          //     // set x position based on date
-          //     .attr("x", function (d){
-          //       return x(d[self.timestep_c2p3])
-          //     })
-          //     // set y position based on segment id
-          //     .attr("y", function(d) {
-          //       return y(d.seg_id_nat)
-          //     })
-          //     // set width and height based on bandwidth of axes
-          //     .attr("width", x.bandwidth())
-          //     .attr("height", y.bandwidth())
-          //     // assign class with segment id AND date for styling
-          //     .attr("class", function(d) {
-          //       return 'c2p3 cell segment' + d.seg_id_nat + ' timestep' + d[self.timestep_c2p3]
-          //     })
-          //     // style based on # of observations for that segment in that year
-          //     .style("fill", function(d) {
-          //       return self.tempColor(d.temp_c);
-          //     })
-          //     .style("stroke-width", 0.5)
-          //     .style("stroke", function(d) {
-          //       return self.tempColor(d.temp_c);
-          //     })
-          //     .style("opacity", 1);
-
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
           self.createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip);
-
-          // transformedMatrix.append("g")
-          //     .style("font-size", 10)
-          //     .attr("transform", "translate(" + 0 + "," + self.matrix_height_c2 + ")")
-          //     .attr("class", "c2p3 matrixAxis bottom")
-          //     .call(self.d3.axisBottom(x).tickSize(0).tickValues(['2019-01-01', '2019-03-01', '2019-05-01', '2019-07-01', '2019-09-01', '2019-11-01']).tickPadding(7)) //.tickFormat(self.d3.timeFormat("%Y"))
-          //     .select(".domain").remove()
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("transform", "translate(" + 0 + "," + 0 + ")")
-          //     .attr("class", "c2p3 matrixAxis top")
-          //     .call(self.d3.axisTop(x).tickSize(0))
-          //     .select(".domain").remove()
-
-          // // draw y axes
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("class", "c2p3 matrixAxis left")
-          //     .call(self.d3.axisLeft(y).tickSize(0))
-          //     .select(".domain").remove()
-          // transformedMatrix.append("g")
-          //     .style("font-size", 0)
-          //     .attr("transform", "translate(" + self.matrix_width_c2 + "," + 0 + ")")
-          //     .attr("class", "c2p3 matrixAxis right")
-          //     .call(self.d3.axisRight(y).tickSize(0))
-          //     .select(".domain").remove()
 
         },
         createMatrixRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip) {
@@ -1629,6 +1617,7 @@
 
           // // build temporal rectangles
           // append to transformed matrix
+          //  no mouseover b/c only used on MouseoverSeg
           let TemporalRectangles = transformedMatrix.selectAll('.c2p3.matrixTemporalRect')
               // bind data (count of observations on each date) to each element
               .data(csv_daily_count_2019)
@@ -1655,19 +1644,8 @@
               .style("stroke-width", 1.5)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
-              // // trigger interactions and coordination with map on mouseover
-              // .on("mouseover", function(d) {
-              //   self.mouseoverRect_c2p3(d, tooltip);
-              // })
-              // .on("mousemove", function(d) {
-              //   let mouse_x = loc_matrix_c2p3.x
-              //   let mouse_y = loc_matrix_c2p3.y
-              //   self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
-              // })
-              // .on("mouseout", function(d) {
-              //   self.mouseoutRect_c2p3(d, tooltip);
-              // })
 
+          // append monthly rectangles for mouseover on matrix
           let MonthlyRectangles = transformedMatrix.selectAll('.c2p3.matrixMonthlyRect')
               // bind data (count of observations on each date) to each element
               .data(csv_monthly_rects_2019)
@@ -1708,25 +1686,16 @@
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p3(d, tooltip);
               })
-
-          // let allTemporalRect = self.d3.selectAll(".c2p3.matrixMonthlyRect")
-          //     // style rectangles to be transparent but available for selection
-          //     .style("fill", "#fcba03")
-          //     .style("stroke-width", 1.5)
-          //     .style("stroke", "#1a1b1c")
-          //     .style("opacity", 1)
-          //     .on("mouseover", function(d) {
-          //       self.mouseoverRect_c2p3(d, tooltip);
-          //     })
-          //     .on("mousemove", function(d) {
-          //       let mouse_x = loc_matrix_c2p3.x
-          //       let mouse_y = loc_matrix_c2p3.y
-          //       self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
-          //     })
-          //     .on("mouseout", function(d) {
-          //       self.mouseoutRect_c2p3(d, tooltip);
-          //     })
-          //     .raise()
+              // .append("text")
+              //   .attr("class", "c2p3 monthlyLabels")
+              //   .attr("x", function(d){
+              //     return xscale(d.start_date);
+              //   })
+              //   .attr("y", self.matrix_height_c2 + 5)
+              //   .style("opacity", 1)
+              //   .text(function(d) {
+              //     return d.month;
+              //   })
           
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
@@ -1798,26 +1767,27 @@
                         })
                         .style("opacity", 1)
                         .raise()
-                    // and populate the text annotations with the observation counts
-                    self.d3.selectAll(".c2p2.cellText.year" + seg_year)
-                        .attr("y", function(d) {
-                              return yScale_matrix_c2p2(segment_id) - barHeight - 5;
-                          })
-                        .attr("x", function(d) {
-                            if (self.segmentDict[segment_id].year_count[seg_year] > 99) {
-                                return xScale_matrix_c2p2(seg_year);
-                            } else if (self.segmentDict[segment_id].year_count[seg_year] < 10) {
-                                return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/3;
-                            } else {
-                                return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/6;
-                            }
-                        })
-                        .attr("fill", "None")
-                        .text(function(d) {
-                          return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
-                        })
-                        .attr("fill", "#ffffff")
-                        .raise()
+                    // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
+                    // // and populate the text annotations with the observation counts
+                    // self.d3.selectAll(".c2p2.cellText.year" + seg_year)
+                    //     .attr("y", function(d) {
+                    //           return yScale_matrix_c2p2(segment_id) - barHeight - 5;
+                    //       })
+                    //     .attr("x", function(d) {
+                    //         if (self.segmentDict[segment_id].year_count[seg_year] > 99) {
+                    //             return xScale_matrix_c2p2(seg_year);
+                    //         } else if (self.segmentDict[segment_id].year_count[seg_year] < 10) {
+                    //             return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/3;
+                    //         } else {
+                    //             return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/6;
+                    //         }
+                    //     })
+                    //     .attr("fill", "None")
+                    //     .text(function(d) {
+                    //       return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
+                    //     })
+                    //     .attr("fill", "#ffffff")
+                    //     .raise()
                   }
               }
           }
@@ -1881,11 +1851,11 @@
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               .raise()
-          // turn off text for cells associated with segment
-          this.d3.selectAll(".c2p2.cellText") 
-              .attr("y", 0)
-              .text('')
-              .attr("fill", "None")
+          // // turn off text for cells associated with segment
+          // this.d3.selectAll(".c2p2.cellText") 
+          //     .attr("y", 0)
+          //     .text('')
+          //     .attr("fill", "None")
           // un-dim riversegments, reservoirs, and bay
           // and reset to default styling
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
@@ -2005,8 +1975,8 @@
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p3.matrixSpatialRect")
-              .style("opacity", 0.65)
-              .style("stroke-width", 1);
+              .style("opacity", 0.6)
+              .style("stroke-width", 2);
           // select background rectangle and change filter
           self.d3.selectAll(".c2p3.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
@@ -2163,10 +2133,10 @@
               .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixMonthlyRect")
-              .style("opacity", 0.6)
+              .style("opacity", 0.8)
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 1.5)
+              .style("stroke-width", 0)
           // select temporalRect for highlighted timestep and make transparent
           this.d3.selectAll(".c2p3.matrixMonthlyRect.month" + data.month)
               .style("opacity", 0)
@@ -2197,7 +2167,7 @@
           //     .domain(self.myGroups_c2p3)
           //     .padding(0.0);
           
-          // select all temporal rectangles and set fill and stroke back to black
+          // select all monthly rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixMonthlyRect")
               .style("fill", "#1a1b1c")
@@ -2489,7 +2459,10 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
   font-size: 0.48em;
   //text-anchor: middle;
 }
-
+.monthlyLabels {
+  fill: $grayBlue;
+  font-size: 0.5em;
+}
 .delaware_bay {
   fill: $grayBlue; 
 }
@@ -2541,18 +2514,40 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 .matrixAxis {
   fill: $grayBlue;
   color: $grayBlue;
-  font-size: 1.1vh;
+  font-size: 16px;
+  text-align: middle;
+}
+.NS_arrow {
+  stroke: $grayBlue; //#4d4c4d
+  stroke-width: 1px;
+  stroke-dasharray: 2 6;
+}
+.NS_arrowhead {
+  fill: $grayBlue;
 }
 .chartAxisText {
   fill: $grayBlue;
   font-size: 1.1vh;
 }
-.tooltip {
+.tooltip.map {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 0.7em;
+  font-size: 1em; //1em
   font-weight: bold;
   line-height: 1em;
+  @media screen and (max-height: 700px) {
+          font-size: 1.5em;
+        }
+}
+.tooltip.matrix {
+  fill: #ffffff;
+  font-family: sans-serif;
+  font-size: 1.1em; //1.1em
+  font-weight: bold;
+  line-height: 1em;
+  @media screen and (max-height: 700px) {
+          font-size: 2em;
+        }
 }
 #hex-map {
   height: auto;

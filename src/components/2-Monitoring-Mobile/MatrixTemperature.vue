@@ -1498,31 +1498,31 @@
       <g id="date_labels">
         <text
           class="explainer-minor-text"
-          transform="translate(420.6 1119.4)"
+          transform="translate(442.6 1119.4)"
         >Sept</text>
         <text
           class="explainer-minor-text"
-          transform="translate(523.9 1119.4)"
+          transform="translate(553.9 1119.4)"
         >Nov</text>
-        <text
+        <!-- text
           class="explainer-minor-text"
           transform="translate(610.2 1119.4)"
-        >Dec</text>
+        >Dec</text -->
         <text
           class="explainer-minor-text"
-          transform="translate(323.4 1119.4)"
+          transform="translate(341.4 1119.4)"
         >Jul</text>
         <text
           class="explainer-minor-text"
-          transform="translate(218.9 1119.4)"
+          transform="translate(238.9 1119.4)"
         >May</text>
         <text
           class="explainer-minor-text"
-          transform="translate(118.3 1119.4)"
+          transform="translate(142.3 1119.4)"
         >Mar</text>
         <text
           class="explainer-minor-text"
-          transform="translate(29 1119.4)"
+          transform="translate(41 1119.4)"
         >Jan</text>
       </g>
       <g id="date_tick_marks">
