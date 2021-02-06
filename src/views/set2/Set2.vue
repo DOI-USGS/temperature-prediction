@@ -243,41 +243,41 @@
           id="matrixChart_c2p3"
           class="mm-grid-item"
         >
-            <svg class="c2p3 matrix_c2p3 matrix">
-              <g
-                class="prebuilt_c2p3_group matrix"
-                width="650"
-                height="920"
-              >
-                <PrebuiltC2P3Matrix />
-              </g>
-              <g id="month_labels">
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(48 997)"
-                >Jan</text>
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(153 997)"
-                >Mar</text>
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(263 997)"
-                >May</text>
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(375 997)"
-                >Jul</text>
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(478 997)"
-                >Sept</text>
-                <text
-                  class="c2p3 matrixAxis"
-                  transform="translate(590 997)"
-                >Nov</text>
-              </g>
-              <g>
+          <svg class="c2p3 matrix_c2p3 matrix">
+            <g
+              class="prebuilt_c2p3_group matrix"
+              width="650"
+              height="920"
+            >
+              <PrebuiltC2P3Matrix />
+            </g>
+            <g id="month_labels">
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(48 997)"
+              >Jan</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(153 997)"
+              >Mar</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(263 997)"
+              >May</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(375 997)"
+              >Jul</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(478 997)"
+              >Sept</text>
+              <text
+                class="c2p3 matrixAxis"
+                transform="translate(590 997)"
+              >Nov</text>
+            </g>
+            <g>
               <line
                 class="c2p3 NS_arrow"
                 x1="710"
@@ -302,7 +302,7 @@
                 transform="translate(705 960)"
               >S</text>
             </g>
-            </svg>
+          </svg>
         </div>
       </div>
     </div>
