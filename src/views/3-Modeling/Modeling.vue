@@ -1633,9 +1633,9 @@
                 transform="translate(78.5 236.4)"
               >11 °C</text>
               <text
-                class="f_temp pred ital"
-                transform="translate(4 236.4)"
-              >Prediction</text>
+                class="f_minor ital"
+                transform="translate(21 236.4)"
+              >prediction</text>
             </g>
             <g
               id="ANN10_annotations"
