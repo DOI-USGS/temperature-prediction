@@ -13,6 +13,8 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
           viewBox="0 0 100 100"
         >
           <!-- bubbles by alison from the Noun Project -->
@@ -38,6 +40,8 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
           viewBox="0 0 100 100"
         >
           <!-- Aquaponics by Rhys de Dezsery from the Noun Project -->
@@ -58,6 +62,8 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
           viewBox="0 0 100 100"
         >
           <!-- Recycle by IconMark from the Noun Project -->
@@ -79,6 +85,8 @@
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
           viewBox="0 0 100 100"
         >
           <!-- cell by Yu luck from the Noun Project -->
@@ -198,7 +206,10 @@ $grayBlue: #576069; //#4F5C67
 
     #icon-1 {
         grid-area: icon-1;
-        display: flex; 
+        display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 75px;
+        }
         svg {
           fill: $mediumBlue; //$grayBlue
         }
@@ -210,7 +221,10 @@ $grayBlue: #576069; //#4F5C67
 
     #icon-2 {
         grid-area: icon-2;
-        display: flex; 
+        display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 75px;
+        }
          svg {
           fill: $plasmaPurple;
         }
