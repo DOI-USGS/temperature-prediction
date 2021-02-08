@@ -6,16 +6,19 @@
       </p>
       <router-link
         to="/"
+        @click.native="$scrollToTop"
       >
         1. Importance
       </router-link>
       <router-link
         to="/monitoring"
+        @click.native="scrollToTop"
       >
         2. Monitoring
       </router-link>
       <router-link
         to="/modeling"
+        @click.native="scrollToTop"
       >
         3. Modeling
       </router-link>
@@ -94,7 +97,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     background-color: $mediumBlue;
     border-radius: 5px;
     padding: 6px;
-    transition: background-color .2s ease;
+    // transition: background-color .2s ease;
     cursor: pointer;
   }
 

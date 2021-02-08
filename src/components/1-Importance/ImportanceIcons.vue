@@ -158,6 +158,8 @@ $grayBlue: #576069; //#4F5C67
         grid-template-columns: 30% 70%;
         // grid-template-rows: repeat(4, 1fr);
         gap: 0px 0px;
+        min-width: 0;
+        min-height: 0;
         width: 80%;
         grid-template-areas:
             "icon-1 desc-1"
@@ -195,7 +197,8 @@ $grayBlue: #576069; //#4F5C67
     }
 
     #icon-1 {
-        grid-area: icon-1; 
+        grid-area: icon-1;
+        display: flex; 
         svg {
           fill: $mediumBlue; //$grayBlue
         }
@@ -206,7 +209,8 @@ $grayBlue: #576069; //#4F5C67
     }
 
     #icon-2 {
-        grid-area: icon-2; 
+        grid-area: icon-2;
+        display: flex; 
          svg {
           fill: $plasmaPurple;
         }
@@ -217,7 +221,8 @@ $grayBlue: #576069; //#4F5C67
     }
 
     #icon-3 {
-        grid-area: icon-3; 
+        grid-area: icon-3;
+        display: flex; 
          svg {
           fill: $plasmaPink;
         
@@ -229,7 +234,8 @@ $grayBlue: #576069; //#4F5C67
     }
 
     #icon-4 {
-        grid-area: icon-4; 
+        grid-area: icon-4;
+        display: flex; 
          svg {
           fill: $plasmaYellow;
         }

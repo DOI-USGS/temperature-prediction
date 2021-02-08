@@ -5,7 +5,7 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     width="650"
-    height="930"
+    height="920"
     viewBox="0 0 700 1000"
     preserveAspectRatio="none"
   >
@@ -124,11 +124,6 @@
       d="M0,0 V1000 M17.5,0 V1000 M35,0 V1000 M52.5,0 V1000 M70,0 V1000 M87.5,0 V1000 M105,0 V1000 M122.5,0 V1000 M140,0 V1000 M157.5,0 V1000 M175,0 V1000 M192.5,0 V1000 M210,0 V1000 M227.5,0 V1000 M245,0 V1000 M262.5,0 V1000 M280,0 V1000 M297.5,0 V1000 M315,0 V1000 M332.5,0 V1000 M350,0 V1000 M367.5,0 V1000 M385,0 V1000 M402.5,0 V1000 M420,0 V1000 M437.5,0 V1000 M455,0 V1000 M472.5,0 V1000 M490,0 V1000 M507.5,0 V1000 M525,0 V1000 M542.5,0 V1000 M560,0 V1000 M577.5,0 V1000 M595,0 V1000 M612.5,0 V1000 M630,0 V1000 M647.5,0 V1000 M665,0 V1000 M682.5,0 V1000 M700,0 V1000"
       stroke="#1a1b1c"
       stroke-width="0.5"
-    />
-    <path
-      id="matrix-border"
-      d="M0,0 H700 V1000 H0 Z"
-      fill="transparent"
     />
   </svg>
 </template>

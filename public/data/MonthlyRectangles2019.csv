@@ -1,0 +1,13 @@
+month,num_days,start_date
+January,31,2019-01-01
+February,28,2019-02-01
+March,31,2019-03-01
+April,30,2019-04-01
+May,31,2019-05-01
+June,30,2019-06-01
+July,31,2019-07-01
+August,31,2019-08-01
+September,30,2019-09-01
+October,31,2019-10-01
+November,30,2019-11-01
+December,31,2019-12-01
