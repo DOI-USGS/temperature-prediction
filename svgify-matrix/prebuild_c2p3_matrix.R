@@ -1,14 +1,14 @@
-# Prebuild the matrix SVG for temp prediction viz
+# Prebuild the matrix SVG for temp prediction viz for the daily observations in 2019.
 
 # Source this file to build the SVG
-# You will need to have the local file, `matrix_annual_obs.csv` (Hayley sent to me)
+# You will need to have the local file, `matrix_daily_2019_obs.csv` (Hayley sent to me)
 
 library(readr)
 library(dplyr)
 library(xml2)
 
 build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_testing = FALSE,
-                      range_obs_days = c(1,366), range_obs_years = c(1980, 2019), n_segs = 455) {
+                      range_obs_days = c(1,365), range_obs_temp = c(0, 30), n_segs = 455) {
 
   ##### Prepare the data #####
 
@@ -18,20 +18,28 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
                      "#f59545","#fcad35","#f9c830","#f5e12a","#f0f821")
 
   stream_data <- read_csv(obs_fn) %>%
-    # Don't build paths for any of the 0 category data
+    # Don't build paths for any of the segment days with 0 observations
     filter(obs_count > 0) %>%
-    # Group obs counts into color categories to make paths (include 1 in the first group & 366 in the last)
+    # Group temperatures into color categories to make paths (include 0 in the first group & 30 in the last)
     mutate(color_cat = as.character(cut(
-      obs_count,
-      breaks = seq(range_obs_days[1], range_obs_days[2], length.out = length(color_palette)+1),
+      temp_c,
+      breaks = seq(range_obs_temp[1], range_obs_temp[2], length.out = length(color_palette)+1),
       labels = color_palette, include.lowest = TRUE))) %>%
-    mutate(year_i = year - range_obs_years[1])
+    mutate(day_i = as.numeric(format(date, "%j")))
 
   # Define some basic configs using the data and SVG size
-  max_x <- diff(range_obs_years)
+  max_x <- diff(range_obs_days)
   max_y <- n_segs
-  rect_width <- round(width/(max_x+1),1)
+  rect_width <- round(width/(max_x),1)
   rect_height <- round(height/(max_y+1),4) # `y` precision needs to be higher or there are weird offsets with the horizontal grid
+
+  monthly_cfg <- stream_data %>%
+    mutate(month_i = as.numeric(format(date, "%m")),
+           month_nm = format(date, "%B")) %>%
+    group_by(month_i) %>%
+    summarize(month_start = min(day_i),
+              month_end = max(day_i),
+              month_nm = unique(month_nm))
 
   ##### Setup the SVG #####
 
@@ -49,16 +57,14 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
   g_color_blocks <- xml_add_child(svg_root, "g", id = 'matrix-colored-boxes')
 
   for(col in color_palette) {
-
     data_col <- stream_data %>%
       filter(color_cat == col) %>%
-      arrange(year_i, rank)
+      arrange(day_i, rank)
 
-    add_path_per_color(g_color_blocks, col, data_col$year_i, data_col$rank, rect_width, rect_height, height)
+    add_path_per_color(g_color_blocks, col, data_col$day_i, data_col$rank, rect_width, rect_height, height)
   }
 
-  # Add grid of black lines
-  add_grids(svg_root, width, height, rect_width, rect_height)
+  add_rectangles_for_mouseover(svg_root, monthly_cfg, height, rect_width)
 
   ##### Write out final SVG to file #####
 
@@ -79,32 +85,32 @@ init_svg <- function(width, height) {
 add_path_per_color <- function(svg, color, x, y, rh, rv, full_height) {
 
   # Build path string
-  hv_path_str <- paste(sprintf("M%s,%s h%s v%s h%s Z", x*rh, -(y-0)*rv, rh, -rv, -rh), collapse = " ") # v=vertical, h=horizontal
+  hv_path_str <- paste(sprintf("M%s,%s h%s v%s h%s", (x-1)*rh, -(y-0)*rv, rh, -rv, -rh), collapse = " ") # start at 0
   d <- sprintf('M%s,%s %sZ', 0, 0, hv_path_str)
 
-  xml_add_child(svg, "path", d = d, id = sprintf('matrix-%s-path', color), fill = color,
+  xml_add_child(svg, "path", d = d, id = sprintf('matrix-%s-path', color), fill = color, stroke = "none",
                 # Draw from bottom left corner up
                 transform = sprintf("translate(0,%s)", full_height))
 }
 
-add_grids <- function(svg, full_width, full_height, rh, rv) {
+add_rectangles_for_mouseover <- function(svg, monthly_cfg, full_height, rh) {
 
-  horiz_lines <- seq(0, full_height, by = rv)
-  vert_lines <- seq(0, full_width, by = rh)
-
-  # Build path string
-  horiz_d <- paste(sprintf('M0,%s H%s', horiz_lines, full_width), collapse = " ")
-  vert_d <- paste(sprintf('M%s,0 V%s', vert_lines, full_height), collapse = " ")
-
-  xml_add_child(svg, "path", d = horiz_d, id = 'matrix-grid-horizontal', stroke = "#1a1b1c", `stroke-width` = 0.5)
-  xml_add_child(svg, "path", d = vert_d, id = 'matrix-grid-vertical', stroke = "#1a1b1c", `stroke-width` = 0.5)
+  for(m in monthly_cfg$month_i) {
+    m_nm <- monthly_cfg$month_nm[m]
+    m_start <- monthly_cfg$month_start[m] - 1 # Start at 0
+    m_width <- monthly_cfg$month_end[m] - m_start
+    xml_add_child(svg, "rect", x = m_start*rh, width = m_width*rh,
+                  y = 0, height = full_height,
+                  class = sprintf("c2p3.matrixTemporalRect.time%s", m_nm),
+                  data = m_nm)
+  }
 
 }
 
 ##### Actually use the fxns to create the SVG #####
 
 # This line builds a local test version
-# build_svg("svgify-matrix/test.svg", "svgify-matrix/matrix_annual_obs.csv", 800, 1500, local_testing = TRUE)
+# build_svg("svgify-matrix/test2.svg", "svgify-matrix/matrix_daily_2019_obs.csv", 700, 1000, local_testing = TRUE)
 
 # This line builds a version ready to inject into the full viz
-build_svg("svgify-matrix/prebuilt_c2p2_matrix.svg", "svgify-matrix/matrix_annual_obs.csv", 700, 1000, local_testing = FALSE)
+build_svg("svgify-matrix/prebuilt_c2p3_matrix.svg", "svgify-matrix/matrix_daily_2019_obs.csv", 700, 1000, local_testing = FALSE)
