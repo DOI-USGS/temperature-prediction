@@ -5,14 +5,14 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
-/*     scrollBehavior() {
+    scrollBehavior() {
         document.getElementById('app').scrollIntoView();
     },
     methods: {
         scrollToTop() {
             window.scrollTo(0,0);
         }
-    }, */
+    },
     routes: [
         {
             path: '/',
