@@ -2823,7 +2823,7 @@
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
-          this.step_rmse = this.step_error_obs + 2; /// data points to single RMSE
+          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
           this.step_ann = this.step_rmse + 3; /// show RMSE for ANN d100 experiment
           this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
           this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
@@ -2832,10 +2832,10 @@
           this.step_end = this.step_rgcn_ptrn +2;
 
         // colors for chart
-          this.color_d100 = '#FAB62F';
-          this.color_d001 = "#62039A";
-          this.color_obs = "#B666C6";  // #FDAD32 is the current yellow in flubber
-          this.color_exp = "#B666C6";
+          this.color_d100 = '#BE3D7D';
+          this.color_d001 = "#FAB62F";
+          this.color_obs = "#FAB62F";  //
+          this.color_exp = "#5191bd"; //blue is predicted, yellow is observed
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -2871,16 +2871,12 @@
             this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart - default is an error chart to start
-  /*           this.chartState.dataset = this.error_data;
-            this.chartState.grouped = this.color_bees.error;
-            this.chartState.var_x = this.chart_x.error;
-            this.chartState.var_y = this.chart_y.error;
             this.chartState.strengthr = 1;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             this.chartState.radius = 0;
             this.chartState.alpha = 1;
-            this.chartState.aDecay = 0.1; */
+            this.chartState.aDecay = 0.1;
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -3211,7 +3207,7 @@
               this.chartState.var_x = this.chart_x.ANN;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
-              this.chartState.domain_y = null;
+              this.chartState.domain_y = 30;
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
@@ -3227,7 +3223,7 @@
               this.chartState.var_x = this.chart_x.ANN;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
-              this.chartState.domain_y = null;
+              this.chartState.domain_y = 30;
               this.model_current = ': ANN';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
@@ -3241,7 +3237,7 @@
               this.chartState.var_x = this.chart_x.RNN;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
-              this.chartState.domain_y = null;
+              this.chartState.domain_y = 30;
               this.model_current = ': ANN + time';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
@@ -3255,7 +3251,7 @@
               this.chartState.var_x = this.chart_x.RGCN;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
-              this.chartState.domain_y = null;
+              this.chartState.domain_y = 30;
               this.model_current = ': ANN + time + space';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
@@ -3270,7 +3266,7 @@
               this.chartState.var_x = this.chart_x.RGCN_ptrn;
               this.chartState.var_y = this.chart_y.mid;
               this.chartState.domain_x = 8;
-              this.chartState.domain_y = null;
+              this.chartState.domain_y = 30;
               this.model_current = ': ANN + time + space + physics';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
@@ -3323,7 +3319,7 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]);
+            .range([this.color_d100, this.color_d001, this.color_obs, this.color_exp]); //"#292b30"
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
@@ -3367,7 +3363,7 @@
           .attr("refY", 5)
           .attr("markerWidth", 16)
           .attr("markerHeight", 16)
-          .attr("orient", "auto")
+          .attr("orient", "auto-start-reverse")
           .append("path")
           .attr("d", "M 0 0 L 10 5 L 0 10 z")
           .style("fill", "#91989e");
@@ -3383,6 +3379,7 @@
             .attr("stroke", "#91989e")// not the right grey color.........................
             .attr("stroke-dasharray", "5px")
             .attr("marker-end", "url(#triangle)")
+            .attr("marker-start", "url(#triangle)")
             .classed("arrow", true)
             .style("opacity", this.o_rmse_title);
 
@@ -3460,7 +3457,7 @@
 
                   var error_fill = this.d3.scaleOrdinal()
                   .domain(["Predicted","Observed"])
-                  .range([this.color_exp,"#292b30"]);
+                  .range([this.color_exp, this.color_obs]);
 
               legend_error.append("text")
                 .text("Temperature")
@@ -3604,12 +3601,14 @@
             .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
           // tick to make sure dots are poistioned on first draw
-           self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           .velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick)
+          if (this.step >= this.step) {
+            self.simulation
+            .alpha(1)
+            .alphaDecay(0.1)
+            .velocityDecay(0.6)
+            .restart()
+              .on("tick", self.tick)
+          }
 
           };
 
@@ -4308,9 +4307,6 @@ figure.sticky.charts {
     fill: #91989e; //$grayBlue
     color: #91989e; //$grayBlue
     stroke: #91989e; //$grayBlue
-  }
-   #bees-legend {
-
   }
 
   #legend-container {
