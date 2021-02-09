@@ -2902,6 +2902,7 @@
             // Hide all flubber elements (visuals and annotations)
             self.d3.selectAll(".flubber")
               .style("opacity", 0)
+              .attr("opacity", 0)
               // .style("visibility", "hidden");
             
             // // determine initial model id and initial annotation id
@@ -3975,12 +3976,14 @@
             // display flubber visual associated with initial model id
             self.d3.selectAll("#" + initial_model_id)
               .style("opacity", 1)
+              .attr("opacity", 1)
 
             // display flubber annotation associated with initial model id
             self.d3.selectAll("#" + initial_annotation_id)
               .transition()
               .duration(900)
               .style("opacity", 1)
+              .attr("opacity", 1)
             // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
         //  // drop sticky header
