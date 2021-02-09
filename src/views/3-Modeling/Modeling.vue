@@ -2812,7 +2812,7 @@
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
           // document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
-          console.log(this.flubber_dict)
+          // console.log(this.flubber_dict)
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
