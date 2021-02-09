@@ -2676,8 +2676,10 @@
               <!-- p class="step-text">
                 {{ model.method }}
               </p -->
-              <p class="step-text" v-html=model.method>
-              </p>
+              <p
+                class="step-text"
+                v-html="model.method"
+              />
             </div>
           </div>
         </div>
