@@ -15120,7 +15120,7 @@
         class="hex"
       />
       <path
-        fill="#1a1b1c"
+        fill="#292b30"
         class="hex"
         d="M277.2 19.9l3.6 6.1h7.1l3.6-6.1-3.6-6.1h-7.1z"
       />
@@ -15186,14 +15186,14 @@
         Total temperature observations
       </text>
       <text
-        transform="translate(275 20)"
+        transform="translate(265 21.5)"
         style="isolation:isolate"
         class="hex_label"
       >
         0
       </text>
       <text
-        transform="translate(487 20)"
+        transform="translate(486 21.5)"
         style="isolation:isolate"
         class="hex_label"
       >

@@ -185,8 +185,6 @@ $grayBlue: #576069; //#4F5C67
 
     .icon-item{
         text-align: center;
-        width: 70%;
-        height: 70%;
         margin: auto;
         @media screen and (max-width: 600px) {
           display: flex;
