@@ -4227,7 +4227,7 @@ article {
   position: relative;
   width: 90%;
   margin: 2rem auto 4rem auto;
-  z-index: 0;
+  z-index: 1;
   height: 100vh;
   border: 1px;
 
