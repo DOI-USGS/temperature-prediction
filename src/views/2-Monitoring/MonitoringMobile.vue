@@ -12,7 +12,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Temperature Monitoring <span class="yellow">Sites</span> in the Delaware River Basin
+            Temperature monitoring <span class="yellow">sites</span> in the Delaware River Basin
           </p>
           <p class="viz-subtitle" />
         </div>
@@ -26,10 +26,10 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Number of Temperature Measurements</span> by Year
+            Number of <span class="yellow">daily temperature measurements</span> by year
           </p>
           <p class="viz-subtitle">
-            Data from USGS streamgages or other state/local agencies.
+            Number of unique site-days measured by USGS streamgages or other state/local agencies.
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">40 Years</span> of Temperature Data
+            <span class="yellow">40 years</span> of temperature data
           </p>
           <p class="viz-subtitle">
             Every reach with data in each of the last 40 years.
@@ -71,10 +71,10 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of Temperature Data
+            <span class="yellow">Availability</span> of temperature data
           </p>
           <p class="viz-subtitle">
-            Visualizing the count of temperature measurements of all stream reaches in the basin.
+            Visualizing the count of temperature measurements in stream reaches across the basin.
           </p>
         </div>
       </div>
@@ -97,7 +97,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Daily Temperature</span> of River Reaches in 2019
+            <span class="yellow">Daily temperature</span> of river reaches in 2019
           </p>
           <p class="viz-subtitle">
             Each line = one reach.
@@ -116,7 +116,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Variability</span> of Temperature Data in 2019
+            <span class="yellow">Variability</span> of water temperature in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
@@ -138,7 +138,7 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Most Observed</span> Areas in Continental United States
+            <span class="yellow">Monitoring</span> throughout the continental United States
           </p>
           <p class="viz-subtitle">
             USGS, state, or local agency stream temperature observations since 1985.

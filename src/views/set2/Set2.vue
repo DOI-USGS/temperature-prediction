@@ -34,10 +34,10 @@
         <div class="text-content move-up">
           <div class="viz-title-wrapper">
             <p class="viz-title">
-              <span class="yellow">Number of temperature measurements</span> by year
+              Number of <span class="yellow">daily temperature measurements</span> by year
             </p>
             <p class="viz-subtitle">
-              Data from USGS streamgages or other state/local agencies.
+              Number of unique site-days measured by USGS streamgages or other state/local agencies.
             </p>
           </div>
         </div>
@@ -68,10 +68,10 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Variability in <span class="yellow">data availability</span> of stream temperature
+            Variation in the <span class="yellow">availability</span> of stream temperature data
           </p>
           <p class="viz-subtitle">
-            Visualizing the count of temperature measurements of all stream reaches in the basin.
+            Visualizing the count of temperature measurements in stream reaches across the basin.
           </p>
           <p class="viz-subtitle">
             Hover over a stream reach on the map to see the amount of data available for that reach over time.
@@ -318,7 +318,7 @@
       <div class="text-content">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Most observed</span> areas in continental United States
+            <span class="yellow">Monitoring</span> throughout the continental United States
           </p>
           <p class="viz-subtitle">
             USGS, state, or local agency stream temperature observations since 1985.
@@ -331,7 +331,10 @@
       >
         <DesktopHexMap />
       </div>
-    </div>     
+    </div>  
+    <div class="text-content">
+      <p v-html="text.paragraph16" />
+    </div>   
     <div class="container-fluid">
       <div
         id="filter_row"

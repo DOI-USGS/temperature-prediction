@@ -17,8 +17,8 @@
           id="modeling-intro"
           class="text-content"
         >
-          <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "process-guided deep learning".</p>
-          <p>Process-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
+          <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
+          <p>Knowledge-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
           <div 
             v-if="!mobileView"
             id="arrows"
@@ -2673,8 +2673,10 @@
               :key="model" 
               class="step"
             >
-              <p class="step-text">
+              <!-- p class="step-text">
                 {{ model.method }}
+              </p -->
+              <p class="step-text" v-html=model.method>
               </p>
             </div>
           </div>
@@ -3115,6 +3117,9 @@
             case this.step_rgcn_ptrn+1:
             case this.step_rgcn_ptrn+2:
             case this.step_rgcn_ptrn+3:
+            case this.step_rgcn_ptrn+4:
+            case this.step_rgcn_ptrn+5:
+            case this.step_rgcn_ptrn+6:
               this.label_o = 0;
               this.label_o_rmse = 0;
               this.o_pred = 0;
@@ -3262,6 +3267,9 @@
             case this.step_rgcn_ptrn+1:
             case this.step_rgcn_ptrn+2:
             case this.step_rgcn_ptrn+3:
+            case this.step_rgcn_ptrn+4:
+            case this.step_rgcn_ptrn+5:
+            case this.step_rgcn_ptrn+6:
               this.chartState.dataset = this.rmse_exp;
               this.chartState.grouped = this.color_bees.exp;
               this.chartState.var_x = this.chart_x.RGCN_ptrn;
