@@ -10,9 +10,9 @@
     </desc>
     <div class="overall-title">
       <div class="text-content">
-        <h1>
+        <h3>
           Predicting Stream Temperature<br>in the<br>Delaware River Basin
-        </h1>
+        </h3>
         <p class="byline">
           U.S. Geological Survey
         </p>
@@ -35,7 +35,7 @@
 .overall-title {
   background-image: url("../assets/c2p2_matrix_FOR_TITLE_40_stretched.png");
   background-color: #292b30; //#1a1a1f #202226
-  background-size: cover;
+  background-size: 100% 100%; //cover;
   background-position: center;
 }
 </style>

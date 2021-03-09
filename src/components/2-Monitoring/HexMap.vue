@@ -15209,4 +15209,41 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+// IMPORT COLORS
+$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
+$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$offWhite: #F1F1F1;
+$plasmaYellow: #FAB62F;
+$plasmaPink: #BE3D7D;
+$plasmaPurple: #62039A;
+$plasmaBlue: #142167;
+$darkBlue: #0F2237;
+$footerBlue: #00264C;
+$mediumBlue: #5191bd; //#63B1E6 #579ecf
+$lightBlue: #95b5cb;
+$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
+
+#hex-map {
+  height: auto;
+  max-height: 80vh;
+  padding-left: 0em;
+  padding-right: 0em;
+  padding-top: 0em;
+  padding-bottom: 1em;
+}
+.hex {
+  fill-rule: evenodd;
+  stroke: $boxCharcoal; //#141414
+  stroke-miterlimit: 10;
+  stroke-width: 0.1;
+}
+.hex_title {
+  fill: $offWhite;
+  font-size: 0.8em;
+  font-weight: 550;
+}
+.hex_label {
+  fill: $offWhite;
+  font-size: 0.7em;
+}
 </style>

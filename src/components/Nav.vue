@@ -1,26 +1,26 @@
 <template>
   <nav id="nav">
     <div>
-      <p class="chapter">
+      <!-- p class="chapter">
         Go to Chapter
-      </p>
-      <router-link
+      </p -->
+      <!-- router-link
         to="/"
         @click.native="$scrollToTop"
       >
         1. Importance
-      </router-link>
+      </router-link -->
       <router-link
         to="/monitoring"
         @click.native="scrollToTop"
       >
-        2. Monitoring
+        Monitoring
       </router-link>
       <router-link
         to="/modeling"
         @click.native="scrollToTop"
       >
-        3. Modeling
+        Modeling
       </router-link>
     </div>
     <div>
@@ -65,7 +65,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
 
     #nav {
       text-align: center;
-      padding: 40px 0 40px 0;   
+      padding: 40px 0 40px 0;
     }
     @media (max-width: 600px) {
       #nav a {

@@ -15,18 +15,6 @@ export default new Router({
     },
     routes: [
         {
-            path: '/',
-            name: 'nonImportance',
-            component: () =>
-                    import('@/views/1-Importance/Importance.vue/')
-        },
-        {
-            path: '/importance',
-            name: 'Importance',
-            component: () =>
-                    import('@/views/1-Importance/Importance.vue')
-        },
-        {
             path: '/monitoring',
             name: 'Monitoring',
             component: () =>
@@ -46,7 +34,7 @@ export default new Router({
         },
         {
             path: '*',
-            redirect: { name: 'nonImportance' }
+            redirect: { name: 'Monitoring' }
         }
     ]
 });

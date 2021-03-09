@@ -5,8 +5,8 @@
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
     <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
-    <Title />
     <Nav />
+    <Title />
     <router-view
       v-if="!isInternetExplorer"
     />

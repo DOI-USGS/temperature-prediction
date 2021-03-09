@@ -1,46 +1,51 @@
 <template>
   <div id="modeling">
     <figure
-      class="sticky intro"
+      class="intro"
     >
       <div
         id="intro-container"
         class="text-intro"
       >
         <div class="text-content page-title section-title-wrapper">
-          <p class="chapter">
+          <!-- p class="chapter">
             Chapter 3
-          </p>
+          </p -->
           <h2>Modeling Stream Temperature</h2>
         </div>
         <div
-          id="modeling-intro"
+          class="text-content"
+        >
+          <p>
+            Data sparsity and variability in stream temperature across the network limit our ability to answer questions like: How far downstream will a cold water release affect temperature?  How has fish habitat changed through time?  Will we have enough cold water in the reservoir in 50 years?
+          </p>
+          <p>
+            How can we create models that are robust to a diversity of temperature dynamics, in places and times where we don't have a lot of information?
+          </p>
+        </div>
+        <div class="box-matrix">
+          <div class="text-content">
+            <div class="viz-title-wrapper">
+              <p class="viz-title">
+                <span class="yellow">Monitoring</span> throughout the continental United States
+              </p>
+              <p class="viz-subtitle">
+                USGS, state, or local agency stream temperature observations since 1985.
+              </p>
+            </div>
+          </div>
+          <div
+            id="map-container"
+            class="figure-content"
+          >
+            <DesktopHexMap />
+          </div>
+        </div>
+        <div
           class="text-content"
         >
           <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
           <p>Knowledge-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
-          <div 
-            v-if="!mobileView"
-            id="arrows"
-          >            
-            <svg id="more-arrows">
-              <polygon
-                class="arrow-top"
-                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
-              />
-              <polygon
-                class="arrow-middle"
-                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
-              />
-              <polygon
-                class="arrow-bottom"
-                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
-              />
-            </svg>
-            <p id="scroll-cue">
-              Scroll
-            </p>
-          </div>
         </div>
       </div>
     </figure>
@@ -2661,7 +2666,7 @@
           <div
             class="scroll-sticky"
           >
-            <h3 class="viz-title">
+            <h3 class="viz-title-scrolly">
               {{ model_group }}
             </h3>
           </div>
@@ -2673,9 +2678,6 @@
               :key="model" 
               class="step"
             >
-              <!-- p class="step-text">
-                {{ model.method }}
-              </p -->
               <p
                 class="step-text"
                 v-html="model.method"
@@ -2696,10 +2698,12 @@
     import * as flubber from "flubber";
     import { isMobile } from 'mobile-device-detect';
     import modelingText from "./../../assets/text/modelingText";
+    import DesktopHexMap from "./../../components/2-Monitoring/HexMap";
 
   export default {
     name: 'Modeling',
     components: {
+      DesktopHexMap,
     },
     data() {
           return {
@@ -2793,7 +2797,7 @@
           this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
-                  debug: false, // draw trigger line on page
+                  debug: true, // draw trigger line on page
                   offset: 0.95, //bottom of the page to trigger onStepEnter events
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
@@ -2816,11 +2820,6 @@
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
-
-          // // set header based on refresh scroll
-          //  if (this.step <= 0){
-          //    this.d3.select("figure.intro").classed("sticky", true); 
-          // }
 
           /////////// stage chart step sequence
           // this.start_bees is the step where the error plot appears
@@ -3996,10 +3995,6 @@
               .attr("opacity", 1)
             // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
-        //  // drop sticky header
-        //   if (this.step >= 0 && response.direction == "down"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
 
         // updates to go with downscroll
           if (response.direction == "down"){
@@ -4042,11 +4037,6 @@
           const self = this;
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
-
-        // // make intro header sticky again if scrolling back
-        //   if (this.step <= 2 && response.direction == "up"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
 
 
         // updates to go with upscroll
@@ -4142,9 +4132,6 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
 // Intro
-#modeling-intro {
-  margin-bottom: 200px;
-}
 #arrows {
   margin: 100px auto;
 
@@ -4219,7 +4206,7 @@ article {
   width:100vw;
 }
 
-.viz-title  {
+.viz-title-scrolly  {
   margin-top: 70vh;
 }
 
@@ -4259,9 +4246,7 @@ article {
 }
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
-figure.sticky.intro {
-  // position: -webkit-sticky;
-  // position: sticky;
+figure.intro {
   top: 0;
   height: 10vh;
   width: 100vw;
