@@ -1,7 +1,7 @@
 <template>
   <div id="modeling">
     <figure
-      class="intro"
+      class="sticky intro"
     >
       <div
         id="intro-container"
@@ -2678,6 +2678,9 @@
               :key="model" 
               class="step"
             >
+              <!-- p class="step-text">
+                {{ model.method }}
+              </p -->
               <p
                 class="step-text"
                 v-html="model.method"
@@ -2820,6 +2823,11 @@
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
+
+          // // set header based on refresh scroll
+          //  if (this.step <= 0){
+          //    this.d3.select("figure.intro").classed("sticky", true); 
+          // }
 
           /////////// stage chart step sequence
           // this.start_bees is the step where the error plot appears
@@ -3995,6 +4003,10 @@
               .attr("opacity", 1)
             // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
+        //  // drop sticky header
+        //   if (this.step >= 0 && response.direction == "down"){
+        //      this.d3.select("figure.intro").classed("sticky", false); 
+        //   }
 
         // updates to go with downscroll
           if (response.direction == "down"){
@@ -4037,6 +4049,11 @@
           const self = this;
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
+
+        // // make intro header sticky again if scrolling back
+        //   if (this.step <= 2 && response.direction == "up"){
+        //      this.d3.select("figure.intro").classed("sticky", false); 
+        //   }
 
 
         // updates to go with upscroll
@@ -4246,7 +4263,9 @@ article {
 }
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
-figure.intro {
+figure.sticky.intro {
+  // position: -webkit-sticky;
+  // position: sticky;
   top: 0;
   height: 10vh;
   width: 100vw;
