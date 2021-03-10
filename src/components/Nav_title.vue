@@ -10,14 +10,25 @@
       >
         1. Importance
       </router-link -->
-      <p><router-link
-        to="/monitoring"
-        @click.native="scrollToTop"
-      >Monitor</router-link> <router-link
-        to="/modeling"
-        @click.native="scrollToTop"
-      >Model
-      </router-link></p>
+      <div class="overall-title">
+        <div class="text-content">
+          <h3 class="nav-title">How we<router-link
+            to="/monitoring"
+            @click.native="scrollToTop"
+          >Monitor</router-link><span class="dim_text">|</span><router-link
+            to="/modeling"
+            @click.native="scrollToTop"
+          >Model</router-link><br>Stream Temperature in the<br>
+          Delaware River Basin</h3>
+          <br>
+          <!--p class="byline">
+            U.S. Geological Survey
+          <br>
+            Water Mission Area's Vizlab
+          </p -->
+        </div>
+      </div>
+
     </div>
     <div>
       <!-- <p class="nav-title">
@@ -29,7 +40,7 @@
 
 <script>
     export default {
-        name: 'Nav',
+        name: 'NavTitle',
         data() {
           return {
             currentLinks: null,
@@ -81,6 +92,15 @@ $monotoneBlue4: #4c656e;
 $monotoneBlue5: #10313e;
 $monotoneBlueTransparent: rgba(76,101,110, .2);
 
+.overall-title {
+  background-image: url("../assets/river_draft_charcoal.png"); //url("../assets/c2p2_matrix_FOR_TITLE_40_stretched.png");
+  background-color: #292b30; //#1a1a1f #202226
+  background-size: 100% 100%; //cover;
+  background-position: center;
+}
+.dim_text {
+    color: #9c9c9c;
+}
 
   // .current-link {
   //   color: $plasmaYellow;
@@ -91,8 +111,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
   }
 
   #nav {
-    text-align: center;
-    padding: 40px 0 40px 0;
+    text-align: left;
+    padding: 0px 0 10px 0;
   }
   @media (max-width: 600px) {
     #nav a {
@@ -105,7 +125,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     color: $offWhite;
     font-family: 'Georgia', Helvetica, Arial, sans-serif;
     line-height: 1.4;
-    // text-align: center;
+    // text-align: left;
     // font-size: .8em;
     // font-style: italic;
     // margin-top: 10px;
@@ -136,6 +156,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     font-weight: 100;
     color: $backgroundCharcoal;
     background-color: $plasmaYellow;
+    box-shadow: None;
     border-radius: 5px;
     padding: 5px;
     // transition: background-color .2s ease;

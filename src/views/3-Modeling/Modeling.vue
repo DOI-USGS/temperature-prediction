@@ -7,12 +7,12 @@
         id="intro-container"
         class="text-intro"
       >
-        <div class="text-content page-title section-title-wrapper">
-          <!-- p class="chapter">
+        <!-- div class="text-content page-title section-title-wrapper">
+          <p class="chapter">
             Chapter 3
-          </p -->
+          </p>
           <h2>Modeling Stream Temperature</h2>
-        </div>
+        </div -->
         <div
           class="text-content"
         >
