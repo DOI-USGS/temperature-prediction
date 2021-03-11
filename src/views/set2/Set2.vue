@@ -714,8 +714,8 @@
           // // graduated scale
           // set width classes
           let widthClasses = [
-            0.6,
-            0.9,
+            0.8,
+            1,
             1.2,
             1.4,
             1.7,
@@ -1094,16 +1094,16 @@
 
           // // append background rectangle for matrix
           svgMatrix.append("rect")
-                  .attr("class", "c2p2 matrixBkgdRect")
-                  .attr("width", self.matrix_width_c2)
-                  .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#1a1b1c")
-                  .attr("stroke", "#1a1b1c")
-                  .attr("stroke-width", 1)
-                  .attr("filter", "url(#shadow2)")
-                  .attr("transform",
-                      "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-                  .lower()
+              .attr("class", "c2p2 matrixBkgdRect")
+              .attr("width", self.matrix_width_c2)
+              .attr("height", self.matrix_height_c2)
+              .attr("fill", "#1a1b1c")
+              .attr("stroke", "#1a1b1c")
+              .attr("stroke-width", 1)
+              .attr("filter", "url(#shadow2)")
+              .attr("transform",
+                  "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
+              .lower()
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
@@ -1238,33 +1238,6 @@
               .domain(self.myVars_c2p2)
               .padding(0.075);
 
-          // //  build spatial rectangles
-          // append to transformed matrix
-          let SpatialRectangles = transformedMatrix.selectAll('.c2p2.matrixSpatialRect')
-              // bind data to each element
-              .data(self.segments)
-              // create element for each datum
-              .enter()
-              // append rectangle for each element
-              .append("rect")
-              // set x value based on minimum year (1980)
-              .attr("x", xscale("1980"))
-              // set y value based on segment id
-              .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
-              // set width to width of matrix
-              .attr("width", self.matrix_width_c2)
-              // set height based on yscale bandwidth
-              .attr("height", yscale.bandwidth())
-              // set class based on segment id
-              .attr("class", function(d) {
-                return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
-              })
-              // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
-              .style("stroke", "#1a1b1c")
-              .style("opacity", 0)
-
           // // build temporal rectangles
           // append to transformed matrix
           let TemporalRectangles = transformedMatrix.selectAll('.c2p2.matrixTemporalRect')
@@ -1287,6 +1260,33 @@
               // set class based on year
               .attr("class", function(d) {
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
+              })
+              // style rectangles to be transparent but available for selection
+              .style("fill", "#1a1b1c")
+              .style("stroke-width", 2)
+              .style("stroke", "#1a1b1c")
+              .style("opacity", 0)
+
+          // //  build spatial rectangles
+          // append to transformed matrix
+          let SpatialRectangles = transformedMatrix.selectAll('.c2p2.matrixSpatialRect')
+              // bind data to each element
+              .data(self.segments)
+              // create element for each datum
+              .enter()
+              // append rectangle for each element
+              .append("rect")
+              // set x value based on minimum year (1980)
+              .attr("x", xscale("1980"))
+              // set y value based on segment id
+              .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
+              // set width to width of matrix
+              .attr("width", self.matrix_width_c2)
+              // set height based on yscale bandwidth
+              .attr("height", yscale.bandwidth())
+              // set class based on segment id
+              .attr("class", function(d) {
+                return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
@@ -1727,7 +1727,7 @@
               .domain(self.myVars_c2p2)
               .padding(0.075);
 
-          //re-build x scale fore matrix
+          //re-build x scale for matrix
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
@@ -1739,12 +1739,17 @@
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("opacity", 0.65)
-          // select all *temporal* rectangles and repurpose for bar chart
+          // select all *temporal* rectangles and repurpose for bar charts
+          // if segment has any data in 40 years
           if (self.segmentDict[segment_id].total_count > 0) {
+              // raise all temporal rectnages
+              this.d3.selectAll(".c2p2.matrixTemporalRect")
+                  .raise();
+              // for all years...
               for (let i = 0; i < self.myGroups_c2p2.length; i++) {
                   let seg_year = self.myGroups_c2p2[i]
                   let barHeight;
-                  // for all segment-years with observations...
+                  // if there are observations for the selected segment in that year...
                   if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
                     // convert the temporal rectangles into a bar chart of data availability over time
                     self.d3.selectAll(".c2p2.matrixTemporalRect.time" + seg_year)
@@ -1788,12 +1793,7 @@
                     //     .raise()
                   }
               }
-          }
-          // select background rectangle and change filter
-          self.d3.selectAll(".c2p2.matrixBkgdRect")
-              .attr("filter", "url(#shadow3)")
-          // select the spatial rectangle corresponding to the highlighted segment
-          if (self.segmentDict[segment_id].total_count == 0) {
+          } else if (self.segmentDict[segment_id].total_count == 0) {
               // select the spatial rectangle corresponding to the highlighted segment
               self.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
                   // set stroke width, opacity, and stroke color
@@ -1806,6 +1806,9 @@
                   // raise the spatial rectangle
                   .raise();
           }
+          // select background rectangle and change filter
+          self.d3.selectAll(".c2p2.matrixBkgdRect")
+              .attr("filter", "url(#shadow3)")
           // select mouseovered segment and set to white
           // and raise segment
           self.d3.selectAll(".c2p2.river_segments.seg" + segment_id)
@@ -1837,7 +1840,7 @@
           // select all *temporal* rectangles
           // set y position and height back to defaults
           // and set fill and stroke back
-          // to black and raise so that they are selectable
+          // to black and lower (so spatial are on top)
           this.d3.selectAll(".c2p2.matrixTemporalRect")
               // set y value to 0
               .attr("y", 0)
@@ -1848,7 +1851,6 @@
               .style("stroke-width", 2)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
-              .raise()
           // // turn off text for cells associated with segment
           // this.d3.selectAll(".c2p2.cellText") 
           //     .attr("y", 0)
@@ -1871,42 +1873,123 @@
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           const self = this;
 
-          // identify selected year
-          let selected_year = data[self.timestep_c2p2];
-          // bind mouse coordinates and year to tooltip
-          tooltip
-              .attr("y", mouse_y - 15)
-              .attr("x", mouse_x - 39)
-              .attr("text-align", "left")
-              .text(selected_year)
-              .raise()
+          // find # of observations for selected reach
+          let segment_id = data.properties.seg_id_nat
+          let num_obs = self.segmentDict[segment_id].total_count
+
+          // // bind mouse coordinates and # of obs to tooltip
+          // tooltip
+          //     .attr("y", mouse_y - 15)
+          //     .attr("x", mouse_x - 39)
+          //     .attr("text-align", "left")
+          //     .text(self.d3.format(',')(num_obs) + " obs.")
+          //     .raise()
         },
         mouseoverRect_c2p2(data, tooltip) {
           const self = this;
 
-          // select all the *spatial* rectangles and make them unselectable
-          // by setting fill to none and stroke to none
-          this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("fill", "None")
-              .style("stroke", "None")
+          let segment_id = data.properties.seg_id_nat
 
-          // show tooltip
-          tooltip
-              .style("opacity", 1);
+          // build y scale for hover bar chart
+          let barMax = self.matrix_height_c2/16
+          let yScale_barChart_c2p2 = self.d3.scaleLinear()
+              // set range of possible output values 
+              .range([barMax, 0])
+              // define range of input values
+              .domain([1, self.temporalCountMax_c2p2]);
+          
+          // re-build y scale for matrix
+          let yScale_matrix_c2p2 = self.d3.scaleBand()
+              .range([self.matrix_height_c2, 0])
+              .domain(self.myVars_c2p2)
+              .padding(0.075);
+
+          //re-build x scale fore matrix
+          let xScale_matrix_c2p2 = self.d3.scaleBand()
+              .range([0, self.matrix_width_c2])
+              .domain(self.myGroups_c2p2)
+              .padding(0.1);
+
+          // // show tooltip
+          // tooltip
+          //     .style("opacity", 1);
+          // select all spatial rectangles and make mostly opaque
+          // to dim matrix
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("opacity", 0.65);
+          // select all *temporal* rectangles and repurpose for bar charts
+          // if segment has any data in 40 years
+          if (self.segmentDict[segment_id].total_count > 0) {
+              // raise all temporal rectnages
+              this.d3.selectAll(".c2p2.matrixTemporalRect")
+                  .raise();
+              // for all years...
+              for (let i = 0; i < self.myGroups_c2p2.length; i++) {
+                  let seg_year = self.myGroups_c2p2[i]
+                  let barHeight;
+                  // if there are observations for the selected segment in that year...
+                  if (self.segmentDict[segment_id].year_count[seg_year] > 0) {
+                    // convert the temporal rectangles into a bar chart of data availability over time
+                    self.d3.selectAll(".c2p2.matrixTemporalRect.time" + seg_year)
+                        .attr("height", function(i) {
+                              barHeight = (barMax - yScale_barChart_c2p2(self.segmentDict[segment_id].year_count[seg_year]))+1;
+                              return barHeight;
+                        })
+                        .attr("y", function(d) {
+                            return yScale_matrix_c2p2(segment_id) - barHeight; 
+                        })
+                        // // style based on # of observations for that segment in that year
+                        .style("fill", function(d) {
+                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
+                        })
+                        .style("stroke-width", 0.5)
+                        .style("stroke", function(d){
+                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
+                        })
+                        .style("opacity", 1)
+                        .raise()
+                    // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
+                    // // and populate the text annotations with the observation counts
+                    // self.d3.selectAll(".c2p2.cellText.year" + seg_year)
+                    //     .attr("y", function(d) {
+                    //           return yScale_matrix_c2p2(segment_id) - barHeight - 5;
+                    //       })
+                    //     .attr("x", function(d) {
+                    //         if (self.segmentDict[segment_id].year_count[seg_year] > 99) {
+                    //             return xScale_matrix_c2p2(seg_year);
+                    //         } else if (self.segmentDict[segment_id].year_count[seg_year] < 10) {
+                    //             return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/3;
+                    //         } else {
+                    //             return xScale_matrix_c2p2(seg_year) + xScale_matrix_c2p2.bandwidth()/6;
+                    //         }
+                    //     })
+                    //     .attr("fill", "None")
+                    //     .text(function(d) {
+                    //       return parseInt(self.segmentDict[segment_id].year_count[seg_year]);
+                    //     })
+                    //     .attr("fill", "#ffffff")
+                    //     .raise()
+                  }
+              }
+          } else if (self.segmentDict[segment_id].total_count == 0) {
+              // select the spatial rectangle corresponding to the highlighted segment
+              self.d3.selectAll(".c2p2.matrixSpatialRect.seg" + segment_id) 
+                  // set stroke width, opacity, and stroke color
+                  // based on whether segment has any observations in record
+                  .attr("height", 3)
+                  .style("fill", "#1a1b1c")
+                  .style("stroke-width", 0.5)
+                  .style("opacity", 1)
+                  .style("stroke", "#e0e0e0")
+                  // raise the spatial rectangle
+                  .raise();
+          }
           // select background rectangle and change filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
-          // select all temporal rectangles and make mostly opaque
-          // with thick stroke for selection
-          this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("opacity", 0.8);
-          // select mouseovered rectangle and set opacity to zero
-          this.d3.selectAll(".c2p2.matrixTemporalRect.time" + data[self.timestep_c2p2])
-              .style("opacity", 0)
-          // select all river segments that have data in highlighted year
-          // and make white
-          this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
-          // this.d3.selectAll(".river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
+          // select mouseovered segment and set to white
+          // and raise segment
+          self.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
               .style("stroke", "#ffffff")
               .style("stroke-width", 1.25)
               .style("opacity", 1)
@@ -1914,30 +1997,52 @@
         },
         mouseoutRect_c2p2(data, tooltip) {
           const self = this;
-          // select all *spatial* rectangles and reset fill and stroke to black and raise
-          this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("fill", "#1a1b1c")
-              .style("stroke", "#1a1b1c")
-              .raise()
 
-          // hide tooltip
-          tooltip
-              .style("opacity", 0)
-          // select all temporal rectangles and set fill and stroke back to black
-          // with no opacity and raise (so available for selection but not visible)
-          this.d3.selectAll(".c2p2.matrixTemporalRect")
+          let segment_id = data.properties.seg_id_nat
+
+          // re-build y scale for matrix cells y placement
+          let yScale_matrix_c2p2 = this.d3.scaleBand()
+              .range([this.matrix_height_c2, 0])
+              .domain(this.myVars_c2p2)
+              .padding(0.075);
+
+          // // hide tooltip
+          // tooltip
+          //     .style("opacity", 0)
+          // select all spatial rectangles and set opacity back to zero
+          // with black fill and stroke and raise
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
+              .style("stroke-width", 2)
               .style("opacity", 0)
+              .attr("height", yScale_matrix_c2p2.bandwidth())
               .raise()
-          // un-dim river segments
-          // lower elements as needed
-          this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
-          // this.d3.selectAll(".river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
+          // select all *temporal* rectangles
+          // set y position and height back to defaults
+          // and set fill and stroke back
+          // to black and raise
+          this.d3.selectAll(".c2p2.matrixTemporalRect")
+              // set y value to 0
+              .attr("y", 0)
+              // set height to height of matrix
+              .attr("height", self.matrix_height_c2)
+              // style rectangles to be transparent but available for selection
+              .style("fill", "#1a1b1c")
+              .style("stroke-width", 2)
+              .style("stroke", "#1a1b1c")
+              .style("opacity", 0)
+          // // turn off text for cells associated with segment
+          // this.d3.selectAll(".c2p2.cellText") 
+          //     .attr("y", 0)
+          //     .text('')
+          //     .attr("fill", "None")
+          // reset selected transparent segment and lower
+          this.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
               .style("stroke", "#1a1b1c")
               .style("stroke-width", 6)
               .style("opacity", 0)
-              .lower()
+              .lower() 
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
