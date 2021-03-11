@@ -2661,7 +2661,7 @@
           v-for="(models, model_group) in text" 
           :key="model_group" 
           :class="model_group" 
-          class="step-container text-content"
+          class="step-container model-text-content"
         >
           <div
             class="scroll-sticky"
@@ -2800,7 +2800,7 @@
           this.scroller = scrollama(), 
           this.scroller.setup({
                   step: "article .step",
-                  debug: true, // draw trigger line on page
+                  debug: false, // draw trigger line on page
                   offset: 0.95, //bottom of the page to trigger onStepEnter events
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
@@ -4213,6 +4213,15 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
 
 //style steps
+.model-text-content {
+    // min-width: 350px;
+    // max-width: 1000px;
+    margin: 0 auto;
+    padding: 2em;   
+    @media screen and (max-width: 600px) {
+        padding: 10px;
+    }  
+  }
 article {
   position: relative;
   margin: 0 auto;
@@ -4229,11 +4238,16 @@ article {
 
 .step {
   position: relative;
-  width: 90%;
+  left: -34vw;
+  width: 28vw;
   margin: 2rem auto 4rem auto;
   z-index: 1;
   height: 100vh;
   border: 1px;
+  @media screen and (max-width: 600px) {
+         width: 90%;
+         left: 0vw;
+        }
 
   .step-text {
     padding: 1em;
@@ -4277,15 +4291,21 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 2.1em;
-  grid-template-rows: 30% 25% 30% 5%;
-  grid-template-columns: 2% auto 2%;
+  grid-template-rows: 90%;
+  grid-template-columns: 3fr 2fr 4fr 2%;
   z-index: 1;
   position: -webkit-sticky;
   position: sticky;
   top: 10vh; // leaving top for sticky header
-  height: 100vh;
+  height: 90vh;
   width: auto;
+  @media screen and (min-height: 600px) {
+        grid-template-rows: 45% 55%;
+        grid-template-columns: 1.5fr 3fr 2%;
+        }
   @media screen and (max-width: 600px) {
+          grid-template-rows: 30% 25% 30% 5%;
+          grid-template-columns: 2% auto 2%;
           padding-top: 4em;
         }
 
@@ -4296,6 +4316,14 @@ figure.sticky.charts {
     width: auto;
     min-width: 0;
     min-height: 0;
+    @media screen and (min-height: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 1 / 1;
+        }
+    @media screen and (max-width: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 1 / 1;
+    }
   }
   #flubber {
     height: 100%;
@@ -4305,18 +4333,49 @@ figure.sticky.charts {
     height: 100%;
   }
   #error-container {
-    grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-column: 3 / 3;
+    grid-row: 1 / 1;
+    @media screen and (min-height: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 2 / 2;
+        }
+    @media screen and (max-width: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 3 / 3;
+    }
   }
   #bees-container {
-    grid-column: 2 / 2;
-    grid-row: 3 / 3;
+    grid-column: 3 / 3;
+    grid-row: 1 / 1;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
+    @media screen and (min-height: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 2 / 2;
+        }
+    @media screen and (max-width: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 3 / 3;
+    }
   }
-
+  #legend-container {
+    grid-column: 3 / 3;
+    grid-row: 1 / 1;
+    height: 100%;
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    @media screen and (min-height: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 2 / 2;
+        }
+    @media screen and (max-width: 600px) {
+        grid-column: 2 / 2;
+        grid-row: 3 / 3;
+    }
+  }
   #bees-chart {
 
   }
@@ -4326,14 +4385,7 @@ figure.sticky.charts {
     stroke: #91989e; //$grayBlue
   }
 
-  #legend-container {
-    grid-column: 2 / 2;
-    grid-row: 3 / 3;
-    height: 100%;
-    width: 90%;
-    max-width: 700px;
-    margin: auto;
-  }
+
 }
 
 .axis-label text {
