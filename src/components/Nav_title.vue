@@ -12,14 +12,20 @@
       </router-link -->
       <div class="overall-title">
         <div class="text-content">
-          <h3 class="nav-title">How we<router-link
-            to="/monitoring"
-            @click.native="scrollToTop"
-          >Monitor</router-link><span class="dim_text">|</span><router-link
-            to="/modeling"
-            @click.native="scrollToTop"
-          >Model</router-link><br>Stream Temperature in the<br>
-          Delaware River Basin</h3>
+          <h3 class="nav-title">
+            How we<router-link
+              to="/monitoring"
+              @click.native="scrollToTop"
+            >
+              Monitor
+            </router-link><span class="dim_text">|</span><router-link
+              to="/modeling"
+              @click.native="scrollToTop"
+            >
+              Model
+            </router-link><br>Stream Temperature in the<br>
+            Delaware River Basin
+          </h3>
           <br>
           <!--p class="byline">
             U.S. Geological Survey
@@ -28,7 +34,6 @@
           </p -->
         </div>
       </div>
-
     </div>
     <div>
       <!-- <p class="nav-title">

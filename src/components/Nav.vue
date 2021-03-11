@@ -10,14 +10,19 @@
       >
         1. Importance
       </router-link -->
-      <p><router-link
-        to="/monitoring"
-        @click.native="scrollToTop"
-      >Monitor</router-link> <router-link
-        to="/modeling"
-        @click.native="scrollToTop"
-      >Model
-      </router-link></p>
+      <p>
+        <router-link
+          to="/monitoring"
+          @click.native="scrollToTop"
+        >
+          Monitor
+        </router-link> <router-link
+          to="/modeling"
+          @click.native="scrollToTop"
+        >
+          Model
+        </router-link>
+      </p>
     </div>
     <div>
       <!-- <p class="nav-title">
