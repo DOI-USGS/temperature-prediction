@@ -116,7 +116,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
   }
   @media (max-width: 600px) {
     #nav a {
-      font-size: .7em;
+      font-size: 24px;
     }
   }
 
@@ -125,10 +125,11 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     color: $offWhite;
     font-family: 'Georgia', Helvetica, Arial, sans-serif;
     line-height: 1.4;
-    // text-align: left;
-    // font-size: .8em;
-    // font-style: italic;
-    // margin-top: 10px;
+    font-size: 1.8em;
+    @media screen and (max-width: 600px) {
+        font-size: 24px;
+    }
+
   }
 
   #nav a {
