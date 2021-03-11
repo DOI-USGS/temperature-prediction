@@ -36,7 +36,7 @@
           }
         },
         mounted() {
-            this.setPanels();
+            // this.setPanels();
         },
         methods: {
           // setPanels() {
