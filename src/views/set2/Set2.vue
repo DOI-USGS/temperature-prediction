@@ -1908,13 +1908,13 @@
           let segment_id = data.properties.seg_id_nat
           let num_obs = self.segmentDict[segment_id].total_count
 
-          // // bind mouse coordinates and # of obs to tooltip
-          // tooltip
-          //     .attr("y", mouse_y - 15)
-          //     .attr("x", mouse_x - 39)
-          //     .attr("text-align", "left")
-          //     .text(self.d3.format(',')(num_obs) + " obs.")
-          //     .raise()
+          // bind mouse coordinates and # of obs to tooltip
+          tooltip
+              .attr("y", mouse_y)
+              .attr("x", 30)
+              .attr("text-anchor", "end")
+              .text(self.d3.format(',')(num_obs) + " obs.")
+              .raise()
         },
         mouseoverRect_c2p2(data, tooltip) {
           const self = this;
@@ -1941,9 +1941,9 @@
               .domain(self.myGroups_c2p2)
               .padding(0.1);
 
-          // // show tooltip
-          // tooltip
-          //     .style("opacity", 1);
+          // show tooltip
+          tooltip
+              .style("opacity", 1);
           // // select all spatial rectangles and make mostly opaque
           // // to dim matrix
           // this.d3.selectAll(".c2p2.matrixSpatialRect")
@@ -2037,9 +2037,9 @@
               .domain(this.myVars_c2p2)
               .padding(0.075);
 
-          // // hide tooltip
-          // tooltip
-          //     .style("opacity", 0)
+          // hide tooltip
+          tooltip
+              .style("opacity", 0)
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
