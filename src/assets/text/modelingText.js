@@ -27,12 +27,12 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer. Adding nodes or layers to the model increases the complexity of relationships between inputs and outputs that the model is able to mimic.",
+                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer. Adding more nodes or hidden layers to the model increases the complexity of relationships between inputs and outputs that the model is able to mimic. To predict stream temperature, we use an ANN with many hidden layers.",
                 'flubber_id': 'ANN6',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "The output layer computes a weighted sum of the information received from the hidden layer…",
+                'method': "When the output layer receives the information from the final hidden layer, it computes a weighted sum of that information…",
                 'flubber_id': 'ANN7',
                 'bees_id': 'step_error_exp'
             },

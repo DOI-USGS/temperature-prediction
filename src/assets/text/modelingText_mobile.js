@@ -2,7 +2,12 @@ export default {
     textContents: {
         "Training an artificial neural network": [
             {
-                'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
+                'flubber_id': 'ANN1',
+                'bees_id': 'step_error'
+            },
+            {
+                'method': "During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'step_error'
             },
@@ -12,7 +17,12 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "From the input layer, the information is passed to what is known as a “hidden” layer through a series of connections. Each connection transmits an input value to a node in the hidden layer. During training, the model can vary the weight of each connection to assign more or less importance to a particular piece of information.",
+                'method': "From the input layer, the information is passed to what is known as a “hidden” layer through a series of connections. Each connection transmits an input value to a node in the hidden layer.",
+                'flubber_id': 'ANN3',
+                'bees_id': 'step_error_exp'
+            },
+            {
+                'method': "During training, the model can vary the weight of each connection to assign more or less importance to a particular piece of information.",
                 'flubber_id': 'ANN3',
                 'bees_id': 'step_error_exp'
             },
@@ -27,12 +37,17 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer. Adding nodes or layers to the model increases the complexity of relationships between inputs and outputs that the model is able to mimic.",
+                'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer.",
                 'flubber_id': 'ANN6',
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "The output layer computes a weighted sum of the information received from the hidden layer…",
+                'method': "Adding more nodes or hidden layers to the model increases the complexity of relationships between inputs and outputs that the model is able to mimic. To predict stream temperature, we use an ANN with many hidden layers.",
+                'flubber_id': 'ANN6',
+                'bees_id': 'step_error_exp'
+            },
+            {
+                'method': "When the output layer receives the information from the final hidden layer, it computes a weighted sum of that information…",
                 'flubber_id': 'ANN7',
                 'bees_id': 'step_error_exp'
             },
@@ -47,7 +62,12 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "The model compares the predicted value to the observed stream temperature. The difference between the two values represents the error associated with the prediction. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with.",
+                'method': "The model compares the predicted value to the observed stream temperature. The difference between the two values represents the error associated with the prediction.",
+                'flubber_id': 'ANN10',
+                'bees_id': 'step_error_exp'
+            },
+            {
+                'method': "Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with.",
                 'flubber_id': 'ANN10',
                 'bees_id': 'step_error_exp'
             },
@@ -62,7 +82,12 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on the training data. At this point the model is considered “trained” and can be used to make predictions using new sets of input data. But the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
+                'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on the training data.",
+                'flubber_id': 'ANN13',
+                'bees_id': 'step_error_exp'
+            },
+            {
+                'method': "At this point the model is considered “trained” and can be used to make predictions using new sets of input data. But the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
                 'flubber_id': 'ANN13',
                 'bees_id': 'step_error_exp'
             }],

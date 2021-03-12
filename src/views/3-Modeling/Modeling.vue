@@ -2655,10 +2655,50 @@
     </figure>
     <!--     all the scrolling elements are created from modelingText.js content -->
     <article>
-      <div id="scrollama-container">
+      <div 
+        v-if="!mobileView"
+        id="scrollama-container-desktop"
+      >
         <!-- create scrolling/sticky headers for each model section -->
         <div 
           v-for="(models, model_group) in text" 
+          :key="model_group" 
+          :class="model_group" 
+          class="step-container model-text-content"
+        >
+          <div
+            class="scroll-sticky"
+          >
+            <h3 class="viz-title-scrolly">
+              {{ model_group }}
+            </h3>
+          </div>
+          <!-- populate nested steps using text about each model -->
+          <div class="scrollama-steps">
+            <div
+              v-for="model in models" 
+              :id="model.flubber_id" 
+              :key="model" 
+              class="step"
+            >
+              <!-- p class="step-text">
+                {{ model.method }}
+              </p -->
+              <p
+                class="step-text"
+                v-html="model.method"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div 
+        v-if="mobileView"
+        id="scrollama-container-mobile"
+      >
+        <!-- create scrolling/sticky headers for each model section -->
+        <div 
+          v-for="(models, model_group) in mobile_text" 
           :key="model_group" 
           :class="model_group" 
           class="step-container model-text-content"
@@ -2701,11 +2741,8 @@
     import * as flubber from "flubber";
     import { isMobile } from 'mobile-device-detect';
     import modelingText from "./../../assets/text/modelingText";
-<<<<<<< HEAD
     import modelingText_mobile from "./../../assets/text/modelingText_mobile";
-=======
     import DesktopHexMap from "./../../components/2-Monitoring/HexMap";
->>>>>>> eadb1e00452110768ae8cfafc45060003ba58d30
 
   export default {
     name: 'Modeling',
@@ -2714,10 +2751,11 @@
     },
     data() {
           return {
+            mobileView: isMobile, // test if mobile
+
             // pull title, text, and methods 
             text: modelingText.textContents,
             mobile_text: modelingText_mobile.textContents,
-            mobileView: isMobile, // test if mobile
 
             // sectionTitle: "Modeling Stream Temperature", // the initial
 
@@ -2747,7 +2785,7 @@
             obs_pos: 0,
 
             // beeswarm
-            step_start: 13,
+            step_start: null,
             radius: 6,
             set_colors: null,
             color_exp: null, 
@@ -2798,8 +2836,6 @@
           }
         },
         mounted() {
-          console.log("is mobile?")
-          console.log(isMobile)
 
           // this all happens before the page is rendered
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
@@ -2818,6 +2854,9 @@
           // setup resize event
           window.addEventListener("resize", this.resize);
           this.resize();
+
+          // set step for beeswarm start
+          this.step_start = (this.mobileView) ? 18 : 13
 
           // Populate flubber dictionary
           // add path number as key to nested dictionary
