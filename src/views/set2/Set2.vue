@@ -1033,6 +1033,7 @@
                   return "#ccc";
                 }
               })
+              .style("opacity", 1)
               .append("use").attr("xlink:href", href_id)
           })
 
@@ -1103,7 +1104,7 @@
               .attr("filter", "url(#shadow2)")
               .attr("transform",
                   "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .lower()
+              .lower()      
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
@@ -1225,6 +1226,12 @@
           // Build matrix
           // create transformed matrix variable
           let transformedMatrix = self.d3.select(".c2p2.transformedMatrix")
+              .on("mouseenter", function() {
+                self.mouseenterTransformedRect_c2p2();
+              })
+              .on("mouseleave", function() {
+                self.mouseleaveTransformedRect_c2p2();
+              })
 
           // build x scale using data read in for matrix in createMatrix_c2p2()
           let xscale = self.d3.scaleBand()
@@ -1290,7 +1297,7 @@
               })
               // style rectangles to be transparent but available for selection
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 0)
               .style("stroke", "#1a1b1c")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
@@ -1738,7 +1745,7 @@
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("opacity", 0.65)
+              .style("opacity", 0.8)
           // select all *temporal* rectangles and repurpose for bar charts
           // if segment has any data in 40 years
           if (self.segmentDict[segment_id].total_count > 0) {
@@ -1813,7 +1820,6 @@
           // and raise segment
           self.d3.selectAll(".c2p2.river_segments.seg" + segment_id)
               .style("stroke", "#ffffff")
-              .style("opacity", 1)
               .raise()
         },
         mouseoutSeg_c2p2(segment_id, tooltip) {
@@ -1833,7 +1839,7 @@
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
+              .style("stroke-width", 0)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
               .raise()
@@ -1856,12 +1862,10 @@
           //     .attr("y", 0)
           //     .text('')
           //     .attr("fill", "None")
-          // un-dim riversegments, reservoirs, and bay
-          // and reset to default styling
+          // reset selected river segment
           this.d3.selectAll(".c2p2.river_segments.seg" + segment_id) 
               // .attr("filter","None")
               .style("stroke", "#777b80")
-              .style("opacity", 1)
               .lower()
           // select mouseovered transparent segment and raise segment
           this.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
@@ -1869,6 +1873,33 @@
           // reset filter on background rectangle and lower
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
+        },
+        mouseenterTransformedRect_c2p2() {
+          console.log("mouseover")
+          // select all spatial rectangles and make mostly opaque
+          // to dim matrix
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("opacity", 0.8);
+          // select background rectangle and change filter
+          this.d3.selectAll(".c2p2.matrixBkgdRect")
+              .attr("filter", "url(#shadow3)")
+          // select segments and dim
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#474e57")
+        },
+        mouseleaveTransformedRect_c2p2() {
+          console.log("mouseout")
+
+          // select all spatial rectangles and set opacity back to zero and raise
+          this.d3.selectAll(".c2p2.matrixSpatialRect")
+              .style("opacity", 0)
+              .raise()
+          // select background rectangle and replace filter
+          this.d3.selectAll(".c2p2.matrixBkgdRect")
+              .attr("filter", "url(#shadow2)")
+          // select segments and undim
+          this.d3.selectAll(".c2p2.river_segments")
+              .style("stroke", "#777b80")
         },
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           const self = this;
@@ -1913,10 +1944,10 @@
           // // show tooltip
           // tooltip
           //     .style("opacity", 1);
-          // select all spatial rectangles and make mostly opaque
-          // to dim matrix
-          this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("opacity", 0.65);
+          // // select all spatial rectangles and make mostly opaque
+          // // to dim matrix
+          // this.d3.selectAll(".c2p2.matrixSpatialRect")
+          //     .style("opacity", 0.65);
           // select all *temporal* rectangles and repurpose for bar charts
           // if segment has any data in 40 years
           if (self.segmentDict[segment_id].total_count > 0) {
@@ -1984,9 +2015,9 @@
                   // raise the spatial rectangle
                   .raise();
           }
-          // select background rectangle and change filter
-          this.d3.selectAll(".c2p2.matrixBkgdRect")
-              .attr("filter", "url(#shadow3)")
+          // // select background rectangle and change filter
+          // this.d3.selectAll(".c2p2.matrixBkgdRect")
+          //     .attr("filter", "url(#shadow3)")
           // select mouseovered segment and set to white
           // and raise segment
           self.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
@@ -2014,8 +2045,8 @@
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("stroke", "#1a1b1c")
               .style("fill", "#1a1b1c")
-              .style("stroke-width", 2)
-              .style("opacity", 0)
+              .style("stroke-width", 0)
+              // .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
               .raise()
           // select all *temporal* rectangles
@@ -2043,9 +2074,9 @@
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower() 
-          // select background rectangle and replace filter
-          this.d3.selectAll(".c2p2.matrixBkgdRect")
-              .attr("filter", "url(#shadow2)")
+          // // select background rectangle and replace filter
+          // this.d3.selectAll(".c2p2.matrixBkgdRect")
+          //     .attr("filter", "url(#shadow2)")
         },
         mousemoveSeg_c2p3(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
