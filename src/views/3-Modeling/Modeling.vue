@@ -4009,10 +4009,6 @@
               .attr("opacity", 1)
             // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
-        //  // drop sticky header
-        //   if (this.step >= 0 && response.direction == "down"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
 
         // updates to go with downscroll
           if (response.direction == "down"){
@@ -4055,12 +4051,6 @@
           const self = this;
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
-
-        // // make intro header sticky again if scrolling back
-        //   if (this.step <= 2 && response.direction == "up"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
-
 
         // updates to go with upscroll
         if (this.step == 0 && response.direction == "up") {
@@ -4230,18 +4220,14 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   }
 article {
   position: relative;
-  margin: 0 auto;
+  margin: 10vh auto;
   height: 100%;
   width: auto;
+  top: -110vh;
 }
 .step-container {
   width:100vw;
 }
-
-.viz-title-scrolly  {
-  margin-top: 70vh;
-}
-
 .step {
   position: relative;
   left: -34vw;
@@ -4254,7 +4240,6 @@ article {
          width: 90%;
          left: 0vw;
         }
-
   .step-text {
     padding: 1em;
     background-color: $boxCharcoal;
@@ -4270,10 +4255,6 @@ article {
   top: 40px;
   left: 0;
   padding-top: 0px;
-
-  .step:nth-last-child {
-  background-color: red;
-}
 }
 
 //start at beginning
@@ -4289,6 +4270,7 @@ figure.sticky.intro {
   top: 0;
   width: 100vw;
   height: auto;
+  margin-bottom: 10vh;
 }
 #intro-container.text-content.text-intro h2 {
   margin: 0;
@@ -4382,15 +4364,11 @@ figure.sticky.charts {
         grid-row: 3 / 3;
     }
   }
-  #bees-chart {
-
-  }
   .x-axis {
     fill: #91989e; //$grayBlue
     color: #91989e; //$grayBlue
     stroke: #91989e; //$grayBlue
   }
-
 
 }
 
