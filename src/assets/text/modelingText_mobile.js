@@ -98,7 +98,7 @@ export default {
                 'bees_id': 'step_error_exp'
             },
             {
-                'method': "Prediction error (the difference between predicted temperatures and measured observations) is small when the model can accurately predict the observed water temperature.",
+                'method': "Prediction error (the difference between predicted temperatures and measured observations) is small when the model makes accurate predictions.",
                 'flubber_id': '',
                 'bees_id': 'step_error_obs'
             },

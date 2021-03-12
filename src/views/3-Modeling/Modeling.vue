@@ -4281,6 +4281,9 @@ article {
 
 .viz-title-scrolly  {
   margin-top: 70vh;
+  @media screen and (max-width: 600px) {
+        font-size: 14pt;
+    } 
 }
 
 .step {
@@ -4300,6 +4303,9 @@ article {
     padding: 1em;
     background-color: $boxCharcoal;
     border-radius: 5px;
+     @media screen and (max-width: 600px) {
+         font-size: 12.5pt;
+        }
   }
 }
 
@@ -4351,9 +4357,11 @@ figure.sticky.charts {
         grid-template-columns: 1.5fr 3fr 2%;
         }
   @media screen and (max-width: 600px) {
-          grid-template-rows: 30% 25% 30% 5%;
-          grid-template-columns: 2% auto 2%;
-          padding-top: 4em;
+        top: 5vh;
+        height: 95vh;
+        grid-template-rows: 30% 30% 35%;
+        grid-template-columns: 2% auto 2%;
+        padding-top: 4em;
         }
 
   #flubber-container {
