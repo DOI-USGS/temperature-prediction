@@ -3389,9 +3389,9 @@
           // draw arrow and labels opacity 0 unless 
           this.svg
           .append("line")
-            .attr("x1", 0)
+            .attr("x1", 50)
             .attr("y1", (this.height-50))
-            .attr("x2", this.width)
+            .attr("x2", this.width+50)
             .attr("y2", (this.height-50))
             .attr("stroke-width", 2)
             .attr("stroke", "#91989e")// not the right grey color.........................
