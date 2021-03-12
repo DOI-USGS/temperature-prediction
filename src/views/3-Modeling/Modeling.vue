@@ -3390,9 +3390,9 @@
           this.svg
           .append("line")
             .attr("x1", 50)
-            .attr("y1", (this.height-50))
-            .attr("x2", this.width+50)
-            .attr("y2", (this.height-50))
+            .attr("y1", (this.height-margin))
+            .attr("x2", this.width+margin)
+            .attr("y2", (this.height-margin))
             .attr("stroke-width", 2)
             .attr("stroke", "#91989e")// not the right grey color.........................
             .attr("stroke-dasharray", "5px")
@@ -3403,7 +3403,7 @@
 
           // text labels for the rmse axis
           this.svg.append("text")             
-              .attr("transform","translate(" + 0 + " ," + (this.height-50 - 40) + ")")
+              .attr("transform","translate(" + margin + " ," + (this.height-margin - 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
               .style("fill", "#91989e")// not the right grey color
@@ -3412,7 +3412,7 @@
               .classed("rmse-label", true);
 
             this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin*2) + " ," + (this.height-50-40) + ")")
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-margin-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
               .style("fill", "#91989e")// not the right grey color
@@ -3438,7 +3438,7 @@
 
           // text label for the x axis
           this.svg.append("text")             
-              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 48) + ")")
+              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin*2) + ")")
               .style("text-anchor", "middle")
               .text("time")
               .style("fill", "#91989e")
@@ -3532,7 +3532,7 @@
                   // rmse updating model label
                   legend_error.append("text")
                   .text("Root mean square error (RMSE)")
-                  .attr("x", 50)
+                  .attr("x", margin)
                   .attr("y", nudge_y+420)
                   .style("fill", "white")
                   .style("font-size", "30px")
