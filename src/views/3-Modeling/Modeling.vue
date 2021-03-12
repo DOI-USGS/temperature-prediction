@@ -2696,6 +2696,7 @@
     import * as flubber from "flubber";
     import { isMobile } from 'mobile-device-detect';
     import modelingText from "./../../assets/text/modelingText";
+    import modelingText_mobile from "./../../assets/text/modelingText_mobile";
 
   export default {
     name: 'Modeling',
@@ -2705,6 +2706,7 @@
           return {
             // pull title, text, and methods 
             text: modelingText.textContents,
+            mobile_text: modelingText_mobile.textContents,
             mobileView: isMobile, // test if mobile
 
             // sectionTitle: "Modeling Stream Temperature", // the initial
@@ -2786,8 +2788,11 @@
           }
         },
         mounted() {
-        // this all happens before the page is rendered
-           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
+          console.log("is mobile?")
+          console.log(isMobile)
+
+          // this all happens before the page is rendered
+          this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
 
           // set up scrollama scoller
           this.scroller = scrollama(), 
