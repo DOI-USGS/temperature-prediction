@@ -3389,7 +3389,7 @@
           // draw arrow and labels opacity 0 unless 
           this.svg
           .append("line")
-            .attr("x1", 50)
+            .attr("x1", margin)
             .attr("y1", (this.height-margin))
             .attr("x2", this.width+margin)
             .attr("y2", (this.height-margin))
@@ -3735,7 +3735,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-50) + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-margin) + ")")
 
                 this.yAxis
                 .transition()
@@ -3760,10 +3760,6 @@
           updateChart(direction) {
             //controls decision making for the error >> beeswarm chart
             const self = this;
-
-          // where are we?
-          //console.log(this.chartState.var_x);
-         // console.log(this.chartState.var_y);
           let margin = 50;
 
           // update axes based on active data
@@ -4291,8 +4287,8 @@ figure.sticky.intro {
   // position: -webkit-sticky;
   // position: sticky;
   top: 0;
-  height: 10vh;
   width: 100vw;
+  height: auto;
 }
 #intro-container.text-content.text-intro h2 {
   margin: 0;
