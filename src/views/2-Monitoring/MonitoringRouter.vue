@@ -1,11 +1,11 @@
 <template>
   <section id="monitoring-router">
-    <div class="text-content page-title section-title-wrapper">
+    <!-- div class="text-content page-title section-title-wrapper">
       <p class="chapter">
         Chapter 2
       </p>
       <h2>Monitoring Stream Temperature</h2>
-    </div>
+    </div -->
         
     <div 
       v-if="!mobileView"

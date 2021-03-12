@@ -4,9 +4,9 @@
     <HeaderUSWDSBanner />
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
-    <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
-    <Title />
-    <Nav />
+    <!-- WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" / --> <!-- an empty string in this case means the 'prod' version of the application   -->
+    <NavTitle />
+    <!-- Title / -->
     <router-view
       v-if="!isInternetExplorer"
     />
@@ -21,8 +21,9 @@
     import WindowSize from "./components/WindowSize";
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
+    import NavTitle from './components/Nav_title'
     import Nav from './components/Nav'
-    import Title from './components/Title'
+    // import Title from './components/Title'
     import { isMobile } from 'mobile-device-detect';
 
     export default {
@@ -31,10 +32,11 @@
             WindowSize,
             HeaderUSWDSBanner,
             HeaderUSGS,
+            NavTitle,
             Nav,
-            Title,
+            // Title,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
-            WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
+            // WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
             PreFooterCodeLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-code"*/ "./components/PreFooterCodeLinks"),
             FooterUSGS: () => import( /* webpackPreload: true */ /*webpackChunkName: "usgs-footer"*/ "./components/FooterUSGS") // Have Webpack put the footer in a separate chunk so we can load it conditionally (with a v-if) if we desire
@@ -162,10 +164,11 @@ h3{
 }
 
 .byline {
-  font-style: italic;
+  font-family: 'Georgia', Helvetica, Arial, sans-serif;
+  // font-style: italic;
   font-weight: 300;
   font-size: .8em;
-  color: $offWhite; //#808080
+  color: $grayBlue; //#808080
 }
 
 .chapter {

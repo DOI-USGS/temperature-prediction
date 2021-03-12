@@ -1,10 +1,15 @@
 <template>
   <section id="section_2">
     <div class="text-content">
-      <div class="viz-title"> 
-        <h3 v-html="text.title1" />
-      </div>
-      <br>
+      <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
+      <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
+    </div>
+    <IntroMap />
+    <br>
+    <ImportanceIcons />
+    <div class="text-content">
+      <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
+      <p>Basin-wide monitoring of water temperature underpins our understanding of water temperature dynamics in the Delaware River Basin, but modeling water temperature dynamics can help fill gaps in our knowledge. Here, we explore USGS temperature monitoring and state-of-the-art modeling techniques to predict water temperature in the Delaware River Basin.</p>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
     </div>
@@ -307,32 +312,6 @@
       </div>
     </div>
     <div class="text-content">
-      <div class="subheader">
-        <h3 v-html="text.title4" />
-      </div>
-      <br>
-      <p v-html="text.paragraph14" />
-      <p v-html="text.paragraph15" />
-    </div>
-    <div class="box-matrix">
-      <div class="text-content">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Monitoring</span> throughout the continental United States
-          </p>
-          <p class="viz-subtitle">
-            USGS, state, or local agency stream temperature observations since 1985.
-          </p>
-        </div>
-      </div>
-      <div
-        id="map-container"
-        class="figure-content"
-      >
-        <DesktopHexMap />
-      </div>
-    </div>  
-    <div class="text-content">
       <p v-html="text.paragraph16" />
     </div>   
     <div class="container-fluid">
@@ -402,7 +381,6 @@
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
   import PrebuiltC2P2Matrix from "./../../components/2-Monitoring/PrebuiltC2P2Matrix";
   import PrebuiltC2P3Matrix from "./../../components/2-Monitoring/PrebuiltC2P3Matrix";
-  import DesktopHexMap from "./../../components/2-Monitoring/HexMap";
 
   export default {
       name: 'Set2',
@@ -413,7 +391,8 @@
         MatrixExplainerColor,
         PrebuiltC2P2Matrix,
         PrebuiltC2P3Matrix,
-        DesktopHexMap,
+        IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/1-Importance/IntroMap"),
+        ImportanceIcons: () => import( /* webpackPreload: true */ /*webpackChunkName: "importanceicons"*/ "./../../components/1-Importance/ImportanceIcons"),
         Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
         Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
       },
@@ -2241,13 +2220,6 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
     max-height: 100%;
   }
 
-  #hex-map {
-    padding-left: 0em;
-    padding-right: 0em;
-    padding-top: 0em;
-    padding-bottom: 1em;
-  }
-
   #button-container { 
     display: flex;
     align-items: center;
@@ -2524,23 +2496,5 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
           font-size: 2em;
         }
 }
-#hex-map {
-  height: auto;
-  max-height: 80vh;
-}
-.hex {
-  fill-rule: evenodd;
-  stroke: $boxCharcoal; //#141414
-  stroke-miterlimit: 10;
-  stroke-width: 0.1;
-}
-.hex_title {
-  fill: $offWhite;
-  font-size: 0.8em;
-  font-weight: 550;
-}
-.hex_label {
-  fill: $offWhite;
-  font-size: 0.7em;
-}
+
 </style>
