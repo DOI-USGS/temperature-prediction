@@ -3387,7 +3387,7 @@
           .style("fill", "#91989e");
           
           // draw arrow and labels opacity 0 unless 
-          this.svg.select("g")
+          this.svg
           .append("line")
             .attr("x1", 0)
             .attr("y1", (this.height-50))
@@ -3402,7 +3402,7 @@
             .style("opacity", this.o_rmse_title);
 
           // text labels for the rmse axis
-          this.svg.select("g").append("text")             
+          this.svg.append("text")             
               .attr("transform","translate(" + 0 + " ," + (this.height-50 - 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
@@ -3411,7 +3411,7 @@
               .style("opacity", this.o_rmse_title)
               .classed("rmse-label", true);
 
-            this.svg.select("g").append("text")             
+            this.svg.append("text")             
               .attr("transform","translate(" + (this.width-margin*2) + " ," + (this.height-50-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
@@ -3427,6 +3427,7 @@
              self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
 
         // if starts on any rmse steps, draw the rmse axis only
+        // this doesnt seem to be working corectly
         } else if (this.step >= this.step_rmse) {
            this.yAxis 
             .style("opacity", 0)
@@ -3654,7 +3655,7 @@
 
           },
           moveLegend(direction) {
-              const self = this;
+            const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
             var nudge_x = 150;
@@ -3756,7 +3757,7 @@
                 .style("opacity", 1)
             } 
           },
-          updateChart() {
+          updateChart(direction) {
             //controls decision making for the error >> beeswarm chart
             const self = this;
 
@@ -3861,10 +3862,11 @@
           // define force velocity and ticking
 
          // array of transition steps
-          var step_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          var up_transitions = [70-1, this.now_step, this.step_error_exp-1, this.step_error_obs-1, this.step_rmse-1,this.step_rmse+1-1,this.step_rmse+2-1, this.step_ann-1, this.step_ann_exp-1, this.step_rnn-1, this.step_rgcn-1, this.step_rgcn_ptrn-1];
 
           // tick simulation only if the active step has a chart transition
-          if (step_transitions.indexOf(this.step) !== -1){
+          if (direction == "down" && down_transitions.indexOf(this.step) !== -1){
             
            self.simulation
            .alpha(this.chartState.alpha)
@@ -3873,6 +3875,14 @@
            .restart()
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
+          } else if (direction == "up" && up_transitions.indexOf(this.step) !== -1) {
+             
+           self.simulation
+           .alpha(this.chartState.alpha)
+           .alphaDecay(this.chartState.aDecay)
+           //.velocityDecay(0.6)
+           .restart()
+            .on("tick", self.tick)
           }
           },
           tick() {
@@ -3976,7 +3986,7 @@
           this.setDataVars(); /// refresh data chart is based on
 
           if (this.step >= this.step_start ) {
-            self.updateChart();
+            self.updateChart(response.direction);
           }
 
           ///////////
