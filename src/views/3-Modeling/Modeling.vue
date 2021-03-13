@@ -3740,12 +3740,12 @@
           .style("fill", "#91989e");
           
           // draw arrow and labels opacity 0 unless 
-          this.svg.select("g")
+          this.svg
           .append("line")
-            .attr("x1", 0)
-            .attr("y1", (this.height-50))
-            .attr("x2", this.width)
-            .attr("y2", (this.height-50))
+            .attr("x1", margin)
+            .attr("y1", (this.height-margin))
+            .attr("x2", this.width+margin)
+            .attr("y2", (this.height-margin))
             .attr("stroke-width", 2)
             .attr("stroke", "#91989e")// not the right grey color.........................
             .attr("stroke-dasharray", "5px")
@@ -3755,8 +3755,8 @@
             .style("opacity", this.o_rmse_title);
 
           // text labels for the rmse axis
-          this.svg.select("g").append("text")             
-              .attr("transform","translate(" + 0 + " ," + (this.height-50 - 40) + ")")
+          this.svg.append("text")             
+              .attr("transform","translate(" + margin + " ," + (this.height-margin - 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
               .style("fill", "#91989e")// not the right grey color
@@ -3764,8 +3764,8 @@
               .style("opacity", this.o_rmse_title)
               .classed("rmse-label", true);
 
-            this.svg.select("g").append("text")             
-              .attr("transform","translate(" + (this.width-margin*2) + " ," + (this.height-50-40) + ")")
+            this.svg.append("text")             
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-margin-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
               .style("fill", "#91989e")// not the right grey color
@@ -3780,6 +3780,7 @@
              self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
 
         // if starts on any rmse steps, draw the rmse axis only
+        // this doesnt seem to be working corectly
         } else if (this.step >= this.step_rmse) {
            this.yAxis 
             .style("opacity", 0)
@@ -3790,7 +3791,7 @@
 
           // text label for the x axis
           this.svg.append("text")             
-              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin + 48) + ")")
+              .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin*2) + ")")
               .style("text-anchor", "middle")
               .text("time")
               .style("fill", "#91989e")
@@ -3884,7 +3885,7 @@
                   // rmse updating model label
                   legend_error.append("text")
                   .text("Root mean square error (RMSE)")
-                  .attr("x", 50)
+                  .attr("x", margin)
                   .attr("y", nudge_y+420)
                   .style("fill", "white")
                   .style("font-size", "30px")
@@ -4007,7 +4008,7 @@
 
           },
           moveLegend(direction) {
-              const self = this;
+            const self = this;
             var drop_dot = this.d3.select("g.legend:nth-child(2)")
 
             var nudge_x = 150;
@@ -4087,7 +4088,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-50) + ")")
+                .attr("transform", "translate(" + -margin + "," + (this.height/2-margin) + ")")
 
                 this.yAxis
                 .transition()
@@ -4109,13 +4110,9 @@
                 .style("opacity", 1)
             } 
           },
-          updateChart() {
+          updateChart(direction) {
             //controls decision making for the error >> beeswarm chart
             const self = this;
-
-          // where are we?
-          //console.log(this.chartState.var_x);
-         // console.log(this.chartState.var_y);
           let margin = 50;
 
           // update axes based on active data
@@ -4214,10 +4211,11 @@
           // define force velocity and ticking
 
          // array of transition steps
-          var step_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          var up_transitions = [70-1, this.now_step, this.step_error_exp-1, this.step_error_obs-1, this.step_rmse-1,this.step_rmse+1-1,this.step_rmse+2-1, this.step_ann-1, this.step_ann_exp-1, this.step_rnn-1, this.step_rgcn-1, this.step_rgcn_ptrn-1];
 
           // tick simulation only if the active step has a chart transition
-          if (step_transitions.indexOf(this.step) !== -1){
+          if (direction == "down" && down_transitions.indexOf(this.step) !== -1){
             
            self.simulation
            .alpha(this.chartState.alpha)
@@ -4226,6 +4224,14 @@
            .restart()
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
+          } else if (direction == "up" && up_transitions.indexOf(this.step) !== -1) {
+             
+           self.simulation
+           .alpha(this.chartState.alpha)
+           .alphaDecay(this.chartState.aDecay)
+           //.velocityDecay(0.6)
+           .restart()
+            .on("tick", self.tick)
           }
           },
           tick() {
@@ -4403,7 +4409,7 @@
           this.setDataVars(); /// refresh data chart is based on
 
           if (this.step >= this.step_start ) {
-            self.updateChart();
+            self.updateChart(response.direction);
           }
 
           ///////////
@@ -4430,10 +4436,6 @@
               .attr("opacity", 1)
             // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
           }
-        //  // drop sticky header
-        //   if (this.step >= 0 && response.direction == "down"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
 
         // updates to go with downscroll
           if (response.direction == "down"){
@@ -4476,12 +4478,6 @@
           const self = this;
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
-
-        // // make intro header sticky again if scrolling back
-        //   if (this.step <= 2 && response.direction == "up"){
-        //      this.d3.select("figure.intro").classed("sticky", false); 
-        //   }
-
 
         // updates to go with upscroll
         if (this.step == 0 && response.direction == "up") {
@@ -4651,22 +4647,14 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   }
 article {
   position: relative;
-  margin: 0 auto;
+  margin: 10vh auto;
   height: 100%;
   width: auto;
+  top: -110vh;
 }
 .step-container {
   width:100vw;
 }
-
-.viz-title-scrolly  {
-  margin-top: 70vh;
-  padding: 0;
-  @media screen and (max-width: 600px) {
-        font-size: 14pt;
-    } 
-}
-
 .step {
   position: relative;
   left: -34vw;
@@ -4679,7 +4667,6 @@ article {
          width: 90%;
          left: 0vw;
         }
-
   .step-text {
     padding: 1em;
     background-color: $boxCharcoal;
@@ -4698,10 +4685,6 @@ article {
   top: 40px;
   left: 0;
   padding-top: 0px;
-
-  .step:nth-last-child {
-  background-color: red;
-}
 }
 
 //start at beginning
@@ -4715,8 +4698,9 @@ figure.sticky.intro {
   // position: -webkit-sticky;
   // position: sticky;
   top: 0;
-  height: 10vh;
   width: 100vw;
+  height: auto;
+  margin-bottom: 10vh;
 }
 #intro-container.text-content.text-intro h2 {
   margin: 0;
@@ -4812,15 +4796,11 @@ figure.sticky.charts {
         grid-row: 3 / 3;
     }
   }
-  #bees-chart {
-
-  }
   .x-axis {
     fill: #91989e; //$grayBlue
     color: #91989e; //$grayBlue
     stroke: #91989e; //$grayBlue
   }
-
 
 }
 
