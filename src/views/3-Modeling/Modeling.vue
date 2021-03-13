@@ -4652,6 +4652,11 @@ article {
   width: auto;
   top: -110vh;
 }
+.viz-title-scrolly {
+ @media screen and (max-width: 600px) {
+    font-size: 14pt;
+}
+}
 .step-container {
   width:100vw;
 }
