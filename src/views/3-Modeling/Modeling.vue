@@ -2824,11 +2824,6 @@
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
-          // // set header based on refresh scroll
-          //  if (this.step <= 0){
-          //    this.d3.select("figure.intro").classed("sticky", true); 
-          // }
-
           /////////// stage chart step sequence
           // this.start_bees is the step where the error plot appears
           // update data and trigger events based on the active step
@@ -2846,7 +2841,7 @@
           this.color_d100 = '#BE3D7D';
           this.color_d001 = "#FAB62F";
           this.color_obs = "#FAB62F";  //
-          this.color_exp = "#5191bd"; //blue is predicted, yellow is observed
+          this.color_exp = "#5191bd"; //blue is expected, yellow is observed
 
         // once everything is set up and the component is added to the DOM, read in data and make it dance
         this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -3918,6 +3913,13 @@
             this.chartState.radius = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
+          }
+           if (response.direction == "up" && this.step === this.step_error_obs ) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
           }
           // push to overlap as single RMSE
           if (this.step === this.step_rmse) {
