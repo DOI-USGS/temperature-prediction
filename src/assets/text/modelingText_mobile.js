@@ -103,10 +103,15 @@ export default {
                 'bees_id': 'step_error_obs'
             },
             {
-                'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors – for example, by taking the root mean squared error (RMSE).",
+                'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors.",
                 'flubber_id': '',
                 'bees_id': 'step_error_rmse'
             }, 
+            {
+                'method': "One way to summarize error is by calculating the root mean squared error (RMSE).",
+                'flubber_id': '',
+                'bees_id': 'step_error_rmse'
+            },
             {
                 'method': "Small errors translate to low RMSE, indicating the model is accurately predicting water temperature.",
                 'flubber_id': '',
@@ -118,12 +123,22 @@ export default {
                 'bees_id': 'step_error_rmse_scale'
             }, 
             {
-                'method': "We can use RMSE to compare different models or assess accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the Basin based on all available data in the training period.",
+                'method': "We can use RMSE to compare different models or assess accuracy in time, space, and under different conditions.",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             },
             {
-                'method': "But recall that the Delaware River Basin is one of the most observed basins in the U.S. How does the ANN perform when we don't have a lot of training data?",
+                'method': "Here we show model RMSE for a subset of stream reaches in the Basin based on all available data in the training period.",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            },
+            {
+                'method': "But recall that the Delaware River Basin, as one of the most observed basins in the U.S., is unique in having a lot of data.",
+                'flubber_id': '',
+                'bees_id': 'step_ann'
+            },
+            {
+                'method': " How does the ANN perform when we don't have a lot of training data?",
                 'flubber_id': '',
                 'bees_id': 'step_ann'
             },
@@ -133,7 +148,7 @@ export default {
                 'bees_id': 'step_ann'
             },
             {
-                'method': "When only 0.01% of the training data is used, the ANN model becomes less accurate and has a hard time capturing temperature dynamics of the river.",
+                'method': "When only 0.1% of the training data is used, the ANN model is less accurate and has a hard time capturing temperature dynamics of the river.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
@@ -143,71 +158,141 @@ export default {
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "In reality, humans already know a lot about water temperature. Even without observations, we can guess that water temperature will be warmest in the summer or that forested headwater streams are cooler than large urban streams.",
+                'method': "In reality, humans already know a lot about water temperature.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
-             {
+            {
+                'method': "Even without observations, we can guess that streams will be warmest in the summer or that forested headwater streams are cooler than large urban streams.",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
+            },
+            {
                 'method': "How can we tell a machine what we already know?",
-                'flubber_id': 'ANN13',
+                'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
         ],
         "Recurrent neural network (RNN)": [
             {
-                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory or allow information from one timestep to be passed on to the next time step. The model we used is called a recurrent neural network (RNN).",
+                'method': "One of the simplest things we know is how time relates to stream temperature.",
+                'flubber_id': 'ANN13',
+                'bees_id': 'step_ann_exp'
+            },
+            {
+                'method': "Put simply, the water temperature tomorrow is likely to be similar to the water temperature today.",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_ann_exp'
             },
             {
+                'method': "For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day.",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
+            },
+            {
+                'method': "The type of model with a memory that we use is called a recurrent neural network (RNN).",
+                'flubber_id': '',
+                'bees_id': 'step_ann_exp'
+            },
+            {
                 'method': "In the Delaware River Basin, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
-                'flubber_id': 'RNN',
+                'flubber_id': '',
                 'bees_id': 'step_rnn'
             }],
         "Graph convolutional network": [
             {
-                'method': "Another piece of knowledge we can use to improve the model is that all streams are part of a network. You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream segments is likely to be similar to that in upstream segments. We can use these spatial relationships to better leverage information across the stream network.",
+                'method': "Another piece of knowledge we can use to improve the model is that all streams are part of a network.",
+                'flubber_id': 'RNN',
+                'bees_id': 'step_rnn'
+            },
+            {
+                'method': " You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream segments is likely to be similar to that in upstream segments.",
                 'flubber_id': 'RGCN',
                 'bees_id': 'step_rnn'
             },
             {
-                'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance. Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream. The method we used is called a graph convolutional network.",
+                'method': "We can use these spatial relationships to better leverage information across the stream network.",
+                'flubber_id': 'RGCN',
+                'bees_id': 'step_rnn'
+            },
+            {
+                'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance.",
                 'flubber_id': 'RGCN_2',
                 'bees_id': 'step_rnn'
             },
             {
+                'method': "Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream.",
+                'flubber_id': '',
+                'bees_id': 'step_rnn'
+            },
+            {
+                'method': "The spatially aware model that we use is called a graph convolutional network.",
+                'flubber_id': '',
+                'bees_id': 'step_rnn'
+            },
+            {
                 'method': "In the Delaware River Basin, adding information about the spatial configuration of the river network improves predictions.",
-                'flubber_id': 'RGCN_2',
+                'flubber_id': '',
                 'bees_id': 'step_rgcn'
             }],
         "Knowledge-guided deep learning": [
             {
-                'method': "Beyond time and space, we know quite a bit about the science behind how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a data-driven approach. These processes are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
+                'method': "Beyond time and space, we know quite a bit about the science behind how and why streams gain or lose heat.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn'
+            },
+            {
+                'method': "We shouldn’t ignore this wealth of knowledge simply because we’re using a machine learning approach that is driven by data.",
+                'flubber_id': 'RGCN_2',
+                'bees_id': 'step_rgcn'
+            },
+            {
+                'method': "These natural processes are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
                 'flubber_id': 'RGCN_ptrn',
                 'bees_id': 'step_rgcn'
             },
             {
-                'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics. We can use these equations to make temperature predictions for all places and times in the Delaware River Basin, and treat these predictions as “real data” to train our neural network.",
-                'flubber_id': '',
-                'bees_id': 'step_rgcn'
-            },
-             {
-                'method': "By training the model on the predictions generated by these physics-derived equations, the machine learning model “learns” physics. We call this method knowledge-guided deep learning.",
+                'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn'
             },
             {
-                'method': "And the great news? Now that the model has learned the general physics of the system, it can do more with less. Even when very little (< 1%) of temperature data is available for training, the model is still able to make accurate predictions.",
+                'method': "We can use these equations to make temperature predictions for all places and times in the Delaware River Basin, and treat these predictions as “real data” to train our neural network.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn'
+            },
+            {
+                'method': "By training the model on the predictions generated by these physics-derived equations, the machine learning model “learns” physics.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn'
+            },
+            {
+                'method': "We call this method knowledge-guided deep learning.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn'
+            },
+            {
+                'method': "And the great news? Now that the model has learned the general physics of the system, it can do more with less.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn_ptrn'
             },
             {
-                'method': "These results give us confidence we will be able to use process-guided deep learning to expand the scale at which we make predictions.",
+                'method': " Even when very little (< 1%) of temperature data is available for training, the model is still able to make accurate predictions.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn_ptrn'
             },
             {
-                'method': "Additionally, these knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.",
+                'method': "These results give us confidence we will be able to use knowledge-guided deep learning to expand the scale at which we make predictions.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn_ptrn'
+            },
+            {
+                'method': "Additionally, these knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics.",
+                'flubber_id': '',
+                'bees_id': 'step_rgcn_ptrn'
+            },
+            {
+                'method': " This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn_ptrn'
             },

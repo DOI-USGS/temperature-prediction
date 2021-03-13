@@ -108,7 +108,7 @@ export default {
                 'bees_id': 'step_ann'
             },
             {
-                'method': "When only 0.01% of the training data is used, the ANN model becomes less accurate and has a hard time capturing temperature dynamics of the river.",
+                'method': "When only 0.1% of the training data is used, the ANN model is less accurate and has a hard time capturing temperature dynamics of the river.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },
@@ -130,7 +130,7 @@ export default {
         ],
         "Recurrent neural network (RNN)": [
             {
-                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory or allow information from one timestep to be passed on to the next time step. The model we used is called a recurrent neural network (RNN).",
+                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day. The model with memory that we use is called a recurrent neural network (RNN).",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_ann_exp'
             },
@@ -146,7 +146,7 @@ export default {
                 'bees_id': 'step_rnn'
             },
             {
-                'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance. Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream. The method we used is called a graph convolutional network.",
+                'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance. Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream. The spatially aware model we use is called a graph convolutional network.",
                 'flubber_id': 'RGCN_2',
                 'bees_id': 'step_rnn'
             },
@@ -157,7 +157,7 @@ export default {
             }],
         "Knowledge-guided deep learning": [
             {
-                'method': "Beyond time and space, we know quite a bit about the science behind how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a data-driven approach. These processes are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
+                'method': "Beyond time and space, we know quite a bit about the science behind how and why streams gain or lose heat – we shouldn’t ignore this wealth of knowledge simply because we’re using a machine learning approach that is driven by data. These natural processes are intuitive – warm, sunny days should warm streams, and cold, cloudy days should cool streams.",
                 'flubber_id': 'RGCN_ptrn',
                 'bees_id': 'step_rgcn'
             },
@@ -177,7 +177,7 @@ export default {
                 'bees_id': 'step_rgcn_ptrn'
             },
             {
-                'method': "These results give us confidence we will be able to use process-guided deep learning to expand the scale at which we make predictions.",
+                'method': "These results give us confidence we will be able to use knowledge-guided deep learning to expand the scale at which we make predictions.",
                 'flubber_id': '',
                 'bees_id': 'step_rgcn_ptrn'
             },

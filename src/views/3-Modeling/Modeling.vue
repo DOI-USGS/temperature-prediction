@@ -2881,13 +2881,13 @@
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
-          this.step_rmse = this.step_error_obs + 1; /// data points to single RMSE
-          this.step_ann = this.step_rmse + 3; /// show RMSE for ANN d100 experiment
-          this.step_ann_exp = this.step_ann + 3; // show RMSE for ANN with 3 experiments
-          this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
-          this.step_rgcn = this.step_rnn + 3; // RGCN
-          this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
-          this.step_end = this.step_rgcn_ptrn +2;
+          this.step_rmse = (this.mobileView) ? (this.step_error_obs + 2) : (this.step_error_obs + 1); ///    data points to single RMSE
+          this.step_ann = (this.mobileView) ? (this.step_rmse + 4) : (this.step_rmse + 3); ///    show RMSE for ANN d100 experiment
+          this.step_ann_exp = (this.mobileView) ? (this.step_ann + 4) : (this.step_ann + 3); //    show RMSE for ANN with 3 experiments
+          this.step_rnn = (this.mobileView) ? (this.step_ann_exp + 9) : (this.step_ann_exp + 5); // RNN with some flubber and narrative steps
+          this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
+          this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 6) : (this.step_rgcn + 3); //RGCN_ptrn
+          this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 5) : (this.step_rgcn_ptrn + 2);
 
         // colors for chart
           this.color_d100 = '#BE3D7D';
@@ -3076,280 +3076,586 @@
             }
           },
           setChartState() {
-            /////////////////////////
-          // define which labels and annotations are drawn initially based on scroll step
-          // setting opacity
-          switch(this.step) {
-            case this.step_error_exp:
-              this.label_o = 1; //error axis labels
-              this.label_o_rmse = 0; // rmse axis labels
-              this.o_pred = 1; //legend predicted
-              this.o_obs = 0; // legend observed
-              this.o_train = 0; // legend training data
-              this.o_exp = 0; // legend added experiments
-              this.o_arrow = 0; // rmse arrow legend
-              this.o_rmse_title = 0; // rmse model naming
-              this.obs_pos = 0; // 
-               break;
-            case this.step_error_obs:
-              this.label_o = 1;
-              this.label_o_rmse = 0;
-              this.o_pred = 1;
-              this.o_obs = 1;
-              this.o_train = 0;
-              this.o_exp = 0;
-              this.o_arrow = 0;
-              this.o_rmse_title = 0;
-              this.obs_pos = 30;
-               break;
-            case this.step_rmse:
-            case this.step_rmse+1:
-            case this.step_rmse+2:
-              this.label_o = 0;
-              this.label_o_rmse = 1;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 0;
-              this.o_exp = 0;
-              this.o_arrow = 0;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            case this.step_ann:
-            case this.step_ann+1:
-            case this.step_ann+2:
-              this.label_o = 0;
-              this.label_o_rmse = 1;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 1;
-              this.o_exp = 0;
-              this.o_arrow = 1;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            case this.step_ann_exp:
-            case this.step_ann_exp+1:
-            case this.step_ann_exp+2:
-            case this.step_ann_exp+3:
-            case this.step_ann_exp+4:
-              this.label_o = 0;
-              this.label_o_rmse = 0;
-              this.o_pred =0;
-              this.o_obs = 0;
-              this.o_train = 1;
-              this.o_exp = 1;
-              this.o_arrow = 1;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            case this.step_rnn:
-            case this.step_rnn+1:
-            case this.step_rnn+2:
-              this.label_o = 0;
-              this.label_o_rmse = 1;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 1;
-              this.o_exp = 1;
-              this.o_arrow = 1;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            case this.step_rgcn:
-            case this.step_rgcn+1:
-            case this.step_rgcn+2:
-              this.label_o = 0;
-              this.label_o_rmse = 0;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 1;
-              this.o_exp = 1;
-              this.o_arrow = 1;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            case this.step_rgcn_ptrn:
-            case this.step_rgcn_ptrn+1:
-            case this.step_rgcn_ptrn+2:
-            case this.step_rgcn_ptrn+3:
-            case this.step_rgcn_ptrn+4:
-            case this.step_rgcn_ptrn+5:
-            case this.step_rgcn_ptrn+6:
-              this.label_o = 0;
-              this.label_o_rmse = 0;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 1;
-              this.o_exp = 1;
-              this.o_arrow = 1;
-              this.o_rmse_title = 1;
-              this.obs_pos = 30;
-              break;
-            default:
-              this.label_o = 0;
-              this.label_o_rmse = 0;
-              this.o_pred = 0;
-              this.o_obs = 0;
-              this.o_train = 0;
-              this.o_exp = 0;
-              this.o_arrow = 0;
-              this.o_rmse_title = 0;
-              this.obs_pos = 0;
-          }
+              /////////////////////////
+              // define which labels and annotations are drawn initially based on scroll step
+              // setting opacity
+              if (this.mobileView) {
+                  switch(this.step) {
+                      case this.step_error_exp:
+                        this.label_o = 1; //error axis labels
+                        this.label_o_rmse = 0; // rmse axis labels
+                        this.o_pred = 1; //legend predicted
+                        this.o_obs = 0; // legend observed
+                        this.o_train = 0; // legend training data
+                        this.o_exp = 0; // legend added experiments
+                        this.o_arrow = 0; // rmse arrow legend
+                        this.o_rmse_title = 0; // rmse model naming
+                        this.obs_pos = 0; // 
+                        break;
+                      case this.step_error_obs:
+                        this.label_o = 1;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 1;
+                        this.o_obs = 1;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 0;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rmse:
+                      case this.step_rmse+1:
+                      case this.step_rmse+2:
+                      case this.step_rmse+3:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_ann:
+                      case this.step_ann+1:
+                      case this.step_ann+2:
+                      case this.step_ann+3:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 0;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_ann_exp:
+                      case this.step_ann_exp+1:
+                      case this.step_ann_exp+2:
+                      case this.step_ann_exp+3:
+                      case this.step_ann_exp+4:
+                      case this.step_ann_exp+5:
+                      case this.step_ann_exp+6:
+                      case this.step_ann_exp+7:
+                      case this.step_ann_exp+8:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred =0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rnn:
+                      case this.step_rnn+1:
+                      case this.step_rnn+2:
+                      case this.step_rnn+3:
+                      case this.step_rnn+4:
+                      case this.step_rnn+5:
+                      case this.step_rnn+6:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rgcn:
+                      case this.step_rgcn+1:
+                      case this.step_rgcn+2:
+                      case this.step_rgcn+3:
+                      case this.step_rgcn+4:
+                      case this.step_rgcn+5:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rgcn_ptrn:
+                      case this.step_rgcn_ptrn+1:
+                      case this.step_rgcn_ptrn+2:
+                      case this.step_rgcn_ptrn+3:
+                      case this.step_rgcn_ptrn+4:
+                      case this.step_rgcn_ptrn+5:
+                      case this.step_rgcn_ptrn+6:
+                      case this.step_rgcn_ptrn+7:
+                      case this.step_rgcn_ptrn+8:
+                      case this.step_rgcn_ptrn+9:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      default:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 0;
+                        this.obs_pos = 0;
+                  }
+              } else {
+                  switch(this.step) {
+                      case this.step_error_exp:
+                        this.label_o = 1; //error axis labels
+                        this.label_o_rmse = 0; // rmse axis labels
+                        this.o_pred = 1; //legend predicted
+                        this.o_obs = 0; // legend observed
+                        this.o_train = 0; // legend training data
+                        this.o_exp = 0; // legend added experiments
+                        this.o_arrow = 0; // rmse arrow legend
+                        this.o_rmse_title = 0; // rmse model naming
+                        this.obs_pos = 0; // 
+                        break;
+                      case this.step_error_obs:
+                        this.label_o = 1;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 1;
+                        this.o_obs = 1;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 0;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rmse:
+                      case this.step_rmse+1:
+                      case this.step_rmse+2:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_ann:
+                      case this.step_ann+1:
+                      case this.step_ann+2:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 0;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_ann_exp:
+                      case this.step_ann_exp+1:
+                      case this.step_ann_exp+2:
+                      case this.step_ann_exp+3:
+                      case this.step_ann_exp+4:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred =0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rnn:
+                      case this.step_rnn+1:
+                      case this.step_rnn+2:
+                        this.label_o = 0;
+                        this.label_o_rmse = 1;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rgcn:
+                      case this.step_rgcn+1:
+                      case this.step_rgcn+2:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      case this.step_rgcn_ptrn:
+                      case this.step_rgcn_ptrn+1:
+                      case this.step_rgcn_ptrn+2:
+                      case this.step_rgcn_ptrn+3:
+                      case this.step_rgcn_ptrn+4:
+                      case this.step_rgcn_ptrn+5:
+                      case this.step_rgcn_ptrn+6:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 1;
+                        this.o_exp = 1;
+                        this.o_arrow = 1;
+                        this.o_rmse_title = 1;
+                        this.obs_pos = 30;
+                        break;
+                      default:
+                        this.label_o = 0;
+                        this.label_o_rmse = 0;
+                        this.o_pred = 0;
+                        this.o_obs = 0;
+                        this.o_train = 0;
+                        this.o_exp = 0;
+                        this.o_arrow = 0;
+                        this.o_rmse_title = 0;
+                        this.obs_pos = 0;
+                  }
+              }
           },
           setDataVars(){
-          // setting data variables
-          switch(this.step) {
-            case this.step_error_exp:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.error;
-              this.chartState.var_x = this.chart_x.error;
-              this.chartState.var_y = this.chart_y.error_exp;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '';
-              this.chartState.axis_x = 0; // x end for axis
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = this.height;
-              break;
-            case this.step_error_obs:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.error;
-              this.chartState.var_x = this.chart_x.error;
-              this.chartState.var_y = this.chart_y.error_obs;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = this.height;
-              break;
-            case this.step_rmse:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.mid;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '  quantifies model prediction error';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
-              break;
-            case this.step_rmse+1:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.low;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '  quantifies model prediction error';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-             case this.step_rmse+2:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.high;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '  quantifies model prediction error';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            case this.step_ann:
-            case this.step_ann+1:
-            case this.step_ann+2:
-              this.chartState.dataset = this.rmse_ann;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.ANN;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 8;
-              this.chartState.domain_y = 30;
-              this.model_current = ': ANN';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            case this.step_ann_exp:
-            case this.step_ann_exp+1:
-            case this.step_ann_exp+2:
-            case this.step_ann_exp+3:
-            case this.step_ann_exp+4:
-              this.chartState.dataset = this.rmse_exp;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.ANN;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 8;
-              this.chartState.domain_y = 30;
-              this.model_current = ': ANN';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            case this.step_rnn:
-            case this.step_rnn+1:
-            case this.step_rnn+2:
-              this.chartState.dataset = this.rmse_exp;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.RNN;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 8;
-              this.chartState.domain_y = 30;
-              this.model_current = ': ANN + time';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            case this.step_rgcn:
-            case this.step_rgcn+1:
-            case this.step_rgcn+2:
-              this.chartState.dataset = this.rmse_exp;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.RGCN;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 8;
-              this.chartState.domain_y = 30;
-              this.model_current = ': ANN + time + space';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            case this.step_rgcn_ptrn:
-            case this.step_rgcn_ptrn+1:
-            case this.step_rgcn_ptrn+2:
-            case this.step_rgcn_ptrn+3:
-            case this.step_rgcn_ptrn+4:
-            case this.step_rgcn_ptrn+5:
-            case this.step_rgcn_ptrn+6:
-              this.chartState.dataset = this.rmse_exp;
-              this.chartState.grouped = this.color_bees.exp;
-              this.chartState.var_x = this.chart_x.RGCN_ptrn;
-              this.chartState.var_y = this.chart_y.mid;
-              this.chartState.domain_x = 8;
-              this.chartState.domain_y = 30;
-              this.model_current = ': ANN + time + space + physics';
-              this.chartState.axis_x = 0;
-              this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;
-              break;
-            default:
-              this.chartState.dataset = this.error_data;
-              this.chartState.grouped = this.color_bees.error;
-              this.chartState.var_x = this.chart_x.error;
-              this.chartState.var_y = this.chart_y.exp;
-              this.chartState.domain_x = 30;
-              this.chartState.domain_y = 30;
-              this.model_current = '';
-              this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
-              this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-              this.chartState.axis_x_on_y = this.height;
+              // setting data variables
+              if (this.mobileView) {
+                  switch(this.step) {
+                      case this.step_error_exp:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.error_exp;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = 0; // x end for axis
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = this.height;
+                        break;
+                      case this.step_error_obs:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.error_obs;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = this.height;
+                        break;
+                      case this.step_rmse:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.mid;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;;
+                        break;
+                      case this.step_rmse+1:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.low;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rmse+2:
+                      case this.step_rmse+3:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.high;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_ann:
+                      case this.step_ann+1:
+                      case this.step_ann+2:
+                      case this.step_ann+3:
+                        this.chartState.dataset = this.rmse_ann;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.ANN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_ann_exp:
+                      case this.step_ann_exp+1:
+                      case this.step_ann_exp+2:
+                      case this.step_ann_exp+3:
+                      case this.step_ann_exp+4:
+                      case this.step_ann_exp+5:
+                      case this.step_ann_exp+6:
+                      case this.step_ann_exp+7:
+                      case this.step_ann_exp+8:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.ANN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rnn:
+                      case this.step_rnn+1:
+                      case this.step_rnn+2:
+                      case this.step_rnn+3:
+                      case this.step_rnn+4:
+                      case this.step_rnn+5:
+                      case this.step_rnn+6:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RNN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rgcn:
+                      case this.step_rgcn+1:
+                      case this.step_rgcn+2:
+                      case this.step_rgcn+3:
+                      case this.step_rgcn+4:
+                      case this.step_rgcn+5:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RGCN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time + space';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rgcn_ptrn:
+                      case this.step_rgcn_ptrn+1:
+                      case this.step_rgcn_ptrn+2:
+                      case this.step_rgcn_ptrn+3:
+                      case this.step_rgcn_ptrn+4:
+                      case this.step_rgcn_ptrn+5:
+                      case this.step_rgcn_ptrn+6:
+                      case this.step_rgcn_ptrn+7:
+                      case this.step_rgcn_ptrn+8:
+                      case this.step_rgcn_ptrn+9:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RGCN_ptrn;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time + space + physics';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      default:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.exp;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height;
 
-          }
+                  }
+              } else {
+                  switch(this.step) {
+                      case this.step_error_exp:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.error_exp;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = 0; // x end for axis
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = this.height;
+                        break;
+                      case this.step_error_obs:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.error_obs;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = this.height;
+                        break;
+                      case this.step_rmse:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.mid;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;;
+                        break;
+                      case this.step_rmse+1:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.low;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rmse+2:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.high;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '  quantifies model prediction error';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_ann:
+                      case this.step_ann+1:
+                      case this.step_ann+2:
+                        this.chartState.dataset = this.rmse_ann;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.ANN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_ann_exp:
+                      case this.step_ann_exp+1:
+                      case this.step_ann_exp+2:
+                      case this.step_ann_exp+3:
+                      case this.step_ann_exp+4:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.ANN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rnn:
+                      case this.step_rnn+1:
+                      case this.step_rnn+2:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RNN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rgcn:
+                      case this.step_rgcn+1:
+                      case this.step_rgcn+2:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RGCN;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time + space';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      case this.step_rgcn_ptrn:
+                      case this.step_rgcn_ptrn+1:
+                      case this.step_rgcn_ptrn+2:
+                      case this.step_rgcn_ptrn+3:
+                      case this.step_rgcn_ptrn+4:
+                      case this.step_rgcn_ptrn+5:
+                      case this.step_rgcn_ptrn+6:
+                        this.chartState.dataset = this.rmse_exp;
+                        this.chartState.grouped = this.color_bees.exp;
+                        this.chartState.var_x = this.chart_x.RGCN_ptrn;
+                        this.chartState.var_y = this.chart_y.mid;
+                        this.chartState.domain_x = 8;
+                        this.chartState.domain_y = 30;
+                        this.model_current = ': ANN + time + space + physics';
+                        this.chartState.axis_x = 0;
+                        this.chartState.axis_y = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        break;
+                      default:
+                        this.chartState.dataset = this.error_data;
+                        this.chartState.grouped = this.color_bees.error;
+                        this.chartState.var_x = this.chart_x.error;
+                        this.chartState.var_y = this.chart_y.exp;
+                        this.chartState.domain_x = 30;
+                        this.chartState.domain_y = 30;
+                        this.model_current = '';
+                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height;
+
+                  }
+              }
           },
           makeBeeswarm() {
           // define core chart elements that are constant and only need to be run this one time
@@ -3947,73 +4253,147 @@
           // the biggest problem with force right now if that if the page is refreshed in the middle of the chart sequence
           // it doesn't have enough heat to make it to the mid line because alpha is down to reduce jitter
           // also work could be done to slow down the dots and exaggerate the transitions more, while still making sure they get to their home spots
+          if (this.mobileView) {
+              // error chart
+              if (this.step <= this.step_error_exp) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_error_obs ) {
+                this.chartState.radius = 0;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.1;
+              }
+              // push to overlap as single RMSE
+              if (this.step === this.step_rmse) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_rmse+1) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = .3;
+                this.chartState.aDecay = 0.05;
 
-          // error chart
-          if (this.step <= this.step_error_exp) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-           if (this.step === this.step_error_obs ) {
-            this.chartState.radius = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
-          }
-          // push to overlap as single RMSE
-          if (this.step === this.step_rmse) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-          if (this.step === this.step_rmse+1) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_rmse+2) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = .3;
+                this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_rmse+3) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = .3;
+                this.chartState.aDecay = 0.05;
+              }
+              // intro beeswarm, adding experiments
+              // decrease alpha to reduce jitteriness
+              // corresponding decrease in alphaDecay to allow "cool down" 
+              if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
+                this.chartState.strengthy = 0.9;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.3;
+                this.chartState.aDecay = 0.05;
+              }
+              // RNN
+              if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
+              // RGCN
+              if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
+              // RGCN to end
+              if (this.step >= this.step_rgcn_ptrn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
+          } else {
+              // error chart
+              if (this.step <= this.step_error_exp) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_error_obs ) {
+                this.chartState.radius = 0;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.1;
+              }
+              // push to overlap as single RMSE
+              if (this.step === this.step_rmse) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = 1;
+                this.chartState.aDecay = 0.05;
+              }
+              if (this.step === this.step_rmse+1) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = .3;
+                this.chartState.aDecay = 0.05;
 
+              }
+              if (this.step === this.step_rmse+2) {
+                this.chartState.strengthy = 1;
+                this.chartState.radius = 0;
+                this.chartState.strengthr = 1;
+                this.chartState.alpha = .3;
+                this.chartState.aDecay = 0.05;
+              }
+              // intro beeswarm, adding experiments
+              // decrease alpha to reduce jitteriness
+              // corresponding decrease in alphaDecay to allow "cool down" 
+              if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
+                this.chartState.strengthy = 0.9;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.3;
+                this.chartState.aDecay = 0.05;
+              }
+              // RNN
+              if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
+              // RGCN
+              if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
+              // RGCN to end
+              if (this.step >= this.step_rgcn_ptrn) {
+                this.chartState.strengthy = 0.2;
+                this.chartState.radius = this.paddedRadius;
+                this.chartState.alpha = 0.2;
+                this.chartState.aDecay = 0.15;
+              }
           }
-          if (this.step === this.step_rmse+2) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-          }
-
-          // intro beeswarm, adding experiments
-          // decrease alpha to reduce jitteriness
-          // corresponding decrease in alphaDecay to allow "cool down" 
-          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-            this.chartState.strengthy = 0.9;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.3;
-            this.chartState.aDecay = 0.05;
-          }
-          // RNN
-          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN
-          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN to end
-          if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
+          
 
           /////////// REDRAW
           // now redraw beeswarm chart and modify force based on active data
@@ -4281,6 +4661,7 @@ article {
 
 .viz-title-scrolly  {
   margin-top: 70vh;
+  padding: 0;
   @media screen and (max-width: 600px) {
         font-size: 14pt;
     } 
