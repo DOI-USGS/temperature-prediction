@@ -3851,30 +3851,13 @@
 
           ///////////
           // define force velocity and ticking
-
-         // array of transition steps
-          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-          var up_transitions = [70-1, this.now_step, this.step_error_exp-1, this.step_error_obs-1, this.step_rmse-1,this.step_rmse+1-1,this.step_rmse+2-1, this.step_ann-1, this.step_ann_exp-1, this.step_rnn-1, this.step_rgcn-1, this.step_rgcn_ptrn-1];
-
-          // tick simulation only if the active step has a chart transition
-          if (direction == "down" && down_transitions.indexOf(this.step) !== -1){
-            
-           self.simulation
+          self.simulation
            .alpha(this.chartState.alpha)
            .alphaDecay(this.chartState.aDecay)
            //.velocityDecay(0.6)
            .restart()
             .on("tick", self.tick)
             // high velocity decay with low alpha decay so it cools more slowly
-          } else if (direction == "up" && up_transitions.indexOf(this.step) !== -1) {
-             
-           self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           //.velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick)
-          }
           },
           tick() {
             // ticking the simulation moves the dots. currently this is run each step
@@ -3976,21 +3959,31 @@
             this.chartState.aDecay = 0.15;
           }
 
-          /////////// REDRAW
+          /////////// REDRAW beessawrm
           // now redraw beeswarm chart and modify force based on active data
-          // only redraw if the data or forces change
-          //this.chartState.strengthy = .2;
-          this.chartState.strengthx = 1;
-          this.setDataVars(); /// refresh data chart is based on
+          // if on a step where the data changes
 
-          if (this.step >= this.step_start ) {
-            self.updateChart(response.direction);
+          this.chartState.strengthx = 1;
+
+          // array of transition steps on down scroll
+          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          // for upscroll
+          var up_transitions = down_transitions.map( function(value) { 
+              return value - 1; 
+          } );
+          if (this.step >= this.step_error_exp) {
+            // run update function only if the active step has a chart transition
+            if (response.direction == "down" && down_transitions.indexOf(this.step) !== -1){
+              this.setDataVars(); /// refresh data chart is based on
+              self.updateChart(response.direction);
+            } else if (response.direction == "up" && up_transitions.indexOf(this.step) !== -1) {
+              this.setDataVars(); /// refresh data chart 
+              self.updateChart(response.direction);
+            }
           }
 
-          ///////////
-          // toggle intro header to stepped headers
-          // this is necessary because the first view is not in the same sticky scolling structure as the rest
 
+          // update flubber
           if (this.step == 0 && response.direction == "down") {
 
             // determine initial model id and initial annotation id
