@@ -2728,7 +2728,7 @@
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
-            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
+            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs", obs: "obs", exp: "exp"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
             label_o_rmse: 0, // rmse axis labels
@@ -2743,7 +2743,8 @@
 
             // beeswarm
             step_start: 13,
-            radius: 6,
+            radius: 7,
+            radius_rmse: 5,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2769,16 +2770,6 @@
             flubber_dict: {},
             flubber_id_order: [],
             current_flubber_id: null,
-
-            step_error_exp: null, 
-            step_error_obs: null,
-            step_rmse: null,
-            step_ann: null,
-            step_ann_exp : null,
-            step_rnn: null,
-            step_rgcn: null,
-            step_rgcn_ptrn: null,
-            step_end: null,
 
             time_fade: 500,
             axis_label: null,
@@ -2838,14 +2829,14 @@
           this.step_end = this.step_rgcn_ptrn +2;
 
         // colors for chart
-          this.color_d100 = '#BE3D7D';
-          this.color_d001 = "#FAB62F";
-          this.color_obs = "#FAB62F";  //
-          this.color_exp = "#5191bd"; //blue is expected, yellow is observed
+          this.color_d100 = "#5191bd";
+          this.color_d001 = '#BE3D7D';
+          this.color_obs = "#FAB62F";  //"#5191bd" '#BE3D7D'
+          this.color_exp = "#FAB62F"; //blue is expected, yellow is observed
 
-        // once everything is set up and the component is added to the DOM, read in data and make it dance
-        this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
-        this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+          // once everything is set up and the component is added to the DOM, read in data and make it dance
+          this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
+          this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         },
         
         methods: {
@@ -2861,7 +2852,8 @@
             // read in data 
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType)];
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_links.csv", this.d3.autoType)];
 
            // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
@@ -2872,17 +2864,20 @@
             this.rmse_exp = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_ann = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             this.error_data = data[2];
+            this.links = data[3];
 
             // computed properties
-            this.paddedRadius = this.radius* 1.4;
+            this.paddedRadius = this.radius* 1.5;
 
           // define initial state of chart - default is an error chart to start
             this.chartState.strengthr = 1;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
-            this.chartState.radius = 0;
+            //this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 1;
             this.chartState.aDecay = 0.1;
+            this.chartState.diff_obs = this.chart_y.obs;
+            this.chartState.diff_exp = this.chart_y.exp;
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -3332,7 +3327,7 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, this.color_obs, this.color_exp]); //"#292b30"
+            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]); //"#292b30"
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
@@ -3471,7 +3466,7 @@
 
                   var error_fill = this.d3.scaleOrdinal()
                   .domain(["Predicted","Observed"])
-                  .range([this.color_exp, this.color_obs]);
+                  .range([this.color_exp,"#292b30"]);
 
               legend_error.append("text")
                 .text("Temperature")
@@ -3605,26 +3600,23 @@
                   .style("opacity", this.o_exp)
                   .classed("d_001", true)
           
-          if (this.step >= this.step_error_exp) {
 
             ////////////////
             // initiate force simulation
             self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
             .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(1))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
             .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
 
           // tick to make sure dots are poistioned on first draw
-          if (this.step >= this.step) {
             self.simulation
-            .alpha(1)
-            .alphaDecay(0.1)
-            .velocityDecay(0.6)
-            .restart()
-              .on("tick", self.tick)
-          }
+           .alpha(this.chartState.alpha)
+           .alphaDecay(this.chartState.aDecay)
+           //.velocityDecay(0.6)
+           .restart()
+            .on("tick", self.tick);
 
-          };
+            //self.updateChart();
 
           // define for updating axes and labels
             this.time_fade = 500;
@@ -3637,6 +3629,31 @@
             this.legend_training = this.d3.selectAll("text.rmse-title");
             this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
             this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
+
+            self.drawDiff();
+
+          },
+          drawDiff(){
+              const self = this;
+              let margin = 50;
+          
+            var line = this.d3.line()
+
+            var lines = this.links;
+            console.log(lines)
+
+            for (var i=0; i < lines.length; i++) {
+              this.svg.append("line")
+                .attr("class", "diff")
+                .datum(lines[i])
+                .attr("d", line)
+                .attr("x1", function(d)  { return self.xScale(d.error_x)})
+                .attr("x2", function(d)  { return self.xScale(d.error_x)})
+                .attr("y1", function(d) { return self.yScale(d.obs) })
+                .attr("y2", function(d) { return self.yScale(d.exp) })
+                .style("stroke", "red")
+                .style("stroke-width", "5px").enter();
+          }
 
           },
           transitionAxes(element, end) {
@@ -3795,9 +3812,17 @@
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
           .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
-                .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+           .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
         // modify forces to update chart
+       // // first restart all forces and then define force velocity and ticking
+
+      self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+          .force("x",null)
+          .force('y', null)
+          .force("collide", null)
+          .stop();
+
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
@@ -3850,7 +3875,6 @@
                 //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
           ///////////
-          // define force velocity and ticking
           self.simulation
            .alpha(this.chartState.alpha)
            .alphaDecay(this.chartState.aDecay)
@@ -3889,18 +3913,21 @@
           if (this.step <= this.step_error_exp) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.05;
           }
            if (this.step === this.step_error_obs ) {
+             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.aDecay = 0.05;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
+             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.05;
           }
@@ -3908,7 +3935,15 @@
           if (this.step === this.step_rmse) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
+             this.chartState.strengthr = 2;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (response.direction == "up" && this.step === this.step_rmse) {
+            this.chartState.strengthy = 1.5;
+            this.chartState.strengthy = 2;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.05;
           }
@@ -3962,8 +3997,8 @@
           /////////// REDRAW beessawrm
           // now redraw beeswarm chart and modify force based on active data
           // if on a step where the data changes
-
           this.chartState.strengthx = 1;
+          this.setDataVars(); /// refresh data chart is based on
 
           // array of transition steps on down scroll
           var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
@@ -3974,13 +4009,11 @@
           if (this.step >= this.step_error_exp) {
             // run update function only if the active step has a chart transition
             if (response.direction == "down" && down_transitions.indexOf(this.step) !== -1){
-              this.setDataVars(); /// refresh data chart is based on
               self.updateChart(response.direction);
             } else if (response.direction == "up" && up_transitions.indexOf(this.step) !== -1) {
-              this.setDataVars(); /// refresh data chart 
               self.updateChart(response.direction);
             }
-          }
+          };
 
 
           // update flubber
@@ -4491,5 +4524,9 @@ figure.sticky.charts {
 .f_temp.ital {
   font-style: italic;
 }
+.diff {
+  stroke-width: 5px;
+  color: red;
 
+}
 </style>
