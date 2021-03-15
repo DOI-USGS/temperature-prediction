@@ -133,33 +133,6 @@
       <MatrixTemperature />
     </div>
     <div class="text-content">
-      <br>
-      <div class="viz-title">
-        <h3 v-html="text.title4" />
-      </div>
-      <br>
-      <p v-html="text.paragraph14" />
-      <p v-html="text.paragraph15" />
-    </div>
-    <div class="box">
-      <div class="text-content">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Monitoring</span> throughout the continental United States
-          </p>
-          <p class="viz-subtitle">
-            USGS, state, or local agency stream temperature observations since 1985.
-          </p>
-        </div>
-      </div>
-      <!-- div class="hex-container" -->
-      <img
-        id="hex-map"
-        src="@/assets/temp_hex_map_mobile_transparent.png"
-      >
-      <!-- /div -->
-    </div>
-    <div class="text-content">
       <p v-html="text.paragraph16" />
     </div>
   </div>
@@ -209,44 +182,18 @@
 <style scoped lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
-  // .axis-title {
-  //     font-size: 1.2em;
-  //     font-family: SourceSansPro-Bold, Source Sans Pro;
-  //     font-weight: 700;
-  //     fill: white;
-  // }
-
-  // .axis-subtitle {
-  //       font-family: SourceSansPro-Light, Source Sans Pro;
-  //       font-weight: 300;
-  //       fill: white;
-  // }
-
-  // .tick-label {
-  //       font-family: SourceSansPro-Light, Source Sans Pro;
-  //       font-weight: 300;
-  //       fill: white;
-  //       font-size: .9em;
-  // }
-  // .hex-container {
-  //   text-align: center;
-  // }
-  // #hex-map {
-  //   padding: 0em; //1em
-  //   width: 80vw;
-  //   height: auto;
-  // }
 </style>

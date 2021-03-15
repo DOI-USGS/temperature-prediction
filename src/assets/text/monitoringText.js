@@ -19,6 +19,6 @@ export default {
         title4: "Implications for Temperature Modeling",
         paragraph14: "Data sparsity and variability in stream temperature across the network limit our ability to answer questions like: How far downstream will a cold water release affect temperature?  How has fish habitat changed through time?  Will we have enough cold water in the reservoir in 50 years?",
         paragraph15: "These challenges are not unique to the Delaware River Basin. In fact, relative to the rest of the United States, the Delaware River Basin is one of the most highly monitored basins in the country.",
-        paragraph16: "How can we create models that are robust to a diversity of temperature dynamics, in places and times where we don't have a lot of information? Visit the Modeling chapter to learn about innovative modeling techniques to predict water temperature."
+        paragraph16: "How can we create models that are robust to a diversity of temperature dynamics, in places and times where we don't have a lot of information? Visit the Model chapter to learn about innovative modeling techniques to predict water temperature."
     }
 }

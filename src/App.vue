@@ -81,27 +81,19 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb;
-$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
-
-// Old colors
-$monotoneBlue1: #e9eced;
-$monotoneBlue2: #c3cccf;
-$monotoneBlue3: #88989f;
-$monotoneBlue4: #4c656e;
-$monotoneBlue5: #285C70; //#10313e
-$monotoneBlueTransparent: rgba(76,101,110, .6);
-$riverBlue: #6399ba;
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 // Type
 body {
@@ -328,7 +320,7 @@ h3{
   // box-shadow: -5px -5px $monotoneBlue5;
   font-size: 1.4em;
   font-weight: 700;
-  color: $offWhite;
+  color: $offWhiteBox;
   margin-bottom: 0;
   @media screen and (max-width: 600px) {
        font-size: 1.2em;
@@ -337,7 +329,7 @@ h3{
 }
 
 .viz-subtitle {
-  color: $offWhite;
+  color: $offWhiteBox;
   font-size: .8em;
   text-align: left;
   font-weight: 100;
@@ -348,20 +340,20 @@ h3{
 }
 
 .legend-text {
-    fill: $grayBlue;
+    fill: $dimGray;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 10pt;
   }
 .explainer-minor-text {
-    fill: $grayBlue; //#707070
+    fill: $dimGray;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 15pt;
   }
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
   font-weight: 400;
-  fill:rgb(224, 222, 222);
+  fill: $offWhite;
 }
 .viz-emph {
   font-weight:700;

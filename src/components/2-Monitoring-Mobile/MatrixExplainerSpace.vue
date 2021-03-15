@@ -380,18 +380,19 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 .background{
   fill: $boxCharcoal;
@@ -412,7 +413,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-3, .cls-4 {
-        stroke: $grayBlue; //#4d4c4d
+        stroke: $dimGray;
         stroke-width: 3px;
       }
 
@@ -421,7 +422,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-5 {
-        fill: $grayBlue; //#4d4c4d
+        fill: $dimGray;
       }
 
       .cls-40, .cls-6 {
@@ -429,7 +430,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-39, .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
-        fill: $grayBlue; //#7d7d7d
+        fill: $dimGray;
       }
 
       .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
@@ -597,6 +598,7 @@ $grayBlue: #576069; //#4F5C67
 
       .cls-38 {
         stroke: #7d7d7d;
+        stroke-width: 1.5px;
       }
 
       .cls-40 {

@@ -60,7 +60,7 @@
             >
               <stop
                 offset="0"
-                stop-color="#5191bd"
+                stop-color="#5d9dc7"
               />
               <stop
                 offset="1"
@@ -3696,31 +3696,23 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23
-$boxCharcoal: #1a1b1c; //#28292D #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #192c42; //#0F2237 #19334f #122438
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //
-
-// Old colors
-$monotoneBlue1: #e9eced;
-$monotoneBlue2: #c3cccf;
-$monotoneBlue3: #88989f;
-$monotoneBlue4: #4c656e;
-$monotoneBlue5: #10313e;
-$monotoneBlueTransparent: rgba(76,101,110, .6);
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 #intro-map {
   margin-top: 20px;
   overflow-x: hidden;
-  // background-color: $boxCharcoal;
   border-radius: 5px;
   margin: auto;
    
@@ -3741,8 +3733,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
       fill: none;
       stroke-linejoin: round;
       stroke-linecap: round;
-      /* stroke: #184654; */
-      stroke: #56738f; //#556c80 #61788c #566d82
+      stroke: #56738f;
       stroke-width: .4px;
     }
 
@@ -3759,8 +3750,8 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
      .ocean {
-        fill: $darkBlue; //$darkBlue
-        stroke: #384b63; //$darkBlue #3a506b
+        fill: $darkBlue;
+        stroke: #384b63;
         stroke-width: .4px;
         stroke-opacity: .8;
     }
@@ -3857,7 +3848,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .cls-43 {
-        fill: url(#linear-gradient-2); //$mediumBlue
+        fill: url(#linear-gradient-2);
         stroke: none;
     }
 
@@ -3871,9 +3862,6 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     .inside {
         fill: $offWhite;
         font-weight: 400;
-        /* background-color: black; */
-        /* stroke: black;
-        stroke-width: 1px; */
     }
     .masking {
         fill: $backgroundCharcoal;
@@ -3900,13 +3888,13 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
         stroke: $backgroundCharcoal;
         stroke-width: 0.1px;
         stroke-miterlimit: 10;
-        fill: #d1d1d1; //#545454
+        fill: #d1d1d1;
     }
 
     .water-label {
         font-size: 7.5pt;
         font-weight: 100;
-        fill: #2f5b7a; //$grayBlue #2e4969 #255270
+        fill: #2f5b7a;
 
     }
 
@@ -3916,22 +3904,21 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
     }
 
     .delaware-water-label text {
-      /* fill: #5a98a3; */
       font-size: 8pt;
-      fill: #3a7094; //$grayBlue #4a6585
+      fill: #3a7094;
     }
     .ocean-label {
         font-weight: 200;
         font-size: 16px;
-        fill: #306082; //$grayBlue #1a4663
+        fill: #306082;
         opacity: .8;
     }
 
 
    .state-label {
-        font-weight: 100; //200
+        font-weight: 100;
         font-size: 16px;
-        fill: #8a8a8a; //$offWhite
+        fill: #8a8a8a;
         letter-spacing: 20px;
         opacity: .5;
     }
@@ -3970,7 +3957,7 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
 
   .north-arrow {
     color: #1e4e6e;
-    fill: #1e4e6e; //#1a4663
+    fill: #1e4e6e;
     stroke: none;
   }
 
