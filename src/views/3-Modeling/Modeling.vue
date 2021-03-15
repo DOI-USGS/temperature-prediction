@@ -2758,6 +2758,7 @@
             texture: null,
             yAxis: null,
             xAxis: null,
+            link: null,
 
             // scroll options
             scroller: null,
@@ -3155,6 +3156,7 @@
               this.chartState.axis_x = 0; // x end for axis
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = this.height;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_error_obs:
               this.chartState.dataset = this.error_data;
@@ -3167,6 +3169,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = this.height;
+              this.chartState.strengthlink = 1;
               break;
             case this.step_rmse:
               this.chartState.dataset = this.error_data;
@@ -3178,7 +3181,8 @@
               this.model_current = '  quantifies model prediction error';
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
-              this.chartState.axis_x_on_y = (this.height/2)-50;;
+              this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_rmse+1:
               this.chartState.dataset = this.error_data;
@@ -3191,6 +3195,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
              case this.step_rmse+2:
               this.chartState.dataset = this.error_data;
@@ -3203,6 +3208,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_ann:
             case this.step_ann+1:
@@ -3217,6 +3223,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_ann_exp:
             case this.step_ann_exp+1:
@@ -3233,6 +3240,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_rnn:
             case this.step_rnn+1:
@@ -3247,6 +3255,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_rgcn:
             case this.step_rgcn+1:
@@ -3261,6 +3270,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_rgcn_ptrn:
             case this.step_rgcn_ptrn+1:
@@ -3279,6 +3289,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
+              this.chartState.strengthlink = 0;
               break;
             default:
               this.chartState.dataset = this.error_data;
@@ -3291,6 +3302,7 @@
               this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
               this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
               this.chartState.axis_x_on_y = this.height;
+              this.chartState.strengthlink = 0;
 
           }
           },
@@ -3599,24 +3611,15 @@
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
                   .classed("d_001", true)
-          
 
-            ////////////////
-            // initiate force simulation
-            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
-            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+          // update axes based on active data
+          this.xScale = this.d3.scaleLinear()
+            .range([margin, this.width+margin])
+            .domain([0,this.chartState.domain_x]);
 
-          // tick to make sure dots are poistioned on first draw
-            self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           //.velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick);
-
-            //self.updateChart();
+          this.yScale = this.d3.scaleLinear()
+            .range([this.height, margin])
+            .domain([0,this.chartState.domain_y]);
 
           // define for updating axes and labels
             this.time_fade = 500;
@@ -3630,31 +3633,33 @@
             this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
             this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
 
-            self.drawDiff();
+            ////////////////
+            // initiate force simulation
+            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
+            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+            .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
 
+            this.link = this.svg.append("g")
+            .selectAll("line")
+            .data(this.links)
+            .enter().append("line").classed("link", true)
+            .attr("stroke",this.color_d100)
+            .attr("stroke-width", "4px");
+
+          // tick to make sure dots are poistioned on first draw
+            self.simJumpStart();
           },
-          drawDiff(){
-              const self = this;
-              let margin = 50;
-          
-            var line = this.d3.line()
-
-            var lines = this.links;
-            console.log(lines)
-
-            for (var i=0; i < lines.length; i++) {
-              this.svg.append("line")
-                .attr("class", "diff")
-                .datum(lines[i])
-                .attr("d", line)
-                .attr("x1", function(d)  { return self.xScale(d.error_x)})
-                .attr("x2", function(d)  { return self.xScale(d.error_x)})
-                .attr("y1", function(d) { return self.yScale(d.obs) })
-                .attr("y2", function(d) { return self.yScale(d.exp) })
-                .style("stroke", "red")
-                .style("stroke-width", "5px").enter();
-          }
-
+          simJumpStart(){
+            const self = this;
+            // tick to make sure dots are poistioned on first draw
+            self.simulation
+              .alpha(this.chartState.alpha)
+              .alphaDecay(this.chartState.aDecay)
+              //.velocityDecay(0.6)
+              .restart()
+              .on("tick", self.tick);
           },
           transitionAxes(element, end) {
             const self = this;
@@ -3769,7 +3774,7 @@
                 .style("opacity", 1)
             } 
           },
-          updateChart(direction) {
+          updateChart() {
             //controls decision making for the error >> beeswarm chart
             const self = this;
           let margin = 50;
@@ -3816,17 +3821,18 @@
 
         // modify forces to update chart
        // // first restart all forces and then define force velocity and ticking
-
       self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x",null)
           .force('y', null)
           .force("collide", null)
+          .force("link", null)
           .stop();
 
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(1))
+          .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
           .stop();
 
         // define how elements are added and remove from view
@@ -3836,9 +3842,6 @@
                 .duration(600)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
-                //.attr("r", 0)
-                //.attr("cx", this.width/2) //where they exit from
-                //.attr("cy", (this.height /2)) //where they exit from
                 .remove();
           chart
             .transition()
@@ -3850,8 +3853,6 @@
             chart.enter()
               .append("circle")
               .classed("bees", true)
-              //.attr("cx", this.width/2) // where they enter from
-              //.attr("cy", (this.height/2))// where they enter from
               .attr("cx", (d) => self.xScale(d[this.chartState.var_x]))
               .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
               .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
@@ -3860,8 +3861,6 @@
                 .duration(800)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", this.radius)
-                //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
-                //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
 
           // anything that should happen after points are updated
             chart
@@ -3871,26 +3870,23 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
-                //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
-                //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
-          ///////////
-          self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           //.velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick)
-            // high velocity decay with low alpha decay so it cools more slowly
+          /////////// run sim
+          self.simJumpStart();
           },
           tick() {
-            // ticking the simulation moves the dots. currently this is run each step
-            // needs to be modified to only run if the beeswarm data changes
+            // ticking the simulation moves the dots and link together
           const self = this;
           
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
+
+            this.link
+                .attr('x1', function(d) { return d.source.x; })
+                .attr('y1', function(d) { return  d.source.y; })
+                .attr('x2', function(d) { return  d.target.x; })
+                .attr('y2', function(d) { return  d.target.y; });
         }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
@@ -3903,13 +3899,9 @@
           console.log(response);
 
           ///////////
-          // assign force
-          // to do: implement with switch to make faster and set forces to be different on intial draw and update
-          // the biggest problem with force right now if that if the page is refreshed in the middle of the chart sequence
-          // it doesn't have enough heat to make it to the mid line because alpha is down to reduce jitter
-          // also work could be done to slow down the dots and exaggerate the transitions more, while still making sure they get to their home spots
+          // assign forces
 
-          // error chart
+          // error chart steps
           if (this.step <= this.step_error_exp) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
@@ -4001,20 +3993,19 @@
           this.setDataVars(); /// refresh data chart is based on
 
           // array of transition steps on down scroll
-          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-          // for upscroll
+          var down_transitions = [this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          // for upscroll subtract 1 from each step
           var up_transitions = down_transitions.map( function(value) { 
               return value - 1; 
           } );
+          // run update function only if the active step has a chart transition
           if (this.step >= this.step_error_exp) {
-            // run update function only if the active step has a chart transition
             if (response.direction == "down" && down_transitions.indexOf(this.step) !== -1){
               self.updateChart(response.direction);
             } else if (response.direction == "up" && up_transitions.indexOf(this.step) !== -1) {
               self.updateChart(response.direction);
             }
           };
-
 
           // update flubber
           if (this.step == 0 && response.direction == "down") {
@@ -4106,6 +4097,7 @@
           if (this.step == this.step_error_exp) {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
+            this.d3.selectAll(".link").remove()
             self.fadeOut(this.axis_label, this.time_fade);
             self.fadeOut(this.legend_predicted, this.time_fade);
           }  else if (this.step == this.step_error_obs ) {
@@ -4524,9 +4516,5 @@ figure.sticky.charts {
 .f_temp.ital {
   font-style: italic;
 }
-.diff {
-  stroke-width: 5px;
-  color: red;
 
-}
 </style>
