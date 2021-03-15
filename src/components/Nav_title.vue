@@ -1,37 +1,19 @@
 <template>
   <nav id="nav">
     <div>
-      <!-- p class="chapter">
-        Go to Chapter
-      </p -->
-      <!-- router-link
-        to="/"
-        @click.native="$scrollToTop"
-      >
-        1. Importance
-      </router-link -->
       <div class="overall-title">
         <div class="text-content">
           <h3 class="nav-title">
             How we<router-link
               to="/monitoring"
               @click.native="scrollToTop"
-            >
-              Monitor
-            </router-link><span class="dim_text">|</span><router-link
+            >Monitor</router-link><span class="dim_text">|</span><router-link
               to="/modeling"
               @click.native="scrollToTop"
-            >
-              Model
-            </router-link><br>Stream Temperature in the<br>
+            >Model</router-link><br>Stream Temperature in the<br>
             Delaware River Basin
           </h3>
           <br>
-          <!--p class="byline">
-            U.S. Geological Survey
-          <br>
-            Water Mission Area's Vizlab
-          </p -->
         </div>
       </div>
     </div>
@@ -50,24 +32,6 @@
           return {
             currentLinks: null,
           }
-        },
-        mounted() {
-            // this.setPanels();
-        },
-        methods: {
-          // setPanels() {
-          //   this.currentLinks = document.querySelectorAll('a[href="#/'+document.URL.split('/').pop()+'"]')
-          //   console.log("current links")
-          //   console.log(this.currentLinks)
-          //   this.currentLinks.forEach(function(link) {
-          //       console.log('classList')
-          //       console.log(link.classList)
-          //       // link.className += ' current-link'
-          //       link.classList.add('current-link')
-          //       console.log('classList2')
-          //       console.log(link.classList)
-          //   });
-          // }
         }
     }
 </script>
@@ -107,32 +71,24 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     color: #9c9c9c;
 }
 
-  // .current-link {
-  //   color: $plasmaYellow;
-  // }
   #nav a.router-link-active {
     color: $plasmaYellow;
     box-shadow: 0 2px 0 $plasmaYellow;
+    padding: 0px 5px;
   }
 
   #nav {
     text-align: left;
     padding: 0px 0 10px 0;
   }
-  @media (max-width: 600px) {
-    #nav a {
-      font-size: 24px;
-    }
-  }
-
 
   .nav-title {
     color: $offWhite;
     font-family: 'Georgia', Helvetica, Arial, sans-serif;
     line-height: 1.4;
-    font-size: 1.8em;
+    font-size: 24pt;
     @media screen and (max-width: 600px) {
-        font-size: 24px;
+        font-size: 18pt;
     }
 
   }
@@ -143,16 +99,14 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     box-shadow: 0 0.5px 0 #9c9c9c;
     color: #9c9c9c;
     position: relative;
-    padding: 0px 3px;
+    padding: 0px 5px;
     margin: 0px 7px;
     text-decoration: none;
-    // text-transform: uppercase;
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
   }
 
-  // #nav a:visited {
-  //   font-weight: 400;
-  //   color: $plasmaYellow;
-  // }
   #nav a:focus {
     color: $plasmaYellow;
     outline: none;
@@ -165,7 +119,6 @@ $monotoneBlueTransparent: rgba(76,101,110, .2);
     box-shadow: None;
     border-radius: 5px;
     padding: 5px;
-    // transition: background-color .2s ease;
     cursor: pointer;
   }
 
