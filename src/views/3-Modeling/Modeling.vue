@@ -3641,15 +3641,22 @@
             .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
             .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
 
-            this.link = this.svg.append("g")
+            // draw links
+            self.drawDiff();
+
+          // tick to make sure dots are poistioned on first draw
+            self.simJumpStart();
+          },
+          drawDiff() {
+            const self = this;
+
+         this.link = this.svg.append("g")
             .selectAll("line")
             .data(this.links)
             .enter().append("line").classed("link", true)
             .attr("stroke",this.color_d100)
             .attr("stroke-width", "4px");
 
-          // tick to make sure dots are poistioned on first draw
-            self.simJumpStart();
           },
           simJumpStart(){
             const self = this;
@@ -4097,7 +4104,6 @@
           if (this.step == this.step_error_exp) {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
-            this.d3.selectAll(".link").remove()
             self.fadeOut(this.axis_label, this.time_fade);
             self.fadeOut(this.legend_predicted, this.time_fade);
           }  else if (this.step == this.step_error_obs ) {
