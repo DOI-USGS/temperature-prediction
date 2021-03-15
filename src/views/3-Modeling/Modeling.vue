@@ -2786,7 +2786,7 @@
 
             // beeswarm
             step_start: null,
-            radius: 6,
+            radius: 10,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2871,10 +2871,10 @@
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 5) : (this.step_rgcn_ptrn + 2);
 
         // colors for chart
-          this.color_d100 = "#5191bd";
-          this.color_d001 = '#BE3D7D';
-          this.color_obs = "#FAB62F";  //"#5191bd" '#BE3D7D'
-          this.color_exp = "#FAB62F"; 
+          this.color_d100 = "#FAB62F"; //"#5191bd" pink
+          this.color_d001 = "#FAB62F";
+          this.color_obs = "#5191bd";  //"#5191bd" '#BE3D7D' pink
+          this.color_exp = "#5191bd"; // "#FAB62F" yellow
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
           this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -3689,12 +3689,12 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]); //"#292b30"
+            .range([this.color_d001, "#292b30", "#292b30", this.color_exp]); //"#292b30"
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"]) // took out d002
-            .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
+            .range([this.color_d001,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
           // generate axes
@@ -4175,6 +4175,7 @@
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
           .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
            .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+           .attr("stroke-width", "3px")
 
         // modify forces to update chart
        // // first restart all forces and then define force velocity and ticking
