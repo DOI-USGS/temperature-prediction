@@ -3182,7 +3182,7 @@
               this.chartState.axis_x = 0;
               this.chartState.axis_y = 0;
               this.chartState.axis_x_on_y = (this.height/2)-50;
-              this.chartState.strengthlink = null;
+              this.chartState.strengthlink = 0;
               break;
             case this.step_rmse+1:
               this.chartState.dataset = this.error_data;
@@ -3633,9 +3633,17 @@
             this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
             this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
 
+            ////////////////
+            // initiate force simulation
+            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
+            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+            .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
+
+      
             // draw links
             self.drawDiff();
-            self.updateChart();
 
           // tick to make sure dots are poistioned on first draw
             self.simJumpStart();
@@ -3898,7 +3906,9 @@
           this.step = response.index;
           console.log(response);
 
-          ///////////assign forces
+          ///////////
+          // assign forces
+
           // error chart steps
           if (this.step <= this.step_error_exp) {
             this.chartState.strengthy = 1;
@@ -3912,7 +3922,7 @@
             this.chartState.radius = 0;
             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.08;
+             this.chartState.aDecay = 0.05;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
@@ -4031,6 +4041,7 @@
           if (response.direction == "down"){
             if (this.step == this.step_error_exp) {
                 self.drawAxes("error"); // draw axes
+                self.fadeIn(this.d3.selectAll(".link"), this.time_fade);
                 self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
                 self.fadeIn(this.legend_predicted, this.time_fade); // show predicted in legend
 
@@ -4095,6 +4106,7 @@
           if (this.step == this.step_error_exp) {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
+            self.fadeOut(this.d3.selectAll(".link"), this.time_fade);
             self.fadeOut(this.axis_label, this.time_fade);
             self.fadeOut(this.legend_predicted, this.time_fade);
           }  else if (this.step == this.step_error_obs ) {
