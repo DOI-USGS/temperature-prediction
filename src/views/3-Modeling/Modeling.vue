@@ -2771,7 +2771,7 @@
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
-            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs"},
+            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs", obs: "obs", exp: "exp"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
             label_o_rmse: 0, // rmse axis labels
@@ -2797,31 +2797,18 @@
             rmse_ann: [],
             error_data: [],
             simulation: null,
-            texture: null,
             yAxis: null,
             xAxis: null,
+            link: null,
 
             // scroll options
             scroller: null,
             step: 0, // causing elements to refresh at step 0
-            current_step: null,
-            last_step: 70,
-            now_step: null,
 
             // flubber
             flubber_dict: {},
             flubber_id_order: [],
             current_flubber_id: null,
-
-            step_error_exp: null, 
-            step_error_obs: null,
-            step_rmse: null,
-            step_ann: null,
-            step_ann_exp : null,
-            step_rnn: null,
-            step_rgcn: null,
-            step_rgcn_ptrn: null,
-            step_end: null,
 
             time_fade: 500,
             axis_label: null,
@@ -2871,13 +2858,7 @@
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
-          // // set header based on refresh scroll
-          //  if (this.step <= 0){
-          //    this.d3.select("figure.intro").classed("sticky", true); 
-          // }
-
           /////////// stage chart step sequence
-          // this.start_bees is the step where the error plot appears
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
@@ -2890,14 +2871,14 @@
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 5) : (this.step_rgcn_ptrn + 2);
 
         // colors for chart
-          this.color_d100 = '#BE3D7D';
-          this.color_d001 = "#FAB62F";
-          this.color_obs = "#FAB62F";  //
-          this.color_exp = "#5191bd"; //blue is predicted, yellow is observed
+          this.color_d100 = "#5191bd";
+          this.color_d001 = '#BE3D7D';
+          this.color_obs = "#FAB62F";  //"#5191bd" '#BE3D7D'
+          this.color_exp = "#FAB62F"; 
 
-        // once everything is set up and the component is added to the DOM, read in data and make it dance
-        this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
-        this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+          // once everything is set up and the component is added to the DOM, read in data and make it dance
+          this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
+          this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         },
         
         methods: {
@@ -2913,9 +2894,8 @@
             // read in data 
             let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType)];
-
-           // manipulate data and deploy beeswarm once data are in
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_links.csv", this.d3.autoType)];
             Promise.all(promises).then(self.callback); 
           },
           callback(data) {
@@ -2924,15 +2904,16 @@
             this.rmse_exp = data[0]; // by model typ, e.g. ANN, RNN, RGCN, RGCN_ptrn
             this.rmse_ann = data[1]; // by model type x experiment with only data from d100 experiment, same variable names
             this.error_data = data[2];
+            this.links = data[3];
 
             // computed properties
-            this.paddedRadius = this.radius* 1.4;
+            this.paddedRadius = this.radius* 1.5;
 
           // define initial state of chart - default is an error chart to start
             this.chartState.strengthr = 1;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
-            this.chartState.radius = 0;
+            //this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 1;
             this.chartState.aDecay = 0.1;
 
@@ -2940,7 +2921,6 @@
             this.setChartState(); // pull fadein/out start state based on step
             this.setDataVars(); // pull data for first draw
             this.makeBeeswarm(); // build chart based on step
-
           },
           // resize to keep scroller accurate with window size changes
           resize () {
@@ -2951,7 +2931,6 @@
             //this.marginX = bounds.width * 0.1
             //this.marginY = bounds.height * 0.1 
             this.scroller.resize()
-
           },
           // set up flubber svg
           setFlubber() {
@@ -3350,6 +3329,7 @@
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3362,6 +3342,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 1;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3373,7 +3354,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3386,6 +3368,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse+2:
                       case this.step_rmse+3:
@@ -3399,6 +3382,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3414,6 +3398,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3434,6 +3419,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3452,6 +3438,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3469,6 +3456,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3490,6 +3478,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3502,6 +3491,7 @@
                         this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
                         this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 0;
 
                   }
               } else {
@@ -3517,6 +3507,7 @@
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3529,6 +3520,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 1;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3540,7 +3532,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;;
+                        this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3553,6 +3546,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse+2:
                         this.chartState.dataset = this.error_data;
@@ -3565,6 +3559,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3579,6 +3574,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3595,6 +3591,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3609,6 +3606,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3623,6 +3621,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3641,6 +3640,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = (this.height/2)-50;
+                        this.chartState.strengthlink = 0;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3653,6 +3653,7 @@
                         this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
                         this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
                         this.chartState.axis_x_on_y = this.height;
+                        this.chartState.strengthlink = 0;
 
                   }
               }
@@ -3674,9 +3675,7 @@
             .append("g")
             .attr('transform', `translate(50, 50)`);
 
-          ////////////////////
-          // set scales
-
+          ////////////////////// set scales
           // x axis 
           this.xScale = this.d3.scaleLinear()
             .range([margin, this.width+margin])
@@ -3690,7 +3689,7 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, this.color_obs, this.color_exp]); //"#292b30"
+            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]); //"#292b30"
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
@@ -3829,7 +3828,7 @@
 
                   var error_fill = this.d3.scaleOrdinal()
                   .domain(["Predicted","Observed"])
-                  .range([this.color_exp, this.color_obs]);
+                  .range([this.color_exp,"#292b30"]);
 
               legend_error.append("text")
                 .text("Temperature")
@@ -3962,27 +3961,15 @@
                   this.d3.selectAll("g.legend-rmse:nth-child(3)") //
                   .style("opacity", this.o_exp)
                   .classed("d_001", true)
-          
-          if (this.step >= this.step_error_exp) {
 
-            ////////////////
-            // initiate force simulation
-            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
-            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
-            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(1))
-            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+          // update axes based on active data
+          this.xScale = this.d3.scaleLinear()
+            .range([margin, this.width+margin])
+            .domain([0,this.chartState.domain_x]);
 
-          // tick to make sure dots are poistioned on first draw
-          if (this.step >= this.step) {
-            self.simulation
-            .alpha(1)
-            .alphaDecay(0.1)
-            .velocityDecay(0.6)
-            .restart()
-              .on("tick", self.tick)
-          }
-
-          };
+          this.yScale = this.d3.scaleLinear()
+            .range([this.height, margin])
+            .domain([0,this.chartState.domain_y]);
 
           // define for updating axes and labels
             this.time_fade = 500;
@@ -3996,6 +3983,40 @@
             this.legend_training_d100 = this.d3.selectAll("g.legend-rmse.d_100"); //
             this.legend_training_d001 = this.d3.selectAll("g.legend-rmse.d_001"); // 0.1% dot and label
 
+            ////////////////
+            // initiate force simulation
+            self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg })
+            .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
+            .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
+            .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
+            .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
+      
+            // draw links
+            self.drawDiff();
+
+          // tick to make sure dots are poistioned on first draw
+            self.simJumpStart();
+          },
+          drawDiff() {
+            const self = this;
+
+         this.link = this.svg.append("g")
+            .selectAll("line")
+            .data(this.links)
+            .enter().append("line").classed("link", true)
+            .attr("stroke",this.color_d100)
+            .attr("stroke-width", "4px");
+
+          },
+          simJumpStart(){
+            const self = this;
+            // tick to make sure dots are poistioned on first draw
+            self.simulation
+              .alpha(this.chartState.alpha)
+              .alphaDecay(this.chartState.aDecay)
+              //.velocityDecay(0.6)
+              .restart()
+              .on("tick", self.tick);
           },
           transitionAxes(element, end) {
             const self = this;
@@ -4110,7 +4131,7 @@
                 .style("opacity", 1)
             } 
           },
-          updateChart(direction) {
+          updateChart() {
             //controls decision making for the error >> beeswarm chart
             const self = this;
           let margin = 50;
@@ -4153,13 +4174,22 @@
           let chart = this.svg.selectAll(".bees") // puts out error on intial draw until scrolled
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
           .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
-                .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+           .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
         // modify forces to update chart
+       // // first restart all forces and then define force velocity and ticking
+      self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
+          .force("x",null)
+          .force('y', null)
+          .force("collide", null)
+          .force("link", null)
+          .stop();
+
         self.simulation = this.d3.forceSimulation(self.chartState.dataset, function(d) { return d.seg }) // is the key needed here?
           .force("x", this.d3.forceX((d) => self.xScale(d[this.chartState.var_x])).strength(this.chartState.strengthx))
           .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthy))
           .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr).iterations(1))
+          .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
           .stop();
 
         // define how elements are added and remove from view
@@ -4169,9 +4199,6 @@
                 .duration(600)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
-                //.attr("r", 0)
-                //.attr("cx", this.width/2) //where they exit from
-                //.attr("cy", (this.height /2)) //where they exit from
                 .remove();
           chart
             .transition()
@@ -4183,8 +4210,6 @@
             chart.enter()
               .append("circle")
               .classed("bees", true)
-              //.attr("cx", this.width/2) // where they enter from
-              //.attr("cy", (this.height/2))// where they enter from
               .attr("cx", (d) => self.xScale(d[this.chartState.var_x]))
               .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
               .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
@@ -4193,8 +4218,6 @@
                 .duration(800)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", this.radius)
-                //.attr("cx", (d) => self.xScale(d[this.chartState.var_x])) // this made them fly across the screen before fully appearing?
-                //.attr("cy", (d) => self.xScale(d[this.chartState.var_y]))
 
           // anything that should happen after points are updated
             chart
@@ -4204,44 +4227,23 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
-                //.attr("cx", (d) => self.xScale(d[this.chartState.measure]))// where they move to
-                //.attr("cy", (this.height /2 ) - this.margin/2);// where they move to
 
-          ///////////
-          // define force velocity and ticking
-
-         // array of transition steps
-          var down_transitions = [70, this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
-          var up_transitions = [70-1, this.now_step, this.step_error_exp-1, this.step_error_obs-1, this.step_rmse-1,this.step_rmse+1-1,this.step_rmse+2-1, this.step_ann-1, this.step_ann_exp-1, this.step_rnn-1, this.step_rgcn-1, this.step_rgcn_ptrn-1];
-
-          // tick simulation only if the active step has a chart transition
-          if (direction == "down" && down_transitions.indexOf(this.step) !== -1){
-            
-           self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           //.velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick)
-            // high velocity decay with low alpha decay so it cools more slowly
-          } else if (direction == "up" && up_transitions.indexOf(this.step) !== -1) {
-             
-           self.simulation
-           .alpha(this.chartState.alpha)
-           .alphaDecay(this.chartState.aDecay)
-           //.velocityDecay(0.6)
-           .restart()
-            .on("tick", self.tick)
-          }
+          /////////// run sim
+          self.simJumpStart();
           },
           tick() {
-            // ticking the simulation moves the dots. currently this is run each step
-            // needs to be modified to only run if the beeswarm data changes
+            // ticking the simulation moves the dots and link together
           const self = this;
           
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
+
+            this.link
+                .attr('x1', function(d) { return d.source.x; })
+                .attr('y1', function(d) { return  d.source.y; })
+                .attr('x2', function(d) { return  d.target.x; })
+                .attr('y2', function(d) { return  d.target.y; });
         }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
@@ -4251,171 +4253,197 @@
 
           // update step variable to match step in view
           this.step = response.index;
-          console.log(response);
+          //console.log(response);
 
-          ///////////
-          // assign force
-          // to do: implement with switch to make faster and set forces to be different on intial draw and update
-          // the biggest problem with force right now if that if the page is refreshed in the middle of the chart sequence
-          // it doesn't have enough heat to make it to the mid line because alpha is down to reduce jitter
-          // also work could be done to slow down the dots and exaggerate the transitions more, while still making sure they get to their home spots
+          ///////////          // assign forces
+          // error chart steps
           if (this.mobileView) {
-              // error chart
-              if (this.step <= this.step_error_exp) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.05;
-              }
-              if (this.step === this.step_error_obs ) {
-                this.chartState.radius = 0;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.1;
-              }
-              // push to overlap as single RMSE
-              if (this.step === this.step_rmse) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.05;
-              }
-              if (this.step === this.step_rmse+1) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = .3;
-                this.chartState.aDecay = 0.05;
+          if (this.step <= this.step_error_exp) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+           if (this.step === this.step_error_obs ) {
+             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+           if (response.direction == "up" && this.step === this.step_error_obs ) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          // push to overlap as single RMSE
+          if (this.step === this.step_rmse) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 2;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (response.direction == "up" && this.step === this.step_rmse) {
+            this.chartState.strengthy = 1.5;
+            this.chartState.strengthy = 2;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (this.step === this.step_rmse+1) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
 
-              }
-              if (this.step === this.step_rmse+2) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = .3;
-                this.chartState.aDecay = 0.05;
-              }
-              if (this.step === this.step_rmse+3) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = .3;
-                this.chartState.aDecay = 0.05;
-              }
-              // intro beeswarm, adding experiments
-              // decrease alpha to reduce jitteriness
-              // corresponding decrease in alphaDecay to allow "cool down" 
-              if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-                this.chartState.strengthy = 0.9;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.3;
-                this.chartState.aDecay = 0.05;
-              }
-              // RNN
-              if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
-              // RGCN
-              if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
-              // RGCN to end
-              if (this.step >= this.step_rgcn_ptrn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
-          } else {
-              // error chart
-              if (this.step <= this.step_error_exp) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.05;
-              }
-              if (this.step === this.step_error_obs ) {
-                this.chartState.radius = 0;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.1;
-              }
-              // push to overlap as single RMSE
-              if (this.step === this.step_rmse) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = 1;
-                this.chartState.aDecay = 0.05;
-              }
-              if (this.step === this.step_rmse+1) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = .3;
-                this.chartState.aDecay = 0.05;
+          }
+          if (this.step === this.step_rmse+2) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
+          }
+    
+          // intro beeswarm, adding experiments
+          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
+            this.chartState.strengthy = 0.9;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.3;
+            this.chartState.aDecay = 0.05;
+          }
+          // RNN
+          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
+          // RGCN
+          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
+          // RGCN to end
+          if (this.step >= this.step_rgcn_ptrn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
+          }else {
+         if (this.step <= this.step_error_exp) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+           if (this.step === this.step_error_obs ) {
+             this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+            this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+           if (response.direction == "up" && this.step === this.step_error_obs ) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          // push to overlap as single RMSE
+          if (this.step === this.step_rmse) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 2;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (response.direction == "up" && this.step === this.step_rmse) {
+            this.chartState.strengthy = 1.5;
+            this.chartState.strengthy = 2;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 0;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.05;
+          }
+          if (this.step === this.step_rmse+1) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
 
-              }
-              if (this.step === this.step_rmse+2) {
-                this.chartState.strengthy = 1;
-                this.chartState.radius = 0;
-                this.chartState.strengthr = 1;
-                this.chartState.alpha = .3;
-                this.chartState.aDecay = 0.05;
-              }
-              // intro beeswarm, adding experiments
-              // decrease alpha to reduce jitteriness
-              // corresponding decrease in alphaDecay to allow "cool down" 
-              if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-                this.chartState.strengthy = 0.9;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.3;
-                this.chartState.aDecay = 0.05;
-              }
-              // RNN
-              if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
-              // RGCN
-              if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
-              // RGCN to end
-              if (this.step >= this.step_rgcn_ptrn) {
-                this.chartState.strengthy = 0.2;
-                this.chartState.radius = this.paddedRadius;
-                this.chartState.alpha = 0.2;
-                this.chartState.aDecay = 0.15;
-              }
+          }
+          if (this.step === this.step_rmse+2) {
+            this.chartState.strengthy = 1;
+            this.chartState.radius = 0;
+             this.chartState.strengthr = 1;
+             this.chartState.alpha = .3;
+             this.chartState.aDecay = 0.05;
+          }
+
+          // intro beeswarm, adding experiments
+          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
+            this.chartState.strengthy = 0.9;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.3;
+            this.chartState.aDecay = 0.05;
+          }
+          // RNN
+          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
+          // RGCN
+          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
+          // RGCN to end
+          if (this.step >= this.step_rgcn_ptrn) {
+            this.chartState.strengthy = 0.2;
+            this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = 0.2;
+            this.chartState.aDecay = 0.15;
+          }
           }
           
 
-          /////////// REDRAW
-          // now redraw beeswarm chart and modify force based on active data
-          // only redraw if the data or forces change
-          //this.chartState.strengthy = .2;
+          /////////// REDRAW beessawrm
           this.chartState.strengthx = 1;
-          this.setDataVars(); /// refresh data chart is based on
+          this.setDataVars(); /// refresh data chart is based on step
 
-          if (this.step >= this.step_start ) {
-            self.updateChart(response.direction);
-          }
+          // array of transition steps on down scroll
+          var down_transitions = [this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
+          // for upscroll subtract 1 from each step
+          var up_transitions = down_transitions.map( function(value) { 
+              return value - 1; 
+          } );
+          // run update function only if the active step has a chart transition
+          if (this.step >= this.step_error_exp) {
+            if (response.direction == "down" && down_transitions.indexOf(this.step) !== -1){
+              self.updateChart(response.direction);
+            } else if (response.direction == "up" && up_transitions.indexOf(this.step) !== -1) {
+              self.updateChart(response.direction);
+            }
+          };
 
-          ///////////
-          // toggle intro header to stepped headers
-          // this is necessary because the first view is not in the same sticky scolling structure as the rest
-
+          // update flubber
           if (this.step == 0 && response.direction == "down") {
 
             // determine initial model id and initial annotation id
@@ -4441,6 +4469,7 @@
           if (response.direction == "down"){
             if (this.step == this.step_error_exp) {
                 self.drawAxes("error"); // draw axes
+                self.fadeIn(this.d3.selectAll(".link"), this.time_fade);
                 self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
                 self.fadeIn(this.legend_predicted, this.time_fade); // show predicted in legend
 
@@ -4473,7 +4502,6 @@
           this.animateFlubber(response.element.id, response.direction);
 
         },
-        
         handleStepExit(response) {
           const self = this;
           // changes css for class
@@ -4505,6 +4533,7 @@
           if (this.step == this.step_error_exp) {
             self.drawAxes("error_up");
             this.d3.selectAll(".bees").remove()
+            self.fadeOut(this.d3.selectAll(".link"), this.time_fade);
             self.fadeOut(this.axis_label, this.time_fade);
             self.fadeOut(this.legend_predicted, this.time_fade);
           }  else if (this.step == this.step_error_obs ) {
@@ -4528,7 +4557,6 @@
           } 
         }
         },
-        
         fadeOut(element, time) {
           element
           .transition()
