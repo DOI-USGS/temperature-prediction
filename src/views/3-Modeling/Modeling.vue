@@ -2743,8 +2743,7 @@
 
             // beeswarm
             step_start: 13,
-            radius: 7,
-            radius_rmse: 5,
+            radius: 6,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2755,7 +2754,6 @@
             rmse_ann: [],
             error_data: [],
             simulation: null,
-            texture: null,
             yAxis: null,
             xAxis: null,
             link: null,
@@ -2763,9 +2761,6 @@
             // scroll options
             scroller: null,
             step: 0, // causing elements to refresh at step 0
-            current_step: null,
-            last_step: 70,
-            now_step: null,
 
             // flubber
             flubber_dict: {},
@@ -2817,7 +2812,6 @@
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
 
           /////////// stage chart step sequence
-          // this.start_bees is the step where the error plot appears
           // update data and trigger events based on the active step
           this.step_error_exp = this.step_start; // the error chart appears
           this.step_error_obs = this.step_error_exp + 1; // highlight difference between observed and expected
@@ -2827,13 +2821,12 @@
           this.step_rnn = this.step_ann_exp + 5; // RNN with some flubber and narrative steps
           this.step_rgcn = this.step_rnn + 3; // RGCN
           this.step_rgcn_ptrn = this.step_rgcn + 3; //RGCN_ptrn
-          this.step_end = this.step_rgcn_ptrn +2;
 
         // colors for chart
           this.color_d100 = "#5191bd";
           this.color_d001 = '#BE3D7D';
           this.color_obs = "#FAB62F";  //"#5191bd" '#BE3D7D'
-          this.color_exp = "#FAB62F"; //blue is expected, yellow is observed
+          this.color_exp = "#FAB62F"; 
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
           this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -2855,8 +2848,6 @@
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_links.csv", this.d3.autoType)];
-
-           // manipulate data and deploy beeswarm once data are in
             Promise.all(promises).then(self.callback); 
           },
           callback(data) {
@@ -2877,14 +2868,11 @@
             //this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 1;
             this.chartState.aDecay = 0.1;
-            this.chartState.diff_obs = this.chart_y.obs;
-            this.chartState.diff_exp = this.chart_y.exp;
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
             this.setDataVars(); // pull data for first draw
             this.makeBeeswarm(); // build chart based on step
-
           },
           // resize to keep scroller accurate with window size changes
           resize () {
@@ -2895,7 +2883,6 @@
             //this.marginX = bounds.width * 0.1
             //this.marginY = bounds.height * 0.1 
             this.scroller.resize()
-
           },
           // set up flubber svg
           setFlubber() {
@@ -3303,7 +3290,6 @@
               this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
               this.chartState.axis_x_on_y = this.height;
               this.chartState.strengthlink = 0;
-
           }
           },
           makeBeeswarm() {
@@ -3323,9 +3309,7 @@
             .append("g")
             .attr('transform', `translate(50, 50)`);
 
-          ////////////////////
-          // set scales
-
+          ////////////////////// set scales
           // x axis 
           this.xScale = this.d3.scaleLinear()
             .range([margin, this.width+margin])
@@ -3640,7 +3624,6 @@
             .force('y', this.d3.forceY((d) => self.yScale(d[this.chartState.var_y])).strength(this.chartState.strengthx))
             .force("collide", this.d3.forceCollide(this.chartState.radius).strength(this.chartState.strengthr))
             .force("link", this.d3.forceLink(this.links).id(function(d) { return d.seg; }).strength(this.chartState.strengthlink))
-
       
             // draw links
             self.drawDiff();
@@ -3904,11 +3887,9 @@
 
           // update step variable to match step in view
           this.step = response.index;
-          console.log(response);
+          //console.log(response);
 
-          ///////////
-          // assign forces
-
+          ///////////          // assign forces
           // error chart steps
           if (this.step <= this.step_error_exp) {
             this.chartState.strengthy = 1;
@@ -3964,8 +3945,6 @@
           }
 
           // intro beeswarm, adding experiments
-          // decrease alpha to reduce jitteriness
-          // corresponding decrease in alphaDecay to allow "cool down" 
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
@@ -3995,10 +3974,8 @@
           }
 
           /////////// REDRAW beessawrm
-          // now redraw beeswarm chart and modify force based on active data
-          // if on a step where the data changes
           this.chartState.strengthx = 1;
-          this.setDataVars(); /// refresh data chart is based on
+          this.setDataVars(); /// refresh data chart is based on step
 
           // array of transition steps on down scroll
           var down_transitions = [this.now_step, this.step_error_exp, this.step_error_obs, this.step_rmse,this.step_rmse+1,this.step_rmse+2, this.step_ann, this.step_ann_exp, this.step_rnn, this.step_rgcn, this.step_rgcn_ptrn];
@@ -4074,7 +4051,6 @@
           this.animateFlubber(response.element.id, response.direction);
 
         },
-        
         handleStepExit(response) {
           const self = this;
           // changes css for class
