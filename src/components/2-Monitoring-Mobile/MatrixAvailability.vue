@@ -33005,12 +33005,12 @@
       <g id="legend_text">
         <text
           class="explainer-minor-text"
-          transform="translate(120.1 75.1)"
-        >yearly</text>
+          transform="translate(39 75.1)"
+        >observed yearly</text>
         <text
           class="explainer-minor-text"
           transform="translate(528.1 75.1)"
-        >daily</text>
+        >observed daily</text>
       </g>
     </svg>
     <svg class="filter">

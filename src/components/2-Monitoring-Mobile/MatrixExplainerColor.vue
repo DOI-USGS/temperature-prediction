@@ -1500,7 +1500,6 @@
         </g>
       </g>
       <g 
-        v-if="!mobileView"
         id="barchart_bars"
       >
         <g>
@@ -1779,7 +1778,7 @@
           />
         </g>
       </g>
-      <g
+      <!-- g
         v-if="!mobileView"
         id="barchart_labels"
         transform="translate(-1, 0)"
@@ -1952,7 +1951,7 @@
           class="cls-34"
           transform="translate(666.4 765.1)"
         >0</text>
-      </g>
+      </g -->
       <g id="legend">
         <rect
           class="cls-35"
@@ -1962,7 +1961,8 @@
           height="89.08"
         />
       </g>
-      <g id="legend_text">
+      <g id="legend_text"
+        transform="translate(0, 10)">
         <text
           class="viz-comment"
           transform="translate(207.6 533.2)"

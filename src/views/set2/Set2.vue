@@ -82,7 +82,7 @@
             Variation in the <span class="yellow">availability</span> of stream temperature data
           </p>
           <p class="viz-subtitle">
-            Visualizing the count of temperature measurements in stream reaches across the basin.
+            Visualizing the count of temperature observations in stream reaches across the basin.
           </p>
           <p class="viz-subtitle">
             Hover over a stream reach on the map to see the amount of data available for that reach over time.
@@ -1151,7 +1151,7 @@
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
               .attr("y", 17)
-              .text("1 daily value")
+              .text("Observed yearly")
 
           // append legend rectangle
           legendGroup.append("rect")
@@ -1167,7 +1167,7 @@
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
               .attr("y", 17)
-              .text("365 daily values")
+              .text("Observed daily")
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
