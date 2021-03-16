@@ -1,6 +1,6 @@
 <template>
   <div id="visualization">
-    <h1>Delaware River Basin Temperature Prediction</h1>
+    <h1>How we Monitor and Model Stream Temperature in the Delaware River Basin</h1>
     <!-- Eventually, stack all the components for the navigation bar in here -->
   </div>
 </template>
@@ -11,8 +11,6 @@
   export default {
     name: "Vizualization",
     components: {
-      //Nav: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "nav"*/ "./components/Nav"),
-      //Importance: () => import( /* webpackPreload: true */ /*webpackChunkName: "importance"*/ "./1-Importance/Importance")
     }
   }
 </script>

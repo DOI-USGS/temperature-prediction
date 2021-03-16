@@ -7,11 +7,12 @@
           :href="LinkOne"
         >
           <figure>
-            <figcaption>Water Science and Management in the Delaware River Basin</figcaption>
+            <figcaption>Water Science and Management in the DRB</figcaption>
             <img
               src="@/assets/components/PreFooterVisualizationsLinks/images/DRBthumb.png"
               alt=""
               loading="lazy"
+              class="link_image"
             >
           </figure>
         </a>
@@ -24,6 +25,7 @@
               src="@/assets/components/PreFooterVisualizationsLinks/images/Gages.png"
               alt=""
               loading="lazy"
+              class="link_image"
             >
           </figure>
         </a>
@@ -76,6 +78,9 @@
         padding: 0.5em;
         max-width: 20rem;
       }
+    }
+    .link_image {
+      border-radius: 5px;
     }
   }
 }

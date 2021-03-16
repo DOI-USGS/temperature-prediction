@@ -4,7 +4,7 @@
       :href="gitHubRepositoryLink"
       target="_blank"
       aria-label="github link"
-    >Get the {{ projectTitle }} code
+    >Get the Temperature Prediction Visualization code
       <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'github' }" />
     </a>
   </div>
