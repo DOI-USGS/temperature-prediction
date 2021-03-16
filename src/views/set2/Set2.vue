@@ -33,7 +33,7 @@
         <div class="figure-content">
           <div
             id="DRB_map_c2p1"
-            class="figure map"
+            class="figure map_monitoring"
           />
         </div>
       </div>
@@ -416,7 +416,7 @@
           tempColor: null,
           temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
-          chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
+          chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
           matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
@@ -446,7 +446,7 @@
         this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
 
         this.chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
-        this.chart_height = window.innerHeight * 0.25 - this.chart_margin.top - this.chart_margin.bottom;
+        this.chart_height = window.innerHeight * 0.3 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
         this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; //window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
       
@@ -937,7 +937,7 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.chart_width * 0.93 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.chart_width * 0.967 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
               .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
@@ -2603,7 +2603,10 @@ $dimGray: #9c9c9c;
 }
 .chartAxisText {
   fill: $dimGray;
-  font-size: 1.1vh;
+  font-size: 10pt;
+  @media screen and (max-height: 770px) {
+          font-size: 7pt;
+        }
 }
 .tooltip.map {
   fill: #ffffff;

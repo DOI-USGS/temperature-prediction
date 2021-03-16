@@ -279,7 +279,16 @@ h3{
     @media screen and (max-width: 600px) {
         max-width: 300px;
     }
-
+  }
+  .map_monitoring {
+    min-width: 400px;
+    max-width: 600px;
+    max-height: 100%;
+    flex: 1 1 30%;
+    justify-self: center;
+    @media screen and (max-width: 600px) {
+        max-width: 300px;
+    }
   }
   .map_matrix {
     justify-self: center;
