@@ -4192,14 +4192,14 @@
         // attributes and positioning define the starting point
           chart.exit()
               .transition()
-                .duration(600)
+                .duration(500)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 .remove();
 
           chart
             .transition()
-            .duration(800)
+            .duration(500)
             .attr("r", this.radius)
             .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
             .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
@@ -4227,25 +4227,6 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
-
-        /* // make expected nodes fixed when observed values are added...need to figure out how to selectively apply fx and fy to only some of the nodes (class fixed)
-        if ( this.step == this.step_error_obs){
-            self.simulation
-              .attr("fx", function(d) { 
-                if (d.fixed == "true") { 
-                  return self.xScale(d[this.chartState.var_x]) 
-                  } else {
-                    return null
-                  } 
-              })
-              .attr("fy",  function(d) { 
-                if (d.fixed == "true") { 
-                  return self.yScale(d[this.chartState.var_y]) 
-                  } else {
-                    return null
-                  } 
-              })
-        }  */
 
           /////////// run sim
           self.simJumpStart();
