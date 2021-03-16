@@ -4652,7 +4652,7 @@ $dimGray: #9c9c9c;
     // max-width: 1000px;
     margin: 0 auto;
     padding: 2em;   
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
         padding: 10px;
     }  
   }
@@ -4664,7 +4664,7 @@ article {
   top: -110vh;
 }
 .viz-title-scrolly {
- @media screen and (max-width: 600px) {
+ @media screen and (max-width: 770px) {
     font-size: 14pt;
 }
 }
@@ -4679,7 +4679,7 @@ article {
   z-index: 1;
   height: 100vh;
   border: 1px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 770px) {
          width: 90%;
          left: 0vw;
         }
@@ -4688,7 +4688,7 @@ article {
     padding: 1em;
     background-color: $boxCharcoal;
     border-radius: 5px;
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
          font-size: 12.5pt;
     }
   }
@@ -4734,11 +4734,11 @@ figure.sticky.charts {
   top: 10vh; // leaving top for sticky header
   height: 90vh;
   width: auto;
-  @media screen and (min-height: 600px) {
+  @media screen and (min-height: 770px) {
         grid-template-rows: 40% 60%;
         grid-template-columns: 1.5fr 3fr 2%;
         }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 770px) {
         top: 5vh;
         height: 95vh;
         grid-template-rows: 30% 30% 35%;
@@ -4753,11 +4753,11 @@ figure.sticky.charts {
     width: auto;
     min-width: 0;
     min-height: 0;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 770px) {
         grid-column: 2 / 2;
         grid-row: 1 / 1;
         }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
         grid-column: 2 / 2;
         grid-row: 1 / 1;
     }
@@ -4772,11 +4772,11 @@ figure.sticky.charts {
   #error-container {
     grid-column: 3 / 3;
     grid-row: 1 / 1;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 770px) {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }
@@ -4788,11 +4788,11 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 770px) {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }
@@ -4804,11 +4804,11 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 770px) {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 770px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }

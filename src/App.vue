@@ -270,9 +270,9 @@ h3{
   }
 
   .map {
-    min-width: 400px;
-    max-width: 600px;
-    max-height: 90vh;
+    min-width: 600px;
+    max-width: 800px;
+    max-height: 150vh;
     flex: 1 1 30%;
     justify-self: center;
 
@@ -342,7 +342,7 @@ h3{
 .legend-text {
     fill: $dimGray;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 10pt;
+    font-size: 12pt;
   }
 .explainer-minor-text {
     fill: $dimGray;

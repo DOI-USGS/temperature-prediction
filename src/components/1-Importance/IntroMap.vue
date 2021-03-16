@@ -1,24 +1,8 @@
 <template>
-  <div>
-    <!-- div class="viz-title-wrapper text-content">
-      <h3 class="viz-title">
-        The Delaware River Basin
-      </h3>
-      <p class="viz-subtitle">
-        Spanning New York, New Jersey, Pennsylvania, and Delaware
-      </p>
-    </div -->
-    
+  <div>   
     <div
       id="intro-map"
     >
-      <div class="text-content">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            The Delaware River Basin
-          </p>
-        </div>
-      </div>  
       <div class="figure-content">
         <svg
           class="figure map"
@@ -3041,7 +3025,7 @@
                     >Binghamton</text>
                     <text
                       class="city-label"
-                      transform="translate(192.4 241.9)"
+                      transform="translate(193.4 241.9)"
                     >Scranton</text>
                     <text
                       class="city-label hidden-on-mobile"

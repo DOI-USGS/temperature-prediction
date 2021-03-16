@@ -1,11 +1,17 @@
 <template>
   <section id="section_2">
+    <br>
+    <IntroMap />
     <div class="text-content">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          The Delaware River Basin
+        </p>
+      </div>
+      <br>
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>
-    <IntroMap />
-    <br>
     <ImportanceIcons />
     <div class="text-content">
       <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
@@ -156,7 +162,7 @@
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(660 997)"
+                transform="translate(655 997)"
               >2019</text>
             </g>
             <g>
@@ -2442,7 +2448,7 @@ $dimGray: #9c9c9c;
 
 .chartAxis {
   color: $dimGray;
-  font-size: .60em;
+  font-size: 10pt;
 }
 
 .legend {
@@ -2461,8 +2467,11 @@ $dimGray: #9c9c9c;
 .matrixAxis {
   fill: $dimGray;
   color: $dimGray;
-  font-size: 13pt;
+  font-size: 1.1em;
   text-align: middle;
+  @media screen and (max-height: 770px) {
+          font-size: 1.2em;
+        }
 }
 .NS_arrow {
   stroke: $grayBlue;
@@ -2482,7 +2491,7 @@ $dimGray: #9c9c9c;
   font-size: 1em;
   font-weight: bold;
   line-height: 1em;
-  @media screen and (max-height: 700px) {
+  @media screen and (max-height: 770px) {
           font-size: 1.5em;
         }
 }
@@ -2492,7 +2501,7 @@ $dimGray: #9c9c9c;
   font-size: 1.1em;
   font-weight: bold;
   line-height: 1em;
-  @media screen and (max-height: 700px) {
+  @media screen and (max-height: 770px) {
           font-size: 2em;
         }
 }
