@@ -150,44 +150,44 @@
               >1980</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(235 997)"
+                transform="translate(231 997)"
               >1990</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(382 997)"
+                transform="translate(375 997)"
               >2000</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(530 997)"
+                transform="translate(519 997)"
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(659 997)"
+                transform="translate(646 997)"
               >2019</text>
             </g>
-            <g>
+            <g id="space_labels">
               <line
                 class="c2p2 NS_arrow"
-                x1="710"
+                x1="692.5"
                 y1="90"
-                x2="710"
+                x2="692.5"
                 y2="935"
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="701.6 103.3 709.9 88.2 718.3 103.3 701.6 103.3"
+                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="701.6 917.6 709.9 932.8 718.3 917.6 701.6 917.6"
+                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
               />
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(705 70)"
+                transform="translate(686 70)"
               >N</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(705 960)"
+                transform="translate(686 960)"
               >S</text>
             </g>
           </svg>
@@ -265,52 +265,52 @@
             <g id="month_labels">
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(110 997)"
+                transform="translate(108 997)"
               >Jan</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(207 997)"
+                transform="translate(203 997)"
               >Mar</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(302 997)"
+                transform="translate(297 997)"
               >May</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(406 997)"
+                transform="translate(399 997)"
               >Jul</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(498 997)"
+                transform="translate(487 997)"
               >Sept</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(599 997)"
+                transform="translate(585 997)"
               >Nov</text>
             </g>
-            <g>
+            <g id="space_labels">
               <line
                 class="c2p3 NS_arrow"
-                x1="710"
+                x1="692.5"
                 y1="90"
-                x2="710"
+                x2="692.5"
                 y2="935"
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="701.6 103.3 709.9 88.2 718.3 103.3 701.6 103.3"
+                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="701.6 917.6 709.9 932.8 718.3 917.6 701.6 917.6"
+                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
               />
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(705 70)"
+                transform="translate(686 70)"
               >N</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(705 960)"
+                transform="translate(686 960)"
               >S</text>
             </g>
           </svg>
@@ -419,7 +419,7 @@
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 10, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -1868,9 +1868,9 @@
           // select background rectangle and change filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow3)")
-          // select segments and dim
-          this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#474e57")
+          // // select segments and dim
+          // this.d3.selectAll(".c2p2.river_segments")
+          //     .style("stroke", "#474e57")
         },
         mouseleaveTransformedRect_c2p2() {
           console.log("mouseout")
@@ -1882,9 +1882,9 @@
           // select background rectangle and replace filter
           this.d3.selectAll(".c2p2.matrixBkgdRect")
               .attr("filter", "url(#shadow2)")
-          // select segments and undim
-          this.d3.selectAll(".c2p2.river_segments")
-              .style("stroke", "#777b80")
+          // // select segments and undim
+          // this.d3.selectAll(".c2p2.river_segments")
+          //     .style("stroke", "#777b80")
         },
         mousemoveRect_c2p2(data, tooltip, mouse_x, mouse_y) {
           const self = this;
@@ -1920,7 +1920,7 @@
               .domain(self.myVars_c2p2)
               .padding(0.075);
 
-          //re-build x scale fore matrix
+          //re-build x scale for matrix
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
@@ -2000,9 +2000,6 @@
                   // raise the spatial rectangle
                   .raise();
           }
-          // // select background rectangle and change filter
-          // this.d3.selectAll(".c2p2.matrixBkgdRect")
-          //     .attr("filter", "url(#shadow3)")
           // select mouseovered segment and set to white
           // and raise segment
           self.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
@@ -2059,9 +2056,6 @@
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower() 
-          // // select background rectangle and replace filter
-          // this.d3.selectAll(".c2p2.matrixBkgdRect")
-          //     .attr("filter", "url(#shadow2)")
         },
         mousemoveSeg_c2p3(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
@@ -2348,15 +2342,6 @@ $dimGray: #9c9c9c;
     width: 100%;
   }
 
-  .inset-viz-subtitle {
-    fill: $grayBlue; //$offWhite
-    font-style: italic;
-    font-size: .5em;
-    text-align: center;
-    font-weight: 100;
-    opacity: 1;
-  }
-
   #timeseries {
     display: block;
     max-width: 700px;
@@ -2437,6 +2422,9 @@ $dimGray: #9c9c9c;
     max-width: 100%;
     min-width: 300px;
     max-height: 90vh;
+    @media screen and (max-height: 770px) {
+      max-height: 100%;
+    }
     @media screen and (max-width: 600px) {
       padding: 0 10px;
       gap: 0px;
@@ -2480,6 +2468,12 @@ $dimGray: #9c9c9c;
     min-height: 0;
     height: 85vh;
     max-width: 2000px;
+    @media screen and (max-height: 770px) {
+        grid-template-columns: 2fr 2.5fr;
+    }
+    @media screen and (min-width: 1500px) {
+        grid-template-columns: 2fr 2.5fr;
+    }
   }
   .mm-grid-item {
     padding: 0px;
@@ -2549,10 +2543,6 @@ $dimGray: #9c9c9c;
 .c2p2.cellText {
   font-size: 0.48em;
 }
-.monthlyLabels {
-  fill: $grayBlue;
-  font-size: 0.5em;
-}
 .delaware_bay {
   fill: $grayBlue; 
 }
@@ -2586,12 +2576,6 @@ $dimGray: #9c9c9c;
   color: $dimGray;
   font-size: 10pt;
 }
-
-.legend {
-  font-family: 'Open Sans', arial, sans-serif;
-  font-size: 0.5em;
-  fill: $grayBlue;
-}
 .legendAxis {
   color: $dimGray;
   fill: $dimGray;
@@ -2610,12 +2594,12 @@ $dimGray: #9c9c9c;
         }
 }
 .NS_arrow {
-  stroke: $grayBlue;
+  stroke: $dimGray;
   stroke-width: 1px;
   stroke-dasharray: 2 6;
 }
 .NS_arrowhead {
-  fill: $grayBlue;
+  fill: $dimGray;
 }
 .chartAxisText {
   fill: $dimGray;
