@@ -146,23 +146,23 @@
             <g id="year_labels">
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(90 997)"
+                transform="translate(86 997)"
               >1980</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(238 997)"
+                transform="translate(235 997)"
               >1990</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(385 997)"
+                transform="translate(382 997)"
               >2000</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(533 997)"
+                transform="translate(530 997)"
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(664 997)"
+                transform="translate(659 997)"
               >2019</text>
             </g>
             <g>
@@ -269,23 +269,23 @@
               >Jan</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(209 997)"
+                transform="translate(207 997)"
               >Mar</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(304 997)"
+                transform="translate(302 997)"
               >May</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(409 997)"
+                transform="translate(406 997)"
               >Jul</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(502 997)"
+                transform="translate(498 997)"
               >Sept</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(603 997)"
+                transform="translate(599 997)"
               >Nov</text>
             </g>
             <g>
@@ -1083,8 +1083,8 @@
               .attr("class", "c2p2 matrixBkgdRect")
               .attr("width", self.matrix_width_c2)
               .attr("height", self.matrix_height_c2)
-              .attr("fill", "#1a1b1c")
-              .attr("stroke", "#1a1b1c")
+              .attr("fill", "#0f0f0f")
+              .attr("stroke", "#0f0f0f")
               .attr("stroke-width", 1)
               .attr("filter", "url(#shadow2)")
               .attr("transform",
@@ -1281,9 +1281,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1822,8 +1822,8 @@
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
@@ -1993,7 +1993,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#1a1b1c")
+                  .style("fill", "#0f0f0f")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
@@ -2028,8 +2028,8 @@
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
               // .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
@@ -2044,9 +2044,9 @@
               // set height to height of matrix
               .attr("height", self.matrix_height_c2)
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 2)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
           // // turn off text for cells associated with segment
           // this.d3.selectAll(".c2p2.cellText") 
@@ -2055,7 +2055,7 @@
           //     .attr("fill", "None")
           // reset selected transparent segment and lower
           this.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower() 
@@ -2603,7 +2603,7 @@ $dimGray: #9c9c9c;
 .matrixAxis {
   fill: $dimGray;
   color: $dimGray;
-  font-size: 1.1em;
+  font-size: 1.08em;
   text-align: middle;
   @media screen and (max-height: 770px) {
           font-size: 1.2em;
