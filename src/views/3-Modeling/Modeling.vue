@@ -3662,14 +3662,9 @@
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
-              .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
+              .attr("viewBox", [0, -50, (this.width+margin*2), (this.height+margin*3)].join(' '))
               .attr("height", "100%")
               .attr("width", "100%")
-
-          // define where chart starts within svg
-          this.svg
-            .append("g")
-            .attr('transform', `translate(50, 50)`);
 
           ////////////////////// set scales
           // x axis 
@@ -3713,7 +3708,6 @@
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#9c9c9c")
-          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
          this.yAxis
           .attr("transform", "translate(" + margin + "," + 0 + ")")
@@ -3738,9 +3732,9 @@
           this.svg
           .append("line")
             .attr("x1", margin)
-            .attr("y1", (this.height-margin))
+            .attr("y1", (this.height))
             .attr("x2", this.width+margin)
-            .attr("y2", (this.height-margin))
+            .attr("y2", (this.height))
             .attr("stroke-width", 2)
             .attr("stroke", "#9c9c9c")
             .attr("stroke-dasharray", "5px")
@@ -3751,7 +3745,7 @@
 
           // text labels for the rmse axis
           this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height-margin - 40) + ")")
+              .attr("transform","translate(" + margin + " ," + (this.height- 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
               .style("fill", "#9c9c9c")// not the right grey color
@@ -3760,7 +3754,7 @@
               .classed("rmse-label", true);
 
             this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-margin-40) + ")")
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
               .style("fill", "#9c9c9c")// not the right grey color
@@ -3775,7 +3769,6 @@
              self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
 
         // if starts on any rmse steps, draw the rmse axis only
-        // this doesnt seem to be working corectly
         } else if (this.step >= this.step_rmse) {
            this.yAxis 
             .style("opacity", 0)
@@ -3784,13 +3777,15 @@
           self.transitionAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
         }
 
+        let font_item = "30px";
+
           // text label for the x axis
           this.svg.append("text")             
               .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin*2) + ")")
               .style("text-anchor", "middle")
               .text("time")
               .style("fill", "#9c9c9c")
-              .style("font-size", "30px")
+              .style("font-size", font_item)
               .attr("opacity", this.label_o)
               .classed("error", true)
               .classed("axis-label", true);
@@ -3806,7 +3801,7 @@
               .style("fill", "#9c9c9c")
               .attr("opacity", this.label_o)
               .classed("error", true)
-              .style("font-size", "30px")
+              .style("font-size", font_item)
               .classed("axis-label", true);    
 
             ////////////////////////////// colors + legends
@@ -3815,8 +3810,8 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = 150;
-                 var nudge_y = this.height*.1;
+                 var nudge_x = 2*margin;
+                 var nudge_y = this.height*.05;
 
                 var error_stroke = this.d3.scaleOrdinal()
                   .domain(["Predicted","Observed"])
@@ -3828,10 +3823,10 @@
 
               legend_error.append("text")
                 .text("Temperature")
-                .attr("x", nudge_x-20)
+                .attr("x", nudge_x)
                 .attr("y", nudge_y)
                 .style("fill", "white")
-                 .style("font-size", "30px")
+                 .style("font-size", font_item)
                  .style("font-weight","bold")
                  .style("opacity", this.o_pred)
                  .classed("error_1" , true)
@@ -3842,7 +3837,7 @@
                   .enter().append("g")
                     .attr("class", "legend")
                     .attr("transform", function(d,i) {
-                      return "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")";
+                      return "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 30) + ")";
                     });
 
                 legend.append("circle")
@@ -3855,8 +3850,8 @@
                   .style("opacity", this.o_pred)
 
                   legend.append("text")
-                  .attr("x", "20px")
-                  .attr("y", "5px")
+                  .attr("x", "25px")
+                  .attr("y", "8px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
                   .style("font-size", "20px")
@@ -3882,9 +3877,9 @@
                   legend_error.append("text")
                   .text("Root mean square error (RMSE)")
                   .attr("x", margin)
-                  .attr("y", nudge_y+420)
+                  .attr("y", this.height+nudge_y)
                   .style("fill", "white")
-                  .style("font-size", "30px")
+                  .style("font-size", font_item)
                   .attr("line-height", "35px")
                   .style("font-weight","bold")
                   .style("opacity", this.o_rmse_title)
@@ -3894,9 +3889,9 @@
                  legend_error.append("text")
                   .text(this.model_current)
                   .attr("x", 510)
-                  .attr("y", nudge_y+420)
+                  .attr("y", this.height+nudge_y)
                   .style("fill", "white")
-                  .style("font-size", "30px")
+                  .style("font-size", font_item)
                   .attr("line-height", "35px")
                   .style("font-weight","100")
                   .style("opacity", this.o_rmse_title)
@@ -3908,8 +3903,7 @@
                     .append("g").classed("rmse-legend", true)
                     .classed("rmse", true)
               
-                 var nudge_x_rmse = this.width*.8;
-                 var nudge_y_rmse = this.height*.1;
+                 var nudge_x_rmse = 780;
 
                 var rmse_stroke = this.d3.scaleOrdinal()
                   .domain(["100%","0.1%"])
@@ -3921,10 +3915,11 @@
 
               legend_rmse.append("text")
                 .text("Training data")
-                .attr("x", nudge_x_rmse-20)
-                .attr("y", nudge_y_rmse)
+                .attr("text-anchor", "end")
+                .attr("x", this.width-margin)
+                .attr("y", nudge_y)
                 .style("fill", "white")
-                 .style("font-size", "30px")
+                 .style("font-size", font_item)
                  .style("font-weight","bold")
                  .style("opacity", this.o_train)
                  .classed("rmse-title", true)
@@ -3934,12 +3929,12 @@
                   .enter().append("g")
                     .attr("class", "legend-rmse")
                     .attr("transform", function(d,i) {
-                      return "translate(" + (nudge_x_rmse) + " ,"  + (nudge_y_rmse + 30 + i * 30) + ")";
+                      return "translate(" + (nudge_x_rmse) + " ,"  + (nudge_y + 25 + i * 25) + ")";
                     });
 
                 legend_r.append("circle")
                   .attr("x", nudge_x_rmse)
-                  .attr("y", nudge_y_rmse)
+                  .attr("y", nudge_y)
                   .attr("r", this.radius)
                   .style("fill", rmse_fill)
                   .style("stroke", rmse_stroke)
@@ -3947,7 +3942,7 @@
 
                   legend_r.append("text")
                   .attr("x", "20px")
-                  .attr("y", "5px")
+                  .attr("y", "8px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
                   .style("font-size", "20px")
@@ -4028,10 +4023,10 @@
           },
           moveLegend(direction) {
             const self = this;
-            var drop_dot = this.d3.select("g.legend:nth-child(2)")
+            let margin = 50;
 
-            var nudge_x = 150;
-            var nudge_y = this.height*.1;
+            var nudge_x = margin*2;
+            var nudge_y = this.height*.05;
 
             if (direction == "down"){
                   this.d3.select("g.legend:nth-child(2) circle")
@@ -4042,12 +4037,24 @@
                   this.d3.select("g.legend:nth-child(2)")
                   .transition()
                   .duration(400)
-                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 60) + ")")
+                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 100) + ")")
 
                   this.d3.select("g.legend:nth-child(2) text")
                   .transition()
                   .duration(150)
                   .style("opacity", 1)
+
+                  var line = this.d3.line()
+
+                  // draw link between legend items
+                  this.d3.select("g.legend")
+                  .enter().append("line")
+                  .attr("x1", nudge_x)
+                  .attr("x2", nudge_x)
+                  .attr("y1", nudge_y)
+                  .attr("y2", nudge_y+100)
+                  .attr("stroke",this.color_d100)
+                .attr("stroke-width", "8px");
 
 
             } else if (direction == "up") {
@@ -4059,7 +4066,7 @@
                 this.d3.select("g.legend:nth-child(2)")
                   .transition()
                   .duration(400)
-                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")")
+                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 30) + ")")
 
                   this.d3.select("g.legend:nth-child(2) circle")
                   .transition()
@@ -4132,7 +4139,7 @@
           updateChart() {
             //controls decision making for the error >> beeswarm chart
             const self = this;
-          let margin = 50;
+            let margin = 50;
 
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
@@ -4140,7 +4147,7 @@
             .domain([0,this.chartState.domain_x]);
 
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, margin])
+            .range([this.height+margin,0])
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
@@ -4158,7 +4165,7 @@
               .classed("model" , true)
               .text(this.model_current) // pulls current step model
               .attr("x", 510)
-              .attr("y", (this.height*.1)+420)
+              .attr("y", this.height+25)
               .style("fill", "white")
               .style("font-size", "30px")
               .attr("line-height", "30px")
