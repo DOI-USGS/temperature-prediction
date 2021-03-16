@@ -2902,6 +2902,7 @@
 
             // computed properties
             this.paddedRadius = this.radius* 1.4;
+            this.errorRadius = 10;
 
           // define initial state of chart - default is an error chart to start
             this.chartState.strengthr = 0;
@@ -3325,7 +3326,7 @@
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height+margin;
-                        this.chartState.rad = this.paddedRadius;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3338,7 +3339,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height+margin;
-                        this.chartState.rad = this.paddedRadius;
+                        this.chartState.rad = this.errorRadius;
                         break;                      
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3503,7 +3504,7 @@
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height+margin;
-                        this.chartState.rad = this.paddedRadius;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3516,7 +3517,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height+margin;
-                        this.chartState.rad = this.paddedRadius;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3847,7 +3848,7 @@
                 legend.append("circle")
                   .attr("x", nudge_x)
                   .attr("y", nudge_y)
-                  .attr("r", this.radius)
+                  .attr("r", this.errorRadius)
                   .style("fill", error_fill)
                   .style("stroke", error_stroke)
                   .style("stroke-width",  this.stroke_w)
