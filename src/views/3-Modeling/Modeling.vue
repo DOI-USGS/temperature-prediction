@@ -2764,7 +2764,7 @@
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
-            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs", obs: "obs", exp: "exp"},
+            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs_new", obs: "obs", exp: "exp"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
             label_o_rmse: 0, // rmse axis labels
@@ -2816,7 +2816,6 @@
           }
         },
         mounted() {
-
           // this all happens before the page is rendered
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
 
@@ -2905,7 +2904,7 @@
             this.paddedRadius = this.radius* 1.5;
 
           // define initial state of chart - default is an error chart to start
-            this.chartState.strengthr = 1;
+            this.chartState.strengthr = 0;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             //this.chartState.radius = this.paddedRadius;
@@ -3337,7 +3336,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 1;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3515,7 +3514,7 @@
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
                         this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 1;
+                        this.chartState.strengthlink = 0;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -4197,6 +4196,7 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 .remove();
+
           chart
             .transition()
             .duration(800)
@@ -4208,6 +4208,7 @@
             chart.enter()
               .append("circle")
               .classed("bees", true)
+              .classed("fixed", function(d) { return d.fixed })
               .attr("cx", (d) => self.xScale(d[this.chartState.var_x]))
               .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
               .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
@@ -4227,13 +4228,32 @@
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
 
+        /* // make expected nodes fixed when observed values are added...need to figure out how to selectively apply fx and fy to only some of the nodes (class fixed)
+        if ( this.step == this.step_error_obs){
+            self.simulation
+              .attr("fx", function(d) { 
+                if (d.fixed == "true") { 
+                  return self.xScale(d[this.chartState.var_x]) 
+                  } else {
+                    return null
+                  } 
+              })
+              .attr("fy",  function(d) { 
+                if (d.fixed == "true") { 
+                  return self.yScale(d[this.chartState.var_y]) 
+                  } else {
+                    return null
+                  } 
+              })
+        }  */
+
           /////////// run sim
           self.simJumpStart();
           },
           tick() {
             // ticking the simulation moves the dots and link together
           const self = this;
-          
+
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
