@@ -4,7 +4,7 @@
     id="matrix-svg"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="650"
+    width="590"
     height="920"
     viewBox="0 0 700 1000"
     preserveAspectRatio="none"

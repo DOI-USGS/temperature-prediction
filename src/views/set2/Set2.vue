@@ -140,23 +140,23 @@
             <g id="year_labels">
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(25 997)"
+                transform="translate(90 997)"
               >1980</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(187 997)"
+                transform="translate(238 997)"
               >1990</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(351 997)"
+                transform="translate(385 997)"
               >2000</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(513 997)"
+                transform="translate(533 997)"
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(660 997)"
+                transform="translate(664 997)"
               >2019</text>
             </g>
             <g>
@@ -259,27 +259,27 @@
             <g id="month_labels">
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(48 997)"
+                transform="translate(110 997)"
               >Jan</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(153 997)"
+                transform="translate(209 997)"
               >Mar</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(263 997)"
+                transform="translate(304 997)"
               >May</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(375 997)"
+                transform="translate(409 997)"
               >Jul</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(478 997)"
+                transform="translate(502 997)"
               >Sept</text>
               <text
                 class="c2p3 matrixAxis"
-                transform="translate(590 997)"
+                transform="translate(603 997)"
               >Nov</text>
             </g>
             <g>
@@ -413,7 +413,7 @@
           chart_margin: {top: 30, right: 70, bottom: 45, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 15, bottom: 30, left: 35}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 10, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -1724,7 +1724,7 @@
               .style("opacity", 1);
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("opacity", 0.8)
+              .style("opacity", 0.9)
           // select all *temporal* rectangles and repurpose for bar charts
           // if segment has any data in 40 years
           if (self.segmentDict[segment_id].total_count > 0) {
@@ -1889,8 +1889,8 @@
 
           // bind mouse coordinates and # of obs to tooltip
           tooltip
-              .attr("y", mouse_y)
-              .attr("x", 30)
+              .attr("y", mouse_y-1)
+              .attr("x", 95)
               .attr("text-anchor", "end")
               .text(self.d3.format(',')(num_obs) + " obs.")
               .raise()
@@ -2615,7 +2615,7 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 .tooltip.map {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 1em; //1em
+  font-size: 0.95em; //1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 700px) {
@@ -2625,7 +2625,7 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 .tooltip.matrix {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 1.1em; //1.1em
+  font-size: 1em; //1.1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 700px) {
