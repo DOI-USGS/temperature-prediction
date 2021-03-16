@@ -176,6 +176,7 @@ $dimGray: #9c9c9c;
             "icon-4 desc-4";
         @media screen and (max-width: 600px) {
           max-width: 80vw;
+          gap: 0px 15px;
         }
     }
 
