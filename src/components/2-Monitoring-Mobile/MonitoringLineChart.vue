@@ -285,8 +285,8 @@
           <text
             id="cool"
             class="highlight-text"
-            transform="translate(230 320)"
-          >Coldest reach,<tspan
+            transform="translate(215 320)"
+          >Coldest summer reach,<tspan
             x="0"
             y="15"
           >showing temperature </tspan><tspan
@@ -302,11 +302,11 @@
           <text
             id="warm"
             class="highlight-text"
-            transform="translate(115 100)"
-          >Warmest river reach<tspan
+            transform="translate(100 110)"
+          >Warmest summer river<tspan
             x="0"
             y="15"
-          >in the DRB</tspan></text>
+          >reach in the DRB</tspan></text>
         </g>
       </g>>
       <g
@@ -411,29 +411,19 @@ export default {
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb;
-$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
-
-
-// Old colors
-$backgroundCharcoal: #171717;
-$offWhite: rgb(241, 241, 241);
-$monotoneBlue1: #e9eced;
-$monotoneBlue2: #c3cccf;
-$monotoneBlue3: #88989f;
-$monotoneBlue4: #4c656e;
-$monotoneBlue5: #285C70;
-$monotoneBlueTransparent: rgba(76,101,110, .6);
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 #line-chart-svg {
     width: 100%;
@@ -517,10 +507,12 @@ $monotoneBlueTransparent: rgba(76,101,110, .6);
   font-style: italic;
 }
 .highlight-text {
-  fill: $plasmaPink;
-  opacity: 0.6;
-  font-size: 14px;
+  opacity: 0.7;
+  font-size: 10pt;
   font-style: italic;
+  @media screen and (max-width: 600px) {
+    font-size: 10.5pt;
+  }
 }
 
 #warm {

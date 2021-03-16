@@ -1,11 +1,17 @@
 <template>
   <section id="section_2">
+    <br>
+    <IntroMap />
     <div class="text-content">
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          The Delaware River Basin
+        </p>
+      </div>
+      <br>
       <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
       <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
     </div>
-    <IntroMap />
-    <br>
     <ImportanceIcons />
     <div class="text-content">
       <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
@@ -76,7 +82,7 @@
             Variation in the <span class="yellow">availability</span> of stream temperature data
           </p>
           <p class="viz-subtitle">
-            Visualizing the count of temperature measurements in stream reaches across the basin.
+            Visualizing the count of temperature observations in stream reaches across the basin.
           </p>
           <p class="viz-subtitle">
             Hover over a stream reach on the map to see the amount of data available for that reach over time.
@@ -156,7 +162,7 @@
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(660 997)"
+                transform="translate(655 997)"
               >2019</text>
             </g>
             <g>
@@ -835,7 +841,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(0.9))
+              .attr("d", self.map_path_c2.pointRadius(1))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -949,7 +955,7 @@
               .attr("transform", "rotate(-90)")
               
           // set the tick mark lines to background color
-          svgChart.selectAll(".tick line").attr("stroke", "#1a1b1c").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
+          svgChart.selectAll(".tick line").attr("stroke", "#0f0f0f").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
 
         },
         setMap_c2p2(){
@@ -1034,7 +1040,7 @@
               // set opacity to 0 so segments aren't visible but can be selected
               .style("opacity", 0)
               // set stroke color to background color
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               // set stroke width to be large for selection
               .style("stroke-width", 6)
               // trigger interactions
@@ -1053,13 +1059,13 @@
               .append("use").attr("xlink:href", href_id)
           })
 
-          // add scale bar
-          let scaleBarGroup = self.map_c2p2.append("g")
-            .attr("class", "c2p2 scaleBar")
-            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
+          // // add scale bar
+          // let scaleBarGroup = self.map_c2p2.append("g")
+          //   .attr("class", "c2p2 scaleBar")
+          //   .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
 
-          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
-          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
+          // scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          // scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
         },
         createMatrix_c2p2(csv_matrix_annual, csv_annual_count){
           const self = this;
@@ -1076,8 +1082,8 @@
                   .attr("class", "c2p2 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#1a1b1c")
-                  .attr("stroke", "#1a1b1c")
+                  .attr("fill", "#0f0f0f")
+                  .attr("stroke", "#0f0f0f")
                   .attr("stroke-width", 1)
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
@@ -1145,7 +1151,7 @@
               .attr("text-anchor", "end")
               .attr("x", self.matrix_width_c2*1/4 - 10)
               .attr("y", 17)
-              .text("1 daily value")
+              .text("Observed yearly")
 
           // append legend rectangle
           legendGroup.append("rect")
@@ -1161,7 +1167,7 @@
               .attr("text-anchor", "start")
               .attr("x", self.matrix_width_c2*3/4 + 10)
               .attr("y", 17)
-              .text("365 daily values")
+              .text("Observed daily")
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
@@ -1239,9 +1245,9 @@
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 2)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1268,9 +1274,9 @@
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 2)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1379,7 +1385,7 @@
               // set opacity to 0 so segments aren't visible but can be selected
               .style("opacity", 0)
               // set stroke color to background color
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               // set stroke width to be large for selection
               .style("stroke-width", 6)
               // trigger interactions
@@ -1398,13 +1404,13 @@
               .append("use").attr("xlink:href", href_id)
           })
 
-          // add scale bar
-          let scaleBarGroup = self.map_c2p3.append("g")
-            .attr("class", "c2p3 scaleBar")
-            .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
+          // // add scale bar
+          // let scaleBarGroup = self.map_c2p3.append("g")
+          //   .attr("class", "c2p3 scaleBar")
+          //   .attr("transform", "translate(" + (30) + "," + (self.map_height - 10) + ")")
 
-          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
-          scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
+          // scaleBarGroup.append("g").attr("class", "c2p1 scaleBarTop").call(self.scaleBarTop_c2);
+          // scaleBarGroup.append("g").attr("class", "c2p1 scaleBarBottom").call(self.scaleBarBottom_c2).attr("transform", "translate(0,5)")
 
         },
         createMatrix_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019){
@@ -1421,8 +1427,8 @@
                   .attr("class", "c2p3 matrixBkgdRect")
                   .attr("width", self.matrix_width_c2)
                   .attr("height", self.matrix_height_c2)
-                  .attr("fill", "#1a1b1c")
-                  .attr("stroke", "#1a1b1c")
+                  .attr("fill", "#0f0f0f")
+                  .attr("stroke", "#0f0f0f")
                   .attr("stroke-width", 1)
                   .attr("filter", "url(#shadow2)")
                   .attr("transform",
@@ -1597,9 +1603,9 @@
                 return 'c2p3 matrixSpatialRect seg' + d.properties.seg_id_nat;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
           // // build temporal rectangles
@@ -1627,9 +1633,9 @@
                 return 'c2p3 matrixTemporalRect time' + d[self.timestep_c2p3];
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1.5)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
           // append monthly rectangles for mouseover on matrix
@@ -1657,9 +1663,9 @@
                 return 'c2p3 matrixMonthlyRect month' + d.month;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1.5)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
@@ -1778,7 +1784,7 @@
                   // set stroke width, opacity, and stroke color
                   // based on whether segment has any observations in record
                   .attr("height", 3)
-                  .style("fill", "#1a1b1c")
+                  .style("fill", "#0f0f0f")
                   .style("stroke-width", 0.5)
                   .style("opacity", 1)
                   .style("stroke", "#e0e0e0")
@@ -1807,8 +1813,8 @@
           // select all spatial rectangles and set opacity back to zero
           // with black fill and stroke and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 2)
               .style("opacity", 0)
               .attr("height", yScale_matrix_c2p2.bandwidth())
@@ -1823,9 +1829,9 @@
               // set height to height of matrix
               .attr("height", self.matrix_height_c2)
               // style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 2)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
               .raise()
           // // turn off text for cells associated with segment
@@ -1895,8 +1901,8 @@
           const self = this;
           // select all *spatial* rectangles and reset fill and stroke to black and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("fill", "#1a1b1c")
-              .style("stroke", "#1a1b1c")
+              .style("fill", "#0f0f0f")
+              .style("stroke", "#0f0f0f")
               .raise()
 
           // hide tooltip
@@ -1905,15 +1911,15 @@
           // select all temporal rectangles and set fill and stroke back to black
           // with no opacity and raise (so available for selection but not visible)
           this.d3.selectAll(".c2p2.matrixTemporalRect")
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("opacity", 0)
               .raise()
           // un-dim river segments
           // lower elements as needed
           this.d3.selectAll(".c2p2.segs_transparent." + self.timestep_c2p2 + data[self.timestep_c2p2])
           // this.d3.selectAll(".river_segments." + self.timestep_c2p2 + data[self.timestep_c2p2])
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -2019,8 +2025,8 @@
           self.d3.selectAll(".c2p3.matrixSpatialRect")
               .attr("height", yScale_matrix_c2p3.bandwidth())
               .style("stroke", "None")
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1)
               .style("opacity", 0)
               // .raise()
@@ -2034,9 +2040,9 @@
               // set height to height of matrix
               .attr("height", self.matrix_height_c2)
               //style rectangles to be transparent but available for selection
-              .style("fill", "#1a1b1c")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1.5)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("opacity", 0)
           // select all monthly rectangles and raise
           self.d3.selectAll(".c2p3.matrixMonthlyRect")
@@ -2094,8 +2100,8 @@
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.matrixMonthlyRect")
               .style("opacity", 0.8)
-              .style("stroke", "#1a1b1c")
-              .style("fill", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
           // select temporalRect for highlighted timestep and make transparent
           this.d3.selectAll(".c2p3.matrixMonthlyRect.month" + data.month)
@@ -2113,8 +2119,8 @@
           
           // select all *spatial* rectangles and reset fill and stroke to black
           this.d3.selectAll(".c2p3.matrixSpatialRect")
-              .style("fill", "#1a1b1c")
-              .style("stroke", "#1a1b1c")
+              .style("fill", "#0f0f0f")
+              .style("stroke", "#0f0f0f")
               .raise()
 
           // hide tooltip
@@ -2124,15 +2130,15 @@
           // select all monthly rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.matrixMonthlyRect")
-              .style("fill", "#1a1b1c")
-              .style("stroke", "#1a1b1c")
+              .style("fill", "#0f0f0f")
+              .style("stroke", "#0f0f0f")
               .style("stroke-width", 1.5)
               .style("opacity", 0)
               .raise()
           // un-dim river segments
           // lower elements as needed
            this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
-              .style("stroke", "#1a1b1c")
+              .style("stroke", "#0f0f0f")
               .style("stroke-width", 6)
               .style("opacity", 0)
               .lower()
@@ -2168,18 +2174,19 @@
 
 <style scoped lang="scss">
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb;
-$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 #section_2 {
   margin-bottom: 0;
@@ -2371,40 +2378,40 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #d4d4d4;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb;
-$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 .label {
   font-size: 1em; //base font setting for all scale bar labels
 }
 .c2p1.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $grayBlue;
   font-size: 0.5em;
   stroke-width: 0.5px;
 }
 .c2p2.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $grayBlue;
   font-size: 0.7em;
   stroke-width: 0.5px;
 }
 .c2p3.scaleBar {
-  color: $grayBlue; //#285C70
+  color: $grayBlue;
   font-size: 0.7em;
   stroke-width: 0.5px;
 }
 .c2p2.cellText {
   font-size: 0.48em;
-  //text-anchor: middle;
 }
 .monthlyLabels {
   fill: $grayBlue;
@@ -2417,13 +2424,12 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 .river_segments {
   stroke: inherit;
   stroke-width: inherit;
-  // stroke: #285C70;// original was #6399ba;
   stroke-linecap: round;
 }
 
 .reservoirs {
   fill: $grayBlue; 
-  stroke: $grayBlue;// o
+  stroke: $grayBlue;
 }
 
 .obs_sites {
@@ -2441,8 +2447,8 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
 }
 
 .chartAxis {
-  color: $grayBlue; //#707070
-  font-size: .60em;
+  color: $dimGray;
+  font-size: 10pt;
 }
 
 .legend {
@@ -2451,21 +2457,24 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
   fill: $grayBlue;
 }
 .legendAxis {
-  color: $grayBlue;
-  fill: $grayBlue;
-  font-size: .8em;;
+  color: $dimGray;
+  fill: $dimGray;
+  font-size: 13pt;;
 }
 .tick text {
   font-size: .8em;
 }
 .matrixAxis {
-  fill: $grayBlue;
-  color: $grayBlue;
-  font-size: 16px;
+  fill: $dimGray;
+  color: $dimGray;
+  font-size: 1.1em;
   text-align: middle;
+  @media screen and (max-height: 770px) {
+          font-size: 1.2em;
+        }
 }
 .NS_arrow {
-  stroke: $grayBlue; //#4d4c4d
+  stroke: $grayBlue;
   stroke-width: 1px;
   stroke-dasharray: 2 6;
 }
@@ -2473,26 +2482,26 @@ $grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
   fill: $grayBlue;
 }
 .chartAxisText {
-  fill: $grayBlue;
+  fill: $dimGray;
   font-size: 1.1vh;
 }
 .tooltip.map {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 1em; //1em
+  font-size: 1em;
   font-weight: bold;
   line-height: 1em;
-  @media screen and (max-height: 700px) {
+  @media screen and (max-height: 770px) {
           font-size: 1.5em;
         }
 }
 .tooltip.matrix {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 1.1em; //1.1em
+  font-size: 1.1em;
   font-weight: bold;
   line-height: 1em;
-  @media screen and (max-height: 700px) {
+  @media screen and (max-height: 770px) {
           font-size: 2em;
         }
 }

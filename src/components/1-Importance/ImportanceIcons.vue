@@ -148,23 +148,23 @@
 <style scoped lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
     .grid-container {
         display: grid;
         grid-template-columns: 30% 70%;
-        // grid-template-rows: repeat(4, 1fr);
         gap: 0px 0px;
         min-width: 0;
         min-height: 0;
@@ -176,6 +176,7 @@ $grayBlue: #576069; //#4F5C67
             "icon-4 desc-4";
         @media screen and (max-width: 600px) {
           max-width: 80vw;
+          gap: 0px 15px;
         }
     }
 
@@ -190,10 +191,6 @@ $grayBlue: #576069; //#4F5C67
           display: flex;
         }
     }
-
-    // .icon {
-    //   fill: $mediumBlue; //285C70
-    // }
 
     .desc{
       margin: auto 0;
