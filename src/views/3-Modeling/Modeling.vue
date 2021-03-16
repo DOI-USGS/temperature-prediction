@@ -2779,7 +2779,7 @@
 
             // beeswarm
             step_start: null,
-            radius: 10,
+            radius: 7,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -2901,7 +2901,7 @@
             this.links = data[3];
 
             // computed properties
-            this.paddedRadius = this.radius* 1.5;
+            this.paddedRadius = this.radius* 1.4;
 
           // define initial state of chart - default is an error chart to start
             this.chartState.strengthr = 0;
@@ -2910,6 +2910,7 @@
             //this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 1;
             this.chartState.aDecay = 0.1;
+            this.chartState.strengthlink = 0;
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -3309,6 +3310,7 @@
               }
           },
           setDataVars(){
+            let margin = 50;
               // setting data variables
               if (this.mobileView) {
                   switch(this.step) {
@@ -3322,8 +3324,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.paddedRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3335,9 +3337,9 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
-                        break;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.paddedRadius;
+                        break;                      
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
                         this.chartState.grouped = this.color_bees.exp;
@@ -3348,8 +3350,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3361,8 +3363,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+2:
                       case this.step_rmse+3:
@@ -3375,8 +3377,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3391,8 +3393,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3412,8 +3414,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3431,8 +3433,8 @@
                         this.model_current = ': ANN + time';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3449,8 +3451,8 @@
                         this.model_current = ': ANN + time + space';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3471,8 +3473,8 @@
                         this.model_current = ': ANN + time + space + physics';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3482,10 +3484,10 @@
                         this.chartState.domain_x = 30;
                         this.chartState.domain_y = 30;
                         this.model_current = '';
-                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x = this.width+margin; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+margin;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.radius;
 
                   }
               } else {
@@ -3500,8 +3502,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.paddedRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3513,8 +3515,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.paddedRadius;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3526,8 +3528,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3539,8 +3541,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+2:
                         this.chartState.dataset = this.error_data;
@@ -3552,8 +3554,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3567,8 +3569,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3584,8 +3586,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3599,8 +3601,8 @@
                         this.model_current = ': ANN + time';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3614,8 +3616,8 @@
                         this.model_current = ': ANN + time + space';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3633,8 +3635,8 @@
                         this.model_current = ': ANN + time + space + physics';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)
+                        this.chartState.rad = this.radius;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3644,10 +3646,10 @@
                         this.chartState.domain_x = 30;
                         this.chartState.domain_y = 30;
                         this.model_current = '';
-                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x = this.width+margin; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+margin;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.radius;
                   }
               }
           },
@@ -3676,7 +3678,7 @@
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height,0])
+            .range([this.height+margin,0])
             .domain([0,this.chartState.domain_y]);
 
            // define beeswarm colors
@@ -3695,17 +3697,17 @@
           let xGen = this.d3.axisBottom(self.xScale).ticks(0).tickSize(0);
 
           // draw on chart
-          this.yAxis = this.svg.select("g").append("g")
+          this.yAxis = this.svg.append("g")
             .attr("class", "y-axis")
             .call(yGen);
 
-          this.xAxis = this.svg.select("g").append("g")
+          this.xAxis = this.svg.append("g")
             .attr("class", "x-axis")
             .call(xGen);
 
         // style modifications and set up axis drawing animation
          this.xAxis
-          .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
+          .attr("transform", "translate(" + 0 + "," + this.chartState.axis_x_on_y + ")")
           .style("stroke-width", "3px")
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
@@ -3713,11 +3715,11 @@
           //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
          this.yAxis
+          .attr("transform", "translate(" + margin + "," + 0 + ")")
           .style("stroke-width", "3px")
           .style("stroke-dasharray", this.height+margin)
           .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#9c9c9c")
-          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
           /// define arrow head for rmse label
         this.svg.append("svg:defs").append("svg:marker")
@@ -3739,7 +3741,7 @@
             .attr("x2", this.width+margin)
             .attr("y2", (this.height-margin))
             .attr("stroke-width", 2)
-            .attr("stroke", "#9c9c9c")// not the right grey color.........................
+            .attr("stroke", "#9c9c9c")
             .attr("stroke-dasharray", "5px")
             .attr("marker-end", "url(#triangle)")
             .attr("marker-start", "url(#triangle)")
@@ -4104,7 +4106,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-margin) + ")")
+                .attr("transform", "translate(" + 0 + "," + (this.height/2) + ")")
 
                 this.yAxis
                 .transition()
@@ -4118,7 +4120,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + this.height + ")")
+                .attr("transform", "translate(" + 0 + "," + (this.height+margin) + ")")
 
                 this.yAxis
                 .transition()
@@ -4200,7 +4202,7 @@
           chart
             .transition()
             .duration(500)
-            .attr("r", this.radius)
+            .attr("r", this.chartState.rad)
             .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
             .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
             .attr("stroke-width",  this.stroke_w)
@@ -4217,7 +4219,7 @@
               .transition()
                 .duration(800)
                 .delay(function(d,i) { return 5* i})
-                .attr("r", this.radius)
+                .attr("r", this.chartState.rad)
 
           // anything that should happen after points are updated
             chart
