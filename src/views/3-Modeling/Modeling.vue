@@ -2887,8 +2887,8 @@
           loadData() {
             const self = this;
             // read in data 
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_links.csv", this.d3.autoType)];
             Promise.all(promises).then(self.callback); 
@@ -3649,7 +3649,6 @@
                         this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
                         this.chartState.axis_x_on_y = this.height;
                         this.chartState.strengthlink = 0;
-
                   }
               }
           },
