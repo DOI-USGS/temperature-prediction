@@ -2779,7 +2779,7 @@
 
             // beeswarm
             step_start: null,
-            radius: 7,
+            radius: 6,
             set_colors: null,
             color_exp: null, 
             paddedRadius: null,
@@ -4007,7 +4007,7 @@
 
             let vdecay;
             if (this.step >= this.step_ann) {
-              vdecay = 0.7;
+              vdecay = 0.4;
             } else {
               vdecay = 0.5;
             }
@@ -4310,15 +4310,15 @@
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = .5;
-            this.chartState.aDecay = 0.07;
+            this.chartState.alpha = .2;
+            this.chartState.aDecay = 0.15;
           }
           // RNN toe nd
           if (this.step >= this.step_rnn)  {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.5;
-            this.chartState.aDecay = 0.07;
+            this.chartState.alpha = 0.3;
+            this.chartState.aDecay = 0.15;
           }
           }else {
          if (this.step <= this.step_error_obs) {
@@ -4348,23 +4348,23 @@
             this.chartState.strengthy = 2;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
+             this.chartState.alpha = .2;
+             this.chartState.aDecay = 0.15;
           }
 
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = .5;
-            this.chartState.aDecay = 0.07;
+            this.chartState.alpha = .3;
+            this.chartState.aDecay = 0.15;
           }
           // RNN to end
           if (this.step >= this.step_rnn ) {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.5;
-            this.chartState.aDecay = 0.07;
+            this.chartState.alpha = 0.3;
+            this.chartState.aDecay = 0.15;
           }
           }
           
