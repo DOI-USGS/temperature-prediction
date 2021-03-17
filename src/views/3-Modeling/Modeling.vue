@@ -3743,6 +3743,16 @@
             .classed("arrow", true)
             .style("opacity", this.o_rmse_title);
 
+            // draw link between legend items
+          this.d3.select("g.legend_error")
+                  .append("line").classed("leg-link", true)
+                  .attr("x1", nudge_x)
+                  .attr("x2", nudge_x)
+                  .attr("y1", nudge_y)
+                  .attr("y2", nudge_y+75)
+                  .attr("stroke",this.color_d100)
+                  .attr("stroke-width", "8px");
+
           // text labels for the rmse axis
           this.svg.append("text")             
               .attr("transform","translate(" + margin + " ," + (this.height- 40) + ")")
@@ -4045,7 +4055,7 @@
                   this.d3.select("g.legend:nth-child(2)")
                   .transition()
                   .duration(400)
-                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 100) + ")")
+                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 75) + ")")
 
                   this.d3.select("g.legend:nth-child(2) text")
                   .transition()
@@ -4053,14 +4063,16 @@
                   .style("opacity", 1)
 
                   var line = this.d3.line()
+                  .x(function (d) { return d.x; })
+                  .y(function (d) { return d.y; });
 
                   // draw link between legend items
-                  this.d3.select("g.legend")
-                  .enter().append("line")
+                  this.d3.select("g.legend_error")
+                  .append("line").classed("leg-link", true)
                   .attr("x1", nudge_x)
                   .attr("x2", nudge_x)
                   .attr("y1", nudge_y)
-                  .attr("y2", nudge_y+100)
+                  .attr("y2", nudge_y+75)
                   .attr("stroke",this.color_d100)
                   .attr("stroke-width", "8px");
 
@@ -4245,6 +4257,7 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+                .attr("r", this.chartState.rad)
 
           /////////// run sim
           self.simJumpStart();
