@@ -3065,7 +3065,8 @@
                         this.o_exp = 0; // legend added experiments
                         this.o_arrow = 0; // rmse arrow legend
                         this.o_rmse_title = 0; // rmse model naming
-                        this.obs_pos = 0; // 
+                        this.obs_pos = 0; 
+                        this.link_o = 1; 
                         break;
                       case this.step_error_obs:
                         this.label_o = 1;
@@ -3077,6 +3078,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 30;
+                        this.link_o = 1; 
                         break;
                       case this.step_rmse:
                       case this.step_rmse+1:
@@ -3091,6 +3093,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3105,6 +3108,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3124,6 +3128,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3141,6 +3146,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3157,6 +3163,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3177,6 +3184,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       default:
                         this.label_o = 0;
@@ -3188,6 +3196,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 0;
+                        this.link_o = 0; 
                   }
               } else {
                   switch(this.step) {
@@ -3201,6 +3210,7 @@
                         this.o_arrow = 0; // rmse arrow legend
                         this.o_rmse_title = 0; // rmse model naming
                         this.obs_pos = 0; // 
+                        this.link_o = 1; 
                         break;
                       case this.step_error_obs:
                         this.label_o = 1;
@@ -3212,6 +3222,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 30;
+                        this.link_o = 1; 
                         break;
                       case this.step_rmse:
                       case this.step_rmse+1:
@@ -3225,6 +3236,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3238,6 +3250,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3253,6 +3266,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3266,6 +3280,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3279,6 +3294,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3296,6 +3312,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       default:
                         this.label_o = 0;
@@ -3307,6 +3324,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 0;
+                        this.link_o = 0; 
                   }
               }
           },
@@ -3829,7 +3847,8 @@
                   .attr("y1", nudge_y+30)
                   .attr("y2", nudge_y+30)
                   .attr("stroke",this.color_d100)
-                  .attr("stroke-width", "8px");
+                  .attr("stroke-width", "8px")
+                  .style("opacity", this.link_o);
 
               legend_error.append("text")
                 .text("Temperature")
@@ -4008,7 +4027,8 @@
             .data(this.links)
             .enter().append("line").classed("link", true)
             .attr("stroke",this.color_d100)
-            .attr("stroke-width", "8px");
+            .attr("stroke-width", "8px")
+            .style("opacity", this.link_o);
 
           },
           simJumpStart(){
@@ -4425,6 +4445,7 @@
             if (this.step == this.step_error_exp) {
                 self.drawAxes("error"); // draw axes
                 self.fadeIn(this.d3.selectAll(".link"), this.time_fade);
+                 self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
                 self.fadeIn(this.legend_predicted, this.time_fade); // show predicted in legend
 
