@@ -4311,14 +4311,14 @@
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = .5;
-            this.chartState.aDecay = 0.05;
+            this.chartState.aDecay = 0.07;
           }
           // RNN toe nd
           if (this.step >= this.step_rnn)  {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.5;
-            this.chartState.aDecay = 0.05;
+            this.chartState.aDecay = 0.7;
           }
           }else {
          if (this.step <= this.step_error_obs) {
@@ -4357,14 +4357,14 @@
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = .5;
-            this.chartState.aDecay = 0.05;
+            this.chartState.aDecay = 0.07;
           }
           // RNN to end
           if (this.step >= this.step_rnn ) {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.5;
-            this.chartState.aDecay = 0.05;
+            this.chartState.aDecay = 0.07;
           }
           }
           
