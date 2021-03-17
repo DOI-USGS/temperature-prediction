@@ -3743,16 +3743,6 @@
             .classed("arrow", true)
             .style("opacity", this.o_rmse_title);
 
-            // draw link between legend items
-          this.d3.select("g.legend_error")
-                  .append("line").classed("leg-link", true)
-                  .attr("x1", nudge_x)
-                  .attr("x2", nudge_x)
-                  .attr("y1", nudge_y)
-                  .attr("y2", nudge_y+75)
-                  .attr("stroke",this.color_d100)
-                  .attr("stroke-width", "8px");
-
           // text labels for the rmse axis
           this.svg.append("text")             
               .attr("transform","translate(" + margin + " ," + (this.height- 40) + ")")
@@ -3831,6 +3821,16 @@
                   .domain(["Predicted","Observed"])
                   .range([this.color_exp,"#292b30"]);
 
+               // draw link between legend items
+               legend_error
+                  .append("line").classed("leg-link", true)
+                  .attr("x1", nudge_x+20)
+                  .attr("x2", nudge_x+20)
+                  .attr("y1", nudge_y+30)
+                  .attr("y2", nudge_y+30)
+                  .attr("stroke",this.color_d100)
+                  .attr("stroke-width", "8px");
+
               legend_error.append("text")
                 .text("Temperature")
                 .attr("x", nudge_x)
@@ -3866,20 +3866,20 @@
                   .style("fill", "white")
                   .style("font-size", "20px")
 
-                   this.d3.select("g.legend:nth-child(3) text")
+                   this.d3.select("g.legend:nth-child(4) text")
                   .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
-                  this.d3.select("g.legend:nth-child(3) circle")
+                  this.d3.select("g.legend:nth-child(4) circle")
                   .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
 
-                  this.d3.select("g.legend:nth-child(2) text")
+                  this.d3.select("g.legend:nth-child(3) text")
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
-                  this.d3.select("g.legend:nth-child(2) circle")
+                  this.d3.select("g.legend:nth-child(3) circle")
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
@@ -4047,35 +4047,26 @@
             var nudge_y = this.height*.05;
 
             if (direction == "down"){
-                  this.d3.select("g.legend:nth-child(2) circle")
+                  this.d3.select("g.legend:nth-child(3) circle")
                   .transition()
                   .duration(150)
                   .style("opacity", 1)
 
-                  this.d3.select("g.legend:nth-child(2)")
+                  this.d3.select("g.legend:nth-child(3)")
                   .transition()
                   .duration(400)
                   .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 75) + ")")
 
-                  this.d3.select("g.legend:nth-child(2) text")
+                  this.d3.select("g.legend:nth-child(3) text")
                   .transition()
                   .duration(150)
                   .style("opacity", 1)
 
-                  var line = this.d3.line()
-                  .x(function (d) { return d.x; })
-                  .y(function (d) { return d.y; });
-
                   // draw link between legend items
-                  this.d3.select("g.legend_error")
-                  .append("line").classed("leg-link", true)
-                  .attr("x1", nudge_x)
-                  .attr("x2", nudge_x)
-                  .attr("y1", nudge_y)
-                  .attr("y2", nudge_y+75)
-                  .attr("stroke",this.color_d100)
-                  .attr("stroke-width", "8px");
-
+                  this.d3.select("line.leg-link")
+                    .transition()
+                    .duration(400)
+                    .attr("y2", nudge_y+75)
 
             } else if (direction == "up") {
              this.d3.select("g.legend:nth-child(2) text")
@@ -4092,6 +4083,12 @@
                   .transition()
                   .duration(150)
                   .style("opacity", 0)
+
+                  // draw link between legend items
+                  this.d3.select("line.leg-link")
+                    .transition()
+                    .duration(400)
+                    .attr("y2", nudge_y+30)
 
             }
           },
@@ -4436,6 +4433,7 @@
               }  else if (this.step == this.step_rmse) {
                 self.drawAxes("rmse"); // move legend up to center plot for RMSEs
                 // rmse legend in and error legend out
+                self.fadeOut(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeOut(this.axis_label, this.time_fade); // remove error axis labels
                 self.fadeOut(this.legend_predicted, this.time_fade); // remove error legend
                 self.fadeOut(this.legend_observed, this.time_fade); // remove error legend
@@ -4499,6 +4497,7 @@
            self.fadeOut(this.legend_observed, this.time_fade);
           } else if (this.step == this.step_rmse) {
             self.drawAxes("rmse_up");
+            self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
             self.fadeIn(this.axis_label, this.time_fade);
             self.fadeIn(this.legend_predicted, this.time_fade);
             self.fadeIn(this.legend_observed, this.time_fade);
