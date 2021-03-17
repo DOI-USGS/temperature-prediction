@@ -4318,7 +4318,7 @@
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.5;
-            this.chartState.aDecay = 0.7;
+            this.chartState.aDecay = 0.07;
           }
           }else {
          if (this.step <= this.step_error_obs) {
