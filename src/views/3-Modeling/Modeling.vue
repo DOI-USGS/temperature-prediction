@@ -4004,10 +4004,18 @@
           simJumpStart(){
             const self = this;
             // tick to make sure dots are poistioned on first draw
+
+            let vdecay;
+            if (this.step >= this.step_ann) {
+              vdecay = 0.7;
+            } else {
+              vdecay = 0.5;
+            }
+
             self.simulation
               .alpha(this.chartState.alpha)
               .alphaDecay(this.chartState.aDecay)
-              //.velocityDecay(0.6)
+              .velocityDecay(vdecay)
               .restart()
               .on("tick", self.tick);
           },
@@ -4054,7 +4062,7 @@
                   .attr("y1", nudge_y)
                   .attr("y2", nudge_y+100)
                   .attr("stroke",this.color_d100)
-                .attr("stroke-width", "8px");
+                  .attr("stroke-width", "8px");
 
 
             } else if (direction == "up") {
@@ -4268,34 +4276,27 @@
           ///////////          // assign forces
           // error chart steps
           if (this.mobileView) {
-          if (this.step <= this.step_error_exp) {
+          if (this.step <= this.step_error_obs) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-           if (this.step === this.step_error_obs ) {
-             this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-            this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           // push to overlap as single RMSE
-          if (this.step === this.step_rmse) {
+          if (this.step === this.step_rmse && this.step <= this.step_rmse+2) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           if (response.direction == "up" && this.step === this.step_rmse) {
             this.chartState.strengthy = 1.5;
@@ -4303,81 +4304,44 @@
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
-          if (this.step === this.step_rmse+1) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-
-          }
-          if (this.step === this.step_rmse+2) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-          }
-    
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.3;
+            this.chartState.alpha = .5;
             this.chartState.aDecay = 0.05;
           }
-          // RNN
-          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.strengthy = 0.2;
+          // RNN toe nd
+          if (this.step >= this.step_rnn)  {
+            this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN
-          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN to end
-          if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
+            this.chartState.alpha = 0.5;
+            this.chartState.aDecay = 0.05;
           }
           }else {
-         if (this.step <= this.step_error_exp) {
+         if (this.step <= this.step_error_obs) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-           if (this.step === this.step_error_obs ) {
-             this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-            this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           // push to overlap as single RMSE
-          if (this.step === this.step_rmse) {
+          if (this.step >= this.step_rmse && this.step <= this.step_rmse+2) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           if (response.direction == "up" && this.step === this.step_rmse) {
             this.chartState.strengthy = 1.5;
@@ -4385,51 +4349,22 @@
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-          if (this.step === this.step_rmse+1) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-
-          }
-          if (this.step === this.step_rmse+2) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
 
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.3;
+            this.chartState.alpha = .5;
             this.chartState.aDecay = 0.05;
           }
-          // RNN
-          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.strengthy = 0.2;
+          // RNN to end
+          if (this.step >= this.step_rnn ) {
+            this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN
-          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN to end
-          if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
+            this.chartState.alpha = 0.5;
+            this.chartState.aDecay = 0.05;
           }
           }
           
