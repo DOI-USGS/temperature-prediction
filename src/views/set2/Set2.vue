@@ -1481,9 +1481,24 @@
               .interpolator(self.d3.interpolatePlasma) /* interpolateRdYlBu Plasma */
               // .domain([obsTempMax, obsTempMin]) // if INVERTING color scale
               .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
-              // .domain([(obsTempMin-(obsTempMax-obsTempMin)), (obsTempMax+(obsTempMax-obsTempMin))]) // if NOT INVERTING color scale
+              // .domain([(obsTempMin-(obsTempMax-obsTempMin)), (obsTempMax+(obsTempMax-obsTempMin))]) // if NOT INVERTING color scale AND cutting of extremes of color scale
 
-          // build list of posible counts (0 to 366)
+          // // // Build CUSTOM 3-color scale
+          // // Find mean observed temperature
+          // let sum_temps = 0;
+          // for (i = 0; i < arrayObsTemps.length; i++) {
+          //   sum_temps += arrayObsTemps[i];
+          // }
+          // let obsTempMean = sum_temps/arrayObsTemps.length;
+          // // define 3 colors for custom color gradient
+          // let tempColors = ['#5d9dc7','#835eb7','#ba5290']
+          // // build custom color scale
+          // self.tempColor = self.d3.scaleLinear()
+          //     .domain([obsTempMin, obsTempMean, obsTempMax])
+          //     // .interpolate(self.d3.interpolateHcl)
+          //     .range(tempColors)
+
+          // build list of posible temperatures
           let temp_list = [];
           for (i = obsTempMin; i <= obsTempMax; i++) {
             temp_list.push(i);
