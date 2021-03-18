@@ -602,36 +602,47 @@
 
           // join csv flow data to geojson segments
           // ch 2 map segments
-          this.segments = this.joinData(this.segments, csv_flow);
+          // this.segments = this.joinData(this.segments, csv_flow);
 
           // set stroke width scale
           // for ch 2 map segments
           this.widthScale_c2 = this.makeWidthScale_c2(csv_flow);
 
-          // build dictionary
+          // build dictionary and populate list of segments
           this.segments.forEach(function(segment) {
-            self.segmentDict[segment.properties.seg_id_nat]={}
-            self.segmentDict[segment.properties.seg_id_nat]['avg_ann_flow'] = segment.properties.avg_ann_flow
-            self.segmentDict[segment.properties.seg_id_nat]['total_count'] = segment.properties.total_count
-            self.segmentDict[segment.properties.seg_id_nat]['year_count'] = {}
-            let year_key = null;
-            for (year_key in segment.properties.year_count) {
-              self.segmentDict[segment.properties.seg_id_nat]['year_count'][year_key] = segment.properties.year_count[year_key]
+            let key;
+            for (key in segment.properties) {
+              if (key == 'seg_id_nat') {
+                  self.segment_id_list.push(segment.properties[key])
+              } else {
+                  self.segmentDict[key] = segment.properties[key]
+              }
             }
-            self.segmentDict[segment.properties.seg_id_nat]['data_2019'] = {}
-            let day_key = null;
-            for (day_key in segment.properties.day_count) {
-              self.segmentDict[segment.properties.seg_id_nat]['data_2019'][day_key] = {}
-              self.segmentDict[segment.properties.seg_id_nat]['data_2019'][day_key]['day_count'] = segment.properties.day_count[day_key]
-              self.segmentDict[segment.properties.seg_id_nat]['data_2019'][day_key]['day_t_c'] = segment.properties.day_t_c[day_key]
-            }
-            self.segmentDict[segment.properties.seg_id_nat]['month_count'] = {}
-            let month_key = null;
-            for (month_key in segment.properties.month_count) {
-              self.segmentDict[segment.properties.seg_id_nat]['month_count'][month_key] = segment.properties.month_count[month_key]
-            }
+            // self.segmentDict[segment.properties.seg_id_nat] = 
+            // self.segmentDict[segment.properties.seg_id_nat]={}
+            // self.segmentDict[segment.properties.seg_id_nat]['avg_ann_flow'] = segment.properties.avg_ann_flow
+            // self.segmentDict[segment.properties.seg_id_nat]['total_count'] = segment.properties.total_count
+            // self.segmentDict[segment.properties.seg_id_nat]['year_count'] = {}
+            // let year_key = null;
+            // for (year_key in segment.properties.year_count) {
+            //   self.segmentDict[segment.properties.seg_id_nat]['year_count'][year_key] = segment.properties.year_count[year_key]
+            // }
+            // self.segmentDict[segment.properties.seg_id_nat]['data_2019_daily'] = {}
+            // let day_key = null;
+            // for (day_key in segment.properties.day_count) {
+            //   self.segmentDict[segment.properties.seg_id_nat]['data_2019_daily'][day_key] = {}
+            //   self.segmentDict[segment.properties.seg_id_nat]['data_2019_daily'][day_key]['day_count'] = segment.properties.day_count[day_key]
+            //   self.segmentDict[segment.properties.seg_id_nat]['data_2019_daily'][day_key]['day_t_c'] = segment.properties.day_t_c[day_key]
+            // }
+            // self.segmentDict[segment.properties.seg_id_nat]['month_count'] = {}
+            // self.segmentDict[segment.properties.seg_id_nat]['month_temp'] = {}
+            // let month_key = null;
+            // for (month_key in segment.properties.month_count) {
+            //   self.segmentDict[segment.properties.seg_id_nat]['month_count'][month_key] = segment.properties.month_count[month_key]
+            //   self.segmentDict[segment.properties.seg_id_nat]['month_temp'][month_key] = segment.properties.month_temp[month_key]
+            // }
+            
           })
-          // console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -784,13 +795,7 @@
 		        .append("use").attr("xlink:href","#drbReservoirs")
           ////////////////////////////////          
 
-          ////////// SEGMENTS //////////
-          // build array of all segment ids of segments
-          let i;
-          for (i=0; i<self.segments.length; i++){
-            self.segment_id_list.push(self.segments[i].properties.seg_id_nat);
-          };
-          
+          ////////// SEGMENTS //////////         
           // Define individual group <use> elements FOR EACH SEGMENT
           // for loop works here b/c not assigning mouseover event using segment_id
           let segment_id = null;
@@ -1001,8 +1006,8 @@
                 let seg_class = 'c2p2 river_segments seg'
                 seg_class += segment_id
                 let year_key = null;
-                for (year_key in self.segmentDict[segment_id]['year_count']) {
-                  if (self.segmentDict[segment_id]['year_count'][year_key] > 0) {
+                for (year_key in self.segmentDict[segment_id].year_count) {
+                  if (self.segmentDict[segment_id].year_count[year_key] > 0) {
                     seg_class += " " + self.timestep_c2p2 + year_key
                   }
                 }
@@ -1031,8 +1036,8 @@
                 let seg_class = 'c2p2 segs_transparent seg'
                 seg_class += transparent_segment_id
                 let year_key = null;
-                for (year_key in self.segmentDict[transparent_segment_id]['year_count']) {
-                  if (self.segmentDict[transparent_segment_id]['year_count'][year_key] > 0) {
+                for (year_key in self.segmentDict[transparent_segment_id].year_count) {
+                  if (self.segmentDict[transparent_segment_id].year_count[year_key] > 0) {
                     seg_class += " " + self.timestep_c2p2 + year_key
                   }
                 }
@@ -1353,8 +1358,8 @@
                 let seg_class = 'c2p3 river_segments seg'
                 seg_class += segment_id
                 let month_key = null;
-                for (month_key in self.segmentDict[segment_id].month_count) {
-                  if (self.segmentDict[segment_id].month_count[month_key] > 0) {
+                for (month_key in self.segmentDict[segment_id].data_2019_monthly) {
+                  if (self.segmentDict[segment_id].data_2019_monthly[month_key].month_count > 0) {
                     seg_class += " " + self.timestep_c2p3 + month_key
                   }
                 }
@@ -1382,8 +1387,8 @@
                 let seg_class = 'c2p3 segs_transparent seg'
                 seg_class += transparent_segment_id
                 let month_key = null;
-                for (month_key in self.segmentDict[transparent_segment_id].month_count) {
-                  if (self.segmentDict[transparent_segment_id].month_count[month_key] > 0) {
+                for (month_key in self.segmentDict[transparent_segment_id].data_2019_monthly) {
+                  if (self.segmentDict[transparent_segment_id].data_2019_monthly[month_key].month_count > 0) {
                     seg_class += " " + self.timestep_c2p3 + month_key
                   }
                 }
@@ -1473,9 +1478,10 @@
 
           // build color scale
           self.tempColor = self.d3.scaleSequential()
-              .interpolator(self.d3.interpolatePlasma) /* interpolateRdYlBu */
+              .interpolator(self.d3.interpolatePlasma) /* interpolateRdYlBu Plasma */
               // .domain([obsTempMax, obsTempMin]) // if INVERTING color scale
               .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
+              // .domain([(obsTempMin-(obsTempMax-obsTempMin)), (obsTempMax+(obsTempMax-obsTempMin))]) // if NOT INVERTING color scale
 
           // build list of posible counts (0 to 366)
           let temp_list = [];
@@ -1860,7 +1866,6 @@
               .attr("filter", "url(#shadow2)")
         },
         mouseenterTransformedRect_c2p2() {
-          console.log("mouseover")
           // select all spatial rectangles and make mostly opaque
           // to dim matrix
           this.d3.selectAll(".c2p2.matrixSpatialRect")
@@ -1873,8 +1878,6 @@
           //     .style("stroke", "#474e57")
         },
         mouseleaveTransformedRect_c2p2() {
-          console.log("mouseout")
-
           // select all spatial rectangles and set opacity back to zero and raise
           this.d3.selectAll(".c2p2.matrixSpatialRect")
               .style("opacity", 0)
@@ -2098,8 +2101,8 @@
               for (let i = 0; i < self.myGroups_c2p3.length; i++) {
                   let seg_day = self.myGroups_c2p3[i]
                   // for all segment-days with observations...
-                  if (self.segmentDict[segment_id]['data_2019'][seg_day] != undefined) {
-                      if (self.segmentDict[segment_id]['data_2019'][seg_day]['day_count'] > 0) {
+                  if (self.segmentDict[segment_id]['data_2019_daily'][seg_day] != undefined) {
+                      if (self.segmentDict[segment_id]['data_2019_daily'][seg_day]['day_count'] > 0) {
                           // repurpose the temporal rectangles to show the temperatures over the year
                           self.d3.selectAll(".c2p3.matrixTemporalRect.time" + seg_day)
                               .attr("height", cellHeight_c2p3)
@@ -2107,10 +2110,10 @@
                                 return yScale_matrix_c2p3(segment_id) - cellHeight_c2p3/2;
                               })
                               .style("fill", function(d) {
-                                  return self.tempColor(self.segmentDict[segment_id]['data_2019'][seg_day]['day_t_c'])
+                                  return self.tempColor(self.segmentDict[segment_id]['data_2019_daily'][seg_day]['day_t_c'])
                               })
                               .style("stroke", function(d) {
-                                  return self.tempColor(self.segmentDict[segment_id]['data_2019'][seg_day]['day_t_c'])
+                                  return self.tempColor(self.segmentDict[segment_id]['data_2019_daily'][seg_day]['day_t_c'])
                               })
                               .style("opacity", 1)
                               .raise()
@@ -2238,11 +2241,18 @@
               .style("opacity", 0)
           // select all river segments that have data in highlighted year
           // and make white
-          this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
-              .style("stroke", "#ffffff")
-              .style("stroke-width", 1.25)
-              .style("opacity", 1)
-              .raise()
+          let month_sel = this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
+          let selected_segments = month_sel._groups[0]
+          selected_segments.forEach(function(segment) {
+              let segment_id = segment.classList[2].split('seg')[1]
+              self.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
+                  .style("stroke", function(d) {
+                      return self.tempColor(self.segmentDict[segment_id].data_2019_monthly[data.month].month_temp)
+                  })
+                  .style("stroke-width", 2)
+                  .style("opacity", 1)
+                  .raise()
+          })
         },
         mouseoutRect_c2p3(data, tooltip) {
           const self = this;
