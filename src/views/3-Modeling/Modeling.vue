@@ -4321,7 +4321,7 @@
              this.chartState.aDecay = 0.1;
           }
           // push to overlap as single RMSE
-          if (this.step === this.step_rmse && this.step <= this.step_rmse+2) {
+          if (this.step === this.step_rmse && this.step <= this.step_rmse+3) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
