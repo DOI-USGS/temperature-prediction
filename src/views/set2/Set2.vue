@@ -416,12 +416,15 @@
           tempColor: null,
           temporalCountMax_c2p2: null,
           timestep_c2p3: 'date',
-          chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
-          chart_width: null, // this will get a value in the mounted hook
-          chart_height: null, // this will get a value in the mounted hook
+          bar_chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
+          bar_chart_width: null, // this will get a value in the mounted hook
+          bar_chart_height: null, // this will get a value in the mounted hook
           matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
+          temp_chart_margin:{top: 10, right: 10, bottom: 10, left: 10},
+          temp_chart_width: null,
+          temp_chart_height: null,
           scaleBarTop_c2: null,
           scaleBarBottom_c2: null,
           map_c2p1: null,
@@ -445,11 +448,13 @@
       mounted() {
         this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
 
-        this.chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
-        this.chart_height = window.innerHeight * 0.3 - this.chart_margin.top - this.chart_margin.bottom;
+        this.bar_chart_width = 500 - this.bar_chart_margin.left - this.bar_chart_margin.right;
+        this.bar_chart_height = window.innerHeight * 0.3 - this.bar_chart_margin.top - this.bar_chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
         this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; //window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
-      
+        this.temp_chart_width = 700 - this.temp_chart_margin.left - this.temp_chart_margin.right;
+        this.temp_chart_height = 500 - this.matrix_margin.top - this.matrix_margin.bottom;
+
         this.setPanels();  // begin script when window loads
       },
       methods: {
@@ -870,27 +875,27 @@
           // append svg to div
           let svgChart = this.d3.select("#barChart_c2p1")
               .append("svg")
-              .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
-                (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
+              .attr("viewBox", [0, 0, (this.bar_chart_width + this.bar_chart_margin.right + this.bar_chart_margin.left),
+                (this.bar_chart_height + this.bar_chart_margin.top + this.bar_chart_margin.bottom)].join(' '))
               .attr("class", "c2p1 barChart chart")
-              .attr("viewBox", [0, 0, (this.chart_width + this.chart_margin.right + this.chart_margin.left),
-                (this.chart_height + this.chart_margin.top + this.chart_margin.bottom)].join(' '))
+              .attr("viewBox", [0, 0, (this.bar_chart_width + this.bar_chart_margin.right + this.bar_chart_margin.left),
+                (this.bar_chart_height + this.bar_chart_margin.top + this.bar_chart_margin.bottom)].join(' '))
               .attr("class", "c2p1 barChart chart")
 
           let g = svgChart.append("g")
               .attr("class", "c2p1 transformedBarChart")
-              .attr("transform", "translate(" + this.chart_margin.left + "," + this.chart_margin.top + ")");
+              .attr("transform", "translate(" + this.bar_chart_margin.left + "," + this.bar_chart_margin.top + ")");
 
           // define x
           let x = this.d3.scaleBand()
-              .rangeRound([0, this.chart_width])
+              .rangeRound([0, this.bar_chart_width])
               // set padding between bars
               .padding(0.1)
 
           // make y scale
           let y = this.d3.scaleLinear()
               // define range of output values
-              .range([this.chart_height, 0]);
+              .range([this.bar_chart_height, 0]);
 
           // // load processed data
           let data = csv_source_count
@@ -918,14 +923,14 @@
               // set y attribute
               .attr("y", function(d) { return y(d.total); })
               // this calculates the height down from the starting point
-              .attr("height", function(d) { return (self.chart_height - y(d.total)); })
+              .attr("height", function(d) { return (self.bar_chart_height - y(d.total)); })
               // calculate width for each band
               .attr("width", x.bandwidth())
 
           // place the x axis
           g.append("g")
               .attr("class", "c2p1 chartAxis bottom")
-              .attr("transform", "translate(0," + this.chart_height + ")")
+              .attr("transform", "translate(0," + this.bar_chart_height + ")")
               .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
               .select(".domain").remove()
 
@@ -942,7 +947,7 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.chart_width * 0.967 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.bar_chart_width * 0.975 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
               .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
@@ -952,7 +957,7 @@
               .append("text")
               .attr("y", 40)
               // offset to (roughly) center on y axis
-              .attr("x", -this.chart_height / 2)
+              .attr("x", -this.bar_chart_height / 2)
               .attr("text-anchor", "middle")
               .attr("class", "c2p1 chartAxisText")
               .text("Unique temperature measurements")
