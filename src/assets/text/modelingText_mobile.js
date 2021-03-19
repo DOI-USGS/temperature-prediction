@@ -7,7 +7,7 @@ export default {
                 'bees_id': 'step_error'
             },
             {
-                'method': "During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                'method': "During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as values – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'step_error'
             },
@@ -185,7 +185,7 @@ export default {
                 'bees_id': 'step_ann_exp'
             },
             {
-                'method': "For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day.",
+                'method': "For machine learning modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day.",
                 'flubber_id': '',
                 'bees_id': 'step_ann_exp'
             },

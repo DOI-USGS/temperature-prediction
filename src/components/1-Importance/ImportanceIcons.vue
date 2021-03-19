@@ -116,7 +116,7 @@
         class="grid-item desc"
       >
         <p class="desc">
-          Growth rates and abundance of fish
+          Growth rates and abundance of fish and other aquatic organisms
         </p>
       </div>
       <div

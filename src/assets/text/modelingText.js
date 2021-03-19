@@ -2,7 +2,7 @@ export default {
     textContents: {
         "Training an artificial neural network": [
             {
-                'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as values – it has no idea how the inputs and output may be physically related.",
                 'flubber_id': 'ANN1',
                 'bees_id': 'step_error'
             },
@@ -130,7 +130,7 @@ export default {
         ],
         "Recurrent neural network (RNN)": [
             {
-                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day. The model with memory that we use is called a recurrent neural network (RNN).",
+                'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For machine learning modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day. The model with memory that we use is called a recurrent neural network (RNN).",
                 'flubber_id': 'RNN',
                 'bees_id': 'step_ann_exp'
             },
