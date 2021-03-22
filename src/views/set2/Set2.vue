@@ -138,7 +138,7 @@
           <svg class="c2p2 matrix_c2p2 matrix">
             <g
               class="prebuilt_c2p2_group matrix"
-              width="650"
+              width="570"
               height="920"
             >
               <PrebuiltC2P2Matrix />
@@ -175,11 +175,11 @@
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p2 matrixAxis"
@@ -257,7 +257,7 @@
           <svg class="c2p3 matrix_c2p3 matrix">
             <g
               class="prebuilt_c2p3_group matrix"
-              width="650"
+              width="570"
               height="920"
             >
               <PrebuiltC2P3Matrix />
@@ -298,11 +298,11 @@
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p3 matrixAxis"
@@ -419,7 +419,7 @@
           chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
