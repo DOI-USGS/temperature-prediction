@@ -2620,8 +2620,8 @@ $dimGray: #9c9c9c;
 }
 .NS_arrow {
   stroke: $dimGray;
-  stroke-width: 1px;
-  stroke-dasharray: 2 6;
+  stroke-width: 1.5px;
+  stroke-dasharray: 1 6;
 }
 .NS_arrowhead {
   fill: $dimGray;
