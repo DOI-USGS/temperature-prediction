@@ -2553,17 +2553,17 @@ $dimGray: #9c9c9c;
 .c2p1.scaleBar {
   color: $grayBlue;
   font-size: 0.5em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p3.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.cellText {
   font-size: 0.48em;
