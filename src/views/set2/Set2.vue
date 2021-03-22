@@ -846,7 +846,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(1))
+              .attr("d", self.map_path_c2.pointRadius(1.3))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -2585,8 +2585,8 @@ $dimGray: #9c9c9c;
 
 .obs_sites {
   stroke: $boxCharcoal;
-  stroke-width: 0.1;
-  opacity: 0.7;
+  stroke-width: 0.2;
+  opacity: 0.9;
 }
 
 .USGS_station {
