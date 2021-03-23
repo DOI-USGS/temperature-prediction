@@ -3,12 +3,12 @@
         textContents: {
             "Training an artificial neural network": [
                 {
-                    'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
+                    'method': "Like other environmental models, ANNs are fine-tuned using real-world observations. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
                     'flubber_id': 'ANN1',
                     'bees_id': 'step_error'
                 },
                 {
-                    'method': "During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                    'method': "During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as values – it has no idea how the inputs and output may be physically related.",
                     'flubber_id': 'ANN1',
                     'bees_id': 'step_error'
                 },
@@ -186,7 +186,7 @@
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day.",
+                    'method': "For machine learning modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day.",
                     'flubber_id': '',
                     'bees_id': 'step_ann_exp'
                 },
