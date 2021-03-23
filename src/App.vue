@@ -207,8 +207,8 @@ h3{
     margin: 0 auto;
     padding: 15px;
     @media screen and (max-width: 600px) {
-        margin: 10px;
-    } 
+        margin: 20px;
+    }
   }
 
   .flex-container {
