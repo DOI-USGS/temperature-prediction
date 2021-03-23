@@ -7,7 +7,7 @@
     >
       <defs>
         <linearGradient
-          id="linear-gradient"
+          id="linear-gradient-plasma"
           x1="45.43"
           y1="998.62"
           x2="45.7"
@@ -1500,7 +1500,6 @@
         </g>
       </g>
       <g 
-        v-if="!mobileView"
         id="barchart_bars"
       >
         <g>
@@ -1779,7 +1778,7 @@
           />
         </g>
       </g>
-      <g
+      <!-- g
         v-if="!mobileView"
         id="barchart_labels"
         transform="translate(-1, 0)"
@@ -1952,7 +1951,7 @@
           class="cls-34"
           transform="translate(666.4 765.1)"
         >0</text>
-      </g>
+      </g -->
       <g id="legend">
         <rect
           class="cls-35"
@@ -1962,7 +1961,8 @@
           height="89.08"
         />
       </g>
-      <g id="legend_text">
+      <g id="legend_text"
+        transform="translate(0, 10)">
         <text
           class="viz-comment"
           transform="translate(207.6 533.2)"
@@ -2622,18 +2622,19 @@
 <style lang="scss" scoped>
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 .background{
   fill: $boxCharcoal;
@@ -2792,7 +2793,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-35 {
-        fill: url(#linear-gradient);
+        fill: url(#linear-gradient-plasma);
       }
 
       .cls-100 {
@@ -2800,7 +2801,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-44, .cls-81 {
-        fill: $grayBlue; //#7d7d7d
+        fill: $dimGray;
       }
 
       .cls-37, .cls-38, .cls-39, .cls-40, .cls-41, .cls-42 {
@@ -2973,9 +2974,9 @@ $grayBlue: #576069; //#4F5C67
 
       .cls-102, .cls-80 {
         fill: none;
-        stroke: $grayBlue; //#7d7d7d
+        stroke: $dimGray;
         stroke-miterlimit: 10;
-        
+        stroke-width: 1.5px;
       }
 
 

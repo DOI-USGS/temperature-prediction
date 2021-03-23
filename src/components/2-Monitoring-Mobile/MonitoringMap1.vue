@@ -1,8 +1,5 @@
 <template>
   <div id="monitoring-map-1">
-    <!-- h3 class="viz-title">
-      Monitoring Sites in the Delaware River Basin
-    </h3 -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 50 610 1020"
@@ -10078,36 +10075,6 @@
           d="M399.6,629.7a1.9,1.9,0,0,1-1.9-2,1.9,1.9,0,0,1,1.9-1.9,2,2,0,0,1,1.9,1.9A2,2,0,0,1,399.6,629.7Z"
         />
       </g>
-      <!-- g id="legend">
-        <g id="legend_text">
-          <text
-            class="legend-text"
-            transform="translate(81 328.6)"
-          >USGS</text>
-          <text
-            class="legend-text"
-            transform="translate(81 306.5)"
-          >State or other agency</text>
-        </g>
-        <g id="legend_squares">
-          <rect
-            class="cls-9"
-            x="57.7"
-            y="318"
-            width="10.4"
-            height="10.38"
-            rx="5.2"
-          />
-          <rect
-            class="cls-8"
-            x="57.7"
-            y="295.9"
-            width="10.4"
-            height="10.38"
-            rx="5.2"
-          />
-        </g>
-      </g -->
     </svg>
   </div>
 </template>
@@ -10120,22 +10087,23 @@ export default {
 
 <style scoped lang="scss">
   // IMPORT COLORS
-  $backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-  $boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+  $backgroundCharcoal: #292b30;
+  $boxCharcoal: #0f0f0f;
   $offWhite: #F1F1F1;
+  $offWhiteBox: #dedede;
   $plasmaYellow: #FAB62F;
   $plasmaPink: #BE3D7D;
   $plasmaPurple: #62039A;
   $plasmaBlue: #142167;
-  $darkBlue: #0F2237;
+  $darkBlue: #192c42;
   $footerBlue: #00264C;
-  $mediumBlue: #5191bd; //#63B1E6 #579ecf
-  $lightBlue: #AAD1EC;
-  $grayBlue: #576069; //#4F5C67
+  $mediumBlue: #5D9DC7; 
+  $grayBlue: #777b80;
+  $dimGray: #9c9c9c;
 
   #monitoring-map-1 {
       width: 100%;
-      padding: 0px; //10px
+      padding: 0px;
   }
   /* Rivers and Delaware Bay */
   .st0 {
@@ -10149,13 +10117,13 @@ export default {
   }
 	.scale-line{fill:none;stroke:$grayBlue;}
   .scale-text {
-    fill: $grayBlue; //#1f4f61
+    fill: $grayBlue;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 1em;
   }
 
   /* Circles */
-	.cls-8{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;} /* other #EB4444  stroke-width:0.5*/
-	.cls-9{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;} /* USGS #EDB932 stroke-width:0.5*/
+	.cls-8{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;}
+	.cls-9{fill:$plasmaYellow;stroke:$backgroundCharcoal;stroke-width:0.5;opacity:0.8;}
 
 </style>

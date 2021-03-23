@@ -1,8 +1,5 @@
 <template>
   <div id="matrix-temperature">
-    <!-- h3 class="viz-title">
-      Temperature of all DRB reaches during a year
-    </h3 -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -1660,18 +1657,19 @@ export default {
 
 <style lang="scss" scoped>
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #AAD1EC;
-$grayBlue: #576069; //#4F5C67
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 #matrix-background{
   fill: $boxCharcoal;
@@ -1684,7 +1682,7 @@ $grayBlue: #576069; //#4F5C67
         width: 100%;
 }
 .NS_arrow {
-        stroke: $grayBlue;
+        stroke: $dimGray;
         stroke-width: 3px;
         stroke-dasharray: 2 6;
 }
@@ -5600,7 +5598,7 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-781, .cls-782 {
-        stroke: $grayBlue;
+        stroke: $dimGray;
         stroke-width: 3px;
       }
 
@@ -5609,11 +5607,11 @@ $grayBlue: #576069; //#4F5C67
       }
 
       .cls-783 {
-        fill: $grayBlue;
+        fill: $dimGray;
       }
 
       .cls-784 {
         font-size: 26px;
-        fill: $grayBlue;
+        fill: $dimGray;
       }
 </style>

@@ -4,9 +4,9 @@
     <HeaderUSWDSBanner />
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
-    <WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" /> <!-- an empty string in this case means the 'prod' version of the application   -->
-    <Title />
-    <Nav />
+    <!-- WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" / --> <!-- an empty string in this case means the 'prod' version of the application   -->
+    <NavTitle />
+    <!-- Title / -->
     <router-view
       v-if="!isInternetExplorer"
     />
@@ -21,8 +21,9 @@
     import WindowSize from "./components/WindowSize";
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
+    import NavTitle from './components/Nav_title'
     import Nav from './components/Nav'
-    import Title from './components/Title'
+    // import Title from './components/Title'
     import { isMobile } from 'mobile-device-detect';
 
     export default {
@@ -31,10 +32,11 @@
             WindowSize,
             HeaderUSWDSBanner,
             HeaderUSGS,
+            NavTitle,
             Nav,
-            Title,
+            // Title,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
-            WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
+            // WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
             PreFooterCodeLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-code"*/ "./components/PreFooterCodeLinks"),
             FooterUSGS: () => import( /* webpackPreload: true */ /*webpackChunkName: "usgs-footer"*/ "./components/FooterUSGS") // Have Webpack put the footer in a separate chunk so we can load it conditionally (with a v-if) if we desire
@@ -79,27 +81,19 @@
 <style lang="scss">
 
 // IMPORT COLORS
-$backgroundCharcoal: #292b30; //#1E1F23 #26282b #202226 #292c33 #2a2d33
-$boxCharcoal: #1a1b1c; //#28292D #1a1b1f #171717
+$backgroundCharcoal: #292b30;
+$boxCharcoal: #0f0f0f;
 $offWhite: #F1F1F1;
+$offWhiteBox: #dedede;
 $plasmaYellow: #FAB62F;
 $plasmaPink: #BE3D7D;
 $plasmaPurple: #62039A;
 $plasmaBlue: #142167;
-$darkBlue: #0F2237;
+$darkBlue: #192c42;
 $footerBlue: #00264C;
-$mediumBlue: #5191bd; //#63B1E6 #579ecf
-$lightBlue: #95b5cb;
-$grayBlue: #777b80; //#4F5C67 #576069 #7B7F85
-
-// Old colors
-$monotoneBlue1: #e9eced;
-$monotoneBlue2: #c3cccf;
-$monotoneBlue3: #88989f;
-$monotoneBlue4: #4c656e;
-$monotoneBlue5: #285C70; //#10313e
-$monotoneBlueTransparent: rgba(76,101,110, .6);
-$riverBlue: #6399ba;
+$mediumBlue: #5D9DC7; 
+$grayBlue: #777b80;
+$dimGray: #9c9c9c;
 
 // Type
 body {
@@ -162,10 +156,11 @@ h3{
 }
 
 .byline {
-  font-style: italic;
+  font-family: 'Georgia', Helvetica, Arial, sans-serif;
+  // font-style: italic;
   font-weight: 300;
   font-size: .8em;
-  color: $offWhite; //#808080
+  color: $grayBlue; //#808080
 }
 
 .chapter {
@@ -275,16 +270,25 @@ h3{
   }
 
   .map {
-    min-width: 400px;
-    max-width: 600px;
-    max-height: 90vh;
+    min-width: 600px;
+    max-width: 800px;
+    max-height: 150vh;
     flex: 1 1 30%;
     justify-self: center;
 
     @media screen and (max-width: 600px) {
         max-width: 300px;
     }
-
+  }
+  .map_monitoring {
+    min-width: 400px;
+    max-width: 600px;
+    max-height: 100%;
+    flex: 1 1 30%;
+    justify-self: center;
+    @media screen and (max-width: 600px) {
+        max-width: 300px;
+    }
   }
   .map_matrix {
     justify-self: center;
@@ -325,7 +329,7 @@ h3{
   // box-shadow: -5px -5px $monotoneBlue5;
   font-size: 1.4em;
   font-weight: 700;
-  color: $offWhite;
+  color: $offWhiteBox;
   margin-bottom: 0;
   @media screen and (max-width: 600px) {
        font-size: 1.2em;
@@ -334,7 +338,7 @@ h3{
 }
 
 .viz-subtitle {
-  color: $offWhite;
+  color: $offWhiteBox;
   font-size: .8em;
   text-align: left;
   font-weight: 100;
@@ -345,20 +349,20 @@ h3{
 }
 
 .legend-text {
-    fill: $grayBlue;
+    fill: $dimGray;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 12pt;
   }
 .explainer-minor-text {
-    fill: $grayBlue; //#707070
+    fill: $dimGray;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 15pt;
   }
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
   font-weight: 400;
-  fill:rgb(224, 222, 222);
+  fill: $offWhite;
 }
 .viz-emph {
   font-weight:700;
