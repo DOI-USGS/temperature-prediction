@@ -2764,7 +2764,7 @@
             // string keys to modify chart appearance
             chartState: {},
             chart_x: {error: 'error_x', mid: 'rmse_x', ANN: 'ANN', RNN: 'RNN', RGCN: 'RGCN', RGCN_ptrn: 'RGCN_ptrn', low: 'low', high: 'hi'},
-            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs", obs: "obs", exp: "exp"},
+            chart_y: {mid: 'mid', error_exp: "error_exp", error_obs: "error_obs_new", obs: "obs", exp: "exp"},
             color_bees: {exp: 'experiment', error:'group'},
             label_o: 1, //error axis labels
             label_o_rmse: 0, // rmse axis labels
@@ -2816,7 +2816,6 @@
           }
         },
         mounted() {
-
           // this all happens before the page is rendered
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
 
@@ -2864,10 +2863,12 @@
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 5) : (this.step_rgcn_ptrn + 2);
 
         // colors for chart
-          this.color_d100 = "#5D9DC7";
-          this.color_d001 = '#BE3D7D';
-          this.color_obs = "#FAB62F";
-          this.color_exp = "#FAB62F"; 
+          this.color_d100 = "#FAB62F"; //"#5191bd" pink
+          this.color_d001 = "#FAB62F";
+          this.color_obs = "#5191bd";  //"#5191bd" '#BE3D7D' pink
+          this.color_exp = "#5191bd"; // "#FAB62F" yellow
+          this.color_fill = "#292b30"; // to fill open circles same as background
+          this.stroke_w = "2px"
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
           this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
@@ -2885,8 +2886,8 @@
           loadData() {
             const self = this;
             // read in data 
-            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_test.csv", this.d3.autoType),
-            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100_test.csv", this.d3.autoType),
+            let promises = [self.d3.csv(self.publicPath + "data/rmse_monthly_experiments.csv", this.d3.autoType),
+            self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_d100.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_monthly_experiments_error.csv", this.d3.autoType),
             self.d3.csv(self.publicPath + "data/rmse_links.csv", this.d3.autoType)];
             Promise.all(promises).then(self.callback); 
@@ -2900,15 +2901,17 @@
             this.links = data[3];
 
             // computed properties
-            this.paddedRadius = this.radius* 1.5;
+            this.paddedRadius = this.radius* 1.4;
+            this.errorRadius = 10;
 
           // define initial state of chart - default is an error chart to start
-            this.chartState.strengthr = 1;
+            this.chartState.strengthr = 0;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
             //this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 1;
             this.chartState.aDecay = 0.1;
+            this.chartState.strengthlink = 0;
 
             // draw the chart
             this.setChartState(); // pull fadein/out start state based on step
@@ -3062,7 +3065,8 @@
                         this.o_exp = 0; // legend added experiments
                         this.o_arrow = 0; // rmse arrow legend
                         this.o_rmse_title = 0; // rmse model naming
-                        this.obs_pos = 0; // 
+                        this.obs_pos = 0; 
+                        this.link_o = 1; 
                         break;
                       case this.step_error_obs:
                         this.label_o = 1;
@@ -3074,6 +3078,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 30;
+                        this.link_o = 1; 
                         break;
                       case this.step_rmse:
                       case this.step_rmse+1:
@@ -3088,6 +3093,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3102,6 +3108,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3121,6 +3128,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3138,6 +3146,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3154,6 +3163,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3174,6 +3184,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       default:
                         this.label_o = 0;
@@ -3185,6 +3196,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 0;
+                        this.link_o = 0; 
                   }
               } else {
                   switch(this.step) {
@@ -3198,6 +3210,7 @@
                         this.o_arrow = 0; // rmse arrow legend
                         this.o_rmse_title = 0; // rmse model naming
                         this.obs_pos = 0; // 
+                        this.link_o = 1; 
                         break;
                       case this.step_error_obs:
                         this.label_o = 1;
@@ -3209,6 +3222,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 30;
+                        this.link_o = 1; 
                         break;
                       case this.step_rmse:
                       case this.step_rmse+1:
@@ -3222,6 +3236,7 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3235,6 +3250,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3250,6 +3266,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3263,6 +3280,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3276,6 +3294,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3293,6 +3312,7 @@
                         this.o_arrow = 1;
                         this.o_rmse_title = 1;
                         this.obs_pos = 30;
+                        this.link_o = 0; 
                         break;
                       default:
                         this.label_o = 0;
@@ -3304,10 +3324,12 @@
                         this.o_arrow = 0;
                         this.o_rmse_title = 0;
                         this.obs_pos = 0;
+                        this.link_o = 0; 
                   }
               }
           },
           setDataVars(){
+            let margin = 50;
               // setting data variables
               if (this.mobileView) {
                   switch(this.step) {
@@ -3321,8 +3343,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3334,9 +3356,9 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 1;
-                        break;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.errorRadius;
+                        break;                      
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
                         this.chartState.grouped = this.color_bees.exp;
@@ -3347,8 +3369,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3360,8 +3382,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+2:
                       case this.step_rmse+3:
@@ -3374,8 +3396,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3390,8 +3412,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3411,8 +3433,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3430,8 +3452,8 @@
                         this.model_current = ': ANN + time';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3448,8 +3470,8 @@
                         this.model_current = ': ANN + time + space';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3470,8 +3492,8 @@
                         this.model_current = ': ANN + time + space + physics';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3481,10 +3503,10 @@
                         this.chartState.domain_x = 30;
                         this.chartState.domain_y = 30;
                         this.model_current = '';
-                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x = this.width+margin; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+margin;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.radius;
 
                   }
               } else {
@@ -3499,8 +3521,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0; // x end for axis
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_error_obs:
                         this.chartState.dataset = this.error_data;
@@ -3512,8 +3534,8 @@
                         this.model_current = '';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 1;
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_rmse:
                         this.chartState.dataset = this.error_data;
@@ -3525,8 +3547,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+1:
                         this.chartState.dataset = this.error_data;
@@ -3538,8 +3560,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rmse+2:
                         this.chartState.dataset = this.error_data;
@@ -3551,8 +3573,8 @@
                         this.model_current = '  quantifies model prediction error';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann:
                       case this.step_ann+1:
@@ -3566,8 +3588,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_ann_exp:
                       case this.step_ann_exp+1:
@@ -3583,8 +3605,8 @@
                         this.model_current = ': ANN';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rnn:
                       case this.step_rnn+1:
@@ -3598,8 +3620,8 @@
                         this.model_current = ': ANN + time';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn:
                       case this.step_rgcn+1:
@@ -3613,8 +3635,8 @@
                         this.model_current = ': ANN + time + space';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2);
+                        this.chartState.rad = this.radius;
                         break;
                       case this.step_rgcn_ptrn:
                       case this.step_rgcn_ptrn+1:
@@ -3632,8 +3654,8 @@
                         this.model_current = ': ANN + time + space + physics';
                         this.chartState.axis_x = 0;
                         this.chartState.axis_y = 0;
-                        this.chartState.axis_x_on_y = (this.height/2)-50;
-                        this.chartState.strengthlink = 0;
+                        this.chartState.axis_x_on_y = (this.height/2)
+                        this.chartState.rad = this.radius;
                         break;
                       default:
                         this.chartState.dataset = this.error_data;
@@ -3643,11 +3665,10 @@
                         this.chartState.domain_x = 30;
                         this.chartState.domain_y = 30;
                         this.model_current = '';
-                        this.chartState.axis_x = this.width+50; // if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_y = this.height+50;// if not on a beeswarm step, the axis is recoiled
-                        this.chartState.axis_x_on_y = this.height;
-                        this.chartState.strengthlink = 0;
-
+                        this.chartState.axis_x = this.width+margin; // if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_y = this.height+margin;// if not on a beeswarm step, the axis is recoiled
+                        this.chartState.axis_x_on_y = this.height+margin;
+                        this.chartState.rad = this.radius;
                   }
               }
           },
@@ -3659,14 +3680,9 @@
           // add svg for beeswarm 
           this.svg = this.d3.select('#bees-container').append('svg')
               .attr("id", "bees-chart")
-              .attr("viewBox", [0, 0, (this.width+margin*2), (this.height+margin*2)].join(' '))
+              .attr("viewBox", [0, -50, (this.width+margin*2), (this.height+margin*3)].join(' '))
               .attr("height", "100%")
               .attr("width", "100%")
-
-          // define where chart starts within svg
-          this.svg
-            .append("g")
-            .attr('transform', `translate(50, 50)`);
 
           ////////////////////// set scales
           // x axis 
@@ -3676,18 +3692,18 @@
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height,0])
+            .range([this.height+margin,0])
             .domain([0,this.chartState.domain_y]);
 
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d100, this.color_d001, "#292b30", this.color_exp]); //"#292b30"
+            .range([this.color_d001, this.color_fill, this.color_fill, this.color_exp]); //"#292b30"
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"]) // took out d002
-            .range([this.color_d100,  this.color_d001, this.color_obs, this.color_exp]);
+            .range([this.color_d001,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
           // generate axes
@@ -3695,29 +3711,28 @@
           let xGen = this.d3.axisBottom(self.xScale).ticks(0).tickSize(0);
 
           // draw on chart
-          this.yAxis = this.svg.select("g").append("g")
+          this.yAxis = this.svg.append("g")
             .attr("class", "y-axis")
             .call(yGen);
 
-          this.xAxis = this.svg.select("g").append("g")
+          this.xAxis = this.svg.append("g")
             .attr("class", "x-axis")
             .call(xGen);
 
         // style modifications and set up axis drawing animation
          this.xAxis
-          .attr("transform", "translate(" + -margin + "," + this.chartState.axis_x_on_y + ")")
+          .attr("transform", "translate(" + 0 + "," + this.chartState.axis_x_on_y + ")")
           .style("stroke-width", "3px")
           .style("stroke-dasharray", this.width+margin)
           .style("stroke-dashoffset", this.width+margin) // initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#9c9c9c")
-          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
          this.yAxis
+          .attr("transform", "translate(" + margin + "," + 0 + ")")
           .style("stroke-width", "3px")
           .style("stroke-dasharray", this.height+margin)
           .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#9c9c9c")
-          //style('marker-end', 'url(#arrow)'); // append arrow to axis
 
           /// define arrow head for rmse label
         this.svg.append("svg:defs").append("svg:marker")
@@ -3735,11 +3750,11 @@
           this.svg
           .append("line")
             .attr("x1", margin)
-            .attr("y1", (this.height-margin))
+            .attr("y1", (this.height))
             .attr("x2", this.width+margin)
-            .attr("y2", (this.height-margin))
+            .attr("y2", (this.height))
             .attr("stroke-width", 2)
-            .attr("stroke", "#9c9c9c")// not the right grey color.........................
+            .attr("stroke", "#9c9c9c")
             .attr("stroke-dasharray", "5px")
             .attr("marker-end", "url(#triangle)")
             .attr("marker-start", "url(#triangle)")
@@ -3748,7 +3763,7 @@
 
           // text labels for the rmse axis
           this.svg.append("text")             
-              .attr("transform","translate(" + margin + " ," + (this.height-margin - 40) + ")")
+              .attr("transform","translate(" + margin + " ," + (this.height- 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
               .style("fill", "#9c9c9c")// not the right grey color
@@ -3757,7 +3772,7 @@
               .classed("rmse-label", true);
 
             this.svg.append("text")             
-              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-margin-40) + ")")
+              .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
               .style("fill", "#9c9c9c")// not the right grey color
@@ -3772,7 +3787,6 @@
              self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
 
         // if starts on any rmse steps, draw the rmse axis only
-        // this doesnt seem to be working corectly
         } else if (this.step >= this.step_rmse) {
            this.yAxis 
             .style("opacity", 0)
@@ -3781,13 +3795,15 @@
           self.transitionAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
         }
 
+        let font_item = "30px";
+
           // text label for the x axis
           this.svg.append("text")             
               .attr("transform","translate(" + (this.width/2) + " ," + (this.height + margin*2) + ")")
               .style("text-anchor", "middle")
               .text("time")
               .style("fill", "#9c9c9c")
-              .style("font-size", "30px")
+              .style("font-size", font_item)
               .attr("opacity", this.label_o)
               .classed("error", true)
               .classed("axis-label", true);
@@ -3803,7 +3819,7 @@
               .style("fill", "#9c9c9c")
               .attr("opacity", this.label_o)
               .classed("error", true)
-              .style("font-size", "30px")
+              .style("font-size", font_item)
               .classed("axis-label", true);    
 
             ////////////////////////////// colors + legends
@@ -3812,23 +3828,34 @@
                 .append("g").classed("legend_color", true)
                 .classed("error", true)
               
-                 var nudge_x = 150;
-                 var nudge_y = this.height*.1;
+                 var nudge_x = 2*margin;
+                 var nudge_y = this.height*.05;
 
                 var error_stroke = this.d3.scaleOrdinal()
-                  .domain(["prediction","observed"])
+                  .domain(["Predicted","Observed"])
                   .range([this.color_obs, this.color_exp]);
 
                   var error_fill = this.d3.scaleOrdinal()
                   .domain(["Predicted","Observed"])
                   .range([this.color_exp,"#292b30"]);
 
+               // draw link between legend items
+               legend_error
+                  .append("line").classed("leg-link", true)
+                  .attr("x1", nudge_x+20)
+                  .attr("x2", nudge_x+20)
+                  .attr("y1", nudge_y+30)
+                  .attr("y2", nudge_y+30)
+                  .attr("stroke",this.color_d100)
+                  .attr("stroke-width", "8px")
+                  .style("opacity", this.link_o);
+
               legend_error.append("text")
                 .text("Temperature")
-                .attr("x", nudge_x-20)
+                .attr("x", nudge_x)
                 .attr("y", nudge_y)
                 .style("fill", "white")
-                 .style("font-size", "30px")
+                 .style("font-size", font_item)
                  .style("font-weight","bold")
                  .style("opacity", this.o_pred)
                  .classed("error_1" , true)
@@ -3839,38 +3866,39 @@
                   .enter().append("g")
                     .attr("class", "legend")
                     .attr("transform", function(d,i) {
-                      return "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")";
+                      return "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 30) + ")";
                     });
 
                 legend.append("circle")
                   .attr("x", nudge_x)
                   .attr("y", nudge_y)
-                  .attr("r", this.radius)
+                  .attr("r", this.errorRadius)
                   .style("fill", error_fill)
                   .style("stroke", error_stroke)
+                  .style("stroke-width",  this.stroke_w)
                   .style("opacity", this.o_pred)
 
                   legend.append("text")
-                  .attr("x", "20px")
-                  .attr("y", "5px")
+                  .attr("x", "25px")
+                  .attr("y", "8px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
                   .style("font-size", "20px")
 
-                   this.d3.select("g.legend:nth-child(3) text")
+                   this.d3.select("g.legend:nth-child(4) text")
                   .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
-                  this.d3.select("g.legend:nth-child(3) circle")
+                  this.d3.select("g.legend:nth-child(4) circle")
                   .attr("opacity", this.o_pred)
                   .classed("error_1" , true)
 
 
-                  this.d3.select("g.legend:nth-child(2) text")
+                  this.d3.select("g.legend:nth-child(3) text")
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
-                  this.d3.select("g.legend:nth-child(2) circle")
+                  this.d3.select("g.legend:nth-child(3) circle")
                   .attr("opacity", this.o_obs)
                   .classed("error_2" , true)
 
@@ -3878,9 +3906,9 @@
                   legend_error.append("text")
                   .text("Root mean square error (RMSE)")
                   .attr("x", margin)
-                  .attr("y", nudge_y+420)
+                  .attr("y", this.height+nudge_y)
                   .style("fill", "white")
-                  .style("font-size", "30px")
+                  .style("font-size", font_item)
                   .attr("line-height", "35px")
                   .style("font-weight","bold")
                   .style("opacity", this.o_rmse_title)
@@ -3890,9 +3918,9 @@
                  legend_error.append("text")
                   .text(this.model_current)
                   .attr("x", 510)
-                  .attr("y", nudge_y+420)
+                  .attr("y", this.height+nudge_y)
                   .style("fill", "white")
-                  .style("font-size", "30px")
+                  .style("font-size", font_item)
                   .attr("line-height", "35px")
                   .style("font-weight","100")
                   .style("opacity", this.o_rmse_title)
@@ -3904,8 +3932,7 @@
                     .append("g").classed("rmse-legend", true)
                     .classed("rmse", true)
               
-                 var nudge_x_rmse = this.width*.8;
-                 var nudge_y_rmse = this.height*.1;
+                 var nudge_x_rmse = 780;
 
                 var rmse_stroke = this.d3.scaleOrdinal()
                   .domain(["100%","0.1%"])
@@ -3913,14 +3940,15 @@
 
                   var rmse_fill = this.d3.scaleOrdinal()
                   .domain(["100%","0.1%"])
-                  .range([this.color_d100,  this.color_d001]);
+                  .range([this.color_d100,  this.color_fill]);
 
               legend_rmse.append("text")
                 .text("Training data")
-                .attr("x", nudge_x_rmse-20)
-                .attr("y", nudge_y_rmse)
+                .attr("text-anchor", "end")
+                .attr("x", this.width-margin)
+                .attr("y", nudge_y)
                 .style("fill", "white")
-                 .style("font-size", "30px")
+                 .style("font-size", font_item)
                  .style("font-weight","bold")
                  .style("opacity", this.o_train)
                  .classed("rmse-title", true)
@@ -3930,19 +3958,20 @@
                   .enter().append("g")
                     .attr("class", "legend-rmse")
                     .attr("transform", function(d,i) {
-                      return "translate(" + (nudge_x_rmse) + " ,"  + (nudge_y_rmse + 30 + i * 30) + ")";
+                      return "translate(" + (nudge_x_rmse) + " ,"  + (nudge_y + 25 + i * 25) + ")";
                     });
 
                 legend_r.append("circle")
                   .attr("x", nudge_x_rmse)
-                  .attr("y", nudge_y_rmse)
+                  .attr("y", nudge_y)
                   .attr("r", this.radius)
                   .style("fill", rmse_fill)
                   .style("stroke", rmse_stroke)
+                  .style("stroke-width",  this.stroke_w)
 
                   legend_r.append("text")
                   .attr("x", "20px")
-                  .attr("y", "5px")
+                  .attr("y", "8px")
                   .text(function(d) { return d; })
                   .style("fill", "white")
                   .style("font-size", "20px")
@@ -3998,16 +4027,25 @@
             .data(this.links)
             .enter().append("line").classed("link", true)
             .attr("stroke",this.color_d100)
-            .attr("stroke-width", "4px");
+            .attr("stroke-width", "8px")
+            .style("opacity", this.link_o);
 
           },
           simJumpStart(){
             const self = this;
             // tick to make sure dots are poistioned on first draw
+
+            let vdecay;
+            if (this.step >= this.step_ann) {
+              vdecay = 0.4;
+            } else {
+              vdecay = 0.5;
+            }
+
             self.simulation
               .alpha(this.chartState.alpha)
               .alphaDecay(this.chartState.aDecay)
-              //.velocityDecay(0.6)
+              .velocityDecay(vdecay)
               .restart()
               .on("tick", self.tick);
           },
@@ -4023,27 +4061,32 @@
           },
           moveLegend(direction) {
             const self = this;
-            var drop_dot = this.d3.select("g.legend:nth-child(2)")
+            let margin = 50;
 
-            var nudge_x = 150;
-            var nudge_y = this.height*.1;
+            var nudge_x = margin*2;
+            var nudge_y = this.height*.05;
 
             if (direction == "down"){
-                  this.d3.select("g.legend:nth-child(2) circle")
+                  this.d3.select("g.legend:nth-child(3) circle")
                   .transition()
                   .duration(150)
                   .style("opacity", 1)
 
-                  this.d3.select("g.legend:nth-child(2)")
+                  this.d3.select("g.legend:nth-child(3)")
                   .transition()
                   .duration(400)
-                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 60) + ")")
+                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 75) + ")")
 
-                  this.d3.select("g.legend:nth-child(2) text")
+                  this.d3.select("g.legend:nth-child(3) text")
                   .transition()
                   .duration(150)
                   .style("opacity", 1)
 
+                  // draw link between legend items
+                  this.d3.select("line.leg-link")
+                    .transition()
+                    .duration(400)
+                    .attr("y2", nudge_y+75)
 
             } else if (direction == "up") {
              this.d3.select("g.legend:nth-child(2) text")
@@ -4054,12 +4097,18 @@
                 this.d3.select("g.legend:nth-child(2)")
                   .transition()
                   .duration(400)
-                  .attr("transform", "translate(" + (nudge_x) + " ,"  + (nudge_y + 30) + ")")
+                  .attr("transform", "translate(" + (nudge_x+20) + " ,"  + (nudge_y + 30) + ")")
 
                   this.d3.select("g.legend:nth-child(2) circle")
                   .transition()
                   .duration(150)
                   .style("opacity", 0)
+
+                  // draw link between legend items
+                  this.d3.select("line.leg-link")
+                    .transition()
+                    .duration(400)
+                    .attr("y2", nudge_y+30)
 
             }
           },
@@ -4102,7 +4151,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + (this.height/2-margin) + ")")
+                .attr("transform", "translate(" + 0 + "," + (this.height/2) + ")")
 
                 this.yAxis
                 .transition()
@@ -4116,7 +4165,7 @@
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + -margin + "," + this.height + ")")
+                .attr("transform", "translate(" + 0 + "," + (this.height+margin) + ")")
 
                 this.yAxis
                 .transition()
@@ -4127,7 +4176,7 @@
           updateChart() {
             //controls decision making for the error >> beeswarm chart
             const self = this;
-          let margin = 50;
+            let margin = 50;
 
           // update axes based on active data
           this.xScale = this.d3.scaleLinear()
@@ -4135,7 +4184,7 @@
             .domain([0,this.chartState.domain_x]);
 
           this.yScale = this.d3.scaleLinear()
-            .range([this.height, margin])
+            .range([this.height+margin,0])
             .domain([0,this.chartState.domain_y]);
             // this totally works but hardly see movment vs scaling??
 
@@ -4153,7 +4202,7 @@
               .classed("model" , true)
               .text(this.model_current) // pulls current step model
               .attr("x", 510)
-              .attr("y", (this.height*.1)+420)
+              .attr("y", this.height+25)
               .style("fill", "white")
               .style("font-size", "30px")
               .attr("line-height", "30px")
@@ -4168,6 +4217,7 @@
           .data(this.chartState.dataset, function(d) { return d.seg }) // use seg as a key to bind and update data
           .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
            .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+           .attr("stroke-width", "3px")
 
         // modify forces to update chart
        // // first restart all forces and then define force velocity and ticking
@@ -4189,28 +4239,32 @@
         // attributes and positioning define the starting point
           chart.exit()
               .transition()
-                .duration(600)
+                .duration(500)
                 .delay(function(d,i) { return 5* i})
                 .attr("r", 0)
                 .remove();
+
           chart
             .transition()
-            .duration(800)
-            .attr("r", this.radius)
+            .duration(500)
+            .attr("r", this.chartState.rad)
             .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
             .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+            .attr("stroke-width",  this.stroke_w)
 
             chart.enter()
               .append("circle")
               .classed("bees", true)
+              .classed("fixed", function(d) { return d.fixed })
               .attr("cx", (d) => self.xScale(d[this.chartState.var_x]))
               .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // define entering color before appears
               .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
               .attr("r", 0) 
+              .attr("stroke-width",  this.stroke_w)
               .transition()
                 .duration(800)
                 .delay(function(d,i) { return 5* i})
-                .attr("r", this.radius)
+                .attr("r", this.chartState.rad)
 
           // anything that should happen after points are updated
             chart
@@ -4220,6 +4274,7 @@
                 .delay(function(d,i) { return 5* i})
                 .attr("fill", (d) => self.set_colors(d[this.chartState.grouped])) // transitions color
                 .attr("stroke", (d) => self.stroke_colors(d[this.chartState.grouped]))
+                .attr("r", this.chartState.rad)
 
           /////////// run sim
           self.simJumpStart();
@@ -4227,7 +4282,7 @@
           tick() {
             // ticking the simulation moves the dots and link together
           const self = this;
-          
+
           this.d3.selectAll(".bees")
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
@@ -4251,34 +4306,27 @@
           ///////////          // assign forces
           // error chart steps
           if (this.mobileView) {
-          if (this.step <= this.step_error_exp) {
+          if (this.step <= this.step_error_obs) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-           if (this.step === this.step_error_obs ) {
-             this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-            this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           // push to overlap as single RMSE
-          if (this.step === this.step_rmse) {
+          if (this.step === this.step_rmse && this.step <= this.step_rmse+3) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           if (response.direction == "up" && this.step === this.step_rmse) {
             this.chartState.strengthy = 1.5;
@@ -4286,132 +4334,66 @@
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
-          if (this.step === this.step_rmse+1) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-
-          }
-          if (this.step === this.step_rmse+2) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-          }
-    
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = .2;
+            this.chartState.aDecay = 0.15;
+          }
+          // RNN toe nd
+          if (this.step >= this.step_rnn)  {
+            this.chartState.strengthy = 0.3;
+            this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.3;
-            this.chartState.aDecay = 0.05;
-          }
-          // RNN
-          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN
-          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN to end
-          if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
             this.chartState.aDecay = 0.15;
           }
           }else {
-         if (this.step <= this.step_error_exp) {
+         if (this.step <= this.step_error_obs) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
             this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-           if (this.step === this.step_error_obs ) {
-             this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-            this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
            if (response.direction == "up" && this.step === this.step_error_obs ) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           // push to overlap as single RMSE
-          if (this.step === this.step_rmse) {
+          if (this.step >= this.step_rmse && this.step <= this.step_rmse+2) {
             this.chartState.strengthy = 1;
             this.chartState.radius = 0;
              this.chartState.strengthr = 2;
              this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
+             this.chartState.aDecay = 0.1;
           }
           if (response.direction == "up" && this.step === this.step_rmse) {
             this.chartState.strengthy = 1.5;
             this.chartState.strengthy = 2;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.05;
-          }
-          if (this.step === this.step_rmse+1) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
-
-          }
-          if (this.step === this.step_rmse+2) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 1;
-             this.chartState.alpha = .3;
-             this.chartState.aDecay = 0.05;
+             this.chartState.alpha = .2;
+             this.chartState.aDecay = 0.15;
           }
 
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
             this.chartState.strengthy = 0.9;
             this.chartState.radius = this.paddedRadius;
+            this.chartState.alpha = .3;
+            this.chartState.aDecay = 0.15;
+          }
+          // RNN to end
+          if (this.step >= this.step_rnn ) {
+            this.chartState.strengthy = 0.3;
+            this.chartState.radius = this.paddedRadius;
             this.chartState.alpha = 0.3;
-            this.chartState.aDecay = 0.05;
-          }
-          // RNN
-          if (this.step >= this.step_rnn && this.step < this.step_rgcn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN
-          if (this.step >= this.step_rgcn && this.step <= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RGCN to end
-          if (this.step >= this.step_rgcn_ptrn) {
-            this.chartState.strengthy = 0.2;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.2;
             this.chartState.aDecay = 0.15;
           }
           }
@@ -4463,6 +4445,7 @@
             if (this.step == this.step_error_exp) {
                 self.drawAxes("error"); // draw axes
                 self.fadeIn(this.d3.selectAll(".link"), this.time_fade);
+                 self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
                 self.fadeIn(this.legend_predicted, this.time_fade); // show predicted in legend
 
@@ -4471,6 +4454,7 @@
               }  else if (this.step == this.step_rmse) {
                 self.drawAxes("rmse"); // move legend up to center plot for RMSEs
                 // rmse legend in and error legend out
+                self.fadeOut(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeOut(this.axis_label, this.time_fade); // remove error axis labels
                 self.fadeOut(this.legend_predicted, this.time_fade); // remove error legend
                 self.fadeOut(this.legend_observed, this.time_fade); // remove error legend
@@ -4534,6 +4518,7 @@
            self.fadeOut(this.legend_observed, this.time_fade);
           } else if (this.step == this.step_rmse) {
             self.drawAxes("rmse_up");
+            self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
             self.fadeIn(this.axis_label, this.time_fade);
             self.fadeIn(this.legend_predicted, this.time_fade);
             self.fadeIn(this.legend_observed, this.time_fade);
@@ -4652,7 +4637,7 @@ $dimGray: #9c9c9c;
     // max-width: 1000px;
     margin: 0 auto;
     padding: 2em;   
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
         padding: 10px;
     }  
   }
@@ -4664,7 +4649,7 @@ article {
   top: -110vh;
 }
 .viz-title-scrolly {
- @media screen and (max-width: 770px) {
+ @media screen and (max-width: 600px) {
     font-size: 14pt;
 }
 }
@@ -4679,7 +4664,7 @@ article {
   z-index: 1;
   height: 100vh;
   border: 1px;
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 600px) {
          width: 90%;
          left: 0vw;
         }
@@ -4688,7 +4673,7 @@ article {
     padding: 1em;
     background-color: $boxCharcoal;
     border-radius: 5px;
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
          font-size: 12.5pt;
     }
   }
@@ -4738,7 +4723,7 @@ figure.sticky.charts {
         grid-template-rows: 40% 60%;
         grid-template-columns: 1.5fr 3fr 2%;
         }
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 600px) {
         top: 5vh;
         height: 95vh;
         grid-template-rows: 30% 30% 35%;
@@ -4757,7 +4742,7 @@ figure.sticky.charts {
         grid-column: 2 / 2;
         grid-row: 1 / 1;
         }
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
         grid-column: 2 / 2;
         grid-row: 1 / 1;
     }
@@ -4776,7 +4761,7 @@ figure.sticky.charts {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }
@@ -4792,7 +4777,7 @@ figure.sticky.charts {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }
@@ -4808,7 +4793,7 @@ figure.sticky.charts {
         grid-column: 2 / 2;
         grid-row: 2 / 2;
         }
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 600px) {
         grid-column: 2 / 2;
         grid-row: 3 / 3;
     }

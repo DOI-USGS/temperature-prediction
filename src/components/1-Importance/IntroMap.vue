@@ -3021,7 +3021,7 @@
                   >
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(145.7 121.3)"
+                      transform="translate(146.2 121.3)"
                     >Binghamton</text>
                     <text
                       class="city-label"
@@ -3037,7 +3037,7 @@
                     >New York</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(62.2 606.9)"
+                      transform="translate(62.7 606.9)"
                     >Baltimore</text>
                     <text
                       class="city-label hidden-on-mobile"
@@ -3730,14 +3730,14 @@ $dimGray: #9c9c9c;
     }
 
     .shallow {
-      opacity: .45;
+      opacity: .40;
     }
 
      .ocean {
         fill: $darkBlue;
         stroke: #384b63;
         stroke-width: .4px;
-        stroke-opacity: .8;
+        stroke-opacity: .5;
     }
 
 
