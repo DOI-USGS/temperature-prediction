@@ -52,10 +52,6 @@
         id="flubber-container"
         class="figure-content"
       >
-        <div
-          id="flubber"
-          class="figure-content"
-        >
           <svg
             id="flubber-svg"
             class="figure-content"
@@ -2629,7 +2625,6 @@
               >Precipitation</text>
             </g>
           </svg>
-        </div>
       </div>
       <div
         id="bees-container"
@@ -2674,9 +2669,6 @@
               :key="model" 
               class="step"
             >
-              <!-- p class="step-text">
-                {{ model.method }}
-              </p -->
               <p
                 class="step-text"
                 v-html="model.method"
@@ -2711,9 +2703,6 @@
               :key="model" 
               class="step"
             >
-              <!-- p class="step-text">
-                {{ model.method }}
-              </p -->
               <p
                 class="step-text"
                 v-html="model.method"
@@ -2819,6 +2808,7 @@
           // this all happens before the page is rendered
           this.d3 = Object.assign(d3Base); // load d3 plugins with webpack
 
+          // // // SCROLL FRAMEWORK SET UP // // //
           // set up scrollama scoller
           this.scroller = scrollama(), 
           this.scroller.setup({
@@ -2834,9 +2824,7 @@
           window.addEventListener("resize", this.resize);
           this.resize();
 
-          // set step for beeswarm start
-          this.step_start = (this.mobileView) ? 18 : 13
-
+          // // // FLUBBER SET UP // // //
           // Populate flubber dictionary
           // add path number as key to nested dictionary
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]]={});
@@ -2844,11 +2832,17 @@
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id] = {})
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
-          // document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]=path.getAttribute("d"));
           // console.log(this.flubber_dict)
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
+
+          // set up initial flubber view
+          this.setFlubber(); // get flubber going right away (hide all flubber elements except first set)
+          
+          // // // BEESWARM SET UP // // //
+          // set step for beeswarm start
+          this.step_start = (this.mobileView) ? 19 : 13
 
           /////////// stage chart step sequence
           // update data and trigger events based on the active step
@@ -2871,7 +2865,6 @@
           this.stroke_w = "2px"
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
-          this.setFlubber(); // get flubber going right away (remove all flubber elements except first set)
           this.loadData(); // this reads in data and then calls function to draw beeswarm chart
         },
         
@@ -2933,26 +2926,25 @@
             const self = this;
 
             // Hide all flubber elements (visuals and annotations)
-            self.d3.selectAll(".flubber")
-              .style("opacity", 0)
-              .attr("opacity", 0)
-              // .style("visibility", "hidden");
-            
-            // // determine initial model id and initial annotation id
-            // // NOTE currently assumes that we are beginning the visuals at step 0
-            // let initial_model_id = self.flubber_id_order[self.step]
-            // let initial_annotation_id = initial_model_id + "_annotations"
+            // except for first set
+            let flubber_all = self.d3.selectAll(".flubber")
 
-            // // display visual associated with initial model id
-            // self.d3.selectAll("#" + initial_model_id)
-            //   .attr("opacity", 1)
-            //   // .style("visibility", "visible");
+            let flubber_element_list = flubber_all._groups[0]
 
-            // // display visual associated with initial model id
-            // self.d3.selectAll("#" + initial_annotation_id)
-            //   .attr("opacity", 1)
-            //   // .style("visibility", "visible");
-
+            flubber_element_list.forEach(function(flubber_element) {
+              let model_id = flubber_element.id
+              if (model_id == 'ANN1') {
+                  self.d3.select('#flubber-svg').selectAll('#' + model_id)
+                    .style("opacity", 1)
+                  self.d3.select('#flubber-svg').selectAll('#' + model_id + "_annotations") 
+                    .style("opacity", 1)
+              } else {
+                  self.d3.select('#flubber-svg').selectAll('#' + model_id)
+                    .style("opacity", 0)
+                  self.d3.select('#flubber-svg').selectAll('#' + model_id + "_annotations")
+                    .style("opacity", 0)
+              }
+            })
           },
           // animate flubber svg
           animateFlubber(step_id, step_direction) {
@@ -4418,28 +4410,6 @@
             }
           };
 
-          // update flubber
-          if (this.step == 0 && response.direction == "down") {
-
-            // determine initial model id and initial annotation id
-            // NOTE currently assumes that we are beginning the visuals at step 0
-            let initial_model_id = self.flubber_id_order[this.step]
-            let initial_annotation_id = initial_model_id + "_annotations"
-
-            // display flubber visual associated with initial model id
-            self.d3.selectAll("#" + initial_model_id)
-              .style("opacity", 1)
-              .attr("opacity", 1)
-
-            // display flubber annotation associated with initial model id
-            self.d3.selectAll("#" + initial_annotation_id)
-              .transition()
-              .duration(900)
-              .style("opacity", 1)
-              .attr("opacity", 1)
-            // self.fadeIn(this.d3.selectAll("#flubber-svg"), 900);
-          }
-
         // updates to go with downscroll
           if (response.direction == "down"){
             if (this.step == this.step_error_exp) {
@@ -4483,27 +4453,6 @@
           const self = this;
           // changes css for class
           response.element.classList.remove("is-active");// add remove class on exit
-
-        // updates to go with upscroll
-        if (this.step == 0 && response.direction == "up") {
-
-            /// determine initial model id and initial annotation id
-            // NOTE currently assumes that we are beginning the visuals at step 0
-            let initial_model_id = self.flubber_id_order[this.step]
-            let initial_annotation_id = initial_model_id + "_annotations"
-
-            // fade flubber visual associated with initial model id
-            self.d3.selectAll("#" + initial_model_id)
-              .transition()
-              .duration(500)
-              .style("opacity", 0)
-
-            // fade flubber annotation associated with initial model id
-            self.d3.selectAll("#" + initial_annotation_id)
-              .transition()
-              .duration(500)
-              .style("opacity", 0)
-          }
 
         if (response.direction == "up") {
 
