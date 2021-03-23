@@ -33,7 +33,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "…and then the weighted sum is adjusted by some simple rule, for example, keeping positive values as-is and setting negative values to zero.",
+                    'method': "…and then the weighted sum is adjusted by some simple rule, for example, dividing only those weighted sums that are less than five by two.",
                     'flubber_id': 'ANN5',
                     'bees_id': 'step_error_exp'
                 },
@@ -53,7 +53,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "And passes the sum through a mathematical function to produce a final output value.",
+                    'method': "And adjusts that sum by another simple rule to produce a final output value.",
                     'flubber_id': 'ANN8',
                     'bees_id': 'step_error_exp'
                 },
@@ -83,7 +83,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on the training data.",
+                    'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on all the data across all the locations.",
                     'flubber_id': 'ANN13',
                     'bees_id': 'step_error_exp'
                 },
