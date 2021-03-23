@@ -923,7 +923,7 @@
             >
               <text
                 class="f_main bold"
-                transform="translate(154 57.2)"
+                transform="translate(151 57.2)"
               >Air temperature</text>
               <text
                 class="f_main bold"
@@ -2926,21 +2926,16 @@
             const self = this;
 
             // Hide all flubber elements (visuals and annotations)
-            // except for first set
+            // except for first set (ANN1)
             let flubber_all = self.d3.selectAll(".flubber")
-
             let flubber_element_list = flubber_all._groups[0]
-
             flubber_element_list.forEach(function(flubber_element) {
               let model_id = flubber_element.id
-              if (model_id == 'ANN1') {
-                  self.d3.select('#flubber-svg').selectAll('#' + model_id)
-                    .style("opacity", 1)
-                  self.d3.select('#flubber-svg').selectAll('#' + model_id + "_annotations") 
-                    .style("opacity", 1)
-              } else {
+              if (model_id != 'ANN1' & model_id != 'ANN1_annotations') {
+                  // hide flubber visuals associated with that id
                   self.d3.select('#flubber-svg').selectAll('#' + model_id)
                     .style("opacity", 0)
+                  // hide flubber annotations associated with that id
                   self.d3.select('#flubber-svg').selectAll('#' + model_id + "_annotations")
                     .style("opacity", 0)
               }
@@ -2950,7 +2945,7 @@
           animateFlubber(step_id, step_direction) {
             const self = this;
             // The { maxSegmentLength: X } parameter controls the smoothness of the animation 
-            // - currently using default values from Aaron's example. From the documentation: 
+            // From the documentation: 
             // // // "maxSegmentLength: the lower this number is, the smoother the resulting animation 
             // // // will be, at the expense of performance. Represents a number in pixels (if no 
             // // // transforms are involved). Set it to false or Infinity for no smoothing. (default: 10)"
