@@ -205,7 +205,7 @@ h3{
     border-radius: 5px;
     max-width: 95%;
     margin: 0 auto;
-    padding: 15px;
+    padding: 1%;
     @media screen and (max-width: 600px) {
         margin: 20px;
     }
