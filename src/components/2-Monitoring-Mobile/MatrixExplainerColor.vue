@@ -1961,8 +1961,10 @@
           height="89.08"
         />
       </g>
-      <g id="legend_text"
-        transform="translate(0, 10)">
+      <g
+        id="legend_text"
+        transform="translate(0, 10)"
+      >
         <text
           class="viz-comment"
           transform="translate(207.6 533.2)"

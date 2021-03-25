@@ -3,7 +3,12 @@
         textContents: {
             "Training an artificial neural network": [
                 {
-                    'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
+                    'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world.",
+                    'flubber_id': 'ANN1',
+                    'bees_id': 'step_error'
+                },
+                {
+                    'method': "To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
                     'flubber_id': 'ANN1',
                     'bees_id': 'step_error'
                 },
