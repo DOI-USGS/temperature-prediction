@@ -15225,12 +15225,11 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
 #hex-map {
-  height: auto;
+  margin-top: 1em;
   max-height: 80vh;
-  padding-left: 0em;
-  padding-right: 0em;
-  padding-top: 0em;
-  padding-bottom: 1em;
+  @media screen and (min-width: 1500px) {
+      max-width: 50vw;
+  }
 }
 .hex {
   fill-rule: evenodd;

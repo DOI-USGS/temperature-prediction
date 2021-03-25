@@ -138,7 +138,7 @@
           <svg class="c2p2 matrix_c2p2 matrix">
             <g
               class="prebuilt_c2p2_group matrix"
-              width="650"
+              width="570"
               height="920"
             >
               <PrebuiltC2P2Matrix />
@@ -175,11 +175,11 @@
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p2 matrixAxis"
@@ -257,7 +257,7 @@
           <svg class="c2p3 matrix_c2p3 matrix">
             <g
               class="prebuilt_c2p3_group matrix"
-              width="650"
+              width="570"
               height="920"
             >
               <PrebuiltC2P3Matrix />
@@ -298,11 +298,11 @@
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p3 matrixAxis"
@@ -419,7 +419,7 @@
           chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
           chart_width: null, // this will get a value in the mounted hook
           chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           scaleBarTop_c2: null,
@@ -846,7 +846,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(1))
+              .attr("d", self.map_path_c2.pointRadius(1.3))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -2478,26 +2478,23 @@ $dimGray: #9c9c9c;
     grid-area: color;
   }
   .map-matrix-grid-container {
-    // padding: 25px;
-    margin: auto;
+    // margin: auto;
     display: grid;
-    // align-items: center;
-    // justify-content: center;
-    // justify-items: center;
-    grid-template-columns: 1.5fr 3fr;
+    grid-template-columns: auto 1.5fr 3fr auto;
     grid-template-rows: 100%;
     grid-template-areas:
-        "map matrix";
+        "left map matrix right";
     gap: 0px 10px;
     min-width: 0;
     min-height: 0;
-    height: 85vh;
-    max-width: 2000px;
+    max-height: 85vh;
+    max-width: 100%;
+    padding-bottom: 2.5em;
     @media screen and (max-height: 770px) {
-        grid-template-columns: 2fr 2.5fr;
+        grid-template-columns: auto 30% 50% auto;
     }
     @media screen and (min-width: 1500px) {
-        grid-template-columns: 2fr 2.5fr;
+        grid-template-columns: auto 20% 40% auto;
     }
   }
   .mm-grid-item {
@@ -2514,6 +2511,7 @@ $dimGray: #9c9c9c;
     grid-area: matrix;
     display: flex;
     max-height: 100%;
+    // padding-bottom: 10px;
   }
   #DRB_map_c2p3 {
     grid-area: map;
@@ -2524,6 +2522,7 @@ $dimGray: #9c9c9c;
     grid-area: matrix;
     display: flex;
     max-height: 100%;
+    // padding-bottom: 10px;
   }
 }
 </style>
@@ -2553,17 +2552,17 @@ $dimGray: #9c9c9c;
 .c2p1.scaleBar {
   color: $grayBlue;
   font-size: 0.5em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p3.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.cellText {
   font-size: 0.48em;
@@ -2585,8 +2584,8 @@ $dimGray: #9c9c9c;
 
 .obs_sites {
   stroke: $boxCharcoal;
-  stroke-width: 0.1;
-  opacity: 0.7;
+  stroke-width: 0.2;
+  opacity: 0.9;
 }
 
 .USGS_station {
@@ -2620,8 +2619,8 @@ $dimGray: #9c9c9c;
 }
 .NS_arrow {
   stroke: $dimGray;
-  stroke-width: 1px;
-  stroke-dasharray: 2 6;
+  stroke-width: 1.5px;
+  stroke-dasharray: 1 6;
 }
 .NS_arrowhead {
   fill: $dimGray;

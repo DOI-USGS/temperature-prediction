@@ -195,6 +195,7 @@ h3{
     margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
+        max-width: 95%;
         margin: 20px;
     } 
   }
@@ -206,8 +207,8 @@ h3{
     margin: 0 auto;
     padding: 15px;
     @media screen and (max-width: 600px) {
-        margin: 10px;
-    } 
+        margin: 20px;
+    }
   }
 
   .flex-container {

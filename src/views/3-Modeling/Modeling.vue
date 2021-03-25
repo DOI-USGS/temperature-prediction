@@ -4567,70 +4567,6 @@ $mediumBlue: #5D9DC7;
 $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
-// Intro
-#arrows {
-  margin: 100px auto;
-
-  text-align: center;
-  p{
-    padding-top: 1em;
-  }
-}
-#more-arrows {
-  width: 75px;
-  height: 65px;
-  transform: scale(.6);
-  polygon {
-    fill: $offWhite;
-    transition: all .2s ease-out;
-    opacity: .4;
-  }
-  .arrow-bottom {
-    opacity: .8;
-    animation: bounceDown 3s infinite;
-  }
-
-  .arrow-top {
-    opacity: .3;
-    animation-duration: 3s;
-    animation: bounceUp 3s infinite;
-  }
-}
-
-// write animation
-@keyframes bounceUp {
-  from {
-    transform: translateY(18px); 
-  }
-  75% {
-    transform: translateY(0px);
-  }
-  to{
-    transform: translateY(18px);
-  }
-}
-
-#scroll-cue {
-  font-size: .6em;
-  font-style: italic;
-}
-
-@keyframes bounceDown {
-  from {
-    transform: translateY(-18px); 
-  }
-  75% {
-    transform: translateY(0px);
-  }
-  to{
-    transform: translateY(-18px);
-  }
-}
-
-
-// apply animation
-
-
 //style steps
 .model-text-content {
     // min-width: 350px;
@@ -4658,15 +4594,14 @@ article {
 }
 .step {
   position: relative;
-  left: -34vw;
   width: 28vw;
-  margin: 2rem auto 4rem auto;
+  padding-top: 2.1em;
   z-index: 1;
   height: 100vh;
   border: 1px;
   @media screen and (max-width: 600px) {
          width: 90%;
-         left: 0vw;
+         margin: auto;
         }
   .step-text {
     color: $offWhiteBox;
@@ -4697,8 +4632,6 @@ article {
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
 figure.sticky.intro {
-  // position: -webkit-sticky;
-  // position: sticky;
   top: 0;
   width: 100vw;
   height: auto;
