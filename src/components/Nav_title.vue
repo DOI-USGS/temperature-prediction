@@ -1,7 +1,7 @@
 <template>
   <nav id="nav">
     <div>
-      <!-- div class="overall-title" -->
+      <div class="overall-title">
         <div class="text-content">
           <h3 class="nav-title">
             How we<router-link
@@ -15,7 +15,7 @@
           </h3>
           <br>
         </div>
-      <!-- /div -->
+      </div>
     </div>
   </nav>
 </template>

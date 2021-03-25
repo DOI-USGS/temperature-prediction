@@ -23,29 +23,25 @@
       <p v-html="text.paragraph2" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            Temperature monitoring <span class="yellow">sites</span> in the Delaware River Basin
-          </p>
-          <p class="viz-subtitle" />
-        </div>
-      </div>   
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          Temperature monitoring <span class="yellow">sites</span> in the Delaware River Basin
+        </p>
+        <p class="viz-subtitle" />
+      </div>
       <MonitoringMap1 />
     </div>
     <div class="text-content">
       <p v-html="text.paragraph3" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            Number of <span class="yellow">daily temperature measurements</span> by year
-          </p>
-          <p class="viz-subtitle">
-            Number of unique site-days measured by USGS streamgages or other state/local agencies.
-          </p>
-        </div>
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          Number of <span class="yellow">daily temperature measurements</span> by year
+        </p>
+        <p class="viz-subtitle">
+          Number of unique site-days measured by USGS streamgages or other state/local agencies.
+        </p>
       </div>
       <MonitoringBarChart />
     </div>
@@ -64,15 +60,13 @@
       <p v-html="text.tiptextMobile" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">40 years</span> of temperature data
-          </p>
-          <p class="viz-subtitle">
-            Every reach with data in each of the last 40 years.
-          </p>
-        </div>
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          <span class="yellow">40 years</span> of temperature data
+        </p>
+        <p class="viz-subtitle">
+          Every reach with data in each of the last 40 years.
+        </p>
       </div>
       <MonitoringMap2 />
     </div>
@@ -82,15 +76,13 @@
       <p v-html="text.paragraph9" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Availability</span> of temperature data
-          </p>
-          <p class="viz-subtitle">
-            Visualizing the count of temperature measurements in stream reaches across the basin.
-          </p>
-        </div>
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          <span class="yellow">Availability</span> of temperature data
+        </p>
+        <p class="viz-subtitle">
+          Visualizing the count of temperature measurements in stream reaches across the basin.
+        </p>
       </div>
       <MatrixExplainerSpace />
       <MatrixExplainerTime />
@@ -108,16 +100,14 @@
       <p v-html="text.paragraph11" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Daily temperature</span> of river reaches in 2019
-          </p>
-          <p class="viz-subtitle">
-            Each line = one reach.
-          </p>
-          <p class="viz-subtitle" />
-        </div>
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          <span class="yellow">Daily temperature</span> of river reaches in 2019
+        </p>
+        <p class="viz-subtitle">
+          Each line = one reach.
+        </p>
+        <p class="viz-subtitle" />
       </div>
       <MonitoringLineChart />
     </div>
@@ -127,16 +117,14 @@
       <p v-html="text.paragraph13" />
     </div>
     <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Variability</span> of water temperature in 2019
-          </p>
-          <p class="viz-subtitle">
-            Visualizing measured stream temperature in the basin in 2019.
-          </p>
-        </div>
-      </div>  
+      <div class="viz-title-wrapper">
+        <p class="viz-title">
+          <span class="yellow">Variability</span> of water temperature in 2019
+        </p>
+        <p class="viz-subtitle">
+          Visualizing measured stream temperature in the basin.
+        </p>
+      </div>
       <MatrixTemperature />
     </div>
     <div class="text-content">
