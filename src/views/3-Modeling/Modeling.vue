@@ -4775,7 +4775,7 @@ figure.sticky.charts {
 .line_rain {
   stroke: $plasmaYellow;
   stroke-miterlimit: 10;
-  stroke-dasharray: 2 5;
+  stroke-dasharray: 1.2 7;
   stroke-width: 0.8px;
 }
 .f_synapse {
