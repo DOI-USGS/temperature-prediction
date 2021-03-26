@@ -85,13 +85,13 @@
               id="ANN4"
               class="path1 flubber visuals"
               style="fill: #5D9DC7"
-              d="M59.9,80.3A10.8,10.8,0,1,0,70.6,91H59.9Z"
+              d="M59.9,85.3A10.8,10.8,0,1,0,70.6,96H59.9Z"
             />
             <path
               id="ANN5"
               class="path1 flubber visuals"
               style="fill: #292b30"
-              d="M59.9,91Z"
+              d="M59.9,96Z"
             />
             <path
               id="ANN6"
@@ -192,7 +192,7 @@
               id="ANN4"
               style="fill: #5D9DC7"
               class="path2 flubber visuals"
-              d="M125.3,80.4A10.7,10.7,0,0,0,114.9,91h10.4Z"
+              d="M125.3,85.4A10.7,10.7,0,0,0,114.9,96h10.4Z"
             />
             <path
               id="ANN5"
@@ -205,49 +205,49 @@
               id="ANN6"
               class="path2 flubber visuals"
               style="fill: #9c9c9c"
-              d="M134.1,139.2h-4.4v4.7a16.3,16.3,0,1,1-8.5,0v-4.7h-4.4a20.4,20.4,0,0,0,0,40.7h17.3a20.4,20.4,0,1,0,0-40.7Z"
+              d="M134.1,149.2h-4.4v4.7a16.3,16.3,0,1,1-8.5,0v-4.7h-4.4a20.4,20.4,0,0,0,0,40.7h17.3a20.4,20.4,0,1,0,0-40.7Z"
             />
             <path
               id="ANN7"
               class="path2 flubber visuals"
               style="fill: #9c9c9c"
-              d="M134.1,139.2h-4.4v4.7a16.3,16.3,0,1,1-8.5,0v-4.7h-4.4a20.4,20.4,0,0,0,0,40.8h17.3a20.4,20.4,0,1,0,0-40.7Z"
+              d="M134.1,149.2h-4.4v4.7a16.3,16.3,0,1,1-8.5,0v-4.7h-4.4a20.4,20.4,0,0,0,0,40.8h17.3a20.4,20.4,0,1,0,0-40.7Z"
             />
             <path
               id="ANN8"
               class="path2 flubber visuals"
               style="fill: #9c9c9c"
-              d="M134.1,179.9h-4.4v-4.7a16.1,16.1,0,0,0,12-15.6,16.3,16.3,0,1,0-32.5,0,16.1,16.1,0,0,0,12,15.6v4.7h-4.4a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9h-4.4v-4.7a16.1,16.1,0,0,0,12-15.6,16.3,16.3,0,1,0-32.5,0,16.1,16.1,0,0,0,12,15.6v4.7h-4.4a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />   
             <path
               id="ANN9"
               class="path2 flubber visuals"
               style="fill: #666666"
-              d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN10"
               class="path2 flubber visuals"
               style="fill: #666666"
-              d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN11"
               class="path2 flubber visuals"
               style="fill: #666666"
-              d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN12"
               class="path2 flubber visuals"
               style="fill: #666666"
-              d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN13"
               class="path2 flubber visuals"
               style="fill: #666666"
-              d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
+              d="M134.1,189.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             /> 
             <path
               id="RNN"
@@ -300,31 +300,31 @@
               id="ANN4"
               class="path3 flubber visuals"
               style="fill: #FAB62F"
-              d="M59.9,80.3V91H70.6A10.7,10.7,0,0,0,59.9,80.3Z"
+              d="M59.9,85.3V96H70.6A10.7,10.7,0,0,0,59.9,85.3Z"
             />
             <path
               id="ANN5"
               class="path3 flubber visuals"
               style="fill: #f0f821"
-              d="M63.1,91a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,63.1,91Z"
+              d="M63.1,96a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,63.1,96Z"
             />
             <path
               id="ANN6"
               class="path3 flubber visuals"
               style="fill: #f0f821"
-              d="M63.1,91a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,63.1,91Z"
+              d="M63.1,96a3.2,3.2,0,1,1-3.2-3.2A3.2,3.2,0,0,1,63.1,96Z"
             />
             <path
               id="ANN7"
               class="path3 flubber visuals"
               style="fill: #f0f821"
-              d="M114.8,159.6a10.7,10.7,0,0,0,10.7,10.7h0V159.6Z"
+              d="M114.8,169.6a10.7,10.7,0,0,0,10.7,10.7h0V169.6Z"
             />
             <path
               id="ANN8"
               class="path3 flubber visuals"
               style="fill: #5D9DC7"
-              d="M130.8,159.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,159.6Z"
+              d="M130.8,169.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,169.6Z"
             />                                                                                                  
             <path
               id="ANN9"
@@ -407,31 +407,31 @@
               id="ANN4"
               class="path4 flubber visuals"
               style="fill: #FAB62F"
-              d="M125.7,80.3h-.4V91H114.9a10.8,10.8,0,1,0,10.8-10.7Z"
+              d="M125.7,85.3h-.4V96H114.9a10.8,10.8,0,1,0,10.8-10.7Z"
             />
             <path
               id="ANN5"
               class="path4 flubber visuals"
               style="fill: #62039A"
-              d="M136.4,91a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,136.4,91Z"
+              d="M136.4,96a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,136.4,96Z"
             />
             <path
               id="ANN6"
               class="path4 flubber visuals"
               style="fill: #62039A"
-              d="M136.4,91a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,136.4,91Z"
+              d="M136.4,96a10.8,10.8,0,1,1-10.7-10.7A10.7,10.7,0,0,1,136.4,96Z"
             />
             <path
               id="ANN7"
               class="path4 flubber visuals"
               style="fill: #62039A"
-              d="M125.5,148.9a10.7,10.7,0,0,0-10.7,10.7h10.7l7.9,7.2a10.7,10.7,0,0,0-7.9-17.9Z"
+              d="M125.5,158.9a10.7,10.7,0,0,0-10.7,10.7h10.7l7.9,7.2a10.7,10.7,0,0,0-7.9-17.9Z"
             />
             <path
               id="ANN8"
               class="path4 flubber visuals"
               style="fill: #5D9DC7"
-              d="M130.8,159.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,159.6Z"
+              d="M130.8,169.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,169.6Z"
             />               
             <path
               id="ANN9"
@@ -514,13 +514,13 @@
               id="ANN4"
               class="path5 flubber visuals"
               style="fill: #FAB62F"
-              d="M191,80.3v21.5a10.8,10.8,0,0,0,0-21.5Z"
+              d="M191,85.3v21.5a10.8,10.8,0,0,0,0-21.5Z"
             />
             <path
               id="ANN5"
               class="path5 flubber visuals"
               style="fill: #BE3D7D"
-              d="M191,91Z"
+              d="M191,96Z"
             />
             <path
               id="ANN6"
@@ -621,31 +621,31 @@
               id="ANN4"
               class="path6 flubber visuals"
               style="fill: #5D9DC7"
-              d="M191,80.3a10.8,10.8,0,0,0,0,21.5V80.3Z"
+              d="M191,85.3a10.8,10.8,0,0,0,0,21.5V85.3Z"
             />
             <path
               id="ANN5"
               class="path6 flubber visuals"
               style="fill: #BE3D7D"
-              d="M197.5,91a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,197.5,91Z"
+              d="M197.5,96a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,197.5,96Z"
             />
             <path
               id="ANN6"
               class="path6 flubber visuals"
               style="fill: #BE3D7D"
-              d="M197.5,91a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,197.5,91Z"
+              d="M197.5,96a6.5,6.5,0,1,1-6.5-6.4A6.5,6.5,0,0,1,197.5,96Z"
             />
             <path
               id="ANN7"
               class="path6 flubber visuals"
               style="fill: #BE3D7D"
-              d="M125.5,170.3a11,11,0,0,0,7.9-3.5l-7.9-7.2Z"
+              d="M125.5,180.3a11,11,0,0,0,7.9-3.5l-7.9-7.2Z"
             />
             <path
               id="ANN8"
               class="path6 flubber visuals"
               style="fill: #5D9DC7"
-              d="M130.8,159.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,159.6Z"
+              d="M130.8,169.6a5.4,5.4,0,1,1-5.3-5.4A5.3,5.3,0,0,1,130.8,169.6Z"
             />             
             <path
               id="ANN9"
@@ -829,67 +829,67 @@
               id="ANN3"
               class="path8 flubber visuals"
               style="fill: #9c9c9c"
-              d="M201.9,70.7h-6.5v4.7a16.3,16.3,0,1,1-8.5,0V70.7H129.7v4.7a16.3,16.3,0,1,1-8.5,0V70.7H64.1v4.7a16.3,16.3,0,1,1-8.5,0V70.7H49.1a20.4,20.4,0,1,0,0,40.7H201.9a20.4,20.4,0,0,0,0-40.7Z"
+              d="M201.9,75.7h-6.5v4.7a16.3,16.3,0,1,1-8.5,0V75.7H129.7v4.7a16.3,16.3,0,1,1-8.5,0V75.7H64.1v4.7a16.3,16.3,0,1,1-8.5,0V75.7H49.1a20.4,20.4,0,1,0,0,40.7H201.9a20.4,20.4,0,0,0,0-40.7Z"
             />
             <path
               id="ANN4"
               class="path8 flubber visuals"
               style="fill: #9c9c9c"
-              d="M201.9,70.7h-6.5v4.7a16.3,16.3,0,1,1-8.5,0V70.7H129.7v4.7a16.3,16.3,0,1,1-8.5,0V70.7H64.1v4.7a16.3,16.3,0,1,1-8.5,0V70.7H49.1a20.4,20.4,0,1,0,0,40.7H201.9a20.4,20.4,0,0,0,0-40.7Z"
+              d="M201.9,75.7h-6.5v4.7a16.3,16.3,0,1,1-8.5,0V75.7H129.7v4.7a16.3,16.3,0,1,1-8.5,0V75.7H64.1v4.7a16.3,16.3,0,1,1-8.5,0V75.7H49.1a20.4,20.4,0,1,0,0,40.7H201.9a20.4,20.4,0,0,0,0-40.7Z"
             />
             <path
               id="ANN5"
               class="path8 flubber visuals"
               style="fill: #9c9c9c"
-              d="M201.9,111.4h-6.5v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H129.7v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H64.1v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4h-6.5v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H129.7v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H64.1v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN6"
               class="path8 flubber visuals"
               style="fill: #9c9c9c"
-              d="M201.9,111.4h-6.5v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H129.7v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H64.1v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4h-6.5v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H129.7v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H64.1v-4.7a16.3,16.3,0,1,0-8.5,0v4.7H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN7"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN8"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />             
             <path
               id="ANN9"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN10"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN11"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN12"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN13"
               class="path8 flubber visuals"
               style="fill: #666666"
-              d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
+              d="M201.9,116.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />   
             <path
               id="RNN"
@@ -950,7 +950,7 @@
           >
             <text
               class="f_main bold"
-              transform="translate(83.5 127.7)"
+              transform="translate(83.5 132.7)"
             >Hidden layer</text>
             <g>
               <path
@@ -984,44 +984,44 @@
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
           </g>
           <g
@@ -1031,7 +1031,7 @@
           >
             <text
               class="f_main bold"
-              transform="translate(83.5 127.7)"
+              transform="translate(83.5 132.7)"
             >Hidden layer</text>
             <text
               class="f_main bold"
@@ -1043,44 +1043,44 @@
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <g>
               <path
@@ -1112,7 +1112,7 @@
           >
             <text
               class="f_main bold"
-              transform="translate(83.5 127.7)"
+              transform="translate(83.5 132.7)"
             >Hidden layer</text>
             <text
               class="f_main bold"
@@ -1124,44 +1124,44 @@
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <g>
               <path
@@ -1200,70 +1200,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(86 195.6)"
+              transform="translate(86 205.6)"
             >Output layer</text>
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1302,74 +1302,74 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <text
               class="f_main bold"
-              transform="translate(86 195.6)"
+              transform="translate(86 205.6)"
             >Output layer</text>
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1408,70 +1408,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1515,70 +1515,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1604,13 +1604,13 @@
             >weight</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(103 157.9)"
+              transform="translate(103 167.9)"
             >Output<tspan
               x="8"
               y="14.4"
             >layer</tspan></text>
             <g>
-              <line
+              <!-- line
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
@@ -1620,7 +1620,7 @@
               <polygon
                 class="f_arrowhead"
                 points="77.9 197.4 75.5 202.3 80.9 202 77.9 197.4"
-              />
+              / -->
             </g>
             <text
               class="f_temp pred"
@@ -1645,70 +1645,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1734,13 +1734,13 @@
             >weight</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(103 157.9)"
+              transform="translate(103 167.9)"
             >Output<tspan
               x="8"
               y="14.4"
             >layer</tspan></text>
             <g>
-              <line
+              <!-- line
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
@@ -1750,7 +1750,7 @@
               <polygon
                 class="f_arrowhead"
                 points="77.9 197.4 75.5 202.3 80.9 202 77.9 197.4"
-              />
+              / -->
             </g>
             <text
               class="f_temp pred"
@@ -1801,70 +1801,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse medium"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse high"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -1889,7 +1889,7 @@
               y="22.5"
             >weight</tspan></text>
             <g>
-              <line
+              <!-- line
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
@@ -1899,11 +1899,11 @@
               <polygon
                 class="f_arrowhead"
                 points="187.1 203.1 192.4 201.6 188.5 197.8 187.1 203.1"
-              />
+              / -->
             </g>
             <text
               class="f_main bold"
-              transform="translate(103 157.9)"
+              transform="translate(103 167.9)"
             >Output<tspan
               x="8"
               y="14.4"
@@ -1931,70 +1931,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse medium"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -2019,7 +2019,7 @@
               y="22.5"
             >weight</tspan></text>
             <g>
-              <line
+              <!-- line
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
@@ -2029,11 +2029,11 @@
               <polygon
                 class="f_arrowhead"
                 points="160.1 202 165.6 201.6 162.5 197.1 160.1 202"
-              />
+              / -->
             </g>
             <text
               class="f_main bold"
-              transform="translate(103 157.9)"
+              transform="translate(103 167.9)"
             >Output<tspan
               x="8"
               y="14.4"
@@ -2061,70 +2061,70 @@
             >layer</tspan></text>
             <text
               class="f_main bold"
-              transform="translate(83.5 95.6)"
+              transform="translate(83.5 100.6)"
             >Hidden layer</text>
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse low"
               x1="80.4"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="60.1"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse high"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="125.5"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="167.8"
-              y1="44.8"
+              y1="47.3"
               x2="191"
-              y2="68.9"
+              y2="71.4"
             />
             <line
               class="f_synapse medium"
               x1="60.1"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="125.5"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <line
               class="f_synapse low"
               x1="191"
-              y1="113.3"
+              y1="120.8"
               x2="125.5"
-              y2="137.2"
+              y2="144.7"
             />
             <g>
               <path
@@ -2149,7 +2149,7 @@
               y="22.5"
             >weight</tspan></text>
             <g>
-              <line
+              <!-- line
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
@@ -2159,11 +2159,11 @@
               <polygon
                 class="f_arrowhead"
                 points="124.6 197.9 127.9 202.3 130.1 197.3 124.6 197.9"
-              />
+              / -->
             </g>
             <text
               class="f_main bold"
-              transform="translate(103 157.9)"
+              transform="translate(103 167.9)"
             >Output<tspan
               x="8"
               y="14.4"
@@ -4786,16 +4786,16 @@ figure.sticky.charts {
   stroke: #ffffff;
 }
 .f_synapse.high{
-  stroke-width: 2.7px;
-  stroke-linecap: butt;
+  stroke-width: 4px;
+  stroke-linecap: round;
 }
 .f_synapse.medium {
-  stroke-width: 1.1px;
-  stroke-linecap: butt;
+  stroke-width: 2px;
+  stroke-linecap: round;
 }
 .f_synapse.low {
-  stroke-width: 0.4px;
-  stroke-linecap: butt;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
 }
 .f_synapse.arrowhead {
   stroke-width: 0.9px;
