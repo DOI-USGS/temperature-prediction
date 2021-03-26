@@ -4805,7 +4805,10 @@ figure.sticky.charts {
   fill: $mediumBlue;
 }
 .f_temp.actual {
-  fill: $plasmaYellow;
+  fill: $mediumBlue;
+  fill-opacity: 0.2;
+  stroke: $mediumBlue;
+  stroke-width: 0.5px;
 }
 .f_temp.ital {
   font-style: italic;
