@@ -4809,10 +4809,12 @@ figure.sticky.charts {
   fill: $mediumBlue;
 }
 .f_temp.actual {
-  fill: $mediumBlue;
-  fill-opacity: 0.2;
-  stroke: $mediumBlue;
-  stroke-width: 0.5px;
+  fill: $offWhite;
+  // fill: $mediumBlue;
+  font-weight: 400;
+  // fill-opacity: 0.5;
+  // stroke: $mediumBlue;
+  // stroke-width: 0.5px;
 }
 .f_error {
   font-size: 12px;
