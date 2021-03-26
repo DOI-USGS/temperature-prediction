@@ -4597,7 +4597,7 @@ figure.sticky.charts {
   height: 90vh;
   width: auto;
   @media screen and (min-height: 770px) {
-        grid-template-rows: 40% 60%;
+        grid-template-rows: 35% 65%;
         grid-template-columns: 1.5fr 3fr 2%;
         }
   @media screen and (max-width: 600px) {
