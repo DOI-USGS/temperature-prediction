@@ -436,32 +436,32 @@
             <path
               id="ANN9"
               class="path4 flubber visuals"
-              style="fill: #5D9DC7"
-              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
+              style="fill: #FAB62F"
+              d="M73.4,213.2H71.7v-2h1.7Z"
             />
             <path
               id="ANN10"
               class="path4 flubber visuals"
-              style="fill: #5D9DC7"
-              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
+              style="fill: #FAB62F"
+              d="M135.7,213.2H77.4v-2h58.3Z"
             />
             <path
               id="ANN11"
               class="path4 flubber visuals"
-              style="fill: #5D9DC7"
-              d="M199,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,199,212.2Z"
+              style="fill: #FAB62F"
+              d="M188.8,213.2H145.2v-2h43.6Z"
             />
             <path
               id="ANN12"
               class="path4 flubber visuals"
-              style="fill: #5D9DC7"
-              d="M172.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,172.3,212.2Z"
+              style="fill: #FAB62F"
+              d="M162.5,213.2H145.2v-2h17.3Z"
             />
             <path
               id="ANN13"
               class="path4 flubber visuals"
-              style="fill: #5D9DC7"
-              d="M133.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,133.3,212.2Z"
+              style="fill: #FAB62F"
+              d="M135.7,213.2h-2.8v-2h2.8Z"
             />
             <path
               id="RNN"
@@ -549,26 +549,26 @@
             <path
               id="ANN10"
               class="path5 flubber visuals"
-              style="fill: #FAB62F"
-              d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              style="fill: #5D9DC7"
+              d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
             />
             <path
               id="ANN11"
               class="path5 flubber visuals"
-              style="fill: #FAB62F"
-              d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              style="fill: #5D9DC7"
+              d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
             />
             <path
               id="ANN12"
               class="path5 flubber visuals"
-              style="fill: #FAB62F"
-              d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              style="fill: #5D9DC7"
+              d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
             />
             <path
               id="ANN13"
               class="path5 flubber visuals"
-              style="fill: #FAB62F"
-              d="M146,212.2a5.4,5.4,0,1,1-5.4-5.3A5.4,5.4,0,0,1,146,212.2Z"
+              style="fill: #5D9DC7"
+              d="M140.6,206.9a5.4,5.4,0,1,0,5.4,5.3A5.3,5.3,0,0,0,140.6,206.9Zm0,9.1a3.8,3.8,0,1,1,3.8-3.8A3.8,3.8,0,0,1,140.6,216Z"
             />
             <path
               id="RNN"
@@ -1768,6 +1768,10 @@
               class="f_minor ital"
               transform="translate(164.9 236.4)"
             >actual</text>
+            <text
+              class="f_error"
+              transform="translate(94.5 205)"
+            >error</text>
             <!-- g>
                 <line
                   class="f_arrow"
@@ -4809,6 +4813,10 @@ figure.sticky.charts {
   fill-opacity: 0.2;
   stroke: $mediumBlue;
   stroke-width: 0.5px;
+}
+.f_error {
+  font-size: 12px;
+  fill: $plasmaYellow;
 }
 .f_temp.ital {
   font-style: italic;
