@@ -90,25 +90,25 @@
             <path
               id="ANN5"
               class="path1 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M59.9,91Z"
             />
             <path
               id="ANN6"
               class="path1 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M125.7,228.1Z"
             />
             <path
               id="ANN7"
               class="path1 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M125.7,228.1Z"
             />
             <path
               id="ANN8"
               class="path1 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M125.7,212.3Z"
             />   
             <path
@@ -222,31 +222,31 @@
             <path
               id="ANN9"
               class="path2 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN10"
               class="path2 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN11"
               class="path2 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN12"
               class="path2 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             />
             <path
               id="ANN13"
               class="path2 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M134.1,179.9H116.8a20.4,20.4,0,0,1,0-40.7h17.3a20.4,20.4,0,1,1,0,40.7Z"
             /> 
             <path
@@ -525,19 +525,19 @@
             <path
               id="ANN6"
               class="path5 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M140.7,212.2Z"
             />
             <path
               id="ANN7"
               class="path5 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M140.7,212.2Z"
             />
             <path
               id="ANN8"
               class="path5 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M140.7,212.2Z"
             />             
             <path
@@ -709,7 +709,7 @@
             <path
               id="ANN1"
               class="path7 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M124,22.5Z"
             />
             <path
@@ -727,61 +727,61 @@
             <path
               id="ANN4"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN5"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN6"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN7"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN8"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />             
             <path
               id="ANN9"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN10"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN11"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN12"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
               id="ANN13"
               class="path7 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M179.3,2.1H71.6a20.4,20.4,0,0,0,0,40.8H179.3a20.4,20.4,0,0,0,0-40.8Z"
             />
             <path
@@ -815,14 +815,14 @@
             <path
               id="ANN1"
               class="path8 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M125,89.5Z"
             />
             <!-- d="M125,22.5Z" -->
             <path
               id="ANN2"
               class="path8 flubber visuals"
-              style="fill: #9c9c9c"
+              style="fill: #292b30"
               d="M125,89.5Z"
             />
             <path
@@ -852,43 +852,43 @@
             <path
               id="ANN7"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN8"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />             
             <path
               id="ANN9"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN10"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN11"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN12"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />
             <path
               id="ANN13"
               class="path8 flubber visuals"
-              style="fill: #777b80"
+              style="fill: #666666"
               d="M201.9,111.4H49.1a20.4,20.4,0,1,1,0-40.7H201.9a20.4,20.4,0,0,1,0,40.7Z"
             />   
             <path
@@ -4680,9 +4680,9 @@ figure.sticky.charts {
     }
   }
   .x-axis {
-    fill: #9c9c9c; //$grayBlue
-    color: #9c9c9c; //$grayBlue
-    stroke: #9c9c9c; //$grayBlue
+    fill: #9c9c9c;
+    color: #9c9c9c;
+    stroke: #9c9c9c;
   }
 
 }
@@ -4697,7 +4697,7 @@ figure.sticky.charts {
   stroke-width: 5px;
 }
 .axis-label {
-  fill: #9c9c9c; //$grayBlue
+  fill: #9c9c9c;
   font-weight: 300;
   font-size: 20px;
 }
@@ -4762,7 +4762,7 @@ figure.sticky.charts {
 }
 .line_solid {
   fill: None;
-  stroke: #9c9c9c; //#969696
+  stroke: #9c9c9c;
   stroke-miterlimit: 10;
   stroke-width: 0.8px;
 }
