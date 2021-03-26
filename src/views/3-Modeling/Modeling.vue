@@ -330,19 +330,19 @@
               id="ANN9"
               class="path3 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN10"
               class="path3 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN11"
               class="path3 flubber visuals"
               style="fill: #5D9DC7"
-              d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              d="M199,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,199,212.2Z"
             />
             <path
               id="ANN12"
@@ -437,19 +437,19 @@
               id="ANN9"
               class="path4 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN10"
               class="path4 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN11"
               class="path4 flubber visuals"
               style="fill: #5D9DC7"
-              d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              d="M199,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,199,212.2Z"
             />
             <path
               id="ANN12"
@@ -651,19 +651,19 @@
               id="ANN9"
               class="path6 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN10"
               class="path6 flubber visuals"
               style="fill: #5D9DC7"
-              d="M100.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,100.3,212.2Z"
+              d="M77.8,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,77.8,212.2Z"
             />
             <path
               id="ANN11"
               class="path6 flubber visuals"
               style="fill: #5D9DC7"
-              d="M206.3,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,206.3,212.2Z"
+              d="M199,212.2a5.4,5.4,0,1,1-5.3-5.3A5.4,5.4,0,0,1,199,212.2Z"
             />
             <path
               id="ANN12"
@@ -1614,21 +1614,21 @@
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
-                x2="98.8"
+                x2="78.8"
                 y2="200.1"
               />
               <polygon
                 class="f_arrowhead"
-                points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
+                points="77.9 197.4 75.5 202.3 80.9 202 77.9 197.4"
               />
             </g>
             <text
               class="f_temp pred"
-              transform="translate(78.5 236.4)"
-            >11 °C</text>
+              transform="translate(60 236.4)"
+            >8 °C</text>
             <text
               class="f_minor ital"
-              transform="translate(21 236.4)"
+              transform="translate(1 236.4)"
             >prediction</text>
           </g>
           <g
@@ -1744,21 +1744,21 @@
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
-                x2="98.8"
+                x2="78.8"
                 y2="200.1"
               />
               <polygon
                 class="f_arrowhead"
-                points="97.9 197.4 95.5 202.3 100.9 202 97.9 197.4"
+                points="77.9 197.4 75.5 202.3 80.9 202 77.9 197.4"
               />
             </g>
             <text
               class="f_temp pred"
-              transform="translate(78.5 236.4)"
-            >11 °C</text>
+              transform="translate(60 236.4)"
+            >8 °C</text>
             <text
               class="f_minor ital"
-              transform="translate(21 236.4)"
+              transform="translate(1 236.4)"
             >prediction</text>
             <text
               class="f_temp actual"
@@ -1889,12 +1889,12 @@
                 class="f_arrow"
                 x1="125.7"
                 y1="182.5"
-                x2="194.6"
+                x2="188.6"
                 y2="200.6"
               />
               <polygon
                 class="f_arrowhead"
-                points="193.1 203.1 198.4 201.6 194.5 197.8 193.1 203.1"
+                points="187.1 203.1 192.4 201.6 188.5 197.8 187.1 203.1"
               />
             </g>
             <text
@@ -1910,8 +1910,8 @@
             >17 °C</text>
             <text
               class="f_temp pred"
-              transform="translate(186.7 236.2)"
-            >25 °C</text>
+              transform="translate(178 236.2)"
+            >24 °C</text>
           </g>
           <g
             id="ANN12_annotations"
