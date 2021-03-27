@@ -543,7 +543,7 @@
             <path
               id="ANN9"
               class="path5 flubber visuals"
-              style="fill: #FAB62F"
+              style="fill: #5D9DC7"
               d="M140.7,212.2Z"
             />
             <path
