@@ -135,11 +135,11 @@
           id="matrixChart_c2p2"
           class="mm-grid-item"
         >
-          <svg class="c2p2 matrix_c2p2 matrix">
+          <svg
+            class="c2p2 matrix_c2p2"
+          >
             <g
-              class="prebuilt_c2p2_group matrix"
-              width="570"
-              height="920"
+              class="prebuilt_c2p2_group"
             >
               <PrebuiltC2P2Matrix />
             </g>
@@ -254,11 +254,11 @@
           id="matrixChart_c2p3"
           class="mm-grid-item"
         >
-          <svg class="c2p3 matrix_c2p3 matrix">
+          <svg
+            class="c2p3 matrix_c2p3"
+          >
             <g
-              class="prebuilt_c2p3_group matrix"
-              width="570"
-              height="920"
+              class="prebuilt_c2p3_group"
             >
               <PrebuiltC2P3Matrix />
             </g>
@@ -448,7 +448,7 @@
         this.chart_width = 500 - this.chart_margin.left - this.chart_margin.right;
         this.chart_height = window.innerHeight * 0.3 - this.chart_margin.top - this.chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
-        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; //window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
+        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; 
       
         this.setPanels();  // begin script when window loads
       },
@@ -522,18 +522,20 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2 map_matrix") //map_matrix
+              .attr("class", "map_c2p2") //map_matrix
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
               .attr("width", "100%")
+              .attr("height", "100%")
           
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
-              .attr("class", "map_c2p3 map_matrix")
+              .attr("class", "map_c2p3")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
               .attr("width", "100%")
+              .attr("height", "100%")
 
           // // LOAD IN DATA AND CALL SCRIPTS IN STAGES
           self.loadData_1();
@@ -986,7 +988,7 @@
           // // Add tooltip as text element appended to map svg, without coordinates
           // add tooltip to map svg
           let tooltip = self.map_c2p2.append("text")
-              .attr("class", "c2p2 tooltip map")
+              .attr("class", "c2p2 tooltip_map")
 
           // // add delaware bay to map
           // re-use bay group
@@ -1077,11 +1079,11 @@
           const self = this;
 
           // set viewbox for existing svg
-          let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
+          let svgMatrix = self.d3.select(".c2p2.matrix_c2p2")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("width", "90%")
-              // .attr("preserveAspectRatio", "none") // STRETCHES MATRIX - including legend and bar chart labels
+              .attr("width", "100%")
+              .attr("height", "100%")
 
           // // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -1098,9 +1100,10 @@
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
+              .attr("width", self.matrix_width_c2)
+              .attr("height", self.matrix_height_c2)
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .attr("width", "90%")
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -1177,7 +1180,7 @@
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
-              .attr("class", "c2p2 tooltip matrix")
+              .attr("class", "c2p2 tooltip_matrix")
 
           // append the body of the matrix (transformed by margins)
           svgMatrix.append("g")
@@ -1338,7 +1341,7 @@
           // // Add tooltip as text appended to map svg
           // add tooltip to map svg
           let tooltip = self.map_c2p3.append("text")
-              .attr("class", "c2p3 tooltip map")
+              .attr("class", "c2p3 tooltip_map")
 
           // // add delaware bay to map
           // re-use bay group
@@ -1429,10 +1432,11 @@
           const self = this;
 
           // set viewbox for existing svg
-          let svgMatrix = self.d3.select(".c2p3.matrix_c2p3.matrix")
+          let svgMatrix = self.d3.select(".c2p3.matrix_c2p3")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("width", "90%")
+              .attr("width", "100%")
+              .attr("height", "100%")
 
           // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -1449,6 +1453,8 @@
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p3 = svgMatrix.select(".prebuilt_c2p3_group")
+              .attr("width", self.matrix_width_c2)
+              .attr("height", self.matrix_height_c2)
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
           
@@ -1456,7 +1462,6 @@
           let prebuiltRects_c2p3 = svgMatrix.select(".rects_c2p3_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .attr("width", "90%")
               .raise()
 
           // build array of all values of observed temperature
@@ -1557,7 +1562,7 @@
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
-              .attr("class", "c2p3 tooltip matrix")
+              .attr("class", "c2p3 tooltip_matrix")
 
           // append the body of the matrix (transformed by margins)
           svgMatrix.append("g")
@@ -2478,18 +2483,17 @@ $dimGray: #9c9c9c;
     grid-area: color;
   }
   .map-matrix-grid-container {
-    // margin: auto;
+    margin: 5px;
+    padding: 0em 0em 0em 0em;
     display: grid;
-    grid-template-columns: auto 1.5fr 3fr auto;
-    grid-template-rows: 100%;
+    grid-template-columns: auto 35% 65% auto;
+    // grid-template-rows: 1fr;
     grid-template-areas:
         "left map matrix right";
-    gap: 0px 10px;
-    min-width: 0;
-    min-height: 0;
-    max-height: 85vh;
+    gap: 0px 0px;
+    max-height: 90vh;
+    min-width: 300px;
     max-width: 100%;
-    padding-bottom: 2.5em;
     @media screen and (max-height: 770px) {
         grid-template-columns: auto 30% 50% auto;
     }
@@ -2504,25 +2508,23 @@ $dimGray: #9c9c9c;
   }
   #DRB_map_c2p2 {
     grid-area: map;
-    display: flex;
-    max-height: 80vh;
+    max-height: 85vh;
   }
   #matrixChart_c2p2 {
     grid-area: matrix;
-    display: flex;
-    max-height: 100%;
-    // padding-bottom: 10px;
+  }
+  .matrix_c2p2 {
+    max-height: 90vh;
   }
   #DRB_map_c2p3 {
     grid-area: map;
-    display: flex;
-    max-height: 80vh;
+    max-height: 85vh;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
-    display: flex;
-    max-height: 100%;
-    // padding-bottom: 10px;
+  }
+  .matrix_c2p3 {
+    max-height: 90vh;
   }
 }
 </style>
@@ -2587,7 +2589,14 @@ $dimGray: #9c9c9c;
   stroke-width: 0.2;
   opacity: 0.9;
 }
-
+.map_c2p2 {
+  max-height: 85vh;
+  width: 100%;
+}
+.map_c2p3 {
+  max-height: 85vh;
+  width: 100%;
+}
 .USGS_station {
   fill: $plasmaYellow;
 }
@@ -2632,25 +2641,31 @@ $dimGray: #9c9c9c;
           font-size: 7pt;
         }
 }
-.tooltip.map {
+.tooltip_map {
   fill: #ffffff;
   font-family: sans-serif;
   font-size: 0.95em; //1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 770px) {
-          font-size: 1.5em;
+          font-size: 1em;
         }
+  @media screen and (min-width: 1500px) {
+        font-size: 0.8em;
+    }
 }
-.tooltip.matrix {
+.tooltip_matrix {
   fill: #ffffff;
   font-family: sans-serif;
   font-size: 1em; //1.1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 770px) {
-          font-size: 2em;
+          font-size: 1.4em;
         }
+  @media screen and (min-width: 1500px) {
+        font-size: 0.85em;
+    }
 }
 
 </style>

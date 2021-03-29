@@ -3029,7 +3029,7 @@
                     >Scranton</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(87 445)"
+                      transform="translate(88 445)"
                     >Harrisburg</text>
                     <text
                       class="city-label"
