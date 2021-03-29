@@ -173,12 +173,12 @@
                     'bees_id': 'step_rgcn'
                 },
                 {
-                    'method': "And the great news? Now that the model has learned the general physics of the system, it can do more with less. Even when very little (< 1%) of temperature data is available for training, the model is still able to make accurate predictions.",
+                    'method': "And the great news? Now that the model has learned the general physics of the system, it can do more with less. Even when less than 1 percent of temperature data is available for training, the model is still able to make accurate predictions.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn_ptrn'
                 },
                 {
-                    'method': "These results give us confidence we will be able to use knowledge-guided deep learning to expand the scale at which we make predictions.",
+                    'method': "These results give us confidence that we can use knowledge-guided deep learning to make predictions in river basins with limited observations.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn_ptrn'
                 },
