@@ -3003,56 +3003,59 @@
                 previous_id = (next_id_index == self.flubber_id_order.length-1 || step_id == self.current_flubber_id) ? step_id : self.flubber_id_order[next_id_index + 1]  
               }
 
-              // loop through the paths in the dictionary for the current step id
-              let path_num;
-              for (path_num in self.flubber_dict) {
-                if (path_num == "f_arrow") {
+              // if the step_id differs from the previous id...
+              if (step_id != previous_id) {
+                  // loop through the paths in the dictionary for the current step id
+                  let path_num;
+                  for (path_num in self.flubber_dict) {
+                    if (path_num == "f_arrow") {
 
-                } else {
-                  // define path end using the CURRENT STEP ID
-                  let path_end = self.flubber_dict[path_num][step_id]['path_code']
-                  // define path end using the PREVIOUS STEP ID (as defined above)
-                  let path_start = self.flubber_dict[path_num][previous_id]['path_code']
+                    } else {
+                      // define path end using the CURRENT STEP ID
+                      let path_end = self.flubber_dict[path_num][step_id]['path_code']
+                      // define path end using the PREVIOUS STEP ID (as defined above)
+                      let path_start = self.flubber_dict[path_num][previous_id]['path_code']
 
-                  // transition between the two
-                  // select path in the group element for that path number
-                  self.d3.select("#" + path_num + ' path')
-                    .style("display", "block")
-                    .datum({ path_start, path_end })
-                    .transition()
-                    .duration(animationLength)
-                    .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
-                    .attrTween("d", function(d){
-                      return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2.5 })
-                    })
-                }
-              }
+                      // transition between the two
+                      // select path in the group element for that path number
+                      self.d3.select("#" + path_num + ' path')
+                        .style("display", "block")
+                        .datum({ path_start, path_end })
+                        .transition()
+                        .duration(animationLength)
+                        .style("fill", self.flubber_dict[path_num][step_id]['fill_color'])
+                        .attrTween("d", function(d){
+                          return flubber.interpolate(d.path_start, d.path_end, { maxSegmentLength: 2.5 })
+                        })
+                    }
+                  }
 
-              // select associated annotations
-              let previous_annotation_id = previous_id + "_annotations"
-              // console.log(previous_annotation_id)
-              let next_annotation_id = step_id + "_annotations"
-              // console.log(next_annotation_id)
+                  // select associated annotations
+                  let previous_annotation_id = previous_id + "_annotations"
+                  // console.log(previous_annotation_id)
+                  let next_annotation_id = step_id + "_annotations"
+                  // console.log(next_annotation_id)
 
-              // set length of annotation transition
-              let transition_duration = animationLength/2
+                  // set length of annotation transition
+                  let transition_duration = animationLength/2
 
-              if (next_annotation_id != previous_annotation_id) {
-                // display visual associated with initial model id
-                self.d3.selectAll("#" + previous_annotation_id)
-                  .transition()
-                  .duration(animationLength)
-                  // .style("visibility", "hidden"); // loses transition
-                  // .style("display", "none"); // loses transition
-                  .style("opacity", "0");
+                  if (next_annotation_id != previous_annotation_id) {
+                    // hide visual associated with previous model id
+                    self.d3.selectAll("#" + previous_annotation_id)
+                      .transition()
+                      .duration(animationLength)
+                      // .style("visibility", "hidden"); // loses transition
+                      // .style("display", "none"); // loses transition
+                      .style("opacity", "0");
 
-                // display visual associated with initial model id
-                self.d3.selectAll("#" + next_annotation_id)
-                  .transition()
-                  .duration(animationLength)
-                  // .style("visibility", "visible"); // loses transition
-                  // .style("display", "block"); // loses transition
-                  .style("opacity", "1");
+                    // show visual associated with next model id
+                    self.d3.selectAll("#" + next_annotation_id)
+                      .transition()
+                      .duration(animationLength)
+                      // .style("visibility", "visible"); // loses transition
+                      // .style("display", "block"); // loses transition
+                      .style("opacity", "1");
+                  }
               }
 
               // store current id
