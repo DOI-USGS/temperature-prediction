@@ -10,9 +10,7 @@
       <br>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-    </div>
       <ImportanceIcons />
-    <div class="text-content">
       <p v-html="text.paragraph3" />
       <p v-html="text.paragraph4" />
       <p v-html="text.paragraph5" />
