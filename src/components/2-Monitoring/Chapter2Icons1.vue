@@ -1,6 +1,7 @@
 <template>
   <div
     id="icons"
+    class="text-content"
   > 
     <div class="grid-container">
       <div
@@ -359,26 +360,23 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
     #icons {
-      min-width: 375px;
-      max-width: 700px;
-      margin: 0 auto;
-      padding-right: 2em;   
+      padding: 1em;
       @media screen and (max-width: 600px) {
-          padding-right: 20px;
-      }
+          padding: 0em;
+        }
     }
     .grid-container {
         padding: 0px;
         display: grid;
         grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%;
         grid-template-rows: 100%;
-        gap: 0px 5px;
+        gap: 0px 0px;
         grid-template-areas:
             "icon-1 icon-2 icon-3 icon-4 icon-5 icon-6 icon-7";
         min-width: 0;
         min-height: 0;
         @media screen and (max-width: 600px) {
-          padding: 10px 0;
+          // padding: 10px 0;
           gap: 0px;
         }
     }

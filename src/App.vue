@@ -195,8 +195,10 @@ h3{
     margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
-        max-width: 95%;
-        margin: 20px;
+        width: 90%;
+        padding: 10px;
+        // max-width: 95%;
+        // margin: 20px;
     } 
   }
 
@@ -205,7 +207,7 @@ h3{
     border-radius: 5px;
     max-width: 95%;
     margin: 0 auto;
-    padding: 15px;
+    padding: 1%;
     @media screen and (max-width: 600px) {
         margin: 20px;
     }
@@ -322,7 +324,8 @@ h3{
   max-width: 100%;
   z-index: 100;
   @media screen and (max-width: 600px) {
-        max-width: 90%;
+        max-width: 100%;
+        padding: 10px 10px 0px 10px;
   }
 }
 
