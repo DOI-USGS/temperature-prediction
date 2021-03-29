@@ -213,25 +213,25 @@ h3{
     }
   }
 
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    align-content: space-around;
-    max-width: 30%;
-    margin: auto;
-    @media screen and (max-width: 600px) {
-        max-width: 100%;
-    }
-  }
+  // .flex-container {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   align-items: flex-start;
+  //   justify-content: space-evenly;
+  //   align-content: space-around;
+  //   max-width: 30%;
+  //   margin: auto;
+  //   @media screen and (max-width: 600px) {
+  //       max-width: 100%;
+  //   }
+  // }
 
-  .flex-item {
-    padding: 20px;
-    min-width: 400px;
-    flex: 0 0 auto;
-    align-self: center;
-  }
+  // .flex-item {
+  //   padding: 20px;
+  //   min-width: 400px;
+  //   flex: 0 0 auto;
+  //   align-self: center;
+  // }
 
 
   @media (max-width: 600px) {
@@ -293,25 +293,25 @@ h3{
         max-width: 300px;
     }
   }
-  .map_matrix {
-    justify-self: center;
-    min-width: 250px;
-    max-width: 600px;
-    max-height: 90vh;
-    // flex: 1 1 30%;
-  }
+  // .map_matrix {
+  //   justify-self: center;
+  //   min-width: 250px;
+  //   max-width: 600px;
+  //   max-height: 90vh;
+  //   // flex: 1 1 30%;
+  // }
   .chart {
     min-width: 600px;
-    flex: 1 1 40%;
+    // flex: 1 1 40%;
   }
 
-  .matrix {
-    justify-self: stretch;
-    min-width: 400px;
-    // max-width: 700px;
-    max-height: 90vh;
-    // flex: 1 1 50%;
-  }
+  // .matrix {
+  //   justify-self: stretch;
+  //   min-width: 400px;
+  //   // max-width: 700px;
+  //   max-height: 90vh;
+  //   // flex: 1 1 50%;
+  // }
 
 // Specific Design Elements for Charts and Maps
 
