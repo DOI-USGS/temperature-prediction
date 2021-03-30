@@ -4591,7 +4591,7 @@ article {
   z-index: 1;
   position: -webkit-sticky;
   position: sticky;
-  top: 40px;
+  top: 25px;
   left: 0;
   padding-top: 0px;
 }
@@ -4615,13 +4615,13 @@ figure.sticky.intro {
 }
 figure.sticky.charts {
   display: grid;
-  padding-top: 2.1em;
+  padding-top: 1.1em;
   grid-template-rows: 90%;
   grid-template-columns: 3fr 2fr 4fr 2%;
   z-index: 1;
   position: -webkit-sticky;
   position: sticky;
-  top: 10vh; // leaving top for sticky header
+  top: 7vh; // leaving top for sticky header
   height: 90vh;
   width: auto;
   @media screen and (min-height: 770px) {
@@ -4629,9 +4629,9 @@ figure.sticky.charts {
         grid-template-columns: 1.5fr 3fr 2%;
         }
   @media screen and (max-width: 600px) {
-        top: 5vh;
-        height: 95vh;
-        grid-template-rows: 30% 30% 35%;
+        top: 0.5vh;
+        height: 99.5vh;
+        grid-template-rows: 33% 30% 35%;
         grid-template-columns: 2% auto 2%;
         padding-top: 4em;
         }
@@ -4658,6 +4658,7 @@ figure.sticky.charts {
   }
   #flubber-svg {
     height: 100%;
+    width: 100%;
   }
   #error-container {
     grid-column: 3 / 3;
