@@ -41,6 +41,7 @@
     "vue-browser-detect-plugin": "^0.1.13",
     "vue-mobile-detection": "^1.0.0",
     "vue-router": "^3.3.4",
+    "vue-state-router": "^3.0.12",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
