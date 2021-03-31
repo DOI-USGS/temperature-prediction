@@ -77,10 +77,7 @@
             Visualizing the count of temperature observations in stream reaches across the basin.
           </p>
           <p class="viz-subtitle">
-            Hover over a stream reach on the map to see the amount of data available for that reach over time.
-          </p>
-          <p class="viz-subtitle">
-            Hover over a column in the matrix to see which reaches have data in a given year.
+            Hover over a stream reach on the map or a row in the matrix to see the amount of data available for a single reach over the last forty years.
           </p>
         </div>
       </div>
