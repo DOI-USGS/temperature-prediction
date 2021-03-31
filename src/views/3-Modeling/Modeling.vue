@@ -2020,10 +2020,6 @@ figure.sticky.charts {
         grid-row: 1 / 1;
     }
   }
-  #flubber {
-    height: 100%;
-    width: auto;
-  }
   #flubber-svg {
     height: 100%;
     width: 100%;

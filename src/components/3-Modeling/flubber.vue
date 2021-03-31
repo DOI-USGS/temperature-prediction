@@ -2619,4 +2619,9 @@ $dimGray: #9c9c9c;
 .hidden-on-load {
     display: none;
 }
+
+#flubber-svg {
+    height: 100%;
+    width: 100%;
+  }
 </style>
