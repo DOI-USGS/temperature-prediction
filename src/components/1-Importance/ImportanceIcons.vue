@@ -172,7 +172,7 @@ $dimGray: #9c9c9c;
           max-width: 80vw;
           gap: 0px 15px;
           padding-top: 0px;
-          padding-bottom: 5px;
+          padding-bottom: 0px;
         }
     }
 

@@ -3,15 +3,17 @@
     <br>
     <IntroMap />
     <div class="text-content">
-      <div class="subheader">
+      <div class="first_subheader">
         <h3 v-html="text.title1" />
       </div>
-      <br>
       <p v-html="text.paragraph1"/>
       <p v-html="text.paragraph2"/>
       <ImportanceIcons />
       <p v-html="text.paragraph3"/>
       <p v-html="text.paragraph4"/>
+      <div class="subheader">
+        <h3 v-html="text.title2" />
+      </div>
       <p v-html="text.paragraph5" />
     </div>
     <div id="map-and-bar-chart">
@@ -57,12 +59,9 @@
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
       <Chapter2Icons1 />
-      <br>
-      <br>
       <div class="subheader">
-        <h3 v-html="text.title2" />
+        <h3 v-html="text.title3" />
       </div>
-      <br>
       <p v-html="text.paragraph9" />
       <p v-html="text.paragraph10" />
       <p v-html="text.paragraph11" />
@@ -189,9 +188,8 @@
     </div>
     <div class="text-content">
       <div class="subheader">
-        <h3 v-html="text.title3" />
+        <h3 v-html="text.title4" />
       </div>
-      <br>
       <p v-html="text.paragraph12" />
       <Chapter2Icons2 />
       <p v-html="text.paragraph13" />

@@ -171,7 +171,12 @@ h3{
 }
 
 .subheader {
-
+  padding-top: 1.25em;
+  padding-bottom: .75em;
+}
+.first_subheader {
+  padding-top: 0em;
+  padding-bottom: .75em;
 }
   // General Layout  
 
