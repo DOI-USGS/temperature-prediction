@@ -21,6 +21,11 @@
           return {
             currentLinks: null,
           }
+        },
+        methods: {
+            scrollToTop() {
+                window.scrollTo(0,0);
+            }
         }
     }
 </script>

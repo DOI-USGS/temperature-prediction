@@ -4,12 +4,12 @@
             "Training an artificial neural network": [
                 {
                     'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world.",
-                    'flubber_id': 'ANN1',
+                    'flubber_id': '',
                     'bees_id': 'step_error'
                 },
                 {
                     'method': "To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures).",
-                    'flubber_id': 'ANN1',
+                    'flubber_id': '',
                     'bees_id': 'step_error'
                 },
                 {
@@ -94,7 +94,7 @@
                 },
                 {
                     'method': "At this point the model is considered “trained” and can be used to make predictions using new sets of input data. But the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
-                    'flubber_id': 'ANN13',
+                    'flubber_id': '',
                     'bees_id': 'step_error_exp'
                 }],
             "Testing an artificial neural network (ANN)": [
