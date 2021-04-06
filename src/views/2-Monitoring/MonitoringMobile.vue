@@ -68,7 +68,7 @@
     <div class="box">
       <div class="viz-title-wrapper">
         <p class="viz-title">
-          <span class="yellow">Availability</span> of temperature data
+          <span class="yellow">Availability</span> of stream temperature data
         </p>
         <p class="viz-subtitle">
           Visualizing the count of temperature measurements in stream reaches across the basin.
@@ -107,7 +107,7 @@
     <div class="box">
       <div class="viz-title-wrapper">
         <p class="viz-title">
-          <span class="yellow">Variability</span> of water temperature in 2019
+          <span class="yellow">Variability</span> of stream temperature in 2019
         </p>
         <p class="viz-subtitle">
           Visualizing measured stream temperature in the basin.
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-  import monitoringText from "./../../assets/text/monitoringText";
+  import monitoringText from "./../../components/2-Monitoring/monitoringText";
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
   import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
   import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";

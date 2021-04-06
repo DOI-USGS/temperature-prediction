@@ -58,7 +58,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "The model keeps adjusting weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware River Basin.",
+                    'method': "The model keeps adjusting weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the DRB.",
                     'flubber_id': 'ANN12',
                     'bees_id': 'step_error_exp'
                 },
@@ -99,7 +99,7 @@
                     'bees_id': 'step_ann'
                 },
                 {
-                    'method': "But recall that the availability of stream temperature data varies greatly across the continental United States, and even within the well-monitored Delaware River Basin. How does the ANN perform when we don't have a lot of training data?",
+                    'method': "But recall that the availability of stream temperature data varies greatly across the continental United States, and even within the well-monitored DRB. How does the ANN perform when we don't have a lot of training data?",
                     'flubber_id': '',
                     'bees_id': 'step_ann'
                 },
@@ -136,7 +136,7 @@
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "In the Delaware River Basin, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
+                    'method': "In the DRB, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
                     'flubber_id': 'RNN',
                     'bees_id': 'step_rnn'
                 }],
@@ -152,7 +152,7 @@
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': "In the Delaware River Basin, adding information about the spatial configuration of the river network improves predictions.",
+                    'method': "In the DRB, adding information about the spatial configuration of the river network improves predictions.",
                     'flubber_id': 'RGCN_2',
                     'bees_id': 'step_rgcn'
                 }],
@@ -163,7 +163,7 @@
                     'bees_id': 'step_rgcn'
                 },
                 {
-                    'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics. We can use these equations to make temperature predictions for all places and times in the Delaware River Basin, and treat these predictions as “real” data to train our neural network.",
+                    'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics. We can use these equations to make temperature predictions for all places and times in the DRB, and treat these predictions as “real” data to train our neural network.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn'
                 },

@@ -71,7 +71,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Variation in the <span class="yellow">availability</span> of stream temperature data
+            <span class="yellow">Availability</span> of stream temperature data
           </p>
           <p class="viz-subtitle">
             Visualizing the count of temperature observations in stream reaches across the basin.
@@ -219,7 +219,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Variability of <span class="yellow">water temperature</span> in 2019
+            <span class="yellow">Variability</span> of stream temperature in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
@@ -368,7 +368,7 @@
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
-  import monitoringText from "./../../assets/text/monitoringText";
+  import monitoringText from "./../../components/2-Monitoring/monitoringText";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
   import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
