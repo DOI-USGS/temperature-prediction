@@ -2,25 +2,19 @@
   <div id="monitoring-mobile">
     <br>
     <IntroMap />
-    <br>
     <div class="text-content">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          The Delaware River Basin
-        </p>
+      <div class="subheader">
+        <h3 v-html="text.title1" />
       </div>
-      <br>
-      <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
-      <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
-    </div>
-    <ImportanceIcons />
-    <div class="text-content">
-      <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
-      <p>Basin-wide monitoring of water temperature underpins our understanding of water temperature dynamics in the Delaware River Basin, but modeling water temperature dynamics can help fill gaps in our knowledge. Here, we explore USGS temperature monitoring and state-of-the-art modeling techniques to predict water temperature in the Delaware River Basin.</p>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-      <p v-html="text.paragraph1" />
-      <p v-html="text.paragraph2" />
+      <ImportanceIcons />
+      <p v-html="text.paragraph3" />
+      <p v-html="text.paragraph4" />
+      <div class="subheader">
+        <h3 v-html="text.title2" />
+      </div>
+      <p v-html="text.paragraph5" />
     </div>
     <div class="box">
       <div class="viz-title-wrapper">
@@ -32,7 +26,7 @@
       <MonitoringMap1 />
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph3" />
+      <p v-html="text.paragraph6" />
     </div>
     <div class="box">
       <div class="viz-title-wrapper">
@@ -46,17 +40,14 @@
       <MonitoringBarChart />
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph4" />
-      <p v-html="text.paragraph5" />
+      <p v-html="text.paragraph7" />
+      <p v-html="text.paragraph8" />
       <Chapter2Icons1 />
-      <br>
-      <br>
-      <div class="viz-title">
-        <h3 v-html="text.title2" />
+      <div class="first_subheader">
+        <h3 v-html="text.title3" />
       </div>
-      <br>
-      <p v-html="text.subtitle2" />
-      <p v-html="text.paragraph6" />
+      <p v-html="text.paragraph9" />
+      <p v-html="text.paragraph10" />
       <p v-html="text.tiptextMobile" />
     </div>
     <div class="box">
@@ -72,13 +63,12 @@
     </div>
     <br>
     <div class="text-content">
-      <p v-html="text.paragraph8" />
-      <p v-html="text.paragraph9" />
+      <p v-html="text.paragraph11" />
     </div>
     <div class="box">
       <div class="viz-title-wrapper">
         <p class="viz-title">
-          <span class="yellow">Availability</span> of temperature data
+          <span class="yellow">Availability</span> of stream temperature data
         </p>
         <p class="viz-subtitle">
           Visualizing the count of temperature measurements in stream reaches across the basin.
@@ -90,14 +80,12 @@
       <MatrixAvailability />
     </div>
     <div class="text-content">
-      <br>
-      <div class="viz-title">
-        <h3 v-html="text.title3" />
+      <div class="subheader">
+        <h3 v-html="text.title4" />
       </div>
-      <br>
-      <p v-html="text.paragraph10" />
+      <p v-html="text.paragraph12" />
       <Chapter2Icons2 />
-      <p v-html="text.paragraph11" />
+      <p v-html="text.paragraph13" />
     </div>
     <div class="box">
       <div class="viz-title-wrapper">
@@ -113,13 +101,13 @@
     </div>
     <br>
     <div class="text-content">
-      <p v-html="text.paragraph12" />
-      <p v-html="text.paragraph13" />
+      <p v-html="text.paragraph14" />
+      <p v-html="text.paragraph15" />
     </div>
     <div class="box">
       <div class="viz-title-wrapper">
         <p class="viz-title">
-          <span class="yellow">Variability</span> of water temperature in 2019
+          <span class="yellow">Variability</span> of stream temperature in 2019
         </p>
         <p class="viz-subtitle">
           Visualizing measured stream temperature in the basin.
@@ -134,7 +122,7 @@
 </template>
 
 <script>
-  import monitoringText from "./../../assets/text/monitoringText";
+  import monitoringText from "./../../components/2-Monitoring/monitoringText";
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
   import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
   import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";

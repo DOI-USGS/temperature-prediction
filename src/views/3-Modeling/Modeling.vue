@@ -11,7 +11,7 @@
           class="text-content"
         >
           <p>
-            Data sparsity and variability in stream temperature across the network limit our ability to answer questions like: How far downstream will a cold water release affect temperature?  How has fish habitat changed through time?  Will we have enough cold water in the reservoir in 50 years?
+            Data sparsity and variability in stream temperature across the Delaware River Basin (DRB) limit our ability to answer questions like: How far downstream will a cold water release affect temperature?  How has fish habitat changed through time?  Will we have enough cold water in the reservoir in 50 years?
           </p>
           <p>
             How can we create models that are robust to a diversity of temperature dynamics, in places and times where we don't have a lot of information?
