@@ -48,21 +48,6 @@
       </div>
       <p v-html="text.paragraph9" />
       <p v-html="text.paragraph10" />
-      <p v-html="text.tiptextMobile" />
-    </div>
-    <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          <span class="yellow">40 years</span> of temperature data
-        </p>
-        <p class="viz-subtitle">
-          Every reach with data in each of the last 40 years.
-        </p>
-      </div>
-      <MonitoringMap2 />
-    </div>
-    <br>
-    <div class="text-content">
       <p v-html="text.paragraph11" />
     </div>
     <div class="box">
@@ -125,7 +110,6 @@
   import monitoringText from "./../../components/2-Monitoring/monitoringText";
   import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
   import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
-  import MonitoringMap2 from "./../../components/2-Monitoring-Mobile/MonitoringMap2";
   import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
@@ -139,7 +123,6 @@
     components: {
       MonitoringMap1,
       MonitoringBarChart,
-      MonitoringMap2,
       MatrixExplainerSpace,
       MatrixExplainerTime,
       MatrixExplainerColor,
