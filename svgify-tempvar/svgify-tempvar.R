@@ -71,15 +71,6 @@ build_path <- function(x, y, connect) {
   return(d)
 }
 
-
-scale_to_svg(obs %>% filter(seg_id_nat == 2034) %>% select(x=jday, y=temp_c), connect = FALSE, 600, 600)
-
-
-svg_width <- 600
-svg_height <- 600
-build_svg("test.svg", 600,  600)
-
-
 # run it ------------------------------------------------------------------
 
 library(tidyverse);library(lubridate)
