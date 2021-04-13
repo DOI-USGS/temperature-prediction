@@ -112,14 +112,11 @@ body {
 
 
 h1{
-  font-size: 4em;
-  font-weight: 700;
-  text-align: left;
-  color: white;
+  font-size: 2em;
+  font-weight: 300;
   @media screen and (max-width: 600px) {
-    font-size: 3em;
-  }
-
+      font-size: 1.4em;
+  }  
 }
 
 
