@@ -3,7 +3,7 @@
     <div>
       <div class="overall-title">
         <div class="text-content">
-          <h3 class="nav-title">
+          <h1 class="nav-title">
             How we<router-link
               to="/monitoring"
               @click.native="scrollToTop"
@@ -12,7 +12,7 @@
               @click.native="scrollToTop"
             >Model</router-link><br>Stream Temperature in the<br>
             Delaware River Basin
-          </h3>
+          </h1>
           <br>
         </div>
       </div>
