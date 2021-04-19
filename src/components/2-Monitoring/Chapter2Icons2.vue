@@ -103,15 +103,6 @@ $mediumBlue: #5D9DC7;
 $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
-#icons {
-  min-width: 375px;
-  max-width: 700px;
-  margin: 0 auto;
-  padding-right: 2em;   
-  @media screen and (max-width: 600px) {
-      padding-right: 25px;
-  }
-}
 .grid-container {
     padding: 10px;
     padding-left: 35px;

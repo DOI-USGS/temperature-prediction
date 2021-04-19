@@ -112,14 +112,11 @@ body {
 
 
 h1{
-  font-size: 4em;
-  font-weight: 700;
-  text-align: left;
-  color: white;
+  font-size: 2em;
+  font-weight: 300;
   @media screen and (max-width: 600px) {
-    font-size: 3em;
-  }
-
+      font-size: 1.4em;
+  }  
 }
 
 
@@ -171,7 +168,12 @@ h3{
 }
 
 .subheader {
-
+  padding-top: 1.25em;
+  padding-bottom: .75em;
+}
+.first_subheader {
+  padding-top: 0em;
+  padding-bottom: .75em;
 }
   // General Layout  
 
@@ -195,7 +197,10 @@ h3{
     margin: 0 auto;
     padding: 10px;
     @media screen and (max-width: 600px) {
-        margin: 20px;
+        width: 90%;
+        padding: 10px;
+        // max-width: 95%;
+        // margin: 20px;
     } 
   }
 
@@ -204,31 +209,31 @@ h3{
     border-radius: 5px;
     max-width: 95%;
     margin: 0 auto;
-    padding: 15px;
+    padding: 1%;
     @media screen and (max-width: 600px) {
-        margin: 10px;
-    } 
-  }
-
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    align-content: space-around;
-    max-width: 30%;
-    margin: auto;
-    @media screen and (max-width: 600px) {
-        max-width: 100%;
+        margin: 20px;
     }
   }
 
-  .flex-item {
-    padding: 20px;
-    min-width: 400px;
-    flex: 0 0 auto;
-    align-self: center;
-  }
+  // .flex-container {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   align-items: flex-start;
+  //   justify-content: space-evenly;
+  //   align-content: space-around;
+  //   max-width: 30%;
+  //   margin: auto;
+  //   @media screen and (max-width: 600px) {
+  //       max-width: 100%;
+  //   }
+  // }
+
+  // .flex-item {
+  //   padding: 20px;
+  //   min-width: 400px;
+  //   flex: 0 0 auto;
+  //   align-self: center;
+  // }
 
 
   @media (max-width: 600px) {
@@ -290,25 +295,25 @@ h3{
         max-width: 300px;
     }
   }
-  .map_matrix {
-    justify-self: center;
-    min-width: 250px;
-    max-width: 600px;
-    max-height: 90vh;
-    // flex: 1 1 30%;
-  }
+  // .map_matrix {
+  //   justify-self: center;
+  //   min-width: 250px;
+  //   max-width: 600px;
+  //   max-height: 90vh;
+  //   // flex: 1 1 30%;
+  // }
   .chart {
     min-width: 600px;
-    flex: 1 1 40%;
+    // flex: 1 1 40%;
   }
 
-  .matrix {
-    justify-self: stretch;
-    min-width: 400px;
-    // max-width: 700px;
-    max-height: 90vh;
-    // flex: 1 1 50%;
-  }
+  // .matrix {
+  //   justify-self: stretch;
+  //   min-width: 400px;
+  //   // max-width: 700px;
+  //   max-height: 90vh;
+  //   // flex: 1 1 50%;
+  // }
 
 // Specific Design Elements for Charts and Maps
 
@@ -321,7 +326,8 @@ h3{
   max-width: 100%;
   z-index: 100;
   @media screen and (max-width: 600px) {
-        max-width: 90%;
+        max-width: 100%;
+        padding: 10px 10px 0px 10px;
   }
 }
 

@@ -109,18 +109,36 @@
 </script>
 
 <style scoped lang="scss">
+  // IMPORT COLORS
+  $backgroundCharcoal: #292b30;
+  $boxCharcoal: #0f0f0f;
+  $offWhite: #F1F1F1;
+  $offWhiteBox: #dedede;
+  $plasmaYellow: #FAB62F;
+  $plasmaPink: #BE3D7D;
+  $plasmaPurple: #62039A;
+  $plasmaBlue: #142167;
+  $darkBlue: #192c42;
+  $footerBlue: #00264C;
+  $mediumBlue: #5D9DC7; 
+  $grayBlue: #777b80;
+  $dimGray: #9c9c9c;
+
   .usa-banner {
-    background: #292b30;
-    color: #F1F1F1;
+    background: $backgroundCharcoal;
+    color: $offWhite;
   }
 
   .usa-banner__header {
-    color: #F1F1F1;
+    color: $offWhite;
   }
   @import '~uswds/dist/css/uswds.css';
   .usa-banner__inner {
     margin-left: 10px;
     padding-left: 5px;
+  }
+  .usa-banner__button-text {
+    color: $mediumBlue;
   }
   .usa-banner__button::after {
     content: none;

@@ -2715,63 +2715,63 @@
                     </g>
                   </g>
                 </g>
-                <g id="gnispop_p_extract_p">
-                  <g id="in_DRB">
-                    <text
-                      id="philly-dot"
-                      class="city-dot"
-                      transform="translate(304.1 506.1) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      id="allentown-dot"
-                      class="city-dot"
-                      transform="translate(261.5 389.5) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      id="wilmington-dot"
-                      class="city-dot"
-                      transform="translate(253 539.9) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      id="trenton-dot"
-                      class="city-dot"
-                      transform="translate(362 458) scale(11.1 11.1)"
-                    >•</text>
-                  </g>
-                  <g id="outside_DRB">
-                    <text
-                      class="city-dot hidden-on-mobile"
-                      transform="translate(207.3 126.6) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      class="city-dot hidden-on-mobile"
-                      transform="translate(111.7 611.9) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      id="new-york-dot"
-                      class="city-dot"
-                      transform="translate(458 364.5) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      class="city-dot hidden-on-mobile"
-                      transform="translate(77.7 441.2) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      class="city-dot hidden-on-mobile"
-                      transform="translate(53.5 679.4) scale(11.1 11.1)"
-                    >•</text>
-                    <text
-                      id="scranton-dot"
-                      class="city-dot"
-                      transform="translate(240 246.1) scale(11.1 11.1)"
-                    >•</text>
-                  </g>
-                </g>
                 <g id="estuary_river_fade">
                   <path
                     class="cls-43"
                     d="M324.4,483.2l-1.3.6-.2.2-.3.2-.6.6-.6,1h0l-.3.5-.5,1.7-.7.6-.7.5-3.1,1.1-1.4.7-1.1,1.1-1.5,2.9-.5,3.6.5,3-.5,1.1-1.3,1.1-.9.3-6.1,2.4-1.8.9-4.7,2.7-3.2.3-2.9-.9-1.2.2-6.2,3.1-1.2.5-2.4.7-1.8.8-.9.9-2.9,3.9c.8.2,1.6.2,1.9.8a.7.7,0,0,0,.9.2l3.4-2.4,1.8-1.1,5.4-2.5,2-.6,4.5-1,2.7-.2,1.9-.4,1.5-.3,3.4-1.7,1.3-.5,2.7-.9,1-.7,2.2.2,2-1.5,2.3-2.5,1.5-1.1V503l-1.8-2.6-.9-3.2.4-1.6.4-.4,1.9.6,1.7-1.8,1.4.3,4.1-6.6,1.1-1.7.7-.6h1.3Z"
                   />
+                </g>
+                <g id="gnispop_p_extract_p">
+                  <g id="in_DRB">
+                    <text
+                      id="philly-dot"
+                      class="city-dot"
+                      transform="translate(304.1 506.1) scale(10 10)"
+                    >•</text>
+                    <text
+                      id="allentown-dot"
+                      class="city-dot"
+                      transform="translate(261.5 389.5) scale(10 10)"
+                    >•</text>
+                    <text
+                      id="wilmington-dot"
+                      class="city-dot"
+                      transform="translate(253 539.9) scale(10 10)"
+                    >•</text>
+                    <text
+                      id="trenton-dot"
+                      class="city-dot"
+                      transform="translate(362 458) scale(10 10)"
+                    >•</text>
+                  </g>
+                  <g id="outside_DRB">
+                    <text
+                      class="city-dot hidden-on-mobile"
+                      transform="translate(207.3 126.6) scale(10 10)"
+                    >•</text>
+                    <text
+                      class="city-dot hidden-on-mobile"
+                      transform="translate(110 611.9) scale(10 10)"
+                    >•</text>
+                    <text
+                      id="new-york-dot"
+                      class="city-dot"
+                      transform="translate(458 364.5) scale(10 10)"
+                    >•</text>
+                    <text
+                      class="city-dot hidden-on-mobile"
+                      transform="translate(77.7 441.2) scale(10 10)"
+                    >•</text>
+                    <text
+                      class="city-dot hidden-on-mobile"
+                      transform="translate(53.5 679.4) scale(10 10)"
+                    >•</text>
+                    <text
+                      id="scranton-dot"
+                      class="city-dot"
+                      transform="translate(240 246.1) scale(10 10)"
+                    >•</text>
+                  </g>
                 </g>
               </g>
               <g id="Labels">
@@ -3021,27 +3021,27 @@
                   >
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(146.2 121.3)"
+                      transform="translate(147.4 116.5)"
                     >Binghamton</text>
                     <text
                       class="city-label"
-                      transform="translate(193.4 241.9)"
+                      transform="translate(194.7 235.6)"
                     >Scranton</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(88.9 435.9)"
+                      transform="translate(88 445)"
                     >Harrisburg</text>
                     <text
                       class="city-label"
-                      transform="translate(409.6 359)"
+                      transform="translate(409.5 354)"
                     >New York</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(62.7 606.9)"
+                      transform="translate(62 601.5)"
                     >Baltimore</text>
                     <text
                       class="city-label hidden-on-mobile"
-                      transform="translate(63.3 674.3)"
+                      transform="translate(65 674.3)"
                     >Washington</text>
                   </g>
                   <g id="Inside_DRB">
@@ -3052,7 +3052,7 @@
                       >Allentown</text>
                       <text
                         class="city-label masking"
-                        transform="translate(371.5 458)"
+                        transform="translate(373 459)"
                       >Trenton</text>
                       <text
                         class="city-label masking"
@@ -3069,7 +3069,7 @@
                     >Allentown</text>
                     <text
                       class="city-label inside"
-                      transform="translate(371.5 458)"
+                      transform="translate(373 459)"
                     >Trenton</text>
                     <text
                       class="city-label inside"
@@ -3127,11 +3127,11 @@
                   >Y</text>
                   <text
                     class="state-label"
-                    transform="matrix(0.08, 1, -1, 0.08, 241.44, 684.24)"
+                    transform="matrix(0.08, 1, -1, 0.08, 240.14, 684.24)"
                   >D</text>
                   <text
                     class="state-label"
-                    transform="translate(242.7 697.8) rotate(80.3)"
+                    transform="translate(241.7 697.8) rotate(78)"
                   >E</text>
                   <text
                     class="state-label"
@@ -3640,7 +3640,7 @@
                 <g>
                   <text
                     class="scale-bar-label"
-                    transform="translate(488 774.3)"
+                    transform="translate(491 775.5)"
                   >25 Miles</text>
                 </g>
                 <polyline
@@ -3650,7 +3650,7 @@
                 <g>
                   <text
                     class="scale-bar-label"
-                    transform="translate(488 753.9)"
+                    transform="translate(487 753.9)"
                   >50 Kilometers</text>
                 </g>
                 <path

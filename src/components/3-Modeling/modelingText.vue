@@ -3,7 +3,7 @@
         textContents: {
             "Training an artificial neural network": [
                 {
-                    'method': "Like other environmental models, ANNs are fine-tuned using observations from the real world. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model “learns” the relationship between the inputs and outputs. The model only sees this information as numbers – it has no idea how the inputs and output may be physically related.",
+                    'method': "ANN machine learning models are trained and tested using real-world observations. To predict stream temperature, we provide the ANN model with input data (daily observations of precipitation and air temperature) and output data (observed stream temperatures). During training, the model “learns” the relationship between the input and output data. The model only sees this information as values – it has no idea how the input and output may be physically related.",
                     'flubber_id': 'ANN1',
                     'bees_id': 'step_error'
                 },
@@ -18,17 +18,17 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "In the hidden layer, the receiving nodes calculate a weighted sum of the received information…",
+                    'method': "In the hidden layer, the nodes calculate a weighted sum of the received information…",
                     'flubber_id': 'ANN4',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "…and then the weighted sum is adjusted by some simple rule, for example, keeping positive values as-is and setting negative values to zero.",
+                    'method': "…and then the weighted sum is adjusted by some simple rule, for example, dividing in half any weighted sums that are less than five.",
                     'flubber_id': 'ANN5',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "These output values are then passed to nodes in the next hidden layer, or, if there are no more hidden layers, to the output layer. Adding more nodes or hidden layers to the model increases the complexity of relationships between inputs and outputs that the model is able to mimic. To predict stream temperature, we use an ANN with many hidden layers.",
+                    'method': "These adjusted values are then passed to nodes in the next hidden layer, or, if there aren't more hidden layers, to the output layer. The more nodes or hidden layers in the model, the better the model can “learn” complex relationships. To predict stream temperature, we use an ANN with many hidden layers.",
                     'flubber_id': 'ANN6',
                     'bees_id': 'step_error_exp'
                 },
@@ -38,7 +38,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "And passes the sum through a mathematical function to produce a final output value.",
+                    'method': "And adjusts that sum by another simple rule to produce a final output value.",
                     'flubber_id': 'ANN8',
                     'bees_id': 'step_error_exp'
                 },
@@ -48,38 +48,38 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "The model compares the predicted value to the observed stream temperature. The difference between the two values represents the error associated with the prediction. Since the first set of weights and connections are initialized randomly, the model is pretty far off to begin with.",
+                    'method': "The model compares the predicted value to the observed stream temperature. The difference between the two values represents the error in the prediction. Since the first set of weights are chosen randomly, the model is pretty far off to begin with.",
                     'flubber_id': 'ANN10',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "The model reduces the error by going back and adjusting the weights throughout the model. Using calculus, the model efficiently calculates the relationship between the error and each weight in the model to figure out how much and in what direction to adjust the weights to improve prediction accuracy.",
+                    'method': "The model reduces the error by going back and adjusting the weights throughout the model. It figures out how to change the weights to make more accurate predictions by calculating the relationship between the error and every weight in the model.",
                     'flubber_id': 'ANN11',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "The model keeps adjusting weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the Delaware River Basin.",
+                    'method': "The model keeps adjusting weights and evaluating the error associated with stream temperature predictions for every location and every day that we have monitoring data in the DRB.",
                     'flubber_id': 'ANN12',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on the training data. At this point the model is considered “trained” and can be used to make predictions using new sets of input data. But the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
+                    'method': "Eventually, the model lands on a set of weights that produces the most accurate predictions based on all the data across all the locations. At this point the model is considered “trained” and can be used to make predictions using new input data. But the model will never be perfect, even when fully trained, and will perform better for some places and times than others.",
                     'flubber_id': 'ANN13',
                     'bees_id': 'step_error_exp'
                 }],
             "Testing an artificial neural network (ANN)": [
                 {
-                    'method': "As an example, here we show daily temperature predictions for a stream reach over a one month period.",
+                    'method': "We can test a trained model by asking it to predict stream temperature using input data it has never seen. Here we show daily temperature predictions for a stream reach over one month.",
                     'flubber_id': '',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "Prediction error (the difference between predicted temperatures and measured observations) is small when the model makes accurate predictions.",
+                    'method': "The difference between those predictions and observed stream temperatures represents the prediction error. It is small when the model makes accurate predictions.",
                     'flubber_id': '',
                     'bees_id': 'step_error_obs'
                 },
                 {
-                    'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize daily prediction errors – for example, by taking the root mean squared error (RMSE).",
+                    'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize the daily prediction errors – for example, by taking the root mean squared error (RMSE).",
                     'flubber_id': '',
                     'bees_id': 'step_error_rmse'
                 }, 
@@ -89,54 +89,54 @@
                     'bees_id': 'step_error_rmse'
                 }, 
                 {
-                    'method': "Large errors and high RMSE indicate the model is doing a poor job of predicting water temperature dynamics.",
+                    'method': "Large errors translate to high RMSE, indicating the model is doing a poor job of predicting water temperature dynamics.",
                     'flubber_id': '',
                     'bees_id': 'step_error_rmse_scale'
                 }, 
                 {
-                    'method': "We can use RMSE to compare different models or assess accuracy in time, space, and under different conditions. Here we show model RMSE for a subset of stream reaches in the Basin based on all available data in the training period.",
+                    'method': "We can use RMSE to compare the performance of different models or to assess how accuracy varies in time, space, or under different conditions. Here each dot represents the RMSE for predictions in a single stream reach. The model was trained on all available data in the training period, and is accurate in most reaches.",
                     'flubber_id': '',
                     'bees_id': 'step_ann'
                 },
                 {
-                    'method': "But recall that the Delaware River Basin is one of the most observed basins in the U.S. How does the ANN perform when we don't have a lot of training data?",
+                    'method': "But recall that the availability of stream temperature data varies greatly across the continental United States, and even within the well-monitored DRB. How does the ANN perform when we don't have a lot of training data?",
                     'flubber_id': '',
                     'bees_id': 'step_ann'
                 },
                 {
-                    'method': "To find out, we artificially reduced the amount of data used to train the model, and compared the models built on different data availability schemes.",
+                    'method': "To find out, we artificially reduced the amount of data used to train the model, and compared this restricted model to the one trained on all of the available data.",
                     'flubber_id': '',
                     'bees_id': 'step_ann'
                 },
                 {
-                    'method': "When only 0.1% of the training data is used, the ANN model is less accurate and has a hard time capturing temperature dynamics of the river.",
+                    'method': "When only 0.1% of the training data is used, the ANN model is less accurate and has a hard time capturing temperature dynamics in the streams.",
                     'flubber_id': '',
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "How can we improve model predictions when temperature observations are limited?",
+                    'method': "How can we improve the accuracy of model predictions when training data are limited?",
                     'flubber_id': '',
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "In reality, humans already know a lot about water temperature. Even without observations, we can guess that water temperature will be warmest in the summer or that forested headwater streams are cooler than large urban streams.",
+                    'method': "In reality, humans already know a lot about water temperature. Even without training observations, we can guess that water temperature will be warmest in the summer and that forested headwater streams are cooler than large urban streams.",
                     'flubber_id': '',
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "How can we tell a machine what we already know?",
+                    'method': "How can we tell a machine learning model what we already know?",
                     'flubber_id': 'ANN13',
                     'bees_id': 'step_ann_exp'
                 },
             ],
             "Recurrent neural network (RNN)": [
                 {
-                    'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For data-driven modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next day. The model with memory that we use is called a recurrent neural network (RNN).",
+                    'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For machine learning modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next. The model with memory that we use is called a recurrent neural network (RNN).",
                     'flubber_id': 'RNN',
                     'bees_id': 'step_ann_exp'
                 },
                 {
-                    'method': "In the Delaware River Basin, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
+                    'method': "In the DRB, giving the model a memory improves model accuracy in some reaches but worsens model performance in others.",
                     'flubber_id': 'RNN',
                     'bees_id': 'step_rnn'
                 }],
@@ -152,7 +152,7 @@
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': "In the Delaware River Basin, adding information about the spatial configuration of the river network improves predictions.",
+                    'method': "In the DRB, adding information about the spatial configuration of the river network improves predictions.",
                     'flubber_id': 'RGCN_2',
                     'bees_id': 'step_rgcn'
                 }],
@@ -163,7 +163,7 @@
                     'bees_id': 'step_rgcn'
                 },
                 {
-                    'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics. We can use these equations to make temperature predictions for all places and times in the Delaware River Basin, and treat these predictions as “real data” to train our neural network.",
+                    'method': "Scientists have written heat loss and gain rules into equations to make temperature predictions that generally follow the laws of physics. We can use these equations to make temperature predictions for all places and times in the DRB, and treat these predictions as “real” data to train our neural network.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn'
                 },
@@ -173,12 +173,12 @@
                     'bees_id': 'step_rgcn'
                 },
                 {
-                    'method': "And the great news? Now that the model has learned the general physics of the system, it can do more with less. Even when very little (< 1%) of temperature data is available for training, the model is still able to make accurate predictions.",
+                    'method': "And the great news? Once the model has learned the general physics of the system, it can do more with less. Even when less than 1 percent of temperature data is available for training, the model is still able to make accurate predictions.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn_ptrn'
                 },
                 {
-                    'method': "These results give us confidence we will be able to use knowledge-guided deep learning to expand the scale at which we make predictions.",
+                    'method': "These results give us confidence that we can use knowledge-guided deep learning to make predictions in river basins with limited observations.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn_ptrn'
                 },

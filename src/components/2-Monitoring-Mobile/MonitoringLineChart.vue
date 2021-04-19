@@ -286,7 +286,7 @@
             id="cool"
             class="highlight-text"
             transform="translate(215 320)"
-          >Coldest summer reach,<tspan
+          >Cold summer reach,<tspan
             x="0"
             y="15"
           >showing temperature </tspan><tspan
@@ -306,7 +306,10 @@
           >Warmest summer river<tspan
             x="0"
             y="15"
-          >reach in the DRB</tspan></text>
+          >reach in the DRB,</tspan><tspan
+            x="0"
+            y="30"
+          >in an urban area</tspan></text>
         </g>
       </g>>
       <g
@@ -432,8 +435,8 @@ $dimGray: #9c9c9c;
 .background-line {
     fill: none;
     stroke: $grayBlue;
-    stroke-width: 1px;
-    opacity: .1;
+    stroke-width: 0.5px;
+    opacity: .25;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
@@ -474,7 +477,7 @@ $dimGray: #9c9c9c;
 .cls-23 { // cool reach
   stroke: $mediumBlue; 
   stroke-width: 1px;
-  opacity: 0.6; // 0.05
+  opacity: 0.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
@@ -483,7 +486,7 @@ $dimGray: #9c9c9c;
 .cls-24 { // warm reach
   stroke: $plasmaYellow; 
   stroke-width: 1px;
-  opacity: 0.6; // 0.05
+  opacity: 0.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
@@ -491,8 +494,8 @@ $dimGray: #9c9c9c;
 
 .cls-25 { // average
   stroke: $mediumBlue; 
-  opacity: .1;
-  stroke-width: 1px;
+  opacity: .25;
+  stroke-width: 0.5px;
 }
 
 .desc-text {

@@ -3,23 +3,19 @@
     <br>
     <IntroMap />
     <div class="text-content">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          The Delaware River Basin
-        </p>
+      <div class="first_subheader">
+        <h3 v-html="text.title1" />
       </div>
-      <br>
-      <p>The Delaware River Basin covers 13,500 square miles in parts of four states, including New York, New Jersey, Pennsylvania, and Delaware. The Delaware River is rich in history, ecologically diverse, and critical to the regional economy.</p>
-      <p>Water managers in this region have a long history of applying innovative, regional solutions to ensure the long-term sustainability of this resource, which provides drinking water to over 15 million people in the region.</p>
+      <p v-html="text.paragraph1"/>
+      <p v-html="text.paragraph2"/>
+      <ImportanceIcons />
+      <p v-html="text.paragraph3"/>
+      <p v-html="text.paragraph4"/>
+      <div class="subheader">
+        <h3 v-html="text.title2" />
+      </div>
+      <p v-html="text.paragraph5" />
     </div>
-    <ImportanceIcons />
-    <div class="text-content">
-      <p>Many species – including economically important game species like Brown trout and endangered species like the Dwarf wedgemussel – thrive or spawn in specific temperature ranges. Increases in river water temperature are happening all over the globe, and in the Delaware River Basin, urbanization, climate change, and human modification of hydrology can all increase water temperature. Fortunately, water managers in the basin can modify stream temperature via cold water releases from reservoirs. The ability to predict water temperature, and therefore make an educated guess at when, where, and how much cold water to release can help protect cold water habitat in the Delaware River basin.</p>
-      <p>Basin-wide monitoring of water temperature underpins our understanding of water temperature dynamics in the Delaware River Basin, but modeling water temperature dynamics can help fill gaps in our knowledge. Here, we explore USGS temperature monitoring and state-of-the-art modeling techniques to predict water temperature in the Delaware River Basin.</p>
-      <p v-html="text.paragraph1" />
-      <p v-html="text.paragraph2" />
-    </div>
-       
     <div id="map-and-bar-chart">
       <div class="box">
         <div class="text-content move-up">
@@ -39,7 +35,7 @@
       </div>
       
       <div class="text-content">
-        <p v-html="text.paragraph3" />
+        <p v-html="text.paragraph6" />
       </div>
       <div class="box">
         <div class="text-content move-up">
@@ -60,35 +56,28 @@
       </div>
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph4" />
-      <p v-html="text.paragraph5" />
-      <Chapter2Icons1 />
-      <br>
-      <br>
-      <div class="subheader">
-        <h3 v-html="text.title2" />
-      </div>
-      <br>
-      <p v-html="text.subtitle2" />
-      <p v-html="text.paragraph6" />
+      <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
+      <Chapter2Icons1 />
+      <div class="subheader">
+        <h3 v-html="text.title3" />
+      </div>
       <p v-html="text.paragraph9" />
+      <p v-html="text.paragraph10" />
+      <p v-html="text.paragraph11" />
       <p v-html="text.tiptextDesktop" />
     </div>
     <div class="box-matrix">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Variation in the <span class="yellow">availability</span> of stream temperature data
+            <span class="yellow">Availability</span> of stream temperature data
           </p>
           <p class="viz-subtitle">
             Visualizing the count of temperature observations in stream reaches across the basin.
           </p>
           <p class="viz-subtitle">
-            Hover over a stream reach on the map to see the amount of data available for that reach over time.
-          </p>
-          <p class="viz-subtitle">
-            Hover over a column in the matrix to see which reaches have data in a given year.
+            Hover over a stream reach on the map or a row in the matrix to see the amount of data available for a single reach over the last forty years.
           </p>
         </div>
       </div>
@@ -135,11 +124,11 @@
           id="matrixChart_c2p2"
           class="mm-grid-item"
         >
-          <svg class="c2p2 matrix_c2p2 matrix">
+          <svg
+            class="c2p2 matrix_c2p2"
+          >
             <g
-              class="prebuilt_c2p2_group matrix"
-              width="650"
-              height="920"
+              class="prebuilt_c2p2_group"
             >
               <PrebuiltC2P2Matrix />
             </g>
@@ -175,11 +164,11 @@
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p2 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p2 matrixAxis"
@@ -196,12 +185,11 @@
     </div>
     <div class="text-content">
       <div class="subheader">
-        <h3 v-html="text.title3" />
+        <h3 v-html="text.title4" />
       </div>
-      <br>
-      <p v-html="text.paragraph10" />
+      <p v-html="text.paragraph12" />
       <Chapter2Icons2 />
-      <p v-html="text.paragraph11" />
+      <p v-html="text.paragraph13" />
     </div>
     <div class="box">
       <div class="text-content move-up">
@@ -224,14 +212,14 @@
       </div>
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph12" />
-      <p v-html="text.paragraph13" />
+      <p v-html="text.paragraph14" />
+      <p v-html="text.paragraph15" />
     </div>
     <div class="box-matrix">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            Variability of <span class="yellow">water temperature</span> in 2019
+            <span class="yellow">Variability</span> of stream temperature in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019.
@@ -254,11 +242,11 @@
           id="matrixChart_c2p3"
           class="mm-grid-item"
         >
-          <svg class="c2p3 matrix_c2p3 matrix">
+          <svg
+            class="c2p3 matrix_c2p3"
+          >
             <g
-              class="prebuilt_c2p3_group matrix"
-              width="650"
-              height="920"
+              class="prebuilt_c2p3_group"
             >
               <PrebuiltC2P3Matrix />
             </g>
@@ -298,11 +286,11 @@
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 103.3 692.9 88.2 700.3 103.3 685.6 103.3"
+                points="686.6 100.3 692.9 88.2 699.3 100.3 686.6 100.3"
               />
               <polygon
                 class="c2p3 NS_arrowhead"
-                points="685.6 917.6 692.9 932.8 700.3 917.6 685.6 917.6"
+                points="686.6 920.7 692.9 932.8 699.3 920.7 686.6 920.7"
               />
               <text
                 class="c2p3 matrixAxis"
@@ -380,7 +368,7 @@
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
-  import monitoringText from "./../../assets/text/monitoringText";
+  import monitoringText from "./../../components/2-Monitoring/monitoringText";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
   import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
@@ -419,7 +407,7 @@
           bar_chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
           bar_chart_width: null, // this will get a value in the mounted hook
           bar_chart_height: null, // this will get a value in the mounted hook
-          matrix_margin: {top: 50, right: 25, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
+          matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
           temp_chart_margin:{top: 10, right: 10, bottom: 10, left: 10},
@@ -451,7 +439,7 @@
         this.bar_chart_width = 500 - this.bar_chart_margin.left - this.bar_chart_margin.right;
         this.bar_chart_height = window.innerHeight * 0.3 - this.bar_chart_margin.top - this.bar_chart_margin.bottom;
         this.matrix_width_c2 = 700 - this.matrix_margin.left - this.matrix_margin.right;
-        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom; //window.innerHeight * 0.9 - this.matrix_margin.top - this.matrix_margin.bottom;
+        this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom;
         this.temp_chart_width = 700 - this.temp_chart_margin.left - this.temp_chart_margin.right;
         this.temp_chart_height = 500 - this.matrix_margin.top - this.matrix_margin.bottom;
 
@@ -527,18 +515,20 @@
           //create new svg container for the ch 2 panel 2 map
           this.map_c2p2 = self.d3.select("#DRB_map_c2p2")
               .append("svg")
-              .attr("class", "map_c2p2 map_matrix") //map_matrix
+              .attr("class", "map_c2p2") //map_matrix
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
               .attr("width", "100%")
+              .attr("height", "100%")
           
           // create new svg container for the ch 2 panel 3 map
           this.map_c2p3 = self.d3.select("#DRB_map_c2p3")
               .append("svg")
-              .attr("class", "map_c2p3 map_matrix")
+              .attr("class", "map_c2p3")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '))
               .attr("width", "100%")
+              .attr("height", "100%")
 
           // // LOAD IN DATA AND CALL SCRIPTS IN STAGES
           self.loadData_1();
@@ -851,7 +841,7 @@
               // append each element to the svg as a circle element
               .append("path")
               // project points and SET SIZE
-              .attr("d", self.map_path_c2.pointRadius(1))
+              .attr("d", self.map_path_c2.pointRadius(1.3))
               // assign class for styling
               .attr("class", function(d) {
                 if (d.properties.source === 'USGS'){
@@ -991,7 +981,7 @@
           // // Add tooltip as text element appended to map svg, without coordinates
           // add tooltip to map svg
           let tooltip = self.map_c2p2.append("text")
-              .attr("class", "c2p2 tooltip map")
+              .attr("class", "c2p2 tooltip_map")
 
           // // add delaware bay to map
           // re-use bay group
@@ -1082,11 +1072,11 @@
           const self = this;
 
           // set viewbox for existing svg
-          let svgMatrix = self.d3.select(".c2p2.matrix_c2p2.matrix")
+          let svgMatrix = self.d3.select(".c2p2.matrix_c2p2")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("width", "90%")
-              // .attr("preserveAspectRatio", "none") // STRETCHES MATRIX - including legend and bar chart labels
+              .attr("width", "100%")
+              .attr("height", "100%")
 
           // // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -1103,9 +1093,10 @@
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p2 = svgMatrix.select(".prebuilt_c2p2_group")
+              .attr("width", self.matrix_width_c2)
+              .attr("height", self.matrix_height_c2)
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .attr("width", "90%")
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
@@ -1182,7 +1173,7 @@
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
-              .attr("class", "c2p2 tooltip matrix")
+              .attr("class", "c2p2 tooltip_matrix")
 
           // append the body of the matrix (transformed by margins)
           svgMatrix.append("g")
@@ -1343,7 +1334,7 @@
           // // Add tooltip as text appended to map svg
           // add tooltip to map svg
           let tooltip = self.map_c2p3.append("text")
-              .attr("class", "c2p3 tooltip map")
+              .attr("class", "c2p3 tooltip_map")
 
           // // add delaware bay to map
           // re-use bay group
@@ -1434,10 +1425,11 @@
           const self = this;
 
           // set viewbox for existing svg
-          let svgMatrix = self.d3.select(".c2p3.matrix_c2p3.matrix")
+          let svgMatrix = self.d3.select(".c2p3.matrix_c2p3")
               .attr("viewBox", [0, 0, (self.matrix_width_c2 + self.matrix_margin.left + self.matrix_margin.right),
                 (self.matrix_height_c2 + self.matrix_margin.top + self.matrix_margin.bottom)].join(' '))
-              .attr("width", "90%")
+              .attr("width", "100%")
+              .attr("height", "100%")
 
           // append background rectangle for matrix
           svgMatrix.append("rect")
@@ -1454,6 +1446,8 @@
 
           // translate group containing prebuilt matrix
           let prebuiltMatrix_c2p3 = svgMatrix.select(".prebuilt_c2p3_group")
+              .attr("width", self.matrix_width_c2)
+              .attr("height", self.matrix_height_c2)
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
           
@@ -1461,7 +1455,6 @@
           let prebuiltRects_c2p3 = svgMatrix.select(".rects_c2p3_group")
               .attr("transform",
                       "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
-              .attr("width", "90%")
               .raise()
 
           // build array of all values of observed temperature
@@ -1562,7 +1555,7 @@
 
           // append tooltip for matrix to the matrix svg
           let tooltip = svgMatrix.append("text")
-              .attr("class", "c2p3 tooltip matrix")
+              .attr("class", "c2p3 tooltip_matrix")
 
           // append the body of the matrix (transformed by margins)
           svgMatrix.append("g")
@@ -2483,26 +2476,22 @@ $dimGray: #9c9c9c;
     grid-area: color;
   }
   .map-matrix-grid-container {
-    // padding: 25px;
-    margin: auto;
+    margin: 5px;
+    padding: 0em 0em 0em 0em;
     display: grid;
-    // align-items: center;
-    // justify-content: center;
-    // justify-items: center;
-    grid-template-columns: 1.5fr 3fr;
-    grid-template-rows: 100%;
+    grid-template-columns: auto 35% 65% auto;
+    // grid-template-rows: 1fr;
     grid-template-areas:
-        "map matrix";
-    gap: 0px 10px;
-    min-width: 0;
-    min-height: 0;
-    height: 85vh;
-    max-width: 2000px;
+        "left map matrix right";
+    gap: 0px 0px;
+    max-height: 90vh;
+    min-width: 300px;
+    max-width: 100%;
     @media screen and (max-height: 770px) {
-        grid-template-columns: 2fr 2.5fr;
+        grid-template-columns: auto 30% 50% auto;
     }
     @media screen and (min-width: 1500px) {
-        grid-template-columns: 2fr 2.5fr;
+        grid-template-columns: auto 20% 40% auto;
     }
   }
   .mm-grid-item {
@@ -2512,23 +2501,23 @@ $dimGray: #9c9c9c;
   }
   #DRB_map_c2p2 {
     grid-area: map;
-    display: flex;
-    max-height: 80vh;
+    max-height: 85vh;
   }
   #matrixChart_c2p2 {
     grid-area: matrix;
-    display: flex;
-    max-height: 100%;
+  }
+  .matrix_c2p2 {
+    max-height: 90vh;
   }
   #DRB_map_c2p3 {
     grid-area: map;
-    display: flex;
-    max-height: 80vh;
+    max-height: 85vh;
   }
   #matrixChart_c2p3 {
     grid-area: matrix;
-    display: flex;
-    max-height: 100%;
+  }
+  .matrix_c2p3 {
+    max-height: 90vh;
   }
 }
 </style>
@@ -2558,17 +2547,17 @@ $dimGray: #9c9c9c;
 .c2p1.scaleBar {
   color: $grayBlue;
   font-size: 0.5em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p3.scaleBar {
   color: $grayBlue;
   font-size: 0.7em;
-  stroke-width: 0.5px;
+  stroke-width: 0.8px;
 }
 .c2p2.cellText {
   font-size: 0.48em;
@@ -2590,10 +2579,17 @@ $dimGray: #9c9c9c;
 
 .obs_sites {
   stroke: $boxCharcoal;
-  stroke-width: 0.1;
-  opacity: 0.7;
+  stroke-width: 0.2;
+  opacity: 0.9;
 }
-
+.map_c2p2 {
+  max-height: 85vh;
+  width: 100%;
+}
+.map_c2p3 {
+  max-height: 85vh;
+  width: 100%;
+}
 .USGS_station {
   fill: $plasmaYellow;
 }
@@ -2625,8 +2621,8 @@ $dimGray: #9c9c9c;
 }
 .NS_arrow {
   stroke: $dimGray;
-  stroke-width: 1px;
-  stroke-dasharray: 2 6;
+  stroke-width: 1.5px;
+  stroke-dasharray: 1 6;
 }
 .NS_arrowhead {
   fill: $dimGray;
@@ -2638,25 +2634,31 @@ $dimGray: #9c9c9c;
           font-size: 7pt;
         }
 }
-.tooltip.map {
+.tooltip_map {
   fill: #ffffff;
   font-family: sans-serif;
   font-size: 0.95em; //1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 770px) {
-          font-size: 1.5em;
+          font-size: 1em;
         }
+  @media screen and (min-width: 1500px) {
+        font-size: 0.8em;
+    }
 }
-.tooltip.matrix {
+.tooltip_matrix {
   fill: #ffffff;
   font-family: sans-serif;
   font-size: 1em; //1.1em
   font-weight: bold;
   line-height: 1em;
   @media screen and (max-height: 770px) {
-          font-size: 2em;
+          font-size: 1.4em;
         }
+  @media screen and (min-width: 1500px) {
+        font-size: 0.85em;
+    }
 }
 
 </style>
