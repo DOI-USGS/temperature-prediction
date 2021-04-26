@@ -916,12 +916,12 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis bottom")
               .attr("transform", "translate(0," + this.chart_height + ")")
-              .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
+              .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2020' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
               .select(".domain").remove()
 
           // place and rotate x axis labels
           g.selectAll('text')
-              .attr("y", 6)
+              .attr("y", 7)
               .attr("x", -27)
               .attr("dy", ".35em")
               .attr("transform", "rotate(-45)")
@@ -932,7 +932,7 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.chart_width * 0.967 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.chart_width * 0.98 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
               .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
@@ -1455,7 +1455,7 @@
           // build array of all values of observed temperature
           let arrayObsTemps = [];
           for (i=0; i<csv_matrix_daily_2019.length; i++){
-            let val = parseFloat(csv_matrix_daily_2019[i]['temp_c']);
+            let val = parseFloat(csv_matrix_daily_2019[i]['mean_temp_c']);
             if (val){
               arrayObsTemps.push(val);
             } else {
