@@ -633,6 +633,7 @@
             // }
             
           })
+          console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -779,7 +780,7 @@
                 return "reservoirs res_id" + d.properties.GRAND_ID
               })
               // set stroke width so that polygons appear larger
-              .style("stroke-width", 0.75)
+              .style("stroke-width", 1.25)
           // append reservoir group to c2p1 map  (ONCE PER MAP)
           self.map_c2p1.append("g").attr("class","c2p1 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
@@ -2015,7 +2016,7 @@
           // and raise segment
           self.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
               .style("stroke", "#ffffff")
-              .style("stroke-width", 1.25)
+              .style("stroke-width", 3)
               .style("opacity", 1)
               .raise()
         },
