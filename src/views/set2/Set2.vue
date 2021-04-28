@@ -410,7 +410,7 @@
           matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
-          temp_chart_margin:{top: 20, right: 20, bottom: 20, left: 20},
+          temp_chart_margin:{top: 25, right: 50, bottom: 30, left: 5},
           temp_chart_width: null,
           temp_chart_height: null,
           temp_chart_gradient: null,
@@ -547,7 +547,7 @@
           ];
           Promise.all(promises_1).then(self.callback_1);
         },
-        loadData_2() {
+        loadData_2() { 
           const self = this;
 
           // Second set of data and scripts to generate Ch2 panel 2 matrix
@@ -1433,32 +1433,13 @@
               .attr("width", "100%")
               .attr("height", "100%")
 
-          // // append background rectangle for matrix
-          // svgChart.append("rect")
-          //         .attr("class", "c2p3 matrixBkgdRect")
-          //         .attr("width", self.temp_chart_width)
-          //         .attr("height", self.temp_chart_height)
-          //         .attr("fill", "#0f0f0f")
-          //         .attr("stroke", "#0f0f0f")
-          //         .attr("stroke-width", 1)
-          //         .attr("filter", "url(#shadow2)")
-          //         .attr("transform",
-          //             "translate(" + self.temp_chart_margin.left + "," + self.temp_chart_margin.top + ")")
-          //         .lower()
-
-          // translate group containing prebuilt matrix
+          // translate group containing prebuilt chart
           let prebuiltChart_c2p3 = svgChart.select(".prebuilt_c2p3_group")
               .attr("width", self.temp_chart_width)
               .attr("height", self.temp_chart_height)
               .attr("transform",
                       "translate(" + self.temp_chart_margin.left + "," + self.temp_chart_margin.top + ")")
           
-          // and group containing monthly rectangles
-          let prebuiltRects_c2p3 = svgChart.select(".rects_c2p3_group")
-              .attr("transform",
-                      "translate(" + self.temp_chart_margin.left + "," + self.temp_chart_margin.top + ")")
-              .raise()
-
           // build array of all values of observed temperature
           let arrayObsTemps = [];
           for (i=0; i<csv_matrix_daily_2019.length; i++){
@@ -1483,107 +1464,17 @@
               .domain([obsTempMin, obsTempMax]) // if NOT INVERTING color scale
               // .domain([(obsTempMin-(obsTempMax-obsTempMin)), (obsTempMax+(obsTempMax-obsTempMin))]) // if NOT INVERTING color scale AND cutting of extremes of color scale
 
-          // // // Build CUSTOM 3-color scale
-          // // Find mean observed temperature
-          // let sum_temps = 0;
-          // for (i = 0; i < arrayObsTemps.length; i++) {
-          //   sum_temps += arrayObsTemps[i];
-          // }
-          // let obsTempMean = sum_temps/arrayObsTemps.length;
-          // // define 3 colors for custom color gradient
-          // let tempColors = ['#5d9dc7','#835eb7','#ba5290']
-          // // build custom color scale
-          // self.tempColor = self.d3.scaleLinear()
-          //     .domain([obsTempMin, obsTempMean, obsTempMax])
-          //     // .interpolate(self.d3.interpolateHcl)
-          //     .range(tempColors)
-
           // build list of posible temperatures
           let temp_list = [];
           for (i = obsTempMin; i <= obsTempMax; i++) {
             temp_list.push(i);
           } 
 
-          // // define gradient for legend
-          // let defs = svgChart.append("defs")
-          //     .append("linearGradient")
-          //     .attr("id", "gradient-RYB")
-          //     .attr("x1", "0%").attr("y1", "0%")
-          //     .attr("x2", "100%").attr("y2", "0%")
-          //     .selectAll("stop")
-          //       .data(temp_list)
-          //     .enter().append("stop")
-          //       .attr("offset", function(d,i) {
-          //         return i/(temp_list.length-1);
-          //       })
-          //       .attr("stop-color", function(d) {
-          //         return self.tempColor(d)
-          //       })
-
-          // // append legend container
-          // let legendsvg = svgChart.append("svg")
-          //     .attr("class", "c2p3 legendWrapper")
-          
-          // let legendGroup = legendsvg.append("g")
-          //     .attr("class", "c2p3 legendColor")
-          //     .attr("width", self.temp_chart_width)
-          //     .attr("transform", "translate(" + (self.temp_chart_margin.left) + "," + 0 + ")")
-
-          // // append legend text
-          // legendGroup.append("text")
-          //     .attr("class", "c2p3 legendAxis")
-          //     .attr("text-anchor", "end")
-          //     .attr("x", self.temp_chart_width*1/4 - 10)
-          //     .attr("y", 17)
-          //     .attr("fill", "#ffffff")
-          //     .text(obsTempMin + " °C")
-
-          // // append legend rectangle
-          // legendGroup.append("rect")
-          //     .attr("class", "c2p3 matrixLegend")
-          //     .attr("width", self.temp_chart_width/2)
-          //     .attr("height", 20)
-          //     .attr("fill", "url(#gradient-RYB)")
-          //     .attr("x", self.temp_chart_width/4)
-
-          // // append legend text
-          // legendGroup.append("text")
-          //     .attr("class", "c2p3 legendAxis")
-          //     .attr("text-anchor", "start")
-          //     .attr("x", self.temp_chart_width*3/4 + 10)
-          //     .attr("y", 17)
-          //     .attr("fill", "#ffffff")
-          //     .text(obsTempMax + " °C")
-
-          // append tooltip for matrix to the matrix svg
-          let tooltip = svgChart.append("text")
-              .attr("class", "c2p3 tooltip_chart")
-
-          // append the body of the matrix (transformed by margins)
-          let transformedChart = svgChart.append("g")
-              .attr("class", "c2p3 transformedChart")
-              .attr("transform",
-                  "translate(" + self.temp_chart_margin.left + "," + self.temp_chart_margin.top + ")");
-
-          // read in data for matrix
-          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
-          self.myVars_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d.seg_id_nat;}).keys()
-
-          // // build x scale using data for chart read in createChart_c2p3()
-          // let xscale = self.d3.scaleBand()
-          //     .range([0, self.temp_chart_width])
-          //     .domain(self.myGroups_c2p3)
-          //     .padding(0);
-
-          // // build y scale using data for matrix read in createChart_c2p3()
-          // let yscale = self.d3.scaleBand()
-          //     .range([self.temp_chart_height, 0])
-          //     .domain(self.myVars_c2p3)
-          //     .padding(0);
-
-          // create linear gradient for lines
-          self.temp_chart_gradient = svgChart.append("linearGradient")
+          // create linear gradient for lines and legend
+          self.temp_chart_gradient = svgChart.append("defs")
+            .append("linearGradient")
             .attr("id", "plasma-vertical")
+            .attr("gradientUnits", "userSpaceOnUse")
             .attr("x1", "0%")
             .attr("y1", "100%")
             .attr("x2", "0%")
@@ -1598,142 +1489,55 @@
                 return self.tempColor(d)
               })
 
+          // append legend container
+          let legendsvg = svgChart.append("svg")
+              .attr("class", "c2p3 legendWrapper")
+          
+          let legendGroup = legendsvg.append("g")
+              .attr("class", "c2p3 legendColor")
+              .attr("transform", "translate(" + (self.temp_chart_width + self.temp_chart_margin.left) + ",0)")
 
-          // // select all temp lines
-          // let temp_lines = svgChart.selectAll(".temp_line")
-          //   .style("stroke", "url(#plasma-vertical)") //
-          //   .style("stroke-width", "0.5")
-          //   .style("fill", "None")
-          //   .style("opacity", 1)
-          //   .on("mouseover", function() {
-          //       self.mouseoverLine_c2p3();
-          //   })
-          //   .on("mouseout", function() {
-          //     self.mouseoutLine_c2p3();
-          //   })
+          // append legend rectangle
+          legendGroup.append("rect")
+              .attr("class", "c2p3 matrixLegend")
+              .attr("width", 10)
+              .attr("height", self.temp_chart_height)
+              .attr("fill", "url(#plasma-vertical)")
+              .attr("x", 20)
+              .attr("y", self.temp_chart_margin.top)
 
-          // let line_group = svgChart.selectAll("#temp_lines")
-          //     .style("stroke", "url(#plasma-vertical)")
-          //     .style("stroke-width", 0.5)
-          //     .style("fill", "None")
-          //     .style("opacity", 1)
+          // append legend text - top
+          legendGroup.append("text")
+              .attr("class", "c2p3 legendAxis")
+              .attr("text-anchor", "start")
+              .attr("x", 0)
+              .attr("y", self.temp_chart_margin.top - 8)
+              .text(obsTempMax + " °C")
 
-          let line_sel = svgChart.selectAll(".temp_line")
-          let selected_lines = line_sel._groups[0]
-          selected_lines.forEach(function(line) {
-              let segment_id = line.classList[1].split('seg_')[1]
-              let line_segment_id = line.classList[1]
-              svgChart.selectAll(".temp_line." + line_segment_id)
-                  .style("stroke", "url(#plasma-vertical)")
-                  .style("stroke-width", 0.5)
-                  .style("fill", "None")
-                  .style("opacity", 1)
-                  .on("mouseover", function() {
-                      self.mouseoverLine_c2p3(segment_id);
-                  })
-                  .on("mouseout", function() {
-                    self.mouseoutLine_c2p3(segment_id);
-                  })
-          })
+          // append legend text - bottom
+          legendGroup.append("text")
+              .attr("class", "c2p3 legendAxis")
+              .attr("text-anchor", "start")
+              .attr("x", 8)
+              .attr("y", self.temp_chart_height + self.temp_chart_margin.top + self.temp_chart_margin.bottom - 5)
+              .text(obsTempMin + " °C")
 
-          // add the overlaid rectangles (temporal and spatial) that will be used for selection
-          self.createChartRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip);
+          // read in data for x scale
+          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
 
-        },
-        createChartRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip) {
-          const self = this;
-
-          // // Set up necessary elements for mousemove event within svg with viewBox
-          // find root svg element
-          let svg_chart_c2p3 = document.querySelector('.temp_chart_c2p3');
-          // create a SVGPoint for future math
-          let pt_chart_c2p3 = svg_chart_c2p3.createSVGPoint();
-          // function to get point in global SVG space
-          function cursorPoint_chart_c2p3(evt){
-            pt_chart_c2p3.x = evt.clientX; pt_chart_c2p3.y = evt.clientY;
-            return pt_chart_c2p3.matrixTransform(svg_chart_c2p3.getScreenCTM().inverse());
-          }
-          // create local variable to store point coordinates
-          let loc_chart_c2p3;
-          // reset coordinates when mousemoves over matrix svg
-          svg_chart_c2p3.addEventListener('mousemove', function(evt){
-            loc_chart_c2p3 = cursorPoint_chart_c2p3(evt);
-          }, false);
-
-          // // Build chart
-          // create transformed chart variable
-          let transformedChart = self.d3.select(".c2p3.transformedChart")
-          let svgChart = self.d3.select(".c2p3.temp_chart_c2p3")
-
-          // build x scale using data for chart read in createChart_c2p3()
+          // build x scale
           let xscale = self.d3.scaleBand()
               .range([0, self.temp_chart_width])
               .domain(self.myGroups_c2p3)
               .padding(0);
 
-          // build y scale using data for matrix read in createChart_c2p3()
-          let yscale = self.d3.scaleBand()
-              .range([self.temp_chart_height, 0])
-              .domain(self.myVars_c2p3)
-              .padding(0);
+          // select all temp lines and color with gradient
+          let temp_lines = svgChart.selectAll(".temp_line")
+            .style("stroke", "url(#plasma-vertical)") //
+            .style("stroke-width", "0.5")
+            .style("fill", "None")
+            .style("opacity", 1)
 
-          // // // build spatial rectangles
-          // // append to transformed matrix
-          // let SpatialRectangles = transformedMatrix.selectAll('.c2p3.matrixSpatialRect')
-          //     // bind data to each element
-          //     .data(self.segments)
-          //     // create element for each datum
-          //     .enter()
-          //     // append rectangle for each element
-          //     .append("rect")
-          //     // set x value based on minimum date (2019-01-01)
-          //     .attr("x", xscale("2019-01-01"))
-          //     // set y value based on segment id
-          //     .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
-          //     // set width to width of matrix
-          //     .attr("width", self.temp_chart_width)
-          //     // set height based on yscale bandwidth
-          //     .attr("height", yscale.bandwidth() )
-          //     // set class based on segment id
-          //     .attr("class", function(d) {
-          //       return 'c2p3 chartSpatialRect seg' + d.properties.seg_id_nat;
-          //     })
-          //     // style rectangles to be transparent but available for selection
-          //     .style("fill", "#0f0f0f")
-          //     .style("stroke-width", 1)
-          //     .style("stroke", "#0f0f0f")
-          //     .style("opacity", 0)
-
-          // // // build temporal rectangles
-          // // append to transformed matrix
-          // //  no mouseover b/c only used on MouseoverSeg
-          // let TemporalRectangles = transformedChart.selectAll('.c2p3.chartTemporalRect')
-          //     // bind data (count of observations on each date) to each element
-          //     .data(csv_daily_count_2019)
-          //     // create element for each datum
-          //     .enter()
-          //     // append rectangle for each element
-          //     .append("rect")
-          //     // set x value based on date and xscale
-          //     .attr("x", function(d){
-          //       return xscale(d[self.timestep_c2p3])
-          //     })
-          //     // set y value to 0
-          //     .attr("y", 0)
-          //     // set width based on bandwidth of x scale
-          //     .attr("width", xscale.bandwidth())
-          //     // set height to height of matrix
-          //     .attr("height", self.temp_chart_height)
-          //     // set class based on date
-          //     .attr("class", function(d) {
-          //       return 'c2p3 chartTemporalRect time' + d[self.timestep_c2p3];
-          //     })
-          //     // style rectangles to be transparent but available for selection
-          //     .style("fill", "#0f0f0f")
-          //     .style("stroke-width", 1.5)
-          //     .style("stroke", "#0f0f0f")
-          //     .style("opacity", 0)
-         
           // append monthly rectangles for mouseover on chart
           let MonthlyRectangles = svgChart.selectAll('.c2p3.chartMonthlyRect')
               // bind data (count of observations on each date) to each element
@@ -1747,39 +1551,34 @@
                 return xscale(d.start_date);
               })
               // set y value to 0
-              .attr("y", 0)
+              .attr("y", self.temp_chart_margin.top)
               // set width based on bandwidth of x scale
               .attr("width", function(d) {
                 return ((self.temp_chart_width/365) * d.num_days);
               })
               // set height to height of matrix
-              .attr("height", 20)
+              .attr("height", self.temp_chart_height + self.temp_chart_margin.bottom)
               // transform to align with inner svg
               .attr("transform",
-                      "translate(" + self.temp_chart_margin.left + ",0)")
+                      "translate(" + self.temp_chart_margin.left + "," + 0 + ")")
               // set class based on date
               .attr("class", function(d) {
                 return 'c2p3 chartMonthlyRect month' + d.month;
               })
               // style rectangles to be transparent but available for selection
-              .style("fill", "#ffffff")
+              .style("fill", "#0f0f0f")
               .style("stroke-width", 1.5)
               .style("stroke", "#0f0f0f")
-              .style("opacity", 1)
+              .style("opacity", 0)
               // trigger interactions and coordination with map on mouseover
               .on("mouseover", function(d) {
                 self.mouseoverRect_c2p3(d);
               })            
-              // .on("mousemove", function(d) {
-              //   let mouse_x = loc_chart_c2p3.x
-              //   let mouse_y = loc_chart_c2p3.y
-              //   self.mousemoveRect_c2p3(d, tooltip, mouse_x, mouse_y);
-              // })
               .on("mouseout", function(d) {
                 self.mouseoutRect_c2p3(d);
               })
 
-          // add text
+          // add text to  montly rectangles
           let monthLabels = svgChart.selectAll('.month_labels')
               // bind data (count of observations on each date) to each element
               .data(csv_monthly_rects_2019)
@@ -1791,7 +1590,7 @@
                   .attr("x", function(d){
                     return xscale(d.start_date) + 8;
                   })
-                  .attr("y", 15)
+                  .attr("y", self.temp_chart_height + self.temp_chart_margin.top + self.temp_chart_margin.bottom - 5)
                   .attr("transform",
                       "translate(" + self.temp_chart_margin.left + ",0)")
                   .attr("class", function(d) {
@@ -1799,7 +1598,7 @@
                   })
                   .attr("text-anchor", "start")
                   .text(function(d) { return d.month_abbr })
-                  .style("fill", "#0f0f0f")
+                  .style("fill", "#dedede")
                   // trigger interactions and coordination with map on mouseover
                   .on("mouseover", function(d) {
                     self.mouseoverRect_c2p3(d);
@@ -1807,7 +1606,6 @@
                   .on("mouseout", function(d) {
                     self.mouseoutRect_c2p3(d);
                   })
-          
         },
         mousemoveSeg_c2p2(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
@@ -2207,7 +2005,7 @@
 
           // Select the associated temperature line
           self.d3.selectAll(".temp_line")
-            .style("opacity", 0.5)
+            .style("opacity", 0.2)
           self.d3.selectAll(".temp_line.seg_" + segment_id)
             .style("opacity", 1)
             .style("stroke-width", 3)
@@ -2359,20 +2157,14 @@
           //     .attr("filter", "url(#shadow3)")
           // select all temporal rectangles and make mostly opaque
           this.d3.selectAll(".c2p3.chartMonthlyRect")
-              .attr("height", self.temp_chart_height + self.temp_chart_margin.top)
               .style("opacity", 0.8)
-              .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
           this.d3.selectAll(".c2p3.month_labels")
-              .style("fill", "#f1f1f1")
               .style("opacity", 0.2)
           // select temporalRect for highlighted timestep and make transparent
           this.d3.selectAll(".c2p3.chartMonthlyRect.month" + data.month)
-              .attr("height", 20)
-              .style("fill", "#f1f1f1")
-              .style("opacity", 1)
+              .style("opacity", 0)
           this.d3.selectAll(".c2p3.month_labels.label" + data.month)
-              .style("fill", "#0f0f0f")
               .style("opacity", 1)
           // select all river segments that have data in highlighted year
           // and make white
@@ -2405,14 +2197,8 @@
           // select all monthly rectangles and set fill and stroke back to black
           // with no opacity (so available for selection but not visible)
           this.d3.selectAll(".c2p3.chartMonthlyRect")
-              .attr("height", 20)
-              .style("fill", "#f1f1f1")
-              .style("stroke", "#0f0f0f")
-              .style("stroke-width", 1.5)
-              .style("opacity", 1)
-              // .raise()
+              .style("opacity", 0)
           this.d3.selectAll(".c2p3.month_labels")
-              .style("fill", "#0f0f0f")
               .style("opacity", 1)
           // un-dim river segments
           // lower elements as needed
@@ -2425,32 +2211,32 @@
           // this.d3.selectAll(".c2p3.matrixBkgdRect")
           //     .attr("filter", "url(#shadow2)")
         },
-        mouseoverLine_c2p3(segment_id) {
-          this.d3.selectAll(".temp_line")
-            .style("opacity", 0.5)
-          this.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("opacity", 1)
-            .style("stroke-width", 3)
-            .raise()
-          // select mouseovered segment and set to white
-          // and raise segment
-          this.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
-              .style("stroke", "#ffffff")
-              .style("stroke-width", 3)
-              .style("opacity", 1)
-              .raise()
-        },
-        mouseoutLine_c2p3(segment_id) {
-          this.d3.selectAll(".temp_line")
-            .style("opacity", 1)
-            .style("stroke-width", 0.5)
-          // reset selected transparent segment and lower
-          this.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
-              .style("stroke", "#0f0f0f")
-              .style("stroke-width", 2)
-              .style("opacity", 0)
-              .lower()
-        },
+        // mouseoverLine_c2p3(segment_id) {
+        //   this.d3.selectAll(".temp_line")
+        //     .style("opacity", 0.5)
+        //   this.d3.selectAll(".temp_line.seg_" + segment_id)
+        //     .style("opacity", 1)
+        //     .style("stroke-width", 3)
+        //     .raise()
+        //   // select mouseovered segment and set to white
+        //   // and raise segment
+        //   this.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
+        //       .style("stroke", "#ffffff")
+        //       .style("stroke-width", 3)
+        //       .style("opacity", 1)
+        //       .raise()
+        // },
+        // mouseoutLine_c2p3(segment_id) {
+        //   this.d3.selectAll(".temp_line")
+        //     .style("opacity", 1)
+        //     .style("stroke-width", 0.5)
+        //   // reset selected transparent segment and lower
+        //   this.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
+        //       .style("stroke", "#0f0f0f")
+        //       .style("stroke-width", 2)
+        //       .style("opacity", 0)
+        //       .lower()
+        // },
         explain() {
           const self = this;
 
