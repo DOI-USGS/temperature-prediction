@@ -96,7 +96,7 @@ build_path_from_coords <- function(coords) {
 library(tidyverse);library(lubridate)
 library(xml2)
 
-obs <- read_csv("svgify-charts/matrix_daily_2019_obs.csv") %>%
+obs <- read_csv("public/data/matrix_daily_2019_obs.csv") %>%
   mutate(jday = yday(date))%>%
   transform(date=as.Date(date))
 

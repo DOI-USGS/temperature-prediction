@@ -111,7 +111,7 @@ add_rectangles_for_mouseover <- function(svg, monthly_cfg, full_height, rh) {
 ##### Actually use the fxns to create the SVG #####
 
 # This line builds a local test version
-# build_svg("svgify-charts/test2.svg", "svgify-charts/matrix_daily_2019_obs.csv", 700, 1000, local_testing = TRUE)
+# build_svg("svgify-charts/test2.svg", "public/data/matrix_daily_2019_obs.csv", 700, 1000, local_testing = TRUE)
 
 # This line builds a version ready to inject into the full viz
-build_svg("src/assets/prebuilt_c2p3_matrix.svg", "svgify-charts/matrix_daily_2019_obs.csv", 700, 1000, local_testing = FALSE)
+build_svg("src/assets/prebuilt_c2p3_matrix.svg", "public/data/matrix_daily_2019_obs.csv", 700, 1000, local_testing = FALSE)
