@@ -413,6 +413,7 @@
           temp_chart_margin:{top: 20, right: 20, bottom: 20, left: 20},
           temp_chart_width: null,
           temp_chart_height: null,
+          temp_chart_gradient: null,
           scaleBarTop_c2: null,
           scaleBarBottom_c2: null,
           map_c2p1: null,
@@ -638,6 +639,7 @@
             // }
             
           })
+          console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -1558,7 +1560,7 @@
               .attr("class", "c2p3 tooltip_chart")
 
           // append the body of the matrix (transformed by margins)
-          svgChart.append("g")
+          let transformedChart = svgChart.append("g")
               .attr("class", "c2p3 transformedChart")
               .attr("transform",
                   "translate(" + self.temp_chart_margin.left + "," + self.temp_chart_margin.top + ")");
@@ -1579,36 +1581,42 @@
           //     .domain(self.myVars_c2p3)
           //     .padding(0);
 
-          // // create linear gradient for lines
-          // svg.append("linearGradient")
-          //   .attr("id", "plasma-vertical")
-          //   .attr("gradientUnits", "userSpaceOnUse")
-          //   .attr("x1", 0)
-          //   .attr("y1", yscale(obsTempMin))
-          //   .attr("x2", 0)
-          //   .attr("y2", yscale(obsTempMax))
-          //   .selectAll("stop")
-          //     .data(temp_list)
-          //   .enter().append("stop")
-          //     .attr("offset", function(d,i) {
-          //       return i/(temp_list.length-1);
-          //     })
-          //     .attr("stop-color", function(d) {
-          //       return self.tempColor(d)
-          //     })
+          // create linear gradient for lines
+          self.temp_chart_gradient = svgChart.append("linearGradient")
+            .attr("id", "plasma-vertical")
+            .attr("x1", "0%")
+            .attr("y1", "100%")
+            .attr("x2", "0%")
+            .attr("y2", "0%")
+            .selectAll("stop")
+              .data(temp_list)
+            .enter().append("stop")
+              .attr("offset", function(d,i) {
+                return i/(temp_list.length-1);
+              })
+              .attr("stop-color", function(d) {
+                return self.tempColor(d)
+              })
 
 
-          // select all temp lines
+          // // select all temp lines
           // let temp_lines = svgChart.selectAll(".temp_line")
-          //   .style("stroke", "#ffffff") //url(#plasma-vertical)
+          //   .style("stroke", "url(#plasma-vertical)") //
           //   .style("stroke-width", "0.5")
           //   .style("fill", "None")
-            // .on("mouseover", function() {
-            //     self.mouseoverLine_c2p3();
-            // })
-            // .on("mouseout", function() {
-            //   self.mouseoutLine_c2p3();
-            // })
+          //   .style("opacity", 1)
+          //   .on("mouseover", function() {
+          //       self.mouseoverLine_c2p3();
+          //   })
+          //   .on("mouseout", function() {
+          //     self.mouseoutLine_c2p3();
+          //   })
+
+          // let line_group = svgChart.selectAll("#temp_lines")
+          //     .style("stroke", "url(#plasma-vertical)")
+          //     .style("stroke-width", 0.5)
+          //     .style("fill", "None")
+          //     .style("opacity", 1)
 
           let line_sel = svgChart.selectAll(".temp_line")
           let selected_lines = line_sel._groups[0]
@@ -1616,7 +1624,7 @@
               let segment_id = line.classList[1].split('seg_')[1]
               let line_segment_id = line.classList[1]
               svgChart.selectAll(".temp_line." + line_segment_id)
-                  .style("stroke", "#ffffff")
+                  .style("stroke", "url(#plasma-vertical)")
                   .style("stroke-width", 0.5)
                   .style("fill", "None")
                   .style("opacity", 1)
@@ -1627,7 +1635,6 @@
                     self.mouseoutLine_c2p3(segment_id);
                   })
           })
-
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
           self.createChartRectangles_c2p3(csv_matrix_daily_2019, csv_daily_count_2019, csv_monthly_rects_2019, tooltip);
@@ -1726,7 +1733,7 @@
           //     .style("stroke-width", 1.5)
           //     .style("stroke", "#0f0f0f")
           //     .style("opacity", 0)
-          console.log(csv_monthly_rects_2019)
+         
           // append monthly rectangles for mouseover on chart
           let MonthlyRectangles = svgChart.selectAll('.c2p3.chartMonthlyRect')
               // bind data (count of observations on each date) to each element
@@ -2199,8 +2206,10 @@
               .style("opacity", 1);
 
           // Select the associated temperature line
+          self.d3.selectAll(".temp_line")
+            .style("opacity", 0.5)
           self.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("stroke", "#fcba03")
+            .style("opacity", 1)
             .style("stroke-width", 3)
             .raise()
           // // select all spatial rectangles and make mostly opaque to dim matrix
@@ -2292,8 +2301,8 @@
           //     .style("stroke", "#0f0f0f")
           //     .style("opacity", 0)
           // Select the associated temperature line
-          self.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("stroke", "#ffffff")
+          self.d3.selectAll(".temp_line")
+            .style("opacity", 1)
             .style("stroke-width", 0.5)
           // select all monthly rectangles and raise
           self.d3.selectAll(".c2p3.matrixMonthlyRect")
@@ -2417,8 +2426,10 @@
           //     .attr("filter", "url(#shadow2)")
         },
         mouseoverLine_c2p3(segment_id) {
+          this.d3.selectAll(".temp_line")
+            .style("opacity", 0.5)
           this.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("stroke", "#fcba03")
+            .style("opacity", 1)
             .style("stroke-width", 3)
             .raise()
           // select mouseovered segment and set to white
@@ -2430,8 +2441,8 @@
               .raise()
         },
         mouseoutLine_c2p3(segment_id) {
-          this.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("stroke", "#ffffff")
+          this.d3.selectAll(".temp_line")
+            .style("opacity", 1)
             .style("stroke-width", 0.5)
           // reset selected transparent segment and lower
           this.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
