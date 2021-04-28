@@ -114,7 +114,7 @@ for(r in reaches) {
   svg_root %>%
     xml_add_child("path",
                   class = sprintf('seg_%s', r),
-                  style = sprintf("stroke: black"),
+                  # style = sprintf("stroke: black;fill: none"),
                   d = reach_coords_svg)
 
 }
