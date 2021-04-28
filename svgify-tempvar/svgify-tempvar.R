@@ -98,8 +98,7 @@ library(xml2)
 
 obs <- read_csv("svgify-charts/matrix_daily_2019_obs.csv") %>%
   mutate(jday = yday(date))%>%
-  transform(date=as.Date(date)) %>%
-  filter(total_count > 50)
+  transform(date=as.Date(date))
 
 svg_root <- init_svg(viewbox_dims = c(0, 0, svg_width=600, svg_height=600))
 
