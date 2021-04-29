@@ -22,7 +22,7 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
     filter(obs_count > 0) %>%
     # Group temperatures into color categories to make paths (include 0 in the first group & 30 in the last)
     mutate(color_cat = as.character(cut(
-      temp_c,
+      mean_temp_c,
       breaks = seq(range_obs_temp[1], range_obs_temp[2], length.out = length(color_palette)+1),
       labels = color_palette, include.lowest = TRUE))) %>%
     mutate(day_i = as.numeric(format(date, "%j")))
@@ -64,7 +64,8 @@ build_svg <- function(svg_out_fn, obs_fn, width = 700, height = 1000, local_test
     add_path_per_color(g_color_blocks, col, data_col$day_i, data_col$rank, rect_width, rect_height, height)
   }
 
-  add_rectangles_for_mouseover(svg_root, monthly_cfg, height, rect_width)
+  # Hayley now adds these in D3, so skip!
+  # add_rectangles_for_mouseover(svg_root, monthly_cfg, height, rect_width)
 
   ##### Write out final SVG to file #####
 
@@ -110,7 +111,7 @@ add_rectangles_for_mouseover <- function(svg, monthly_cfg, full_height, rh) {
 ##### Actually use the fxns to create the SVG #####
 
 # This line builds a local test version
-# build_svg("svgify-matrix/test2.svg", "svgify-matrix/matrix_daily_2019_obs.csv", 700, 1000, local_testing = TRUE)
+# build_svg("svgify-charts/test2.svg", "public/data/matrix_daily_2019_obs.csv", 700, 1000, local_testing = TRUE)
 
 # This line builds a version ready to inject into the full viz
-build_svg("svgify-matrix/prebuilt_c2p3_matrix.svg", "svgify-matrix/matrix_daily_2019_obs.csv", 700, 1000, local_testing = FALSE)
+build_svg("src/assets/prebuilt_c2p3_matrix.svg", "public/data/matrix_daily_2019_obs.csv", 700, 1000, local_testing = FALSE)
