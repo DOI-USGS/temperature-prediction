@@ -1219,7 +1219,7 @@
           let xscale = self.d3.scaleBand()
               .range([0,self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.075);
+              .padding(0.05);
 
           // build y scale using data read in for matrix in createMatrix_c2p2()
           let yscale = self.d3.scaleBand()
@@ -1738,7 +1738,7 @@
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.1);
+              .padding(0.05);
 
           // make tooltip visible
           tooltip
@@ -1771,10 +1771,7 @@
                         .style("fill", function(d) {
                           return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
                         })
-                        .style("stroke-width", 0.5)
-                        .style("stroke", function(d){
-                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
-                        })
+                        .style("stroke-width", 0)
                         .style("opacity", 1)
                         .raise()
                     // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
@@ -1936,7 +1933,7 @@
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.1);
+              .padding(0.05);
 
           // show tooltip
           tooltip
@@ -1970,10 +1967,7 @@
                         .style("fill", function(d) {
                           return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
                         })
-                        .style("stroke-width", 0.5)
-                        .style("stroke", function(d){
-                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
-                        })
+                        .style("stroke-width", 0)
                         .style("opacity", 1)
                         .raise()
                     // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
