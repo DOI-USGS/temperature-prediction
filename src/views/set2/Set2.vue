@@ -190,28 +190,6 @@
       <p v-html="text.paragraph12" />
       <Chapter2Icons2 />
       <p v-html="text.paragraph13" />
-    </div>
-    <div class="box">
-      <div class="text-content move-up">
-        <div class="viz-title-wrapper">
-          <p class="viz-title">
-            <span class="yellow">Daily temperature</span> of river reaches in 2019
-          </p>
-          <p class="viz-subtitle">
-            Each line = one reach.
-          </p>
-        </div>
-      </div>  
-      <div class="figure-content">
-        <div
-          id="timeseries"
-          class="figure chart"
-        >
-          <MonitoringLineChart />
-        </div>
-      </div>
-    </div>
-    <div class="text-content">
       <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
@@ -222,13 +200,13 @@
             <span class="yellow">Variability</span> of stream temperature in 2019
           </p>
           <p class="viz-subtitle">
-            Visualizing measured stream temperature in the basin in 2019.
+            Visualizing measured stream temperature in the basin in 2019. Each line = one reach.
           </p>
           <p class="viz-subtitle">
-            Hover over a stream reach on the map to see the temperature in that reach during 2019.
+            Hover over a stream reach on the map to see temperatures in that reach during 2019.
           </p>
           <p class="viz-subtitle">
-            Hover over a column in the matrix to see stream temperatures during a given month.
+            Hover over the chart to see average stream temperatures during each month.
           </p>
           <br>
         </div>
@@ -369,7 +347,6 @@
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
   import monitoringText from "./../../components/2-Monitoring/monitoringText";
-  import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
   import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
   import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
@@ -379,7 +356,6 @@
   export default {
       name: 'Set2',
       components: {
-        MonitoringLineChart,
         MatrixExplainerSpace,
         MatrixExplainerTime,
         MatrixExplainerColor,
