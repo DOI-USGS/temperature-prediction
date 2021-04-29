@@ -1500,7 +1500,7 @@
           // append legend rectangle
           legendGroup.append("rect")
               .attr("class", "c2p3 matrixLegend")
-              .attr("width", 10)
+              .attr("width", 5)
               .attr("height", self.temp_chart_height)
               .attr("fill", "url(#plasma-vertical)")
               .attr("x", 20)
