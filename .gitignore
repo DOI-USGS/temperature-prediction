@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# R-to-SVG related data files
+svgify-charts/*.svg
+svgify-charts/*.csv
