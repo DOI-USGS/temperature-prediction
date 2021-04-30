@@ -11,10 +11,7 @@
           class="text-content"
         >
           <p>
-            Data sparsity and variability in stream temperature across the Delaware River Basin (DRB) limit our ability to answer questions like: How far downstream will a cold water release affect temperature?  How has fish habitat changed through time?  Will we have enough cold water in the reservoir in 50 years?
-          </p>
-          <p>
-            How can we create models that are robust to a diversity of temperature dynamics, in places and times where we don't have a lot of information?
+            Data sparsity and variability in stream temperature dynamics are not unique to the Delaware River Basin; relative to most of the continental United States, the Delaware River Basin is well monitored for water temperature.
           </p>
         </div>
         <div class="box-matrix">
@@ -38,7 +35,7 @@
         <div
           class="text-content"
         >
-          <p>The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
+          <p>The Delaware River Basin is therefore an ideal place to develop new methods for stream temperature prediction. The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
           <p>Knowledge-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
         </div>
       </div>
