@@ -334,6 +334,7 @@
           matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE w/o changing in prebuilt component, too - WILL MESS UP SVG ALIGNMENT
           matrix_width_c2: null, // this will get a value in the mounted hook
           matrix_height_c2: null, // this will get a value in the mounted hook
+          yScale_matrix_c2p2: null,
           temp_chart_margin:{top: 25, right: 50, bottom: 30, left: 5},
           temp_chart_width: null,
           temp_chart_height: null,
@@ -636,7 +637,7 @@
                 return "reservoirs res_id" + d.properties.GRAND_ID
               })
               // set stroke width so that polygons appear larger
-              .style("stroke-width", 1.25)
+              .style("stroke-width", 1.5)
           // append reservoir group to c2p1 map  (ONCE PER MAP)
           self.map_c2p1.append("g").attr("class","c2p1 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
@@ -1055,13 +1056,13 @@
               })
 
           // build x scale using data read in for matrix in createMatrix_c2p2()
-          let xscale = self.d3.scaleBand()
+          let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0,self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
               .padding(0.05);
 
           // build y scale using data read in for matrix in createMatrix_c2p2()
-          let yscale = self.d3.scaleBand()
+          self.yScale_matrix_c2p2 = self.d3.scaleBand()
               .range([self.matrix_height_c2, 0])
               .domain(self.myVars_c2p2)
               .padding(0.075);
@@ -1077,21 +1078,21 @@
               .append("rect")
               // set x value based on year and xscale
               .attr("x", function(d){
-                return xscale(d[self.timestep_c2p2])
+                return xScale_matrix_c2p2(d[self.timestep_c2p2])
               })
               // set y value to 0
               .attr("y", 0)
               // set width based on bandwidth of x scale
-              .attr("width", xscale.bandwidth())
+              .attr("width", xScale_matrix_c2p2.bandwidth())
               // set height to height of matrix
               .attr("height", self.matrix_height_c2)
               // set class based on year
               .attr("class", function(d) {
                 return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
               })
-              // style rectangles to be transparent but available for selection
+              // style rectangles to be transparent
               .style("fill", "#0f0f0f")
-              .style("stroke-width", 2)
+              .style("stroke-width", 0.5)
               .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
@@ -1105,13 +1106,13 @@
               // append rectangle for each element
               .append("rect")
               // set x value based on minimum year (1980)
-              .attr("x", xscale("1980"))
+              .attr("x", xScale_matrix_c2p2("1980"))
               // set y value based on segment id
-              .attr("y", function(d) { return yscale(d.properties.seg_id_nat) })
+              .attr("y", function(d) { return self.yScale_matrix_c2p2(d.properties.seg_id_nat) })
               // set width to width of matrix
               .attr("width", self.matrix_width_c2)
               // set height based on yscale bandwidth
-              .attr("height", yscale.bandwidth())
+              .attr("height", self.yScale_matrix_c2p2.bandwidth())
               // set class based on segment id
               .attr("class", function(d) {
                 return 'c2p2 matrixSpatialRect seg' + d.properties.seg_id_nat;
@@ -1443,25 +1444,13 @@
               // define range of input values
               .domain([1, self.temporalCountMax_c2p2]);
           
-          // re-build y scale for matrix
-          let yScale_matrix_c2p2 = self.d3.scaleBand()
-              .range([self.matrix_height_c2, 0])
-              .domain(self.myVars_c2p2)
-              .padding(0.075);
-
-          //re-build x scale for matrix
-          let xScale_matrix_c2p2 = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2])
-              .domain(self.myGroups_c2p2)
-              .padding(0.05);
-
           // make tooltip visible
           tooltip
               .style("opacity", 1);
 
           // select all spatial rectangles and make mostly opaque to dim matrix
           self.d3.selectAll(".c2p2.matrixSpatialRect")
-              .style("opacity", 0.8)
+              .style("opacity", 0.9)
           
           // if segment has any data in 41 years
           if (self.segmentDict[segment_id].total_count > 0) {
@@ -1482,7 +1471,7 @@
                               return barHeight;
                         })
                         .attr("y", function(d) {
-                            return yScale_matrix_c2p2(segment_id) - barHeight; 
+                            return self.yScale_matrix_c2p2(segment_id) - barHeight; 
                         })
                         // // style based on # of observations for that segment in that year
                         .style("fill", function(d) {
@@ -1520,12 +1509,6 @@
         mouseoutSeg_c2p2(segment_id, tooltip) {
           const self = this;
 
-          // re-build y scale for matrix cells y placement
-          let yScale_matrix_c2p2 = this.d3.scaleBand()
-              .range([this.matrix_height_c2, 0])
-              .domain(this.myVars_c2p2)
-              .padding(0.075);
-
           // hide tooltip
           tooltip
               .style("opacity", 0)
@@ -1537,7 +1520,7 @@
               .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
               .style("opacity", 0)
-              .attr("height", yScale_matrix_c2p2.bandwidth())
+              .attr("height", self.yScale_matrix_c2p2.bandwidth())
               .raise()
 
           // select all *temporal* rectangles
@@ -1550,7 +1533,7 @@
               .attr("height", self.matrix_height_c2)
               // style rectangles to be transparent but available for selection
               .style("fill", "#0f0f0f")
-              .style("stroke-width", 2)
+              .style("stroke-width", 0.5)
               .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
@@ -1618,18 +1601,6 @@
               // define range of input values
               .domain([1, self.temporalCountMax_c2p2]);
           
-          // re-build y scale for matrix
-          let yScale_matrix_c2p2 = self.d3.scaleBand()
-              .range([self.matrix_height_c2, 0])
-              .domain(self.myVars_c2p2)
-              .padding(0.075);
-
-          //re-build x scale for matrix
-          let xScale_matrix_c2p2 = self.d3.scaleBand()
-              .range([0, self.matrix_width_c2])
-              .domain(self.myGroups_c2p2)
-              .padding(0.05);
-
           // show tooltip
           tooltip
               .style("opacity", 1);
@@ -1653,7 +1624,7 @@
                               return barHeight;
                         })
                         .attr("y", function(d) {
-                            return yScale_matrix_c2p2(segment_id) - barHeight; 
+                            return self.yScale_matrix_c2p2(segment_id) - barHeight; 
                         })
                         // // style based on # of observations for that segment in that year
                         .style("fill", function(d) {
@@ -1691,12 +1662,6 @@
 
           let segment_id = data.properties.seg_id_nat
 
-          // re-build y scale for matrix cells y placement
-          let yScale_matrix_c2p2 = this.d3.scaleBand()
-              .range([this.matrix_height_c2, 0])
-              .domain(this.myVars_c2p2)
-              .padding(0.075);
-
           // hide tooltip
           tooltip
               .style("opacity", 0)
@@ -1708,7 +1673,7 @@
               .style("fill", "#0f0f0f")
               .style("stroke-width", 0)
               .style("opacity", 0.8)
-              .attr("height", yScale_matrix_c2p2.bandwidth())
+              .attr("height", self.yScale_matrix_c2p2.bandwidth())
               .raise()
 
           // select all *temporal* rectangles
@@ -1721,7 +1686,7 @@
               .attr("height", self.matrix_height_c2)
               // style rectangles to be transparent but available for selection
               .style("fill", "#0f0f0f")
-              .style("stroke-width", 2)
+              .style("stroke-width", 0.5)
               .style("stroke", "#0f0f0f")
               .style("opacity", 0)
 
