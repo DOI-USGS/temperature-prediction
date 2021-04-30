@@ -86,7 +86,6 @@
     </div>
     <br>
     <div class="text-content">
-      <p v-html="text.paragraph14" />
       <p v-html="text.paragraph15" />
     </div>
     <div class="box">
@@ -99,9 +98,6 @@
         </p>
       </div>
       <MatrixTemperature />
-    </div>
-    <div class="text-content">
-      <p v-html="text.paragraph16" />
     </div>
   </div>
 </template>

@@ -191,7 +191,6 @@
       <Chapter2Icons3 />
       <p v-html="text.paragraph13" />
       <p v-html="text.paragraph14" />
-      <p v-html="text.paragraph15" />
     </div>
     <div class="box-matrix">
       <div class="text-content move-up">
@@ -233,7 +232,7 @@
       </div>
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph16" />
+      <p v-html="text.paragraph15" />
     </div>   
     <div class="container-fluid">
       <div
