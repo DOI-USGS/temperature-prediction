@@ -139,20 +139,20 @@
               >1980</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(231 997)"
+                transform="translate(227 997)"
               >1990</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(375 997)"
+                transform="translate(366 997)"
               >2000</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(519 997)"
+                transform="translate(505 997)"
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(646 997)"
-              >2019</text>
+                transform="translate(644 997)"
+              >2020</text>
             </g>
             <g id="space_labels">
               <line
