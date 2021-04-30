@@ -1,5 +1,4 @@
 <template>
-  <!-- xMidYMid meet transform="scale(0.926, 0.919)"-->
   <svg
     id="matrix-svg"
     xmlns="http://www.w3.org/2000/svg"
