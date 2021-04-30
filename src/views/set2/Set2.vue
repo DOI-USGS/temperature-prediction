@@ -1341,7 +1341,7 @@
               .padding(0);
 
           // select all temp lines and color with gradient
-          let temp_lines = svgChart.selectAll(".temp_line")
+          svgChart.selectAll(".temp_line")
             .style("stroke", "url(#plasma-vertical)") //
             .style("stroke-width", "0.5")
             .style("fill", "None")
@@ -1711,26 +1711,31 @@
         mouseoverSeg_c2p3(segment_id, tooltip) {
           const self = this;
 
+          console.log(segment_id)
+
           // make tooltip visible
           tooltip
               .style("opacity", 1);
-
-          // Dim all temperature timeseries lines
-          self.d3.selectAll(".temp_line")
-            .style("opacity", 0.2)
-
-          // Select the associated temperature line and make
-          // opaque and thicker to emphasize
-          self.d3.selectAll(".temp_line.seg_" + segment_id)
-            .style("opacity", 1)
-            .style("stroke-width", 3)
-            .raise()
 
           // select mouseovered segment and set to white with a shadow
           // and raise segment
           self.d3.selectAll(".c2p3.river_segments.seg" + segment_id)
               .style("stroke", "#ffffff")
               .raise()
+
+          // if segment has data in 2019
+          if (self.segmentDict[segment_id].year_count['2019'] > 0) {
+            // Dim all temperature timeseries lines
+            self.d3.selectAll(".temp_line")
+              .style("opacity", 0)
+
+            // Select the associated temperature line and make
+            // opaque and thicker to emphasize
+            selected_seg = self.d3.selectAll(".temp_line.seg_" + segment_id)
+              .style("opacity", 1)
+              .style("stroke-width", 3)
+              .raise()
+          }
         },
         mouseoutSeg_c2p3(segment_id, tooltip) {
           const self = this;
@@ -1738,6 +1743,15 @@
           // hide tooltip
           tooltip
               .style("opacity", 0)
+
+          // reset river segments to default styling
+          self.d3.selectAll(".c2p3.river_segments.seg" + segment_id)
+              .style("stroke", "#777b80")
+              .lower()
+
+          // select mouseovered transparent segment and raise segment
+          self.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
+              .raise()
 
           // Select all temperature timeseries lines
           // and reset opacity and width
@@ -1748,15 +1762,6 @@
           // select all monthly rectangles and raise
           self.d3.selectAll(".c2p3.matrixMonthlyRect")
             .raise()
-
-          // reset river segments to default styling
-          self.d3.selectAll(".c2p3.river_segments.seg" + segment_id)
-              .style("stroke", "#777b80")
-              .lower()
-
-          // select mouseovered transparent segment and raise segment
-          self.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
-              .raise()
         },
         mouseoverRect_c2p3(data) {
           const self = this;
