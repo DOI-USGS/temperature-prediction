@@ -75,7 +75,7 @@
     <div class="box">
       <div class="viz-title-wrapper">
         <p class="viz-title">
-          <span class="yellow">Daily temperature</span> of river reaches in 2019
+          <span class="yellow">Variability</span> of stream temperature in 2019
         </p>
         <p class="viz-subtitle">
           Each line = one reach.
@@ -87,17 +87,6 @@
     <br>
     <div class="text-content">
       <p v-html="text.paragraph15" />
-    </div>
-    <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          <span class="yellow">Variability</span> of stream temperature in 2019
-        </p>
-        <p class="viz-subtitle">
-          Visualizing measured stream temperature in the basin.
-        </p>
-      </div>
-      <MatrixTemperature />
     </div>
   </div>
 </template>
@@ -111,7 +100,6 @@
   import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
   import MatrixAvailability from "./../../components/2-Monitoring-Mobile/MatrixAvailability";
   import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
-  import MatrixTemperature from "./../../components/2-Monitoring-Mobile/MatrixTemperature";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
@@ -124,7 +112,6 @@
       MatrixExplainerColor,
       MatrixAvailability,
       MonitoringLineChart,
-      MatrixTemperature,
       IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/2-Monitoring/IntroMap"),
       Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
       Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2"),
