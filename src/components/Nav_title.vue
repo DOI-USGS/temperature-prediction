@@ -59,7 +59,7 @@ $dimGray: #9c9c9c;
   background-position: center;
 }
 .dim_text {
-    color: #9c9c9c;
+  color: #9c9c9c;
 }
 
 #nav a.router-link-active {
@@ -79,7 +79,7 @@ $dimGray: #9c9c9c;
   line-height: 1.4;
   font-size: 24pt;
   @media screen and (max-width: 600px) {
-      font-size: 18pt;
+    font-size: 18pt;
   }
 }
 

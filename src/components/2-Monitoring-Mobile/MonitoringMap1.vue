@@ -10102,20 +10102,24 @@ export default {
   $dimGray: #9c9c9c;
 
   #monitoring-map-1 {
-      width: 100%;
-      padding: 0px;
+    width: 100%;
+    padding: 0px;
   }
   /* Rivers and Delaware Bay */
   .st0 {
-      fill:$grayBlue;
-      stroke: $grayBlue;
-      stroke-width: 1px;
-      }
+    fill:$grayBlue;
+    stroke: $grayBlue;
+    stroke-width: 1px;
+  }
 
   #legend_text {
-      transform: translate(0, 30)
+    transform: translate(0, 30)
   }
-	.scale-line{fill:none;stroke:$grayBlue;}
+	.scale-line {
+    fill:none;
+    stroke:$grayBlue;
+  }
+  
   .scale-text {
     fill: $grayBlue;
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;

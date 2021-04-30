@@ -8,7 +8,7 @@
       </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-      <ImportanceIcons />
+      <Chapter2Icons1 />
       <p v-html="text.paragraph3" />
       <p v-html="text.paragraph4" />
       <div class="subheader">
@@ -42,7 +42,7 @@
     <div class="text-content">
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
-      <Chapter2Icons1 />
+      <Chapter2Icons2 />
       <div class="first_subheader">
         <h3 v-html="text.title3" />
       </div>
@@ -69,7 +69,7 @@
         <h3 v-html="text.title4" />
       </div>
       <p v-html="text.paragraph12" />
-      <Chapter2Icons2 />
+      <Chapter2Icons3 />
       <p v-html="text.paragraph13" />
     </div>
     <div class="box">
@@ -129,10 +129,10 @@
       MatrixAvailability,
       MonitoringLineChart,
       MatrixTemperature,
-      IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/1-Importance/IntroMap"),
-      ImportanceIcons: () => import( /* webpackPreload: true */ /*webpackChunkName: "importanceicons"*/ "./../../components/1-Importance/ImportanceIcons"),
+      IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/2-Monitoring/IntroMap"),
       Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
-      Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2")
+      Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2"),
+      Chapter2Icons3: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons3"*/ "./../../components/2-Monitoring/Chapter2Icons3")
     },
     data() {
         return {

@@ -2522,29 +2522,36 @@ $dimGray: #9c9c9c;
   font-weight: 400;
   font-size: 10px;
 }
+
 .f_main {
   font-size: 14px;
   fill: $offWhite;
 }
+
 .f_sec {
   font-size: 10px;
   fill: $offWhite;
 }
+
 .f_minor {
   font-size: 12px;
   fill: #9c9c9c;
 }
+
 .f_main.light, .f_minor {
   font-weight: 100;
   letter-spacing: 0em;
 }
+
 .f_main.bold {
   font-weight: 600;
 }
+
 .f_sec.reg {
   font-weight: 400;
   letter-spacing: 0em;
 }
+
 .f_arrow {
   fill: None;
   stroke: #9c9c9c;
@@ -2552,15 +2559,18 @@ $dimGray: #9c9c9c;
   stroke-dasharray: 1 2;
   stroke-width: 0.8px;
 }
+
 .f_arrowhead {
   fill: #9c9c9c;
 }
+
 .line_solid {
   fill: None;
   stroke: #9c9c9c;
   stroke-miterlimit: 10;
   stroke-width: 0.8px;
 }
+
 .line_dot {
   fill: None;
   stroke: #9c9c9c;
@@ -2568,60 +2578,72 @@ $dimGray: #9c9c9c;
   stroke-dasharray: 1 2;
   stroke-width: 0.8px;
 }
+
 .line_arrowhead {
   fill: #9c9c9c;
 }
+
 .line_rain {
   stroke: $plasmaYellow;
   stroke-miterlimit: 10;
   stroke-dasharray: 1.2 7;
   stroke-width: 0.8px;
 }
+
 .f_synapse {
   stroke: #ffffff;
 }
+
 .f_synapse.high{
   stroke-width: 4px;
   stroke-linecap: round;
 }
+
 .f_synapse.medium {
   stroke-width: 2px;
   stroke-linecap: round;
 }
+
 .f_synapse.low {
   stroke-width: 0.5px;
   stroke-linecap: round;
 }
+
 .f_synapse.arrowhead {
   stroke-width: 0.9px;
   fill: $offWhite;
 }
+
 .f_temp {
   font-size: 14px;
   font-weight: 600;
 } 
+
 .f_temp.pred {
   fill: $mediumBlue;
 }
+
 .f_temp.actual {
   fill: $offWhite;
   font-weight: 400;
 }
+
 .f_error {
   font-size: 12px;
   fill: $plasmaYellow;
 }
+
 .f_temp.ital {
   font-style: italic;
 }
 
 /* Hiding elements on page load */   
 .hidden-on-load {
-    display: none;
+  display: none;
 }
 
 #flubber-svg {
-    height: 100%;
-    width: 100%;
-  }
+  height: 100%;
+  width: 100%;
+}
 </style>

@@ -166,15 +166,12 @@
             text: modelingText.textContents,
             mobile_text: modelingText_mobile.textContents,
 
-            // sectionTitle: "Modeling Stream Temperature", // the initial
-
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
 
             // dimensions
             height: 500,
             width: 1000,
-            //margin: 50,
             svg: null,
 
             // string keys to modify chart appearance
@@ -259,7 +256,6 @@
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id] = {})
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['path_code'] = path.getAttribute("d"));
           document.querySelectorAll("#flubber-svg g path").forEach(path => this.flubber_dict[path.classList[0]][path.id]['fill_color'] = path.style.fill);
-          // console.log(this.flubber_dict)
           
           // set order of flubber components
           this.flubber_id_order = ['ANN1','ANN2','ANN3','ANN4','ANN5','ANN6','ANN7','ANN8','ANN9','ANN10','ANN11','ANN12','ANN13','RNN','RGCN','RGCN_2','RGCN_ptrn'];
@@ -281,10 +277,10 @@
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
 
         // colors for chart
-          this.color_d100 = "#FAB62F"; //"#5191bd" pink
+          this.color_d100 = "#FAB62F"; 
           this.color_d001 = "#FAB62F";
-          this.color_obs = "#5191bd";  //"#5191bd" '#BE3D7D' pink
-          this.color_exp = "#5191bd"; // "#FAB62F" yellow
+          this.color_obs = "#5191bd";  
+          this.color_exp = "#5191bd"; 
           this.color_fill = "#292b30"; // to fill open circles same as background
           this.stroke_w = "2px"
 
@@ -321,7 +317,7 @@
             this.paddedRadius = this.radius* 1.4;
             this.errorRadius = 10;
 
-          // define initial state of chart - default is an error chart to start
+            // define initial state of chart - default is an error chart to start
             this.chartState.strengthr = 0;
             this.chartState.domain_y = 30;
             this.chartState.domain_x = 30;
@@ -340,9 +336,6 @@
             const self = this;
             const bounds = this.$refs.figure.getBoundingClientRect()
             this.width_screen = bounds.width
-            //this.height = bounds.height
-            //this.marginX = bounds.width * 0.1
-            //this.marginY = bounds.height * 0.1 
             this.scroller.resize()
           },
           // animate flubber svg
@@ -358,9 +351,6 @@
             // if were ids, would have to add check that id is in flubber_id_order array
             if (step_id) {
               let animationLength = 1600; // original was 2400
-
-              //console.log('current flubber id')
-             // console.log(self.current_flubber_id)
 
               // identify which flubber id to transition to
               // get id of current step w/i flubber_id_order array
@@ -440,8 +430,6 @@
               // store current id
               self.current_flubber_id = step_id
 
-            } else {
-              //console.log("step has no flubber id")
             }
           },
           setChartState() {
@@ -1080,11 +1068,11 @@
            // define beeswarm colors
            this.set_colors = this.d3.scaleOrdinal()
             .domain(["d100","d001","obs","exp"])
-            .range([this.color_d001, this.color_fill, this.color_fill, this.color_exp]); //"#292b30"
+            .range([this.color_d001, this.color_fill, this.color_fill, this.color_exp]);
 
           // separate scale for stroke color to create open and filled points
             this.stroke_colors = this.d3.scaleOrdinal()
-            .domain(["d100","d001","obs","exp"]) // took out d002
+            .domain(["d100","d001","obs","exp"])
             .range([this.color_d001,  this.color_d001, this.color_obs, this.color_exp]);
 
           ///////////////////
@@ -1148,7 +1136,7 @@
               .attr("transform","translate(" + margin + " ," + (this.height- 40) + ")")
               .style("text-anchor", "left")
               .text("accurate")
-              .style("fill", "#9c9c9c")// not the right grey color
+              .style("fill", "#9c9c9c")
               .style("font-size", "24px")
               .style("opacity", this.o_rmse_title)
               .classed("rmse-label", true);
@@ -1157,7 +1145,7 @@
               .attr("transform","translate(" + (this.width-margin) + " ," + (this.height-40) + ")")
               .style("text-anchor", "right")
               .text("inaccurate")
-              .style("fill", "#9c9c9c")// not the right grey color
+              .style("fill", "#9c9c9c")
               .style("font-size", "24px")
               .style("opacity", this.o_rmse_title)
               .classed("rmse-label", true);
@@ -1535,7 +1523,7 @@
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + 0 + "," + (this.height/2) + ")")
 
-                this.yAxis
+              this.yAxis
                 .transition()
                 .duration(time_slide)
                 .style("opacity", 0)
@@ -1549,7 +1537,7 @@
                 .ease(this.d3.easeCircle)
                 .attr("transform", "translate(" + 0 + "," + (this.height+margin) + ")")
 
-                this.yAxis
+              this.yAxis
                 .transition()
                 .duration(time_slide)
                 .style("opacity", 1)
@@ -1568,9 +1556,9 @@
           this.yScale = this.d3.scaleLinear()
             .range([this.height+margin,0])
             .domain([0,this.chartState.domain_y]);
-            // this totally works but hardly see movment vs scaling??
+            // this totally works but hardly see movement vs scaling??
 
-            // update label under beesawrm with current model data in view
+            // update label under beeswarm with current model data in view
             this.d3.selectAll("text.rmse-name.model")
               .transition()
               .duration(500)
@@ -1725,7 +1713,7 @@
             this.chartState.alpha = .2;
             this.chartState.aDecay = 0.15;
           }
-          // RNN toe nd
+          // RNN to end
           if (this.step >= this.step_rnn)  {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
@@ -1908,12 +1896,13 @@ $dimGray: #9c9c9c;
 
 //style steps
 .model-text-content {
-    margin: 0 auto;
-    padding: 2em;   
-    @media screen and (max-width: 600px) {
-        padding: 10px;
-    }  
-  }
+  margin: 0 auto;
+  padding: 2em;   
+  @media screen and (max-width: 600px) {
+      padding: 10px;
+  }  
+}
+
 article {
   position: relative;
   margin: 10vh auto;
@@ -1921,14 +1910,17 @@ article {
   width: auto;
   top: -110vh;
 }
+
 .viz-title-scrolly {
- @media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) {
     font-size: 14pt;
+  }
 }
-}
+
 .step-container {
   width:100vw;
 }
+
 .step {
   position: relative;
   width: 28vw;
@@ -1937,16 +1929,16 @@ article {
   height: 100vh;
   border: 1px;
   @media screen and (max-width: 600px) {
-         width: 90%;
-         margin: auto;
-        }
+    width: 90%;
+    margin: auto;
+  }
   .step-text {
     color: $offWhiteBox;
     padding: 1em;
     background-color: $boxCharcoal;
     border-radius: 5px;
     @media screen and (max-width: 600px) {
-         font-size: 12.5pt;
+      font-size: 12.5pt;
     }
   }
 }
@@ -1966,6 +1958,7 @@ article {
 #modeling {
   width: 100vw;
 }
+
 // set up structure for sticky elements
 // beeswarm and flubber contained in sticky figure
 figure.sticky.intro {
@@ -1974,10 +1967,11 @@ figure.sticky.intro {
   height: auto;
   margin-bottom: 10vh;
 }
+
 #intro-container.text-content.text-intro h2 {
   margin: 0;
-
 }
+
 figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
@@ -1990,16 +1984,16 @@ figure.sticky.charts {
   height: 90vh;
   width: auto;
   @media screen and (min-height: 770px) {
-        grid-template-rows: 35% 65%;
-        grid-template-columns: 1.5fr 3fr 2%;
-        }
+    grid-template-rows: 35% 65%;
+    grid-template-columns: 1.5fr 3fr 2%;
+  }
   @media screen and (max-width: 600px) {
-        top: 0.5vh;
-        height: 99.5vh;
-        grid-template-rows: 33% 30% 35%;
-        grid-template-columns: 2% auto 2%;
-        padding-top: 4em;
-        }
+    top: 0.5vh;
+    height: 99.5vh;
+    grid-template-rows: 33% 30% 35%;
+    grid-template-columns: 2% auto 2%;
+    padding-top: 4em;
+  }
  
   #flubber-container {
     grid-column: 2 / 2;
@@ -2009,30 +2003,33 @@ figure.sticky.charts {
     min-width: 0;
     min-height: 0;
     @media screen and (min-height: 770px) {
-        grid-column: 2 / 2;
-        grid-row: 1 / 1;
-        }
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
     @media screen and (max-width: 600px) {
-        grid-column: 2 / 2;
-        grid-row: 1 / 1;
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
     }
   }
+
   #flubber-svg {
     height: 100%;
     width: 100%;
   }
+
   #error-container {
     grid-column: 3 / 3;
     grid-row: 1 / 1;
     @media screen and (min-height: 770px) {
-        grid-column: 2 / 2;
-        grid-row: 2 / 2;
-        }
+      grid-column: 2 / 2;
+      grid-row: 2 / 2;
+    }
     @media screen and (max-width: 600px) {
-        grid-column: 2 / 2;
-        grid-row: 3 / 3;
+      grid-column: 2 / 2;
+      grid-row: 3 / 3;
     }
   }
+
   #bees-container {
     grid-column: 3 / 3;
     grid-row: 1 / 1;
@@ -2041,14 +2038,15 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
     @media screen and (min-height: 770px) {
-        grid-column: 2 / 2;
-        grid-row: 2 / 2;
-        }
+      grid-column: 2 / 2;
+      grid-row: 2 / 2;
+    }
     @media screen and (max-width: 600px) {
-        grid-column: 2 / 2;
-        grid-row: 3 / 3;
+      grid-column: 2 / 2;
+      grid-row: 3 / 3;
     }
   }
+
   #legend-container {
     grid-column: 3 / 3;
     grid-row: 1 / 1;
@@ -2057,20 +2055,20 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
     @media screen and (min-height: 770px) {
-        grid-column: 2 / 2;
-        grid-row: 2 / 2;
-        }
+      grid-column: 2 / 2;
+      grid-row: 2 / 2;
+    }
     @media screen and (max-width: 600px) {
-        grid-column: 2 / 2;
-        grid-row: 3 / 3;
+      grid-column: 2 / 2;
+      grid-row: 3 / 3;
     }
   }
-  .x-axis {
-    fill: #9c9c9c;
-    color: #9c9c9c;
-    stroke: #9c9c9c;
-  }
+}
 
+.x-axis {
+  fill: #9c9c9c;
+  color: #9c9c9c;
+  stroke: #9c9c9c;
 }
 
 .axis-label text {
@@ -2090,14 +2088,12 @@ figure.sticky.charts {
 .arrow {
   fill: $offWhite;
   opacity: 0;
-
 }
 
 .text-annotate {
   fill:$offWhite;
   font-weight: 300;
   font-size: 20px;
-
   .left {
     text-anchor: left;
 
@@ -2105,6 +2101,5 @@ figure.sticky.charts {
   .right {
     text-anchor: right;
   }
-
 }
 </style>

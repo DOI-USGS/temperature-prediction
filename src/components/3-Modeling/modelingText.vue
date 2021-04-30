@@ -212,10 +212,10 @@
     $dimGray: #9c9c9c;
 
     a.pub_link {
-        color: $mediumBlue;
+      color: $mediumBlue;
     }
 
     a.pub_link:focus {
-        outline: none;
+      outline: none;
     }
 </style>

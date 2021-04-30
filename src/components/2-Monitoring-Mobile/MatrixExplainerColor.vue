@@ -1778,180 +1778,6 @@
           />
         </g>
       </g>
-      <!-- g
-        v-if="!mobileView"
-        id="barchart_labels"
-        transform="translate(-1, 0)"
-      >
-        <text
-          class="cls-34"
-          transform="translate(30.7 683.3)"
-        >321</text>
-        <text
-          class="cls-34"
-          transform="translate(46.9 694.3)"
-        >277</text>
-        <text
-          class="cls-34"
-          transform="translate(63.1 720.4)"
-        >174</text>
-        <text
-          class="cls-34"
-          transform="translate(79.3 687)"
-        >309</text>
-        <text
-          class="cls-34"
-          transform="translate(79.3 687.1)"
-        >309</text>
-        <text
-          class="cls-34"
-          transform="translate(95.6 697.7)"
-        >263</text>
-        <text
-          class="cls-34"
-          transform="translate(113.5 740.2)"
-        >93</text>
-        <text
-          class="cls-34"
-          transform="translate(129.7 740.3)"
-        >93</text>
-        <text
-          class="cls-34"
-          transform="translate(144.2 703.8)"
-        >241</text>
-        <text
-          class="cls-34"
-          transform="translate(160.4 716.5)"
-        >188</text>
-        <text
-          class="cls-34"
-          transform="translate(176.6 673.8)"
-        >364</text>
-        <text
-          class="cls-34"
-          transform="translate(192.8 673.9)"
-        >365</text>
-        <text
-          class="cls-34"
-          transform="translate(192.8 673.8)"
-        >365</text>
-        <text
-          class="cls-34"
-          transform="translate(209 691.2)"
-        >295</text>
-        <text
-          class="cls-34"
-          transform="translate(225.2 673.8)"
-        >366</text>
-        <text
-          class="cls-34"
-          transform="translate(241.4 681.3)"
-        >334</text>
-        <text
-          class="cls-34"
-          transform="translate(257.6 720.4)"
-        >172</text>
-        <text
-          class="cls-34"
-          transform="translate(273.8 702.1)"
-        >248</text>
-        <text
-          class="cls-34"
-          transform="translate(290.1 690)"
-        >298</text>
-        <text
-          class="cls-34"
-          transform="translate(306.3 692.6)"
-        >286</text>
-        <text
-          class="cls-34"
-          transform="translate(322.5 698.7)"
-        >263</text>
-        <text
-          class="cls-34"
-          transform="translate(340.4 741.6)"
-        >86</text>
-        <text
-          class="cls-34"
-          transform="translate(354.9 690.9)"
-        >293</text>
-        <text
-          class="cls-34"
-          transform="translate(371.1 697.7)"
-        >268</text>
-        <text
-          class="cls-34"
-          transform="translate(387.3 684.3)"
-        >321</text>
-        <text
-          class="cls-34"
-          transform="translate(403.5 686.9)"
-        >311</text>
-        <text
-          class="cls-34"
-          transform="translate(419.7 688.6)"
-        >305</text>
-        <text
-          class="cls-34"
-          transform="translate(435.9 685.5)"
-        >317</text>
-        <text
-          class="cls-34"
-          transform="translate(452.1 677)"
-        >353</text>
-        <text
-          class="cls-34"
-          transform="translate(468.3 688)"
-        >308</text>
-        <text
-          class="cls-34"
-          transform="translate(484.5 677.5)"
-        >349</text>
-        <text
-          class="cls-34"
-          transform="translate(500.8 682.3)"
-        >331</text>
-        <text
-          class="cls-34"
-          transform="translate(517 673.8)"
-        >365</text>
-        <text
-          class="cls-34"
-          transform="translate(533.2 678.5)"
-        >347</text>
-        <text
-          class="cls-34"
-          transform="translate(549.4 678.5)"
-        >347</text>
-        <text
-          class="cls-34"
-          transform="translate(564.9 676.6)"
-        >355 </text>
-        <text
-          class="cls-34"
-          transform="translate(581.8 681.3)"
-        >338</text>
-        <text
-          class="cls-34"
-          transform="translate(598 693.6)"
-        >288</text>
-        <text
-          class="cls-34"
-          transform="translate(614.2 681.6)"
-        >331</text>
-        <text
-          class="cls-34"
-          transform="translate(630.4 683.8)"
-        >323</text>
-        <text
-          class="cls-34"
-          transform="translate(646.7 705.8)"
-        >234</text>
-        <text
-          class="cls-34"
-          transform="translate(666.4 765.1)"
-        >0</text>
-      </g -->
       <g id="legend">
         <rect
           class="cls-35"
@@ -2643,346 +2469,346 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-color-view {
-        width: 100%;
-    }
-    .text-halo {
-      @supports not (-webkit-touch-callout: none) { // targets everything except Safari mobile
-        text-shadow: 0px 0px 2px white, 0px 0px 5px white, 0px 0px 10px white;
-        fill: black;
-      }
-    }
-
-    .cls-1 {
-        isolation: isolate;
-      }
-
-      .cls-2 {
-        opacity: 0.8;
-        mix-blend-mode: screen;
-      }
-
-      .cls-3 {
-        fill: #fec628;
-      }
-
-      .cls-4 {
-        fill: #f89741;
-      }
-
-      .cls-5 {
-        fill: #c6407f;
-      }
-
-      .cls-6 {
-        fill: #fdb72a;
-      }
-
-      .cls-7 {
-        fill: #f48947;
-      }
-
-      .cls-8 {
-        fill: #793293;
-      }
-
-      .cls-9 {
-        fill: #eb7654;
-      }
-
-      .cls-10 {
-        fill: #ce4c75;
-      }
-
-      .cls-11 {
-        fill: #ebe82f;
-      }
-
-      .cls-12 {
-        fill: #ebe72c;
-      }
-
-      .cls-13 {
-        fill: #fba933;
-      }
-
-      .cls-14 {
-        fill: #fbd323;
-      }
-
-      .cls-15 {
-        fill: #c53d81;
-      }
-
-      .cls-16 {
-        fill: #ee7c51;
-      }
-
-      .cls-17 {
-        fill: #fbab33;
-      }
-
-      .cls-18 {
-        fill: #f99f3b;
-      }
-
-      .cls-19 {
-        fill: #723293;
-      }
-
-      .cls-20 {
-        fill: #faa638;
-      }
-
-      .cls-21 {
-        fill: #f78f46;
-      }
-
-      .cls-22 {
-        fill: #fdb92a;
-      }
-
-      .cls-23 {
-        fill: #fcb42d;
-      }
-
-      .cls-24 {
-        fill: #fdbf29;
-      }
-
-      .cls-25 {
-        fill: #f4e822;
-      }
-
-      .cls-26 {
-        fill: #fdb62b;
-      }
-
-      .cls-27 {
-        fill: #f6e61f;
-      }
-
-      .cls-28 {
-        fill: #fcd026;
-      }
-
-      .cls-29 {
-        fill: #f6e21e;
-      }
-
-      .cls-30 {
-        fill: #f3ea2b;
-      }
-
-      .cls-31 {
-        fill: #fbd522;
-      }
-
-      .cls-32 {
-        fill: #fec727;
-      }
-
-      .cls-33 {
-        fill: #e9705a;
-      }
-
-      .cls-34 {
-        font-size: 8px;
-        fill: #fcfcfc;
-      }
-
-      .cls-100, .cls-34, .cls-44 {
-        font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;//SourceSansPro-Regular, Source Sans Pro;
-      }
-
-      .cls-35 {
-        fill: url(#linear-gradient-plasma);
-      }
-
-      .cls-100 {
-        font-size: 26px;
-      }
-
-      .cls-44, .cls-81 {
-        fill: $dimGray;
-      }
-
-      .cls-37, .cls-38, .cls-39, .cls-40, .cls-41, .cls-42 {
-        fill: #fff;
-        font-family: SourceSansPro-Bold, Source Sans Pro;
-        font-weight: 700;
-      }
-
-
-    
-
-      .cls-49 {
-        fill: #e87059;
-        stroke: #e87059;
-      }
-
-      .cls-49, .cls-50, .cls-51, .cls-52, .cls-53, .cls-54, .cls-55, .cls-56, .cls-57, .cls-58, .cls-59, .cls-60, .cls-61, .cls-62, .cls-63, .cls-64, .cls-65, .cls-66, .cls-67, .cls-68, .cls-69, .cls-70, .cls-71, .cls-72, .cls-73, .cls-74, .cls-75, .cls-76, .cls-77, .cls-78, .cls-79 {
-        stroke-width: 0.5px;
-      }
-
-      .cls-50 {
-        fill: #fdc627;
-        stroke: #fdc627;
-      }
-
-      .cls-51 {
-        fill: #fcd025;
-        stroke: #fcd025;
-      }
-
-      .cls-52 {
-        fill: #fb9f3a;
-        stroke: #fb9f3a;
-      }
-
-      .cls-53 {
-        fill: #fbd524;
-        stroke: #fbd524;
-      }
-
-      .cls-54 {
-        fill: #f4ed27;
-        stroke: #f4ed27;
-      }
-
-      .cls-55 {
-        fill: #f7e225;
-        stroke: #f7e225;
-      }
-
-      .cls-56 {
-        fill: #f0f921;
-        stroke: #f0f921;
-      }
-
-      .cls-57 {
-        fill: #f6e626;
-        stroke: #f6e626;
-      }
-
-      .cls-58 {
-        fill: #feb72d;
-        stroke: #feb72d;
-      }
-
-      .cls-59 {
-        fill: #f5e926;
-        stroke: #f5e926;
-      }
-
-      .cls-60 {
-        fill: #fec029;
-        stroke: #fec029;
-      }
-
-      .cls-61 {
-        fill: #fdb42f;
-        stroke: #fdb42f;
-      }
-
-      .cls-62 {
-        fill: #feba2c;
-        stroke: #feba2c;
-      }
-
-      .cls-63 {
-        fill: #fdc527;
-        stroke: #fdc527;
-      }
-
-      .cls-64 {
-        fill: #f68f44;
-        stroke: #f68f44;
-      }
-
-      .cls-65 {
-        fill: #fca636;
-        stroke: #fca636;
-      }
-
-      .cls-66 {
-        fill: #7701a8;
-        stroke: #7701a8;
-      }
-
-      .cls-67 {
-        fill: #f48948;
-        stroke: #f48948;
-      }
-
-      .cls-68 {
-        fill: #fdac33;
-        stroke: #fdac33;
-      }
-
-      .cls-69 {
-        fill: #ef7c51;
-        stroke: #ef7c51;
-      }
-
-      .cls-70 {
-        fill: #c33d80;
-        stroke: #c33d80;
-      }
-
-      .cls-71 {
-        fill: #fbd324;
-        stroke: #fbd324;
-      }
-
-      .cls-72 {
-        fill: #fca934;
-        stroke: #fca934;
-      }
-
-      .cls-73 {
-        fill: #f0f724;
-        stroke: #f0f724;
-      }
-
-      .cls-74 {
-        fill: #ce4b75;
-        stroke: #ce4b75;
-      }
-
-      .cls-75 {
-        fill: #eb7655;
-        stroke: #eb7655;
-      }
-
-      .cls-76 {
-        fill: #7e03a8;
-        stroke: #7e03a8;
-      }
-
-      .cls-77 {
-        fill: #feb82c;
-        stroke: #feb82c;
-      }
-
-      .cls-78 {
-        fill: #c5407e;
-        stroke: #c5407e;
-      }
-
-      .cls-79 {
-        fill: #f9973f;
-        stroke: #f9973f;
-      }
-
-      .cls-102, .cls-80 {
-        fill: none;
-        stroke: $dimGray;
-        stroke-miterlimit: 10;
-        stroke-width: 1.5px;
-      }
-
-
-      .cls-100 {
-        fill: #eaeae9;
-      }
+  width: 100%;
+}
+
+.text-halo {
+  @supports not (-webkit-touch-callout: none) { // targets everything except Safari mobile
+    text-shadow: 0px 0px 2px white, 0px 0px 5px white, 0px 0px 10px white;
+    fill: black;
+  }
+}
+
+.cls-1 {
+  isolation: isolate;
+}
+
+.cls-2 {
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.cls-3 {
+  fill: #fec628;
+}
+
+.cls-4 {
+  fill: #f89741;
+}
+
+.cls-5 {
+  fill: #c6407f;
+}
+
+.cls-6 {
+  fill: #fdb72a;
+}
+
+.cls-7 {
+  fill: #f48947;
+}
+
+.cls-8 {
+  fill: #793293;
+}
+
+.cls-9 {
+  fill: #eb7654;
+}
+
+.cls-10 {
+  fill: #ce4c75;
+}
+
+.cls-11 {
+  fill: #ebe82f;
+}
+
+.cls-12 {
+  fill: #ebe72c;
+}
+
+.cls-13 {
+  fill: #fba933;
+}
+
+.cls-14 {
+  fill: #fbd323;
+}
+
+.cls-15 {
+  fill: #c53d81;
+}
+
+.cls-16 {
+  fill: #ee7c51;
+}
+
+.cls-17 {
+  fill: #fbab33;
+}
+
+.cls-18 {
+  fill: #f99f3b;
+}
+
+.cls-19 {
+  fill: #723293;
+}
+
+.cls-20 {
+  fill: #faa638;
+}
+
+.cls-21 {
+  fill: #f78f46;
+}
+
+.cls-22 {
+  fill: #fdb92a;
+}
+
+.cls-23 {
+  fill: #fcb42d;
+}
+
+.cls-24 {
+  fill: #fdbf29;
+}
+
+.cls-25 {
+  fill: #f4e822;
+}
+
+.cls-26 {
+  fill: #fdb62b;
+}
+
+.cls-27 {
+  fill: #f6e61f;
+}
+
+.cls-28 {
+  fill: #fcd026;
+}
+
+.cls-29 {
+  fill: #f6e21e;
+}
+
+.cls-30 {
+  fill: #f3ea2b;
+}
+
+.cls-31 {
+  fill: #fbd522;
+}
+
+.cls-32 {
+  fill: #fec727;
+}
+
+.cls-33 {
+  fill: #e9705a;
+}
+
+.cls-34 {
+  font-size: 8px;
+  fill: #fcfcfc;
+}
+
+.cls-100, .cls-34, .cls-44 {
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+}
+
+.cls-35 {
+  fill: url(#linear-gradient-plasma);
+}
+
+.cls-100 {
+  font-size: 26px;
+}
+
+.cls-44, .cls-81 {
+  fill: $dimGray;
+}
+
+.cls-37, .cls-38, .cls-39, .cls-40, .cls-41, .cls-42 {
+  fill: #fff;
+  font-family: SourceSansPro-Bold, Source Sans Pro;
+  font-weight: 700;
+}
+
+
+
+
+.cls-49 {
+  fill: #e87059;
+  stroke: #e87059;
+}
+
+.cls-49, .cls-50, .cls-51, .cls-52, .cls-53, .cls-54, .cls-55, .cls-56, .cls-57, .cls-58, .cls-59, .cls-60, .cls-61, .cls-62, .cls-63, .cls-64, .cls-65, .cls-66, .cls-67, .cls-68, .cls-69, .cls-70, .cls-71, .cls-72, .cls-73, .cls-74, .cls-75, .cls-76, .cls-77, .cls-78, .cls-79 {
+  stroke-width: 0.5px;
+}
+
+.cls-50 {
+  fill: #fdc627;
+  stroke: #fdc627;
+}
+
+.cls-51 {
+  fill: #fcd025;
+  stroke: #fcd025;
+}
+
+.cls-52 {
+  fill: #fb9f3a;
+  stroke: #fb9f3a;
+}
+
+.cls-53 {
+  fill: #fbd524;
+  stroke: #fbd524;
+}
+
+.cls-54 {
+  fill: #f4ed27;
+  stroke: #f4ed27;
+}
+
+.cls-55 {
+  fill: #f7e225;
+  stroke: #f7e225;
+}
+
+.cls-56 {
+  fill: #f0f921;
+  stroke: #f0f921;
+}
+
+.cls-57 {
+  fill: #f6e626;
+  stroke: #f6e626;
+}
+
+.cls-58 {
+  fill: #feb72d;
+  stroke: #feb72d;
+}
+
+.cls-59 {
+  fill: #f5e926;
+  stroke: #f5e926;
+}
+
+.cls-60 {
+  fill: #fec029;
+  stroke: #fec029;
+}
+
+.cls-61 {
+  fill: #fdb42f;
+  stroke: #fdb42f;
+}
+
+.cls-62 {
+  fill: #feba2c;
+  stroke: #feba2c;
+}
+
+.cls-63 {
+  fill: #fdc527;
+  stroke: #fdc527;
+}
+
+.cls-64 {
+  fill: #f68f44;
+  stroke: #f68f44;
+}
+
+.cls-65 {
+  fill: #fca636;
+  stroke: #fca636;
+}
+
+.cls-66 {
+  fill: #7701a8;
+  stroke: #7701a8;
+}
+
+.cls-67 {
+  fill: #f48948;
+  stroke: #f48948;
+}
+
+.cls-68 {
+  fill: #fdac33;
+  stroke: #fdac33;
+}
+
+.cls-69 {
+  fill: #ef7c51;
+  stroke: #ef7c51;
+}
+
+.cls-70 {
+  fill: #c33d80;
+  stroke: #c33d80;
+}
+
+.cls-71 {
+  fill: #fbd324;
+  stroke: #fbd324;
+}
+
+.cls-72 {
+  fill: #fca934;
+  stroke: #fca934;
+}
+
+.cls-73 {
+  fill: #f0f724;
+  stroke: #f0f724;
+}
+
+.cls-74 {
+  fill: #ce4b75;
+  stroke: #ce4b75;
+}
+
+.cls-75 {
+  fill: #eb7655;
+  stroke: #eb7655;
+}
+
+.cls-76 {
+  fill: #7e03a8;
+  stroke: #7e03a8;
+}
+
+.cls-77 {
+  fill: #feb82c;
+  stroke: #feb82c;
+}
+
+.cls-78 {
+  fill: #c5407e;
+  stroke: #c5407e;
+}
+
+.cls-79 {
+  fill: #f9973f;
+  stroke: #f9973f;
+}
+
+.cls-102, .cls-80 {
+  fill: none;
+  stroke: $dimGray;
+  stroke-miterlimit: 10;
+  stroke-width: 1.5px;
+}
+
+.cls-100 {
+  fill: #eaeae9;
+}
 </style>
