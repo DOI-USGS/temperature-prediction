@@ -319,15 +319,12 @@
           d3: null, // this is used so that we can assign d3 plugins to the d3 instance
           
           // global variables instantiated in next section
-          timestep_c2p2: 'year',
           myGroups_c2p2: null,
           myVars_c2p2: null,
           availabilityColor: null,
           myGroups_c2p3: null,
-          myVars_c2p3: null,
           tempColor: null,
           temporalCountMax_c2p2: null,
-          timestep_c2p3: 'date',
           bar_chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
           bar_chart_width: null, // this will get a value in the mounted hook
           bar_chart_height: null, // this will get a value in the mounted hook
@@ -849,7 +846,7 @@
                 let year_key = null;
                 for (year_key in self.segmentDict[segment_id].year_count) {
                   if (self.segmentDict[segment_id].year_count[year_key] > 0) {
-                    seg_class += " " + self.timestep_c2p2 + year_key
+                    seg_class += " year" + year_key
                   }
                 }
                 return seg_class
@@ -879,7 +876,7 @@
                 let year_key = null;
                 for (year_key in self.segmentDict[transparent_segment_id].year_count) {
                   if (self.segmentDict[transparent_segment_id].year_count[year_key] > 0) {
-                    seg_class += " " + self.timestep_c2p2 + year_key
+                    seg_class += " year" + year_key
                   }
                 }
                 return seg_class
@@ -1018,7 +1015,7 @@
                   "translate(" + self.matrix_margin.left + "," + self.matrix_margin.top + ")")
 
           // read in data for matrix
-          self.myGroups_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d[self.timestep_c2p2];}).keys()
+          self.myGroups_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d['year'];}).keys()
           self.myVars_c2p2 = self.d3.map(csv_matrix_annual, function(d){return d.seg_id_nat;}).keys()
 
           // add the overlaid rectangles (temporal and spatial) that will be used for selection
@@ -1078,7 +1075,7 @@
               .append("rect")
               // set x value based on year and xscale
               .attr("x", function(d){
-                return xScale_matrix_c2p2(d[self.timestep_c2p2])
+                return xScale_matrix_c2p2(d['year'])
               })
               // set y value to 0
               .attr("y", 0)
@@ -1088,7 +1085,7 @@
               .attr("height", self.matrix_height_c2)
               // set class based on year
               .attr("class", function(d) {
-                return 'c2p2 matrixTemporalRect time' + d[self.timestep_c2p2];
+                return 'c2p2 matrixTemporalRect time' + d['year'];
               })
               // style rectangles to be transparent
               .style("fill", "#0f0f0f")
@@ -1181,7 +1178,7 @@
                 let month_key = null;
                 for (month_key in self.segmentDict[segment_id].data_2019_monthly) {
                   if (self.segmentDict[segment_id].data_2019_monthly[month_key].month_count > 0) {
-                    seg_class += " " + self.timestep_c2p3 + month_key
+                    seg_class += " date" + month_key
                   }
                 }
                 return seg_class
@@ -1210,7 +1207,7 @@
                 let month_key = null;
                 for (month_key in self.segmentDict[transparent_segment_id].data_2019_monthly) {
                   if (self.segmentDict[transparent_segment_id].data_2019_monthly[month_key].month_count > 0) {
-                    seg_class += " " + self.timestep_c2p3 + month_key
+                    seg_class += " date" + month_key
                   }
                 }
                 return seg_class
@@ -1335,7 +1332,7 @@
               .text(obsTempMin + " °C")
 
           // read in data for x scale
-          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d[self.timestep_c2p3];}).keys()
+          self.myGroups_c2p3 = self.d3.map(csv_matrix_daily_2019, function(d){return d['date'];}).keys()
 
           // build x scale
           let xscale = self.d3.scaleBand()
@@ -1779,7 +1776,7 @@
 
           // select all river segments that have data in highlighted month
           // and make color according to average temperature in that month
-          let month_sel = this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
+          let month_sel = this.d3.selectAll(".c2p3.segs_transparent.date" + data.month)
           let selected_segments = month_sel._groups[0]
           selected_segments.forEach(function(segment) {
               let segment_id = segment.classList[2].split('seg')[1]
@@ -1804,7 +1801,7 @@
               .style("opacity", 1)
 
           // reset styling of transparent river segments
-           this.d3.selectAll(".c2p3.segs_transparent." + self.timestep_c2p3 + data.month)
+           this.d3.selectAll(".c2p3.segs_transparent.date" + data.month)
               .style("stroke", "#0f0f0f")
               .style("stroke-width", 6)
               .style("opacity", 0)
