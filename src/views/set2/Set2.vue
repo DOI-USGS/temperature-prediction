@@ -1178,7 +1178,7 @@
                 let month_key = null;
                 for (month_key in self.segmentDict[segment_id].data_2019_monthly) {
                   if (self.segmentDict[segment_id].data_2019_monthly[month_key].month_count > 0) {
-                    seg_class += " date" + month_key
+                    seg_class += " month" + month_key
                   }
                 }
                 return seg_class
@@ -1207,7 +1207,7 @@
                 let month_key = null;
                 for (month_key in self.segmentDict[transparent_segment_id].data_2019_monthly) {
                   if (self.segmentDict[transparent_segment_id].data_2019_monthly[month_key].month_count > 0) {
-                    seg_class += " date" + month_key
+                    seg_class += " month" + month_key
                   }
                 }
                 return seg_class
@@ -1349,13 +1349,13 @@
 
           // append monthly rectangles for mouseover on chart
           let MonthlyRectangles = svgChart.selectAll('.c2p3.chartMonthlyRect')
-              // bind data (count of observations on each date) to each element
+              // bind data to each element
               .data(csv_monthly_rects_2019)
               // create element for each datum
               .enter()
               // append rectangle for each element
               .append("rect")
-              // set x value based on date and xscale
+              // set x value based on month start date and xscale
               .attr("x", function(d, i){
                 return xscale(d.start_date);
               })
@@ -1370,7 +1370,7 @@
               // transform to align with inner svg
               .attr("transform",
                       "translate(" + self.temp_chart_margin.left + "," + 0 + ")")
-              // set class based on date
+              // set class based on month name
               .attr("class", function(d) {
                 return 'c2p3 chartMonthlyRect month' + d.month;
               })
@@ -1389,13 +1389,13 @@
 
           // add text to  montly rectangles
           let monthLabels = svgChart.selectAll('.month_labels')
-              // bind data (count of observations on each date) to each element
+              // bind data (abbreviation of month name) to each element
               .data(csv_monthly_rects_2019)
               // create element for each datum
               .enter()
               // append rectangle for each element
               .append("text")
-                  // set x value based on date and xscale
+                  // set x value based on month start date and xscale
                   .attr("x", function(d){
                     return xscale(d.start_date) + 8;
                   })
@@ -1776,7 +1776,7 @@
 
           // select all river segments that have data in highlighted month
           // and make color according to average temperature in that month
-          let month_sel = this.d3.selectAll(".c2p3.segs_transparent.date" + data.month)
+          let month_sel = this.d3.selectAll(".c2p3.segs_transparent.month" + data.month)
           let selected_segments = month_sel._groups[0]
           selected_segments.forEach(function(segment) {
               let segment_id = segment.classList[2].split('seg')[1]
@@ -1801,7 +1801,7 @@
               .style("opacity", 1)
 
           // reset styling of transparent river segments
-           this.d3.selectAll(".c2p3.segs_transparent.date" + data.month)
+           this.d3.selectAll(".c2p3.segs_transparent.month" + data.month)
               .style("stroke", "#0f0f0f")
               .style("stroke-width", 6)
               .style("opacity", 0)
