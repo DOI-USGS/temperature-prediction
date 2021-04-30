@@ -139,20 +139,20 @@
               >1980</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(231 997)"
+                transform="translate(227 997)"
               >1990</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(375 997)"
+                transform="translate(366 997)"
               >2000</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(519 997)"
+                transform="translate(505 997)"
               >2010</text>
               <text
                 class="c2p2 matrixAxis"
-                transform="translate(646 997)"
-              >2019</text>
+                transform="translate(644 997)"
+              >2020</text>
             </g>
             <g id="space_labels">
               <line
@@ -762,7 +762,7 @@
                 return "reservoirs res_id" + d.properties.GRAND_ID
               })
               // set stroke width so that polygons appear larger
-              .style("stroke-width", 0.75)
+              .style("stroke-width", 1.25)
           // append reservoir group to c2p1 map  (ONCE PER MAP)
           self.map_c2p1.append("g").attr("class","c2p1 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
@@ -899,12 +899,12 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis bottom")
               .attr("transform", "translate(0," + this.bar_chart_height + ")")
-              .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2019' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
+              .call(this.d3.axisBottom(x).tickValues(['1960', '1970', '1980', '1990', '2000', '2010', '2020' ]).tickSize(0)) /* ['1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2019' ] */
               .select(".domain").remove()
 
           // place and rotate x axis labels
           g.selectAll('text')
-              .attr("y", 6)
+              .attr("y", 7)
               .attr("x", -27)
               .attr("dy", ".35em")
               .attr("transform", "rotate(-45)")
@@ -915,7 +915,7 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.bar_chart_width * 0.975 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.bar_chart_width * 0.98 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
               .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
               .select(".domain").remove()
@@ -1201,7 +1201,7 @@
           let xscale = self.d3.scaleBand()
               .range([0,self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.075);
+              .padding(0.05);
 
           // build y scale using data read in for matrix in createMatrix_c2p2()
           let yscale = self.d3.scaleBand()
@@ -1419,7 +1419,7 @@
           // build array of all values of observed temperature
           let arrayObsTemps = [];
           for (i=0; i<csv_matrix_daily_2019.length; i++){
-            let val = parseFloat(csv_matrix_daily_2019[i]['temp_c']);
+            let val = parseFloat(csv_matrix_daily_2019[i]['mean_temp_c']);
             if (val){
               arrayObsTemps.push(val);
             } else {
@@ -1618,7 +1618,7 @@
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.1);
+              .padding(0.05);
 
           // make tooltip visible
           tooltip
@@ -1651,10 +1651,7 @@
                         .style("fill", function(d) {
                           return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
                         })
-                        .style("stroke-width", 0.5)
-                        .style("stroke", function(d){
-                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
-                        })
+                        .style("stroke-width", 0)
                         .style("opacity", 1)
                         .raise()
                     // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
@@ -1816,7 +1813,7 @@
           let xScale_matrix_c2p2 = self.d3.scaleBand()
               .range([0, self.matrix_width_c2])
               .domain(self.myGroups_c2p2)
-              .padding(0.1);
+              .padding(0.05);
 
           // show tooltip
           tooltip
@@ -1850,10 +1847,7 @@
                         .style("fill", function(d) {
                           return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
                         })
-                        .style("stroke-width", 0.5)
-                        .style("stroke", function(d){
-                          return self.availabilityColor(self.segmentDict[segment_id].year_count[seg_year]);
-                        })
+                        .style("stroke-width", 0)
                         .style("opacity", 1)
                         .raise()
                     // // COMMENTING OUT BAR CHART ANNOTATIONS FOR NOW
@@ -1896,7 +1890,7 @@
           // and raise segment
           self.d3.selectAll(".c2p2.segs_transparent.seg" + segment_id)
               .style("stroke", "#ffffff")
-              .style("stroke-width", 1.25)
+              .style("stroke-width", 3)
               .style("opacity", 1)
               .raise()
         },
