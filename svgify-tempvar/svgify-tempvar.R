@@ -46,13 +46,13 @@ scale_to_svg <- function(xy_df, svg_width, svg_height) {
     y = round(approx(y_extent_pixels, c(svg_height, 0), y_pixels)$y, 6)
   )
 
-  d <- split_df_by_NAs(dat)
+  d <- split_df_by_NAs(dat, svg_width, svg_height)
   return(d)
 }
 
 # Break path into multiple paths to leave a break when there are NAs
-# This assumes NAs in the `y` but not in the X
-split_df_by_NAs <- function(df) {
+# This assumes NAs in the `y` but not in the `x`
+split_df_by_NAs <- function(df, svg_width, svg_height) {
   ## draw path if there is data
   dat <- df %>% filter(!is.na(y))
 
@@ -72,7 +72,22 @@ split_df_by_NAs <- function(df) {
 
       # Use this vector of groups to split the dataframe into a list of data frames broken up by NAs
       coords <- split(df_noNA, data_groups)
-      lapply(coords, build_path_from_coords) %>%
+
+      # If there is only one point to draw a path, we want it to resemble
+      # a point. To do that, add a small bit using "L" to make it look like a point.
+      coords_fixed <- lapply(coords, function(xydf) {
+        if(nrow(xydf) == 1) {
+          # Add a second coordinate slightly further away to
+          # draw a path that looks like a single point
+          xydf_fix <- xydf %>%
+            mutate(x = x + svg_width*0.003, # 0.3% of the SVG width
+                   y = y + svg_height*0.003) # 0.3% of the SVG height
+          xydf <- bind_rows(xydf, xydf_fix)
+        }
+        return(xydf)
+      })
+
+      lapply(coords_fixed, build_path_from_coords) %>%
         str_c(collapse = ' ')
     } else {
       # If there are no NAs, or the NAs are all in sequence at the end or beginning of the string, filter them out
