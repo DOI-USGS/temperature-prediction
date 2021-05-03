@@ -196,7 +196,7 @@
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Variability</span> of stream temperature in 2019
+            Stream temperature <span class="yellow">variability</span> in 2019
           </p>
           <p class="viz-subtitle">
             Visualizing measured stream temperature in the basin in 2019. Each line = one reach.
