@@ -518,6 +518,7 @@
               }
             }
           })
+          console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -1731,7 +1732,7 @@
 
             // Select the associated temperature line and make
             // opaque and thicker to emphasize
-            selected_seg = self.d3.selectAll(".temp_line.seg_" + segment_id)
+            self.d3.selectAll(".temp_line.seg_" + segment_id)
               .style("opacity", 1)
               .style("stroke-width", 3)
               .raise()
@@ -2161,6 +2162,7 @@ $dimGray: #9c9c9c;
   font-size: 0.95em;
   font-weight: bold;
   line-height: 1em;
+  pointer-events: none;
   @media screen and (max-height: 770px) {
     font-size: 1em;
   }
@@ -2175,6 +2177,7 @@ $dimGray: #9c9c9c;
   font-size: 1em;
   font-weight: bold;
   line-height: 1em;
+  pointer-events: none;
   @media screen and (max-height: 770px) {
     font-size: 1.4em;
   }
