@@ -415,7 +415,7 @@
           //create new svg container for the ch 2 panel 1 map
           this.map_c2p1 = self.d3.select("#DRB_map_c2p1")
               .append("svg")
-              .attr("class", "map_c2p1 map")
+              .attr("class", "map_c2p1 map_monitoring")
               .attr("id", "drb_map")
               .attr("viewBox", [0, 0, (this.map_width + this.map_margin.right + this.map_margin.left),
                 (this.map_height + this.map_margin.top + this.map_margin.bottom)].join(' '));
@@ -1857,11 +1857,6 @@ $dimGray: #9c9c9c;
 
 #filter_row {
   height: 0vh;
-}
-
-#DRB_map_c2p1 {
-  display: flex;
-  width: 100%;
 }
 
 #barChart_c2p1 {

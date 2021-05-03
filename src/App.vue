@@ -249,12 +249,15 @@ h3{
   @media screen and (max-width: 600px) {
     max-width: 300px;
   }
+  // @media screen and (max-height: 770px) {
+  //   max-height: 130vh;
+  // }
 }
 
 .map_monitoring {
   min-width: 400px;
   max-width: 600px;
-  max-height: 100%;
+  max-height: 95vh;
   flex: 1 1 30%;
   justify-self: center;
   @media screen and (max-width: 600px) {
