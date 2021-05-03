@@ -6,11 +6,11 @@
       <div class="first_subheader">
         <h3 v-html="text.title1" />
       </div>
-      <p v-html="text.paragraph1"/>
-      <p v-html="text.paragraph2"/>
+      <p v-html="text.paragraph1" />
+      <p v-html="text.paragraph2" />
       <Chapter2Icons1 />
-      <p v-html="text.paragraph3"/>
-      <p v-html="text.paragraph4"/>
+      <p v-html="text.paragraph3" />
+      <p v-html="text.paragraph4" />
       <div class="subheader">
         <h3 v-html="text.title2" />
       </div>

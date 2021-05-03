@@ -133,7 +133,7 @@
 
 <script>
     export default {
-        name: 'chapter2icons1'
+        name: 'Chapter2icons1'
     }
 </script>
 
