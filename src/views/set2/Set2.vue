@@ -343,7 +343,7 @@
           map_c2p3: null,
           map_width: null,
           map_height: null,
-          map_margin: null,
+          map_margin: {top: 25, right: 0, bottom: 30, left: 0},
           map_path_c2: null,
           widthScale_c2: null,
           segments: null,
@@ -365,6 +365,9 @@
         this.matrix_height_c2 = 1000 - this.matrix_margin.top - this.matrix_margin.bottom;
         this.temp_chart_width = 600 - this.temp_chart_margin.left - this.temp_chart_margin.right;
         this.temp_chart_height = 600 - this.temp_chart_margin.top - this.temp_chart_margin.bottom;
+        // set universal map frame dimensions for Ch 2 panel maps
+        this.map_width = 300 - this.map_margin.left - this.map_margin.right;
+        this.map_height = 600 - this.map_margin.top - this.map_margin.bottom;
 
         this.setPanels();  // begin script when window loads
       },
@@ -372,15 +375,10 @@
         setPanels() {
           const self = this;
 
-          // // CHAPTER 2 MAPS
-          // set universal map frame dimensions for Ch 2 panel maps
-          this.map_width = 350;
-          this.map_height = 600; //
-          this.map_margin = {top: 15, right: 20, bottom: 5, left: 5};
-
+          // // CHAPTER 2 MAPS      
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
-              .center([0, 40.678894445])
+              .center([0, 40.778894445])
               .rotate([75.413333335, 0, 0])
               .parallels([39.9352537033, 41.1825351867])
               .scale(this.map_height * 15)
@@ -2003,7 +2001,7 @@ button:focus {
 
 #DRB_map_c2p2 {
   grid-area: map;
-  max-height: 85vh;
+  max-height: 90vh;
 }
 
 #matrixChart_c2p2 {
@@ -2016,7 +2014,7 @@ button:focus {
 
 #DRB_map_c2p3 {
   grid-area: map;
-  max-height: 85vh;
+  max-height: 90vh;
 }
 
 #tempChart_c2p3 {
@@ -2096,12 +2094,12 @@ $dimGray: #9c9c9c;
 }
 
 .map_c2p2 {
-  max-height: 85vh;
+  max-height: 90vh;
   width: 100%;
 }
 
 .map_c2p3 {
-  max-height: 85vh;
+  max-height: 90vh;
   width: 100%;
 }
 
