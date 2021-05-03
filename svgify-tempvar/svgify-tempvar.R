@@ -81,7 +81,10 @@ split_df_by_NAs <- function(df, svg_width, svg_height) {
         str_c(collapse = ' ')
     } else {
       # If there are no NAs, or the NAs are all in sequence at the end or beginning of the string, filter them out
-      build_path_from_coords(dat)
+      dat %>%
+        apply_single_coord_fix(svg_height, svg_width) %>%
+        build_path_from_coords()
+    }
   }
 }
 
