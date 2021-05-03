@@ -80,8 +80,8 @@ split_df_by_NAs <- function(df, svg_width, svg_height) {
           # Add a second coordinate slightly further away to
           # draw a path that looks like a single point
           xydf_fix <- xydf %>%
-            mutate(x = x + svg_width*0.003, # 0.3% of the SVG width
-                   y = y + svg_height*0.003) # 0.3% of the SVG height
+            mutate(x = x + svg_width*0.002, # 0.2% of the SVG width
+                   y = y + svg_height*0.002) # 0.2% of the SVG height
           xydf <- bind_rows(xydf, xydf_fix)
         }
         return(xydf)
