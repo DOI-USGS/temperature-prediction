@@ -1727,7 +1727,7 @@
           if (self.segmentDict[segment_id].year_count['2019'] > 0) {
             // Dim all temperature timeseries lines
             self.d3.selectAll(".temp_line")
-              .style("opacity", 0)
+              .style("opacity", 0.1)
 
             // Select the associated temperature line and make
             // opaque and thicker to emphasize
