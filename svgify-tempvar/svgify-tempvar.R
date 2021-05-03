@@ -75,25 +75,26 @@ split_df_by_NAs <- function(df, svg_width, svg_height) {
 
       # If there is only one point to draw a path, we want it to resemble
       # a point. To do that, add a small bit using "L" to make it look like a point.
-      coords_fixed <- lapply(coords, function(xydf) {
-        if(nrow(xydf) == 1) {
-          # Add a second coordinate slightly further away to
-          # draw a path that looks like a single point
-          xydf_fix <- xydf %>%
-            mutate(x = x + svg_width*0.002, # 0.2% of the SVG width
-                   y = y + svg_height*0.002) # 0.2% of the SVG height
-          xydf <- bind_rows(xydf, xydf_fix)
-        }
-        return(xydf)
-      })
+      coords_fixed <- lapply(coords, apply_single_coord_fix, svg_height, svg_width)
 
       lapply(coords_fixed, build_path_from_coords) %>%
         str_c(collapse = ' ')
     } else {
       # If there are no NAs, or the NAs are all in sequence at the end or beginning of the string, filter them out
       build_path_from_coords(dat)
-    }
   }
+}
+
+apply_single_coord_fix <- function(coords, svg_height, svg_width) {
+  if(nrow(coords) == 1) {
+    # Add a second coordinate slightly further away to
+    # draw a path that looks like a single point
+    coords_fix <- coords %>%
+      mutate(x = x + svg_width*0.002, # 0.2% of the SVG width
+             y = y + svg_height*0.002) # 0.2% of the SVG height
+    coords <- bind_rows(coords, coords_fix)
+  }
+  return(coords)
 }
 
 build_path_from_coords <- function(coords) {
