@@ -518,7 +518,6 @@
               }
             }
           })
-          console.log(self.segmentDict)
 
           // Set up Ch 2 panel 1 -
           // set up panel 1 map
@@ -1711,8 +1710,6 @@
         },
         mouseoverSeg_c2p3(segment_id, tooltip) {
           const self = this;
-
-          console.log(segment_id)
 
           // make tooltip visible
           tooltip
