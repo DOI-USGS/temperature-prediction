@@ -64,17 +64,12 @@
       </div>
       <p v-html="text.paragraph9" />
       <p v-html="text.paragraph10" />
-      <p v-html="text.paragraph11" />
-      <p v-html="text.tiptextDesktop" />
     </div>
     <div class="box-matrix">
       <div class="text-content move-up">
         <div class="viz-title-wrapper">
           <p class="viz-title">
-            <span class="yellow">Availability</span> of stream temperature data
-          </p>
-          <p class="viz-subtitle">
-            Visualizing the count of temperature observations in stream reaches across the basin.
+            <span class="yellow">Availability</span> of temperature data in space and time
           </p>
           <p class="viz-subtitle">
             Hover over a stream reach on the map or a row in the matrix to see the amount of data available for a single reach over the last forty years.
@@ -187,10 +182,9 @@
       <div class="subheader">
         <h3 v-html="text.title4" />
       </div>
-      <p v-html="text.paragraph12" />
+      <p v-html="text.paragraph11" />
       <Chapter2Icons3 />
-      <p v-html="text.paragraph13" />
-      <p v-html="text.paragraph14" />
+      <p v-html="text.paragraph12" />
     </div>
     <div class="box-matrix">
       <div class="text-content move-up">
@@ -199,10 +193,7 @@
             Stream temperature <span class="yellow">variability</span> in 2019
           </p>
           <p class="viz-subtitle">
-            Visualizing measured stream temperature in the basin in 2019. Each line = one reach.
-          </p>
-          <p class="viz-subtitle">
-            Hover over a stream reach on the map to see temperatures in that reach during 2019.
+            Hover over a stream reach on the map to see temperatures in that reach.
           </p>
           <p class="viz-subtitle">
             Hover over the chart to see average stream temperatures during each month.
@@ -232,7 +223,8 @@
       </div>
     </div>
     <div class="text-content">
-      <p v-html="text.paragraph15" />
+      <p v-html="text.paragraph13" />
+      <p v-html="text.paragraph14" />
     </div>   
     <div class="container-fluid">
       <div
