@@ -301,11 +301,6 @@
                     'method': " This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.",
                     'flubber_id': '',
                     'bees_id': 'step_rgcn_ptrn'
-                },
-                {
-                    'method': "To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in <a href=\"https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2019WR024922\" target=”_blank” class=\"pub_link_mobile\">lakes</a> and <a href=\"https://arxiv.org/pdf/2009.12575.pdf\" target=”_blank” class=\"pub_link_mobile\">streams</a>.",
-                    'flubber_id': '',
-                    'bees_id': 'step_rgcn_ptrn'
                 }]
         }
     }
