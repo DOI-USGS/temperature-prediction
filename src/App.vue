@@ -4,9 +4,7 @@
     <HeaderUSWDSBanner />
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
-    <!-- WorkInProgressWarning v-if="checkTypeOfEnv !== '' & !isInternetExplorer" / --> <!-- an empty string in this case means the 'prod' version of the application   -->
     <NavTitle />
-    <!-- Title / -->
     <router-view
       v-if="!isInternetExplorer"
     />
@@ -23,7 +21,6 @@
     import HeaderUSGS from './components/HeaderUSGS'
     import NavTitle from './components/Nav_title'
     import Nav from './components/Nav'
-    // import Title from './components/Title'
     import { isMobile } from 'mobile-device-detect';
 
     export default {
@@ -34,9 +31,7 @@
             HeaderUSGS,
             NavTitle,
             Nav,
-            // Title,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
-            // WorkInProgressWarning: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "work-in-progress-warning"*/ "./components/WorkInProgressWarning"),
             PreFooterVisualizationsLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-visualizations"*/ "./components/PreFooterVisualizationsLinks"),
             PreFooterCodeLinks: () => import( /* webpackPreload: true */ /*webpackChunkName: "pre-footer-links-code"*/ "./components/PreFooterCodeLinks"),
             FooterUSGS: () => import( /* webpackPreload: true */ /*webpackChunkName: "usgs-footer"*/ "./components/FooterUSGS") // Have Webpack put the footer in a separate chunk so we can load it conditionally (with a v-if) if we desire
@@ -97,29 +92,26 @@ $dimGray: #9c9c9c;
 
 // Type
 body {
-      margin: 0;
-      padding: 0;
-      color: $offWhite;
-      background-color: $backgroundCharcoal;
-      line-height: 1.5;
-      font-size: 13pt;
-      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      width: 100%;
-  }
-
+  margin: 0;
+  padding: 0;
+  color: $offWhite;
+  background-color: $backgroundCharcoal;
+  line-height: 1.5;
+  font-size: 13pt;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+}
 
 h1{
   font-size: 2em;
   font-weight: 300;
   @media screen and (max-width: 600px) {
-      font-size: 1.4em;
+    font-size: 1.4em;
   }  
 }
-
-
 
 h2{
   color: $mediumBlue;
@@ -138,14 +130,13 @@ h3{
   padding-top: .5em;
   font-weight: 300;
   @media screen and (max-width: 600px) {
-      font-size: 1.4em;
+    font-size: 1.4em;
   }  
 }
 
 .overall-title {
   padding-top: 0vh;
   margin: 0 auto;
-  // background: $footerBlue;
   overflow-x: hidden;
   @media screen and (max-width: 600px) {
     padding: 0 20px 0 20px;
@@ -154,10 +145,9 @@ h3{
 
 .byline {
   font-family: 'Georgia', Helvetica, Arial, sans-serif;
-  // font-style: italic;
   font-weight: 300;
   font-size: .8em;
-  color: $grayBlue; //#808080
+  color: $grayBlue; 
 }
 
 .chapter {
@@ -171,168 +161,124 @@ h3{
   padding-top: 1.25em;
   padding-bottom: .75em;
 }
+
 .first_subheader {
   padding-top: 0em;
   padding-bottom: .75em;
 }
-  // General Layout  
+// General Layout  
 
-  .text-content {
-    min-width: 350px;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 2em;   
-    @media screen and (max-width: 600px) {
-        padding: 10px;
-    }  
-  }
-  .text-content.move-up {
-    padding-bottom: 5px;
-  }
-
-  .box {
-    background-color: $boxCharcoal;
-    border-radius: 5px;
-    max-width: 700px;
-    margin: 0 auto;
+.text-content {
+  min-width: 350px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2em;   
+  @media screen and (max-width: 600px) {
     padding: 10px;
-    @media screen and (max-width: 600px) {
-        width: 90%;
-        padding: 10px;
-        // max-width: 95%;
-        // margin: 20px;
-    } 
-  }
+  }  
+}
+.text-content.move-up {
+  padding-bottom: 5px;
+}
 
-  .box-matrix {
-    background-color: $boxCharcoal;
-    border-radius: 5px;
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 1%;
-    @media screen and (max-width: 600px) {
-        margin: 20px;
-    }
-  }
+.box {
+  background-color: $boxCharcoal;
+  border-radius: 5px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 10px;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    padding: 10px;
+  } 
+}
 
-  // .flex-container {
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   align-items: flex-start;
-  //   justify-content: space-evenly;
-  //   align-content: space-around;
-  //   max-width: 30%;
-  //   margin: auto;
-  //   @media screen and (max-width: 600px) {
-  //       max-width: 100%;
-  //   }
+.box-matrix {
+  background-color: $boxCharcoal;
+  border-radius: 5px;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 1%;
+  @media screen and (max-width: 600px) {
+      margin: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .flex-container {
+    flex-direction: column;
+  }
+  .flex-item {
+    flex: none;
+    padding: 0 0 1em 0;
+    height: 100%;
+  }
+}
+
+.figure-content {
+  border: 1px white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  align-content: space-around;
+  max-width: 100%;
+  margin: auto;
+  @media screen and (max-width: 600px) {
+    padding: 0px; 
+  }
+}
+
+.figure {
+  display: flex;
+  padding: 20px;
+  max-height: 100vh;
+  align-items: center;
+  justify-content: center; 
+  @media screen and (max-width: 600px) {
+    padding: 0px;
+  }
+}
+
+.map {
+  min-width: 600px;
+  max-width: 800px;
+  max-height: 150vh;
+  flex: 1 1 30%;
+  justify-self: center;
+  @media screen and (max-width: 600px) {
+    max-width: 300px;
+  }
+  // @media screen and (max-height: 770px) {
+  //   max-height: 130vh;
   // }
+}
 
-  // .flex-item {
-  //   padding: 20px;
-  //   min-width: 400px;
-  //   flex: 0 0 auto;
-  //   align-self: center;
-  // }
-
-
-  @media (max-width: 600px) {
-    .flex-container {
-      flex-direction: column;
-    }
-    .flex-item {
-      flex: none;
-      padding: 0 0 1em 0;
-      height: 100%;
-    }
+.map_monitoring {
+  min-width: 400px;
+  max-width: 600px;
+  max-height: 95vh;
+  flex: 1 1 30%;
+  justify-self: center;
+  @media screen and (max-width: 600px) {
+    max-width: 300px;
   }
+}
 
-  .figure-content {
-    border: 1px white;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    align-content: space-around;
-    max-width: 100%;
-    // padding: 0 100px;
-    margin: auto;
-
-    @media screen and (max-width: 600px) {
-        padding: 0px; 
-    }
-
-  }
-  .figure {
-    display: flex; //block, flex
-    padding: 20px;
-    max-height: 100vh;
-    align-items: center;
-    justify-content: center; 
-    @media screen and (max-width: 600px) {
-      padding: 0px;
-     }
-  }
-
-  .map {
-    min-width: 600px;
-    max-width: 800px;
-    max-height: 150vh;
-    flex: 1 1 30%;
-    justify-self: center;
-
-    @media screen and (max-width: 600px) {
-        max-width: 300px;
-    }
-  }
-  .map_monitoring {
-    min-width: 400px;
-    max-width: 600px;
-    max-height: 100%;
-    flex: 1 1 30%;
-    justify-self: center;
-    @media screen and (max-width: 600px) {
-        max-width: 300px;
-    }
-  }
-  // .map_matrix {
-  //   justify-self: center;
-  //   min-width: 250px;
-  //   max-width: 600px;
-  //   max-height: 90vh;
-  //   // flex: 1 1 30%;
-  // }
-  .chart {
-    min-width: 600px;
-    // flex: 1 1 40%;
-  }
-
-  // .matrix {
-  //   justify-self: stretch;
-  //   min-width: 400px;
-  //   // max-width: 700px;
-  //   max-height: 90vh;
-  //   // flex: 1 1 50%;
-  // }
-
-// Specific Design Elements for Charts and Maps
-
-// .move-up {
-//   margin-bottom: -100px;
-
-// }
+.chart {
+  min-width: 600px;
+}
 
 .viz-title-wrapper {
   max-width: 100%;
   z-index: 100;
   @media screen and (max-width: 600px) {
-        max-width: 100%;
-        padding: 10px 10px 0px 10px;
+    max-width: 100%;
+    padding: 10px 10px 0px 10px;
   }
 }
 
 .viz-title {
-  // box-shadow: -5px -5px $monotoneBlue5;
   font-size: 1.4em;
   font-weight: 700;
   color: $offWhiteBox;
@@ -355,21 +301,24 @@ h3{
 }
 
 .legend-text {
-    fill: $dimGray;
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 12pt;
-  }
+  fill: $dimGray;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+}
+
 .explainer-minor-text {
-    fill: $dimGray;
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size: 15pt;
-  }
+  fill: $dimGray;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  font-size: 15pt;
+}
+  
 .viz-comment {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 26px;
   font-weight: 400;
   fill: $offWhite;
 }
+
 .viz-emph {
   font-weight:700;
   fill: white;
@@ -411,7 +360,6 @@ h3{
   stroke: $boxCharcoal;
   stroke-width: 0.75px;
 }
-
 
 a:focus {
     outline: none;

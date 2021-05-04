@@ -383,31 +383,6 @@ import * as d3 from 'd3';
 
 export default {
     name: "MonitoringLineChart",
-
-    // everything after here is copied from Chapter 3 stuff, sorry for the likely brokenness!
-    data() {
-      return {
-      // d3: null, // this is used so that we can assign d3 plugins to the d3 instance
-            // global variables instantiated in next section
-      }
-    },
-    mounted() {
-      console.log("App Loaded")
-      // this.d3 = Object.assign(d3Base, { geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles }); // this loads d3 plugins with webpack
-    },
-    methods: {
-      colorLines() {
-        var specialLines = document.querySelectorAll(".special-line")
-
-        // build color scale
-        var myColor = self.d3.scaleSequential()
-            .interpolator(self.d3.interpolateRdYlBu) /* interpolatePlasma */
-            .domain([0, 30]) // if INVERTING color scale
-
-
-            // Use this tutorial https://www.d3-graph-gallery.com/graph/line_color_gradient_svg.html
-      }
-    }
 }
 </script>
 
@@ -429,23 +404,22 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
 #line-chart-svg {
-    width: 100%;
+  width: 100%;
 }
 
 .background-line {
-    fill: none;
-    stroke: $grayBlue;
-    stroke-width: 0.5px;
-    opacity: .25;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-miterlimit: 10;
+  fill: none;
+  stroke: $grayBlue;
+  stroke-width: 0.5px;
+  opacity: .25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
 }
 
 .cls-1, .cls-23, .cls-24, .cls-25, .cls-3 {
   fill: none;
 }
-
 
 .cls-23, .cls-24, .cls-25 {
   stroke-linecap: round;
@@ -468,11 +442,9 @@ $dimGray: #9c9c9c;
   fill: #fff;
 }
 
-
 .cls-22 {
   font-weight: 300;
 }
-
 
 .cls-23 { // cool reach
   stroke: $mediumBlue; 

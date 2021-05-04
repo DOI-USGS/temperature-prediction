@@ -975,224 +975,223 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-time-view {
-        width: 100%;
-    }
+  width: 100%;
+}
 
-    .cls-1 {
-        isolation: isolate;
-      }
+.cls-1 {
+  isolation: isolate;
+}
 
-      .cls-2 {
-        opacity: 0.8;
-        mix-blend-mode: screen;
-      }
+.cls-2 {
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
 
-      .cls-3 {
-        fill: #e26660;
-        stroke: #e26660;
-      }
+.cls-3 {
+  fill: #e26660;
+  stroke: #e26660;
+}
 
-      .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-3, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
-        stroke-width: 0.5px;
-      }
+.cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-3, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+  stroke-width: 0.5px;
+}
 
-      .cls-4 {
-        fill: #f4ed27;
-        stroke: #f4ed27;
-      }
+.cls-4 {
+  fill: #f4ed27;
+  stroke: #f4ed27;
+}
 
-      .cls-5 {
-        fill: #20068f;
-        stroke: #20068f;
-      }
+.cls-5 {
+  fill: #20068f;
+  stroke: #20068f;
+}
 
-      .cls-6 {
-        fill: #240691;
-        stroke: #240691;
-      }
+.cls-6 {
+  fill: #240691;
+  stroke: #240691;
+}
 
-      .cls-7 {
-        fill: #1b068d;
-        stroke: #1b068d;
-      }
+.cls-7 {
+  fill: #1b068d;
+  stroke: #1b068d;
+}
 
-      .cls-8 {
-        fill: #130789;
-        stroke: #130789;
-      }
+.cls-8 {
+  fill: #130789;
+  stroke: #130789;
+}
 
-      .cls-9 {
-        fill: #19068c;
-        stroke: #19068c;
-      }
+.cls-9 {
+  fill: #19068c;
+  stroke: #19068c;
+}
 
-      .cls-10 {
-        fill: #1d068e;
-        stroke: #1d068e;
-      }
+.cls-10 {
+  fill: #1d068e;
+  stroke: #1d068e;
+}
 
-      .cls-11 {
-        fill: #220690;
-        stroke: #220690;
-      }
+.cls-11 {
+  fill: #220690;
+  stroke: #220690;
+}
 
-      .cls-12 {
-        fill: #16078a;
-        stroke: #16078a;
-      }
+.cls-12 {
+  fill: #16078a;
+  stroke: #16078a;
+}
 
-      .cls-13 {
-        fill: #f7e425;
-        stroke: #f7e425;
-      }
+.cls-13 {
+  fill: #f7e425;
+  stroke: #f7e425;
+}
 
-      .cls-14 {
-        fill: #280592;
-        stroke: #280592;
-      }
+.cls-14 {
+  fill: #280592;
+  stroke: #280592;
+}
 
-      .cls-15 {
-        fill: #f0f921;
-        stroke: #f0f921;
-      }
+.cls-15 {
+  fill: #f0f921;
+  stroke: #f0f921;
+}
 
-      .cls-16 {
-        fill: #feb72d;
-        stroke: #feb72d;
-      }
+.cls-16 {
+  fill: #feb72d;
+  stroke: #feb72d;
+}
 
-      .cls-17 {
-        fill: #fa9c3c;
-        stroke: #fa9c3c;
-      }
+.cls-17 {
+  fill: #fa9c3c;
+  stroke: #fa9c3c;
+}
 
-      .cls-18 {
-        fill: #0d0887;
-        stroke: #0d0887;
-      }
+.cls-18 {
+  fill: #0d0887;
+  stroke: #0d0887;
+}
 
-      .cls-19 {
-        fill: #fdaf31;
-        stroke: #fdaf31;
-      }
+.cls-19 {
+  fill: #fdaf31;
+  stroke: #fdaf31;
+}
 
-      .cls-20 {
-        fill: #f1f426;
-        stroke: #f1f426;
-      }
+.cls-20 {
+  fill: #f1f426;
+  stroke: #f1f426;
+}
 
-      .cls-21 {
-        fill: #f9983e;
-        stroke: #f9983e;
-      }
+.cls-21 {
+  fill: #f9983e;
+  stroke: #f9983e;
+}
 
-      .cls-22 {
-        fill: #db5c68;
-        stroke: #db5c68;
-      }
+.cls-22 {
+  fill: #db5c68;
+  stroke: #db5c68;
+}
 
-      .cls-23 {
-        fill: #3e049c;
-        stroke: #3e049c;
-      }
+.cls-23 {
+  fill: #3e049c;
+  stroke: #3e049c;
+}
 
-      .cls-24 {
-        fill: #3c049b;
-        stroke: #3c049b;
-      }
+.cls-24 {
+  fill: #3c049b;
+  stroke: #3c049b;
+}
 
-      .cls-25 {
-        fill: #f5eb27;
-        stroke: #f5eb27;
-      }
+.cls-25 {
+  fill: #f5eb27;
+  stroke: #f5eb27;
+}
 
-      .cls-26 {
-        fill: #f2f227;
-        stroke: #f2f227;
-      }
+.cls-26 {
+  fill: #f2f227;
+  stroke: #f2f227;
+}
 
-      .cls-27 {
-        fill: #f9dc24;
-        stroke: #f9dc24;
-      }
+.cls-27 {
+  fill: #f9dc24;
+  stroke: #f9dc24;
+}
 
-      .cls-28 {
-        fill: #7e03a8;
-        stroke: #7e03a8;
-      }
+.cls-28 {
+  fill: #7e03a8;
+  stroke: #7e03a8;
+}
 
-      .cls-29 {
-        fill: #f1f525;
-        stroke: #f1f525;
-      }
+.cls-29 {
+  fill: #f1f525;
+  stroke: #f1f525;
+}
 
-      .cls-30 {
-        fill: #f3f027;
-        stroke: #f3f027;
-      }
+.cls-30 {
+  fill: #f3f027;
+  stroke: #f3f027;
+}
 
-      .cls-31 {
-        fill: #350498;
-        stroke: #350498;
-      }
+.cls-31 {
+  fill: #350498;
+  stroke: #350498;
+}
 
-      .cls-32 {
-        fill: #f6e626;
-        stroke: #f6e626;
-      }
+.cls-32 {
+  fill: #f6e626;
+  stroke: #f6e626;
+}
 
-      .cls-33 {
-        fill: #5b01a5;
-        stroke: #5b01a5;
-      }
+.cls-33 {
+  fill: #5b01a5;
+  stroke: #5b01a5;
+}
 
-      .cls-34 {
-        fill: #2f0596;
-        stroke: #2f0596;
-      }
+.cls-34 {
+  fill: #2f0596;
+  stroke: #2f0596;
+}
 
-      .cls-35, .cls-36, .cls-49 {
-        fill: none;
-        stroke-miterlimit: 10;
-      }
+.cls-35, .cls-36, .cls-49 {
+  fill: none;
+  stroke-miterlimit: 10;
+}
 
-      .cls-35, .cls-36 {
-        stroke: $dimGray;
-        stroke-width: 3px;
-      }
+.cls-35, .cls-36 {
+  stroke: $dimGray;
+  stroke-width: 3px;
+}
 
-      .cls-36 {
-        stroke-dasharray: 2 6;
-      }
+.cls-36 {
+  stroke-dasharray: 2 6;
+}
 
-      .cls-37 {
-        fill: $dimGray;
-      }
+.cls-37 {
+  fill: $dimGray;
+}
 
-      .cls-38, .cls-39 {
-        font-size: 26px;
-        font-family: SourceSansPro-Regular, Source Sans Pro;
-      }
+.cls-38, .cls-39 {
+  font-size: 26px;
+  font-family: SourceSansPro-Regular, Source Sans Pro;
+}
 
-      .cls-38, .cls-50 {
-        fill: $dimGray;
-      }
+.cls-38, .cls-50 {
+  fill: $dimGray;
+}
 
-      .cls-39 {
-        fill: #c1c0c0;
-      }
+.cls-39 {
+  fill: #c1c0c0;
+}
 
-      .cls-40 {
-        fill: #eaeae9;
-        font-family: SourceSansPro-Bold, Source Sans Pro;
-        font-weight: 700;
-      }
+.cls-40 {
+  fill: #eaeae9;
+  font-family: SourceSansPro-Bold, Source Sans Pro;
+  font-weight: 700;
+}
 
 
-      .cls-49 {
-        stroke: $dimGray;
-        stroke-width: 1.5px;
-      }
-
+.cls-49 {
+  stroke: $dimGray;
+  stroke-width: 1.5px;
+}
 
 </style>

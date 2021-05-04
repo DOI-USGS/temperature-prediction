@@ -327,11 +327,11 @@
     $dimGray: #9c9c9c;
 
     a.pub_link_mobile {
-        color: $mediumBlue;
-        box-shadow: 0 0.5px 0 $mediumBlue;
+      color: $mediumBlue;
+      box-shadow: 0 0.5px 0 $mediumBlue;
     }
 
     a.pub_link_mobile:focus {
-        outline: none;
+      outline: none;
     }
 </style>

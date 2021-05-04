@@ -399,225 +399,224 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-space-view {
-        width: 100%;
-    }
+  width: 100%;
+}
 
-    .cls-2 {
-        opacity: 0.8;
-        mix-blend-mode: screen;
-      }
+.cls-2 {
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
 
-      .cls-3, .cls-38, .cls-4 {
-        fill: none;
-        stroke-miterlimit: 10;
-      }
+.cls-3, .cls-38, .cls-4 {
+  fill: none;
+  stroke-miterlimit: 10;
+}
 
-      .cls-3, .cls-4 {
-        stroke: $dimGray;
-        stroke-width: 3px;
-      }
+.cls-3, .cls-4 {
+  stroke: $dimGray;
+  stroke-width: 3px;
+}
 
-      .cls-4 {
-        stroke-dasharray: 1.99 5.97;
-      }
+.cls-4 {
+  stroke-dasharray: 1.99 5.97;
+}
 
-      .cls-5 {
-        fill: $dimGray;
-      }
+.cls-5 {
+  fill: $dimGray;
+}
 
-      .cls-40, .cls-6 {
-        font-size: 26px;
-      }
+.cls-40, .cls-6 {
+  font-size: 26px;
+}
 
-      .cls-39, .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
-        fill: $dimGray;
-      }
+.cls-39, .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
+  fill: $dimGray;
+}
 
-      .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
-        font-family: SourceSansPro-Regular, Source Sans Pro;
-      }
+.cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-6 {
+  font-family: SourceSansPro-Regular, Source Sans Pro;
+}
 
-      .cls-7 {
-        fill: #e87059;
-        stroke: #e87059;
-      }
+.cls-7 {
+  fill: #e87059;
+  stroke: #e87059;
+}
 
-      .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-35, .cls-36, .cls-37, .cls-7, .cls-8, .cls-9 {
-        stroke-width: 0.5px;
-      }
+.cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-16, .cls-17, .cls-18, .cls-19, .cls-20, .cls-21, .cls-22, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-35, .cls-36, .cls-37, .cls-7, .cls-8, .cls-9 {
+  stroke-width: 0.5px;
+}
 
-      .cls-8 {
-        fill: #fdc627;
-        stroke: #fdc627;
-      }
+.cls-8 {
+  fill: #fdc627;
+  stroke: #fdc627;
+}
 
-      .cls-9 {
-        fill: #fcd025;
-        stroke: #fcd025;
-      }
+.cls-9 {
+  fill: #fcd025;
+  stroke: #fcd025;
+}
 
-      .cls-10 {
-        fill: #fb9f3a;
-        stroke: #fb9f3a;
-      }
+.cls-10 {
+  fill: #fb9f3a;
+  stroke: #fb9f3a;
+}
 
-      .cls-11 {
-        fill: #fbd524;
-        stroke: #fbd524;
-      }
+.cls-11 {
+  fill: #fbd524;
+  stroke: #fbd524;
+}
 
-      .cls-12 {
-        fill: #f4ed27;
-        stroke: #f4ed27;
-      }
+.cls-12 {
+  fill: #f4ed27;
+  stroke: #f4ed27;
+}
 
-      .cls-13 {
-        fill: #f7e225;
-        stroke: #f7e225;
-      }
+.cls-13 {
+  fill: #f7e225;
+  stroke: #f7e225;
+}
 
-      .cls-14 {
-        fill: #f0f921;
-        stroke: #f0f921;
-      }
+.cls-14 {
+  fill: #f0f921;
+  stroke: #f0f921;
+}
 
-      .cls-15 {
-        fill: #f6e626;
-        stroke: #f6e626;
-      }
+.cls-15 {
+  fill: #f6e626;
+  stroke: #f6e626;
+}
 
-      .cls-16 {
-        fill: #feb72d;
-        stroke: #feb72d;
-      }
+.cls-16 {
+  fill: #feb72d;
+  stroke: #feb72d;
+}
 
-      .cls-17 {
-        fill: #f5e926;
-        stroke: #f5e926;
-      }
+.cls-17 {
+  fill: #f5e926;
+  stroke: #f5e926;
+}
 
-      .cls-18 {
-        fill: #fec029;
-        stroke: #fec029;
-      }
+.cls-18 {
+  fill: #fec029;
+  stroke: #fec029;
+}
 
-      .cls-19 {
-        fill: #fdb42f;
-        stroke: #fdb42f;
-      }
+.cls-19 {
+  fill: #fdb42f;
+  stroke: #fdb42f;
+}
 
-      .cls-20 {
-        fill: #feba2c;
-        stroke: #feba2c;
-      }
+.cls-20 {
+  fill: #feba2c;
+  stroke: #feba2c;
+}
 
-      .cls-21 {
-        fill: #fdc527;
-        stroke: #fdc527;
-      }
+.cls-21 {
+  fill: #fdc527;
+  stroke: #fdc527;
+}
 
-      .cls-22 {
-        fill: #f68f44;
-        stroke: #f68f44;
-      }
+.cls-22 {
+  fill: #f68f44;
+  stroke: #f68f44;
+}
 
-      .cls-23 {
-        fill: #fca636;
-        stroke: #fca636;
-      }
+.cls-23 {
+  fill: #fca636;
+  stroke: #fca636;
+}
 
-      .cls-24 {
-        fill: #7701a8;
-        stroke: #7701a8;
-      }
+.cls-24 {
+  fill: #7701a8;
+  stroke: #7701a8;
+}
 
-      .cls-25 {
-        fill: #f48948;
-        stroke: #f48948;
-      }
+.cls-25 {
+  fill: #f48948;
+  stroke: #f48948;
+}
 
-      .cls-26 {
-        fill: #fdac33;
-        stroke: #fdac33;
-      }
+.cls-26 {
+  fill: #fdac33;
+  stroke: #fdac33;
+}
 
-      .cls-27 {
-        fill: #ef7c51;
-        stroke: #ef7c51;
-      }
+.cls-27 {
+  fill: #ef7c51;
+  stroke: #ef7c51;
+}
 
-      .cls-28 {
-        fill: #c33d80;
-        stroke: #c33d80;
-      }
+.cls-28 {
+  fill: #c33d80;
+  stroke: #c33d80;
+}
 
-      .cls-29 {
-        fill: #fbd324;
-        stroke: #fbd324;
-      }
+.cls-29 {
+  fill: #fbd324;
+  stroke: #fbd324;
+}
 
-      .cls-30 {
-        fill: #fca934;
-        stroke: #fca934;
-      }
+.cls-30 {
+  fill: #fca934;
+  stroke: #fca934;
+}
 
-      .cls-31 {
-        fill: #f0f724;
-        stroke: #f0f724;
-      }
+.cls-31 {
+  fill: #f0f724;
+  stroke: #f0f724;
+}
 
-      .cls-32 {
-        fill: #ce4b75;
-        stroke: #ce4b75;
-      }
+.cls-32 {
+  fill: #ce4b75;
+  stroke: #ce4b75;
+}
 
-      .cls-33 {
-        fill: #eb7655;
-        stroke: #eb7655;
-      }
+.cls-33 {
+  fill: #eb7655;
+  stroke: #eb7655;
+}
 
-      .cls-34 {
-        fill: #7e03a8;
-        stroke: #7e03a8;
-      }
+.cls-34 {
+  fill: #7e03a8;
+  stroke: #7e03a8;
+}
 
-      .cls-35 {
-        fill: #feb82c;
-        stroke: #feb82c;
-      }
+.cls-35 {
+  fill: #feb82c;
+  stroke: #feb82c;
+}
 
-      .cls-36 {
-        fill: #c5407e;
-        stroke: #c5407e;
-      }
+.cls-36 {
+  fill: #c5407e;
+  stroke: #c5407e;
+}
 
-      .cls-37 {
-        fill: #f9973f;
-        stroke: #f9973f;
-      }
+.cls-37 {
+  fill: #f9973f;
+  stroke: #f9973f;
+}
 
-      .cls-38 {
-        stroke: #7d7d7d;
-        stroke-width: 1.5px;
-      }
+.cls-38 {
+  stroke: #7d7d7d;
+  stroke-width: 1.5px;
+}
 
-      .cls-40 {
-        fill: #eaeae9;
-        font-family: SourceSansPro-Bold, Source Sans Pro;
-        font-weight: 700;
-      }
+.cls-40 {
+  fill: #eaeae9;
+  font-family: SourceSansPro-Bold, Source Sans Pro;
+  font-weight: 700;
+}
 
-      .cls-41 {
-        letter-spacing: -0.01em;
-      }
+.cls-41 {
+  letter-spacing: -0.01em;
+}
 
-      .cls-42 {
-        letter-spacing: -0.03em;
-      }
+.cls-42 {
+  letter-spacing: -0.03em;
+}
 
-      .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48 {
-        font-weight: 400;
-      }
+.cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48 {
+  font-weight: 400;
+}
 
-     
 </style>
