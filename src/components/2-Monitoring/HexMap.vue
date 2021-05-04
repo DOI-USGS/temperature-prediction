@@ -4044,7 +4044,7 @@ $dimGray: #9c9c9c;
   fill-rule: evenodd;
   stroke: $boxCharcoal;
   stroke-miterlimit: 10;
-  stroke-width: 0.1;
+  stroke-width: 1;
 }
 .hex_title {
   fill: $offWhiteBox;
