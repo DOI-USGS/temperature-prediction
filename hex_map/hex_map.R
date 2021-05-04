@@ -1,10 +1,13 @@
+
+# hex map -----------------------------------------------------------------
+
 ### making a hex map of temperature observations across CONUS
 #### from waterdata.usgs.gov/visualizations/temperature-prediction/index.html#/monitoring
 
-## goal: plot the number of temperature observations at the national scale
-## use hex grid to spatiall bin observation data
+## plotting temperature observations at the national scale
+## use hex grid to spatially bin observation data
 
-# preliminaries --------------------------------------------------------------
+# preliminaries ----------------------------------------------------------
 
 ## load libraries
 library(rmapshaper);library(sf);library(maps)
@@ -13,10 +16,10 @@ library(tidyverse);library(lubridate)
 
 proj<-"+proj=lcc +lat_1=30.7 +lat_2=29.3 +lat_0=28.5 +lon_0=-91.33333333333333 +x_0=999999.9999898402 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
 
-# prep data ------------------------------------------------------------
+# prep data ---------------------------------------------------------------
 
 ## temperature observation data 
-sites_sf <- read.csv("temperature_counts_us.csv") %>%
+sites_sf <- read.csv("temperature_counts_us_2020.csv") %>%
   filter(!is.na(longitude))%>%
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>% 
   st_transform(proj)
