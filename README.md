@@ -49,3 +49,17 @@ And then launch JupyterLab:
 `jupyter lab`
 
 The `Temperature_Prediction_data.ipynb` notebook should automatically open
+
+## Preprocessing SVGs
+
+A trick we've learned over the years is to preprocess SVGs to save on loading time and then add interaction with D3 later. In this viz, we prebuilt the matrix showing the number of observations available per segment through time and the line chart showing temperatures throughout 2019 for each segment. Below is the code you can run to prebuild them yourself. 
+
+```r
+# Creates the SVG, `src/assets/prebuilt_c1p2_linechart.svg`
+# This uses the data in `public/data/matrix_annual_obs.csv`
+source("svgify-charts/prebuild_c1p2_matrix.R")
+
+# Creates the SVG, `src/assets/prebuilt_c1p3_linechart.svg`
+# This uses the data in `public/data/matrix_daily_2019_obs.csv`
+source("svgify-charts/prebuild_c1p3_linechart.R")
+```
