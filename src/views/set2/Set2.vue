@@ -1416,14 +1416,14 @@
           tooltip
               .attr("y", mouse_y - 5)
               .attr("x", function() {
-                if (mouse_x < 210) {
+                if (mouse_x < 180) {
                   return mouse_x + 5
                 } else {
                   return mouse_x - 5
                 }
               })
               .attr("text-anchor", function() {
-                if (mouse_x < 210) {
+                if (mouse_x < 180) {
                   return "start"
                 } else {
                   return "end"
