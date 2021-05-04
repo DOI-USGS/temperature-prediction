@@ -156,7 +156,7 @@
             Knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.  <br> <br>
             These models could be used to answer pressing water questions: How will climate change impact available fish habitat? Will increases in water use change stream temperature dynamics? What will happen to stream temperature if we add or remove a dam?   <br> <br>
             What’s next for knowledge-guided water temperature modeling at the U.S. Geological Survey? We’re actively working to incorporate real-time data to improve temperature forecasts, modify the machine learning architecture to accommodate reservoirs, and expand to new basins across the U.S.   <br> <br>
-            To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in lakes and streams.
+            To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in <a href=\"https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2019WR024922\" target=”_blank” class=\"pub_link\">lakes</a> and <a href=\"https://arxiv.org/pdf/2009.12575.pdf\" target=”_blank” class=\"pub_link\">streams</a>.
           </p>
         </div>
         </div>
