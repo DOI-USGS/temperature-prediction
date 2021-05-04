@@ -11,7 +11,7 @@
       class="hex"
       stroke-linejoin="round"
       stroke-width="1.3"
-      transform="translate(-350 450)"
+      transform="translate(-355 450)"
     >
     <path fill="#f6dd2b" class="hex" d="M562 28.7l2.8-5h5.7l2.8 5-2.8 4.9h-5.7z"/>
     <path fill="#fca637" class="hex" d="M544.3 28.7l2.8-5h5.7l2.8 5-2.8 4.9h-5.7z"/>
@@ -31,7 +31,6 @@
     <path fill="#b12a90" class="hex" d="M482.5 33.7l2.8-4.9h5.7l2.8 5-2.8 4.9h-5.7z"/>
     <path fill="#52039d" class="hex" d="M447.2 33.7l2.8-4.9h5.7l2.8 5-2.8 4.8H450z"/>
     <path fill="#0d0887" class="hex" d="M429.5 33.7l2.8-4.9h5.7l2.8 5-2.8 4.9h-5.7z"/>
-    <path fill="#020000" class="hex" d="M411.9 33.7l2.8-4.9h5.7l2.8 5-2.8 4.9h-5.7z"/>
     <path fill="#f9f04e" class="hex" d="M570.8 33.7l2.8-4.9h5.7l2.8 5-2.8 4.9h-5.7z" style="isolation:isolate"/>
   </g>
       <text
@@ -42,14 +41,14 @@
         Total temperature observations
       </text>
       <text
-        transform="translate(45 488)"
+        transform="translate(50 488)"
         style="isolation:isolate"
         class="hex_label"
       >
         0
       </text>
       <text
-        transform="translate(251 488)"
+        transform="translate(246 488)"
         style="isolation:isolate"
         class="hex_label"
       >
