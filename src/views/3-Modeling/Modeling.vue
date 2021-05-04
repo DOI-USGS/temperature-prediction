@@ -174,7 +174,7 @@
             // dimensions
             height: 500,
             width: 1000,
-            //margin: 50,
+            margin: 50,
             svg: null,
 
             // string keys to modify chart appearance
@@ -338,8 +338,8 @@
           // resize to keep scroller accurate with window size changes
           resize () {
             const self = this;
-            const bounds = this.$refs.figure.getBoundingClientRect()
-            this.width_screen = bounds.width
+            //const bounds = this.$refs.figure.getBoundingClientRect()
+            //this.width_screen = bounds.width
             //this.height = bounds.height
             //this.marginX = bounds.width * 0.1
             //this.marginY = bounds.height * 0.1 
@@ -449,6 +449,8 @@
               // define which labels and annotations are drawn initially based on scroll step
               // setting opacity
               if (this.mobileView) {
+                // steps with opacity = 1
+          
                   switch(this.step) {
                       case this.step_error_exp:
                         this.label_o = 1; //error axis labels
@@ -1074,7 +1076,7 @@
 
           // y axis scale for error plot only
           this.yScale = this.d3.scaleLinear()
-            .range([this.height+margin,0])
+            .range([this.height+margin,-50])
             .domain([0,this.chartState.domain_y]);
 
            // define beeswarm colors
@@ -1112,8 +1114,8 @@
          this.yAxis
           .attr("transform", "translate(" + margin + "," + 0 + ")")
           .style("stroke-width", "3px")
-          .style("stroke-dasharray", this.height+margin)
-          .style("stroke-dashoffset", this.height+margin)// initially draw axis pulled back, then animate drawing depending on step
+          .style("stroke-dasharray", this.height+margin*2)
+          .style("stroke-dashoffset", this.height+margin*2)// initially draw axis pulled back, then animate drawing depending on step
           .style("color", "#9c9c9c")
 
           /// define arrow head for rmse label
@@ -1165,16 +1167,18 @@
         // if refreshed on any of the error chart views, do the line drawing animation to put it on the page
         let error_steps = [this.step_error_exp, this.step_error_obs];
         if (error_steps.indexOf(this.step) !== -1) {
-             self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
-             self.transitionAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
+             self.drawAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+             self.drawAxes(this.yAxis, this.chartState.axis_y); // line drawing animation
 
         // if starts on any rmse steps, draw the rmse axis only
         } else if (this.step >= this.step_rmse) {
            this.yAxis 
             .style("opacity", 0)
+          this.xAxis 
+            .style("opacity", 0)
             
-          self.transitionAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
-          self.transitionAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
+          self.drawAxes(this.xAxis, this.chartState.axis_x); // line drawing animation
+          self.drawAxes(this.yAxis, this.chartState.axis_y); // draw invisible so exist on potential scrollback
         }
 
         let font_item = "30px";
@@ -1193,7 +1197,7 @@
           // text label for the y axis
           this.svg.append("text")
               .attr("transform", "rotate(-90)")
-              .attr("x", -(this.height/2+margin))
+              .attr("x", -((this.height+margin)/2))
               .attr("y",0)
               .attr("dy", "1em")
               .style("text-anchor", "middle")
@@ -1431,7 +1435,7 @@
               .restart()
               .on("tick", self.tick);
           },
-          transitionAxes(element, end) {
+          drawAxes(element, end) {
             const self = this;
             let time_slide = 500;
             element
@@ -1494,66 +1498,16 @@
 
             }
           },
-          drawAxes(axes_in) {
+          moveAxes(alpha, ht) {
             const self = this;
-            // controls axis aniamtions between error chart and beeswarm
-            // to do: clean up and reuse moveXAxis and transitionAxes functions to simplify code here
             let time_slide = 500;
-            let margin = 50;
-
-            if (axes_in === "error") {
-             this.yAxis
-              .transition()
-              .duration(time_slide)
-              .ease(this.d3.easeCircle)
-              .style("stroke-dashoffset", 0)
-
-            this.xAxis
-              .transition()
-              .duration(time_slide)
-              .ease(this.d3.easeCircle)
-              .style("stroke-dashoffset", 0)
-
-            } else if (axes_in === "error_up") {
-            this.yAxis
-              .transition()
-              .duration(time_slide)
-              .ease(this.d3.easeCircle)
-              .style("stroke-dashoffset", this.height+margin)
-
-            this.xAxis
-              .transition()
-              .duration(time_slide)
-              .ease(this.d3.easeCircle)
-              .style("stroke-dashoffset", this.width+margin)
-
-            } else if (axes_in === "rmse"){
-              // move x-axis up to center line
+            // controls axis aniamtions between error chart and beeswarm
               this.xAxis
                 .transition()
                 .duration(time_slide)
                 .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + 0 + "," + (this.height/2) + ")")
-
-                this.yAxis
-                .transition()
-                .duration(time_slide)
-                .style("opacity", 0)
-
-            } else if (axes_in === "rmse_up"){
-              // move x-axis down to bottom
-
-              this.xAxis
-                .transition()
-                .duration(time_slide)
-                .ease(this.d3.easeCircle)
-                .attr("transform", "translate(" + 0 + "," + (this.height+margin) + ")")
-
-                this.yAxis
-                .transition()
-                .duration(time_slide)
-                .style("opacity", 1)
-            } 
+                .attr("transform", "translate(" + 0 + "," + (ht) + ")")
+                .style("opacity", alpha)
           },
           updateChart() {
             //controls decision making for the error >> beeswarm chart
@@ -1671,9 +1625,9 @@
 
             this.link
                 .attr('x1', function(d) { return d.source.x; })
-                .attr('y1', function(d) { return  d.source.y; })
-                .attr('x2', function(d) { return  d.target.x; })
-                .attr('y2', function(d) { return  d.target.y; });
+                .attr('y1', function(d) { return d.source.y; })
+                .attr('x2', function(d) { return d.target.x; })
+                .attr('y2', function(d) { return d.target.y; });
         }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
@@ -1803,7 +1757,10 @@
         // updates to go with downscroll
           if (response.direction == "down"){
             if (this.step == this.step_error_exp) {
-                self.drawAxes("error"); // draw axes
+                self.drawAxes(this.xAxis, 0); // draw axes
+                self.drawAxes(this.yAxis, 0); // draw axes
+                //self.moveAxes(1, this.height+this.margin); 
+
                 self.fadeIn(this.d3.selectAll(".link"), this.time_fade);
                  self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeIn(this.axis_label, this.time_fade); // show error axis labels
@@ -1812,7 +1769,10 @@
               }  else if (this.step == this.step_error_obs) {
                 self.moveLegend("down"); // add observed to legend
               }  else if (this.step == this.step_rmse) {
-                self.drawAxes("rmse"); // move legend up to center plot for RMSEs
+                self.moveAxes(0, this.height/2);  // move axis up to center plot for RMSEs
+                self.fadeOut(this.xAxis, this.time_fade);
+                self.fadeOut(this.yAxis, this.time_fade);
+
                 // rmse legend in and error legend out
                 self.fadeOut(this.d3.select("line.leg-link"), this.time_fade);
                 self.fadeOut(this.axis_label, this.time_fade); // remove error axis labels
@@ -1847,7 +1807,9 @@
         if (response.direction == "up") {
 
           if (this.step == this.step_error_exp) {
-            self.drawAxes("error_up");
+            self.drawAxes(this.yAxis, this.height+this.margin*2);
+            self.drawAxes(this.xAxis, this.width+this.margin);
+
             this.d3.selectAll(".bees").remove()
             self.fadeOut(this.d3.selectAll(".link"), this.time_fade);
             self.fadeOut(this.axis_label, this.time_fade);
@@ -1856,7 +1818,10 @@
             self.moveLegend("up");
            self.fadeOut(this.legend_observed, this.time_fade);
           } else if (this.step == this.step_rmse) {
-            self.drawAxes("rmse_up");
+            self.fadeIn(this.xAxis, this.time_fade);
+            self.fadeIn(this.yAxis, this.time_fade);
+            self.moveAxes(1, this.height+this.margin); 
+
             self.fadeIn(this.d3.select("line.leg-link"), this.time_fade);
             self.fadeIn(this.axis_label, this.time_fade);
             self.fadeIn(this.legend_predicted, this.time_fade);
