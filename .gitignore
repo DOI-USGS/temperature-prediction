@@ -23,3 +23,6 @@ yarn-error.log*
 # R-to-SVG related data files
 svgify-charts/*.svg
 svgify-charts/*.csv
+.Rproj.user
+*.Rproj
+.Rhistory
