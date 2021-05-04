@@ -1,0 +1,14 @@
+name: temp_prediction
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - numpy
+  - pandas
+  - geopandas
+  - shapely
+  - descartes
+  - geojson
+  - jupyter 
+  - notebook
+  - jupyterlab
