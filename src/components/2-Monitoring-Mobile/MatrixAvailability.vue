@@ -1,8 +1,5 @@
 <template>
   <div id="matrix-availability">
-    <!-- h3 class="viz-title">
-      Observation Frequency for Reaches in the DRB
-    </h3 -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -33061,1165 +33058,1166 @@ $dimGray: #9c9c9c;
   filter: url(#shadow2);
 }
 #matrix-availability {
-        width: 100%;
-    }
-
-    .cls-1, .cls-229 {
-        isolation: isolate;
-      }
-
-      .cls-2 {
-        opacity: 0.8;
-        mix-blend-mode: screen;
-      }
-
-      .cls-3 {
-        fill: #e26561;
-        stroke: #e26561;
-      }
-
-      .cls-10, .cls-100, .cls-101, .cls-102, .cls-103, .cls-104, .cls-105, .cls-106, .cls-107, .cls-108, .cls-109, .cls-11, .cls-110, .cls-111, .cls-112, .cls-113, .cls-114, .cls-115, .cls-116, .cls-117, .cls-118, .cls-119, .cls-12, .cls-120, .cls-121, .cls-122, .cls-123, .cls-124, .cls-125, .cls-126, .cls-127, .cls-128, .cls-129, .cls-13, .cls-130, .cls-131, .cls-132, .cls-133, .cls-134, .cls-135, .cls-136, .cls-137, .cls-138, .cls-139, .cls-14, .cls-140, .cls-141, .cls-142, .cls-143, .cls-144, .cls-145, .cls-146, .cls-147, .cls-148, .cls-149, .cls-15, .cls-150, .cls-151, .cls-152, .cls-153, .cls-154, .cls-155, .cls-156, .cls-157, .cls-158, .cls-159, .cls-16, .cls-160, .cls-161, .cls-162, .cls-163, .cls-164, .cls-165, .cls-166, .cls-167, .cls-168, .cls-169, .cls-17, .cls-170, .cls-171, .cls-172, .cls-173, .cls-174, .cls-175, .cls-176, .cls-177, .cls-178, .cls-179, .cls-18, .cls-180, .cls-181, .cls-182, .cls-183, .cls-184, .cls-185, .cls-186, .cls-187, .cls-188, .cls-189, .cls-19, .cls-190, .cls-191, .cls-192, .cls-193, .cls-194, .cls-195, .cls-196, .cls-197, .cls-198, .cls-199, .cls-20, .cls-200, .cls-201, .cls-202, .cls-203, .cls-204, .cls-205, .cls-206, .cls-207, .cls-208, .cls-209, .cls-21, .cls-210, .cls-211, .cls-212, .cls-213, .cls-214, .cls-215, .cls-216, .cls-217, .cls-218, .cls-219, .cls-22, .cls-220, .cls-221, .cls-222, .cls-223, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-3, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-35, .cls-36, .cls-37, .cls-38, .cls-39, .cls-4, .cls-40, .cls-41, .cls-42, .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-49, .cls-5, .cls-50, .cls-51, .cls-52, .cls-53, .cls-54, .cls-55, .cls-56, .cls-57, .cls-58, .cls-59, .cls-6, .cls-60, .cls-61, .cls-62, .cls-63, .cls-64, .cls-65, .cls-66, .cls-67, .cls-68, .cls-69, .cls-7, .cls-70, .cls-71, .cls-72, .cls-73, .cls-74, .cls-75, .cls-76, .cls-77, .cls-78, .cls-79, .cls-8, .cls-80, .cls-81, .cls-82, .cls-83, .cls-84, .cls-85, .cls-86, .cls-87, .cls-88, .cls-89, .cls-9, .cls-90, .cls-91, .cls-92, .cls-93, .cls-94, .cls-95, .cls-96, .cls-97, .cls-98, .cls-99 {
-        stroke-width: 0.5px;
-      }
-
-      .cls-4 {
-        fill: #e16462;
-        stroke: #e16462;
-      }
-
-      .cls-5 {
-        fill: #e76f5a;
-        stroke: #e76f5a;
-      }
-
-      .cls-6 {
-        fill: #ed7a52;
-        stroke: #ed7a52;
-      }
-
-      .cls-7 {
-        fill: #ee7b51;
-        stroke: #ee7b51;
-      }
-
-      .cls-8 {
-        fill: #f68f44;
-        stroke: #f68f44;
-      }
-
-      .cls-9 {
-        fill: #e26660;
-        stroke: #e26660;
-      }
-
-      .cls-10 {
-        fill: #d35171;
-        stroke: #d35171;
-      }
-
-      .cls-11 {
-        fill: #dc5d67;
-        stroke: #dc5d67;
-      }
-
-      .cls-12 {
-        fill: #8707a6;
-        stroke: #8707a6;
-      }
-
-      .cls-13 {
-        fill: #cc4977;
-        stroke: #cc4977;
-      }
-
-      .cls-14 {
-        fill: #ce4b75;
-        stroke: #ce4b75;
-      }
-
-      .cls-15 {
-        fill: #ca457a;
-        stroke: #ca457a;
-      }
-
-      .cls-16 {
-        fill: #cc4778;
-        stroke: #cc4778;
-      }
-
-      .cls-17 {
-        fill: #c13b82;
-        stroke: #c13b82;
-      }
-
-      .cls-18 {
-        fill: #d04d73;
-        stroke: #d04d73;
-      }
-
-      .cls-19 {
-        fill: #cd4a76;
-        stroke: #cd4a76;
-      }
-
-      .cls-20 {
-        fill: #d6556d;
-        stroke: #d6556d;
-      }
-
-      .cls-21 {
-        fill: #cf4c74;
-        stroke: #cf4c74;
-      }
-
-      .cls-22 {
-        fill: #d45270;
-        stroke: #d45270;
-      }
-
-      .cls-23 {
-        fill: #d5536f;
-        stroke: #d5536f;
-      }
-
-      .cls-24 {
-        fill: #c8437b;
-        stroke: #c8437b;
-      }
-
-      .cls-25 {
-        fill: #cb4679;
-        stroke: #cb4679;
-      }
-
-      .cls-26 {
-        fill: #c6417d;
-        stroke: #c6417d;
-      }
-
-      .cls-27 {
-        fill: #c5407e;
-        stroke: #c5407e;
-      }
-
-      .cls-28 {
-        fill: #d24f71;
-        stroke: #d24f71;
-      }
-
-      .cls-29 {
-        fill: #df6263;
-        stroke: #df6263;
-      }
-
-      .cls-30 {
-        fill: #db5c68;
-        stroke: #db5c68;
-      }
-
-      .cls-31 {
-        fill: #d8576b;
-        stroke: #d8576b;
-      }
-
-      .cls-32 {
-        fill: #e56b5d;
-        stroke: #e56b5d;
-      }
-
-      .cls-33 {
-        fill: #0d0887;
-        stroke: #0d0887;
-      }
-
-      .cls-34 {
-        fill: #100788;
-        stroke: #100788;
-      }
-
-      .cls-35 {
-        fill: #310597;
-        stroke: #310597;
-      }
-
-      .cls-36 {
-        fill: #e87059;
-        stroke: #e87059;
-      }
-
-      .cls-37 {
-        fill: #fdc627;
-        stroke: #fdc627;
-      }
-
-      .cls-38 {
-        fill: #fcd025;
-        stroke: #fcd025;
-      }
-
-      .cls-39 {
-        fill: #fb9f3a;
-        stroke: #fb9f3a;
-      }
-
-      .cls-40 {
-        fill: #fbd524;
-        stroke: #fbd524;
-      }
-
-      .cls-41 {
-        fill: #f4ed27;
-        stroke: #f4ed27;
-      }
-
-      .cls-42 {
-        fill: #f7e225;
-        stroke: #f7e225;
-      }
-
-      .cls-43 {
-        fill: #f0f921;
-        stroke: #f0f921;
-      }
-
-      .cls-44 {
-        fill: #f6e626;
-        stroke: #f6e626;
-      }
-
-      .cls-45 {
-        fill: #feb72d;
-        stroke: #feb72d;
-      }
-
-      .cls-46 {
-        fill: #f5e926;
-        stroke: #f5e926;
-      }
-
-      .cls-47 {
-        fill: #fec029;
-        stroke: #fec029;
-      }
-
-      .cls-48 {
-        fill: #fdb42f;
-        stroke: #fdb42f;
-      }
-
-      .cls-49 {
-        fill: #feba2c;
-        stroke: #feba2c;
-      }
-
-      .cls-50 {
-        fill: #fdc527;
-        stroke: #fdc527;
-      }
-
-      .cls-51 {
-        fill: #fca636;
-        stroke: #fca636;
-      }
-
-      .cls-52 {
-        fill: #7701a8;
-        stroke: #7701a8;
-      }
-
-      .cls-53 {
-        fill: #f48948;
-        stroke: #f48948;
-      }
-
-      .cls-54 {
-        fill: #fdac33;
-        stroke: #fdac33;
-      }
-
-      .cls-55 {
-        fill: #ef7c51;
-        stroke: #ef7c51;
-      }
-
-      .cls-56 {
-        fill: #c33d80;
-        stroke: #c33d80;
-      }
-
-      .cls-57 {
-        fill: #fbd324;
-        stroke: #fbd324;
-      }
-
-      .cls-58 {
-        fill: #fca934;
-        stroke: #fca934;
-      }
-
-      .cls-59 {
-        fill: #f0f724;
-        stroke: #f0f724;
-      }
-
-      .cls-60 {
-        fill: #eb7655;
-        stroke: #eb7655;
-      }
-
-      .cls-61 {
-        fill: #7e03a8;
-        stroke: #7e03a8;
-      }
-
-      .cls-62 {
-        fill: #feb82c;
-        stroke: #feb82c;
-      }
-
-      .cls-63 {
-        fill: #f9973f;
-        stroke: #f9973f;
-      }
-
-      .cls-64 {
-        fill: #20068f;
-        stroke: #20068f;
-      }
-
-      .cls-65 {
-        fill: #1b068d;
-        stroke: #1b068d;
-      }
-
-      .cls-66 {
-        fill: #280592;
-        stroke: #280592;
-      }
-
-      .cls-67 {
-        fill: #16078a;
-        stroke: #16078a;
-      }
-
-      .cls-68 {
-        fill: #f9dd25;
-        stroke: #f9dd25;
-      }
-
-      .cls-69 {
-        fill: #19068c;
-        stroke: #19068c;
-      }
-
-      .cls-70 {
-        fill: #220690;
-        stroke: #220690;
-      }
-
-      .cls-71 {
-        fill: #1d068e;
-        stroke: #1d068e;
-      }
-
-      .cls-72 {
-        fill: #240691;
-        stroke: #240691;
-      }
-
-      .cls-73 {
-        fill: #fad824;
-        stroke: #fad824;
-      }
-
-      .cls-74 {
-        fill: #f3ee27;
-        stroke: #f3ee27;
-      }
-
-      .cls-75 {
-        fill: #fba238;
-        stroke: #fba238;
-      }
-
-      .cls-76 {
-        fill: #fdae32;
-        stroke: #fdae32;
-      }
-
-      .cls-77 {
-        fill: #ed7953;
-        stroke: #ed7953;
-      }
-
-      .cls-78 {
-        fill: #130789;
-        stroke: #130789;
-      }
-
-      .cls-79 {
-        fill: #fdb130;
-        stroke: #fdb130;
-      }
-
-      .cls-80 {
-        fill: #9e199d;
-        stroke: #9e199d;
-      }
-
-      .cls-81 {
-        fill: #5b01a5;
-        stroke: #5b01a5;
-      }
-
-      .cls-82 {
-        fill: #f9983e;
-        stroke: #f9983e;
-      }
-
-      .cls-83 {
-        fill: #fccd25;
-        stroke: #fccd25;
-      }
-
-      .cls-84 {
-        fill: #f1f525;
-        stroke: #f1f525;
-      }
-
-      .cls-85 {
-        fill: #f2f227;
-        stroke: #f2f227;
-      }
-
-      .cls-86 {
-        fill: #8a09a5;
-        stroke: #8a09a5;
-      }
-
-      .cls-87 {
-        fill: #f89540;
-        stroke: #f89540;
-      }
-
-      .cls-88 {
-        fill: #fada24;
-        stroke: #fada24;
-      }
-
-      .cls-89 {
-        fill: #e66c5c;
-        stroke: #e66c5c;
-      }
-
-      .cls-90 {
-        fill: #aa2395;
-        stroke: #aa2395;
-      }
-
-      .cls-91 {
-        fill: #f9dc24;
-        stroke: #f9dc24;
-      }
-
-      .cls-92 {
-        fill: #fdab33;
-        stroke: #fdab33;
-      }
-
-      .cls-93 {
-        fill: #de6164;
-        stroke: #de6164;
-      }
-
-      .cls-94 {
-        fill: #fdc229;
-        stroke: #fdc229;
-      }
-
-      .cls-95 {
-        fill: #f8e125;
-        stroke: #f8e125;
-      }
-
-      .cls-96 {
-        fill: #f3854b;
-        stroke: #f3854b;
-      }
-
-      .cls-97 {
-        fill: #d9586a;
-        stroke: #d9586a;
-      }
-
-      .cls-98 {
-        fill: #fdca26;
-        stroke: #fdca26;
-      }
-
-      .cls-99 {
-        fill: #fca338;
-        stroke: #fca338;
-      }
-
-      .cls-100 {
-        fill: #febe2a;
-        stroke: #febe2a;
-      }
-
-      .cls-101 {
-        fill: #f79143;
-        stroke: #f79143;
-      }
-
-      .cls-102 {
-        fill: #e06363;
-        stroke: #e06363;
-      }
-
-      .cls-103 {
-        fill: #f5eb27;
-        stroke: #f5eb27;
-      }
-
-      .cls-104 {
-        fill: #ec7754;
-        stroke: #ec7754;
-      }
-
-      .cls-105 {
-        fill: #fa9c3c;
-        stroke: #fa9c3c;
-      }
-
-      .cls-106 {
-        fill: #f79342;
-        stroke: #f79342;
-      }
-
-      .cls-107 {
-        fill: #f1814d;
-        stroke: #f1814d;
-      }
-
-      .cls-108 {
-        fill: #fdcb26;
-        stroke: #fdcb26;
-      }
-
-      .cls-109 {
-        fill: #f1834c;
-        stroke: #f1834c;
-      }
-
-      .cls-110 {
-        fill: #febd2a;
-        stroke: #febd2a;
-      }
-
-      .cls-111 {
-        fill: #2e0595;
-        stroke: #2e0595;
-      }
-
-      .cls-112 {
-        fill: #e76e5b;
-        stroke: #e76e5b;
-      }
-
-      .cls-113 {
-        fill: #6f00a8;
-        stroke: #6f00a8;
-      }
-
-      .cls-114 {
-        fill: #febb2b;
-        stroke: #febb2b;
-      }
-
-      .cls-115 {
-        fill: #fcd225;
-        stroke: #fcd225;
-      }
-
-      .cls-116 {
-        fill: #8405a7;
-        stroke: #8405a7;
-      }
-
-      .cls-117 {
-        fill: #3c049b;
-        stroke: #3c049b;
-      }
-
-      .cls-118 {
-        fill: #f7e425;
-        stroke: #f7e425;
-      }
-
-      .cls-119 {
-        fill: #f58b47;
-        stroke: #f58b47;
-      }
-
-      .cls-120 {
-        fill: #3e049c;
-        stroke: #3e049c;
-      }
-
-      .cls-121 {
-        fill: #f1f426;
-        stroke: #f1f426;
-      }
-
-      .cls-122 {
-        fill: #7a02a8;
-        stroke: #7a02a8;
-      }
-
-      .cls-123 {
-        fill: #b32c8e;
-        stroke: #b32c8e;
-      }
-
-      .cls-124 {
-        fill: #6a00a8;
-        stroke: #6a00a8;
-      }
-
-      .cls-125 {
-        fill: #8104a7;
-        stroke: #8104a7;
-      }
-
-      .cls-126 {
-        fill: #8e0ca4;
-        stroke: #8e0ca4;
-      }
-
-      .cls-127 {
-        fill: #f8df25;
-        stroke: #f8df25;
-      }
-
-      .cls-128 {
-        fill: #fdc827;
-        stroke: #fdc827;
-      }
-
-      .cls-129 {
-        fill: #fcce25;
-        stroke: #fcce25;
-      }
-
-      .cls-130 {
-        fill: #e4695e;
-        stroke: #e4695e;
-      }
-
-      .cls-131 {
-        fill: #f07f4f;
-        stroke: #f07f4f;
-      }
-
-      .cls-132 {
-        fill: #bf3984;
-        stroke: #bf3984;
-      }
-
-      .cls-133 {
-        fill: #7801a8;
-        stroke: #7801a8;
-      }
-
-      .cls-134 {
-        fill: #fdc328;
-        stroke: #fdc328;
-      }
-
-      .cls-135 {
-        fill: #8f0da4;
-        stroke: #8f0da4;
-      }
-
-      .cls-136 {
-        fill: #fa9b3d;
-        stroke: #fa9b3d;
-      }
-
-      .cls-137 {
-        fill: #f3874a;
-        stroke: #f3874a;
-      }
-
-      .cls-138 {
-        fill: #e97257;
-        stroke: #e97257;
-      }
-
-      .cls-139 {
-        fill: #6001a6;
-        stroke: #6001a6;
-      }
-
-      .cls-140 {
-        fill: #fca835;
-        stroke: #fca835;
-      }
-
-      .cls-141 {
-        fill: #fbd724;
-        stroke: #fbd724;
-      }
-
-      .cls-142 {
-        fill: #f68d45;
-        stroke: #f68d45;
-      }
-
-      .cls-143 {
-        fill: #3f049c;
-        stroke: #3f049c;
-      }
-
-      .cls-144 {
-        fill: #2a0593;
-        stroke: #2a0593;
-      }
-
-      .cls-145 {
-        fill: #46039f;
-        stroke: #46039f;
-      }
-
-      .cls-146 {
-        fill: #2c0594;
-        stroke: #2c0594;
-      }
-
-      .cls-147 {
-        fill: #5801a4;
-        stroke: #5801a4;
-      }
-
-      .cls-148 {
-        fill: #7401a8;
-        stroke: #7401a8;
-      }
-
-      .cls-149 {
-        fill: #fdb22f;
-        stroke: #fdb22f;
-      }
-
-      .cls-150 {
-        fill: #7d03a8;
-        stroke: #7d03a8;
-      }
-
-      .cls-151 {
-        fill: #3a049a;
-        stroke: #3a049a;
-      }
-
-      .cls-152 {
-        fill: #6600a7;
-        stroke: #6600a7;
-      }
-
-      .cls-153 {
-        fill: #7100a8;
-        stroke: #7100a8;
-      }
-
-      .cls-154 {
-        fill: #7b02a8;
-        stroke: #7b02a8;
-      }
-
-      .cls-155 {
-        fill: #fba139;
-        stroke: #fba139;
-      }
-
-      .cls-156 {
-        fill: #f99a3e;
-        stroke: #f99a3e;
-      }
-
-      .cls-157 {
-        fill: #f0804e;
-        stroke: #f0804e;
-      }
-
-      .cls-158 {
-        fill: #f6e826;
-        stroke: #f6e826;
-      }
-
-      .cls-159 {
-        fill: #fa9e3b;
-        stroke: #fa9e3b;
-      }
-
-      .cls-160 {
-        fill: #5002a2;
-        stroke: #5002a2;
-      }
-
-      .cls-161 {
-        fill: #5502a4;
-        stroke: #5502a4;
-      }
-
-      .cls-162 {
-        fill: #8004a8;
-        stroke: #8004a8;
-      }
-
-      .cls-163 {
-        fill: #da5b69;
-        stroke: #da5b69;
-      }
-
-      .cls-164 {
-        fill: #b02991;
-        stroke: #b02991;
-      }
-
-      .cls-165 {
-        fill: #f2844b;
-        stroke: #f2844b;
-      }
-
-      .cls-166 {
-        fill: #a11b9b;
-        stroke: #a11b9b;
-      }
-
-      .cls-167 {
-        fill: #38049a;
-        stroke: #38049a;
-      }
-
-      .cls-168 {
-        fill: #6100a7;
-        stroke: #6100a7;
-      }
-
-      .cls-169 {
-        fill: #48039f;
-        stroke: #48039f;
-      }
-
-      .cls-170 {
-        fill: #fdb52e;
-        stroke: #fdb52e;
-      }
-
-      .cls-171 {
-        fill: #ea7457;
-        stroke: #ea7457;
-      }
-
-      .cls-172 {
-        fill: #b12a90;
-        stroke: #b12a90;
-      }
-
-      .cls-173 {
-        fill: #fdaf31;
-        stroke: #fdaf31;
-      }
-
-      .cls-174 {
-        fill: #6c00a8;
-        stroke: #6c00a8;
-      }
-
-      .cls-175 {
-        fill: #4c02a1;
-        stroke: #4c02a1;
-      }
-
-      .cls-176 {
-        fill: #2f0596;
-        stroke: #2f0596;
-      }
-
-      .cls-177 {
-        fill: #41049d;
-        stroke: #41049d;
-      }
-
-      .cls-178 {
-        fill: #920fa3;
-        stroke: #920fa3;
-      }
-
-      .cls-179 {
-        fill: #43039e;
-        stroke: #43039e;
-      }
-
-      .cls-180 {
-        fill: #5102a3;
-        stroke: #5102a3;
-      }
-
-      .cls-181 {
-        fill: #e56a5d;
-        stroke: #e56a5d;
-      }
-
-      .cls-182 {
-        fill: #6e00a8;
-        stroke: #6e00a8;
-      }
-
-      .cls-183 {
-        fill: #6400a7;
-        stroke: #6400a7;
-      }
-
-      .cls-184 {
-        fill: #f89441;
-        stroke: #f89441;
-      }
-
-      .cls-185 {
-        fill: #6300a7;
-        stroke: #6300a7;
-      }
-
-      .cls-186 {
-        fill: #350498;
-        stroke: #350498;
-      }
-
-      .cls-187 {
-        fill: #5901a5;
-        stroke: #5901a5;
-      }
-
-      .cls-188 {
-        fill: #260591;
-        stroke: #260591;
-      }
-
-      .cls-189 {
-        fill: #9613a1;
-        stroke: #9613a1;
-      }
-
-      .cls-190 {
-        fill: #910ea3;
-        stroke: #910ea3;
-      }
-
-      .cls-191 {
-        fill: #7501a8;
-        stroke: #7501a8;
-      }
-
-      .cls-192 {
-        fill: #f3f027;
-        stroke: #f3f027;
-      }
-
-      .cls-193 {
-        fill: #4903a0;
-        stroke: #4903a0;
-      }
-
-      .cls-194 {
-        fill: #5c01a6;
-        stroke: #5c01a6;
-      }
-
-      .cls-195 {
-        fill: #6700a8;
-        stroke: #6700a8;
-      }
-
-      .cls-196 {
-        fill: #5601a4;
-        stroke: #5601a4;
-      }
-
-      .cls-197 {
-        fill: #5e01a6;
-        stroke: #5e01a6;
-      }
-
-      .cls-198 {
-        fill: #f79044;
-        stroke: #f79044;
-      }
-
-      .cls-199 {
-        fill: #370499;
-        stroke: #370499;
-      }
-
-      .cls-200 {
-        fill: #330597;
-        stroke: #330597;
-      }
-
-      .cls-201 {
-        fill: #44039e;
-        stroke: #44039e;
-      }
-
-      .cls-202 {
-        fill: #4b03a1;
-        stroke: #4b03a1;
-      }
-
-      .cls-203 {
-        fill: #5302a3;
-        stroke: #5302a3;
-      }
-
-      .cls-204 {
-        fill: #6900a8;
-        stroke: #6900a8;
-      }
-
-      .cls-205 {
-        fill: #4e02a2;
-        stroke: #4e02a2;
-      }
-
-      .cls-206 {
-        fill: #f58c46;
-        stroke: #f58c46;
-      }
-
-      .cls-207 {
-        fill: #b22b8f;
-        stroke: #b22b8f;
-      }
-
-      .cls-208 {
-        fill: #a31e9a;
-        stroke: #a31e9a;
-      }
-
-      .cls-209 {
-        fill: #bd3786;
-        stroke: #bd3786;
-      }
-
-      .cls-210 {
-        fill: #b6308b;
-        stroke: #b6308b;
-      }
-
-      .cls-211 {
-        fill: #b83289;
-        stroke: #b83289;
-      }
-
-      .cls-212 {
-        fill: #ac2694;
-        stroke: #ac2694;
-      }
-
-      .cls-213 {
-        fill: #9814a0;
-        stroke: #9814a0;
-      }
-
-      .cls-214 {
-        fill: #d14e72;
-        stroke: #d14e72;
-      }
-
-      .cls-215 {
-        fill: #8305a7;
-        stroke: #8305a7;
-      }
-
-      .cls-216 {
-        fill: #a82296;
-        stroke: #a82296;
-      }
-
-      .cls-217 {
-        fill: #9d189d;
-        stroke: #9d189d;
-      }
-
-      .cls-218 {
-        fill: #8808a6;
-        stroke: #8808a6;
-      }
-
-      .cls-219 {
-        fill: #eb7556;
-        stroke: #eb7556;
-      }
-
-      .cls-220 {
-        fill: #7201a8;
-        stroke: #7201a8;
-      }
-
-      .cls-221 {
-        fill: #fca537;
-        stroke: #fca537;
-      }
-
-      .cls-222 {
-        fill: #c43e7f;
-        stroke: #c43e7f;
-      }
-
-      .cls-223 {
-        fill: #8b0aa5;
-        stroke: #8b0aa5;
-      }
-
-      .cls-224, .cls-229 {
-        font-size: 26px;
-        fill: #7d7d7d;
-        font-family: SourceSansPro-Regular, Source Sans Pro;
-      }
-
-      .cls-225, .cls-226, .cls-227 {
-        fill: none;
-        stroke-miterlimit: 10;
-      }
-
-      .cls-225 {
-        stroke: #c1c0c0;
-      }
-
-      .cls-226, .cls-227 {
-        stroke: #4d4c4d;
-        stroke-width: 3px;
-      }
-
-      .cls-227 {
-        stroke-dasharray: 1.99 5.97;
-      }
-
-      .cls-228 {
-        fill: $dimGray;
-      }
-
-      .cls-230 {
-        fill: url(#linear-gradient1);
-      }
-      .NS_arrow {
-        stroke: $dimGray;
-        stroke-width: 3px;
-        stroke-dasharray: 2 6;
-      }
-
-      #matrix-background{
-        fill: $backgroundCharcoal;
-      }
+  width: 100%;
+}
+
+.cls-1, .cls-229 {
+  isolation: isolate;
+}
+
+.cls-2 {
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.cls-3 {
+  fill: #e26561;
+  stroke: #e26561;
+}
+
+.cls-10, .cls-100, .cls-101, .cls-102, .cls-103, .cls-104, .cls-105, .cls-106, .cls-107, .cls-108, .cls-109, .cls-11, .cls-110, .cls-111, .cls-112, .cls-113, .cls-114, .cls-115, .cls-116, .cls-117, .cls-118, .cls-119, .cls-12, .cls-120, .cls-121, .cls-122, .cls-123, .cls-124, .cls-125, .cls-126, .cls-127, .cls-128, .cls-129, .cls-13, .cls-130, .cls-131, .cls-132, .cls-133, .cls-134, .cls-135, .cls-136, .cls-137, .cls-138, .cls-139, .cls-14, .cls-140, .cls-141, .cls-142, .cls-143, .cls-144, .cls-145, .cls-146, .cls-147, .cls-148, .cls-149, .cls-15, .cls-150, .cls-151, .cls-152, .cls-153, .cls-154, .cls-155, .cls-156, .cls-157, .cls-158, .cls-159, .cls-16, .cls-160, .cls-161, .cls-162, .cls-163, .cls-164, .cls-165, .cls-166, .cls-167, .cls-168, .cls-169, .cls-17, .cls-170, .cls-171, .cls-172, .cls-173, .cls-174, .cls-175, .cls-176, .cls-177, .cls-178, .cls-179, .cls-18, .cls-180, .cls-181, .cls-182, .cls-183, .cls-184, .cls-185, .cls-186, .cls-187, .cls-188, .cls-189, .cls-19, .cls-190, .cls-191, .cls-192, .cls-193, .cls-194, .cls-195, .cls-196, .cls-197, .cls-198, .cls-199, .cls-20, .cls-200, .cls-201, .cls-202, .cls-203, .cls-204, .cls-205, .cls-206, .cls-207, .cls-208, .cls-209, .cls-21, .cls-210, .cls-211, .cls-212, .cls-213, .cls-214, .cls-215, .cls-216, .cls-217, .cls-218, .cls-219, .cls-22, .cls-220, .cls-221, .cls-222, .cls-223, .cls-23, .cls-24, .cls-25, .cls-26, .cls-27, .cls-28, .cls-29, .cls-3, .cls-30, .cls-31, .cls-32, .cls-33, .cls-34, .cls-35, .cls-36, .cls-37, .cls-38, .cls-39, .cls-4, .cls-40, .cls-41, .cls-42, .cls-43, .cls-44, .cls-45, .cls-46, .cls-47, .cls-48, .cls-49, .cls-5, .cls-50, .cls-51, .cls-52, .cls-53, .cls-54, .cls-55, .cls-56, .cls-57, .cls-58, .cls-59, .cls-6, .cls-60, .cls-61, .cls-62, .cls-63, .cls-64, .cls-65, .cls-66, .cls-67, .cls-68, .cls-69, .cls-7, .cls-70, .cls-71, .cls-72, .cls-73, .cls-74, .cls-75, .cls-76, .cls-77, .cls-78, .cls-79, .cls-8, .cls-80, .cls-81, .cls-82, .cls-83, .cls-84, .cls-85, .cls-86, .cls-87, .cls-88, .cls-89, .cls-9, .cls-90, .cls-91, .cls-92, .cls-93, .cls-94, .cls-95, .cls-96, .cls-97, .cls-98, .cls-99 {
+  stroke-width: 0.5px;
+}
+
+.cls-4 {
+  fill: #e16462;
+  stroke: #e16462;
+}
+
+.cls-5 {
+  fill: #e76f5a;
+  stroke: #e76f5a;
+}
+
+.cls-6 {
+  fill: #ed7a52;
+  stroke: #ed7a52;
+}
+
+.cls-7 {
+  fill: #ee7b51;
+  stroke: #ee7b51;
+}
+
+.cls-8 {
+  fill: #f68f44;
+  stroke: #f68f44;
+}
+
+.cls-9 {
+  fill: #e26660;
+  stroke: #e26660;
+}
+
+.cls-10 {
+  fill: #d35171;
+  stroke: #d35171;
+}
+
+.cls-11 {
+  fill: #dc5d67;
+  stroke: #dc5d67;
+}
+
+.cls-12 {
+  fill: #8707a6;
+  stroke: #8707a6;
+}
+
+.cls-13 {
+  fill: #cc4977;
+  stroke: #cc4977;
+}
+
+.cls-14 {
+  fill: #ce4b75;
+  stroke: #ce4b75;
+}
+
+.cls-15 {
+  fill: #ca457a;
+  stroke: #ca457a;
+}
+
+.cls-16 {
+  fill: #cc4778;
+  stroke: #cc4778;
+}
+
+.cls-17 {
+  fill: #c13b82;
+  stroke: #c13b82;
+}
+
+.cls-18 {
+  fill: #d04d73;
+  stroke: #d04d73;
+}
+
+.cls-19 {
+  fill: #cd4a76;
+  stroke: #cd4a76;
+}
+
+.cls-20 {
+  fill: #d6556d;
+  stroke: #d6556d;
+}
+
+.cls-21 {
+  fill: #cf4c74;
+  stroke: #cf4c74;
+}
+
+.cls-22 {
+  fill: #d45270;
+  stroke: #d45270;
+}
+
+.cls-23 {
+  fill: #d5536f;
+  stroke: #d5536f;
+}
+
+.cls-24 {
+  fill: #c8437b;
+  stroke: #c8437b;
+}
+
+.cls-25 {
+  fill: #cb4679;
+  stroke: #cb4679;
+}
+
+.cls-26 {
+  fill: #c6417d;
+  stroke: #c6417d;
+}
+
+.cls-27 {
+  fill: #c5407e;
+  stroke: #c5407e;
+}
+
+.cls-28 {
+  fill: #d24f71;
+  stroke: #d24f71;
+}
+
+.cls-29 {
+  fill: #df6263;
+  stroke: #df6263;
+}
+
+.cls-30 {
+  fill: #db5c68;
+  stroke: #db5c68;
+}
+
+.cls-31 {
+  fill: #d8576b;
+  stroke: #d8576b;
+}
+
+.cls-32 {
+  fill: #e56b5d;
+  stroke: #e56b5d;
+}
+
+.cls-33 {
+  fill: #0d0887;
+  stroke: #0d0887;
+}
+
+.cls-34 {
+  fill: #100788;
+  stroke: #100788;
+}
+
+.cls-35 {
+  fill: #310597;
+  stroke: #310597;
+}
+
+.cls-36 {
+  fill: #e87059;
+  stroke: #e87059;
+}
+
+.cls-37 {
+  fill: #fdc627;
+  stroke: #fdc627;
+}
+
+.cls-38 {
+  fill: #fcd025;
+  stroke: #fcd025;
+}
+
+.cls-39 {
+  fill: #fb9f3a;
+  stroke: #fb9f3a;
+}
+
+.cls-40 {
+  fill: #fbd524;
+  stroke: #fbd524;
+}
+
+.cls-41 {
+  fill: #f4ed27;
+  stroke: #f4ed27;
+}
+
+.cls-42 {
+  fill: #f7e225;
+  stroke: #f7e225;
+}
+
+.cls-43 {
+  fill: #f0f921;
+  stroke: #f0f921;
+}
+
+.cls-44 {
+  fill: #f6e626;
+  stroke: #f6e626;
+}
+
+.cls-45 {
+  fill: #feb72d;
+  stroke: #feb72d;
+}
+
+.cls-46 {
+  fill: #f5e926;
+  stroke: #f5e926;
+}
+
+.cls-47 {
+  fill: #fec029;
+  stroke: #fec029;
+}
+
+.cls-48 {
+  fill: #fdb42f;
+  stroke: #fdb42f;
+}
+
+.cls-49 {
+  fill: #feba2c;
+  stroke: #feba2c;
+}
+
+.cls-50 {
+  fill: #fdc527;
+  stroke: #fdc527;
+}
+
+.cls-51 {
+  fill: #fca636;
+  stroke: #fca636;
+}
+
+.cls-52 {
+  fill: #7701a8;
+  stroke: #7701a8;
+}
+
+.cls-53 {
+  fill: #f48948;
+  stroke: #f48948;
+}
+
+.cls-54 {
+  fill: #fdac33;
+  stroke: #fdac33;
+}
+
+.cls-55 {
+  fill: #ef7c51;
+  stroke: #ef7c51;
+}
+
+.cls-56 {
+  fill: #c33d80;
+  stroke: #c33d80;
+}
+
+.cls-57 {
+  fill: #fbd324;
+  stroke: #fbd324;
+}
+
+.cls-58 {
+  fill: #fca934;
+  stroke: #fca934;
+}
+
+.cls-59 {
+  fill: #f0f724;
+  stroke: #f0f724;
+}
+
+.cls-60 {
+  fill: #eb7655;
+  stroke: #eb7655;
+}
+
+.cls-61 {
+  fill: #7e03a8;
+  stroke: #7e03a8;
+}
+
+.cls-62 {
+  fill: #feb82c;
+  stroke: #feb82c;
+}
+
+.cls-63 {
+  fill: #f9973f;
+  stroke: #f9973f;
+}
+
+.cls-64 {
+  fill: #20068f;
+  stroke: #20068f;
+}
+
+.cls-65 {
+  fill: #1b068d;
+  stroke: #1b068d;
+}
+
+.cls-66 {
+  fill: #280592;
+  stroke: #280592;
+}
+
+.cls-67 {
+  fill: #16078a;
+  stroke: #16078a;
+}
+
+.cls-68 {
+  fill: #f9dd25;
+  stroke: #f9dd25;
+}
+
+.cls-69 {
+  fill: #19068c;
+  stroke: #19068c;
+}
+
+.cls-70 {
+  fill: #220690;
+  stroke: #220690;
+}
+
+.cls-71 {
+  fill: #1d068e;
+  stroke: #1d068e;
+}
+
+.cls-72 {
+  fill: #240691;
+  stroke: #240691;
+}
+
+.cls-73 {
+  fill: #fad824;
+  stroke: #fad824;
+}
+
+.cls-74 {
+  fill: #f3ee27;
+  stroke: #f3ee27;
+}
+
+.cls-75 {
+  fill: #fba238;
+  stroke: #fba238;
+}
+
+.cls-76 {
+  fill: #fdae32;
+  stroke: #fdae32;
+}
+
+.cls-77 {
+  fill: #ed7953;
+  stroke: #ed7953;
+}
+
+.cls-78 {
+  fill: #130789;
+  stroke: #130789;
+}
+
+.cls-79 {
+  fill: #fdb130;
+  stroke: #fdb130;
+}
+
+.cls-80 {
+  fill: #9e199d;
+  stroke: #9e199d;
+}
+
+.cls-81 {
+  fill: #5b01a5;
+  stroke: #5b01a5;
+}
+
+.cls-82 {
+  fill: #f9983e;
+  stroke: #f9983e;
+}
+
+.cls-83 {
+  fill: #fccd25;
+  stroke: #fccd25;
+}
+
+.cls-84 {
+  fill: #f1f525;
+  stroke: #f1f525;
+}
+
+.cls-85 {
+  fill: #f2f227;
+  stroke: #f2f227;
+}
+
+.cls-86 {
+  fill: #8a09a5;
+  stroke: #8a09a5;
+}
+
+.cls-87 {
+  fill: #f89540;
+  stroke: #f89540;
+}
+
+.cls-88 {
+  fill: #fada24;
+  stroke: #fada24;
+}
+
+.cls-89 {
+  fill: #e66c5c;
+  stroke: #e66c5c;
+}
+
+.cls-90 {
+  fill: #aa2395;
+  stroke: #aa2395;
+}
+
+.cls-91 {
+  fill: #f9dc24;
+  stroke: #f9dc24;
+}
+
+.cls-92 {
+  fill: #fdab33;
+  stroke: #fdab33;
+}
+
+.cls-93 {
+  fill: #de6164;
+  stroke: #de6164;
+}
+
+.cls-94 {
+  fill: #fdc229;
+  stroke: #fdc229;
+}
+
+.cls-95 {
+  fill: #f8e125;
+  stroke: #f8e125;
+}
+
+.cls-96 {
+  fill: #f3854b;
+  stroke: #f3854b;
+}
+
+.cls-97 {
+  fill: #d9586a;
+  stroke: #d9586a;
+}
+
+.cls-98 {
+  fill: #fdca26;
+  stroke: #fdca26;
+}
+
+.cls-99 {
+  fill: #fca338;
+  stroke: #fca338;
+}
+
+.cls-100 {
+  fill: #febe2a;
+  stroke: #febe2a;
+}
+
+.cls-101 {
+  fill: #f79143;
+  stroke: #f79143;
+}
+
+.cls-102 {
+  fill: #e06363;
+  stroke: #e06363;
+}
+
+.cls-103 {
+  fill: #f5eb27;
+  stroke: #f5eb27;
+}
+
+.cls-104 {
+  fill: #ec7754;
+  stroke: #ec7754;
+}
+
+.cls-105 {
+  fill: #fa9c3c;
+  stroke: #fa9c3c;
+}
+
+.cls-106 {
+  fill: #f79342;
+  stroke: #f79342;
+}
+
+.cls-107 {
+  fill: #f1814d;
+  stroke: #f1814d;
+}
+
+.cls-108 {
+  fill: #fdcb26;
+  stroke: #fdcb26;
+}
+
+.cls-109 {
+  fill: #f1834c;
+  stroke: #f1834c;
+}
+
+.cls-110 {
+  fill: #febd2a;
+  stroke: #febd2a;
+}
+
+.cls-111 {
+  fill: #2e0595;
+  stroke: #2e0595;
+}
+
+.cls-112 {
+  fill: #e76e5b;
+  stroke: #e76e5b;
+}
+
+.cls-113 {
+  fill: #6f00a8;
+  stroke: #6f00a8;
+}
+
+.cls-114 {
+  fill: #febb2b;
+  stroke: #febb2b;
+}
+
+.cls-115 {
+  fill: #fcd225;
+  stroke: #fcd225;
+}
+
+.cls-116 {
+  fill: #8405a7;
+  stroke: #8405a7;
+}
+
+.cls-117 {
+  fill: #3c049b;
+  stroke: #3c049b;
+}
+
+.cls-118 {
+  fill: #f7e425;
+  stroke: #f7e425;
+}
+
+.cls-119 {
+  fill: #f58b47;
+  stroke: #f58b47;
+}
+
+.cls-120 {
+  fill: #3e049c;
+  stroke: #3e049c;
+}
+
+.cls-121 {
+  fill: #f1f426;
+  stroke: #f1f426;
+}
+
+.cls-122 {
+  fill: #7a02a8;
+  stroke: #7a02a8;
+}
+
+.cls-123 {
+  fill: #b32c8e;
+  stroke: #b32c8e;
+}
+
+.cls-124 {
+  fill: #6a00a8;
+  stroke: #6a00a8;
+}
+
+.cls-125 {
+  fill: #8104a7;
+  stroke: #8104a7;
+}
+
+.cls-126 {
+  fill: #8e0ca4;
+  stroke: #8e0ca4;
+}
+
+.cls-127 {
+  fill: #f8df25;
+  stroke: #f8df25;
+}
+
+.cls-128 {
+  fill: #fdc827;
+  stroke: #fdc827;
+}
+
+.cls-129 {
+  fill: #fcce25;
+  stroke: #fcce25;
+}
+
+.cls-130 {
+  fill: #e4695e;
+  stroke: #e4695e;
+}
+
+.cls-131 {
+  fill: #f07f4f;
+  stroke: #f07f4f;
+}
+
+.cls-132 {
+  fill: #bf3984;
+  stroke: #bf3984;
+}
+
+.cls-133 {
+  fill: #7801a8;
+  stroke: #7801a8;
+}
+
+.cls-134 {
+  fill: #fdc328;
+  stroke: #fdc328;
+}
+
+.cls-135 {
+  fill: #8f0da4;
+  stroke: #8f0da4;
+}
+
+.cls-136 {
+  fill: #fa9b3d;
+  stroke: #fa9b3d;
+}
+
+.cls-137 {
+  fill: #f3874a;
+  stroke: #f3874a;
+}
+
+.cls-138 {
+  fill: #e97257;
+  stroke: #e97257;
+}
+
+.cls-139 {
+  fill: #6001a6;
+  stroke: #6001a6;
+}
+
+.cls-140 {
+  fill: #fca835;
+  stroke: #fca835;
+}
+
+.cls-141 {
+  fill: #fbd724;
+  stroke: #fbd724;
+}
+
+.cls-142 {
+  fill: #f68d45;
+  stroke: #f68d45;
+}
+
+.cls-143 {
+  fill: #3f049c;
+  stroke: #3f049c;
+}
+
+.cls-144 {
+  fill: #2a0593;
+  stroke: #2a0593;
+}
+
+.cls-145 {
+  fill: #46039f;
+  stroke: #46039f;
+}
+
+.cls-146 {
+  fill: #2c0594;
+  stroke: #2c0594;
+}
+
+.cls-147 {
+  fill: #5801a4;
+  stroke: #5801a4;
+}
+
+.cls-148 {
+  fill: #7401a8;
+  stroke: #7401a8;
+}
+
+.cls-149 {
+  fill: #fdb22f;
+  stroke: #fdb22f;
+}
+
+.cls-150 {
+  fill: #7d03a8;
+  stroke: #7d03a8;
+}
+
+.cls-151 {
+  fill: #3a049a;
+  stroke: #3a049a;
+}
+
+.cls-152 {
+  fill: #6600a7;
+  stroke: #6600a7;
+}
+
+.cls-153 {
+  fill: #7100a8;
+  stroke: #7100a8;
+}
+
+.cls-154 {
+  fill: #7b02a8;
+  stroke: #7b02a8;
+}
+
+.cls-155 {
+  fill: #fba139;
+  stroke: #fba139;
+}
+
+.cls-156 {
+  fill: #f99a3e;
+  stroke: #f99a3e;
+}
+
+.cls-157 {
+  fill: #f0804e;
+  stroke: #f0804e;
+}
+
+.cls-158 {
+  fill: #f6e826;
+  stroke: #f6e826;
+}
+
+.cls-159 {
+  fill: #fa9e3b;
+  stroke: #fa9e3b;
+}
+
+.cls-160 {
+  fill: #5002a2;
+  stroke: #5002a2;
+}
+
+.cls-161 {
+  fill: #5502a4;
+  stroke: #5502a4;
+}
+
+.cls-162 {
+  fill: #8004a8;
+  stroke: #8004a8;
+}
+
+.cls-163 {
+  fill: #da5b69;
+  stroke: #da5b69;
+}
+
+.cls-164 {
+  fill: #b02991;
+  stroke: #b02991;
+}
+
+.cls-165 {
+  fill: #f2844b;
+  stroke: #f2844b;
+}
+
+.cls-166 {
+  fill: #a11b9b;
+  stroke: #a11b9b;
+}
+
+.cls-167 {
+  fill: #38049a;
+  stroke: #38049a;
+}
+
+.cls-168 {
+  fill: #6100a7;
+  stroke: #6100a7;
+}
+
+.cls-169 {
+  fill: #48039f;
+  stroke: #48039f;
+}
+
+.cls-170 {
+  fill: #fdb52e;
+  stroke: #fdb52e;
+}
+
+.cls-171 {
+  fill: #ea7457;
+  stroke: #ea7457;
+}
+
+.cls-172 {
+  fill: #b12a90;
+  stroke: #b12a90;
+}
+
+.cls-173 {
+  fill: #fdaf31;
+  stroke: #fdaf31;
+}
+
+.cls-174 {
+  fill: #6c00a8;
+  stroke: #6c00a8;
+}
+
+.cls-175 {
+  fill: #4c02a1;
+  stroke: #4c02a1;
+}
+
+.cls-176 {
+  fill: #2f0596;
+  stroke: #2f0596;
+}
+
+.cls-177 {
+  fill: #41049d;
+  stroke: #41049d;
+}
+
+.cls-178 {
+  fill: #920fa3;
+  stroke: #920fa3;
+}
+
+.cls-179 {
+  fill: #43039e;
+  stroke: #43039e;
+}
+
+.cls-180 {
+  fill: #5102a3;
+  stroke: #5102a3;
+}
+
+.cls-181 {
+  fill: #e56a5d;
+  stroke: #e56a5d;
+}
+
+.cls-182 {
+  fill: #6e00a8;
+  stroke: #6e00a8;
+}
+
+.cls-183 {
+  fill: #6400a7;
+  stroke: #6400a7;
+}
+
+.cls-184 {
+  fill: #f89441;
+  stroke: #f89441;
+}
+
+.cls-185 {
+  fill: #6300a7;
+  stroke: #6300a7;
+}
+
+.cls-186 {
+  fill: #350498;
+  stroke: #350498;
+}
+
+.cls-187 {
+  fill: #5901a5;
+  stroke: #5901a5;
+}
+
+.cls-188 {
+  fill: #260591;
+  stroke: #260591;
+}
+
+.cls-189 {
+  fill: #9613a1;
+  stroke: #9613a1;
+}
+
+.cls-190 {
+  fill: #910ea3;
+  stroke: #910ea3;
+}
+
+.cls-191 {
+  fill: #7501a8;
+  stroke: #7501a8;
+}
+
+.cls-192 {
+  fill: #f3f027;
+  stroke: #f3f027;
+}
+
+.cls-193 {
+  fill: #4903a0;
+  stroke: #4903a0;
+}
+
+.cls-194 {
+  fill: #5c01a6;
+  stroke: #5c01a6;
+}
+
+.cls-195 {
+  fill: #6700a8;
+  stroke: #6700a8;
+}
+
+.cls-196 {
+  fill: #5601a4;
+  stroke: #5601a4;
+}
+
+.cls-197 {
+  fill: #5e01a6;
+  stroke: #5e01a6;
+}
+
+.cls-198 {
+  fill: #f79044;
+  stroke: #f79044;
+}
+
+.cls-199 {
+  fill: #370499;
+  stroke: #370499;
+}
+
+.cls-200 {
+  fill: #330597;
+  stroke: #330597;
+}
+
+.cls-201 {
+  fill: #44039e;
+  stroke: #44039e;
+}
+
+.cls-202 {
+  fill: #4b03a1;
+  stroke: #4b03a1;
+}
+
+.cls-203 {
+  fill: #5302a3;
+  stroke: #5302a3;
+}
+
+.cls-204 {
+  fill: #6900a8;
+  stroke: #6900a8;
+}
+
+.cls-205 {
+  fill: #4e02a2;
+  stroke: #4e02a2;
+}
+
+.cls-206 {
+  fill: #f58c46;
+  stroke: #f58c46;
+}
+
+.cls-207 {
+  fill: #b22b8f;
+  stroke: #b22b8f;
+}
+
+.cls-208 {
+  fill: #a31e9a;
+  stroke: #a31e9a;
+}
+
+.cls-209 {
+  fill: #bd3786;
+  stroke: #bd3786;
+}
+
+.cls-210 {
+  fill: #b6308b;
+  stroke: #b6308b;
+}
+
+.cls-211 {
+  fill: #b83289;
+  stroke: #b83289;
+}
+
+.cls-212 {
+  fill: #ac2694;
+  stroke: #ac2694;
+}
+
+.cls-213 {
+  fill: #9814a0;
+  stroke: #9814a0;
+}
+
+.cls-214 {
+  fill: #d14e72;
+  stroke: #d14e72;
+}
+
+.cls-215 {
+  fill: #8305a7;
+  stroke: #8305a7;
+}
+
+.cls-216 {
+  fill: #a82296;
+  stroke: #a82296;
+}
+
+.cls-217 {
+  fill: #9d189d;
+  stroke: #9d189d;
+}
+
+.cls-218 {
+  fill: #8808a6;
+  stroke: #8808a6;
+}
+
+.cls-219 {
+  fill: #eb7556;
+  stroke: #eb7556;
+}
+
+.cls-220 {
+  fill: #7201a8;
+  stroke: #7201a8;
+}
+
+.cls-221 {
+  fill: #fca537;
+  stroke: #fca537;
+}
+
+.cls-222 {
+  fill: #c43e7f;
+  stroke: #c43e7f;
+}
+
+.cls-223 {
+  fill: #8b0aa5;
+  stroke: #8b0aa5;
+}
+
+.cls-224, .cls-229 {
+  font-size: 26px;
+  fill: #7d7d7d;
+  font-family: SourceSansPro-Regular, Source Sans Pro;
+}
+
+.cls-225, .cls-226, .cls-227 {
+  fill: none;
+  stroke-miterlimit: 10;
+}
+
+.cls-225 {
+  stroke: #c1c0c0;
+}
+
+.cls-226, .cls-227 {
+  stroke: #4d4c4d;
+  stroke-width: 3px;
+}
+
+.cls-227 {
+  stroke-dasharray: 1.99 5.97;
+}
+
+.cls-228 {
+  fill: $dimGray;
+}
+
+.cls-230 {
+  fill: url(#linear-gradient1);
+}
+
+.NS_arrow {
+  stroke: $dimGray;
+  stroke-width: 3px;
+  stroke-dasharray: 2 6;
+}
+
+#matrix-background{
+  fill: $backgroundCharcoal;
+}
 </style>

@@ -536,37 +536,36 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
 #bar-chart {
-        width: 100%;
-        padding: 10px;
-    }
+  width: 100%;
+  padding: 10px;
+}
 
+.cls-1 {
+  fill: $plasmaYellow;
+}
 
-    .cls-1 {
-        fill: $plasmaYellow;
-      }
+.cls-3, .cls-5, .cls-6 {
+  isolation: isolate;
+  fill: $dimGray;
+  font-family: ArialMT, Arial;
+}
 
-      .cls-3, .cls-5, .cls-6 {
-        isolation: isolate;
-        fill: $dimGray;
-        font-family: ArialMT, Arial;
-      }
+.cls-3 {
+  font-size: 18.95px;
+}
 
-      .cls-3 {
-        font-size: 18.95px;
-      }
+.cls-4 {
+  fill: none;
+  stroke: #000;
+  stroke-dasharray: 1 2;
+}
 
-      .cls-4 {
-        fill: none;
-        stroke: #000;
-        stroke-dasharray: 1 2;
-      }
+.cls-5 {
+  font-size: 18.95px;
+}
 
-      .cls-5 {
-        font-size: 18.95px;
-      }
-
-      .cls-6 {
-        font-size: 16.31px;
-      }
+.cls-6 {
+  font-size: 16.31px;
+}
 
 </style>

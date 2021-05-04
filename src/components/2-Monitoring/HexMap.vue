@@ -3805,7 +3805,7 @@ $dimGray: #9c9c9c;
   margin-top: 1em;
   max-height: 80vh;
   @media screen and (min-width: 1500px) {
-      max-width: 50vw;
+    max-width: 50vw;
   }
 }
 .hex {
