@@ -138,4 +138,4 @@ for(r in reaches) {
 
 }
 
-xml2::write_xml(svg_root, file = 'src/assets/tempvar.svg')
+xml2::write_xml(svg_root, file = 'src/assets/prebuilt_c1p3_linechart.svg')

@@ -107,4 +107,4 @@ add_grids <- function(svg, full_width, full_height, rh, rv) {
 # build_svg("svgify-charts/test.svg", "public/data/matrix_annual_obs.csv", 800, 1500, local_testing = TRUE)
 
 # This line builds a version ready to inject into the full viz
-build_svg("src/assets/prebuilt_c2p2_matrix.svg", "public/data/matrix_annual_obs.csv", 700, 1000, local_testing = FALSE)
+build_svg("src/assets/prebuilt_c1p2_matrix.svg", "public/data/matrix_annual_obs.csv", 700, 1000, local_testing = FALSE)
