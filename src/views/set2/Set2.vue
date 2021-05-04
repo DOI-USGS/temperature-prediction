@@ -1799,7 +1799,7 @@
               let segment_id = segment.classList[2].split('seg')[1]
               self.d3.selectAll(".c2p3.segs_transparent.seg" + segment_id)
                   .style("stroke", function(d) {
-                      return self.tempColor(self.segmentDict[segment_id].data_2019_monthly[data.month].month_temp)
+                      return self.tempColor(self.segmentDict[segment_id].data_2019_monthly[data.month].month_avg_temp)
                   })
                   .style("stroke-width", 2)
                   .style("opacity", 1)
