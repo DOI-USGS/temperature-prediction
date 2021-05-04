@@ -343,7 +343,7 @@
           map_c2p3: null,
           map_width: null,
           map_height: null,
-          map_margin: {top: 25, right: 0, bottom: 30, left: 0},
+          map_margin: {top: 25, right: 20, bottom: 30, left: 10},
           map_path_c2: null,
           widthScale_c2: null,
           segments: null,
@@ -366,7 +366,7 @@
         this.temp_chart_width = 600 - this.temp_chart_margin.left - this.temp_chart_margin.right;
         this.temp_chart_height = 600 - this.temp_chart_margin.top - this.temp_chart_margin.bottom;
         // set universal map frame dimensions for Ch 2 panel maps
-        this.map_width = 300 - this.map_margin.left - this.map_margin.right;
+        this.map_width = 250 - this.map_margin.left - this.map_margin.right;
         this.map_height = 600 - this.map_margin.top - this.map_margin.bottom;
 
         this.setPanels();  // begin script when window loads
@@ -379,9 +379,9 @@
           //create Albers equal area conic projection centered on DRB for ch2 maps
           let map_projection_c2 = self.d3.geoAlbers()
               .center([0, 40.778894445])
-              .rotate([75.413333335, 0, 0])
+              .rotate([75.613333335, 0, 0])
               .parallels([39.9352537033, 41.1825351867])
-              .scale(this.map_height * 15)
+              .scale(this.map_height * 15.5)
               .translate([this.map_width / 2, this.map_height / 2]);
 
           this.map_path_c2 = self.d3.geoPath()
@@ -778,9 +778,9 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.bar_chart_width * 0.98 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.bar_chart_width * 0.985 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
-              .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.chart_width))
+              .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.bar_chart_width))
               .select(".domain").remove()
 
           // place and rotate the y axis label
@@ -1422,9 +1422,21 @@
 
           // bind mouse coordinates and # of obs to tooltip
           tooltip
-              .attr("y", mouse_y - 10)
-              .attr("x", mouse_x + 10)
-              .attr("text-align", "left")
+              .attr("y", mouse_y - 5)
+              .attr("x", function() {
+                if (mouse_x < 210) {
+                  return mouse_x + 5
+                } else {
+                  return mouse_x - 5
+                }
+              })
+              .attr("text-anchor", function() {
+                if (mouse_x < 210) {
+                  return "start"
+                } else {
+                  return "end"
+                }
+              })
               .text(self.d3.format(',')(num_obs) + " obs.")
               .raise()
         },
@@ -1485,7 +1497,7 @@
                   .attr("height", 3)
                   .style("fill", "#0f0f0f")
                   .style("stroke-width", 0.5)
-                  .style("opacity", 1)
+                  .style("opacity", 0.8)
                   .style("stroke", "#e0e0e0")
                   // raise the spatial rectangle
                   .raise();
@@ -1700,9 +1712,21 @@
 
           // bind mouse coordinates and # obs to tooltip
           tooltip
-              .attr("y", mouse_y - 15)
-              .attr("x", mouse_x + 15)
-              .attr("text-align", "left")
+              .attr("y", mouse_y - 5)
+              .attr("x", function() {
+                if (mouse_x < 200) {
+                  return mouse_x + 5
+                } else {
+                  return mouse_x - 5
+                }
+              })
+              .attr("text-anchor", function() {
+                if (mouse_x < 200) {
+                  return "start"
+                } else {
+                  return "end"
+                }
+              })
               .text(this.d3.format(',')(num_obs) + " obs.")
               .raise()
         },
@@ -2015,10 +2039,13 @@ button:focus {
 #DRB_map_c2p3 {
   grid-area: map;
   max-height: 90vh;
+  margin-right: 30px;
+  margin-left: 10px;
 }
 
 #tempChart_c2p3 {
   grid-area: matrix;
+  margin-right: 5px;
 }
 
 .temp_chart_c2p3 {
@@ -2100,7 +2127,7 @@ $dimGray: #9c9c9c;
 
 .map_c2p3 {
   max-height: 90vh;
-  width: 100%;
+  width: 90%;
 }
 
 .chartAxis {
@@ -2146,10 +2173,25 @@ $dimGray: #9c9c9c;
   }
 }
 
-.tooltip_map {
+.c2p2.tooltip_map {
   fill: #ffffff;
   font-family: sans-serif;
-  font-size: 0.95em;
+  font-size: 0.67em;
+  font-weight: bold;
+  line-height: 1em;
+  pointer-events: none;
+  @media screen and (max-height: 770px) {
+    font-size: 0.9em;
+  }
+  @media screen and (min-width: 1500px) {
+    font-size: 0.55em;
+  }
+}
+
+.c2p3.tooltip_map {
+  fill: #ffffff;
+  font-family: sans-serif;
+  font-size: 0.8em;
   font-weight: bold;
   line-height: 1em;
   pointer-events: none;
@@ -2157,7 +2199,7 @@ $dimGray: #9c9c9c;
     font-size: 1em;
   }
   @media screen and (min-width: 1500px) {
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
 }
 
