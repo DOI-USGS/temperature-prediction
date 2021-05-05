@@ -3,6 +3,7 @@
     <figure
       class="sticky intro"
     >
+      <br>
       <div
         id="intro-container"
         class="text-intro"
