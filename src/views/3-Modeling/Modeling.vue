@@ -304,6 +304,7 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
+          this.end = this.step_rgcn_ptrn+1;
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -1809,7 +1810,7 @@
              
           }
           // if upscroll enter .step#end, add sticky charts
-             if (this.step == 34 && response.direction == 'up'){
+             if (this.step == this.end && response.direction == 'up'){
                this.d3.select("figure.sticky.charts")
                 .style("visibility", "visible")
                 //classed("stuck", true)
@@ -1864,7 +1865,7 @@
         }
          
              // if downscroll past .step#end, drop sticky charts
-             if (this.step == 34 && response.direction == 'down'){
+             if (this.step == this.end && response.direction == 'down'){
                this.d3.select("figure.sticky.charts")
                 .style("visibility", "hidden")
                 //.classed("stuck", false)
