@@ -1,4 +1,5 @@
 <template>
+<div>
   <div id="modeling">
     <figure
       class="sticky intro"
@@ -136,7 +137,9 @@
           </div>
         </div>
       </div>
-    </article>
+       </article>
+       </div>
+    
      <figure
       class="sticky"
     >
@@ -165,6 +168,7 @@
                 </div>
         </div>
   </figure>
+
     </div>
 </template>
 
@@ -267,7 +271,7 @@
           this.scroller.setup({
                   step: "article .step",
                   debug: false, // draw trigger line on page
-                  offset: 0.95, //bottom of the page to trigger onStepEnter events
+                  offset: 0.90, //bottom of the page to trigger onStepEnter events
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
                 .onStepEnter(this.handleStepEnter)
@@ -304,7 +308,6 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
-          this.end = this.step_rgcn_ptrn+1;
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -1809,13 +1812,6 @@
               } 
              
           }
-          // if upscroll enter .step#end, add sticky charts
-             if (this.step == this.end && response.direction == 'up'){
-               this.d3.select("figure.sticky.charts")
-                .style("visibility", "visible")
-                //classed("stuck", true)
-             }
-
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -1863,14 +1859,7 @@
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
         }
-         
-             // if downscroll past .step#end, drop sticky charts
-             if (this.step == this.end && response.direction == 'down'){
-               this.d3.select("figure.sticky.charts")
-                .style("visibility", "hidden")
-                //.classed("stuck", false)
-             }
-
+ 
         },
         fadeOut(element, time) {
           element
@@ -1906,9 +1895,10 @@ $dimGray: #9c9c9c;
 
 //style steps
 #outro-container {
-    position: sticky;
-  top: 0px;
+    position: relative;
+  top: 0;
   left: 0;
+  height: auto;
 }
 .model-text-content {
   margin: 0 auto;
@@ -1934,6 +1924,7 @@ article {
 
 .step-container {
   width:100vw;
+  height: auto;
 }
 
 .step {
@@ -1958,7 +1949,12 @@ article {
   }
 }
 #end.step {
-  height: auto
+  height: 0px;
+  opacity: 0;
+  //margin-bottom: 50vh; // adding this to trigger hidden later since there's a space here  regardless
+}
+#last.step {
+  height: auto;
 }
 
 // add sticky header to steps to maintain while given model is shown
@@ -1996,6 +1992,7 @@ figure.sticky.intro {
 }
 
 figure.sticky.charts {
+  position: realtive;
   display: grid;
   padding-top: 1.1em;
   grid-template-rows: 90%;

@@ -179,7 +179,7 @@
                 },
                 {
                     'method': "These results give us confidence that we can use knowledge-guided deep learning to make predictions in river basins with limited observations.",
-                    'flubber_id': 'end',
+                    'flubber_id': 'last',
                     'bees_id': 'step_rgcn_ptrn'
                 }]
         }
