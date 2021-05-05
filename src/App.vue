@@ -174,6 +174,8 @@ h3{
   margin: 0 auto;
   padding: 2em;   
   @media screen and (max-width: 600px) {
+    min-width: 50vw;
+    max-width: 95vw;
     padding: 10px;
   }  
 }
@@ -257,11 +259,14 @@ h3{
 .map_monitoring {
   min-width: 400px;
   max-width: 600px;
-  max-height: 95vh;
+  max-height: 75vh;
   flex: 1 1 30%;
   justify-self: center;
   @media screen and (max-width: 600px) {
     max-width: 300px;
+  }
+  @media screen and (max-height: 770px) {
+    max-height: 95vh;
   }
 }
 
@@ -274,7 +279,7 @@ h3{
   z-index: 100;
   @media screen and (max-width: 600px) {
     max-width: 100%;
-    padding: 10px 10px 0px 10px;
+    padding: 5px 5px 0px 5px;
   }
 }
 
@@ -284,8 +289,8 @@ h3{
   color: $offWhiteBox;
   margin-bottom: 0;
   @media screen and (max-width: 600px) {
-       font-size: 1.2em;
-       line-height: 1.2em;
+    font-size: 1.2em;
+    line-height: 1.2em;
   }
 }
 
@@ -295,8 +300,10 @@ h3{
   text-align: left;
   font-weight: 100;
   margin-bottom: 0;
+  padding-top: 4px;
   @media screen and (max-width: 600px) {
-        font-size: .6em;
+    font-size: .8em;
+    padding-top: 8px;
   }
 }
 

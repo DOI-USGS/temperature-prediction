@@ -17,28 +17,34 @@
       <p v-html="text.paragraph5" />
     </div>
     <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          Temperature monitoring <span class="yellow">sites</span> in the Delaware River Basin
-        </p>
-        <p class="viz-subtitle" />
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            Temperature monitoring <span class="yellow">sites</span> in the Delaware River Basin
+          </p>
+          <p class="viz-subtitle" />
+        </div>
       </div>
       <MonitoringMap1 />
     </div>
+    <br>
     <div class="text-content">
       <p v-html="text.paragraph6" />
     </div>
     <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          Number of <span class="yellow">daily temperature measurements</span> by year
-        </p>
-        <p class="viz-subtitle">
-          Number of unique site-days measured by USGS streamgages or other state/local agencies.
-        </p>
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            Number of <span class="yellow">daily temperature measurements</span> by year
+          </p>
+          <p class="viz-subtitle">
+            Number of unique site-days measured by USGS streamgages or other state/local agencies.
+          </p>
+        </div>
       </div>
       <MonitoringBarChart />
     </div>
+    <br>
     <div class="text-content">
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
@@ -50,10 +56,12 @@
       <p v-html="text.paragraph10" />
     </div>
     <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          <span class="yellow">Availability</span> of temperature data in space and time
-        </p>
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            <span class="yellow">Availability</span> of temperature data in space and time
+          </p>
+        </div>
       </div>
       <MatrixExplainerSpace />
       <MatrixExplainerTime />
@@ -69,14 +77,16 @@
       <p v-html="text.paragraph12" />
     </div>
     <div class="box">
-      <div class="viz-title-wrapper">
-        <p class="viz-title">
-          Stream temperature <span class="yellow">variability</span> in 2019
-        </p>
-        <p class="viz-subtitle">
-          Each line = one reach.
-        </p>
-        <p class="viz-subtitle" />
+      <div class="text-content move-up">
+        <div class="viz-title-wrapper">
+          <p class="viz-title">
+            Stream temperature <span class="yellow">variability</span> in 2019
+          </p>
+          <p class="viz-subtitle">
+            Each line = one reach.
+          </p>
+          <p class="viz-subtitle" />
+        </div>
       </div>
       <MonitoringLineChart />
     </div>
