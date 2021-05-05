@@ -174,7 +174,7 @@ h3{
   margin: 0 auto;
   padding: 2em;   
   @media screen and (max-width: 600px) {
-    padding: 10px;
+    padding: 20px;
   }  
 }
 .text-content.move-up {
