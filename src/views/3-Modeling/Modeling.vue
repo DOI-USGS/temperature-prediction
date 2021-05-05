@@ -1809,7 +1809,7 @@
              
           }
           // if upscroll enter .step#end, add sticky charts
-             if (this.step == 34 && response.direction == 'down'){
+             if (this.step == 34 && response.direction == 'up'){
                this.d3.select("figure.sticky.charts")
                 .style("visibility", "hidden")
                 //classed("stuck", true)
