@@ -1,43 +1,44 @@
+
+# hex map -----------------------------------------------------------------
+
 ### making a hex map of temperature observations across CONUS
 #### from waterdata.usgs.gov/visualizations/temperature-prediction/index.html#/monitoring
 
-## goal: plot the number of temperature observations at the national scale
-## use hex grid to spatiall bin observation data
+## plotting temperature observations at the national scale
+## use hex grid to spatially bin observation data
 
-# preliminaries --------------------------------------------------------------
+# preliminaries ----------------------------------------------------------
 
 ## load libraries
 library(rmapshaper);library(sf);library(maps)
 library(viridis)
 library(tidyverse);library(lubridate)
 
-proj<-"+proj=lcc +lat_1=30.7 +lat_2=29.3 +lat_0=28.5 +lon_0=-91.33333333333333 +x_0=999999.9999898402 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
+proj <- "+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
 
-# prep data ------------------------------------------------------------
-
+# prep data ---------------------------------------------------------------
 ## temperature observation data 
-sites_sf <- read.csv("temperature_counts_us.csv") %>%
-  filter(!is.na(longitude))%>%
+
+sites_sf <- read.csv("temperature_counts_us_2020.csv") %>%
+  filter(!is.na(longitude)) %>%
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>% 
   st_transform(proj)
-str(counts)
 
 # make hex grid -----------------------------------------------------------
 
 ## spatially summarize state polygons to make map outline of usa
-usa_sf <- maps::map('usa', fill=TRUE)%>%
+usa_sf <- maps::map('usa', fill = TRUE, plot = FALSE)%>%
   st_as_sf() %>%
   st_transform(proj)
 
 ## make hex tesselation of CONUS
-columns <- 80
-rows <- 80
+columns <- 90
+rows <- 90
 site_grid <- usa_sf %>% 
-  st_make_grid(n=c(columns,rows), what="polygons", square = FALSE)%>%
-  st_as_sf()%>%
-  mutate(geometry=x) %>%
-  mutate(hex  =  as.character(seq.int(nrow(.))))
-glimpse(site_grid)
+  st_make_grid(n = c(columns,rows), what = "polygons", square = FALSE)%>%
+  st_as_sf() %>%
+  mutate(geometry = x) %>%
+  mutate(hex = as.character(seq.int(nrow(.))))
 
 ## intersect the hex grid with observation data
 site_hex <- site_grid %>%
@@ -47,35 +48,37 @@ site_hex <- site_grid %>%
   group_by(hex) %>%
   summarize(n_obs_hex = sum(n_obs), 
           n_sites = length(unique(site_id)))
-glimpse(site_hex)
 
 # join counts back with spatial grid
-sitey <- site_grid %>% left_join(site_hex, by='hex')
+hex_map <- site_grid %>% left_join(site_hex, by = 'hex')
 
 # plot map ----------------------------------------------------------
 
-scale_breaks <- c(1,25000, 50000, 75000, 100000,  125000, 150000, 175000, 200000)
+scale_breaks <- seq(0, 275000,  by = 25000)
 
-sitey%>%
-  ungroup()%>%
-  ggplot()+
-  geom_sf(aes(fill=as.numeric(n_obs_hex)), color="black", size=.2) +
-  scale_fill_viridis_c(option='plasma', 
-                     breaks=scale_breaks,labels=scale_breaks,
-                     direction=1, na.value=NA)+
-  theme_void()+
-  theme(legend.position="bottom",
-        plot.background = element_rect(fill="black"), 
-        legend.text = element_text(color="white"), 
-        legend.title=element_text(color="white"))+ 
-  guides(fill=guide_legend(title="Observations", 
-                             title.position="top",
+hex_map %>%
+  ungroup() %>%
+  ggplot() +
+  geom_sf(aes(fill = as.numeric(n_obs_hex)), 
+          color = "black", 
+          size = 0.2) +
+  scale_fill_viridis_c(option = 'plasma', 
+                       breaks = c(1,scale_breaks, 275000),
+                       direction = 1, 
+                       na.value = NA)+
+  theme_void() +
+  theme(legend.position = "bottom",
+        plot.background = element_rect(fill = "black"), 
+        legend.text = element_text(color = "white"), 
+        legend.title = element_text(color = "white")) + 
+  guides(fill = guide_legend(title = "Observations", 
+                             title.position = "top",
                              barwidth = 10,
-                             barhieght= 5, 
+                             barhieght = 5, 
                              show.limits = TRUE, 
-                             ticks=FALSE, 
+                             ticks = FALSE, 
                              direction = "horizontal"))
 
-ggsave("temp_hex_map.svg", width=32, height = 20)
-ggsave("temp_hex_map.png", width=32, height = 20)
+ggsave("temp_hex_map.svg", width = 32, height = 20)
+ggsave("temp_hex_map.png", width = 32, height = 20)
 
