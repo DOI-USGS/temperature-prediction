@@ -179,12 +179,7 @@
                 },
                 {
                     'method': "These results give us confidence that we can use knowledge-guided deep learning to make predictions in river basins with limited observations.",
-                    'flubber_id': '',
-                    'bees_id': 'step_rgcn_ptrn'
-                },
-                {
-                    'method': "Additionally, these knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.",
-                    'flubber_id': '',
+                    'flubber_id': 'end',
                     'bees_id': 'step_rgcn_ptrn'
                 }]
         }

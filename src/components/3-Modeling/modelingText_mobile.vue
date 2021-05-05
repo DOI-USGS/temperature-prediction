@@ -294,12 +294,7 @@
                 },
                 {
                     'method': "Additionally, these knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics.",
-                    'flubber_id': '',
-                    'bees_id': 'step_rgcn_ptrn'
-                },
-                {
-                    'method': " This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.",
-                    'flubber_id': '',
+                    'flubber_id': 'end',
                     'bees_id': 'step_rgcn_ptrn'
                 }]
         }
