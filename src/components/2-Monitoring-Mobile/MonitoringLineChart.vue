@@ -3,8 +3,6 @@
     <svg
       id="temp-chart-svg"
       xmlns="http://www.w3.org/2000/svg"
-      width="317"
-      height="306"
       viewBox="0 0 932 900"
     >
       <linearGradient id="temp-linear-gradient" x1="-300.5" y1="300" x2="-300.5" y2="900" gradientTransform="matrix(1.5, 0, 0, -1.5, 1336.5, 1350)" gradientUnits="userSpaceOnUse">
@@ -394,7 +392,7 @@ $dimGray: #9c9c9c;
 
 #temp-chart-svg {
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 
 .cls-1 {

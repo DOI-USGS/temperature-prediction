@@ -174,7 +174,9 @@ h3{
   margin: 0 auto;
   padding: 2em;   
   @media screen and (max-width: 600px) {
-    padding: 20px;
+    min-width: 50vw;
+    max-width: 95vw;
+    padding: 10px;
   }  
 }
 .text-content.move-up {
@@ -277,7 +279,7 @@ h3{
   z-index: 100;
   @media screen and (max-width: 600px) {
     max-width: 100%;
-    padding: 10px 10px 0px 10px;
+    padding: 5px 5px 0px 5px;
   }
 }
 
@@ -289,6 +291,7 @@ h3{
   @media screen and (max-width: 600px) {
        font-size: 1.2em;
        line-height: 1.2em;
+       padding-bottom: 2px;
   }
 }
 

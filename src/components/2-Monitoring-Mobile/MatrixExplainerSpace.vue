@@ -1,6 +1,7 @@
 <template>
   <div id="matrix-space-view">
     <svg
+      id="svg-matrix-space"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 700 1160"
@@ -170,6 +171,10 @@ $dimGray: #9c9c9c;
   width: 100%;
 }
 
+#svg-matrix-space {
+  max-height: 100vh;
+}
+
 .cls-2 {
   opacity: 0.8;
   mix-blend-mode: screen;
@@ -186,7 +191,7 @@ $dimGray: #9c9c9c;
 }
 
 .cls-4 {
-  stroke-dasharray: 1.99 5.97;
+  stroke-dasharray: 2 6;
 }
 
 .cls-5 {
