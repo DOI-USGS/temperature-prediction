@@ -317,7 +317,7 @@
           myGroups_c2p3: null,
           tempColor: null,
           temporalCountMax_c2p2: null,
-          bar_chart_margin: {top: 10, right: 40, bottom: 35, left: 10},
+          bar_chart_margin: {top: 10, right: 10, bottom: 35, left: 2},
           bar_chart_width: null, // this will get a value in the mounted hook
           bar_chart_height: null, // this will get a value in the mounted hook
           matrix_margin: {top: 50, right: 30, bottom: 30, left: 100}, //DO NOT CHANGE w/o changing in prebuilt component, too - WILL MESS UP SVG ALIGNMENT
@@ -770,23 +770,11 @@
           g.append("g")
               .attr("class", "c2p1 chartAxis right")
               // offset axis slightly to align closer to last bar
-              .attr("transform", "translate(" + this.bar_chart_width * 0.985 + "," + 0 + ")")
+              .attr("transform", "translate(" + this.bar_chart_width * 0.943 + "," + 0 + ")")
               // give ticks k number format and set their size to cover the width of the chart
               .call(this.d3.axisRight(y).ticks(4, "s").tickSize(- this.bar_chart_width))
               .select(".domain").remove()
-
-          // place and rotate the y axis label
-          svgChart.selectAll(".chartAxis.right")
-              .append("text")
-              .attr("y", 40)
-              // offset to (roughly) center on y axis
-              .attr("x", -this.bar_chart_height / 2)
-              .attr("text-anchor", "middle")
-              .attr("class", "c2p1 chartAxisText")
-              .text("Unique temperature measurements")
-              //.attr("transform", "translate(25, 0)")
-              .attr("transform", "rotate(-90)")
-              
+             
           // set the tick mark lines to background color
           svgChart.selectAll(".tick line").attr("stroke", "#0f0f0f").attr("stroke-width", 0.5).attr("stroke-dasharray", ("1, 2"))
 
