@@ -43,7 +43,7 @@
     <!--  figure contains all the sticky elements -->
     <figure
       ref="figure"
-      class="sticky charts"
+      class="sticky charts stuck"
     >
       <div 
         id="flubber-container"
@@ -137,12 +137,14 @@
         </div>
       </div>
     </article>
+     <figure
+      class="sticky"
+    >
     <div
         id="outro-container"
         class="text-outro"
-      ><div class="step-container model-text-content">
-        </div>
-       <div class="step-container model-text-content">
+      >
+      <div class="step-container model-text-content">
        <div
             class="scroll-sticky"
           >
@@ -162,7 +164,8 @@
         </div>
                 </div>
         </div>
-  </div>
+  </figure>
+    </div>
 </template>
 
 
@@ -1651,7 +1654,7 @@
 
           // update step variable to match step in view
           this.step = response.index;
-          //console.log(response);
+          console.log(response);
 
           ///////////          // assign forces
           // error chart steps
@@ -1747,7 +1750,6 @@
             this.chartState.aDecay = 0.15;
           }
           }
-          
 
           /////////// REDRAW beessawrm
           this.chartState.strengthx = 1;
@@ -1804,7 +1806,15 @@
               } else if (this.step == this.step_ann_exp) {
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
+             
           }
+          // if upscroll enter .step#end, add sticky charts
+             if (this.step == 34 && response.direction == 'down'){
+               this.d3.select("figure.sticky.charts")
+                .style("visibility", "hidden")
+                //classed("stuck", true)
+             }
+
 
            // add class to active step
           response.element.classList.add("is-active");
@@ -1851,6 +1861,13 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
+         
+             // if downscroll past .step#end, drop sticky charts
+             if (this.step == 34 && response.direction == 'down'){
+               this.d3.select("figure.sticky.charts")
+                .style("visibility", "hidden")
+                //.classed("stuck", false)
+             }
         }
         },
         fadeOut(element, time) {
@@ -1886,6 +1903,11 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
 //style steps
+#outro-container {
+    position: sticky;
+  top: 0px;
+  left: 0;
+}
 .model-text-content {
   margin: 0 auto;
   padding: 2em;   
@@ -1933,6 +1955,9 @@ article {
     }
   }
 }
+#end.step {
+  height: auto
+}
 
 // add sticky header to steps to maintain while given model is shown
 .scroll-sticky {
@@ -1943,11 +1968,16 @@ article {
   left: 0;
   padding-top: 0px;
 }
+.stuck {
+  position: -webkit-sticky;
+  position: sticky;
+}
 
 //start at beginning
 //grid layout
 #modeling {
   width: 100vw;
+  height: auto;
 }
 
 // set up structure for sticky elements
@@ -1969,8 +1999,7 @@ figure.sticky.charts {
   grid-template-rows: 90%;
   grid-template-columns: 3fr 2fr 4fr 2%;
   z-index: 1;
-  position: -webkit-sticky;
-  position: sticky;
+  
   top: 7vh; // leaving top for sticky header
   height: 90vh;
   width: auto;
@@ -1985,6 +2014,7 @@ figure.sticky.charts {
     grid-template-columns: 2% auto 2%;
     padding-top: 4em;
   }
+ 
  
   #flubber-container {
     grid-column: 2 / 2;
