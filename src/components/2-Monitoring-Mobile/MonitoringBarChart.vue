@@ -5,7 +5,7 @@
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 500 325.8"
     >
-      <g transform="scale(0.93,0.93) translate(12,12)">
+      <g transform="scale(0.95,0.95) translate(12,12)">
         <g
           id="Bars_all"
           transform="translate(0,-12)"
@@ -565,10 +565,6 @@ $dimGray: #9c9c9c;
 
 #bar-chart {
   width: 100%;
-}
-
-#svg-bar-chart {
-  padding: 10px;
 }
 
 .cls-1 {
