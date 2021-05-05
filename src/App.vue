@@ -289,9 +289,8 @@ h3{
   color: $offWhiteBox;
   margin-bottom: 0;
   @media screen and (max-width: 600px) {
-       font-size: 1.2em;
-       line-height: 1.2em;
-       padding-bottom: 2px;
+    font-size: 1.2em;
+    line-height: 1.2em;
   }
 }
 
@@ -301,8 +300,10 @@ h3{
   text-align: left;
   font-weight: 100;
   margin-bottom: 0;
+  padding-top: 4px;
   @media screen and (max-width: 600px) {
-        font-size: .6em;
+    font-size: .8em;
+    padding-top: 8px;
   }
 }
 
