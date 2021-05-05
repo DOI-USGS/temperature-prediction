@@ -1811,7 +1811,7 @@
           // if upscroll enter .step#end, add sticky charts
              if (this.step == 34 && response.direction == 'up'){
                this.d3.select("figure.sticky.charts")
-                .style("visibility", "hidden")
+                .style("visibility", "visible")
                 //classed("stuck", true)
              }
 
@@ -1861,6 +1861,7 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
+        }
          
              // if downscroll past .step#end, drop sticky charts
              if (this.step == 34 && response.direction == 'down'){
@@ -1868,7 +1869,7 @@
                 .style("visibility", "hidden")
                 //.classed("stuck", false)
              }
-        }
+
         },
         fadeOut(element, time) {
           element
