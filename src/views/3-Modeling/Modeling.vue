@@ -1,176 +1,183 @@
 <template>
-<div>
-  <div id="modeling">
-    <figure
-      class="sticky intro"
-    >
-      <br>
-      <div
-        id="intro-container"
-        class="text-intro"
+  <div>
+    <div id="modeling">
+      <figure
+        class="sticky intro"
       >
+        <br>
         <div
-          class="text-content"
+          id="intro-container"
+          class="text-intro"
         >
-          <p>
-            Data sparsity and variability in stream temperature dynamics are not unique to the Delaware River Basin; relative to most of the continental United States, the Delaware River Basin is well monitored for water temperature.
-          </p>
-        </div>
-        <div class="box-matrix">
-          <div class="text-content">
-            <div class="viz-title-wrapper">
-              <p class="viz-title">
-                <span class="yellow">Monitoring</span> throughout the continental United States
-              </p>
-              <p class="viz-subtitle">
-                USGS, state, or local agency stream temperature observations since 1985.
-              </p>
+          <div
+            class="text-content"
+          >
+            <p>
+              Data sparsity and variability in stream temperature dynamics are not unique to the Delaware River Basin; relative to most of the continental United States, the Delaware River Basin is well monitored for water temperature.
+            </p>
+          </div>
+          <div class="box-matrix">
+            <div class="text-content">
+              <div class="viz-title-wrapper">
+                <p class="viz-title">
+                  <span class="yellow">Monitoring</span> throughout the continental United States
+                </p>
+                <p class="viz-subtitle">
+                  USGS, state, or local agency stream temperature observations since 1985.
+                </p>
+              </div>
+            </div>
+            <div
+              id="map-container"
+              class="figure-content"
+            >
+              <DesktopHexMap />
             </div>
           </div>
           <div
-            id="map-container"
-            class="figure-content"
+            class="text-content"
           >
-            <DesktopHexMap />
+            <p>The Delaware River Basin is therefore an ideal place to develop new methods for stream temperature prediction. The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
+            <p>Knowledge-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
           </div>
         </div>
-        <div
-          class="text-content"
+      </figure>
+      <!--  figure contains all the sticky elements -->
+      <figure
+        ref="figure"
+        class="sticky charts stuck"
+      >
+        <div 
+          id="flubber-container"
+          class="figure-content"
         >
-          <p>The Delaware River Basin is therefore an ideal place to develop new methods for stream temperature prediction. The challenges we described in the Monitoring section – leveraging existing data, capturing diverse cause-and-effect relationships, predicting stream temperature in unmonitored systems and at broad scales – require innovation in modeling. The USGS, along with our academic computer science partners, have been developing new modeling techniques called "knowledge-guided deep learning".</p>
-          <p>Knowledge-guided deep learning is, at its core, a machine learning approach. It uses a specific type of machine learning model called an artificial neural network (ANN). ANNs have been used with great success to identify complex relationships and make accurate predictions in a number of scientific fields.</p>       
+          <FlubberVisuals />
         </div>
-      </div>
-    </figure>
-    <!--  figure contains all the sticky elements -->
-    <figure
-      ref="figure"
-      class="sticky charts stuck"
-    >
-      <div 
-        id="flubber-container"
-        class="figure-content"
-      >
-        <FlubberVisuals />
-      </div>
-      <div
-        id="bees-container"
-      />
-      <div
-        id="legend-container"
-      >
-        <svg
-          id="bees-legend"
-          viewBox="0 0 1000 500"
-          width="100%"
-          height="100%"
-          xmlns="http://www.w3.org/2000/svg" 
+        <div
+          id="bees-container"
         />
-      </div>
-    </figure>
-    <!--     all the scrolling elements are created from modelingText.js content -->
-    <article>
-      <div 
-        v-if="!mobileView"
-        id="scrollama-container-desktop"
-      >
-        <!-- create scrolling/sticky headers for each model section -->
-        <div 
-          v-for="(models, model_group) in text" 
-          :key="model_group" 
-          :class="model_group" 
-          class="step-container model-text-content"
+        <div
+          id="legend-container"
         >
-          <div
-            class="scroll-sticky"
+          <svg
+            id="bees-legend"
+            viewBox="0 0 1000 500"
+            width="100%"
+            height="100%"
+            xmlns="http://www.w3.org/2000/svg" 
+          />
+        </div>
+      </figure>
+      <!--     all the scrolling elements are created from modelingText.js content -->
+      <article>
+        <div 
+          v-if="!mobileView"
+          id="scrollama-container-desktop"
+        >
+          <!-- create scrolling/sticky headers for each model section -->
+          <div 
+            v-for="(models, model_group) in text" 
+            :key="model_group" 
+            :class="model_group" 
+            class="step-container model-text-content"
           >
-            <h3 class="viz-title-scrolly">
-              {{ model_group }}
-            </h3>
-          </div>
-          <!-- populate nested steps using text about each model -->
-          <div class="scrollama-steps">
             <div
-              v-for="model in models" 
-              :id="model.flubber_id" 
-              :key="model" 
-              class="step"
+              class="scroll-sticky"
             >
-              <p
-                class="step-text"
-                v-html="model.method"
-              />
+              <h3 class="viz-title-scrolly">
+                {{ model_group }}
+              </h3>
+            </div>
+            <!-- populate nested steps using text about each model -->
+            <div class="scrollama-steps">
+              <div
+                v-for="model in models" 
+                :id="model.flubber_id" 
+                :key="model" 
+                class="step"
+              >
+                <p
+                  class="step-text"
+                  v-html="model.method"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div 
-        v-if="mobileView"
-        id="scrollama-container-mobile"
-      >
-        <!-- create scrolling/sticky headers for each model section -->
         <div 
-          v-for="(models, model_group) in mobile_text" 
-          :key="model_group" 
-          :class="model_group" 
-          class="step-container model-text-content"
+          v-if="mobileView"
+          id="scrollama-container-mobile"
         >
-          <div
-            class="scroll-sticky"
+          <!-- create scrolling/sticky headers for each model section -->
+          <div 
+            v-for="(models, model_group) in mobile_text" 
+            :key="model_group" 
+            :class="model_group" 
+            class="step-container model-text-content"
           >
-            <h3 class="viz-title-scrolly">
-              {{ model_group }}
-            </h3>
-          </div>
-          <!-- populate nested steps using text about each model -->
-          <div class="scrollama-steps">
             <div
-              v-for="model in models" 
-              :id="model.flubber_id" 
-              :key="model" 
-              class="step"
+              class="scroll-sticky"
             >
-              <p
-                class="step-text"
-                v-html="model.method"
-              />
+              <h3 class="viz-title-scrolly">
+                {{ model_group }}
+              </h3>
+            </div>
+            <!-- populate nested steps using text about each model -->
+            <div class="scrollama-steps">
+              <div
+                v-for="model in models" 
+                :id="model.flubber_id" 
+                :key="model" 
+                class="step"
+              >
+                <p
+                  class="step-text"
+                  v-html="model.method"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-       </article>
-       </div>
+      </article>
+    </div>
     
-     <figure
+    <figure
       class="sticky"
     >
-    <div
+      <div
         id="outro-container"
         class="text-outro"
       >
-      <div class="step-container model-text-content">
-       <div
+        <div class="step-container model-text-content">
+          <div
             class="scroll-sticky"
           >
             <h3 class="viz-title-scrolly">
               What's next?
             </h3>
-        <div
-          class="text-content"
-        >
-          <p>
-            Knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.  <br> <br>
-            These models could be used to answer pressing water questions: How will climate change impact available fish habitat? Will increases in water use change stream temperature dynamics? What will happen to stream temperature if we add or remove a dam?   <br> <br>
-            What’s next for knowledge-guided water temperature modeling at the U.S. Geological Survey? We’re actively working to incorporate real-time data to improve temperature forecasts, modify the machine learning architecture to accommodate reservoirs, and expand to new basins across the U.S.   <br> <br>
-            To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in <a href="https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2019WR024922" target=”_blank” class="pub_link">lakes</a> and <a href="https://arxiv.org/pdf/2009.12575.pdf" target=”_blank” class="pub_link">streams</a>.
-          </p>
+            <div
+              class="text-content"
+            >
+              <p>
+                Knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.  <br> <br>
+                These models could be used to answer pressing water questions: How will climate change impact available fish habitat? Will increases in water use change stream temperature dynamics? What will happen to stream temperature if we add or remove a dam?   <br> <br>
+                What’s next for knowledge-guided water temperature modeling at the U.S. Geological Survey? We’re actively working to incorporate real-time data to improve temperature forecasts, modify the machine learning architecture to accommodate reservoirs, and expand to new basins across the U.S.   <br> <br>
+                To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in <a
+                  href="https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2019WR024922"
+                  target="”_blank”"
+                  class="pub_link"
+                >lakes</a> and <a
+                  href="https://arxiv.org/pdf/2009.12575.pdf"
+                  target="”_blank”"
+                  class="pub_link"
+                >streams</a>.
+              </p>
+            </div>
+          </div>
         </div>
-        </div>
-                </div>
-        </div>
-  </figure>
-
-    </div>
+      </div>
+    </figure>
+  </div>
 </template>
 
 
