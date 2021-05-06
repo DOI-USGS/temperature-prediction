@@ -7,27 +7,29 @@
           :href="LinkOne"
         >
           <figure>
-            <figcaption>Water Science and Management in the DRB</figcaption>
+            
             <img
               src="@/assets/components/PreFooterVisualizationsLinks/images/DRBthumb.png"
               alt=""
               loading="lazy"
               class="link_image"
             >
+            <figcaption>Water Science and Management in the DRB</figcaption>
           </figure>
         </a>
         <a
           :href="LinkTwo"
         >
           <figure>
-            <figcaption>Gages Through the Ages</figcaption>
+            
             <img
-              src="@/assets/components/PreFooterVisualizationsLinks/images/Gages.png"
+              src="@/assets/components/PreFooterVisualizationsLinks/images/SnowToFlow.jpg"
               alt=""
               loading="lazy"
               class="link_image"
             >
           </figure>
+          <figcaption>From Snow to Flow</figcaption>
         </a>
       </div>
     </div>
@@ -40,7 +42,7 @@
         data() {
             return {
                 LinkOne: "https://labs.waterdata.usgs.gov/visualizations/delaware-basin-story/index.html#/",
-                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/gages-through-the-ages/index.html#/"
+                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/snow-to-flow/index.html#/"
             };
         }
     }
