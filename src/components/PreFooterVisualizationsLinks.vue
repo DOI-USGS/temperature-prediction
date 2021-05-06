@@ -41,8 +41,8 @@
         name: 'PreFooterVisualizationsLinks',
         data() {
             return {
-                LinkOne: "https://labs.waterdata.usgs.gov/visualizations/delaware-basin-story/index.html#/",
-                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/snow-to-flow/index.html#/"
+                LinkOne: "https://labs.waterdata.usgs.gov/visualizations/delaware-basin-story/index.html?utm_source=footer&utm_medium=link&utm_campaign=temp#/",
+                LinkTwo: "https://labs.waterdata.usgs.gov/visualizations/snow-to-flow/index.html?utm_source=footer&utm_medium=link&utm_campaign=temp#/"
             };
         }
     }
