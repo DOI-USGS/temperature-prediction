@@ -29,6 +29,9 @@ You might get this error when running ``npm run serve``
   
 - To fix, run ``npm install @vue/cli-service -g`` to install the Vue CLI-Service globally.
 
+## Stream temperature observations
+Observations of stream temperature - `preprocess-data/input_data/obs_temp_drb.rds` - were pulled from the [USGS National Water Information System (NWIS)](https://waterdata.usgs.gov/nwis), the [Water Quality Portal](https://www.waterqualitydata.us/) and [EcoSHEDS](http://db.ecosheds.org/). The code to pull and process that data is stored in [this repository](https://github.com/USGS-R/2wp-temp-observations) and [this repository](https://github.com/USGS-R/delaware-model-prep). Additional final processing for this visualization is done in the `preprocess-data/temp_obs_data_prep.R` script.
+
 ## Preprocessing data in JupyterLab
 The raw shapefiles and temperature observations were processed in a Jupyter notebook and then exported to `public/data`.
 
