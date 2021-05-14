@@ -18,13 +18,13 @@ export default new Router({
             path: '/monitoring',
             name: 'Monitoring',
             component: () =>
-                    import('@/views/2-Monitoring/MonitoringRouter.vue')
+                    import('@/views/1-Monitoring/MonitoringRouter.vue')
         },
         {
             path: '/modeling',
             name: 'Modeling',
             component: () =>
-                    import('@/views/3-Modeling/Modeling.vue')
+                    import('@/views/2-Modeling/Modeling.vue')
         },
         {
             path: '/404',

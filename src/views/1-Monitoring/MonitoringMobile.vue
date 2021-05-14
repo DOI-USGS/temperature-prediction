@@ -8,7 +8,7 @@
       </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-      <Chapter2Icons1 />
+      <Chapter1Icons1 />
       <p v-html="text.paragraph3" />
       <p v-html="text.paragraph4" />
       <div class="subheader">
@@ -25,7 +25,7 @@
           <p class="viz-subtitle" />
         </div>
       </div>
-      <MonitoringMap1 />
+      <MonitoringMap />
     </div>
     <br>
     <div class="text-content">
@@ -48,7 +48,7 @@
     <div class="text-content">
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
-      <Chapter2Icons2 />
+      <Chapter1Icons2 />
       <div class="first_subheader">
         <h3 v-html="text.title3" />
       </div>
@@ -73,7 +73,7 @@
         <h3 v-html="text.title4" />
       </div>
       <p v-html="text.paragraph11" />
-      <Chapter2Icons3 />
+      <Chapter1Icons3 />
       <p v-html="text.paragraph12" />
     </div>
     <div class="box">
@@ -99,30 +99,30 @@
 </template>
 
 <script>
-  import monitoringText from "./../../components/2-Monitoring/monitoringText";
-  import MonitoringMap1 from "./../../components/2-Monitoring-Mobile/MonitoringMap1";
-  import MonitoringBarChart from "./../../components/2-Monitoring-Mobile/MonitoringBarChart";
-  import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
-  import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
-  import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
-  import MatrixAvailability from "./../../components/2-Monitoring-Mobile/MatrixAvailability";
-  import MonitoringLineChart from "./../../components/2-Monitoring-Mobile/MonitoringLineChart";
+  import monitoringText from "./../../components/1-Monitoring/monitoringText";
+  import MonitoringMap from "./../../components/1-Monitoring-Mobile/MonitoringMap";
+  import MonitoringBarChart from "./../../components/1-Monitoring-Mobile/MonitoringBarChart";
+  import MatrixExplainerSpace from "./../../components/1-Monitoring-Mobile/MatrixExplainerSpace";
+  import MatrixExplainerTime from "./../../components/1-Monitoring-Mobile/MatrixExplainerTime";
+  import MatrixExplainerColor from "./../../components/1-Monitoring-Mobile/MatrixExplainerColor";
+  import MatrixAvailability from "./../../components/1-Monitoring-Mobile/MatrixAvailability";
+  import MonitoringLineChart from "./../../components/1-Monitoring-Mobile/MonitoringLineChart";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
     name: 'MonitoringMobile',
     components: {
-      MonitoringMap1,
+      MonitoringMap,
       MonitoringBarChart,
       MatrixExplainerSpace,
       MatrixExplainerTime,
       MatrixExplainerColor,
       MatrixAvailability,
       MonitoringLineChart,
-      IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/2-Monitoring/IntroMap"),
-      Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
-      Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2"),
-      Chapter2Icons3: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons3"*/ "./../../components/2-Monitoring/Chapter2Icons3")
+      IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/1-Monitoring/IntroMap"),
+      Chapter1Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons1"*/ "./../../components/1-Monitoring/Chapter1Icons1"),
+      Chapter1Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons2"*/ "./../../components/1-Monitoring/Chapter1Icons2"),
+      Chapter1Icons3: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons3"*/ "./../../components/1-Monitoring/Chapter1Icons3")
     },
     data() {
         return {

@@ -1838,7 +1838,7 @@
 
 <script>
 export default {
-    name: "PrebuiltC2P3Chart"
+    name: "PrebuiltC1P3Chart"
 }
 </script>
 <style lang="scss" scoped>

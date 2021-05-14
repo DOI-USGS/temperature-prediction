@@ -8,7 +8,7 @@
       </div>
       <p v-html="text.paragraph1" />
       <p v-html="text.paragraph2" />
-      <Chapter2Icons1 />
+      <Chapter1Icons1 />
       <p v-html="text.paragraph3" />
       <p v-html="text.paragraph4" />
       <div class="subheader">
@@ -58,7 +58,7 @@
     <div class="text-content">
       <p v-html="text.paragraph7" />
       <p v-html="text.paragraph8" />
-      <Chapter2Icons2 />
+      <Chapter1Icons2 />
       <div class="subheader">
         <h3 v-html="text.title3" />
       </div>
@@ -125,7 +125,7 @@
             <g
               class="prebuilt_c2p2_group"
             >
-              <PrebuiltC2P2Matrix />
+              <PrebuiltC1P2Matrix />
             </g>
             <g id="year_labels">
               <text
@@ -183,7 +183,7 @@
         <h3 v-html="text.title4" />
       </div>
       <p v-html="text.paragraph11" />
-      <Chapter2Icons3 />
+      <Chapter1Icons3 />
       <p v-html="text.paragraph12" />
     </div>
     <div class="box-matrix">
@@ -216,7 +216,7 @@
             <g
               class="prebuilt_c2p3_group"
             >
-              <PrebuiltC2P3Chart />
+              <PrebuiltC1P3Chart />
             </g>
           </svg>
         </div>
@@ -285,25 +285,25 @@
   import {geoScaleBar, geoScaleBottom, geoScaleTop, geoScaleKilometers, geoScaleMiles} from "d3-geo-scale-bar";
   import * as topojson from "topojson-client";
   import * as ss from 'simple-statistics';
-  import monitoringText from "./../../components/2-Monitoring/monitoringText";
-  import MatrixExplainerSpace from "./../../components/2-Monitoring-Mobile/MatrixExplainerSpace";
-  import MatrixExplainerTime from "./../../components/2-Monitoring-Mobile/MatrixExplainerTime";
-  import MatrixExplainerColor from "./../../components/2-Monitoring-Mobile/MatrixExplainerColor";
-  import PrebuiltC2P2Matrix from "./../../components/2-Monitoring/PrebuiltC2P2Matrix";
-  import PrebuiltC2P3Chart from "./../../components/2-Monitoring/PrebuiltC2P3Chart";
+  import monitoringText from "./../../components/1-Monitoring/monitoringText";
+  import MatrixExplainerSpace from "./../../components/1-Monitoring-Mobile/MatrixExplainerSpace";
+  import MatrixExplainerTime from "./../../components/1-Monitoring-Mobile/MatrixExplainerTime";
+  import MatrixExplainerColor from "./../../components/1-Monitoring-Mobile/MatrixExplainerColor";
+  import PrebuiltC1P2Matrix from "./../../components/1-Monitoring/PrebuiltC1P2Matrix";
+  import PrebuiltC1P3Chart from "./../../components/1-Monitoring/PrebuiltC1P3Chart";
 
   export default {
-      name: 'Set2',
+      name: 'MonitoringDesktop',
       components: {
         MatrixExplainerSpace,
         MatrixExplainerTime,
         MatrixExplainerColor,
-        PrebuiltC2P2Matrix,
-        PrebuiltC2P3Chart,
-        IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/2-Monitoring/IntroMap"),
-        Chapter2Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons1"*/ "./../../components/2-Monitoring/Chapter2Icons1"),
-        Chapter2Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons2"*/ "./../../components/2-Monitoring/Chapter2Icons2"),
-        Chapter2Icons3: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter2icons3"*/ "./../../components/2-Monitoring/Chapter2Icons3")
+        PrebuiltC1P2Matrix,
+        PrebuiltC1P3Chart,
+        IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/1-Monitoring/IntroMap"),
+        Chapter1Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons1"*/ "./../../components/1-Monitoring/Chapter1Icons1"),
+        Chapter1Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons2"*/ "./../../components/1-Monitoring/Chapter1Icons2"),
+        Chapter1Icons3: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons3"*/ "./../../components/1-Monitoring/Chapter1Icons3")
       },
       data() {
         return {
