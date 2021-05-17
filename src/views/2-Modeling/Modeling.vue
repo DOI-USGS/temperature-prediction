@@ -187,10 +187,10 @@
     import * as scrollama from 'scrollama';
     import * as flubber from "flubber";
     import { isMobile } from 'mobile-device-detect';
-    import modelingText from "./../../components/3-Modeling/modelingText";
-    import modelingText_mobile from "./../../components/3-Modeling/modelingText_mobile";
-    import DesktopHexMap from "./../../components/2-Monitoring/HexMap";
-    import FlubberVisuals from "./../../components/3-Modeling/flubber";
+    import modelingText from "./../../components/2-Modeling/modelingText";
+    import modelingText_mobile from "./../../components/2-Modeling/modelingText_mobile";
+    import DesktopHexMap from "./../../components/2-Modeling/HexMap";
+    import FlubberVisuals from "./../../components/2-Modeling/flubber";
 
   export default {
     name: 'Modeling',

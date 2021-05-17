@@ -137,7 +137,7 @@
 
 <script>
 export default {
-    name: "PrebuiltC2P2Matrix"
+    name: "PrebuiltC1P2Matrix"
 }
 </script>
 <style lang="scss" scoped>

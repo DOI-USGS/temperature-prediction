@@ -1,5 +1,5 @@
 <template>
-  <div id="monitoring-map-1">
+  <div id="monitoring-map">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="250"
@@ -11428,7 +11428,7 @@
 
 <script>
 export default {
-    name: "MonitoringMap1"
+    name: "MonitoringMap"
 }
 </script>
 
@@ -11448,7 +11448,7 @@ export default {
   $grayBlue: #777b80;
   $dimGray: #9c9c9c;
 
-  #monitoring-map-1 {
+  #monitoring-map {
     width: 100%;
     padding: 0px;
     text-align: center;
