@@ -111,7 +111,7 @@
                 {
                     'method': "In order to evaluate how well the model is capturing the temperature dynamics of the stream reach, we can summarize the daily prediction errors.",
                     'flubber_id': '',
-                    'bees_id': 'step_error_rmse'
+                    'bees_id': 'step_error_obs'
                 }, 
                 {
                     'method': "One way to summarize error is by calculating the root mean squared error (RMSE).",
@@ -131,7 +131,7 @@
                 {
                     'method': "We can use RMSE to compare the performance of different models or to assess how accuracy varies in time, space, or under different conditions.",
                     'flubber_id': '',
-                    'bees_id': 'step_ann'
+                    'bees_id': 'step_error_rmse_scale'
                 },
                 {
                     'method': "Here each dot represents the RMSE for predictions in a single stream reach. The model was trained on all available data in the training period, and is accurate in most reaches.",

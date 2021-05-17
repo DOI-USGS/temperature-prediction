@@ -494,6 +494,7 @@
                         this.link_o = 1; 
                         break;
                       case this.step_error_obs:
+                      case this.step_error_obs+1:
                         this.label_o = 1;
                         this.label_o_rmse = 0;
                         this.o_pred = 1;
@@ -766,6 +767,7 @@
                         this.chartState.rad = this.errorRadius;
                         break;
                       case this.step_error_obs:
+                      case this.step_error_obs+1:
                         this.chartState.dataset = this.error_data;
                         this.chartState.grouped = this.color_bees.error;
                         this.chartState.var_x = this.chart_x.error;
@@ -1671,50 +1673,50 @@
           ///////////          // assign forces
           // error chart steps
           if (this.mobileView) {
-          if (this.step <= this.step_error_obs) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-            this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
-          }
-           if (response.direction == "up" && this.step === this.step_error_obs ) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
-          }
-          // push to overlap as single RMSE
-          if (this.step === this.step_rmse && this.step <= this.step_rmse+3) {
-            this.chartState.strengthy = 1;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 2;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
-          }
-          if (response.direction == "up" && this.step === this.step_rmse) {
-            this.chartState.strengthy = 1.5;
-            this.chartState.strengthy = 2;
-            this.chartState.radius = 0;
-             this.chartState.strengthr = 0;
-             this.chartState.alpha = 1;
-             this.chartState.aDecay = 0.1;
-          }
-          // intro beeswarm, adding experiments
-          if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-            this.chartState.strengthy = 0.9;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = .2;
-            this.chartState.aDecay = 0.15;
-          }
-          // RNN to end
-          if (this.step >= this.step_rnn)  {
-            this.chartState.strengthy = 0.3;
-            this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.3;
-            this.chartState.aDecay = 0.15;
-          }
+            if (this.step <= this.step_error_obs) {
+              this.chartState.strengthy = 1;
+              this.chartState.radius = 0;
+              this.chartState.strengthr = 0;
+              this.chartState.alpha = 1;
+              this.chartState.aDecay = 0.1;
+            }
+            if (response.direction == "up" && this.step === this.step_error_obs ) {
+              this.chartState.strengthy = 1;
+              this.chartState.radius = 0;
+              this.chartState.strengthr = 0;
+              this.chartState.alpha = 1;
+              this.chartState.aDecay = 0.1;
+            }
+            // push to overlap as single RMSE
+            if (this.step === this.step_rmse && this.step <= this.step_rmse+3) {
+              this.chartState.strengthy = 1;
+              this.chartState.radius = 0;
+              this.chartState.strengthr = 2;
+              this.chartState.alpha = 1;
+              this.chartState.aDecay = 0.1;
+            }
+            if (response.direction == "up" && this.step <= this.step_rmse + 3) {
+              this.chartState.strengthy = 1.5;
+              this.chartState.strengthy = 2;
+              this.chartState.radius = 0;
+              this.chartState.strengthr = 0;
+              this.chartState.alpha = 1;
+              this.chartState.aDecay = 0.1;
+            }
+            // intro beeswarm, adding experiments
+            if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
+              this.chartState.strengthy = 0.9;
+              this.chartState.radius = this.paddedRadius;
+              this.chartState.alpha = .2;
+              this.chartState.aDecay = 0.15;
+            }
+            // RNN to end
+            if (this.step >= this.step_rnn)  {
+              this.chartState.strengthy = 0.3;
+              this.chartState.radius = this.paddedRadius;
+              this.chartState.alpha = 0.3;
+              this.chartState.aDecay = 0.15;
+            }
           }else {
          if (this.step <= this.step_error_obs) {
             this.chartState.strengthy = 1;
@@ -1738,13 +1740,13 @@
              this.chartState.alpha = 1;
              this.chartState.aDecay = 0.1;
           }
-          if (response.direction == "up" && this.step === this.step_rmse) {
+          if (response.direction == "up" && this.step <= this.step_rmse+2) {
             this.chartState.strengthy = 1.5;
             this.chartState.strengthy = 2;
             this.chartState.radius = 0;
              this.chartState.strengthr = 0;
-             this.chartState.alpha = .2;
-             this.chartState.aDecay = 0.15;
+             this.chartState.alpha = 1;
+             this.chartState.aDecay = 0.1;
           }
 
           // intro beeswarm, adding experiments
