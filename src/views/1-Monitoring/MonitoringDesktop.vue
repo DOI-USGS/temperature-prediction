@@ -1,6 +1,7 @@
 <template>
   <section id="section_1">
     <br>
+    <br>
     <IntroMap />
     <div class="text-content">
       <div class="first_subheader">

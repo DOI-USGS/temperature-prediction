@@ -3,6 +3,7 @@
     <div>
       <div class="overall-title">
         <div class="text-content">
+          <br>
           <h1 class="nav-title">
             How we <span class="highlight_word">Monitor</span><br>Stream Temperature in the<br>
             Delaware River Basin
@@ -78,7 +79,7 @@ $dimGray: #9c9c9c;
   line-height: 1.4;
   font-size: 2.6em;
   @media screen and (max-width: 600px) {
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
 }
 
