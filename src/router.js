@@ -21,12 +21,6 @@ export default new Router({
                     import('@/views/1-Monitoring/MonitoringRouter.vue')
         },
         {
-            path: '/modeling',
-            name: 'Modeling',
-            component: () =>
-                    import('@/views/2-Modeling/Modeling.vue')
-        },
-        {
             path: '/404',
             name: 'error404',
             component: () =>

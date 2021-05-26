@@ -7,14 +7,7 @@
             How we<router-link
               to="/monitoring"
               @click.native="scrollToTop"
-            >
-              Monitor
-            </router-link><span class="dim_text">|</span><router-link
-              to="/modeling"
-              @click.native="scrollToTop"
-            >
-              Model
-            </router-link><br>Stream Temperature in the<br>
+            >Monitor</router-link><br>Stream Temperature in the<br>
             Delaware River Basin
           </h1>
           <br>

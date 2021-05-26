@@ -5,13 +5,7 @@
         <router-link
           to="/monitoring"
           @click.native="scrollToTop"
-        >
-          Monitor
-        </router-link><router-link
-          to="/modeling"
-          @click.native="scrollToTop"
-        >
-          Model
+        >Monitor
         </router-link>
       </p>
     </div>

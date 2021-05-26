@@ -19,7 +19,7 @@
             paragraph11: "Another complexity of predicting temperature dynamics in the basin is that not all streams behave the same way. Features of the landscape can have large effects on water temperature that result in different temperature patterns. Groundwater inputs, reservoirs, and urban areas all have distinct temperature signatures.",
             paragraph12: "If we look at a single year of data, we can see how different stream temperature can be across the basin. Each line in the figure below represents temperature observations from one river reach in the DRB in 2019. In July, mean stream temperature across the basin differed by as much as 26 degrees on a single day. Additionally, you can see drastically different warming and cooling patterns, particularly below reservoirs where stream temperature can deviate from the normal seasonal patterns.",
             paragraph13: "The temperature observations in the basin can be used to inform models that help us predict temperature when or where observations are unavailable. Day ahead temperature forecasts, for example, can help managers decide when to release water from reservoirs. How can we create robust models that account for diverse temperature dynamics and make accurate predictions in places and times where we don't have a lot of information?",
-            paragraph14: "Visit the Model chapter to learn about innovative modeling techniques to predict water temperature."
+            paragraph14: "Coming Soon! Visit the Model chapter (to be released on June 21) to learn about innovative modeling techniques to predict water temperature."
         }
     }
 </script>

@@ -812,34 +812,34 @@
           // re-use reservoirs group
           self.map_c1p2.append("g").attr("class","c1p2 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
-
+          console.log(self.segment_id_list)
           // // Use forEach to iterate over list of segment ids and add all segments         
           self.segment_id_list.forEach(function(segment_id) {
             let href_id = '#seg' + segment_id
-            self.map_c1p2.append("g")
-              .attr("class", function(d) {
-                let seg_class = 'c1p2 river_segments seg'
-                seg_class += segment_id
-                let year_key = null;
-                for (year_key in self.segmentDict[segment_id].year_count) {
-                  if (self.segmentDict[segment_id].year_count[year_key] > 0) {
-                    seg_class += " year" + year_key
+              self.map_c1p2.append("g")
+                .attr("class", function(d) {
+                  let seg_class = 'c1p2 river_segments seg'
+                  seg_class += segment_id
+                  let year_key = null;
+                  for (year_key in self.segmentDict[segment_id].year_count) {
+                    if (self.segmentDict[segment_id].year_count[year_key] > 0) {
+                      seg_class += " year" + year_key
+                    }
                   }
-                }
-                return seg_class
-              })
-              .style("stroke", "#777b80")
-              // add stroke width based on widthScale function
-              .style("stroke-width", function(d){
-                let value = self.segmentDict[segment_id]['avg_ann_flow'];
-                if (value){
-                  return self.widthScale(value);
-                } else {
-                  return "#ccc";
-                }
-              })
-              .style("opacity", 1)
-              .append("use").attr("xlink:href", href_id)
+                  return seg_class
+                })
+                .style("stroke", "#777b80")
+                // add stroke width based on widthScale function
+                .style("stroke-width", function(d){
+                  let value = self.segmentDict[segment_id]['avg_ann_flow'];
+                  if (value){
+                    return self.widthScale(value);
+                  } else {
+                    return "#ccc";
+                  }
+                })
+                .style("opacity", 1)
+                .append("use").attr("xlink:href", href_id)
           })
 
           // // Add drb segments again as TRANSPARENT wide segments - for mouseover interaction only
