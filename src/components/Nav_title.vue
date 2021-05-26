@@ -78,7 +78,7 @@ $dimGray: #9c9c9c;
   line-height: 1.4;
   font-size: 2.6em;
   @media screen and (max-width: 600px) {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
 }
 
