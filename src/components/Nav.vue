@@ -1,13 +1,13 @@
 <template>
   <nav id="nav">
     <div>
-      <p>
+      <!-- p>
         <router-link
           to="/monitoring"
           @click.native="scrollToTop"
         >Monitor
         </router-link>
-      </p>
+      </p -->
     </div>
   </nav>
 </template>

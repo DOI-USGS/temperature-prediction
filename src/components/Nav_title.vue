@@ -4,10 +4,7 @@
       <div class="overall-title">
         <div class="text-content">
           <h1 class="nav-title">
-            How we<router-link
-              to="/monitoring"
-              @click.native="scrollToTop"
-            >Monitor</router-link><br>Stream Temperature in the<br>
+            How we <span class="highlight_word">Monitor</span><br>Stream Temperature in the<br>
             Delaware River Basin
           </h1>
           <br>
@@ -55,6 +52,11 @@ $dimGray: #9c9c9c;
   background-size: 100% 100%;
   background-position: center;
 }
+
+.highlight_word {
+  color: $plasmaYellow;
+}
+
 .dim_text {
   color: #9c9c9c;
 }
@@ -74,9 +76,9 @@ $dimGray: #9c9c9c;
   color: $offWhite;
   font-family: 'Georgia', Helvetica, Arial, sans-serif;
   line-height: 1.4;
-  font-size: 24pt;
+  font-size: 2.6em;
   @media screen and (max-width: 600px) {
-    font-size: 18pt;
+    font-size: 1.8em;
   }
 }
 
@@ -89,9 +91,6 @@ $dimGray: #9c9c9c;
   padding: 0px 5px;
   margin: 0px 7px;
   text-decoration: none;
-  @media (max-width: 600px) {
-    font-size: 24px;
-  }
 }
 
 #nav a:focus {
