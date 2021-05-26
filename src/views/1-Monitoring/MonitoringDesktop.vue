@@ -812,7 +812,7 @@
           // re-use reservoirs group
           self.map_c1p2.append("g").attr("class","c1p2 drb_reservoirs")
 		        .append("use").attr("xlink:href","#drbReservoirs")
-          console.log(self.segment_id_list)
+          
           // // Use forEach to iterate over list of segment ids and add all segments         
           self.segment_id_list.forEach(function(segment_id) {
             let href_id = '#seg' + segment_id
@@ -1320,7 +1320,7 @@
           // select all temp lines and color with gradient
           svgChart.selectAll(".temp_line")
             .style("stroke", "url(#plasma-vertical)") //
-            .style("stroke-width", "0.5")
+            .style("stroke-width", 0.5)
             .style("fill", "None")
             .style("opacity", 1)
 
@@ -1396,6 +1396,10 @@
         mousemoveSeg_c1p2(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
 
+          // get current width of map
+          let svg_map_c1p2 = document.querySelector('.map_c1p2')
+          let current_map_width = svg_map_c1p2.clientWidth
+
           // find # of observations for selected reach
           let num_obs = self.segmentDict[segment_id].total_count
 
@@ -1403,14 +1407,14 @@
           tooltip
               .attr("y", mouse_y - 5)
               .attr("x", function() {
-                if (mouse_x < 180) {
+                if (mouse_x < (current_map_width/2)) {
                   return mouse_x + 5
                 } else {
                   return mouse_x - 5
                 }
               })
               .attr("text-anchor", function() {
-                if (mouse_x < 180) {
+                if (mouse_x < (current_map_width/2)) {
                   return "start"
                 } else {
                   return "end"
@@ -1686,6 +1690,10 @@
         mousemoveSeg_c1p3(segment_id, tooltip, mouse_x, mouse_y) {
           const self = this;
 
+          // get current width of map
+          let svg_map_c1p3 = document.querySelector('.map_c1p3')
+          let current_map_width = svg_map_c1p3.clientWidth
+
           // find # of obs in 2019 for selected segment
           let num_obs = self.segmentDict[segment_id].year_count['2019'];
 
@@ -1693,14 +1701,14 @@
           tooltip
               .attr("y", mouse_y - 5)
               .attr("x", function() {
-                if (mouse_x < 200) {
+                if (mouse_x < (current_map_width/2.5)) {
                   return mouse_x + 5
                 } else {
                   return mouse_x - 5
                 }
               })
               .attr("text-anchor", function() {
-                if (mouse_x < 200) {
+                if (mouse_x < (current_map_width/2.5)) {
                   return "start"
                 } else {
                   return "end"
@@ -2160,6 +2168,9 @@ $dimGray: #9c9c9c;
     font-size: 0.9em;
   }
   @media screen and (min-width: 1500px) {
+    font-size: 0.75em;
+  }
+  @media screen and (min-width: 1900px) {
     font-size: 0.55em;
   }
 }
@@ -2175,6 +2186,9 @@ $dimGray: #9c9c9c;
     font-size: 1em;
   }
   @media screen and (min-width: 1500px) {
+    font-size: 1em;
+  }
+  @media screen and (min-width: 1900px) {
     font-size: 0.7em;
   }
 }
@@ -2190,6 +2204,9 @@ $dimGray: #9c9c9c;
     font-size: 1.4em;
   }
   @media screen and (min-width: 1500px) {
+    font-size: 0.95em;
+  }
+  @media screen and (min-width: 1900px) {
     font-size: 0.85em;
   }
 }
