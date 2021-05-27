@@ -133,12 +133,15 @@
     color: $offWhite;
   }
   @import '~uswds/dist/css/uswds.css';
+  .usa-banner__content {
+    color: $offWhite;
+  }
   .usa-banner__inner {
     margin-left: 10px;
     padding-left: 5px;
   }
   .usa-banner__button-text {
-    color: $offWhite;
+    color: $mediumBlue;
   }
   .usa-banner__button::after {
     content: none;
