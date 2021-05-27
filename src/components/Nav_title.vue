@@ -52,16 +52,10 @@ $dimGray: #9c9c9c;
   background-color: $backgroundCharcoal;
   background-repeat: no-repeat;
   background-size: cover;
-  // background-size: 100% 100%;
   background-position: center middle;
-  // height: 35vh;
   @media screen and (max-width: 600px) {
     background-image: url("../assets/river_title.png");
     background-size: 100% 100%;
-    // height: 30vh;
-  }
-  @media screen and (min-width: 2000px) {
-    // height: 34vh;
   }
 }
 
