@@ -138,7 +138,7 @@
     padding-left: 5px;
   }
   .usa-banner__button-text {
-    color: $mediumBlue;
+    color: $offWhite;
   }
   .usa-banner__button::after {
     content: none;
