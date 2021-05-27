@@ -48,10 +48,21 @@ $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
 .overall-title {
-  background-image: url("../assets/river_title.png");
+  background-image: url("../assets/river_title_large.png");
   background-color: $backgroundCharcoal;
-  background-size: 100% 100%;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // background-size: 100% 100%;
+  background-position: center middle;
+  // height: 35vh;
+  @media screen and (max-width: 600px) {
+    background-image: url("../assets/river_title.png");
+    background-size: 100% 100%;
+    // height: 30vh;
+  }
+  @media screen and (min-width: 2000px) {
+    // height: 34vh;
+  }
 }
 
 .highlight_word {
