@@ -414,6 +414,7 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-space-view {
+  text-align: center;
   width: 100%;
 }
 

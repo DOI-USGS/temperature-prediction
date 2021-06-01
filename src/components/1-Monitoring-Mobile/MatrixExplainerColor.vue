@@ -2516,6 +2516,7 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-color-view {
+  text-align: center;
   width: 100%;
 }
 

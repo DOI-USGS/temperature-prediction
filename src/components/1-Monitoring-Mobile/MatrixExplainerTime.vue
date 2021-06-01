@@ -1035,6 +1035,7 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-time-view {
+  text-align: center;
   width: 100%;
 }
 

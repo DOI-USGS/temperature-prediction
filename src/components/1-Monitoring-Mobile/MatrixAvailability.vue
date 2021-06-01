@@ -3164,6 +3164,7 @@ $dimGray: #9c9c9c;
 }
 
 #matrix-availability {
+  text-align: center;
   width: 100%;
 }
 

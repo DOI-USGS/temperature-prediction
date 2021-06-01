@@ -88,7 +88,7 @@
           <p class="viz-subtitle" />
         </div>
       </div>
-      <MonitoringLineChart />
+      <TempChartGif />
     </div>
     <br>
     <div class="text-content">
@@ -106,7 +106,7 @@
   import MatrixExplainerTime from "./../../components/1-Monitoring-Mobile/MatrixExplainerTime";
   import MatrixExplainerColor from "./../../components/1-Monitoring-Mobile/MatrixExplainerColor";
   import MatrixAvailability from "./../../components/1-Monitoring-Mobile/MatrixAvailability";
-  import MonitoringLineChart from "./../../components/1-Monitoring-Mobile/MonitoringLineChart";
+  import TempChartGif from "./../../components/1-Monitoring-Mobile/TempChartGif";
   import { isMobile } from 'mobile-device-detect';
   
   export default {
@@ -118,7 +118,7 @@
       MatrixExplainerTime,
       MatrixExplainerColor,
       MatrixAvailability,
-      MonitoringLineChart,
+      TempChartGif,
       IntroMap: () => import( /* webpackPreload: true */ /*webpackChunkName: "intromap"*/ "./../../components/1-Monitoring/IntroMap"),
       Chapter1Icons1: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons1"*/ "./../../components/1-Monitoring/Chapter1Icons1"),
       Chapter1Icons2: () => import( /* webpackPreload: true */ /*webpackChunkName: "chapter1icons2"*/ "./../../components/1-Monitoring/Chapter1Icons2"),
