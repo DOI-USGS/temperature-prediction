@@ -1408,14 +1408,14 @@
           tooltip
               .attr("y", mouse_y - 5)
               .attr("x", function() {
-                if (mouse_x < (current_map_width/2)) {
+                if (mouse_x < (current_map_width/2.5)) {
                   return mouse_x + 5
                 } else {
                   return mouse_x - 5
                 }
               })
               .attr("text-anchor", function() {
-                if (mouse_x < (current_map_width/2)) {
+                if (mouse_x < (current_map_width/2.5)) {
                   return "start"
                 } else {
                   return "end"
