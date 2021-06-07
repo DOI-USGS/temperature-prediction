@@ -5,7 +5,13 @@
         <div class="text-content">
           <br>
           <h1 class="nav-title">
-            How we <span class="highlight_word">Monitor</span><br>Stream Temperature in the<br>
+            How we<router-link
+              to="/monitoring"
+              @click.native="scrollToTop"
+            >Monitor</router-link><span class="dim_text">|</span><router-link
+              to="/modeling"
+              @click.native="scrollToTop"
+            >Model</router-link><br>Stream Temperature in the<br>
             Delaware River Basin
           </h1>
           <br>
@@ -57,10 +63,6 @@ $dimGray: #9c9c9c;
     background-image: url("../assets/river_title.png");
     background-size: 100% 100%;
   }
-}
-
-.highlight_word {
-  color: $plasmaYellow;
 }
 
 .dim_text {
