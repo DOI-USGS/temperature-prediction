@@ -47,6 +47,12 @@
         ref="figure"
         class="sticky charts stuck"
       >
+      <div
+             
+            >
+              <h3 >{{ title_text }} 
+              </h3>
+            </div>
         <div 
           id="flubber-container"
           class="figure-content"
@@ -119,7 +125,7 @@
               class="scroll-sticky"
             >
               <h3 class="viz-title-scrolly">
-                {{ model_group }}
+                {{ }}
               </h3>
             </div>
             <!-- populate nested steps using text about each model -->
@@ -205,6 +211,7 @@
             // pull title, text, and methods 
             text: modelingText.textContents,
             mobile_text: modelingText_mobile.textContents,
+            title_text: 'Training an artificial neural network (ANN)',
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -316,6 +323,10 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
+          this.step_rnn_title = this.step_rnn -1;
+          this.step_rgcn_title = this.step_rgcn -2;
+          this.step_rgcn_ptrn_title = this.step_rgcn_ptrn -3;
+
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -327,6 +338,7 @@
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
           this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+
         },
         
         methods: {
@@ -1820,6 +1832,19 @@
               } else if (this.step == this.step_ann_exp) {
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
+
+              //updating title
+              if (this.step < this.step_error_exp-2) {
+                this.title_text = "Training an artificial neural network (ANN)"
+                } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
+                this.title_text = "Testing an artificial neural network (ANN)"
+              } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
+                this.title_text = "Recurrent neural network (RNN)"
+              } else if (this.step >= this.step_rgcn_title && this.step < this.step_rgcn_ptrn_title) {
+                this.title_text = "Graph convolutional network"
+              } else if (this.step >= this.step_rgcn_ptrn_title ) {
+                this.title_text = "Knowledge-guided deep learning"
+              } 
              
           }
 
@@ -1868,6 +1893,19 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
+          //updating title
+          console.log(this.step)
+              if (this.step < this.step_error_exp+1) {
+                this.title_text = "Training an artificial neural network (ANN)"
+                } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
+                this.title_text = "Testing an artificial neural network (ANN)"
+              } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
+                this.title_text = "Recurrent neural network (RNN)"
+              } else if (this.step >= this.step_rgcn_title+1 && this.step < this.step_rgcn_ptrn_title+1) {
+                this.title_text = "Graph convolutional network"
+              } else if (this.step >= this.step_rgcn_ptrn_title+1 ) {
+                this.title_text = "Knowledge-guided deep learning"
+              } 
         }
  
         },
