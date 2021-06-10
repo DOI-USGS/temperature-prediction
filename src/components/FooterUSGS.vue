@@ -58,7 +58,7 @@
             </li>
             <li class="twitter">
               <a
-                href="https://twitter.com/usgs"
+                href="https://twitter.com/USGS_DataSci"
                 target="_blank"
                 aria-label="twitter link"
               >
@@ -103,7 +103,7 @@
             </li>
             <li class="instagram">
               <a
-                href="https://instagram.com/usgs"
+                href="https://instagram.com/usgs_streamgages"
                 target="_blank"
                 aria-label="instagram link"
               >
