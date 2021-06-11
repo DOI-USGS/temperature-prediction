@@ -2086,7 +2086,7 @@ figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
   grid-template-rows: 10% 90%;
-  grid-template-columns: 2fr 3fr 4fr 2%;
+  grid-template-columns: 2fr 2fr 3fr 2%;
   z-index: 1;
   
   top: 0vh; // leaving top for sticky header
