@@ -49,6 +49,7 @@
       >
       <div
       class="area"
+       id="sticky-titles"
       >
       <div
         class="title-container"
@@ -1980,16 +1981,29 @@ article {
   width: 10vh;  
 }
 }
-
+#sticky-titles {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 1;
+    height: 100%;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    @media screen and (min-height: 600px) {
+      grid-column: 1 / span 3;
+      grid-row: 1 / 1;
+    }
+    @media screen and (max-width: 600px) {
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
+  }
 .viz-title-sticky {
   margin: 0 auto;
   padding: .7em;  
-  width: 50vw;
   @media screen and (min-height: 770px) {
-    width: 50vw;
   }
   @media screen and (max-width: 600px) {
-    width: 100vw;
+
     font-size: 16pt;
     text-align: center;
     display: table-cell;
@@ -2145,7 +2159,7 @@ figure.sticky.charts {
 
   #legend-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
