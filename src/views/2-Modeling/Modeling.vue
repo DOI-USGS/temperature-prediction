@@ -2093,8 +2093,8 @@ figure.sticky.charts {
   height: 100vh;
   width: auto;
   @media screen and (min-height: 800px) {
-    grid-template-rows: 10% 35% 55%;
-    grid-template-columns: 1.5fr 3fr 2%;
+    grid-template-rows: 10% 30% 50% 10%;
+    grid-template-columns: 2% 1.5fr 2%;
   }
   @media screen and (max-width: 600px) {
     top: 0.5vh;
