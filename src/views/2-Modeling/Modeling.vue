@@ -2022,6 +2022,7 @@ article {
     }
   }
 }
+
 #end.step {
   height: 0px;
   opacity: 0;
@@ -2030,7 +2031,9 @@ article {
 #last.step {
   height: auto;
 }
-
+.step:first-of-type {
+  margin-top: 10vh;
+}
 // add sticky header to steps to maintain while given model is shown
 .scroll-sticky {
   z-index: 1;
@@ -2058,7 +2061,7 @@ figure.sticky.intro {
   top: 0;
   width: 100vw;
   height: auto;
-  margin-bottom: 10vh;
+  margin-bottom: 0vh;
 }
 
 #intro-container.text-content.text-intro h2 {
