@@ -2017,7 +2017,7 @@ article {
 
 .step {
   position: relative;
-  width: 28vw;
+  //width: 28vw;
   padding-top: 1.1em;
   z-index: 1;
   height: 100vh;
@@ -2085,14 +2085,14 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
-  grid-template-rows: 10% 90%;
-  grid-template-columns: 2fr 2fr 3fr 2%;
+  grid-template-rows: 15% 70% 15%;
+  grid-template-columns: 2% 1fr 1fr 2%;
   z-index: 1;
   
-  top: 0vh; // leaving top for sticky header
+  top: 0vh; 
   height: 100vh;
   width: auto;
-  @media screen and (min-height: 600px) {
+  @media screen and (min-height: 800px) {
     grid-template-rows: 10% 35% 55%;
     grid-template-columns: 1.5fr 3fr 2%;
   }
@@ -2112,7 +2112,7 @@ figure.sticky.charts {
     width: auto;
     min-width: 0;
     min-height: 0;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
       grid-row: 2 / 2;
     }
@@ -2130,7 +2130,7 @@ figure.sticky.charts {
   #error-container {
     grid-column: 3 / 3;
     grid-row: 2 / 2;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3
     }
@@ -2147,7 +2147,7 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
@@ -2164,7 +2164,7 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 600px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
