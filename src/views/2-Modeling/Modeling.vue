@@ -48,10 +48,15 @@
         class="sticky charts stuck"
       >
       <div
+      class="area"
+      >
+      <div
+        class="title-container"
              
             >
-              <h3 >{{ title_text }} 
+              <h3 class="viz-title-sticky">{{ title_text }} 
               </h3>
+            </div>
             </div>
         <div 
           id="flubber-container"
@@ -87,13 +92,7 @@
             :class="model_group" 
             class="step-container model-text-content"
           >
-            <div
-              class="scroll-sticky"
-            >
-              <h3 class="viz-title-scrolly">
-                {{ model_group }}
-              </h3>
-            </div>
+
             <!-- populate nested steps using text about each model -->
             <div class="scrollama-steps">
               <div
@@ -1835,7 +1834,7 @@
 
               //updating title
               if (this.step < this.step_error_exp-2) {
-                this.title_text = "Training an artificial neural network (ANN)"
+                this.title_text = "Training an artificial neural network"
                 } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
                 this.title_text = "Testing an artificial neural network (ANN)"
               } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
@@ -1896,7 +1895,7 @@
           //updating title
           console.log(this.step)
               if (this.step < this.step_error_exp+1) {
-                this.title_text = "Training an artificial neural network (ANN)"
+                this.title_text = "Training an artificial neural network"
                 } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
                 this.title_text = "Testing an artificial neural network (ANN)"
               } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
@@ -1969,7 +1968,34 @@ article {
     font-size: 14pt;
   }
 }
+@media screen and (max-width: 600px) {
+.title-container {
+  position: absolute;
+  display: table;
+  height: 10vh;
+}
+.area {
+  position: realtive;
+  height: 10vh;
+  width: 10vh;  
+}
+}
 
+.viz-title-sticky {
+  margin: 0 auto;
+  padding: .7em;  
+  width: 50vw;
+  font-size: 16pt;
+  @media screen and (min-height: 770px) {
+    width: 100vw;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100vw;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
 .step-container {
   width:100vw;
   height: auto;
@@ -2040,43 +2066,42 @@ figure.sticky.intro {
 }
 
 figure.sticky.charts {
-  position: realtive;
   display: grid;
   padding-top: 1.1em;
-  grid-template-rows: 90%;
+  grid-template-rows: 10% 90%;
   grid-template-columns: 3fr 2fr 4fr 2%;
   z-index: 1;
   
-  top: 7vh; // leaving top for sticky header
-  height: 90vh;
+  top: 0vh; // leaving top for sticky header
+  height: 100vh;
   width: auto;
   @media screen and (min-height: 770px) {
-    grid-template-rows: 35% 65%;
+    grid-template-rows: 10% 35% 65%;
     grid-template-columns: 1.5fr 3fr 2%;
   }
   @media screen and (max-width: 600px) {
     top: 0.5vh;
     height: 99.5vh;
-    grid-template-rows: 33% 30% 35%;
+    grid-template-rows: 13% 30% 30% 35%;
     grid-template-columns: 2% auto 2%;
-    padding-top: 4em;
+    padding-top: 0.5em;
   }
  
  
   #flubber-container {
     grid-column: 2 / 2;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: auto;
     min-width: 0;
     min-height: 0;
     @media screen and (min-height: 770px) {
       grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
     }
   }
 
@@ -2087,10 +2112,10 @@ figure.sticky.charts {
 
   #error-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     @media screen and (min-height: 770px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
@@ -2100,14 +2125,14 @@ figure.sticky.charts {
 
   #bees-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
     @media screen and (min-height: 770px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
@@ -2124,7 +2149,7 @@ figure.sticky.charts {
     margin: auto;
     @media screen and (min-height: 770px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
