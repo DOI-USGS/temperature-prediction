@@ -1985,12 +1985,12 @@ article {
   margin: 0 auto;
   padding: .7em;  
   width: 50vw;
-  font-size: 16pt;
   @media screen and (min-height: 770px) {
-    width: 100vw;
+    width: 50vw;
   }
   @media screen and (max-width: 600px) {
     width: 100vw;
+    font-size: 16pt;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
@@ -2069,13 +2069,13 @@ figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
   grid-template-rows: 10% 90%;
-  grid-template-columns: 3fr 2fr 4fr 2%;
+  grid-template-columns: 2fr 3fr 4fr 2%;
   z-index: 1;
   
   top: 0vh; // leaving top for sticky header
   height: 100vh;
   width: auto;
-  @media screen and (min-height: 770px) {
+  @media screen and (min-height: 600px) {
     grid-template-rows: 10% 35% 65%;
     grid-template-columns: 1.5fr 3fr 2%;
   }
@@ -2095,7 +2095,7 @@ figure.sticky.charts {
     width: auto;
     min-width: 0;
     min-height: 0;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 600px) {
       grid-column: 2 / 2;
       grid-row: 2 / 2;
     }
@@ -2113,7 +2113,7 @@ figure.sticky.charts {
   #error-container {
     grid-column: 3 / 3;
     grid-row: 2 / 2;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3
     }
@@ -2130,7 +2130,7 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
@@ -2147,7 +2147,7 @@ figure.sticky.charts {
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
