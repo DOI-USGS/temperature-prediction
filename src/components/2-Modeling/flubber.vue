@@ -2516,26 +2516,34 @@ $mediumBlue: #5D9DC7;
 $grayBlue: #777b80;
 $dimGray: #9c9c9c;
 
+.flubber {
+  pointer-events: none;
+}
+
 .other.label {
   fill: $plasmaYellow;
   stroke-width: 0px;
   font-weight: 400;
   font-size: 10px;
+  pointer-events: none;
 }
 
 .f_main {
   font-size: 14px;
   fill: $offWhite;
+  pointer-events: none;
 }
 
 .f_sec {
   font-size: 10px;
   fill: $offWhite;
+  pointer-events: none;
 }
 
 .f_minor {
   font-size: 12px;
   fill: #9c9c9c;
+  pointer-events: none;
 }
 
 .f_main.light, .f_minor {
@@ -2617,6 +2625,7 @@ $dimGray: #9c9c9c;
 .f_temp {
   font-size: 14px;
   font-weight: 600;
+  pointer-events: none;
 } 
 
 .f_temp.pred {
@@ -2631,6 +2640,7 @@ $dimGray: #9c9c9c;
 .f_error {
   font-size: 12px;
   fill: $plasmaYellow;
+  pointer-events: none;
 }
 
 .f_temp.ital {
@@ -2645,5 +2655,6 @@ $dimGray: #9c9c9c;
 #flubber-svg {
   height: 100%;
   width: 100%;
+  pointer-events: none;
 }
 </style>

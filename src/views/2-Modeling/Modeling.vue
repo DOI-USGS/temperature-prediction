@@ -2002,7 +2002,6 @@ figure.sticky.intro {
 }
 
 figure.sticky.charts {
-  position: realtive;
   display: grid;
   padding-top: 1.1em;
   grid-template-rows: 90%;
@@ -2026,6 +2025,7 @@ figure.sticky.charts {
  
  
   #flubber-container {
+    pointer-events: none;
     grid-column: 2 / 2;
     grid-row: 1 / 1;
     height: 100%;
