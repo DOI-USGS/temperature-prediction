@@ -7,7 +7,6 @@
           :href="LinkOne"
         >
           <figure>
-            
             <img
               src="@/assets/components/PreFooterVisualizationsLinks/images/DRBthumb.png"
               alt=""
@@ -21,7 +20,6 @@
           :href="LinkTwo"
         >
           <figure>
-            
             <img
               src="@/assets/components/PreFooterVisualizationsLinks/images/SnowToFlow.jpg"
               alt=""
@@ -56,7 +54,7 @@
     justify-content: center;
     text-align: center;
     font-family: 'Source Sans Pro',sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     border-top: 1px #FFFFFF10 solid;
     padding-top: 1em;
