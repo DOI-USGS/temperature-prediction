@@ -47,6 +47,18 @@
         ref="figure"
         class="sticky charts stuck"
       >
+      <div
+      class="area"
+       id="sticky-titles"
+      >
+      <div
+        class="title-container"
+             
+            >
+              <h3 class="viz-title-sticky">{{ title_text }} 
+              </h3>
+            </div>
+            </div>
         <div 
           id="flubber-container"
           class="figure-content"
@@ -81,13 +93,7 @@
             :class="model_group" 
             class="step-container model-text-content"
           >
-            <div
-              class="scroll-sticky"
-            >
-              <h3 class="viz-title-scrolly">
-                {{ model_group }}
-              </h3>
-            </div>
+
             <!-- populate nested steps using text about each model -->
             <div class="scrollama-steps">
               <div
@@ -119,7 +125,7 @@
               class="scroll-sticky"
             >
               <h3 class="viz-title-scrolly">
-                {{ model_group }}
+                {{ }}
               </h3>
             </div>
             <!-- populate nested steps using text about each model -->
@@ -205,6 +211,7 @@
             // pull title, text, and methods 
             text: modelingText.textContents,
             mobile_text: modelingText_mobile.textContents,
+            title_text: 'Training an artificial neural network (ANN)',
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -316,6 +323,10 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
+          this.step_rnn_title = this.step_rnn -1;
+          this.step_rgcn_title = this.step_rgcn -2;
+          this.step_rgcn_ptrn_title = this.step_rgcn_ptrn -3;
+
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -327,6 +338,7 @@
 
           // once everything is set up and the component is added to the DOM, read in data and make it dance
           this.loadData(); // this reads in data and then calls function to draw beeswarm chart
+
         },
         
         methods: {
@@ -1820,6 +1832,19 @@
               } else if (this.step == this.step_ann_exp) {
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
+
+              //updating title
+              if (this.step < this.step_error_exp-2) {
+                this.title_text = "Training an artificial neural network"
+                } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
+                this.title_text = "Testing an artificial neural network (ANN)"
+              } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
+                this.title_text = "Recurrent neural network (RNN)"
+              } else if (this.step >= this.step_rgcn_title && this.step < this.step_rgcn_ptrn_title) {
+                this.title_text = "Graph convolutional network"
+              } else if (this.step >= this.step_rgcn_ptrn_title ) {
+                this.title_text = "Knowledge-guided deep learning"
+              } 
              
           }
 
@@ -1868,6 +1893,19 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
+          //updating title
+          console.log(this.step)
+              if (this.step < this.step_error_exp+1) {
+                this.title_text = "Training an artificial neural network"
+                } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
+                this.title_text = "Testing an artificial neural network (ANN)"
+              } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
+                this.title_text = "Recurrent neural network (RNN)"
+              } else if (this.step >= this.step_rgcn_title+1 && this.step < this.step_rgcn_ptrn_title+1) {
+                this.title_text = "Graph convolutional network"
+              } else if (this.step >= this.step_rgcn_ptrn_title+1 ) {
+                this.title_text = "Knowledge-guided deep learning"
+              } 
         }
  
         },
@@ -1931,7 +1969,47 @@ article {
     font-size: 14pt;
   }
 }
+@media screen and (max-width: 600px) {
+.title-container {
+  position: absolute;
+  display: table;
+  height: 10vh;
+}
+.area {
+  position: realtive;
+  height: 10vh;
+  width: 10vh;  
+}
+}
+#sticky-titles {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 1;
+    height: 100%;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    @media screen and (min-height: 600px) {
+      grid-column: 1 / span 3;
+      grid-row: 1 / 1;
+    }
+    @media screen and (max-width: 600px) {
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
+  }
+.viz-title-sticky {
+  margin: 0 auto;
+  padding: .7em;  
+  @media screen and (min-height: 770px) {
+  }
+  @media screen and (max-width: 600px) {
 
+    font-size: 16pt;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
 .step-container {
   width:100vw;
   height: auto;
@@ -1939,7 +2017,7 @@ article {
 
 .step {
   position: relative;
-  width: 28vw;
+  //width: 28vw;
   padding-top: 1.1em;
   z-index: 1;
   height: 100vh;
@@ -1958,6 +2036,7 @@ article {
     }
   }
 }
+
 #end.step {
   height: 0px;
   opacity: 0;
@@ -1966,7 +2045,9 @@ article {
 #last.step {
   height: auto;
 }
-
+.step:first-of-type {
+  margin-top: 10vh;
+}
 // add sticky header to steps to maintain while given model is shown
 .scroll-sticky {
   z-index: 1;
@@ -1994,7 +2075,7 @@ figure.sticky.intro {
   top: 0;
   width: 100vw;
   height: auto;
-  margin-bottom: 10vh;
+  margin-bottom: 0vh;
 }
 
 #intro-container.text-content.text-intro h2 {
@@ -2002,43 +2083,42 @@ figure.sticky.intro {
 }
 
 figure.sticky.charts {
-  position: realtive;
   display: grid;
   padding-top: 1.1em;
-  grid-template-rows: 90%;
-  grid-template-columns: 3fr 2fr 4fr 2%;
+  grid-template-rows: 15% 70% 15%;
+  grid-template-columns: 2% 1fr 1fr 2%;
   z-index: 1;
   
-  top: 7vh; // leaving top for sticky header
-  height: 90vh;
+  top: 0vh; 
+  height: 100vh;
   width: auto;
-  @media screen and (min-height: 770px) {
-    grid-template-rows: 35% 65%;
-    grid-template-columns: 1.5fr 3fr 2%;
+  @media screen and (min-height: 800px) {
+    grid-template-rows: 10% 30% 50% 10%;
+    grid-template-columns: 2% 1.5fr 2%;
   }
   @media screen and (max-width: 600px) {
     top: 0.5vh;
     height: 99.5vh;
-    grid-template-rows: 33% 30% 35%;
+    grid-template-rows: 13% 30% 30% 35%;
     grid-template-columns: 2% auto 2%;
-    padding-top: 4em;
+    padding-top: 0.5em;
   }
  
  
   #flubber-container {
     grid-column: 2 / 2;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: auto;
     min-width: 0;
     min-height: 0;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
     }
   }
 
@@ -2049,10 +2129,10 @@ figure.sticky.charts {
 
   #error-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
-    @media screen and (min-height: 770px) {
+    grid-row: 2 / 2;
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
@@ -2062,14 +2142,14 @@ figure.sticky.charts {
 
   #bees-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
@@ -2079,14 +2159,14 @@ figure.sticky.charts {
 
   #legend-container {
     grid-column: 3 / 3;
-    grid-row: 1 / 1;
+    grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 770px) {
+    @media screen and (min-height: 800px) {
       grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
