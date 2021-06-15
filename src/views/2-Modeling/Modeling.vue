@@ -1470,7 +1470,6 @@
             } else {
               vdecay = 0.5;
             }
-
             self.simulation
               .alpha(this.chartState.alpha)
               .alphaDecay(this.chartState.aDecay)
@@ -1666,11 +1665,16 @@
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
 
-            this.link
+
+          
+            if (this.step >= this.step_error_exp-1 && this.step <= this.step_rmse+1) {
+               this.link
                 .attr('x1', function(d) { return d.source.x; })
                 .attr('y1', function(d) { return d.source.y; })
                 .attr('x2', function(d) { return d.target.x; })
                 .attr('y2', function(d) { return d.target.y; });
+            }
+
         }, 
         // scrollama event handler functions
         // add class on enter, update charts based on step
@@ -1894,7 +1898,6 @@
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
           //updating title
-          console.log(this.step)
               if (this.step < this.step_error_exp+1) {
                 this.title_text = "Training an artificial neural network"
                 } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
