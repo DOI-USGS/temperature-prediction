@@ -1138,11 +1138,13 @@
           // draw on chart
           this.yAxis = this.svg.append("g")
             .attr("class", "y-axis")
-            .call(yGen);
+            .call(yGen)
+            .select(".domain").remove();
 
           this.xAxis = this.svg.append("g")
             .attr("class", "x-axis")
-            .call(xGen);
+            .call(xGen)
+            .select(".domain").remove();
 
         // style modifications and set up axis drawing animation
          this.xAxis
@@ -2012,8 +2014,8 @@ article {
   //
   // monitor wide
   @media screen and (min-height: 800px) and (min-width: 1400px){
-    width: 70%;
-    margin: auto;
+    width: 25%;
+    margin-left: 15%;
   }
   // monitor narrow / iPad portrait
   @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
@@ -2088,12 +2090,12 @@ figure.sticky.charts {
   width: auto;
   // laptop / iPad landscape (any height, width btwn 600 and 1400)
   grid-template-rows: 8% 61% 30%;
-  grid-template-columns: 2% 1fr 1fr 2%;
+  grid-template-columns: 2% 30% 40% 2%;
   // monitor wide 
   @media screen and (min-height: 800px) and (min-width: 1400px){
     top: 6vh;
-    grid-template-rows: 5% 60% 30%;
-    grid-template-columns: 15% 1fr 1fr 15%;
+    grid-template-rows: 5% 40% 50%;
+    grid-template-columns: 15% 27% 43% 15%;
   }
   // monitor narrow / iPad portrait
   @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
@@ -2104,7 +2106,7 @@ figure.sticky.charts {
   @media screen and (max-width: 600px) {
     top: 0.3vh;
     height: 99.5vh;
-    grid-template-rows: 9% 28% 30% 33%;
+    grid-template-rows: 9% 28% 1% 30% 32%;
     grid-template-columns: 2% auto 2%;
   }
  
@@ -2118,7 +2120,7 @@ figure.sticky.charts {
     min-height: 0;
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
-      grid-column: 2 / 2;
+      grid-column: 2 / span 2;
       grid-row: 1 / 1;
     }
     // monitor narrow / iPad portrait
@@ -2144,7 +2146,7 @@ figure.sticky.charts {
     min-height: 0;
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
-      grid-column: 2 / 2;
+      grid-column: 3 / 3;
       grid-row: 2 / 2;
     }
     // monitor narrow / iPad portrait
@@ -2170,7 +2172,7 @@ figure.sticky.charts {
     }
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
-      padding-top: 1.05em;
+      padding-top: 0em;
     }
     @media screen and (max-width: 600px) {
       padding-top: 1.05em;
@@ -2184,7 +2186,7 @@ figure.sticky.charts {
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
       grid-column: 3 / 3;
-      grid-row: 2 / 2
+      grid-row: 3 / 3
     }
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
@@ -2194,7 +2196,7 @@ figure.sticky.charts {
     // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
   }
 
@@ -2209,7 +2211,7 @@ figure.sticky.charts {
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
       grid-column: 3 / 3;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
@@ -2219,7 +2221,7 @@ figure.sticky.charts {
     // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
   }
 
@@ -2234,7 +2236,7 @@ figure.sticky.charts {
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
       grid-column: 3 / 3;
-      grid-row: 2 / 2;
+      grid-row: 3 / 3;
     }
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
@@ -2244,15 +2246,23 @@ figure.sticky.charts {
     // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
   }
 }
 
 .x-axis {
-  fill: #9c9c9c;
-  color: #9c9c9c;
-  stroke: #9c9c9c;
+  fill: None;
+  color: None;
+  stroke: None;
+   stroke-width: 0px;
+}
+
+.y-axis {
+  fill: None;
+  color: None;
+  stroke: None;
+  stroke-width: 0px;
 }
 
 .axis-label text {
