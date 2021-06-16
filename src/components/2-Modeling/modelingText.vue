@@ -67,7 +67,7 @@
                     'flubber_id': 'ANN13',
                     'bees_id': 'step_error_exp'
                 }],
-            "Testing an artificial neural network (ANN)": [
+            "Testing an artificial neural network": [
                 {
                     'method': "We can test a trained model by asking it to predict stream temperature using input data it has never seen. Here we show daily temperature predictions for a stream reach over one month.",
                     'flubber_id': '',
@@ -129,7 +129,7 @@
                     'bees_id': 'step_ann_exp'
                 },
             ],
-            "Recurrent neural network (RNN)": [
+            "Recurrent neural network": [
                 {
                     'method': "One of the simplest things we know is how time relates to stream temperature. Put simply, the water temperature tomorrow is likely to be similar to the water temperature today. For machine learning modeling, incorporating this knowledge is as simple as using models that have memory, allowing information from one day to be passed on to the next. The model with memory that we use is called a recurrent neural network (RNN).",
                     'flubber_id': 'RNN',

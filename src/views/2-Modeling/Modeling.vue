@@ -211,7 +211,7 @@
             // pull title, text, and methods 
             text: modelingText.textContents,
             mobile_text: modelingText_mobile.textContents,
-            title_text: 'Training an artificial neural network (ANN)',
+            title_text: 'Training an artificial neural network',
 
             publicPath: process.env.BASE_URL, // this is need for the data files in the public folder, this allows the application to find the files when on different deployment roots
             d3: null, // this is used so that we can assign d3 plugins to the d3 instance
@@ -1837,9 +1837,9 @@
               if (this.step < this.step_error_exp-2) {
                 this.title_text = "Training an artificial neural network"
                 } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
-                this.title_text = "Testing an artificial neural network (ANN)"
+                this.title_text = "Testing an artificial neural network"
               } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
-                this.title_text = "Recurrent neural network (RNN)"
+                this.title_text = "Recurrent neural network"
               } else if (this.step >= this.step_rgcn_title && this.step < this.step_rgcn_ptrn_title) {
                 this.title_text = "Graph convolutional network"
               } else if (this.step >= this.step_rgcn_ptrn_title ) {
@@ -1981,33 +1981,12 @@ article {
   width: 10vh;  
 }
 }
-#sticky-titles {
-    grid-column: 1 / span 3;
-    grid-row: 1 / 1;
-    height: 100%;
-    width: auto;
-    min-width: 0;
-    min-height: 0;
-    @media screen and (min-height: 600px) {
-      grid-column: 1 / span 3;
-      grid-row: 1 / 1;
-    }
-    @media screen and (max-width: 600px) {
-      grid-column: 2 / 2;
-      grid-row: 1 / 1;
-    }
-  }
+
 .viz-title-sticky {
   margin: 0 auto;
-  padding: .7em;  
-  @media screen and (min-height: 770px) {
-  }
+  padding-top: 0em;
   @media screen and (max-width: 600px) {
-
     font-size: 16pt;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
   }
 }
 .step-container {
@@ -2017,13 +1996,16 @@ article {
 
 .step {
   position: relative;
-  //width: 28vw;
   padding-top: 1.1em;
   z-index: 1;
   height: 100vh;
   border: 1px;
   @media screen and (max-width: 600px) {
     width: 90%;
+    margin: auto;
+  }
+  @media screen and (min-height: 800px) {
+    width: 70%;
     margin: auto;
   }
   .step-text {
@@ -2085,38 +2067,76 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
-  grid-template-rows: 15% 70% 15%;
+  // laptop / iPad landscape (any height, width btwn 600 and 1400)
+  grid-template-rows: 8% 66% 25%;
   grid-template-columns: 2% 1fr 1fr 2%;
   z-index: 1;
-  
-  top: 0vh; 
-  height: 100vh;
+  top: 3vh; 
+  height: 97vh;
   width: auto;
-  @media screen and (min-height: 800px) {
-    grid-template-rows: 10% 30% 50% 10%;
-    grid-template-columns: 2% 1.5fr 2%;
+  // monitor wide 
+  @media screen and (min-height: 800px) and (min-width: 1400px){
+    grid-template-rows: 8% 70% 22%;
+    grid-template-columns: 15% 1fr 1fr 15%;
   }
-  @media screen and (max-width: 600px) {
-    top: 0.5vh;
-    height: 99.5vh;
-    grid-template-rows: 13% 30% 30% 35%;
+  // monitor narrow / iPad portrait
+  @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+    grid-template-rows: 9% 28% 30% 33%;
     grid-template-columns: 2% auto 2%;
-    padding-top: 0.5em;
+  }
+  // mobile
+  @media screen and (max-width: 600px) {
+    top: 0.3vh;
+    height: 99.5vh;
+    grid-template-rows: 9% 28% 30% 33%;
+    grid-template-columns: 2% auto 2%;
   }
  
- 
+  #sticky-titles {
+    // laptop
+    grid-column: 2 / span 2;
+    grid-row: 1 / 1;
+    height: 100%;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
+    // mobile
+    @media screen and (max-width: 600px) {
+      grid-column: 2 / 2;
+      grid-row: 1 / 1;
+    }
+  }
+
   #flubber-container {
     pointer-events: none;
+    // laptop
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     height: 100%;
     width: auto;
     min-width: 0;
     min-height: 0;
-    @media screen and (min-height: 800px) {
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
       grid-column: 2 / 2;
       grid-row: 2 / 2;
     }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+      grid-column: 2 / 2;
+      grid-row: 2 / 2;
+    }
+    // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
       grid-row: 2 / 2;
@@ -2126,15 +2146,26 @@ figure.sticky.charts {
   #flubber-svg {
     height: 100%;
     width: 100%;
+    @media screen and (max-width: 600px) {
+      padding-top: 1.05em;
+    }
   }
 
   #error-container {
+    // laptop
     grid-column: 3 / 3;
     grid-row: 2 / 2;
-    @media screen and (min-height: 800px) {
-      grid-column: 2 / 2;
-      grid-row: 3 / 3
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
+      grid-column: 3 / 3;
+      grid-row: 2 / 2
     }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+      grid-column: 2 / 2;
+      grid-row: 3 / 3;
+    }
+    // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
@@ -2142,16 +2173,24 @@ figure.sticky.charts {
   }
 
   #bees-container {
+    // laptop
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 800px) {
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
+      grid-column: 3 / 3;
+      grid-row: 2 / 2;
+    }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
+    // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
@@ -2159,16 +2198,24 @@ figure.sticky.charts {
   }
 
   #legend-container {
+    // laptop
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     height: 100%;
     width: 90%;
     max-width: 700px;
     margin: auto;
-    @media screen and (min-height: 800px) {
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
+      grid-column: 3 / 3;
+      grid-row: 2 / 2;
+    }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;
     }
+    // mobile
     @media screen and (max-width: 600px) {
       grid-column: 2 / 2;
       grid-row: 3 / 3;

@@ -97,7 +97,7 @@
                     'flubber_id': '',
                     'bees_id': 'step_error_exp'
                 }],
-            "Testing an artificial neural network (ANN)": [
+            "Testing an artificial neural network": [
                 {
                     'method': "We can test a trained model by asking it to predict stream temperature using input data it has never seen. Here we show daily temperature predictions for a stream reach over one month.",
                     'flubber_id': '',
@@ -179,7 +179,7 @@
                     'bees_id': 'step_ann_exp'
                 },
             ],
-            "Recurrent neural network (RNN)": [
+            "Recurrent neural network": [
                 {
                     'method': "One of the simplest things we know is how time relates to stream temperature.",
                     'flubber_id': 'ANN13',
