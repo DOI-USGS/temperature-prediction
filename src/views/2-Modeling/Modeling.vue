@@ -458,9 +458,7 @@
 
                   // select associated annotations
                   let previous_annotation_id = previous_id + "_annotations"
-                  // console.log(previous_annotation_id)
                   let next_annotation_id = step_id + "_annotations"
-                  // console.log(next_annotation_id)
 
                   // set length of annotation transition
                   let transition_duration = animationLength/2
@@ -1692,7 +1690,6 @@
 
           // update step variable to match step in view
           this.step = response.index;
-          console.log(response);
 
           ///////////          // assign forces
           // error chart steps
@@ -2011,12 +2008,19 @@ article {
   z-index: 1;
   height: 100vh;
   border: 1px;
-  @media screen and (max-width: 600px) {
-    width: 90%;
+  // laptop
+  //
+  // monitor wide
+  @media screen and (min-height: 800px) and (min-width: 1400px){
+    width: 70%;
     margin: auto;
   }
-  @media screen and (min-height: 800px) {
-    width: 70%;
+  // monitor narrow / iPad portrait
+  @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+  }
+  // mobile
+  @media screen and (max-width: 600px) {
+    width: 90%;
     margin: auto;
   }
   .step-text {
@@ -2078,16 +2082,17 @@ figure.sticky.intro {
 figure.sticky.charts {
   display: grid;
   padding-top: 1.1em;
-  // laptop / iPad landscape (any height, width btwn 600 and 1400)
-  grid-template-rows: 8% 66% 25%;
-  grid-template-columns: 2% 1fr 1fr 2%;
   z-index: 1;
   top: 3vh; 
   height: 97vh;
   width: auto;
+  // laptop / iPad landscape (any height, width btwn 600 and 1400)
+  grid-template-rows: 8% 61% 30%;
+  grid-template-columns: 2% 1fr 1fr 2%;
   // monitor wide 
   @media screen and (min-height: 800px) and (min-width: 1400px){
-    grid-template-rows: 8% 70% 22%;
+    top: 6vh;
+    grid-template-rows: 5% 60% 30%;
     grid-template-columns: 15% 1fr 1fr 15%;
   }
   // monitor narrow / iPad portrait
@@ -2104,7 +2109,7 @@ figure.sticky.charts {
   }
  
   #sticky-titles {
-    // laptop
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
     grid-column: 2 / span 2;
     grid-row: 1 / 1;
     height: 100%;
@@ -2130,7 +2135,7 @@ figure.sticky.charts {
 
   #flubber-container {
     pointer-events: none;
-    // laptop
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     height: 100%;
@@ -2157,13 +2162,23 @@ figure.sticky.charts {
   #flubber-svg {
     height: 100%;
     width: 100%;
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
+    padding-top: 1.2em;
+    // monitor wide
+    @media screen and (min-height: 800px) and (min-width: 1400px){
+      padding-top: 1.05em;
+    }
+    // monitor narrow / iPad portrait
+    @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+      padding-top: 1.05em;
+    }
     @media screen and (max-width: 600px) {
       padding-top: 1.05em;
     }
   }
 
   #error-container {
-    // laptop
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     // monitor wide
@@ -2184,7 +2199,7 @@ figure.sticky.charts {
   }
 
   #bees-container {
-    // laptop
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     height: 100%;
@@ -2209,7 +2224,7 @@ figure.sticky.charts {
   }
 
   #legend-container {
-    // laptop
+    // laptop / iPad landscape (any height, width btwn 600 and 1400)
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     height: 100%;
