@@ -286,7 +286,7 @@
           this.scroller.setup({
                   step: "article .step",
                   debug: false, // draw trigger line on page
-                  offset: 0.90, //bottom of the page to trigger onStepEnter events
+                  offset: 0.99, //bottom of the page to trigger onStepEnter events
                   progress: false, //whether or not to fire incremental step progress updates within root step
                 })
                 .onStepEnter(this.handleStepEnter)
@@ -1468,14 +1468,24 @@
             if (this.step >= this.step_ann) {
               vdecay = 0.4;
             } else {
-              vdecay = 0.5;
+              vdecay = 0.3;
             }
+            if (this.step < this.step_ann ){
+               self.simulation
+              .alpha(this.chartState.alpha)
+              .alphaDecay(this.chartState.aDecay)
+              .velocityDecay(vdecay)
+              .restart()
+              .on("tick", self.tick);
+
+            } else {
             self.simulation
               .alpha(this.chartState.alpha)
               .alphaDecay(this.chartState.aDecay)
               .velocityDecay(vdecay)
               .restart()
               .on("tick", self.tick);
+            }
           },
           drawAxes(element, end) {
             const self = this;
@@ -1665,8 +1675,6 @@
             .attr('cx', function(d){return d.x})
             .attr('cy', function(d){return d.y})
 
-
-          
             if (this.step >= this.step_error_exp-1 && this.step <= this.step_rmse+1) {
                this.link
                 .attr('x1', function(d) { return d.source.x; })
@@ -1767,17 +1775,17 @@
 
           // intro beeswarm, adding experiments
           if (this.step <= this.step_ann_exp && this.step >= this.step_ann) {
-            this.chartState.strengthy = 0.9;
+            this.chartState.strengthy = 0.8;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = .3;
-            this.chartState.aDecay = 0.15;
+            this.chartState.alpha = .6;
+            this.chartState.aDecay = 0.11;
           }
           // RNN to end
           if (this.step >= this.step_rnn ) {
             this.chartState.strengthy = 0.3;
             this.chartState.radius = this.paddedRadius;
-            this.chartState.alpha = 0.3;
-            this.chartState.aDecay = 0.15;
+            this.chartState.alpha = 0.8;
+            this.chartState.aDecay = 0.1;
           }
           }
 
