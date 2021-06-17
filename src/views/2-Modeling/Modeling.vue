@@ -1910,9 +1910,9 @@
               if (this.step < this.step_error_exp+1) {
                 this.title_text = "Training an artificial neural network"
                 } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
-                this.title_text = "Testing an artificial neural network (ANN)"
+                this.title_text = "Testing an artificial neural network"
               } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
-                this.title_text = "Recurrent neural network (RNN)"
+                this.title_text = "Recurrent neural network"
               } else if (this.step >= this.step_rgcn_title+1 && this.step < this.step_rgcn_ptrn_title+1) {
                 this.title_text = "Graph convolutional network"
               } else if (this.step >= this.step_rgcn_ptrn_title+1 ) {
@@ -2095,7 +2095,8 @@ figure.sticky.charts {
   top: 3vh; 
   height: 97vh;
   width: auto;
-  // laptop / iPad landscape (any height, width btwn 600 and 1400)
+  // laptop / iPad landscape (width btwn 600 and < 1200, height < 800
+  // width > 1200 < 1400, any height)
   grid-template-rows: 8% 91%;
   grid-template-columns: 2% 33% 24% 39% 1%;
   // monitor wide 
@@ -2111,9 +2112,9 @@ figure.sticky.charts {
   }
   // mobile
   @media screen and (max-width: 600px) {
-    top: 0.3vh;
+    top: 0.4vh;
     height: 99.5vh;
-    grid-template-rows: 9% 28% 1% 30% 32%;
+    grid-template-rows: 9% 30% 1% 30% 31%;
     grid-template-columns: 2% auto 2%;
   }
  
