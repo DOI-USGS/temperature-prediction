@@ -67,9 +67,11 @@
         </div>
         <div
           id="bees-container"
+          class="figure-content"
         />
         <div
           id="legend-container"
+          class="figure-content"
         >
           <svg
             id="bees-legend"
