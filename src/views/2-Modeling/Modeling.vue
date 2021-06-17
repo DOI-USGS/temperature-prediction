@@ -159,7 +159,7 @@
           <div
             class="scroll-sticky"
           >
-            <h3 class="viz-title-scrolly">
+            <h3 class="viz-title-scrolly final_title">
               What's next?
             </h3>
             <div
@@ -324,10 +324,12 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
-          this.step_rnn_title = this.step_rnn -1;
-          this.step_rgcn_title = this.step_rgcn -2;
-          this.step_rgcn_ptrn_title = this.step_rgcn_ptrn -3;
-
+          this.step_rnn_title = (this.mobileView) ? this.step_rnn -4 : this.step_rnn -1;
+          this.step_rgcn_title = (this.mobileView) ? this.step_rgcn -6 : this.step_rgcn -2;
+          this.step_rgcn_ptrn_title = (this.mobileView) ? this.step_rgcn_ptrn -8 : this.step_rgcn_ptrn -3;
+          this.step_rnn_title_up = (this.mobileView) ? this.step_rnn_title+1 : this.step_rnn_title+1;
+          this.step_rgcn_title_up = (this.mobileView) ? this.step_rgcn_title+1 : this.step_rgcn_title+1;
+          this.step_rgcn_ptrn_title_up = (this.mobileView) ? this.step_rgcn_ptrn_title+1 : this.step_rgcn_ptrn_title+1;
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -1845,10 +1847,10 @@
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
 
-              //updating title
+              //updating title - UPDATES AT DIFFERENT STEPS FOR DESKTOP AND MOBILE
               if (this.step < this.step_error_exp-2) {
                 this.title_text = "Training an artificial neural network"
-                } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
+              } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
                 this.title_text = "Testing an artificial neural network"
               } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
                 this.title_text = "Recurrent neural network"
@@ -1857,7 +1859,6 @@
               } else if (this.step >= this.step_rgcn_ptrn_title ) {
                 this.title_text = "Knowledge-guided deep learning"
               } 
-             
           }
 
            // add class to active step
@@ -1905,18 +1906,18 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
-          //updating title
-              if (this.step < this.step_error_exp+1) {
-                this.title_text = "Training an artificial neural network"
-                } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
-                this.title_text = "Testing an artificial neural network"
-              } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
-                this.title_text = "Recurrent neural network"
-              } else if (this.step >= this.step_rgcn_title+1 && this.step < this.step_rgcn_ptrn_title+1) {
-                this.title_text = "Graph convolutional network"
-              } else if (this.step >= this.step_rgcn_ptrn_title+1 ) {
-                this.title_text = "Knowledge-guided deep learning"
-              } 
+          //updating title - UPDATES AT DIFFERENT STEPS FOR DESKTOP AND MOBILE
+          if (this.step < this.step_error_exp+1) {
+            this.title_text = "Training an artificial neural network"
+            } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title_up) {
+            this.title_text = "Testing an artificial neural network"
+          } else if (this.step >= this.step_rnn_title_up && this.step < this.step_rgcn_title_up) {
+            this.title_text = "Recurrent neural network"
+          } else if (this.step >= this.step_rgcn_title_up && this.step < this.step_rgcn_ptrn_title_up) {
+            this.title_text = "Graph convolutional network"
+          } else if (this.step >= this.step_rgcn_ptrn_title_up ) {
+            this.title_text = "Knowledge-guided deep learning"
+          } 
         }
  
         },
@@ -1987,10 +1988,16 @@ article {
   height: 10vh;
 }
 .area {
-  position: realtive;
   height: 10vh;
   width: 10vh;  
 }
+}
+
+.viz-title-scrolly.final_title {
+  // monitor wide
+  @media screen and (min-height: 800px) and (min-width: 1400px){
+    margin-left: 15%;
+  }
 }
 
 .viz-title-sticky {

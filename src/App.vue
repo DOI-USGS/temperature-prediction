@@ -177,7 +177,7 @@ h3{
     min-width: 50vw;
     max-width: 95vw;
     padding: 10px;
-  }  
+  }
 }
 .text-content.move-up {
   padding-bottom: 5px;
