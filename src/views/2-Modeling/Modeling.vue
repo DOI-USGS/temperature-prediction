@@ -2011,7 +2011,8 @@ article {
   height: 100vh;
   border: 1px;
   // laptop
-  //
+  width: 32%;
+  margin-left: 0px;
   // monitor wide
   @media screen and (min-height: 800px) and (min-width: 1400px){
     width: 25%;
@@ -2019,9 +2020,13 @@ article {
   }
   // monitor narrow / iPad portrait
   @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+    padding-top: 0em;
+    width: 96%;
+    margin-left: 2%;
   }
   // mobile
   @media screen and (max-width: 600px) {
+    padding-top: 0em;
     width: 90%;
     margin: auto;
   }
@@ -2089,8 +2094,8 @@ figure.sticky.charts {
   height: 97vh;
   width: auto;
   // laptop / iPad landscape (any height, width btwn 600 and 1400)
-  grid-template-rows: 8% 61% 30%;
-  grid-template-columns: 2% 30% 40% 2%;
+  grid-template-rows: 8% 91%;
+  grid-template-columns: 2% 33% 24% 39% 1%;
   // monitor wide 
   @media screen and (min-height: 800px) and (min-width: 1400px){
     top: 6vh;
@@ -2099,7 +2104,7 @@ figure.sticky.charts {
   }
   // monitor narrow / iPad portrait
   @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
-    grid-template-rows: 9% 28% 30% 33%;
+    grid-template-rows: 9% 31% 1% 32% 27%;
     grid-template-columns: 2% auto 2%;
   }
   // mobile
@@ -2112,7 +2117,7 @@ figure.sticky.charts {
  
   #sticky-titles {
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    grid-column: 2 / span 2;
+    grid-column: 2 / span 3;
     grid-row: 1 / 1;
     height: 100%;
     width: auto;
@@ -2138,7 +2143,7 @@ figure.sticky.charts {
   #flubber-container {
     pointer-events: none;
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    grid-column: 2 / 2;
+    grid-column: 3 / 3;
     grid-row: 2 / 2;
     height: 100%;
     width: auto;
@@ -2165,23 +2170,23 @@ figure.sticky.charts {
     height: 100%;
     width: 100%;
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    padding-top: 1.2em;
+    padding-top: 0em;
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
-      padding-top: 1.05em;
+      padding-top: 0em;
     }
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       padding-top: 0em;
     }
     @media screen and (max-width: 600px) {
-      padding-top: 1.05em;
+      padding-top: 0em;
     }
   }
 
   #error-container {
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    grid-column: 3 / 3;
+    grid-column: 4 / 4;
     grid-row: 2 / 2;
     // monitor wide
     @media screen and (min-height: 800px) and (min-width: 1400px){
@@ -2191,7 +2196,7 @@ figure.sticky.charts {
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
     // mobile
     @media screen and (max-width: 600px) {
@@ -2202,7 +2207,7 @@ figure.sticky.charts {
 
   #bees-container {
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    grid-column: 3 / 3;
+    grid-column: 4 / 4;
     grid-row: 2 / 2;
     height: 100%;
     width: 90%;
@@ -2216,7 +2221,7 @@ figure.sticky.charts {
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
     // mobile
     @media screen and (max-width: 600px) {
@@ -2227,7 +2232,7 @@ figure.sticky.charts {
 
   #legend-container {
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
-    grid-column: 3 / 3;
+    grid-column: 4 / 4;
     grid-row: 2 / 2;
     height: 100%;
     width: 90%;
@@ -2241,7 +2246,7 @@ figure.sticky.charts {
     // monitor narrow / iPad portrait
     @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
       grid-column: 2 / 2;
-      grid-row: 3 / 3;
+      grid-row: 4 / 4;
     }
     // mobile
     @media screen and (max-width: 600px) {
