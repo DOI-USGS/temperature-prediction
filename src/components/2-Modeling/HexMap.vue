@@ -18753,6 +18753,7 @@ $dimGray: #9c9c9c;
 #hex-map {
   margin-top: 1em;
   max-height: 80vh;
+  margin-bottom: 1em;
   // monitor wide
   @media screen and (min-height: 800px) and (min-width: 1400px){
     max-width: 50vw;
