@@ -47,18 +47,18 @@
         ref="figure"
         class="sticky charts stuck"
       >
-      <div
-      class="area"
-       id="sticky-titles"
-      >
-      <div
-        class="title-container"
-             
-            >
-              <h3 class="viz-title-sticky">{{ title_text }} 
-              </h3>
-            </div>
-            </div>
+        <div
+          id="sticky-titles"
+          class="area"
+        >
+          <div
+            class="title-container"
+          >
+            <h3 class="viz-title-sticky">
+              {{ title_text }} 
+            </h3>
+          </div>
+        </div>
         <div 
           id="flubber-container"
           class="figure-content"
@@ -95,7 +95,6 @@
             :class="model_group" 
             class="step-container model-text-content"
           >
-
             <!-- populate nested steps using text about each model -->
             <div class="scrollama-steps">
               <div
