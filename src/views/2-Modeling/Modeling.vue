@@ -2054,9 +2054,7 @@ article {
   opacity: 0;
   //margin-bottom: 50vh; // adding this to trigger hidden later since there's a space here  regardless
 }
-#last.step {
-  height: auto;
-}
+
 .step:first-of-type {
   margin-top: 10vh;
 }
