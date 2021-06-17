@@ -33,17 +33,17 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "In the hidden layer, the nodes calculate a weighted sum of the received information…",
+                    'method': "In the hidden layer, each node calculates a weighted sum of the information it received.",
                     'flubber_id': 'ANN4',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "…and then the weighted sum is adjusted by some simple rule, for example, dividing in half any weighted sums that are less than five.",
+                    'method': "Each node then passes this weighted sum through a simple function – for example, a function that transforms the weighted sum to a value between 0 and 1.",
                     'flubber_id': 'ANN5',
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "These adjusted values are then passed to nodes in the next hidden layer, or, if there aren't more hidden layers, to the output layer.",
+                    'method': "These transformed values are then passed to nodes in the next hidden layer, or, if there aren't more hidden layers, to the output layer.",
                     'flubber_id': 'ANN6',
                     'bees_id': 'step_error_exp'
                 },
@@ -58,7 +58,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "And adjusts that sum by another simple rule to produce a final output value.",
+                    'method': "And passes that sum through a simple function to produce a final output value.",
                     'flubber_id': 'ANN8',
                     'bees_id': 'step_error_exp'
                 },
@@ -97,7 +97,7 @@
                     'flubber_id': '',
                     'bees_id': 'step_error_exp'
                 }],
-            "Testing an artificial neural network (ANN)": [
+            "Testing an artificial neural network": [
                 {
                     'method': "We can test a trained model by asking it to predict stream temperature using input data it has never seen. Here we show daily temperature predictions for a stream reach over one month.",
                     'flubber_id': '',
@@ -179,7 +179,7 @@
                     'bees_id': 'step_ann_exp'
                 },
             ],
-            "Recurrent neural network (RNN)": [
+            "Recurrent neural network": [
                 {
                     'method': "One of the simplest things we know is how time relates to stream temperature.",
                     'flubber_id': 'ANN13',

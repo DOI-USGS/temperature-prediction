@@ -18753,8 +18753,18 @@ $dimGray: #9c9c9c;
 #hex-map {
   margin-top: 1em;
   max-height: 80vh;
-  @media screen and (min-width: 1500px) {
+  // monitor wide
+  @media screen and (min-height: 800px) and (min-width: 1400px){
     max-width: 50vw;
+  }
+  // monitor narrow / iPad portrait
+  @media screen and (min-height: 800px) and (max-height: 1400px) and (max-width: 1200px) {
+    max-width: 85vw;
+  }
+  // mobile
+  @media screen and (max-width: 600px) {
+    margin-top: 1.2em;
+    max-width: 80vw;
   }
 }
 .hex {
