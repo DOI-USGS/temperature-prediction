@@ -23,7 +23,7 @@
                     'bees_id': 'step_error_exp'
                 },
                 {
-                    'method': "Each node then passes this weighted sum through a simple function – for example, a function that transforms the weighted sum to a value between 0 and 1.",
+                    'method': "Each node then passes this weighted sum through a simple function – for example, a function that transforms the weighted sum to a value between 0 and 1. This transformation step helps the model capture non-linear patterns in the data.",
                     'flubber_id': 'ANN5',
                     'bees_id': 'step_error_exp'
                 },
