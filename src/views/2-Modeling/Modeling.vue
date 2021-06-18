@@ -13,7 +13,7 @@
             class="text-content"
           >
             <p>
-              Data sparsity and variability in stream temperature dynamics are not unique to the Delaware River Basin; relative to most of the continental United States, the Delaware River Basin is well monitored for water temperature.
+              Data sparsity and variability in stream temperature dynamics are not unique to the Delaware River Basin; relative to most of the continental United States, the Delaware River Basin is well-monitored for water temperature.
             </p>
           </div>
           <div class="box-matrix">
@@ -47,18 +47,18 @@
         ref="figure"
         class="sticky charts stuck"
       >
-      <div
-      class="area"
-       id="sticky-titles"
-      >
-      <div
-        class="title-container"
-             
-            >
-              <h3 class="viz-title-sticky">{{ title_text }} 
-              </h3>
-            </div>
-            </div>
+        <div
+          id="sticky-titles"
+          class="area"
+        >
+          <div
+            class="title-container"
+          >
+            <h3 class="viz-title-sticky">
+              {{ title_text }} 
+            </h3>
+          </div>
+        </div>
         <div 
           id="flubber-container"
           class="figure-content"
@@ -95,7 +95,6 @@
             :class="model_group" 
             class="step-container model-text-content"
           >
-
             <!-- populate nested steps using text about each model -->
             <div class="scrollama-steps">
               <div
@@ -160,17 +159,17 @@
           <div
             class="scroll-sticky"
           >
-            <h3 class="viz-title-scrolly">
+            <h3 class="viz-title-scrolly final_title">
               What's next?
             </h3>
             <div
               class="text-content"
             >
               <p>
-                Knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future where conditions might be different than we've ever seen before.  <br> <br>
+                Knowledge-guided machine learning models shine in new scenarios. When trained on only cold-season data, the model is able to predict warm-season dynamics. This is one piece of evidence that these models can make accurate predictions into the future when conditions might be different than we've ever seen before.  <br> <br>
                 These models could be used to answer pressing water questions: How will climate change impact available fish habitat? Will increases in water use change stream temperature dynamics? What will happen to stream temperature if we add or remove a dam?   <br> <br>
-                What’s next for knowledge-guided water temperature modeling at the U.S. Geological Survey? We’re actively working to incorporate real-time data to improve temperature forecasts, modify the machine learning architecture to accommodate reservoirs, and expand to new basins across the U.S.   <br> <br>
-                To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators in <a
+                What’s next for knowledge-guided water temperature modeling at the USGS? We’re actively working to incorporate real-time data to improve temperature forecasts, modify the machine learning architecture to accommodate reservoirs, and expand to new basins across the U.S.   <br> <br>
+                To learn more about knowledge-guided deep learning, see recent publications by the USGS and collaborators about modeling <a
                   href="https://agupubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2019WR024922"
                   target="”_blank”"
                   class="pub_link"
@@ -325,10 +324,12 @@
           this.step_rgcn = (this.mobileView) ? (this.step_rnn + 7) : (this.step_rnn + 3); // RGCN
           this.step_rgcn_ptrn = (this.mobileView) ? (this.step_rgcn + 9) : (this.step_rgcn + 4); //RGCN_ptrn
           this.step_end = (this.mobileView) ? (this.step_rgcn_ptrn + 4) : (this.step_rgcn_ptrn + 3);
-          this.step_rnn_title = this.step_rnn -1;
-          this.step_rgcn_title = this.step_rgcn -2;
-          this.step_rgcn_ptrn_title = this.step_rgcn_ptrn -3;
-
+          this.step_rnn_title = (this.mobileView) ? this.step_rnn -4 : this.step_rnn -1;
+          this.step_rgcn_title = (this.mobileView) ? this.step_rgcn -6 : this.step_rgcn -2;
+          this.step_rgcn_ptrn_title = (this.mobileView) ? this.step_rgcn_ptrn -8 : this.step_rgcn_ptrn -3;
+          this.step_rnn_title_up = (this.mobileView) ? this.step_rnn_title+1 : this.step_rnn_title+1;
+          this.step_rgcn_title_up = (this.mobileView) ? this.step_rgcn_title+1 : this.step_rgcn_title+1;
+          this.step_rgcn_ptrn_title_up = (this.mobileView) ? this.step_rgcn_ptrn_title+1 : this.step_rgcn_ptrn_title+1;
 
         // colors for chart
           this.color_d100 = "#FAB62F"; 
@@ -1846,10 +1847,10 @@
                 self.fadeIn(this.legend_training_d001, this.time_fade) 
               } 
 
-              //updating title
+              //updating title - UPDATES AT DIFFERENT STEPS FOR DESKTOP AND MOBILE
               if (this.step < this.step_error_exp-2) {
                 this.title_text = "Training an artificial neural network"
-                } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
+              } else if (this.step >= this.step_error_exp && this.step < this.step_rnn_title) {
                 this.title_text = "Testing an artificial neural network"
               } else if (this.step >= this.step_rnn_title && this.step < this.step_rgcn_title) {
                 this.title_text = "Recurrent neural network"
@@ -1858,7 +1859,6 @@
               } else if (this.step >= this.step_rgcn_ptrn_title ) {
                 this.title_text = "Knowledge-guided deep learning"
               } 
-             
           }
 
            // add class to active step
@@ -1906,18 +1906,18 @@
           } else if (this.step == this.step_ann_exp) {
              self.fadeOut(this.legend_training_d001, this.time_fade) 
           } 
-          //updating title
-              if (this.step < this.step_error_exp+1) {
-                this.title_text = "Training an artificial neural network"
-                } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title+1) {
-                this.title_text = "Testing an artificial neural network"
-              } else if (this.step >= this.step_rnn_title+1 && this.step < this.step_rgcn_title+1) {
-                this.title_text = "Recurrent neural network"
-              } else if (this.step >= this.step_rgcn_title+1 && this.step < this.step_rgcn_ptrn_title+1) {
-                this.title_text = "Graph convolutional network"
-              } else if (this.step >= this.step_rgcn_ptrn_title+1 ) {
-                this.title_text = "Knowledge-guided deep learning"
-              } 
+          //updating title - UPDATES AT DIFFERENT STEPS FOR DESKTOP AND MOBILE
+          if (this.step < this.step_error_exp+1) {
+            this.title_text = "Training an artificial neural network"
+            } else if (this.step >= this.step_error_exp+1 && this.step < this.step_rnn_title_up) {
+            this.title_text = "Testing an artificial neural network"
+          } else if (this.step >= this.step_rnn_title_up && this.step < this.step_rgcn_title_up) {
+            this.title_text = "Recurrent neural network"
+          } else if (this.step >= this.step_rgcn_title_up && this.step < this.step_rgcn_ptrn_title_up) {
+            this.title_text = "Graph convolutional network"
+          } else if (this.step >= this.step_rgcn_ptrn_title_up ) {
+            this.title_text = "Knowledge-guided deep learning"
+          } 
         }
  
         },
@@ -1988,10 +1988,16 @@ article {
   height: 10vh;
 }
 .area {
-  position: realtive;
   height: 10vh;
   width: 10vh;  
 }
+}
+
+.viz-title-scrolly.final_title {
+  // monitor wide
+  @media screen and (min-height: 800px) and (min-width: 1400px){
+    margin-left: 15%;
+  }
 }
 
 .viz-title-sticky {
@@ -2046,11 +2052,8 @@ article {
 #end.step {
   height: 0px;
   opacity: 0;
-  //margin-bottom: 50vh; // adding this to trigger hidden later since there's a space here  regardless
 }
-#last.step {
-  height: auto;
-}
+
 .step:first-of-type {
   margin-top: 10vh;
 }
