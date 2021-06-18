@@ -142,12 +142,12 @@
                 }],
             "Graph convolutional network": [
                 {
-                    'method': "Another piece of knowledge we can use to improve the model is that all streams are part of a network. You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream segments is likely to be similar to that in upstream segments. We can use these spatial relationships to better leverage information across the stream network.",
+                    'method': "Another piece of knowledge we can use to improve the model is that all streams are part of a network. You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream reaches is likely to be similar to that in upstream reaches. We can use these spatial relationships to better leverage information across the stream network.",
                     'flubber_id': 'RGCN',
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance. Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream. The spatially aware model we use is called a graph convolutional network.",
+                    'method': "The way we inform the model about space is by calculating the distance between stream reaches and allowing the model to weight information based on distance. Information coming from a nearby reach will be weighted more heavily (assigned greater importance) than information coming from a reach that is far away. The spatially aware model we use is called a graph convolutional network.",
                     'flubber_id': 'RGCN_2',
                     'bees_id': 'step_rnn'
                 },

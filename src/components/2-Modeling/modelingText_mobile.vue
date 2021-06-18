@@ -212,7 +212,7 @@
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': " You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream segments is likely to be similar to that in upstream segments.",
+                    'method': " You don’t need to be a hydrologist to know that water flows downstream, and that the water temperature in downstream reaches is likely to be similar to that in upstream reaches.",
                     'flubber_id': 'RGCN',
                     'bees_id': 'step_rnn'
                 },
@@ -222,12 +222,12 @@
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': "The way we inform the model about space is by calculating the distance between stream segments and allowing the model to weight information based on distance.",
+                    'method': "The way we inform the model about space is by calculating the distance between stream reaches and allowing the model to weight information based on distance.",
                     'flubber_id': 'RGCN_2',
                     'bees_id': 'step_rnn'
                 },
                 {
-                    'method': "Information coming from a nearby stream will be weighted more heavily (assigned greater importance) than information coming from a far away stream.",
+                    'method': "Information coming from a nearby reach will be weighted more heavily (assigned greater importance) than information coming from a reach that is far away.",
                     'flubber_id': '',
                     'bees_id': 'step_rnn'
                 },
