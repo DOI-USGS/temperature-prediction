@@ -79,7 +79,15 @@
             width="100%"
             height="100%"
             xmlns="http://www.w3.org/2000/svg" 
+            aria-labelledby="uniqueTitleID uniqueDescID"
           />
+          <title id="uniqueTitleID">animation of a neural network</title>
+          <desc id="uniqueDescID">An animation plays are the user scrolls through the text depicting preciptiation and air temperature data moving through a neural network to generate stream temperature observations. First, the observations create an input layer. Next, the input layer moves through a series of weighted connections to a hidden layer and become weighted sums. Then the weighted sums enter the output layer and generate temperature predictions. The prediction is adjusted to minimize error from observed data. This process highlights the model training. When model training is done, an chart showing temperature predictions across a month appears. For each prediction the observed value is shown with the error highlighted. Errors morph into an RMSE score that is used to assess model accuracy. The RMSE value moves along the axis to the left to indicate that low values are more accurate, and to the right to show that higher values are less accurate. 
+            RMSE scores are visualized across a series of stream reaches and months, creating a beeswarm plot showing the distribution of RMSE scores from the neural netowrk model. When compared to RMSE scores trained on only 0.1% of the training data, the neural network model does better when more training data (100%) is used. As the page is scrolled, complexities are added to the model as described in the text. 
+            For the recurrent neural network, the model learns about time and the neural network drawing morphs into a timeseries illustration. With this type of model, the RMSE scores reposition, but generally show the same distribution overall. 
+            When the graph convolutional network is described, the drawing morphs into a stream reach with both observed and unobserved sites, and then a stream netowrk with spatial measurements between different sites. The beeswarm chart repositions again to show that the less well-observed sites have lower RMSE with this model.
+            For the last model, knowledge-guided deep learning, the illustration shows a stream setting with a sun, tree, and cloud representing soalr radiation, shade, and precipitation. Using this physics-informed model, the beeswarm redistributes to show even better model performance in which many sites with 0.1% of training data do nearly as well as sites with 100% training data.  </desc>
+
         </div>
       </figure>
       <!--     all the scrolling elements are created from modelingText.js content -->
