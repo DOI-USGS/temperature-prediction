@@ -2022,7 +2022,7 @@ article {
   width: 32%;
   margin-left: 0px;
   // monitor wide
-  @media screen and (min-height: 800px) and (min-width: 1400px){
+  @media screen and (min-height: 800px) and (min-width: 1200px){
     width: 25%;
     margin-left: 15%;
   }
@@ -2103,7 +2103,7 @@ figure.sticky.charts {
   grid-template-rows: 8% 91%;
   grid-template-columns: 2% 33% 24% 39% 1%;
   // monitor wide 
-  @media screen and (min-height: 800px) and (min-width: 1400px){
+  @media screen and (min-height: 800px) and (min-width: 1200px){
     top: 6vh;
     grid-template-rows: 5% 40% 50%;
     grid-template-columns: 15% 27% 43% 15%;
@@ -2130,7 +2130,7 @@ figure.sticky.charts {
     min-width: 0;
     min-height: 0;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       grid-column: 2 / span 2;
       grid-row: 1 / 1;
     }
@@ -2156,7 +2156,7 @@ figure.sticky.charts {
     min-width: 0;
     min-height: 0;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       grid-column: 3 / 3;
       grid-row: 2 / 2;
     }
@@ -2178,7 +2178,7 @@ figure.sticky.charts {
     // laptop / iPad landscape (any height, width btwn 600 and 1400)
     padding-top: 0em;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       padding-top: 0em;
     }
     // monitor narrow / iPad portrait
@@ -2195,7 +2195,7 @@ figure.sticky.charts {
     grid-column: 4 / 4;
     grid-row: 2 / 2;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       grid-column: 3 / 3;
       grid-row: 3 / 3
     }
@@ -2220,7 +2220,7 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       grid-column: 3 / 3;
       grid-row: 3 / 3;
     }
@@ -2245,7 +2245,7 @@ figure.sticky.charts {
     max-width: 700px;
     margin: auto;
     // monitor wide
-    @media screen and (min-height: 800px) and (min-width: 1400px){
+    @media screen and (min-height: 800px) and (min-width: 1200px){
       grid-column: 3 / 3;
       grid-row: 3 / 3;
     }
