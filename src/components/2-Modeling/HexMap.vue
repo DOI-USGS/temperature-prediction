@@ -8,8 +8,8 @@
     transform="translate(0, -20)"
     aria-labelledby="uniqueTitleID uniqueDescID"
   >
-   <title id="uniqueTitleID">temperature observation hex map</title>
-          <desc id="uniqueDescID">a dark-themed map in which grid cells are shaped like 6-sided hex, approximately 50 km wide. the hex map is colored based on the number of stream temperature observations in space. a lot of the map is dark indicating few temperature observations, with a few illuminated spots where the Delaware River Basin is, and a few other location in the Pacific Northwest.</desc>
+    <title id="uniqueTitleID">temperature observation hex map</title>
+    <desc id="uniqueDescID">a dark-themed map in which grid cells are shaped like 6-sided hex, approximately 50 km wide. the hex map is colored based on the number of stream temperature observations in space. a lot of the map is dark indicating few temperature observations, with a few illuminated spots where the Delaware River Basin is, and a few other location in the Pacific Northwest.</desc>
     <g
       class="hex"
       stroke-linejoin="round"
