@@ -6,12 +6,12 @@
           to="/monitoring"
           @click.native="scrollToTop"
         >
-          Monitor
+          <span>Monitor</span>
         </router-link><router-link
           to="/modeling"
           @click.native="scrollToTop"
         >
-          Model
+          <span>Model</span>
         </router-link>
       </p>
     </div>

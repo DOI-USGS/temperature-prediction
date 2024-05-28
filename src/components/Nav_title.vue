@@ -14,7 +14,7 @@
               to="/modeling"
               @click.native="scrollToTop"
             >
-              Model
+              Model&nbsp;
             </router-link><br>Stream Temperature in the<br>
             Delaware River Basin
           </h1>
