@@ -470,7 +470,7 @@
         // Function to process data for Ch 1 part 1 bar chart
         type(d, i, columns) {
           let t = 0;
-          for (let i = 1, t; i < columns.length; ++i)
+          for (i = 1, t; i < columns.length; ++i)
             // for each row, which is d, cycle through the columns
             t += d[columns[i]] = +d[columns[i]];
           // create a new column in the data titled "total"
@@ -913,7 +913,6 @@
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
-          let i;
           for (let i = 0; i<csv_matrix_annual.length; i++){
             let val = parseFloat(csv_matrix_annual[i]['obs_count']);
             domainArrayTemporalCounts.push(val);
