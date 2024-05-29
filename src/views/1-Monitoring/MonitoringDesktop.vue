@@ -913,8 +913,7 @@
 
           // build array of all values of observation counts
           let domainArrayTemporalCounts = [];
-          let i;
-          for (i=0; i<csv_matrix_annual.length; i++){
+          for (let i = 0; i<csv_matrix_annual.length; i++){
             let val = parseFloat(csv_matrix_annual[i]['obs_count']);
             domainArrayTemporalCounts.push(val);
           };
@@ -929,7 +928,7 @@
 
           // build list of posible counts (0 to 366)
           let count_list = [];
-          for (i = 1; i <= self.temporalCountMax_c1p2; i++) {
+          for (let i = 1; i <= self.temporalCountMax_c1p2; i++) {
             count_list.push(i);
           } 
 
@@ -1231,7 +1230,7 @@
           
           // build array of all values of observed temperature
           let arrayObsTemps = [];
-          for (i=0; i<csv_matrix_daily_2019.length; i++){
+          for (let i = 0; i<csv_matrix_daily_2019.length; i++){
             let val = parseFloat(csv_matrix_daily_2019[i]['mean_temp_c']);
             if (val){
               arrayObsTemps.push(val);
@@ -1253,7 +1252,7 @@
 
           // build list of posible temperatures
           let temp_list = [];
-          for (i = obsTempMin; i <= obsTempMax; i++) {
+          for (let i = obsTempMin; i <= obsTempMax; i++) {
             temp_list.push(i);
           } 
 
