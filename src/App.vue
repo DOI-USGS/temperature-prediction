@@ -4,6 +4,7 @@
     <HeaderUSWDSBanner />
     <HeaderUSGS />
     <InternetExplorerPage v-if="isInternetExplorer" />
+    <ShutdownBanner />
     <NavTitle />
     <router-view
       v-if="!isInternetExplorer"
@@ -19,6 +20,7 @@
     import WindowSize from "./components/WindowSize";
     import HeaderUSWDSBanner from './components/HeaderUSWDSBanner'
     import HeaderUSGS from './components/HeaderUSGS'
+    import ShutdownBanner from '@/components/ShutdownBanner.vue'; 
     import NavTitle from './components/Nav_title'
     import Nav from './components/Nav'
     import { isMobile } from 'mobile-device-detect';
@@ -29,6 +31,7 @@
             WindowSize,
             HeaderUSWDSBanner,
             HeaderUSGS,
+            ShutdownBanner,
             NavTitle,
             Nav,
             InternetExplorerPage: () => import( /* webpackPrefetch: true */ /*webpackChunkName: "internet-explorer-page"*/ "./components/InternetExplorerPage"),
